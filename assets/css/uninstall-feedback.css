@@ -1,0 +1,113 @@
+.wpseed-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 100000;
+}
+
+.wpseed-modal-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+    width: 90%;
+    z-index: 100001;
+}
+
+.wpseed-modal-header {
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.wpseed-modal-header h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.wpseed-modal-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    line-height: 1;
+}
+
+.wpseed-modal-close:hover {
+    color: #000;
+}
+
+.wpseed-modal-body {
+    padding: 20px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.wpseed-reason {
+    display: block;
+    padding: 10px;
+    margin: 5px 0;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: background 0.2s;
+}
+
+.wpseed-reason:hover {
+    background: #f5f5f5;
+}
+
+.wpseed-reason input[type="radio"] {
+    margin-right: 10px;
+}
+
+.wpseed-details {
+    margin-top: 15px;
+}
+
+.wpseed-details textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    resize: vertical;
+}
+
+.wpseed-email {
+    margin-top: 15px;
+}
+
+.wpseed-email input[type="email"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.wpseed-email small {
+    display: block;
+    margin-top: 5px;
+    color: #666;
+}
+
+.wpseed-modal-footer {
+    padding: 15px 20px;
+    border-top: 1px solid #ddd;
+    text-align: right;
+}
+
+.wpseed-modal-footer .button {
+    margin-left: 10px;
+}
