@@ -28,6 +28,10 @@ Transform your plugin development workflow with WPSeed - a production-ready boil
 ### 🔌 Modern Architecture
 - **REST API Framework** - Base controller with secure authentication
 - **WP-CLI Commands** - Built-in commands for plugin management
+- **Background Processing** - Queue system for long-running tasks
+- **Object Registry** - Global object access without globals
+- **Data Freshness Manager** - Cache validation and auto-refresh
+- **Developer Flow Logger** - Detailed decision tracking for debugging
 - **Dependency Injection Ready** - Clean, testable code structure
 - **PSR-Compatible** - Modern PHP standards (optional)
 - **Unit Testing** - PHPUnit configuration included
@@ -199,6 +203,52 @@ wpseed/
 ---
 
 ## 🚀 Advanced Features
+
+### Background Processing
+```php
+// Process large tasks in background
+class My_Process extends WPSeed_Background_Process {
+    protected $action = 'my_process';
+    
+    protected function task( $item ) {
+        // Process item
+        return false; // Remove from queue
+    }
+}
+
+$process = new My_Process();
+$process->push_to_queue( array( 'id' => 1 ) );
+$process->save()->dispatch();
+```
+
+### Object Registry
+```php
+// Store and access objects globally
+WPSeed_Object_Registry::add( 'my_object', $object );
+$obj = WPSeed_Object_Registry::get( 'my_object' );
+```
+
+### Data Freshness Manager
+```php
+// Ensure cache freshness
+$data = WPSeed_Data_Freshness_Manager::ensure_freshness(
+    'cache_key',
+    'hourly',
+    function() {
+        return fetch_fresh_data();
+    }
+);
+```
+
+### Developer Flow Logger
+```php
+// Track decision flows (developer mode only)
+WPSeed_Developer_Flow_Logger::start_flow( 'data_processing' );
+WPSeed_Developer_Flow_Logger::log_decision( 'Check cache', 'HIT' );
+WPSeed_Developer_Flow_Logger::end_flow( 'Success' );
+```
+
+See [docs/ADVANCED-FEATURES.md](docs/ADVANCED-FEATURES.md) for complete guide.
 
 ### Code Generator (WP-CLI)
 ```bash

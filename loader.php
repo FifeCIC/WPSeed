@@ -159,8 +159,25 @@ final class WordPressPluginSeed {
         include_once( 'includes/logging-helper.php' );
         include_once( 'includes/api-logging.php' );
         include_once( 'includes/functions/database.php' );
+        include_once( 'includes/classes/asset-manager.php' );
         include_once( 'includes/classes/install.php' );
         include_once( 'includes/classes/ajax.php' );
+        
+        // Background Processing & Advanced Features
+        include_once( 'includes/classes/async-request.php' );
+        include_once( 'includes/classes/background-process.php' );
+        include_once( 'includes/classes/object-registry.php' );
+        include_once( 'includes/classes/data-freshness-manager.php' );
+        include_once( 'includes/classes/developer-flow-logger.php' );
+        
+        // Request Listener
+        include_once( 'includes/classes/listener.php' );
+        
+        // Dashboard Widgets
+        include_once( 'includes/classes/dashboard-widgets.php' );
+        
+        // Unified Feature Example
+        include_once( 'includes/classes/unified-feature.php' );
         
         // New Boilerplate Features
         include_once( 'includes/classes/developer-mode.php' );
@@ -173,6 +190,11 @@ final class WordPressPluginSeed {
         include_once( 'includes/classes/education.php' );
         include_once( 'includes/classes/github-sync.php' );
         include_once( 'includes/functions/github-sync-ajax.php' );
+        
+        // Ecosystem Framework
+        include_once( 'includes/classes/ecosystem-registry.php' );
+        include_once( 'includes/classes/ecosystem-menu-manager.php' );
+        include_once( 'includes/classes/ecosystem-installer.php' );
         
         // WP-CLI Commands
         if ( defined( 'WP_CLI' ) && WP_CLI ) {
@@ -193,26 +215,13 @@ final class WordPressPluginSeed {
         include_once( 'api/api-directory.php' );
         include_once( 'api/api-factory.php' );
         
-        // AI System
-        include_once( 'includes/ai-system/ai-context-manager.php' );
-        include_once( 'includes/ai-system/ai-provider-factory.php' );
-        include_once( 'includes/ai-system/ai-provider-gemini.php' );
-        include_once( 'includes/ai-system/ai-provider-amazonq.php' );
-        include_once( 'includes/ai-system/ai-usage-tracker.php' );
-        include_once( 'includes/ai-system/ai-router.php' );
-        include_once( 'includes/ai-system/ai-assistant.php' );
-        
         if ( $this->is_request( 'admin' ) ) {
             include_once( 'includes/admin/admin.php' );
+            include_once( 'includes/admin/admin-main-views.php' );
             include_once( 'admin/config/admin-menus.php' );
             include_once( 'admin/notifications/notifications.php' );
             include_once( 'toolbars/toolbars.php' );
-            include_once( 'assets/manage-assets.php' );
-            include_once( 'assets/queue-assets.php' );
             include_once( 'includes/classes/uninstall-feedback.php' );
-            
-            // Initialize AI Assistant
-            new WPSeed_AI_Assistant();
         }
 
         if ( $this->is_request( 'frontend' ) ) {

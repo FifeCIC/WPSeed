@@ -22,13 +22,17 @@ class WPSeed_Toolbars {
         // Register admin post handlers
         add_action('admin_post_wpseed_demo_mode_switch', array($this, 'handle_demo_mode_switch'));
         add_action('admin_post_wpseed_reset_pointers', array($this, 'handle_reset_pointers'));
+        add_action('admin_post_wpseed_clear_cache', array($this, 'handle_clear_cache'));
     }   
     
     public function admin_only_toolbars() {       
         if (!current_user_can('activate_plugins')) return;  
         
-        // Include developer toolbar
-        if (current_user_can('manage_options')) {
+        // Include QuickTools toolbar
+        include_once('toolbar-quicktools.php');
+        
+        // Include developer toolbar (developer mode only)
+        if (wpseed_is_developer_mode() && current_user_can('manage_options')) {
             include_once('toolbar-developers.php');
         }
     }

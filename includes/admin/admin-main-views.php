@@ -1,126 +1,46 @@
 <?php
 /**
- * WPSeed Admin Table Views
+ * WPSeed Admin Main Views
  *
- * @author      WPSeed
- * @category    Admin
- * @package     WPSeed/Admin
- * @version     1.0.0
+ * @package WPSeed/Admin
+ * @version 1.0.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
+if (!defined('ABSPATH')) {
+    exit;
 }
-               
-if ( ! class_exists( 'WPSeed_Admin_Main_Views' ) ) :
-            
-/**
- * WPSeed_Admin_Main_Views Class.
- */
+
 class WPSeed_Admin_Main_Views {
-
-    /**
-     * Handles output of the main tables page in admin.
-     */
-    public static function output() {       
-        $tabs              = self::get_tabs();
-        $first_tab         = array_keys( $tabs );
-        $current_tab       = ! empty( $_GET['tab'] ) ? sanitize_title( $_GET['tab'] ) : $first_tab[0];
-        $current_tablelist = isset( $_GET['seedview'] ) ? sanitize_title( $_GET['seedview'] ) : current( array_keys( $tabs[ $current_tab ]['maintabviews'] ) );
-
-        require_once( 'views/html-admin-page.php' );
-    }
-
-    /**
-     * Returns the definitions for the tables to show in admin.
-     *
-     * @return array
-     */
-    public static function get_tabs() {
-        $tabviews = array();
-        
-        // Basic List Tables
-        $tabviews['basic_list_tables'] = array(
-            'title'  => __( 'Basic List Tables', 'wpseed' ),
-            'maintabviews' => array(
-                "default_items" => array(
-                    'title'       => __( 'Default Items', 'wpseed' ),
-                    'description' => '',
-                    'hide_title'  => true,
-                    'callback'    => array( __CLASS__, 'get_maintabview' )
-                ),                    
-                "team_items" => array(
-                    'title'       => __( 'Teams', 'wpseed' ),
-                    'description' => '',
-                    'hide_title'  => true,
-                    'callback'    => array( __CLASS__, 'get_maintabview' )
-                ),
-                "animal_items" => array(
-                    'title'       => __( 'Animals', 'wpseed' ),
-                    'description' => '',
-                    'hide_title'  => true,
-                    'callback'    => array( __CLASS__, 'get_maintabview' )
-                ),
-                "food_items" => array(
-                    'title'       => __( 'Food', 'wpseed' ),
-                    'description' => '',
-                    'hide_title'  => true,
-                    'callback'    => array( __CLASS__, 'get_maintabview' )
-                ),
-            )
-        );
-
-        // Advanced List Tables
-        $tabviews['advanced_list_tables'] = array(
-            'title'  => __( 'Advanced List Tables', 'wpseed' ),
-            'maintabviews' => array(
-                "default_advanced" => array(
-                    'title'       => __( 'Default Items', 'wpseed' ),
-                    'description' => '',
-                    'hide_title'  => true,
-                    'callback'    => array( __CLASS__, 'get_maintabview' )
-                ),                    
-                "team_advanced" => array(
-                    'title'       => __( 'Teams', 'wpseed' ),
-                    'description' => '',
-                    'hide_title'  => true,
-                    'callback'    => array( __CLASS__, 'get_maintabview' )
-                ),
-                "animal_advanced" => array(
-                    'title'       => __( 'Animals', 'wpseed' ),
-                    'description' => '',
-                    'hide_title'  => true,
-                    'callback'    => array( __CLASS__, 'get_maintabview' )
-                ),
-                "food_advanced" => array(
-                    'title'       => __( 'Food', 'wpseed' ),
-                    'description' => '',
-                    'hide_title'  => true,
-                    'callback'    => array( __CLASS__, 'get_maintabview' )
-                ),
-            )
-        );
-      
-        $tabviews = apply_filters( 'wpseed_admin_mainviews', $tabviews );
-
-        return $tabviews;
-    }
-
-    /**
-     * Get a specific table view from 'mainviews' subfolder.
-     */
-    public static function get_maintabview( $name_presan ) {     
-        $name  = sanitize_title( str_replace( '_', '-', $name_presan ) );
-        $class = 'WPSeed_MainView_' . str_replace( '-', '_', $name );
-        
-        require_once( apply_filters( 'wpseed_admin_mainviews_path', 'mainviews/class.wpseed-' . $name . '.php', $name, $class ) );
-
-        if ( ! class_exists( $class ) )
-            return;
-
-        $maintabs = new $class();      
-        $maintabs->output_result();
+    
+    public static function output() {
+        ?>
+        <div class="wrap">
+            <h1><?php _e('WPSeed Plugin', 'wpseed'); ?></h1>
+            
+            <div class="wpseed-main-dashboard">
+                <p><?php _e('Welcome to WPSeed - The AI-Powered WordPress Plugin Boilerplate', 'wpseed'); ?></p>
+                
+                <div class="wpseed-quick-links" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 30px;">
+                    <div class="wpseed-card" style="background: #fff; padding: 20px; border: 1px solid #ddd; border-radius: 4px;">
+                        <h2><?php _e('Development Tools', 'wpseed'); ?></h2>
+                        <p><?php _e('Access 10-tab developer dashboard with assets, debugging, and architecture tools.', 'wpseed'); ?></p>
+                        <a href="<?php echo admin_url('admin.php?page=wpseed-development'); ?>" class="button button-primary"><?php _e('Open Development', 'wpseed'); ?></a>
+                    </div>
+                    
+                    <div class="wpseed-card" style="background: #fff; padding: 20px; border: 1px solid #ddd; border-radius: 4px;">
+                        <h2><?php _e('Settings', 'wpseed'); ?></h2>
+                        <p><?php _e('Configure plugin settings, API keys, and preferences.', 'wpseed'); ?></p>
+                        <a href="<?php echo admin_url('options-general.php?page=wpseed-settings'); ?>" class="button button-primary"><?php _e('Open Settings', 'wpseed'); ?></a>
+                    </div>
+                    
+                    <div class="wpseed-card" style="background: #fff; padding: 20px; border: 1px solid #ddd; border-radius: 4px;">
+                        <h2><?php _e('Documentation', 'wpseed'); ?></h2>
+                        <p><?php _e('Read guides, API reference, and integration examples.', 'wpseed'); ?></p>
+                        <a href="https://github.com/ryanbayne/wpseed" target="_blank" class="button"><?php _e('View Docs', 'wpseed'); ?></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php
     }
 }
-
-endif;

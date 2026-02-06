@@ -35,11 +35,11 @@ class WPSeed_Admin_Development_Page {
             'debug_log' => __('Debug Log', 'wpseed'),
             'database' => __('Database', 'wpseed'),
             'phpinfo' => __('PHP Info', 'wpseed'),
-            'ai_assistant' => __('AI Assistant', 'wpseed'),
             'dev_checklist' => __('Dev Checklist', 'wpseed'),
             'tasks' => __('Tasks', 'wpseed'),
             'layouts' => __('Layouts', 'wpseed'),
             'diagrams' => __('Diagrams', 'wpseed'),
+            'architecture' => __('Architecture', 'wpseed'),
         );
     }
 
@@ -115,10 +115,7 @@ class WPSeed_Admin_Development_Page {
         
         switch ($current_tab) {
             case 'assets':
-                if (!class_exists('WPSeed_Admin_Development_Assets')) {
-                    require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/development/view/assets-tracker.php';
-                }
-                WPSeed_Admin_Development_Assets::output();
+                require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/development/view/assets-tracker.php';
                 break;
             case 'theme_info':
                 if (!class_exists('WPSeed_Admin_Development_Theme_Info')) {
@@ -144,12 +141,6 @@ class WPSeed_Admin_Development_Page {
                 }
                 WPSeed_Admin_Development_PHPInfo::output();
                 break;
-            case 'ai_assistant':
-                if (!class_exists('WPSeed_Admin_Development_AI_Assistant')) {
-                    require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/development/view/ai-assistant.php';
-                }
-                WPSeed_Admin_Development_AI_Assistant::output();
-                break;
             case 'dev_checklist':
                 if (!class_exists('WPSeed_Admin_Development_Checklist')) {
                     require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/development/view/dev-checklist.php';
@@ -173,6 +164,9 @@ class WPSeed_Admin_Development_Page {
                     require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/development/view/diagrams.php';
                 }
                 WPSeed_Admin_Development_Diagrams::output();
+                break;
+            case 'architecture':
+                require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/development/view/architecture.php';
                 break;
             default:
                 if (!class_exists('WPSeed_Admin_Development_Theme_Info')) {

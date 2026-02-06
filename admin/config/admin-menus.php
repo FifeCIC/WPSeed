@@ -34,6 +34,26 @@ function wpseed_register_admin_menus() {
         'wpseed_development',
         'wpseed_development_page'
     );
+    
+    // jQuery UI Gallery
+    add_submenu_page(
+        'wpseed',
+        __('jQuery UI Gallery', 'wpseed'),
+        __('jQuery UI Gallery', 'wpseed'),
+        'manage_options',
+        'wpseed-jquery-ui',
+        'wpseed_jquery_ui_page'
+    );
+    
+    // Component Library
+    add_submenu_page(
+        'wpseed',
+        __('Component Library', 'wpseed'),
+        __('Component Library', 'wpseed'),
+        'manage_options',
+        'wpseed-components',
+        'wpseed_components_page'
+    );
 }
 add_action('admin_menu', 'wpseed_register_admin_menus');
 
@@ -66,4 +86,20 @@ function wpseed_development_page() {
         require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/development/development-tabs.php';
     }
     WPSeed_Admin_Development_Page::output();
+}
+
+/**
+ * jQuery UI Gallery page callback
+ */
+function wpseed_jquery_ui_page() {
+    require_once WPSEED_PLUGIN_DIR_PATH . 'includes/admin/settings/settings-jquery-ui.php';
+    wpseed_render_jquery_ui_gallery();
+}
+
+/**
+ * Component Library page callback
+ */
+function wpseed_components_page() {
+    require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/component-library/component-library.php';
+    wpseed_render_component_library();
 }

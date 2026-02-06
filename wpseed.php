@@ -29,6 +29,8 @@ if ( ! class_exists( 'WordPressPluginSeed' ) ) :
     if ( ! defined( 'WPSEED_PLUGIN_FILE' ) ) { define( 'WPSEED_PLUGIN_FILE', __FILE__ ); }
     if ( ! defined( 'WPSEED_PLUGIN_BASENAME' ) ) { define( 'WPSEED_PLUGIN_BASENAME', plugin_basename( __FILE__ ) ); }
     if ( ! defined( 'WPSEED_PLUGIN_DIR_PATH' ) ) { define( 'WPSEED_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) ); }
+    if ( ! defined( 'WPSEED_PLUGIN_DIR' ) ) { define( 'WPSEED_PLUGIN_DIR', plugin_dir_path( __FILE__ ) ); }
+    if ( ! defined( 'WPSEED_PLUGIN_URL' ) ) { define( 'WPSEED_PLUGIN_URL', plugin_dir_url( __FILE__ ) ); }
     
     // Load core functions with importance on making them available to third-party.                                            
     require_once( WPSEED_PLUGIN_DIR_PATH . 'install.php' );

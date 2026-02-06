@@ -16,13 +16,6 @@ The most advanced WordPress plugin boilerplate with built-in AI assistance, prof
 
 WPSeed is a production-ready WordPress plugin boilerplate that includes everything you need to build professional plugins faster. Transform your plugin development workflow with built-in AI assistance, comprehensive developer tools, and modern architecture patterns.
 
-= AI-Powered Development =
-
-* Built-in AI Assistant with Amazon Q and Gemini integration
-* Intelligent context awareness for code generation and debugging
-* Usage tracking and rate limiting with analytics
-* AI-powered code suggestions and improvements
-
 = Professional Developer Tools =
 
 * 10-Tab Development Dashboard (Assets, Theme, Debug Log, Database, PHP Info, AI Assistant, Dev Checklist, Tasks, Layouts, Diagrams)
@@ -70,9 +63,6 @@ This project belongs to the community and the WordPress community is there to he
 - [Report Issues](https://github.com/ryanbayne/wordpresspluginseed/issues)
 - [Patreon Donations](https://www.patreon.com/ryanbayne)                                                                                                   
 - [Ryan's LinkedIn](https://www.linkedin.com/in/ryanrbayne/)
-- [Ryan's Facebook](https://facebook.com/ryanrbayne)
-- [Ryan's Twitter](https://twitter.com/ryanrbayne)
-
 == Installation ==
 
 = Quick Start (5 Minutes) =
@@ -119,13 +109,13 @@ Visit our GitHub repository for documentation, issues, and discussions. See the 
 
 == Screenshots ==
 
-1. Development Dashboard - 10-tab interface with comprehensive developer tools
-2. AI Assistant - Built-in AI chat for code generation and debugging
-3. Settings Interface - Professional tabbed settings with multiple field types
-4. Asset Tracker - Automatic asset management and missing file detection
-5. System Diagrams - Interactive Mermaid.js diagrams showing architecture
-6. GitHub Integration - Sync documentation directly to your repository
-7. Task Management - View and manage GitHub issues from WordPress admin
+1. Development Dashboard - 11-tab developer interface with comprehensive tools including Assets, Theme Info, Debug Log, Database, PHP Info, AI Assistant, Dev Checklist, Tasks, Layouts, Diagrams, and Architecture mapper
+2. AI Assistant Tab - Built-in AI chat interface with Gemini integration for code generation and debugging. Free tier with 50 requests/day, no credit card required
+3. Settings Interface - Professional tabbed settings page with multiple field types, validation, and organized sections for easy configuration
+4. Asset Tracker - Comprehensive asset management showing all CSS/JS files with found/missing status, file paths, purposes, and page assignments
+5. Architecture Mapper - Interactive visual plugin structure showing all systems, classes, files, and relationships. Perfect for developers and AI assistants to understand the codebase
+6. GitHub Integration - Documentation sync system to push plugin docs directly to GitHub repository. Developer mode feature for maintaining documentation
+7. Task Management - GitHub issues integration displaying tasks, bugs, and feature requests directly in WordPress admin with filtering and status tracking
 
 == Languages ==
 
