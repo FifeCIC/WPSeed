@@ -55,10 +55,14 @@ class WPSeed_Admin_Settings {
             $settings = array();
 
             include_once( 'settings/settings-page.php' );
+            include_once( 'settings/class-settings-repeater.php' );
 
             $settings[] = include( 'settings/settings-example.php' );
             $settings[] = include( 'settings/settings-sections.php' );
-            $settings[] = include( 'settings/settings-github.php' ); 
+            $settings[] = include( 'settings/settings-github.php' );
+            $settings[] = include( 'settings/settings-repeater-example.php' );
+            $settings[] = include( 'settings/settings-license.php' );
+            $settings[] = include( 'settings/settings-tools.php' );
             
             self::$settings = apply_filters( 'wpseed_get_settings_pages', $settings );
         }
@@ -586,6 +590,16 @@ class WPSeed_Admin_Settings {
                     break;
                 case 'textarea' :
                     $value = wp_kses_post( trim( $raw_value ) );
+                    break;
+                case 'repeater' :
+                    $value = array();
+                    if ( is_array( $raw_value ) ) {
+                        foreach ( $raw_value as $item ) {
+                            if ( is_array( $item ) ) {
+                                $value[] = array_map( 'wpseed_clean', $item );
+                            }
+                        }
+                    }
                     break;
                 case 'multiselect' :
                 case 'multi_select_countries' :

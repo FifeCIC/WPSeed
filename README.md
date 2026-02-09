@@ -19,11 +19,12 @@ Transform your plugin development workflow with WPSeed - a production-ready boil
 - **Usage Tracking & Rate Limiting** - Monitor AI usage with built-in analytics
 
 ### 🛠️ Professional Developer Tools
-- **9-Tab Development Dashboard** - Assets, Theme Info, Debug Log, Database, PHP Info, AI Assistant, Dev Checklist, Tasks, Layouts
+- **10-Tab Development Dashboard** - Assets, Theme Info, Debug Log, Database, PHP Info, Documentation, Dev Checklist, Tasks, Layouts, Diagrams, Architecture
 - **Advanced Logging System** - File-based and database-driven logging with filtering
 - **Asset Management** - Automatic asset tracking with missing file detection
 - **GitHub Integration** - Sync documentation directly to your repository
 - **Task Management** - View and manage GitHub issues from WordPress admin
+- **Built-in Documentation Viewer** - Access all docs from within WordPress admin
 
 ### 🔌 Modern Architecture
 - **REST API Framework** - Base controller with secure authentication
@@ -58,7 +59,7 @@ Transform your plugin development workflow with WPSeed - a production-ready boil
 
 ### Development Dashboard
 ![Development Dashboard](assets/screenshots/development-dashboard.png)
-*9-tab developer interface with comprehensive tools*
+*10-tab developer interface with comprehensive tools and built-in documentation*
 
 ### AI Assistant
 ![AI Assistant](assets/screenshots/ai-assistant.png)
@@ -123,6 +124,7 @@ mv wpseed my-awesome-plugin
 - **[Getting Started Guide](docs/GETTING-STARTED.md)** - Detailed setup and customization
 - **[Architecture Overview](docs/ARCHITECTURE.md)** - File structure and design patterns
 - **[API Reference](docs/API-REFERENCE.md)** - Functions, classes, and hooks
+- **[Repeater Fields Guide](docs/REPEATER-FIELDS.md)** - Dynamic repeatable field groups
 - **[Integration Examples](docs/INTEGRATIONS.md)** - WooCommerce, ACF, Elementor, and more
 - **[Video Walkthrough](https://youtube.com/watch?v=...)** - 15-minute video tutorial
 
@@ -133,7 +135,7 @@ mv wpseed my-awesome-plugin
 | Feature | WPSeed | WP Plugin Boilerplate | WP Plugin Skeleton | Others |
 |---------|--------|----------------------|-------------------|--------|
 | **AI Assistant** | ✅ Built-in | ❌ | ❌ | ❌ |
-| **Developer Dashboard** | ✅ 9 Tabs | ❌ | ❌ | ❌ |
+| **Developer Dashboard** | ✅ 10 Tabs | ❌ | ❌ | ❌ |
 | **REST API Framework** | ✅ | ❌ | ✅ | ⚠️ |
 | **WP-CLI Commands** | ✅ | ❌ | ✅ | ⚠️ |
 | **GitHub Integration** | ✅ | ❌ | ❌ | ❌ |
@@ -141,7 +143,7 @@ mv wpseed my-awesome-plugin
 | **Logging System** | ✅ Dual (File + DB) | ❌ | ❌ | ⚠️ |
 | **Unit Testing** | ✅ | ✅ | ✅ | ⚠️ |
 | **CI/CD Ready** | ✅ GitHub Actions | ❌ | ⚠️ | ⚠️ |
-| **Integration Examples** | ✅ 10+ | ❌ | ❌ | ❌ |
+| **Integration Examples** | ✅ 12+ | ❌ | ❌ | ❌ |
 | **Active Development** | ✅ 2024 | ⚠️ 2020 | ⚠️ 2019 | ⚠️ |
 
 **Legend**: ✅ Full Support | ⚠️ Partial/Basic | ❌ Not Available
@@ -195,7 +197,7 @@ wpseed/
 - **Debug Log Tab** - View and filter WordPress debug log
 - **Database Tab** - Inspect tables, run queries, optimize database
 - **PHP Info Tab** - Server configuration and PHP settings
-- **AI Assistant Tab** - Chat with AI for code help
+- **Documentation Tab** - Browse all documentation from within WordPress
 - **Dev Checklist Tab** - Pre-release checklist with industry tools
 - **Tasks Tab** - GitHub issues integration
 - **Layouts Tab** - Visual layout examples and CSS reference
@@ -299,15 +301,23 @@ echo $response['message'];
 
 WPSeed includes ready-to-use integration examples for popular plugins:
 
-### Tier 1 (Included)
+### Tier 1 (E-commerce & Page Builders)
 - **WooCommerce** - Custom product fields, order management, admin columns
+- **Easy Digital Downloads** - Download meta, purchase hooks, custom receipts
 - **Advanced Custom Fields** - Field group registration, custom field types
 - **Elementor** - Custom widgets, dynamic tags, theme builder integration
 
-### Tier 2 (Included)
+### Tier 2 (Forms & SEO)
 - **Contact Form 7** - Form handlers, database logging, custom validation
-- **Yoast SEO** - Meta box integration, schema markup, sitemap customization
 - **Gravity Forms** - Custom fields, form handlers, conditional logic
+- **WPForms** - Submission processing, validation, confirmation messages
+- **Yoast SEO** - Meta box integration, schema markup, sitemap customization
+
+### Tier 3 (Community & Learning)
+- **BuddyPress** - Profile tabs, custom fields, activity streams
+- **bbPress** - Forum hooks, topic/reply management, custom fields
+- **LearnDash** - Course completion, quiz tracking, points system
+- **MemberPress** - Subscription management, transaction hooks, validation
 
 ### More Examples
 See [docs/INTEGRATIONS.md](docs/INTEGRATIONS.md) for complete list and usage instructions.
@@ -437,23 +447,9 @@ If you find WPSeed valuable, consider supporting its development:
 
 ## 🗺️ Roadmap
 
-### Version 1.1 (Q1 2025)
-- [ ] Visual code generator UI
-- [ ] Enhanced settings framework with repeater fields
-- [ ] More integration examples (10+ total)
-- [ ] Video tutorial series
-
-### Version 1.2 (Q2 2025)
-- [ ] Plugin marketplace integration
-- [ ] Advanced AI features (code review, optimization)
-- [ ] Performance monitoring dashboard
-- [ ] Multi-language admin interface
-
-### Version 2.0 (Q3 2025)
-- [ ] Block editor (Gutenberg) integration
-- [ ] React-based admin interface option
-- [ ] Advanced dependency injection container
+### Future Enhancements
 - [ ] Plugin update server integration
+- [ ] Video tutorial series
 
 ---
 
@@ -463,7 +459,7 @@ If you find WPSeed valuable, consider supporting its development:
 - **Classes**: 50+
 - **Functions**: 200+
 - **Admin Pages**: 10+
-- **Integration Examples**: 10+
+- **Integration Examples**: 12
 - **Documentation Pages**: 20+
 
 ---

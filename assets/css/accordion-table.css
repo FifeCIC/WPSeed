@@ -1,0 +1,196 @@
+/**
+ * WPSeed - Accordion Table Styles
+ * 
+ * @package WPSeed/CSS
+ * @version 1.2.0
+ */
+
+.wpseed-accordion-container {
+    margin: 20px 0;
+}
+
+/* Two-column layout */
+.wpseed-layout {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.wpseed-table-container {
+    flex: 2;
+    min-width: 0;
+}
+
+.wpseed-sidebar {
+    flex: 1;
+    position: sticky;
+    top: 32px;
+}
+
+.wpseed-details-container {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    padding: 20px;
+}
+
+.details-placeholder {
+    text-align: center;
+    color: #666;
+    padding: 40px 20px;
+}
+
+/* Section styles */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.section-header h3 {
+    margin: 0;
+}
+
+.section-content {
+    padding: 10px 0;
+}
+
+.detail-group {
+    margin-bottom: 20px;
+}
+
+.detail-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.detail-group input[type="number"] {
+    width: 100px;
+}
+
+.detail-actions {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e1e1e1;
+    display: flex;
+    gap: 10px;
+}
+
+/* Status badges */
+.status-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.status-badge.status-active {
+    background: #00a32a;
+    color: white;
+}
+
+.status-badge.status-inactive {
+    background: #ddd;
+    color: #666;
+}
+
+/* Priority badges */
+.priority-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.priority-badge.priority-high {
+    background-color: #fcf0f0;
+    color: #b32d2e;
+}
+
+.priority-badge.priority-medium {
+    background-color: #fcf9e8;
+    color: #bd8600;
+}
+
+.priority-badge.priority-low {
+    background-color: #ecf7ed;
+    color: #0c833f;
+}
+
+/* Accordion table */
+.wpseed-accordion-table .accordion-row {
+    border: 1px solid #c3c4c7;
+    margin-bottom: 1px;
+    background: #fff;
+}
+
+.wpseed-accordion-table .accordion-header {
+    background: #f6f7f7;
+    padding: 12px 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #c3c4c7;
+    transition: background 0.2s;
+}
+
+.wpseed-accordion-table .accordion-header:hover {
+    background: #f0f0f1;
+}
+
+.wpseed-accordion-table .accordion-header.active {
+    background: #2271b1;
+    color: white;
+}
+
+.wpseed-accordion-table .accordion-header.active .status-badge,
+.wpseed-accordion-table .accordion-header.active .priority-badge {
+    opacity: 0.9;
+}
+
+.wpseed-accordion-table .accordion-content {
+    display: none;
+    padding: 15px;
+    background: white;
+}
+
+.wpseed-accordion-table .accordion-content.active {
+    display: block;
+}
+
+.wpseed-accordion-table .item-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.wpseed-accordion-table .item-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #e1e1e1;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .wpseed-layout {
+        flex-direction: column;
+    }
+    
+    .wpseed-sidebar {
+        position: static;
+        width: 100%;
+    }
+    
+    .wpseed-accordion-table .item-meta {
+        grid-template-columns: 1fr;
+    }
+}

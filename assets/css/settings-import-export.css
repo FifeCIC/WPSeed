@@ -1,0 +1,23 @@
+/* WPSeed Import/Export Settings Styles */
+
+.wpseed-import-export {
+    max-width: 800px;
+    background: #fff;
+    padding: 20px;
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.wpseed-import-export h2 {
+    margin-top: 0;
+}
+
+.wpseed-import-export .dashicons {
+    margin-right: 5px;
+}
+
+.wpseed-import-section,
+.wpseed-export-section {
+    margin: 20px 0;
+}

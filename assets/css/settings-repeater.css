@@ -1,0 +1,114 @@
+/* WPSeed Repeater Field Styles */
+
+.wpseed-repeater-container {
+    max-width: 800px;
+}
+
+.wpseed-repeater-items {
+    margin-bottom: 15px;
+}
+
+.wpseed-repeater-item {
+    background: #fff;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    border-radius: 3px;
+}
+
+.wpseed-repeater-item.collapsed .wpseed-repeater-item-content {
+    display: none;
+}
+
+.wpseed-repeater-item-header {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background: #f9f9f9;
+    border-bottom: 1px solid #ddd;
+    cursor: move;
+}
+
+.wpseed-repeater-item.collapsed .wpseed-repeater-item-header {
+    border-bottom: none;
+}
+
+.wpseed-repeater-handle {
+    color: #999;
+    margin-right: 10px;
+    cursor: move;
+}
+
+.wpseed-repeater-title {
+    flex: 1;
+    font-weight: 600;
+}
+
+.wpseed-repeater-toggle,
+.wpseed-repeater-remove {
+    padding: 0;
+    margin-left: 10px;
+    color: #666;
+    text-decoration: none;
+}
+
+.wpseed-repeater-toggle:hover,
+.wpseed-repeater-remove:hover {
+    color: #0073aa;
+}
+
+.wpseed-repeater-remove:hover {
+    color: #dc3232;
+}
+
+.wpseed-repeater-item-content {
+    padding: 15px;
+}
+
+.wpseed-repeater-field {
+    margin-bottom: 15px;
+}
+
+.wpseed-repeater-field:last-child {
+    margin-bottom: 0;
+}
+
+.wpseed-repeater-field label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.wpseed-repeater-field input[type="text"],
+.wpseed-repeater-field input[type="email"],
+.wpseed-repeater-field input[type="url"],
+.wpseed-repeater-field input[type="number"],
+.wpseed-repeater-field textarea,
+.wpseed-repeater-field select {
+    width: 100%;
+    max-width: 500px;
+}
+
+.wpseed-repeater-field textarea {
+    min-height: 80px;
+}
+
+.wpseed-repeater-placeholder {
+    background: #f0f0f0;
+    border: 2px dashed #ddd;
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+.wpseed-repeater-add {
+    margin-top: 10px;
+}
+
+.wpseed-repeater-template {
+    display: none;
+}
+
+/* Sortable helper */
+.ui-sortable-helper {
+    opacity: 0.8;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}

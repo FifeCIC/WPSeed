@@ -1,0 +1,92 @@
+/**
+ * WPSeed Credits & Contributors Styles
+ * 
+ * @package WPSeed/CSS
+ * @version 1.2.0
+ */
+
+.wpseed-credits-container {
+    margin: 20px 0;
+}
+
+/* Featured badge */
+.featured-badge {
+    display: inline-block;
+    padding: 2px 6px;
+    background: #f0b849;
+    color: #fff;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 600;
+    margin-left: 8px;
+}
+
+/* Type badges */
+.type-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.type-badge.type-library {
+    background: #e7f3ff;
+    color: #0073aa;
+}
+
+.type-badge.type-inspiration {
+    background: #f0f8ff;
+    color: #2271b1;
+}
+
+.type-badge.type-service {
+    background: #f0fff4;
+    color: #00a32a;
+}
+
+/* License badge */
+.license-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    background: #f0f0f1;
+    color: #50575e;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+/* Contributor logo */
+.contributor-logo {
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 4px;
+}
+
+.contributor-logo img {
+    max-width: 200px;
+    height: auto;
+}
+
+/* Contributor meta grid */
+.contributor-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.contributor-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #e1e1e1;
+}
+
+/* Category filter */
+#category-filter {
+    margin-right: 10px;
+}

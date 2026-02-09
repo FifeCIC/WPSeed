@@ -54,6 +54,16 @@ function wpseed_register_admin_menus() {
         'wpseed-components',
         'wpseed_components_page'
     );
+    
+    // Notifications
+    add_submenu_page(
+        'wpseed',
+        __('Notifications', 'wpseed'),
+        __('Notifications', 'wpseed'),
+        'manage_options',
+        'wpseed-notifications',
+        'wpseed_notifications_page'
+    );
 }
 add_action('admin_menu', 'wpseed_register_admin_menus');
 
@@ -102,4 +112,11 @@ function wpseed_jquery_ui_page() {
 function wpseed_components_page() {
     require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/component-library/component-library.php';
     wpseed_render_component_library();
+}
+
+/**
+ * Notifications page callback
+ */
+function wpseed_notifications_page() {
+    require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/notification-center.php';
 }

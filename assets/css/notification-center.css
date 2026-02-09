@@ -1,0 +1,85 @@
+/**
+ * WPSeed Notification Center Styles
+ * 
+ * @package WPSeed/CSS
+ * @version 1.2.0
+ */
+
+.wpseed-notification-center .notification-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.notification-item {
+    border: 1px solid #ccd0d4;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.notification-item.unread {
+    background: #fff;
+    border-left: 4px solid #2271b1;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.notification-item.read {
+    background: #f9f9f9;
+    border-left: 4px solid #2271b1;
+    opacity: 0.7;
+}
+
+.notification-item.priority-high {
+    border-left-color: #d63638;
+}
+
+.notification-item .notification-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.notification-item .unread-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #2271b1;
+    border-radius: 50%;
+}
+
+.notification-item .notification-type {
+    background: #f0f0f1;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.notification-item .priority-high-label {
+    color: #d63638;
+    font-weight: 600;
+}
+
+.notification-item .notification-time {
+    color: #666;
+    font-size: 13px;
+}
+
+.notification-item .notification-message {
+    margin-bottom: 10px;
+}
+
+.notification-item .notification-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.notification-item .snooze-options {
+    display: none;
+    margin-top: 10px;
+    padding: 10px;
+    background: #f0f0f1;
+    border-radius: 3px;
+}

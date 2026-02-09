@@ -170,6 +170,18 @@ final class WordPressPluginSeed {
         include_once( 'includes/classes/data-freshness-manager.php' );
         include_once( 'includes/classes/developer-flow-logger.php' );
         
+        // Action Scheduler Library
+        if (file_exists(plugin_dir_path(__FILE__) . 'includes/libraries/action-scheduler/action-scheduler.php')) {
+            require_once plugin_dir_path(__FILE__) . 'includes/libraries/action-scheduler/action-scheduler.php';
+            include_once( 'includes/classes/task-scheduler.php' );
+        }
+        
+        // Carbon Fields Library
+        if (file_exists(plugin_dir_path(__FILE__) . 'includes/libraries/carbon-fields/core/Carbon_Fields.php')) {
+            require_once plugin_dir_path(__FILE__) . 'includes/libraries/carbon-fields/core/Carbon_Fields.php';
+            include_once( 'includes/classes/carbon-fields-integration.php' );
+        }
+        
         // Request Listener
         include_once( 'includes/classes/listener.php' );
         
@@ -190,6 +202,12 @@ final class WordPressPluginSeed {
         include_once( 'includes/classes/education.php' );
         include_once( 'includes/classes/github-sync.php' );
         include_once( 'includes/functions/github-sync-ajax.php' );
+        include_once( 'includes/classes/settings-import-export.php' );
+        include_once( 'includes/classes/license-manager.php' );
+        include_once( 'includes/classes/extension-installer.php' );
+        include_once( 'includes/classes/library-manager.php' );
+        include_once( 'includes/classes/enhanced-logger.php' );
+        include_once( 'includes/classes/notification-bell.php' );
         
         // Ecosystem Framework
         include_once( 'includes/classes/ecosystem-registry.php' );

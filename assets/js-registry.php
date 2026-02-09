@@ -64,5 +64,23 @@ return array(
         'purpose' => 'Mermaid diagram rendering library',
         'pages' => array('wpseed-development'),
         'dependencies' => array()
+    ),
+    'settings-repeater' => array(
+        'path' => 'js/admin/settings-repeater.js',
+        'purpose' => 'Repeater field functionality',
+        'pages' => array('wpseed-settings'),
+        'dependencies' => array('jquery', 'jquery-ui-sortable')
+    ),
+    'wpseed-accordion-table' => array(
+        'path' => 'js/accordion-table.js',
+        'purpose' => 'Accordion table functionality',
+        'pages' => array('wpseed-examples'),
+        'dependencies' => array('jquery')
+    ),
+    'wpseed-notification-center' => array(
+        'path' => 'js/notification-center.js',
+        'purpose' => 'Notification center functionality',
+        'pages' => array('wpseed-notifications'),
+        'dependencies' => array('jquery')
     )
 );

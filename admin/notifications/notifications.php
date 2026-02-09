@@ -211,17 +211,82 @@ class WPSeed_Notifications {
                 user_id bigint(20) NOT NULL DEFAULT 0,
                 priority varchar(20) NOT NULL DEFAULT 'normal',
                 is_read tinyint(1) NOT NULL DEFAULT 0,
+                is_snoozed tinyint(1) NOT NULL DEFAULT 0,
+                snooze_until datetime DEFAULT NULL,
+                category varchar(50) DEFAULT NULL,
+                action_url varchar(255) DEFAULT NULL,
+                action_label varchar(100) DEFAULT NULL,
                 created_at datetime NOT NULL,
                 expires_at datetime DEFAULT NULL,
                 data longtext DEFAULT NULL,
                 PRIMARY KEY  (id),
                 KEY user_read (user_id, is_read),
-                KEY type (type)
+                KEY type (type),
+                KEY category (category)
             ) $charset_collate;";
             
             require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
             dbDelta($sql);
         }
+    }
+    
+    /**
+     * Snooze notification
+     */
+    public static function snooze_notification($notification_id, $duration = 3600) {
+        global $wpdb;
+        
+        $table = $wpdb->prefix . 'wpseed_notifications';
+        $snooze_until = date('Y-m-d H:i:s', time() + $duration);
+        
+        return $wpdb->update(
+            $table,
+            array(
+                'is_snoozed' => 1,
+                'snooze_until' => $snooze_until,
+            ),
+            array('id' => $notification_id)
+        );
+    }
+    
+    /**
+     * Mark all as read
+     */
+    public static function mark_all_read($user_id) {
+        global $wpdb;
+        
+        $table = $wpdb->prefix . 'wpseed_notifications';
+        
+        return $wpdb->update(
+            $table,
+            array('is_read' => 1),
+            array('user_id' => $user_id, 'is_read' => 0)
+        );
+    }
+    
+    /**
+     * Delete notification
+     */
+    public static function delete_notification($notification_id) {
+        global $wpdb;
+        
+        $table = $wpdb->prefix . 'wpseed_notifications';
+        
+        return $wpdb->delete($table, array('id' => $notification_id));
+    }
+    
+    /**
+     * Get unread count
+     */
+    public static function get_unread_count($user_id) {
+        global $wpdb;
+        
+        $table = $wpdb->prefix . 'wpseed_notifications';
+        
+        return $wpdb->get_var($wpdb->prepare(
+            "SELECT COUNT(*) FROM $table WHERE (user_id = %d OR user_id = 0) AND is_read = 0 AND (expires_at IS NULL OR expires_at > NOW())",
+            $user_id
+        ));
     }
 }
 

@@ -52,5 +52,41 @@ return array(
         'purpose' => 'Ecosystem plugin installer grid',
         'pages' => array('wpseed-ecosystem-installer'),
         'dependencies' => array()
+    ),
+    'settings-import-export' => array(
+        'path' => 'css/settings-import-export.css',
+        'purpose' => 'Settings import/export interface',
+        'pages' => array('wpseed-settings'),
+        'dependencies' => array()
+    ),
+    'settings-repeater' => array(
+        'path' => 'css/settings-repeater.css',
+        'purpose' => 'Repeater field styles',
+        'pages' => array('wpseed-settings'),
+        'dependencies' => array()
+    ),
+    'license-manager' => array(
+        'path' => 'css/license-manager.css',
+        'purpose' => 'License management interface',
+        'pages' => array('wpseed-settings'),
+        'dependencies' => array()
+    ),
+    'wpseed-accordion-table' => array(
+        'path' => 'css/accordion-table.css',
+        'purpose' => 'Accordion table with sidebar layout',
+        'pages' => array('wpseed-examples'),
+        'dependencies' => array()
+    ),
+    'wpseed-credits' => array(
+        'path' => 'css/credits.css',
+        'purpose' => 'Credits and contributors page',
+        'pages' => array('wpseed-development'),
+        'dependencies' => array('wpseed-accordion-table')
+    ),
+    'wpseed-notification-center' => array(
+        'path' => 'css/notification-center.css',
+        'purpose' => 'Notification center page',
+        'pages' => array('wpseed-notifications'),
+        'dependencies' => array()
     )
 );

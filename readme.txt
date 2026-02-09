@@ -7,7 +7,7 @@ Tags: boilerplate, plugin starter, AI assistant, REST API, developer tools, WP-C
 Requires at least: 5.0
 Tested up to: 6.4
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 License: GPLv3
 
 The most advanced WordPress plugin boilerplate with built-in AI assistance, professional developer tools, and modern architecture.
@@ -18,7 +18,8 @@ WPSeed is a production-ready WordPress plugin boilerplate that includes everythi
 
 = Professional Developer Tools =
 
-* 10-Tab Development Dashboard (Assets, Theme, Debug Log, Database, PHP Info, AI Assistant, Dev Checklist, Tasks, Layouts, Diagrams)
+* 10-Tab Development Dashboard (Assets, Theme, Debug Log, Database, PHP Info, Documentation, Dev Checklist, Tasks, Layouts, Diagrams, Architecture)
+* Built-in documentation viewer - Access all docs from within WordPress admin
 * Advanced logging system (file-based and database-driven)
 * Asset management with automatic tracking and missing file detection
 * GitHub integration for documentation sync
@@ -37,13 +38,14 @@ WPSeed is a production-ready WordPress plugin boilerplate that includes everythi
 = Production-Ready Features =
 
 * Custom post types and taxonomies with examples
-* Tabbed settings framework with multiple field types
+* Enhanced settings framework with repeater fields for dynamic configuration
 * Database-driven notification system
 * Multisite support with network activation detection
 * i18n ready with automatic translation loading
 * Enhanced uninstall with complete cleanup
 * Security-first approach (nonces, capability checks, sanitization)
 * Uninstall feedback system for user insights
+* 12 integration examples (WooCommerce, ACF, Elementor, Contact Form 7, Yoast SEO, Gravity Forms, BuddyPress, EDD, bbPress, LearnDash, MemberPress, WPForms)
 
 = UI/UX Components =
 
@@ -126,6 +128,28 @@ Translator needed to localize the plugin.
 No special upgrade instructions this time.
 
 == Changelog ==
+
+= 1.1.0 - 2025 =
+
+**Feature Release - Enhanced Settings & Integrations**
+
+* NEW: Repeater fields for settings framework - Dynamic add/remove field groups
+* NEW: Built-in documentation viewer in Development Dashboard
+* NEW: 12 integration examples for popular plugins
+* NEW: WooCommerce integration example
+* NEW: Elementor integration example
+* NEW: Contact Form 7 integration example
+* NEW: Yoast SEO integration example
+* NEW: Gravity Forms integration example
+* NEW: BuddyPress integration example
+* NEW: Easy Digital Downloads integration example
+* NEW: bbPress integration example
+* NEW: LearnDash integration example
+* NEW: MemberPress integration example
+* NEW: WPForms integration example
+* IMPROVED: Documentation tab in Development Dashboard
+* IMPROVED: Settings framework with repeater field support
+* IMPROVED: Comprehensive integration documentation
 
 = 1.0.0 - 2024 =
 
