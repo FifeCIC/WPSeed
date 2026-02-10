@@ -283,6 +283,11 @@ class WPSeed_Notifications {
         
         $table = $wpdb->prefix . 'wpseed_notifications';
         
+        // Check if table exists first
+        if ($wpdb->get_var("SHOW TABLES LIKE '$table'") != $table) {
+            return 0;
+        }
+        
         return $wpdb->get_var($wpdb->prepare(
             "SELECT COUNT(*) FROM $table WHERE (user_id = %d OR user_id = 0) AND is_read = 0 AND (expires_at IS NULL OR expires_at > NOW())",
             $user_id

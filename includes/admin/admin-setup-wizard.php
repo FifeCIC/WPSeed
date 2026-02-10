@@ -139,8 +139,8 @@ class WPSeed_Admin_Setup_Wizard {
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
             <title><?php _e( 'WordPress Seed &rsaquo; Setup Wizard', 'wpseed' ); ?></title>
             <?php wp_print_scripts( 'wpseed-setup' ); ?>
-            <?php do_action( 'admin_print_styles' ); ?>
-            <?php do_action( 'admin_head' ); ?>
+            <?php wp_print_styles( 'wpseed-setup' ); ?>
+            <?php wp_print_styles( 'wpseed_admin_styles' ); ?>
         </head>
         <body class="wpseed-setup wp-core-ui">
             <h1 id="wpseed-logo"><a href="<?php echo WPSEED_HOME;?>"><img src="<?php echo WPSeed()->plugin_url(); ?>/assets/images/wpseed_logo.png" alt="WPSeed" /></a></h1>

@@ -124,3 +124,12 @@ function wpseed_enqueue_js( $code ) {
 
     $wpseed_queued_js .= "\n" . $code . "\n";
 }
+
+/**
+ * Check if developer mode is enabled
+ *
+ * @return bool
+ */
+function wpseed_is_developer_mode() {
+    return defined('WPSEED_DEV_MODE') && WPSEED_DEV_MODE;
+}

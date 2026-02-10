@@ -51,12 +51,7 @@ class WPSeed_Admin_Development_Page {
      * Enqueue required assets
      */
     private static function enqueue_assets() {
-        wp_enqueue_style(
-            'wpseed-development', 
-            plugins_url('assets/css/admin.css', WPSEED_PLUGIN_FILE), 
-            array(), 
-            WPSEED_VERSION
-        );
+        WPSeed_Asset_Manager::enqueue_style('wpseed_admin_styles');
     }
     
     /**

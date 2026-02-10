@@ -19,6 +19,7 @@ class WPSeed_Admin_Development_Tasks {
      * Output the tasks view
      */
     public static function output() {
+        // Dashicons is a WordPress core style, keep as-is
         wp_enqueue_style('dashicons');
         
         $tasks = self::get_github_tasks();

@@ -102,11 +102,6 @@ class WPSeed_Install {
         self::create_roles();
         self::create_files();
         self::create_tables();
-        
-        // Create notifications table
-        if (class_exists('WPSeed_Notifications')) {
-            WPSeed_Notifications::maybe_create_tables();
-        }
                             
         // Queue upgrades/setup wizard
         $current_installed_version    = get_option( 'wpseed_version', null );
@@ -492,6 +487,50 @@ class WPSeed_Install {
             $education = new WPSeed_Education();
             $education->create_table();
         }
+        
+        // Enhanced Logger table
+        $sql = "CREATE TABLE {$wpdb->prefix}wpseed_debug_logs (
+            id bigint(20) NOT NULL AUTO_INCREMENT,
+            request_uri varchar(255) NOT NULL,
+            query_count int(11) DEFAULT 0,
+            query_time float DEFAULT 0,
+            hook_count int(11) DEFAULT 0,
+            http_count int(11) DEFAULT 0,
+            error_count int(11) DEFAULT 0,
+            execution_time float DEFAULT 0,
+            memory_usage bigint(20) DEFAULT 0,
+            created_at datetime NOT NULL,
+            data longtext,
+            PRIMARY KEY (id),
+            KEY created_at (created_at),
+            KEY request_uri (request_uri)
+        ) $charset_collate;";
+        
+        dbDelta($sql);
+        
+        // Notifications table
+        $sql = "CREATE TABLE {$wpdb->prefix}wpseed_notifications (
+            id mediumint(9) NOT NULL AUTO_INCREMENT,
+            type varchar(50) NOT NULL,
+            message text NOT NULL,
+            user_id bigint(20) NOT NULL DEFAULT 0,
+            priority varchar(20) NOT NULL DEFAULT 'normal',
+            is_read tinyint(1) NOT NULL DEFAULT 0,
+            is_snoozed tinyint(1) NOT NULL DEFAULT 0,
+            snooze_until datetime DEFAULT NULL,
+            category varchar(50) DEFAULT NULL,
+            action_url varchar(255) DEFAULT NULL,
+            action_label varchar(100) DEFAULT NULL,
+            created_at datetime NOT NULL,
+            expires_at datetime DEFAULT NULL,
+            data longtext DEFAULT NULL,
+            PRIMARY KEY  (id),
+            KEY user_read (user_id, is_read),
+            KEY type (type),
+            KEY category (category)
+        ) $charset_collate;";
+        
+        dbDelta($sql);
     }
     
     /**
@@ -500,7 +539,8 @@ class WPSeed_Install {
     * This is not the uninstallation but some level of cleanup can be run here. 
     */
     public static function deactivate() {
-        
+        // Clear Action Scheduler cron
+        wp_clear_scheduled_hook('action_scheduler_run_queue');
     }                 
 }
 

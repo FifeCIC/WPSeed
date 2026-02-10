@@ -176,11 +176,14 @@ final class WordPressPluginSeed {
             include_once( 'includes/classes/task-scheduler.php' );
         }
         
-        // Carbon Fields Library
+        // Carbon Fields Library - DISABLED: Missing Pimple dependency
+        // TODO: Download complete Carbon Fields package with all dependencies
+        /*
         if (file_exists(plugin_dir_path(__FILE__) . 'includes/libraries/carbon-fields/core/Carbon_Fields.php')) {
             require_once plugin_dir_path(__FILE__) . 'includes/libraries/carbon-fields/core/Carbon_Fields.php';
             include_once( 'includes/classes/carbon-fields-integration.php' );
         }
+        */
         
         // Request Listener
         include_once( 'includes/classes/listener.php' );

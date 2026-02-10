@@ -14,8 +14,8 @@ class WPSeed_Admin_Development_Credits {
         $contributors = self::get_contributors();
         $selected = isset($_GET['contributor']) ? sanitize_text_field($_GET['contributor']) : 'action_scheduler';
         
-        wp_enqueue_style('wpseed-accordion-table');
-        wp_enqueue_script('wpseed-accordion-table');
+        WPSeed_Asset_Manager::enqueue_style('wpseed-accordion-table');
+        WPSeed_Asset_Manager::enqueue_script('wpseed-accordion-table');
         ?>
         
         <div class="wpseed-credits-container">
