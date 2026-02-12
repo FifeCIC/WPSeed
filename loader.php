@@ -176,14 +176,12 @@ final class WordPressPluginSeed {
             include_once( 'includes/classes/task-scheduler.php' );
         }
         
-        // Carbon Fields Library - DISABLED: Missing Pimple dependency
-        // TODO: Download complete Carbon Fields package with all dependencies
-        /*
-        if (file_exists(plugin_dir_path(__FILE__) . 'includes/libraries/carbon-fields/core/Carbon_Fields.php')) {
-            require_once plugin_dir_path(__FILE__) . 'includes/libraries/carbon-fields/core/Carbon_Fields.php';
+        // Carbon Fields Library
+        if (file_exists(plugin_dir_path(__FILE__) . 'includes/libraries/carbon-fields/vendor/autoload.php')) {
+            require_once plugin_dir_path(__FILE__) . 'includes/libraries/carbon-fields/vendor/autoload.php';
+            \Carbon_Fields\Carbon_Fields::boot();
             include_once( 'includes/classes/carbon-fields-integration.php' );
         }
-        */
         
         // Request Listener
         include_once( 'includes/classes/listener.php' );
@@ -207,10 +205,11 @@ final class WordPressPluginSeed {
         include_once( 'includes/functions/github-sync-ajax.php' );
         include_once( 'includes/classes/settings-import-export.php' );
         include_once( 'includes/classes/license-manager.php' );
+        include_once( 'includes/classes/license-client.php' );
         include_once( 'includes/classes/extension-installer.php' );
         include_once( 'includes/classes/library-manager.php' );
+        include_once( 'includes/classes/library-update-monitor.php' );
         include_once( 'includes/classes/enhanced-logger.php' );
-        include_once( 'includes/classes/notification-bell.php' );
         
         // Ecosystem Framework
         include_once( 'includes/classes/ecosystem-registry.php' );
@@ -241,6 +240,8 @@ final class WordPressPluginSeed {
             include_once( 'includes/admin/admin-main-views.php' );
             include_once( 'admin/config/admin-menus.php' );
             include_once( 'admin/notifications/notifications.php' );
+            include_once( 'includes/classes/notification-bell.php' );
+            include_once( 'admin/page/development/view/credits.php' );
             include_once( 'toolbars/toolbars.php' );
             include_once( 'includes/classes/uninstall-feedback.php' );
         }

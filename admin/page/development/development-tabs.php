@@ -51,14 +51,14 @@ class WPSeed_Admin_Development_Page {
      * Enqueue required assets
      */
     private static function enqueue_assets() {
-        WPSeed_Asset_Manager::enqueue_style('wpseed_admin_styles');
+        wp_enqueue_style('wpseed-admin-styles', WPSEED_PLUGIN_URL . 'assets/css/admin-styles.css', array(), WPSEED_VERSION);
     }
     
     /**
      * Development view wrapper start
      */
     private static function view_wrapper_start() {
-        $current_tab = isset($_GET['tab']) ? sanitize_title($_GET['tab']) : 'theme_info';
+        $current_tab = isset($_GET['tab']) ? sanitize_title($_GET['tab']) : 'assets';
         $tabs = self::get_tabs();
         $tab_title = isset($tabs[$current_tab]) ? $tabs[$current_tab] : '';
         
@@ -153,10 +153,7 @@ class WPSeed_Admin_Development_Page {
                 WPSeed_Admin_Development_Tasks_Monitor::output();
                 break;
             case 'libraries':
-                if (!class_exists('WPSeed_Admin_Development_Libraries')) {
-                    require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/development/view/libraries.php';
-                }
-                WPSeed_Admin_Development_Libraries::output();
+                require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/development/view/libraries.php';
                 break;
             case 'credits':
                 if (!class_exists('WPSeed_Admin_Development_Credits')) {

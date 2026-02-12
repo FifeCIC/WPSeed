@@ -18,53 +18,60 @@ WPSeed is a production-ready WordPress plugin boilerplate that includes everythi
 
 = Professional Developer Tools =
 
-* 10-Tab Development Dashboard (Assets, Theme, Debug Log, Database, PHP Info, Documentation, Dev Checklist, Tasks, Layouts, Diagrams, Architecture)
+* 11-Tab Development Dashboard (Assets, Theme, Debug Log, Database, PHP Info, AI Assistant, Documentation, Dev Checklist, Tasks, Layouts, Diagrams, Architecture)
+* Built-in AI Assistant with Gemini integration (50 free requests/day)
 * Built-in documentation viewer - Access all docs from within WordPress admin
 * Advanced logging system (file-based and database-driven)
 * Asset management with automatic tracking and missing file detection
 * GitHub integration for documentation sync
 * Task management with GitHub issues integration
-* Interactive system diagrams with Mermaid.js
+* Interactive system diagrams and architecture mapper with Mermaid.js
+* Action Scheduler integration for reliable background processing
 
 = Modern Architecture =
 
 * REST API framework with secure base controller
 * WP-CLI commands for plugin management
+* Action Scheduler for background processing (WooCommerce standard)
 * Dependency injection ready structure
 * PSR-compatible code organization
 * PHPUnit testing framework included
 * GitHub Actions CI/CD workflow
+* Object registry for global access without globals
+* Data freshness manager for cache validation
 
 = Production-Ready Features =
 
 * Custom post types and taxonomies with examples
 * Enhanced settings framework with repeater fields for dynamic configuration
-* Database-driven notification system
+* Database-driven notification system with persistent storage
 * Multisite support with network activation detection
 * i18n ready with automatic translation loading
-* Enhanced uninstall with complete cleanup
+* Enhanced uninstall with complete cleanup (options, transients, user meta)
 * Security-first approach (nonces, capability checks, sanitization)
 * Uninstall feedback system for user insights
-* 12 integration examples (WooCommerce, ACF, Elementor, Contact Form 7, Yoast SEO, Gravity Forms, BuddyPress, EDD, bbPress, LearnDash, MemberPress, WPForms)
+* 12+ integration examples (WooCommerce, ACF, Elementor, Contact Form 7, Yoast SEO, Gravity Forms, BuddyPress, EDD, bbPress, LearnDash, MemberPress, WPForms)
+* Developer flow logger for decision tracking
+* Background processing with Action Scheduler
 
 = UI/UX Components =
 
-* Tooltip system for contextual help
+* Tooltip system for contextual help throughout admin interface
 * Admin notices (progress boxes, intro boxes, dismissible notices)
 * WP_List_Table examples (basic and advanced)
 * Template-based shortcode architecture
 * Layout examples and CSS reference
+* jQuery UI component gallery
+* Dashboard widgets system
+* Unified feature examples
 
-= Project and Author Links =
+= Project Links =
 
-This project belongs to the community and the WordPress community is there to help. 
-
-- [Blog](http://ryanbayne.wordpress.com) 
-- [Project GitHub](https://github.com/ryanbayne/wordpresspluginseed)
-- [Project Slack](https://wpseed.slack.com/)
-- [Report Issues](https://github.com/ryanbayne/wordpresspluginseed/issues)
-- [Patreon Donations](https://www.patreon.com/ryanbayne)                                                                                                   
-- [Ryan's LinkedIn](https://www.linkedin.com/in/ryanrbayne/)
+- [Project GitHub](https://github.com/ryanbayne/wpseed)
+- [Report Issues](https://github.com/ryanbayne/wpseed/issues)
+- [Documentation](https://github.com/ryanbayne/wpseed/tree/main/docs)
+- [Discussions](https://github.com/ryanbayne/wpseed/discussions)
+- [Support Development](https://www.patreon.com/ryanbayne)
 == Installation ==
 
 = Quick Start (5 Minutes) =
@@ -128,6 +135,42 @@ Translator needed to localize the plugin.
 No special upgrade instructions this time.
 
 == Changelog ==
+
+= Roadmap Changes - 2025-01-XX =
+
+**Phase 7 Complete ✅ - Moving to Phase 8**
+
+* COMPLETED: Phase 7.1 Action Scheduler Integration
+* COMPLETED: Phase 7.2 Carbon Fields Integration with 6 premium field templates
+* COMPLETED: Phase 7.3 Enhanced Logging System with Query Monitor-style features
+* COMPLETED: Phase 7.4 Enhanced Notifications with database storage and bell icon
+* COMPLETED: Phase 7.5 Library Update Monitor with GitHub API integration and automatic update checks
+* COMPLETED: Phase 7.6 Credits & Contributors Gallery with AJAX details loading and filtering
+* COMPLETED: Phase 8.1 Carbon Fields Settings Examples (theme options, post meta, conditional fields, repeater fields, all field types)
+* COMPLETED: Phase 8.2 Uninstall Feedback Form (modal popup with reason collection)
+* COMPLETED: Phase 8.4 Widget Examples (legacy widgets, dashboard widgets)
+* REMOVED: WP-CLI code generators from Phase 8 (user decision - not implementing)
+* MOVED: Premium Licensing System from Phase 8 to Phase 15 (future - months away)
+* FOCUS: Phase 8 remaining tasks - Settings import/export, requirements checker, conflict detector, debugging integrations
+
+= 1.2.0 - 2025 =
+
+**Feature Release - Action Scheduler & AI Integration**
+
+* NEW: Action Scheduler integration for reliable background processing
+* NEW: AI Assistant tab with Gemini integration (50 free requests/day)
+* NEW: Architecture mapper tab with interactive plugin structure visualization
+* NEW: Object registry for global access without globals
+* NEW: Data freshness manager for cache validation
+* NEW: Developer flow logger for decision tracking
+* NEW: Library Update Monitor foundation
+* NEW: Credits & Contributors Gallery foundation
+* IMPROVED: Development Dashboard now 11 tabs
+* IMPROVED: Enhanced logging with developer mode support
+* IMPROVED: Setup wizard with Features configuration step
+* IMPROVED: Asset management with centralized registry
+* FIXED: Missing database tables on activation
+* FIXED: Carbon Fields loading with Pimple dependencies
 
 = 1.1.0 - 2025 =
 

@@ -64,6 +64,28 @@ function wpseed_register_admin_menus() {
         'wpseed-notifications',
         'wpseed_notifications_page'
     );
+    
+    // License
+    add_submenu_page(
+        'wpseed',
+        __('License', 'wpseed'),
+        __('License', 'wpseed'),
+        'manage_options',
+        'wpseed-license',
+        'wpseed_license_page'
+    );
+    
+    // Scheduled Actions (Action Scheduler)
+    if (function_exists('as_enqueue_async_action')) {
+        add_submenu_page(
+            'wpseed',
+            __('Scheduled Actions', 'wpseed'),
+            __('Scheduled Actions', 'wpseed'),
+            'manage_options',
+            'wpseed-scheduled-actions',
+            'wpseed_scheduled_actions_page'
+        );
+    }
 }
 add_action('admin_menu', 'wpseed_register_admin_menus');
 
@@ -119,4 +141,23 @@ function wpseed_components_page() {
  */
 function wpseed_notifications_page() {
     require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/notification-center.php';
+}
+
+/**
+ * License page callback
+ */
+function wpseed_license_page() {
+    require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/license-management.php';
+}
+
+/**
+ * Scheduled Actions page callback
+ */
+function wpseed_scheduled_actions_page() {
+    if (!class_exists('ActionScheduler_AdminView')) {
+        wp_die(__('Action Scheduler is not available.', 'wpseed'));
+    }
+    
+    $admin_view = ActionScheduler_AdminView::instance();
+    $admin_view->render_admin_ui();
 }

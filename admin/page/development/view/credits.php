@@ -8,14 +8,23 @@
 
 if (!defined('ABSPATH')) exit;
 
+error_log('Credits.php loaded');
+
 class WPSeed_Admin_Development_Credits {
+    
+    // Set to false to use AJAX, true to use URL-based navigation
+    const USE_URL_NAVIGATION = false;
+    
+    public static function init() {
+        // AJAX handler registered at bottom of file
+    }
     
     public static function output() {
         $contributors = self::get_contributors();
         $selected = isset($_GET['contributor']) ? sanitize_text_field($_GET['contributor']) : 'action_scheduler';
         
-        WPSeed_Asset_Manager::enqueue_style('wpseed-accordion-table');
-        WPSeed_Asset_Manager::enqueue_script('wpseed-accordion-table');
+        wp_enqueue_style('wpseed-accordion-table', WPSEED_PLUGIN_URL . 'assets/css/accordion-table.css', array(), WPSEED_VERSION);
+        wp_enqueue_script('wpseed-accordion-table', WPSEED_PLUGIN_URL . 'assets/js/accordion-table.js', array('jquery'), WPSEED_VERSION, true);
         ?>
         
         <div class="wpseed-credits-container">
@@ -47,7 +56,7 @@ class WPSeed_Admin_Development_Credits {
 
                     <div class="wpseed-accordion-table">
                         <?php foreach ($contributors as $id => $contributor): ?>
-                            <div class="accordion-row" data-category="<?php echo esc_attr($contributor['category']); ?>">
+                            <div class="accordion-row" data-category="<?php echo esc_attr($contributor['category']); ?>" data-contributor-id="<?php echo esc_attr($id); ?>">
                                 <div class="accordion-header">
                                     <div style="flex: 2;">
                                         <strong><?php echo esc_html($contributor['name']); ?></strong>
@@ -83,9 +92,11 @@ class WPSeed_Admin_Development_Credits {
                                     </div>
                                     
                                     <div class="contributor-actions">
-                                        <a href="<?php echo esc_url(add_query_arg('contributor', $id)); ?>" class="button button-primary">
-                                            <?php _e('View Details', 'wpseed'); ?>
-                                        </a>
+                                        <?php if (self::USE_URL_NAVIGATION): ?>
+                                            <a href="<?php echo esc_url(add_query_arg('contributor', $id)); ?>" class="button button-primary">
+                                                <?php _e('View Details', 'wpseed'); ?>
+                                            </a>
+                                        <?php endif; ?>
                                         <?php if ($contributor['website']): ?>
                                             <a href="<?php echo esc_url($contributor['website']); ?>" class="button" target="_blank">
                                                 <?php _e('Visit Website', 'wpseed'); ?>
@@ -109,59 +120,7 @@ class WPSeed_Admin_Development_Credits {
                         <?php if (isset($contributors[$selected])): 
                             $contributor = $contributors[$selected];
                         ?>
-                            <div class="section-header">
-                                <h3><?php echo esc_html($contributor['name']); ?></h3>
-                            </div>
-                            
-                            <div class="section-content">
-                                <?php if ($contributor['logo']): ?>
-                                    <div class="contributor-logo">
-                                        <img src="<?php echo esc_url($contributor['logo']); ?>" alt="<?php echo esc_attr($contributor['name']); ?>">
-                                    </div>
-                                <?php endif; ?>
-                                
-                                <div class="detail-group">
-                                    <label><?php _e('Description:', 'wpseed'); ?></label>
-                                    <p><?php echo esc_html($contributor['description']); ?></p>
-                                </div>
-                                
-                                <div class="detail-group">
-                                    <label><?php _e('Full Details:', 'wpseed'); ?></label>
-                                    <p><?php echo esc_html($contributor['details']); ?></p>
-                                </div>
-                                
-                                <div class="detail-group">
-                                    <label><?php _e('Category:', 'wpseed'); ?></label>
-                                    <span class="type-badge type-<?php echo esc_attr($contributor['category']); ?>">
-                                        <?php echo esc_html(ucfirst($contributor['category'])); ?>
-                                    </span>
-                                </div>
-                                
-                                <div class="detail-group">
-                                    <label><?php _e('License:', 'wpseed'); ?></label>
-                                    <span class="license-badge"><?php echo esc_html($contributor['license']); ?></span>
-                                </div>
-                                
-                                <?php if ($contributor['stats']): ?>
-                                    <div class="detail-group">
-                                        <label><?php _e('Statistics:', 'wpseed'); ?></label>
-                                        <p><?php echo esc_html($contributor['stats']); ?></p>
-                                    </div>
-                                <?php endif; ?>
-                                
-                                <div class="detail-actions">
-                                    <?php if ($contributor['website']): ?>
-                                        <a href="<?php echo esc_url($contributor['website']); ?>" class="button button-primary" target="_blank">
-                                            <?php _e('Visit Website', 'wpseed'); ?>
-                                        </a>
-                                    <?php endif; ?>
-                                    <?php if ($contributor['github']): ?>
-                                        <a href="<?php echo esc_url($contributor['github']); ?>" class="button" target="_blank">
-                                            <?php _e('View on GitHub', 'wpseed'); ?>
-                                        </a>
-                                    <?php endif; ?>
-                                </div>
-                            </div>
+                            <?php echo self::render_contributor_details($contributor); ?>
                         <?php else: ?>
                             <div class="details-placeholder">
                                 <p><?php _e('Select a contributor to view details', 'wpseed'); ?></p>
@@ -174,6 +133,8 @@ class WPSeed_Admin_Development_Credits {
         
         <script>
         jQuery(document).ready(function($) {
+            var useAjax = <?php echo self::USE_URL_NAVIGATION ? 'false' : 'true'; ?>;
+            
             $('#category-filter').on('change', function() {
                 var category = $(this).val();
                 if (category) {
@@ -183,9 +144,123 @@ class WPSeed_Admin_Development_Credits {
                     $('.accordion-row').show();
                 }
             });
+            
+            if (useAjax) {
+                $('.accordion-header').on('click', function(e) {
+                    e.preventDefault();
+                    var contributorId = $(this).closest('.accordion-row').data('contributor-id');
+                    
+                    console.log('Loading contributor:', contributorId);
+                    
+                    $('.wpseed-details-container').html('<div class="details-loading"><span class="spinner is-active" style="float:none;"></span></div>');
+                    
+                    $.post(ajaxurl, {
+                        action: 'wpseed_get_contributor_details',
+                        contributor_id: contributorId,
+                        nonce: '<?php echo wp_create_nonce('wpseed_contributor_details'); ?>'
+                    }, function(response) {
+                        console.log('Response:', response);
+                        if (response.success) {
+                            $('.wpseed-details-container').html(response.data.html);
+                        } else {
+                            $('.wpseed-details-container').html('<p>Error loading details</p>');
+                        }
+                    }).fail(function(xhr, status, error) {
+                        console.error('AJAX Error:', status, error);
+                        $('.wpseed-details-container').html('<p>Error: ' + error + '</p>');
+                    });
+                });
+            }
         });
         </script>
         <?php
+    }
+    
+    private static function render_contributor_details($contributor) {
+        ob_start();
+        ?>
+        <div class="section-header">
+            <h3><?php echo esc_html($contributor['name']); ?></h3>
+        </div>
+        
+        <div class="section-content">
+            <?php if ($contributor['logo']): ?>
+                <div class="contributor-logo">
+                    <img src="<?php echo esc_url($contributor['logo']); ?>" alt="<?php echo esc_attr($contributor['name']); ?>">
+                </div>
+            <?php endif; ?>
+            
+            <div class="detail-group">
+                <label><?php _e('Description:', 'wpseed'); ?></label>
+                <p><?php echo esc_html($contributor['description']); ?></p>
+            </div>
+            
+            <div class="detail-group">
+                <label><?php _e('Full Details:', 'wpseed'); ?></label>
+                <p><?php echo esc_html($contributor['details']); ?></p>
+            </div>
+            
+            <div class="detail-group">
+                <label><?php _e('Category:', 'wpseed'); ?></label>
+                <span class="type-badge type-<?php echo esc_attr($contributor['category']); ?>">
+                    <?php echo esc_html(ucfirst($contributor['category'])); ?>
+                </span>
+            </div>
+            
+            <div class="detail-group">
+                <label><?php _e('License:', 'wpseed'); ?></label>
+                <span class="license-badge"><?php echo esc_html($contributor['license']); ?></span>
+            </div>
+            
+            <?php if ($contributor['stats']): ?>
+                <div class="detail-group">
+                    <label><?php _e('Statistics:', 'wpseed'); ?></label>
+                    <p><?php echo esc_html($contributor['stats']); ?></p>
+                </div>
+            <?php endif; ?>
+            
+            <div class="detail-actions">
+                <?php if ($contributor['website']): ?>
+                    <a href="<?php echo esc_url($contributor['website']); ?>" class="button button-primary" target="_blank">
+                        <?php _e('Visit Website', 'wpseed'); ?>
+                    </a>
+                <?php endif; ?>
+                <?php if ($contributor['github']): ?>
+                    <a href="<?php echo esc_url($contributor['github']); ?>" class="button" target="_blank">
+                        <?php _e('View on GitHub', 'wpseed'); ?>
+                    </a>
+                <?php endif; ?>
+            </div>
+        </div>
+        <?php
+        return ob_get_clean();
+    }
+    
+    public static function ajax_get_contributor_details() {
+        error_log('AJAX handler called');
+        
+        if (!isset($_POST['nonce'])) {
+            error_log('No nonce provided');
+            wp_send_json_error('No nonce');
+        }
+        
+        if (!wp_verify_nonce($_POST['nonce'], 'wpseed_contributor_details')) {
+            error_log('Nonce verification failed');
+            wp_send_json_error('Invalid nonce');
+        }
+        
+        $contributor_id = sanitize_text_field($_POST['contributor_id']);
+        error_log('Contributor ID: ' . $contributor_id);
+        
+        $contributors = self::get_contributors();
+        
+        if (!isset($contributors[$contributor_id])) {
+            error_log('Contributor not found: ' . $contributor_id);
+            wp_send_json_error('Contributor not found');
+        }
+        
+        error_log('Rendering contributor details');
+        wp_send_json_success(array('html' => self::render_contributor_details($contributors[$contributor_id])));
     }
     
     private static function get_contributors() {
@@ -196,8 +271,8 @@ class WPSeed_Admin_Development_Credits {
                 'license' => 'GPL v3',
                 'status' => 'bundled',
                 'featured' => true,
-                'description' => 'Battle-tested background processing library',
-                'details' => 'Used by WooCommerce to handle millions of background tasks daily. Provides reliable job queue with automatic retry and monitoring.',
+                'description' => 'Battle-tested background processing library by Automattic',
+                'details' => 'Created by Automattic (WooCommerce team). Used by WooCommerce to handle millions of background tasks daily. Provides reliable job queue with automatic retry and monitoring.',
                 'used_in' => 'Background task processing',
                 'website' => 'https://actionscheduler.org/',
                 'github' => 'https://github.com/woocommerce/action-scheduler',
@@ -210,8 +285,8 @@ class WPSeed_Admin_Development_Credits {
                 'license' => 'GPL v2',
                 'status' => 'bundled',
                 'featured' => true,
-                'description' => 'Modern WordPress custom fields library',
-                'details' => 'Developer-friendly custom fields library with clean API. Supports theme options, post meta, term meta, and user meta.',
+                'description' => 'Modern WordPress custom fields library by htmlBurger',
+                'details' => 'Created by htmlBurger (Miroslav Mitev, Atanas Angelov, Siyan Panayotov). Developer-friendly custom fields library with clean API. Supports theme options, post meta, term meta, and user meta.',
                 'used_in' => 'Settings framework, custom fields',
                 'website' => 'https://carbonfields.net/',
                 'github' => 'https://github.com/htmlburger/carbon-fields',
@@ -224,8 +299,8 @@ class WPSeed_Admin_Development_Credits {
                 'license' => 'MIT',
                 'status' => 'bundled',
                 'featured' => false,
-                'description' => 'Markdown parser in PHP',
-                'details' => 'Fast and extensible Markdown parser. Used for rendering documentation within WordPress admin.',
+                'description' => 'Markdown parser in PHP by Emanuil Rusev',
+                'details' => 'Created by Emanuil Rusev. Fast and extensible Markdown parser. Used for rendering documentation within WordPress admin.',
                 'used_in' => 'Documentation viewer',
                 'website' => 'https://parsedown.org/',
                 'github' => 'https://github.com/erusev/parsedown',
@@ -238,8 +313,8 @@ class WPSeed_Admin_Development_Credits {
                 'license' => 'GPL v3',
                 'status' => 'reference',
                 'featured' => true,
-                'description' => 'Architecture patterns and best practices',
-                'details' => 'WPSeed draws inspiration from WooCommerce\'s plugin architecture, including REST API patterns, background processing, and asset management.',
+                'description' => 'Architecture patterns and best practices by Automattic',
+                'details' => 'Created by Automattic. WPSeed draws inspiration from WooCommerce\'s plugin architecture, including REST API patterns, background processing, and asset management.',
                 'used_in' => 'Overall architecture, coding standards',
                 'website' => 'https://woocommerce.com/',
                 'github' => 'https://github.com/woocommerce/woocommerce',
@@ -252,8 +327,8 @@ class WPSeed_Admin_Development_Credits {
                 'license' => 'Commercial',
                 'status' => 'integrated',
                 'featured' => true,
-                'description' => 'Version control and collaboration',
-                'details' => 'GitHub provides version control, issue tracking, and CI/CD integration for WPSeed development.',
+                'description' => 'Version control and collaboration by GitHub, Inc. (Microsoft)',
+                'details' => 'Owned by Microsoft Corporation. GitHub provides version control, issue tracking, and CI/CD integration for WPSeed development.',
                 'used_in' => 'Version control, documentation sync, CI/CD',
                 'website' => 'https://github.com/',
                 'github' => 'https://github.com/ryanbayne/wpseed',
@@ -263,3 +338,8 @@ class WPSeed_Admin_Development_Credits {
         );
     }
 }
+
+WPSeed_Admin_Development_Credits::init();
+
+error_log('Registering AJAX action: wpseed_get_contributor_details');
+add_action('wp_ajax_wpseed_get_contributor_details', array('WPSeed_Admin_Development_Credits', 'ajax_get_contributor_details'));

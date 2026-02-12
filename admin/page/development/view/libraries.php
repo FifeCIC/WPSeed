@@ -1,160 +1,163 @@
 <?php
-/**
- * WPSeed Development - Libraries Monitor
- *
- * @package WPSeed/Admin/Development
- * @version 1.2.0
- */
-
-if (!defined('ABSPATH')) exit;
-
-class WPSeed_Admin_Development_Libraries {
-    
-    public static function output() {
-        $libraries = WPSeed_Library_Manager::get_libraries();
-        
-        // Handle manual check
-        if (isset($_POST['check_updates']) && wp_verify_nonce($_POST['_wpnonce'], 'wpseed_check_updates')) {
-            WPSeed_Library_Manager::instance()->check_all_updates();
-            delete_transient('wpseed_library_check');
-            echo '<div class="notice notice-success"><p>' . __('Library updates checked successfully.', 'wpseed') . '</p></div>';
-        }
-        
-        ?>
-        <div class="wpseed-libraries-monitor">
-            
-            <div class="libraries-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <div>
-                    <h3 style="margin: 0;"><?php _e('Bundled Libraries', 'wpseed'); ?></h3>
-                    <p style="margin: 5px 0 0 0; color: #666;">
-                        <?php 
-                        $last_check = get_transient('wpseed_library_check');
-                        if ($last_check) {
-                            printf(__('Last checked: %s ago', 'wpseed'), human_time_diff($last_check));
-                        } else {
-                            _e('Never checked', 'wpseed');
-                        }
-                        ?>
-                    </p>
-                </div>
-                <form method="post">
-                    <?php wp_nonce_field('wpseed_check_updates'); ?>
-                    <button type="submit" name="check_updates" class="button button-primary">
-                        <?php _e('Check for Updates', 'wpseed'); ?>
-                    </button>
-                </form>
-            </div>
-            
-            <table class="wp-list-table widefat fixed striped">
-                <thead>
-                    <tr>
-                        <th><?php _e('Library', 'wpseed'); ?></th>
-                        <th><?php _e('Current Version', 'wpseed'); ?></th>
-                        <th><?php _e('Latest Version', 'wpseed'); ?></th>
-                        <th><?php _e('License', 'wpseed'); ?></th>
-                        <th><?php _e('Status', 'wpseed'); ?></th>
-                        <th><?php _e('Bundled', 'wpseed'); ?></th>
-                        <th><?php _e('Actions', 'wpseed'); ?></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($libraries as $id => $library): 
-                        $status = WPSeed_Library_Manager::get_library_status($id);
-                    ?>
-                        <tr>
-                            <td>
-                                <strong><?php echo esc_html($library['name']); ?></strong>
-                            </td>
-                            <td>
-                                <code><?php echo esc_html($library['version']); ?></code>
-                            </td>
-                            <td>
-                                <?php if (isset($status['latest'])): ?>
-                                    <code><?php echo esc_html($status['latest']); ?></code>
-                                <?php else: ?>
-                                    <span style="color: #666;">—</span>
-                                <?php endif; ?>
-                            </td>
-                            <td>
-                                <span class="license-badge"><?php echo esc_html($library['license']); ?></span>
-                            </td>
-                            <td>
-                                <?php echo self::get_status_badge($status['status']); ?>
-                            </td>
-                            <td>
-                                <?php echo esc_html(human_time_diff(strtotime($library['bundled_date']), current_time('timestamp')) . ' ago'); ?>
-                            </td>
-                            <td>
-                                <a href="https://github.com/<?php echo esc_attr($library['github_repo']); ?>/releases" 
-                                   class="button button-small" target="_blank">
-                                    <?php _e('View Releases', 'wpseed'); ?>
-                                </a>
-                                <?php if ($status['status'] === 'update_available' || $status['status'] === 'outdated'): ?>
-                                    <a href="https://github.com/<?php echo esc_attr($library['github_repo']); ?>/releases/latest" 
-                                       class="button button-small button-primary" target="_blank">
-                                        <?php _e('Download Update', 'wpseed'); ?>
-                                    </a>
-                                <?php endif; ?>
-                            </td>
-                        </tr>
-                        
-                        <?php if ($status['status'] === 'update_available' || $status['status'] === 'outdated'): ?>
-                            <tr class="update-notice-row">
-                                <td colspan="7" style="background: #f0f8ff; border-left: 4px solid #0073aa; padding: 12px;">
-                                    <strong><?php _e('Update Available:', 'wpseed'); ?></strong>
-                                    <?php printf(__('Version %s → %s', 'wpseed'), $status['current'], $status['latest']); ?>
-                                    <br>
-                                    <small style="color: #666;">
-                                        <?php _e('Download the latest version, extract to the library folder, and replace existing files.', 'wpseed'); ?>
-                                    </small>
-                                </td>
-                            </tr>
-                        <?php endif; ?>
-                        
-                        <?php if ($status['status'] === 'missing'): ?>
-                            <tr class="error-notice-row">
-                                <td colspan="7" style="background: #ffeaea; border-left: 4px solid #dc3232; padding: 12px;">
-                                    <strong><?php _e('Library Missing:', 'wpseed'); ?></strong>
-                                    <?php echo esc_html($status['message']); ?>
-                                </td>
-                            </tr>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-            
-            <div class="libraries-info" style="margin-top: 20px; padding: 15px; background: #f9f9f9; border: 1px solid #ddd; border-radius: 4px;">
-                <h4 style="margin-top: 0;"><?php _e('About Library Updates', 'wpseed'); ?></h4>
-                <ul style="margin: 0;">
-                    <li><?php _e('WPSeed checks for library updates once per day automatically', 'wpseed'); ?></li>
-                    <li><?php _e('Updates are not installed automatically - you must download and replace files manually', 'wpseed'); ?></li>
-                    <li><?php _e('Always backup your site before updating libraries', 'wpseed'); ?></li>
-                    <li><?php _e('Test updates in a development environment first', 'wpseed'); ?></li>
-                </ul>
-            </div>
-            
-            <div class="libraries-cli" style="margin-top: 20px; padding: 15px; background: #f0f0f1; border-radius: 4px;">
-                <h4 style="margin-top: 0;"><?php _e('WP-CLI Commands', 'wpseed'); ?></h4>
-                <code style="display: block; padding: 10px; background: #fff; border: 1px solid #ddd; border-radius: 3px;">
-                    wp wpseed libraries check
-                </code>
-                <p style="margin: 10px 0 0 0; color: #666; font-size: 13px;">
-                    <?php _e('Check for library updates via command line', 'wpseed'); ?>
-                </p>
-            </div>
-        </div>
-        <?php
-    }
-    
-    private static function get_status_badge($status) {
-        $badges = array(
-            'up_to_date' => '<span style="display: inline-block; padding: 3px 8px; background: #00a32a; color: #fff; border-radius: 3px; font-size: 11px; font-weight: 600;">✓ Up to Date</span>',
-            'update_available' => '<span style="display: inline-block; padding: 3px 8px; background: #f0b849; color: #fff; border-radius: 3px; font-size: 11px; font-weight: 600;">⚠ Update Available</span>',
-            'outdated' => '<span style="display: inline-block; padding: 3px 8px; background: #d63638; color: #fff; border-radius: 3px; font-size: 11px; font-weight: 600;">⚠ Outdated</span>',
-            'missing' => '<span style="display: inline-block; padding: 3px 8px; background: #dc3232; color: #fff; border-radius: 3px; font-size: 11px; font-weight: 600;">✗ Missing</span>',
-            'unknown' => '<span style="display: inline-block; padding: 3px 8px; background: #ddd; color: #666; border-radius: 3px; font-size: 11px; font-weight: 600;">? Unknown</span>',
-        );
-        
-        return isset($badges[$status]) ? $badges[$status] : $badges['unknown'];
-    }
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
 }
+
+$monitor = WPSeed_Library_Update_Monitor::instance();
+$libraries = $monitor->get_libraries();
+$updates = array();
+
+// Check for updates if requested
+if ( isset( $_GET['check_updates'] ) && isset( $_GET['_wpnonce'] ) && wp_verify_nonce( $_GET['_wpnonce'], 'wpseed_check_library_updates' ) ) {
+    $monitor->clear_cache();
+    $updates = $monitor->check_all_updates();
+    echo '<div class="notice notice-success is-dismissible"><p>Library updates checked successfully.</p></div>';
+}
+
+// Get cached updates
+foreach ( $libraries as $slug => $library ) {
+    $updates[ $slug ] = $monitor->check_updates( $slug );
+}
+?>
+
+<div class="wrap wpseed-libraries-tab">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h2>Bundled Libraries</h2>
+        <a href="<?php echo esc_url( add_query_arg( array( 'check_updates' => '1', '_wpnonce' => wp_create_nonce( 'wpseed_check_library_updates' ) ) ) ); ?>" class="button button-primary">
+            <span class="dashicons dashicons-update" style="margin-top: 3px;"></span> Check for Updates
+        </a>
+    </div>
+    
+    <p>WPSeed bundles the following third-party libraries. Updates are checked automatically every 6 hours.</p>
+    
+    <table class="wp-list-table widefat fixed striped">
+        <thead>
+            <tr>
+                <th style="width: 25%;">Library</th>
+                <th style="width: 15%;">Current Version</th>
+                <th style="width: 15%;">Latest Version</th>
+                <th style="width: 15%;">Status</th>
+                <th style="width: 15%;">Bundled Date</th>
+                <th style="width: 15%;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ( $libraries as $slug => $library ) : 
+                $update = $updates[ $slug ];
+                $is_outdated = $monitor->is_outdated( $slug );
+                $needs_update = ! is_wp_error( $update ) && ! empty( $update['needs_update'] );
+            ?>
+            <tr>
+                <td>
+                    <strong><?php echo esc_html( $library['name'] ); ?></strong>
+                    <br>
+                    <small style="color: #666;"><?php echo esc_html( $library['description'] ); ?></small>
+                    <br>
+                    <small>
+                        License: <code><?php echo esc_html( $library['license'] ); ?></code> | 
+                        <a href="https://github.com/<?php echo esc_attr( $library['github_repo'] ); ?>" target="_blank">GitHub</a>
+                    </small>
+                </td>
+                <td>
+                    <code><?php echo esc_html( $library['version'] ); ?></code>
+                </td>
+                <td>
+                    <?php if ( is_wp_error( $update ) ) : ?>
+                        <span style="color: #999;">—</span>
+                        <br><small style="color: #d63638;"><?php echo esc_html( $update->get_error_message() ); ?></small>
+                    <?php else : ?>
+                        <code><?php echo esc_html( $update['latest_version'] ); ?></code>
+                        <?php if ( ! empty( $update['release_date'] ) ) : ?>
+                            <br><small style="color: #666;"><?php echo esc_html( human_time_diff( strtotime( $update['release_date'] ) ) ); ?> ago</small>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </td>
+                <td>
+                    <?php if ( $needs_update ) : ?>
+                        <span class="dashicons dashicons-warning" style="color: #d63638;"></span>
+                        <strong style="color: #d63638;">Update Available</strong>
+                    <?php elseif ( $is_outdated ) : ?>
+                        <span class="dashicons dashicons-clock" style="color: #dba617;"></span>
+                        <strong style="color: #dba617;">Outdated (6+ months)</strong>
+                    <?php elseif ( ! is_wp_error( $update ) ) : ?>
+                        <span class="dashicons dashicons-yes-alt" style="color: #00a32a;"></span>
+                        <strong style="color: #00a32a;">Up to Date</strong>
+                    <?php else : ?>
+                        <span class="dashicons dashicons-info" style="color: #999;"></span>
+                        <span style="color: #999;">Unknown</span>
+                    <?php endif; ?>
+                </td>
+                <td>
+                    <?php echo esc_html( date( 'M j, Y', strtotime( $library['bundled_date'] ) ) ); ?>
+                    <br>
+                    <small style="color: #666;"><?php echo esc_html( human_time_diff( strtotime( $library['bundled_date'] ) ) ); ?> ago</small>
+                </td>
+                <td>
+                    <?php if ( ! is_wp_error( $update ) && ! empty( $update['release_url'] ) ) : ?>
+                        <a href="<?php echo esc_url( $update['release_url'] ); ?>" target="_blank" class="button button-small">View Release</a>
+                    <?php endif; ?>
+                    <?php if ( $needs_update ) : ?>
+                        <br><br>
+                        <button type="button" class="button button-small" disabled title="Manual update coming soon">Update</button>
+                    <?php endif; ?>
+                </td>
+            </tr>
+            <?php if ( ! is_wp_error( $update ) && ! empty( $update['release_notes'] ) && $needs_update ) : ?>
+            <tr class="wpseed-release-notes" style="display: none;" data-library="<?php echo esc_attr( $slug ); ?>">
+                <td colspan="6" style="background: #f9f9f9; padding: 15px;">
+                    <strong>Release Notes:</strong>
+                    <div style="margin-top: 10px; max-height: 300px; overflow-y: auto; white-space: pre-wrap; font-family: monospace; font-size: 12px;">
+                        <?php echo esc_html( wp_trim_words( $update['release_notes'], 100 ) ); ?>
+                    </div>
+                    <a href="<?php echo esc_url( $update['release_url'] ); ?>" target="_blank">Read full release notes →</a>
+                </td>
+            </tr>
+            <?php endif; ?>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    
+    <div style="margin-top: 30px; padding: 20px; background: #f0f6fc; border-left: 4px solid #0073aa;">
+        <h3 style="margin-top: 0;">About Library Updates</h3>
+        <ul style="margin-bottom: 0;">
+            <li><strong>Automatic Checking:</strong> WPSeed checks for updates every 6 hours via GitHub API</li>
+            <li><strong>Outdated Warning:</strong> Libraries bundled 6+ months ago show a warning</li>
+            <li><strong>Manual Updates:</strong> Currently requires manual download and replacement (automated updates coming soon)</li>
+            <li><strong>Backup First:</strong> Always backup before updating libraries</li>
+            <li><strong>Testing:</strong> Test updates in development environment before production</li>
+        </ul>
+    </div>
+    
+    <div style="margin-top: 20px; padding: 15px; background: #fff3cd; border-left: 4px solid #dba617;">
+        <h4 style="margin-top: 0;">⚠️ Important: Do Not Edit Libraries Directly</h4>
+        <p style="margin-bottom: 0;">
+            Never modify bundled library files directly. Instead, create wrapper classes or use WordPress hooks to extend functionality. 
+            Report bugs to the library's GitHub repository. Direct modifications will be lost on updates.
+        </p>
+    </div>
+</div>
+
+<style>
+.wpseed-libraries-tab .wp-list-table td {
+    vertical-align: top;
+    padding: 12px 10px;
+}
+.wpseed-libraries-tab .button-small {
+    height: auto;
+    padding: 4px 8px;
+    font-size: 12px;
+}
+</style>
+
+<script>
+jQuery(document).ready(function($) {
+    // Dismiss library notice
+    $(document).on('click', '.wpseed-dismiss-library-notice', function(e) {
+        e.preventDefault();
+        $.post(ajaxurl, {
+            action: 'wpseed_dismiss_library_notice'
+        });
+        $(this).closest('.notice').fadeOut();
+    });
+});
+</script>
