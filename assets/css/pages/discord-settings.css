@@ -1,0 +1,42 @@
+/**
+ * wpseed - Discord Settings Page Styles
+ * 
+ * Page-specific styles for the Discord settings page.
+ * 
+ * @package wpseed/CSS/Pages
+ * @since 1.0.0
+ */
+
+/* Discord-specific overrides only */
+.wpseed-discord-integration-title {
+    margin-bottom: var(--tp-spacing-xl);
+}
+
+/* Hide trading-specific UI elements in Discord API tabs */
+.wpseed-discord-api-tab .wpseed-trading-mode-button-form,
+.wpseed-discord-api-tab .wpseed-trading-toggle-container,
+.wpseed-discord-api-tab .wpseed-premium-toggle-container {
+    display: none !important;
+}
+
+/* Discord API credentials layout */
+.wpseed-discord-api-tab .wpseed-api-credentials-container {
+    display: flex;
+    flex-direction: column !important;
+}
+
+.wpseed-discord-api-tab .wpseed-api-credentials-column {
+    flex: 1;
+    width: 100%;
+    margin-bottom: var(--tp-spacing-lg);
+}
+
+.wpseed-discord-api-tab .wpseed-api-credentials-column h4 {
+    border-bottom: 1px solid var(--tp-color-gray-300);
+    padding-bottom: var(--tp-spacing-md);
+    margin-bottom: var(--tp-spacing-lg);
+}
+
+/* Legacy classes mapping for backward compatibility */
+.api-tab[data-api="discord"] { @extend .wpseed-discord-api-tab; }
+.api-tab-content.discord-tab { @extend .wpseed-discord-api-tab; }

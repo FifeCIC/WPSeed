@@ -1,0 +1,120 @@
+/**
+ * wpseed - Responsive Layout Styles
+ * 
+ * Media queries and responsive adjustments.
+ * 
+ * @package wpseed/CSS/Layouts
+ * @since 1.0.0
+ */
+
+@media screen and (max-width: 1200px) {
+    .api-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+    
+    .wpseed-discord-settings-container {
+        flex-direction: column;
+    }
+    
+    .wpseed-discord-card + .wpseed-discord-card {
+        margin-top: var(--tp-spacing-xl);
+    }
+}
+
+@media screen and (max-width: 782px) {
+    .wpseed-grid-2col,
+    .wpseed-grid-3col,
+    .wpseed-grid-4col {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .wpseed-card-span2 {
+        grid-column: span 1 !important;
+    }
+    
+    .wpseed-form-actions {
+        flex-direction: column !important;
+    }
+    
+    .wpseed-button {
+        width: 100% !important;
+        margin-bottom: var(--tp-spacing-xs) !important;
+    }
+    
+    .api-quick-actions {
+        flex-wrap: wrap;
+    }
+    
+    .endpoints-filter {
+        flex-direction: column;
+    }
+    
+    .wpseed-import-export {
+        flex-direction: column;
+    }
+    
+    .github-issues-toolbar {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .issue-filters {
+        flex-wrap: wrap;
+        flex: initial;
+        width: 100%;
+    }
+    
+    .search-group {
+        flex: 1;
+        max-width: none;
+    }
+    
+    /* Legacy responsive styles from alert-decoder */
+    .results-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .result-card.summary {
+        grid-column: span 1;
+    }
+    
+    .emoji-guide {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .wpseed-hide-mobile {
+        display: none !important;
+    }
+    
+    .wpseed-card-footer,
+    .wpseed-form-actions {
+        flex-direction: column;
+    }
+    
+    .wpseed-form-actions .button {
+        width: 100%;
+        margin-bottom: var(--tp-spacing-xs);
+    }
+    
+    .api-main-section {
+        flex-direction: column;
+    }
+    
+    .api-sidebar {
+        width: 100%;
+    }
+    
+    .completion-stats {
+        flex-direction: column;
+    }
+    
+    .stat-box {
+        margin-right: 0;
+    }
+    
+    .forecast-card {
+        width: 100%;
+    }
+}

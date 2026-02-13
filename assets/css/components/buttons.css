@@ -1,0 +1,343 @@
+/**
+ * wpseed Button Components
+ * 
+ * Button styles used throughout the plugin interface
+ * 
+ * HTML Structure:
+ * <button class="tp-button tp-button-primary">Primary Button</button>
+ * <button class="tp-button tp-button-secondary">Secondary Button</button>
+ * <button class="tp-button tp-button-danger">Danger Button</button>
+ * <button class="tp-button tp-button-link">Link Button</button>
+ * 
+ * @package wpseed/CSS/Components
+ * @since 1.0.0
+ */
+
+/* Base Button Styles */
+.tp-button {
+    display: inline-block;
+    padding: var(--wpseed-button-padding-y) var(--wpseed-button-padding-x);
+    font-family: var(--wpseed-font-family-base);
+    font-size: var(--wpseed-font-size);
+    font-weight: var(--wpseed-font-weight-medium);
+    line-height: var(--wpseed-line-height-normal);
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    border: var(--wpseed-border-width) solid transparent;
+    border-radius: var(--wpseed-border-radius);
+    transition: all var(--wpseed-transition-fast);
+    user-select: none;
+    white-space: nowrap;
+    
+    /* Prevent button from breaking layout */
+    min-height: 32px;
+    box-sizing: border-box;
+}
+
+.tp-button:focus {
+    outline: 2px solid var(--wpseed-color-primary-light);
+    outline-offset: 2px;
+}
+
+.tp-button:disabled,
+.tp-button.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Primary Button */
+.tp-button-primary {
+    color: var(--wpseed-color-white);
+    background-color: var(--wpseed-color-primary);
+    border-color: var(--wpseed-color-primary);
+}
+
+.tp-button-primary:hover:not(:disabled) {
+    background-color: var(--wpseed-color-primary-dark);
+    border-color: var(--wpseed-color-primary-dark);
+    color: var(--wpseed-color-white);
+}
+
+.tp-button-primary:active {
+    background-color: var(--wpseed-color-primary-dark);
+    border-color: var(--wpseed-color-primary-dark);
+    transform: translateY(1px);
+}
+
+/* Secondary Button */
+.tp-button-secondary {
+    color: var(--wpseed-color-gray-700);
+    background-color: var(--wpseed-color-white);
+    border-color: var(--wpseed-color-gray-400);
+}
+
+.tp-button-secondary:hover:not(:disabled) {
+    background-color: var(--wpseed-color-gray-50);
+    border-color: var(--wpseed-color-gray-500);
+    color: var(--wpseed-color-gray-800);
+}
+
+.tp-button-secondary:active {
+    background-color: var(--wpseed-color-gray-100);
+    transform: translateY(1px);
+}
+
+/* Success Button */
+.tp-button-success {
+    color: var(--wpseed-color-white);
+    background-color: var(--wpseed-color-success);
+    border-color: var(--wpseed-color-success);
+}
+
+.tp-button-success:hover:not(:disabled) {
+    background-color: var(--wpseed-color-success-dark);
+    border-color: var(--wpseed-color-success-dark);
+    color: var(--wpseed-color-white);
+}
+
+/* Danger Button */
+.tp-button-danger {
+    color: var(--wpseed-color-white);
+    background-color: var(--wpseed-color-error);
+    border-color: var(--wpseed-color-error);
+}
+
+.tp-button-danger:hover:not(:disabled) {
+    background-color: var(--wpseed-color-error-dark);
+    border-color: var(--wpseed-color-error-dark);
+    color: var(--wpseed-color-white);
+}
+
+/* Warning Button */
+.tp-button-warning {
+    color: var(--wpseed-color-black);
+    background-color: var(--wpseed-color-warning);
+    border-color: var(--wpseed-color-warning);
+}
+
+.tp-button-warning:hover:not(:disabled) {
+    background-color: var(--wpseed-color-warning-dark);
+    border-color: var(--wpseed-color-warning-dark);
+    color: var(--wpseed-color-white);
+}
+
+/* Link Button */
+.tp-button-link {
+    color: var(--wpseed-color-primary);
+    background-color: transparent;
+    border-color: transparent;
+    text-decoration: underline;
+}
+
+.tp-button-link:hover:not(:disabled) {
+    color: var(--wpseed-color-primary-dark);
+    background-color: transparent;
+    border-color: transparent;
+}
+
+/* Link Buttons - More specific selectors to override WordPress defaults */
+.wp-core-ui .button-link,
+.wp-admin .button-link,
+button.button-link,
+input.button-link {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: none !important;
+    cursor: pointer !important;
+    text-align: left !important;
+    color: var(--wpseed-color-primary) !important;
+    text-decoration: underline !important;
+    transition-property: border, background, color !important;
+    transition-duration: 0.05s !important;
+    transition-timing-function: ease-in-out !important;
+    font-size: inherit !important;
+    line-height: inherit !important;
+    display: inline !important;
+    font-family: inherit !important;
+}
+
+.wp-core-ui .button-link:hover,
+.wp-core-ui .button-link:active,
+.wp-admin .button-link:hover,
+.wp-admin .button-link:active,
+button.button-link:hover,
+button.button-link:active,
+input.button-link:hover,
+input.button-link:active {
+    color: var(--wpseed-color-primary-dark) !important;
+    text-decoration: underline !important;
+    background: none !important;
+}
+
+.wp-core-ui .button-link:focus,
+.wp-admin .button-link:focus,
+button.button-link:focus,
+input.button-link:focus {
+    color: var(--wpseed-color-primary-dark) !important;
+    box-shadow: 0 0 0 2px var(--wpseed-color-primary) !important;
+    outline: 2px solid transparent !important;
+    text-decoration: underline !important;
+    background: none !important;
+}
+
+.wp-core-ui .button-link-delete,
+.wp-admin .button-link-delete,
+button.button-link-delete,
+input.button-link-delete {
+    color: var(--wpseed-color-error) !important;
+}
+
+.wp-core-ui .button-link-delete:hover,
+.wp-core-ui .button-link-delete:focus,
+.wp-admin .button-link-delete:hover,
+.wp-admin .button-link-delete:focus,
+button.button-link-delete:hover,
+button.button-link-delete:focus,
+input.button-link-delete:hover,
+input.button-link-delete:focus {
+    color: var(--wpseed-color-error-dark) !important;
+    background: none !important;
+}
+
+.wp-core-ui .button-link-delete:disabled,
+.wp-admin .button-link-delete:disabled,
+button.button-link-delete:disabled,
+input.button-link-delete:disabled {
+    background: none !important;
+    color: var(--wpseed-color-gray-500) !important;
+}
+
+/* Ensure wpseed UI Library button links work properly */
+.wpseed-ui-library-container .button-link,
+#ui-library .button-link {
+    color: var(--wpseed-color-primary) !important;
+    text-decoration: underline !important;
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    font-size: inherit !important;
+    line-height: inherit !important;
+}
+
+/* Button Sizes */
+.tp-button-small {
+    padding: var(--wpseed-spacing-xs) var(--wpseed-spacing-sm);
+    font-size: var(--wpseed-font-size-sm);
+    min-height: 28px;
+}
+
+.tp-button-large {
+    padding: var(--wpseed-spacing-lg) var(--wpseed-spacing-xl);
+    font-size: var(--wpseed-font-size-lg);
+    min-height: 40px;
+}
+
+/* WordPress Button Size Compatibility */
+.button-large {
+    min-height: 32px;
+    line-height: 2.30769231;
+    padding: 0 12px;
+    font-size: 13px;
+}
+
+/* Ensure button-large works properly in UI Library context */
+.wpseed-ui-library-container .button.button-large,
+#ui-library .button.button-large {
+    min-height: 32px !important;
+    line-height: 2.30769231 !important;
+    padding: 0 12px !important;
+    font-size: 13px !important;
+}
+
+/* Button Groups */
+.tp-button-group {
+    display: inline-flex;
+    vertical-align: middle;
+}
+
+.tp-button-group .tp-button {
+    border-radius: 0;
+    margin-left: -1px;
+}
+
+.tp-button-group .tp-button:first-child {
+    border-top-left-radius: var(--wpseed-border-radius);
+    border-bottom-left-radius: var(--wpseed-border-radius);
+    margin-left: 0;
+}
+
+.tp-button-group .tp-button:last-child {
+    border-top-right-radius: var(--wpseed-border-radius);
+    border-bottom-right-radius: var(--wpseed-border-radius);
+}
+
+.tp-button-group .tp-button:hover {
+    z-index: 1;
+}
+
+/* Icon Buttons */
+.tp-button-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--wpseed-spacing-xs);
+}
+
+.tp-button-icon .dashicons {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+}
+
+/* Loading State */
+.tp-button-loading {
+    position: relative;
+    color: transparent !important;
+}
+
+.tp-button-loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 16px;
+    height: 16px;
+    border: 2px solid currentColor;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: tp-button-spin 0.8s linear infinite;
+}
+
+@keyframes tp-button-spin {
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* WordPress Button Compatibility */
+.button.tp-button {
+    font-family: var(--wpseed-font-family-base);
+    font-weight: var(--wpseed-font-weight-medium);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 782px) {
+    .tp-button {
+        padding: var(--wpseed-spacing-sm) var(--wpseed-spacing-md);
+        font-size: var(--wpseed-font-size-md);
+        min-height: 36px;
+    }
+    
+    .tp-button-small {
+        padding: var(--wpseed-spacing-xs) var(--wpseed-spacing-sm);
+        font-size: var(--wpseed-font-size-sm);
+        min-height: 32px;
+    }
+}

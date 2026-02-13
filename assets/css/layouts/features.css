@@ -1,0 +1,228 @@
+/**
+ * wpseed - Features Layout Styles
+ * 
+ * Layout for features management page.
+ * 
+ * @package wpseed/CSS/Layouts
+ * @since 1.0.0
+ */
+
+/* Features Management Header */
+.wpseed-features-header {
+    margin-bottom: var(--tp-spacing-xl);
+}
+
+/* Features Controls */
+.wpseed-features-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--tp-spacing-xl);
+    background: #f9f9f9;
+    padding: var(--tp-spacing-md);
+    border: var(--tp-border-standard);
+    border-radius: var(--tp-border-radius);
+}
+
+/* Feature Page Sections */
+.wpseed-feature-page-section {
+    margin-bottom: var(--tp-spacing-xl);
+    border: var(--tp-border-standard);
+    border-radius: var(--tp-border-radius);
+    background: var(--tp-color-white);
+    box-shadow: var(--tp-shadow);
+    transition: box-shadow 0.3s ease;
+}
+
+.wpseed-feature-page-section:hover {
+    box-shadow: 0 2px 5px rgba(0,0,0,.08);
+}
+
+.wpseed-feature-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--tp-spacing-md) var(--tp-spacing-lg);
+    background: #f7fcf7;
+    border-left: 3px solid #46b450;
+    border-bottom: var(--tp-border-standard);
+    cursor: pointer;
+}
+
+.wpseed-feature-page-header h3 {
+    margin: 0;
+}
+
+.wpseed-feature-page-header h3 a {
+    text-decoration: none;
+    color: #2c7636;
+}
+
+.wpseed-feature-page-header h3 .dashicons {
+    font-size: 16px;
+    vertical-align: text-bottom;
+}
+
+.wpseed-feature-page-header .toggle-section {
+    color: #46b450;
+}
+
+.wpseed-feature-page-content {
+    padding: var(--tp-spacing-lg);
+    display: none; /* Initially hidden */
+}
+
+/* Feature Tables */
+.wpseed-feature-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.wpseed-feature-table th {
+    text-align: left;
+    padding: var(--tp-spacing-md);
+    border-bottom: 2px solid #ddd;
+}
+
+.wpseed-feature-table td {
+    padding: var(--tp-spacing-md);
+    border-bottom: 1px solid #eee;
+}
+
+.wpseed-feature-table tr:hover {
+    background-color: #f7fcfe;
+}
+
+.wpseed-tab-cell {
+    background-color: #f7f7f7;
+    border-right: 1px solid #eee;
+    vertical-align: top;
+}
+
+.wpseed-tab-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.wpseed-tab-content a {
+    text-decoration: none;
+    font-weight: var(--tp-font-weight-semibold);
+    color: #23282d;
+}
+
+.wpseed-feature-mode select {
+    width: 100px;
+}
+
+/* Feature Summary */
+.wpseed-feature-summary {
+    margin: var(--tp-spacing-xl) 0;
+}
+
+.wpseed-summary-box {
+    background: var(--tp-color-white);
+    border: var(--tp-border-standard);
+    border-radius: var(--tp-border-radius);
+    padding: var(--tp-spacing-lg);
+}
+
+.wpseed-summary-box h4 {
+    margin-top: 0;
+    border-bottom: 1px solid #eee;
+    padding-bottom: var(--tp-spacing-md);
+}
+
+/* Feature Navigation */
+.wpseed-feature-navigation {
+    position: sticky;
+    top: 32px;
+    background: var(--tp-color-white);
+    border-bottom: var(--tp-border-standard);
+    padding: var(--tp-spacing-md) 0;
+    z-index: 100;
+    margin-bottom: var(--tp-spacing-lg);
+}
+
+.wpseed-feature-sections-nav {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 5px;
+}
+
+.wpseed-feature-nav-item {
+    display: inline-block;
+    padding: 5px 12px;
+    margin-right: 5px;
+    border-radius: var(--tp-border-radius);
+    text-decoration: none;
+    color: #646970;
+    background: #f0f0f1;
+}
+
+.wpseed-feature-nav-item:hover,
+.wpseed-feature-nav-item.active {
+    background: #2271b1;
+    color: var(--tp-color-white);
+}
+
+/* Feature row states */
+.wpseed-feature-row.disabled {
+    opacity: 0.6;
+}
+
+/* Tab header */
+.wpseed-tab-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--tp-spacing-xl);
+    border-bottom: 1px solid #eee;
+    padding-bottom: var(--tp-spacing-md);
+}
+
+.wpseed-tab-header h2 {
+    margin: 0;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 782px) {
+    .wpseed-stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .wpseed-tab-cell {
+        display: block;
+        width: 100%;
+        text-align: center;
+        border-right: none;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .wpseed-tab-content {
+        flex-direction: column;
+        gap: var(--tp-spacing-md);
+    }
+}
+
+/* Features Container */
+.wpseed-features-container {
+    margin-top: var(--tp-spacing-xl);
+}
+
+/* Legacy classes mapping for backward compatibility */
+.wpseed-features-header { @extend .wpseed-features-header; }
+.features-controls { @extend .wpseed-features-controls; }
+.feature-page-section { @extend .wpseed-feature-page-section; }
+.feature-page-header { @extend .wpseed-feature-page-header; }
+.feature-page-content { @extend .wpseed-feature-page-content; }
+.feature-table { @extend .wpseed-feature-table; }
+.tab-cell { @extend .wpseed-tab-cell; }
+.tab-content { @extend .wpseed-tab-content; }
+.feature-summary { @extend .wpseed-feature-summary; }
+.summary-box { @extend .wpseed-summary-box; }
+.feature-navigation { @extend .wpseed-feature-navigation; }
+.feature-sections-nav { @extend .wpseed-feature-sections-nav; }
+.feature-nav-item { @extend .wpseed-feature-nav-item; }
+.feature-row.disabled { @extend .wpseed-feature-row.disabled; }
+.wpseed-tab-header { @extend .wpseed-tab-header; }
+.wpseed-features-container { @extend .wpseed-features-container; }

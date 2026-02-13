@@ -1,0 +1,109 @@
+/**
+ * wpseed - Lists Component Styles
+ * 
+ * Styles for various list types, including task lists, subtasks, etc.
+ * 
+ * HTML Structure:
+ * <ul class="tp-list">
+ *   <li class="tp-list-item">
+ *     <div class="tp-list-content">Content here</div>
+ *   </li>
+ * </ul>
+ * 
+ * @package wpseed/CSS/Components
+ * @since 1.0.0
+ */
+
+.wpseed-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.wpseed-list-item {
+    padding: var(--tp-spacing-md);
+    border-bottom: var(--tp-border-standard);
+    display: flex;
+    align-items: center;
+}
+
+.wpseed-list-item:last-child {
+    border-bottom: none;
+}
+
+.wpseed-list-content {
+    flex: 1;
+}
+
+/* Task Lists */
+.wpseed-task-list .wpseed-list-item {
+    padding: var(--tp-spacing-md);
+    transition: background-color 0.2s ease;
+}
+
+.wpseed-task-list .wpseed-list-item:hover {
+    background-color: var(--tp-color-gray-50);
+}
+
+.wpseed-task-list .wpseed-list-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--tp-spacing-md);
+}
+
+.wpseed-task-title {
+    font-weight: var(--tp-font-weight-semibold);
+    flex: 1;
+    min-width: 200px;
+}
+
+.wpseed-task-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--tp-spacing-lg);
+    color: #666;
+    font-size: 13px;
+}
+
+/* Subtask Lists */
+.wpseed-subtask-list {
+    margin-top: var(--tp-spacing-md);
+}
+
+.wpseed-subtask-list .wpseed-list-item {
+    padding: var(--tp-spacing-sm) var(--tp-spacing-md);
+    background-color: var(--tp-color-gray-50);
+    border-radius: var(--tp-border-radius);
+    margin-bottom: var(--tp-spacing-xs);
+    border: var(--tp-border-standard);
+}
+
+.wpseed-subtask-checkbox {
+    margin-right: var(--tp-spacing-md);
+}
+
+.wpseed-subtask-title {
+    flex: 1;
+}
+
+.wpseed-subtask-list .wpseed-list-item.completed {
+    background-color: #f0f9eb;
+}
+
+.wpseed-subtask-list .wpseed-list-item.completed .wpseed-subtask-title {
+    text-decoration: line-through;
+    color: #666;
+}
+
+/* Legacy classes mapping for backward compatibility */
+.task-list { @extend .wpseed-list; @extend .wpseed-task-list; }
+.task-item { @extend .wpseed-list-item; }
+.task-content { @extend .wpseed-list-content; }
+.task-title { @extend .wpseed-task-title; }
+.task-meta { @extend .wpseed-task-meta; }
+.subtask-list { @extend .wpseed-list; @extend .wpseed-subtask-list; }
+.subtask-item { @extend .wpseed-list-item; }
+.subtask-checkbox { @extend .wpseed-subtask-checkbox; }
+.subtask-title { @extend .wpseed-subtask-title; }
+.subtask-item.completed { @extend .wpseed-list-item.completed; }

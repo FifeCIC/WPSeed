@@ -1,0 +1,125 @@
+/**
+ * wpseed Dark Theme - Admin Layout Styles
+ * 
+ * Dark theme overrides for admin page layouts and structure.
+ * 
+ * @package wpseed/CSS/Dark
+ * @since 1.0.0
+ */
+
+.wpseed-dark-theme {
+    background-color: var(--wpseed-color-white);
+    color: var(--wpseed-color-black);
+}
+
+/* Admin Page Structure */
+.wpseed-dark-theme .wpseed-admin-page {
+    background-color: var(--wpseed-color-white);
+}
+
+.wpseed-dark-theme .wpseed-admin-section {
+    background: var(--wpseed-color-gray-50);
+    border: 1px solid var(--wpseed-color-gray-300);
+    color: var(--wpseed-color-black);
+}
+
+.wpseed-dark-theme .wpseed-admin-section h2 {
+    color: var(--wpseed-color-black);
+    border-bottom: 1px solid var(--wpseed-color-gray-300);
+}
+
+/* Service Card Layout */
+.wpseed-dark-theme .service-overview {
+    background: var(--wpseed-color-gray-50);
+    border: 1px solid var(--wpseed-color-gray-300);
+    color: var(--wpseed-color-black);
+}
+
+.wpseed-dark-theme .service-details h3 {
+    color: var(--wpseed-color-black);
+}
+
+/* Import/Export Layout */
+.wpseed-dark-theme .wpseed-import-section,
+.wpseed-dark-theme .wpseed-export-section {
+    background-color: var(--wpseed-color-gray-100);
+    border: 1px solid var(--wpseed-color-gray-300);
+    color: var(--wpseed-color-black);
+}
+
+/* Feature Status Tables */
+.wpseed-dark-theme .feature-status-table th {
+    background: var(--wpseed-color-gray-100);
+    color: var(--wpseed-color-black);
+    border-bottom: 1px solid var(--wpseed-color-gray-400);
+}
+
+.wpseed-dark-theme .feature-status-table td {
+    color: var(--wpseed-color-black);
+    border-bottom: 1px solid var(--wpseed-color-gray-200);
+}
+
+.wpseed-dark-theme .feature-status-table tr:hover {
+    background: var(--wpseed-color-gray-100);
+}
+
+.wpseed-dark-theme .feature-tab-header {
+    background: var(--wpseed-color-gray-200);
+}
+
+.wpseed-dark-theme .completion-stats {
+    background: var(--wpseed-color-gray-50);
+    border: 1px solid var(--wpseed-color-gray-300);
+    color: var(--wpseed-color-black);
+}
+
+/* Button Styles */
+.wpseed-dark-theme .test-button {
+    background-color: var(--wpseed-color-primary);
+    color: var(--wpseed-color-white);
+}
+
+.wpseed-dark-theme .test-button:hover {
+    background-color: var(--wpseed-color-primary-dark);
+}
+
+.wpseed-dark-theme .test-button.maintenance {
+    background-color: var(--wpseed-color-gray-500);
+}
+
+/* Quick Actions Bar */
+.wpseed-dark-theme .api-quick-actions {
+    background: var(--wpseed-color-gray-50);
+    border: 1px solid var(--wpseed-color-gray-300);
+}
+
+.wpseed-dark-theme .quick-action-button {
+    background: var(--wpseed-color-gray-100);
+    border: 1px solid var(--wpseed-color-gray-400);
+    color: var(--wpseed-color-black);
+}
+
+.wpseed-dark-theme .quick-action-button:hover {
+    background: var(--wpseed-color-gray-200);
+    color: var(--wpseed-color-primary);
+}
+
+/* Issues Tab Styles */
+.wpseed-dark-theme .issue-row:hover {
+    background-color: var(--wpseed-color-gray-100);
+}
+
+/* BugNet Log Viewer Styles */
+.wpseed-dark-theme .bugnet-log-viewer h3 {
+    color: var(--wpseed-color-black);
+}
+
+.wpseed-dark-theme .bugnet-log-viewer textarea {
+    background: var(--wpseed-color-gray-100);
+    border: 1px solid var(--wpseed-color-gray-400);
+    color: var(--wpseed-color-black);
+}
+
+.wpseed-dark-theme .bugnet-log-viewer p {
+    color: var(--wpseed-color-gray-700);
+}

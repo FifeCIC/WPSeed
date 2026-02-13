@@ -1,0 +1,167 @@
+/**
+ * wpseed - Indicator Component Styles
+ * 
+ * Styles for technical and market indicators, signals, and interpretations.
+ * 
+ * HTML Structure:
+ * <div class="tp-indicator-values">
+ *   <div class="tp-indicator-value">
+ *     <span class="tp-indicator-label">Label</span>
+ *     <span class="tp-indicator-figure">Value</span>
+ *   </div>
+ * </div>
+ * <div class="tp-indicator-interpretation bullish|bearish|neutral">
+ *   Interpretation text
+ * </div>
+ * 
+ * @package wpseed/CSS/Components
+ * @since 1.0.0
+ */
+
+/* Indicator display components */
+.wpseed-indicator-values {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.wpseed-indicator-value {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+    background: #f0f0f0;
+    border-radius: 3px;
+}
+
+.wpseed-indicator-interpretation {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 3px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.wpseed-indicator-interpretation.bullish {
+    background-color: rgba(38, 166, 154, 0.2);
+    color: #0d6e63;
+}
+
+.wpseed-indicator-interpretation.bearish {
+    background-color: rgba(239, 83, 80, 0.2);
+    color: #9e2b29;
+}
+
+.wpseed-indicator-interpretation.neutral {
+    background-color: rgba(158, 158, 158, 0.2);
+    color: #666;
+}
+
+/* Tech analysis summary */
+.wpseed-analysis-summary {
+    background: #f9f9f9;
+    border: 1px solid #e5e5e5;
+    padding: 15px;
+    border-radius: 4px;
+}
+
+.wpseed-summary-signals {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.wpseed-signal-count {
+    text-align: center;
+    padding: 15px;
+    border-radius: 4px;
+    width: 30%;
+}
+
+.wpseed-signal-count .count {
+    display: block;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.wpseed-signal-count.bullish {
+    background-color: rgba(38, 166, 154, 0.2);
+}
+
+.wpseed-signal-count.bearish {
+    background-color: rgba(239, 83, 80, 0.2);
+}
+
+.wpseed-signal-count.neutral {
+    background-color: rgba(158, 158, 158, 0.2);
+}
+
+.wpseed-summary-interpretation {
+    padding: 15px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.wpseed-summary-interpretation p {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.wpseed-summary-interpretation p.bullish {
+    color: #0d6e63;
+}
+
+.wpseed-summary-interpretation p.bearish {
+    color: #9e2b29;
+}
+
+.wpseed-summary-interpretation p.neutral {
+    color: #666;
+}
+
+/* Value Indicators */
+.wpseed-value-positive {
+    color: #2ecc71;
+    font-weight: 600;
+}
+
+.wpseed-value-negative {
+    color: #e74c3c;
+    font-weight: 600;
+}
+
+/* Loading Indicators */
+.wpseed-loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.wpseed-loading-overlay .spinner {
+    margin-bottom: 10px;
+}
+
+/* Legacy class mappings for backward compatibility */
+.indicator-values { @extend .wpseed-indicator-values; }
+.indicator-value { @extend .wpseed-indicator-value; }
+.indicator-interpretation { @extend .wpseed-indicator-interpretation; }
+.interpretation.bullish { @extend .wpseed-indicator-interpretation.bullish; }
+.interpretation.bearish { @extend .wpseed-indicator-interpretation.bearish; }
+.interpretation.neutral { @extend .wpseed-indicator-interpretation.neutral; }
+.tech-analysis-summary { @extend .wpseed-analysis-summary; }
+.summary-signals { @extend .wpseed-summary-signals; }
+.signal-count { @extend .wpseed-signal-count; }
+.summary-interpretation { @extend .wpseed-summary-interpretation; }
+.positive { @extend .wpseed-value-positive; }
+.negative { @extend .wpseed-value-negative; }
+.loading-overlay { @extend .wpseed-loading-overlay; }

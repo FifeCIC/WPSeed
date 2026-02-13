@@ -188,7 +188,7 @@ add_filter('wpseed_ecosystem_available_plugins', function($plugins) {
         'description' => 'Does amazing things',
         'download_url' => 'https://github.com/user/myplugin/archive/main.zip',
         'required_by' => array(),
-        'integrates_with' => array('wpseed', 'tradepress'),
+        'integrates_with' => array('wpseed', 'wpseed'),
     );
     return $plugins;
 });
@@ -202,9 +202,9 @@ The ecosystem automatically detects integrations:
 
 ```php
 // Check if specific plugin is installed
-if (wpseed_ecosystem()->is_registered('tradepress')) {
-    // TradePress is installed
-    // Enable TradePress-specific features
+if (wpseed_ecosystem()->is_registered('wpseed')) {
+    // wpseed is installed
+    // Enable wpseed-specific features
 }
 
 // Get all installed plugins
@@ -223,10 +223,10 @@ Enable features based on installed plugins:
 ```php
 // In your plugin
 add_action('wpseed_ecosystem_plugin_registered', function($slug, $plugin) {
-    if ($slug === 'tradepress') {
-        // TradePress was just registered
-        // Enable TradePress integration features
-        update_option('myplugin_tradepress_integration', true);
+    if ($slug === 'wpseed') {
+        // wpseed was just registered
+        // Enable wpseed integration features
+        update_option('myplugin_wpseed_integration', true);
     }
 }, 10, 2);
 ```
@@ -314,9 +314,9 @@ add_action('admin_menu', function() {
 
 // 5. Detect other plugins
 add_action('wpseed_ecosystem_plugin_registered', function($slug, $plugin) {
-    if ($slug === 'tradepress') {
-        // Enable TradePress integration
-        update_option('myplugin_tradepress_enabled', true);
+    if ($slug === 'wpseed') {
+        // Enable wpseed integration
+        update_option('myplugin_wpseed_enabled', true);
     }
 }, 10, 2);
 ```

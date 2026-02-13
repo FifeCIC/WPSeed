@@ -1,0 +1,79 @@
+/**
+ * wpseed - Meta Data Component Styles
+ * 
+ * Styles for displaying meta information like task details, assignments, timestamps.
+ * 
+ * HTML Structure:
+ * <div class="tp-meta-block">
+ *   <div class="tp-meta-item">
+ *     <span class="tp-meta-label">Label</span>
+ *     <span class="tp-meta-value">Value</span>
+ *   </div>
+ * </div>
+ * 
+ * @package wpseed/CSS/Components
+ * @since 1.0.0
+ */
+
+.wpseed-meta {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: #555;
+}
+
+.wpseed-meta-item {
+    margin-right: var(--tp-spacing-lg);
+    display: flex;
+    align-items: center;
+}
+
+.wpseed-meta-item .dashicons {
+    margin-right: var(--tp-spacing-xs);
+    font-size: 16px;
+    color: #666;
+}
+
+.wpseed-meta-block {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--tp-spacing-md);
+    margin-bottom: var(--tp-spacing-lg);
+}
+
+.wpseed-meta-item {
+    display: flex;
+    flex-direction: column;
+    min-width: 120px;
+}
+
+.wpseed-meta-label {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: var(--tp-spacing-xs);
+    font-weight: var(--tp-font-weight-medium);
+}
+
+.wpseed-meta-value {
+    font-size: var(--tp-font-size);
+    font-weight: var(--tp-font-weight-semibold);
+}
+
+.wpseed-meta-value.highlight {
+    color: #2271b1;
+}
+
+.wpseed-meta-block.inline .wpseed-meta-item {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--tp-spacing-xs);
+}
+
+/* Legacy classes mapping for backward compatibility */
+.task-meta { @extend .wpseed-meta; }
+.task-meta > span { @extend .wpseed-meta-item; }
+.task-meta-block { @extend .wpseed-meta-block; }
+.task-meta-item { @extend .wpseed-meta-item; }
+.task-meta-label { @extend .wpseed-meta-label; }
+.task-meta-value { @extend .wpseed-meta-value; }
+.task-meta-value.highlight { @extend .wpseed-meta-value.highlight; }

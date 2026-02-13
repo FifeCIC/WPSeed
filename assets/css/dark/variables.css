@@ -1,0 +1,97 @@
+/**
+ * wpseed Dark Theme CSS Variables
+ * 
+ * Dark theme color overrides for wpseed
+ * 
+ * @package wpseed/CSS/Dark
+ * @since 1.0.0
+ * @created 2024-12-21
+ */
+
+.wpseed-dark-theme {
+    /* Dark Theme Colors */
+    --wpseed-color-primary: #4a9eff;
+    --wpseed-color-primary-dark: #2271b1;
+    --wpseed-color-primary-light: #72aee6;
+    
+    --wpseed-color-secondary: #8c8f94;
+    --wpseed-color-secondary-dark: #646970;
+    --wpseed-color-secondary-light: #a7aaad;
+    
+    --wpseed-color-success: #46d369;
+    --wpseed-color-success-dark: #00a32a;
+    --wpseed-color-success-light: #68de7c;
+    
+    --wpseed-color-warning: #f0c33c;
+    --wpseed-color-warning-dark: #dba617;
+    --wpseed-color-warning-light: #ffeb3b;
+    
+    --wpseed-color-error: #ff6b6b;
+    --wpseed-color-error-dark: #d63638;
+    --wpseed-color-error-light: #ff8a80;
+    
+    --wpseed-color-info: #4a9eff;
+    --wpseed-color-info-dark: #2271b1;
+    --wpseed-color-info-light: #a7c7e7;
+    
+    /* Dark Neutral Colors */
+    --wpseed-color-white: #1e1e1e;
+    --wpseed-color-black: #ffffff;
+    
+    --wpseed-color-gray-50: #2d2d2d;
+    --wpseed-color-gray-100: #3a3a3a;
+    --wpseed-color-gray-200: #4a4a4a;
+    --wpseed-color-gray-300: #5a5a5a;
+    --wpseed-color-gray-400: #6a6a6a;
+    --wpseed-color-gray-500: #7a7a7a;
+    --wpseed-color-gray-600: #8a8a8a;
+    --wpseed-color-gray-700: #9a9a9a;
+    --wpseed-color-gray-800: #aaaaaa;
+    --wpseed-color-gray-900: #e0e0e0;
+    
+    /* Dark Status Colors */
+    --wpseed-status-success-bg: #1a3d1a;
+    --wpseed-status-success-border: #2d5a2d;
+    --wpseed-status-success-text: #68de7c;
+    
+    --wpseed-status-warning-bg: #3d3d1a;
+    --wpseed-status-warning-border: #5a5a2d;
+    --wpseed-status-warning-text: #f0c33c;
+    
+    --wpseed-status-error-bg: #3d1a1a;
+    --wpseed-status-error-border: #5a2d2d;
+    --wpseed-status-error-text: #ff6b6b;
+    
+    --wpseed-status-info-bg: #1a2d3d;
+    --wpseed-status-info-border: #2d4a5a;
+    --wpseed-status-info-text: #4a9eff;
+
+    /* Dark Form Controls */
+    --wpseed-input-bg: #2d2d2d;
+    --wpseed-input-border: 1px solid #4a4a4a;
+    --wpseed-input-border-focus: 1px solid #4a9eff;
+    
+    /* Update backward compatibility variables */
+    --tp-color-white: var(--wpseed-color-white);
+    --tp-color-gray-50: var(--wpseed-color-gray-50);
+    --tp-color-gray-300: var(--wpseed-color-gray-300);
+    --color-white: var(--wpseed-color-white);
+    --color-gray-50: var(--wpseed-color-gray-50);
+    --color-gray-300: var(--wpseed-color-gray-300);
+}
+
+/* Dark Theme Color Swatch Classes */
+.wpseed-dark-theme .wpseed-color-primary { background-color: var(--wpseed-color-primary) !important; }
+.wpseed-dark-theme .wpseed-color-primary-dark { background-color: var(--wpseed-color-primary-dark) !important; }
+.wpseed-dark-theme .wpseed-color-primary-light { background-color: var(--wpseed-color-primary-light) !important; }
+
+.wpseed-dark-theme .wpseed-color-success { background-color: var(--wpseed-color-success) !important; }
+.wpseed-dark-theme .wpseed-color-warning { background-color: var(--wpseed-color-warning) !important; }
+.wpseed-dark-theme .wpseed-color-error { background-color: var(--wpseed-color-error) !important; }
+
+.wpseed-dark-theme .wpseed-color-white { background-color: var(--wpseed-color-white) !important; border: 1px solid var(--wpseed-color-gray-300) !important; }
+.wpseed-dark-theme .wpseed-color-gray-100 { background-color: var(--wpseed-color-gray-100) !important; }
+.wpseed-dark-theme .wpseed-color-gray-300 { background-color: var(--wpseed-color-gray-300) !important; }
+.wpseed-dark-theme .wpseed-color-gray-500 { background-color: var(--wpseed-color-gray-500) !important; }
+.wpseed-dark-theme .wpseed-color-gray-700 { background-color: var(--wpseed-color-gray-700) !important; }
+.wpseed-dark-theme .wpseed-color-gray-900 { background-color: var(--wpseed-color-gray-900) !important; }

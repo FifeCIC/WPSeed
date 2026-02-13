@@ -1,0 +1,211 @@
+/**
+ * wpseed CSS Variables
+ * 
+ * Global CSS custom properties for consistent styling
+ * 
+ * @package wpseed/CSS/Base
+ * @since 1.0.0
+ * @created 2024-12-21
+ */
+
+:root {
+    /* Colors - WordPress Admin Color Scheme */
+    --wpseed-color-primary: #2271b1;
+    --wpseed-color-primary-dark: #135e96;
+    --wpseed-color-primary-light: #72aee6;
+    
+    --wpseed-color-secondary: #646970;
+    --wpseed-color-secondary-dark: #50575e;
+    --wpseed-color-secondary-light: #8c8f94;
+    
+    --wpseed-color-success: #00a32a;
+    --wpseed-color-success-dark: #007317;
+    --wpseed-color-success-light: #68de7c;
+    
+    --wpseed-color-warning: #dba617;
+    --wpseed-color-warning-dark: #996b00;
+    --wpseed-color-warning-light: #f0c33c;
+    
+    --wpseed-color-error: #d63638;
+    --wpseed-color-error-dark: #b32d2e;
+    --wpseed-color-error-light: #e65054;
+    
+    --wpseed-color-info: #72aee6;
+    --wpseed-color-info-dark: #2271b1;
+    --wpseed-color-info-light: #a7c7e7;
+    
+    /* Neutral Colors */
+    --wpseed-color-white: #ffffff;
+    --wpseed-color-black: #000000;
+    
+    --wpseed-color-gray-50: #f6f7f7;
+    --wpseed-color-gray-100: #f0f0f1;
+    --wpseed-color-gray-200: #e0e0e0;
+    --wpseed-color-gray-300: #dcdcde;
+    --wpseed-color-gray-400: #c3c4c7;
+    --wpseed-color-gray-500: #a7aaad;
+    --wpseed-color-gray-600: #8c8f94;
+    --wpseed-color-gray-700: #646970;
+    --wpseed-color-gray-800: #50575e;
+    --wpseed-color-gray-900: #1d2327;
+    
+    /* WordPress Blue Variants */
+    --wpseed-color-wp-blue: #2271b1;
+    --wpseed-color-wp-blue-dark: #135e96;
+    --wpseed-color-wp-blue-light: #72aee6;
+    
+    /* Spacing Scale */
+    --wpseed-spacing-xs: 4px;
+    --wpseed-spacing-sm: 8px;
+    --wpseed-spacing-md: 12px;
+    --wpseed-spacing-lg: 16px;
+    --wpseed-spacing-xl: 20px;
+    --wpseed-spacing-2xl: 24px;
+    --wpseed-spacing-3xl: 32px;
+    --wpseed-spacing-4xl: 40px;
+    --wpseed-spacing-5xl: 48px;
+    
+    /* Typography */
+    --wpseed-font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    --wpseed-font-family-mono: Consolas, Monaco, monospace;
+    
+    --wpseed-font-size-xs: 11px;
+    --wpseed-font-size-sm: 12px;
+    --wpseed-font-size: 13px;
+    --wpseed-font-size-md: 14px;
+    --wpseed-font-size-lg: 16px;
+    --wpseed-font-size-xl: 18px;
+    --wpseed-font-size-2xl: 22px;
+    --wpseed-font-size-3xl: 28px;
+    
+    --wpseed-font-weight-normal: 400;
+    --wpseed-font-weight-medium: 500;
+    --wpseed-font-weight-semibold: 600;
+    --wpseed-font-weight-bold: 700;
+    
+    --wpseed-line-height-tight: 1.2;
+    --wpseed-line-height-normal: 1.4;
+    --wpseed-line-height-relaxed: 1.6;
+    
+    /* Border Radius */
+    --wpseed-border-radius-sm: 2px;
+    --wpseed-border-radius: 4px;
+    --wpseed-border-radius-md: 6px;
+    --wpseed-border-radius-lg: 8px;
+    --wpseed-border-radius-xl: 12px;
+    --wpseed-border-radius-full: 9999px;
+    
+    /* Borders */
+    --wpseed-border-width: 1px;
+    --wpseed-border-width-thick: 2px;
+    --wpseed-border-style: solid;
+    --wpseed-border-color: var(--wpseed-color-gray-300);
+    --wpseed-border-standard: var(--wpseed-border-width) var(--wpseed-border-style) var(--wpseed-border-color);
+    
+    /* Shadows */
+    --wpseed-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+    --wpseed-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --wpseed-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --wpseed-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+    --wpseed-shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+    
+    /* Z-Index Scale */
+    --wpseed-z-index-dropdown: 1000;
+    --wpseed-z-index-modal: 1050;
+    --wpseed-z-index-popover: 1060;
+    --wpseed-z-index-tooltip: 1070;
+    --wpseed-z-index-toast: 1080;
+    
+    /* Transitions */
+    --wpseed-transition-fast: 150ms ease;
+    --wpseed-transition-normal: 250ms ease;
+    --wpseed-transition-slow: 350ms ease;
+    
+    /* Component Specific */
+    --wpseed-button-padding-x: var(--wpseed-spacing-md);
+    --wpseed-button-padding-y: var(--wpseed-spacing-sm);
+    --wpseed-input-padding-x: var(--wpseed-spacing-md);
+    --wpseed-input-padding-y: var(--wpseed-spacing-sm);
+    
+    /* Form Controls */
+    --wpseed-input-bg: var(--wpseed-color-white);
+    --wpseed-input-border: var(--wpseed-border-standard);
+    --wpseed-input-border-focus: var(--wpseed-border-width) var(--wpseed-border-style) var(--wpseed-color-primary);
+    --wpseed-input-border-radius: var(--wpseed-border-radius);
+    
+    /* Status Colors */
+    --wpseed-status-success-bg: #d4edda;
+    --wpseed-status-success-border: #c3e6cb;
+    --wpseed-status-success-text: #155724;
+    
+    --wpseed-status-warning-bg: #fff3cd;
+    --wpseed-status-warning-border: #ffeaa7;
+    --wpseed-status-warning-text: #856404;
+    
+    --wpseed-status-error-bg: #f8d7da;
+    --wpseed-status-error-border: #f5c6cb;
+    --wpseed-status-error-text: #721c24;
+    
+    --wpseed-status-info-bg: #d1ecf1;
+    --wpseed-status-info-border: #bee5eb;
+    --wpseed-status-info-text: #0c5460;
+
+    /* Trading-specific colors */
+    --wpseed-color-bullish: #00a32a;
+    --wpseed-color-bearish: #d63638;
+
+    /* Backward compatibility - Keep old variables for other components */
+    --tp-color-primary: var(--wpseed-color-primary);
+    --tp-color-white: var(--wpseed-color-white);
+    --tp-color-gray-50: var(--wpseed-color-gray-50);
+    --tp-color-gray-300: var(--wpseed-color-gray-300);
+    --tp-spacing-md: var(--wpseed-spacing-md);
+    --tp-spacing-lg: var(--wpseed-spacing-lg);
+    --tp-border-radius: var(--wpseed-border-radius);
+    --tp-shadow: var(--wpseed-shadow);
+    --color-primary: var(--wpseed-color-primary);
+    --color-white: var(--wpseed-color-white);
+    --color-gray-50: var(--wpseed-color-gray-50);
+    --color-gray-300: var(--wpseed-color-gray-300);
+    --spacing-md: var(--wpseed-spacing-md);
+    --spacing-lg: var(--wpseed-spacing-lg);
+    --border-radius: var(--wpseed-border-radius);
+    --shadow: var(--wpseed-shadow);
+}
+
+/* Color Swatch Classes - Make colors visible in UI Library */
+.wpseed-color-primary { background-color: var(--wpseed-color-primary) !important; }
+.wpseed-color-primary-dark { background-color: var(--wpseed-color-primary-dark) !important; }
+.wpseed-color-primary-light { background-color: var(--wpseed-color-primary-light) !important; }
+
+.wpseed-color-success { background-color: var(--wpseed-color-success) !important; }
+.wpseed-color-warning { background-color: var(--wpseed-color-warning) !important; }
+.wpseed-color-error { background-color: var(--wpseed-color-error) !important; }
+
+.wpseed-color-white { background-color: var(--wpseed-color-white) !important; border: 1px solid var(--wpseed-color-gray-300) !important; }
+.wpseed-color-gray-100 { background-color: var(--wpseed-color-gray-100) !important; }
+.wpseed-color-gray-300 { background-color: var(--wpseed-color-gray-300) !important; }
+.wpseed-color-gray-500 { background-color: var(--wpseed-color-gray-500) !important; }
+.wpseed-color-gray-700 { background-color: var(--wpseed-color-gray-700) !important; }
+.wpseed-color-gray-900 { background-color: var(--wpseed-color-gray-900) !important; }
+
+.wpseed-color-primary { background-color: var(--wpseed-color-primary) !important; }
+.wpseed-color-primary-dark { background-color: var(--wpseed-color-primary-dark) !important; }
+.wpseed-color-primary-light { background-color: var(--wpseed-color-primary-light) !important; }
+
+.wpseed-color-success { background-color: var(--wpseed-color-success) !important; }
+.wpseed-color-warning { background-color: var(--wpseed-color-warning) !important; }
+.wpseed-color-error { background-color: var(--wpseed-color-error) !important; }
+
+.wpseed-color-white { background-color: var(--wpseed-color-white) !important; border: 1px solid var(--wpseed-color-gray-300) !important; }
+.wpseed-color-gray-100 { background-color: var(--wpseed-color-gray-100) !important; }
+.wpseed-color-gray-300 { background-color: var(--wpseed-color-gray-300) !important; }
+.wpseed-color-gray-500 { background-color: var(--wpseed-color-gray-500) !important; }
+.wpseed-color-gray-700 { background-color: var(--wpseed-color-gray-700) !important; }
+.wpseed-color-gray-900 { background-color: var(--wpseed-color-gray-900) !important; }
+
+/* WordPress Admin Compatibility */
+.wp-admin {
+    --admin-color-scheme-primary: #2271b1;
+    --admin-color-scheme-secondary: #72aee6;
+}

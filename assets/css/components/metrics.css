@@ -1,0 +1,343 @@
+/**
+ * wpseed - Metrics Component Styles
+ * 
+ * Styles for displaying metrics, stats, and data visualizations.
+ * 
+ * HTML Structure:
+ * <div class="tp-metrics-grid">
+ *   <div class="tp-metric-item">
+ *     <span class="tp-metric-label">Label</span>
+ *     <span class="tp-metric-value">Value</span>
+ *   </div>
+ * </div>
+ * 
+ * @package wpseed/CSS/Components
+ * @since 1.0.0
+ */
+
+/* Metrics Grid */
+.wpseed-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--tp-spacing-lg);
+    margin-top: var(--tp-spacing-lg);
+}
+
+/* Metric Item */
+.wpseed-metric-item {
+    padding: var(--tp-spacing-lg);
+    background: var(--tp-color-gray-100);
+    border: 1px solid var(--tp-color-gray-200);
+    text-align: center;
+}
+
+.wpseed-metric-label {
+    display: block;
+    font-weight: var(--tp-font-weight-semibold);
+    margin-bottom: var(--tp-spacing-xs);
+    color: #444;
+}
+
+.wpseed-metric-value {
+    display: block;
+    font-size: 24px;
+    font-weight: 700;
+    color: #2271b1;
+}
+
+/* Component Metrics - Used in automation */
+.wpseed-component-metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--tp-spacing-md);
+    margin: var(--tp-spacing-lg) 0;
+}
+
+/* Legacy classes mapping for backward compatibility */
+.metrics-grid { @extend .wpseed-metrics-grid; }
+.metric-item { @extend .wpseed-metric-item; }
+.metric-label { @extend .wpseed-metric-label; }
+.metric-value { @extend .wpseed-metric-value; }
+.component-metrics { @extend .wpseed-component-metrics; }
+
+/**
+ * wpseed - Metrics Component Styles
+ * 
+ * For displaying data metrics, stats, and numerical information.
+ * 
+ * HTML Structure:
+ * <div class="tp-stats-grid">
+ *   <div class="tp-stat-item">
+ *     <div class="tp-stat-label">Label</div>
+ *     <div class="tp-stat-value">Value</div>
+ *   </div>
+ * </div>
+ * 
+ * @package wpseed/CSS/Components
+ * @since 1.0.0
+ */
+
+/* Stats Numbers */
+.wpseed-stat-numbers {
+    display: flex;
+    justify-content: space-between;
+}
+
+.wpseed-stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.wpseed-stat-value {
+    font-size: 24px;
+    font-weight: var(--tp-font-weight-semibold);
+}
+
+.wpseed-stat-label {
+    font-size: 12px;
+    color: #666;
+}
+
+.wpseed-stat-detail-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.wpseed-stat-detail-label {
+    font-size: 12px;
+    color: #666;
+}
+
+.wpseed-stat-detail-value {
+    font-size: 14px;
+    font-weight: var(--tp-font-weight-semibold);
+}
+
+/* Success/Error Stats */
+.wpseed-stat-item.success .wpseed-stat-value {
+    color: #46b450;
+}
+
+.wpseed-stat-item.error .wpseed-stat-value {
+    color: #dc3232;
+}
+
+/* Table Stats */
+.wpseed-table-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px 10px;
+}
+
+/* Process Count */
+.wpseed-process-count {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Legacy classes mapping for backward compatibility */
+.stat-numbers { @extend .wpseed-stat-numbers; }
+.stat-item { @extend .wpseed-stat-item; }
+.stat-value { @extend .wpseed-stat-value; }
+.stat-label { @extend .wpseed-stat-label; }
+.stat-detail-item { @extend .wpseed-stat-detail-item; }
+.stat-detail-label { @extend .wpseed-stat-detail-label; }
+.stat-detail-value { @extend .wpseed-stat-detail-value; }
+.table-stats { @extend .wpseed-table-stats; }
+.process-count { @extend .wpseed-process-count; }
+
+/**
+ * wpseed - Metrics Component Styles
+ * 
+ * Styles for metrics, scores, charts and data visualization elements.
+ * 
+ * HTML Structure:
+ * <div class="tp-metric-card">
+ *   <div class="tp-metric-label">Label</div>
+ *   <div class="tp-metric-value">Value</div>
+ * </div>
+ * 
+ * @package wpseed/CSS/Components
+ * @since 1.0.0
+ */
+
+/* Base metrics container */
+.wpseed-metrics-container {
+    margin: 20px 0;
+}
+
+/* Metric score visualization */
+.wpseed-score-container {
+    position: relative;
+    height: 24px;
+    width: 100%;
+    background-color: #f5f5f5;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.wpseed-score-value {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    z-index: 2;
+    color: #333;
+}
+
+.wpseed-score-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+    transition: width 0.3s ease;
+}
+
+.wpseed-score-high .wpseed-score-bar {
+    background-color: #46b450;
+}
+
+.wpseed-score-medium .wpseed-score-bar {
+    background-color: #ffb900;
+}
+
+.wpseed-score-low .wpseed-score-bar {
+    background-color: #dc3232;
+}
+
+.wpseed-score-star {
+    color: gold;
+    margin-left: 2px;
+    font-size: 14px;
+}
+
+/* Loading indicators */
+.wpseed-loader-spinner {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #3498db;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* EPS Change indicators */
+.wpseed-value-positive {
+    color: #46b450;
+    font-weight: bold;
+}
+
+.wpseed-value-negative {
+    color: #dc3232;
+    font-weight: bold;
+}
+
+.wpseed-value-neutral {
+    color: #767676;
+}
+
+/* Whisper difference indicators */
+.wpseed-whisper-diff {
+    display: block;
+    font-size: 11px;
+    padding: 1px 4px;
+    border-radius: 3px;
+    margin-top: 2px;
+}
+
+.wpseed-whisper-positive {
+    background-color: rgba(70, 180, 80, 0.1);
+    color: #46b450;
+}
+
+.wpseed-whisper-negative {
+    background-color: rgba(220, 50, 50, 0.1);
+    color: #dc3232;
+}
+
+/* Importance indicators */
+.wpseed-importance-high {
+    background-color: rgba(214, 54, 56, 0.05);
+}
+
+.wpseed-importance-indicator {
+    color: #d63638;
+    margin-left: 5px;
+}
+
+/* Legacy classes mapping for backward compatibility */
+.directive-test-score-container { @extend .wpseed-score-container; }
+.directive-test-score { @extend .wpseed-score-circle; }
+.directive-test-score-label { @extend .wpseed-score-label; }
+#directive-test-score-value { @extend .wpseed-score-value; }
+.directive-test-loader { @extend .wpseed-loader-spinner; }
+.earnings-positive { @extend .wpseed-value-positive; }
+.earnings-negative { @extend .wpseed-value-negative; }
+.earnings-neutral { @extend .wpseed-value-neutral; }
+.whisper-diff { @extend .wpseed-whisper-diff; }
+.whisper-positive { @extend .wpseed-whisper-positive; }
+.whisper-negative { @extend .wpseed-whisper-negative; }
+.opp-score-container { @extend .wpseed-score-container; }
+.opp-score-value { @extend .wpseed-score-value; }
+.opp-score-bar { @extend .wpseed-score-bar; }
+.high-opportunity { @extend .wpseed-score-high; }
+.medium-opportunity { @extend .wpseed-score-medium; }
+.low-opportunity { @extend .wpseed-score-low; }
+.opportunity-star { @extend .wpseed-score-star; }
+.importance-high { @extend .wpseed-importance-high; }
+.importance-indicator { @extend .wpseed-importance-indicator; }
+
+/**
+ * wpseed - Metrics Component Styles
+ * 
+ * Styles for displaying metrics and statistics.
+ * 
+ * @package wpseed/CSS/Components
+ * @since 1.0.0
+ */
+
+/* Stat items */
+.wpseed-stat-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+    background: #f9f9f9;
+    border-radius: 3px;
+}
+
+.wpseed-live-count {
+    color: #46b450;
+    font-weight: var(--tp-font-weight-semibold);
+}
+
+.wpseed-demo-count {
+    color: #f0c33c;
+    font-weight: var(--tp-font-weight-semibold);
+}
+
+/* Stats grid */
+.wpseed-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+/* Legacy classes mapping for backward compatibility */
+.stat-item { @extend .wpseed-stat-item; }
+.live-count { @extend .wpseed-live-count; }
+.demo-count { @extend .wpseed-demo-count; }
+#feature-stats { @extend .wpseed-stats-grid; }

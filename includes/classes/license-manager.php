@@ -63,11 +63,12 @@ class WPSeed_License_Manager {
         $this->license_status_option = 'wpseed_license_status_' . $product_id;
         $this->license_data_option = 'wpseed_license_data_' . $product_id;
 
-        add_action( 'admin_init', array( $this, 'check_license' ) );
-        add_action( 'admin_init', array( $this, 'handle_license_actions' ) );
-        add_action( 'admin_notices', array( $this, 'license_notices' ) );
-        add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'check_for_updates' ) );
-        add_filter( 'plugins_api', array( $this, 'plugin_info' ), 10, 3 );
+        // License system disabled - keeping for future use
+        // add_action( 'admin_init', array( $this, 'check_license' ) );
+        // add_action( 'admin_init', array( $this, 'handle_license_actions' ) );
+        // add_action( 'admin_notices', array( $this, 'license_notices' ) );
+        // add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'check_for_updates' ) );
+        // add_filter( 'plugins_api', array( $this, 'plugin_info' ), 10, 3 );
     }
 
     /**

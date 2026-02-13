@@ -278,7 +278,7 @@
 
 The boilerplate now includes:
 - ✅ Everything from the original roadmap
-- ✅ Advanced features from TradePress
+- ✅ Advanced features from wpseed
 - ✅ Modern development tools
 - ✅ Professional UI components
 - ✅ Comprehensive documentation

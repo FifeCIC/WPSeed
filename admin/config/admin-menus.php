@@ -129,6 +129,17 @@ function wpseed_jquery_ui_page() {
 }
 
 /**
+ * Enqueue jQuery UI styles for gallery page
+ */
+function wpseed_jquery_ui_enqueue_assets($hook) {
+    if ($hook !== 'wpseed_page_wpseed-jquery-ui') {
+        return;
+    }
+    wp_enqueue_style('wp-jquery-ui-dialog');
+}
+add_action('admin_enqueue_scripts', 'wpseed_jquery_ui_enqueue_assets');
+
+/**
  * Component Library page callback
  */
 function wpseed_components_page() {

@@ -1,0 +1,160 @@
+/**
+ * wpseed - API Layout Styles
+ * 
+ * Layout structures for API pages.
+ * 
+ * @package wpseed/CSS/Layouts
+ * @since 1.0.0
+ */
+
+/* API Configuration Content */
+.wpseed-api-configuration-content {
+    padding: var(--tp-spacing-lg);
+}
+
+/* API Details and Sidebar Layout */
+.wpseed-api-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--tp-spacing-xl);
+    margin-bottom: var(--tp-spacing-xl);
+}
+
+.wpseed-api-main-content {
+    flex: 1;
+    min-width: 500px;
+}
+
+.wpseed-api-sidebar {
+    width: 300px;
+}
+
+/* API Capabilities */
+.wpseed-api-capabilities {
+    padding: var(--tp-spacing-lg);
+}
+
+.wpseed-capability-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--tp-spacing-md);
+}
+
+.wpseed-capability-item .dashicons {
+    margin-right: var(--tp-spacing-md);
+}
+
+.wpseed-capability-item.available .dashicons-yes {
+    color: #46b450;
+}
+
+.wpseed-capability-item.unavailable .dashicons-no {
+    color: #dc3232;
+}
+
+.wpseed-capability-text {
+    flex: 1;
+}
+
+.wpseed-premium-badge {
+    display: inline-block;
+    background: #f18200;
+    color: white;
+    font-size: 10px;
+    padding: 2px 5px;
+    border-radius: 3px;
+    margin-left: var(--tp-spacing-xs);
+}
+
+/* Endpoints List */
+.wpseed-endpoints-list {
+    padding: var(--tp-spacing-lg);
+}
+
+.wpseed-endpoint-item {
+    margin-bottom: var(--tp-spacing-lg);
+    padding-bottom: var(--tp-spacing-lg);
+    border-bottom: 1px solid var(--tp-color-gray-200);
+}
+
+.wpseed-endpoint-item:last-child {
+    border-bottom: none;
+}
+
+.wpseed-endpoint-name {
+    font-weight: var(--tp-font-weight-semibold);
+    margin-bottom: var(--tp-spacing-xs);
+}
+
+.wpseed-endpoint-function {
+    margin-bottom: var(--tp-spacing-xs);
+}
+
+.wpseed-endpoint-function code {
+    background: #f8f8f8;
+    padding: 3px 5px;
+    font-size: 12px;
+}
+
+.wpseed-endpoint-view-all {
+    margin-top: var(--tp-spacing-lg);
+    text-align: center;
+}
+
+/* wpseed API Settings */
+.wpseed-api-settings-container {
+    margin-top: 30px;
+    padding: var(--tp-spacing-xl);
+}
+
+/* API Credentials Testing */
+.wpseed-api-test-credentials {
+    margin-top: var(--tp-spacing-lg);
+    margin-bottom: var(--tp-spacing-lg);
+}
+
+.wpseed-test-credentials-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: var(--tp-spacing-md);
+    margin-bottom: var(--tp-spacing-md);
+}
+
+/* Animation for tool sections */
+.wpseed-tool-section {
+    animation: fadeEffect 0.5s;
+}
+
+@keyframes fadeEffect {
+    from {opacity: 0.7;}
+    to {opacity: 1;}
+}
+
+.wpseed-loading-spinner {
+    animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Legacy classes mapping for backward compatibility */
+.api-configuration-content { @extend .wpseed-api-configuration-content; }
+.api-details { @extend .wpseed-api-details; }
+.api-main-content { @extend .wpseed-api-main-content; }
+.api-sidebar { @extend .wpseed-api-sidebar; }
+.api-capabilities { @extend .wpseed-api-capabilities; }
+.capability-item { @extend .wpseed-capability-item; }
+.capability-text { @extend .wpseed-capability-text; }
+.premium-badge { @extend .wpseed-premium-badge; }
+.endpoints-list { @extend .wpseed-endpoints-list; }
+.endpoint-item { @extend .wpseed-endpoint-item; }
+.endpoint-name { @extend .wpseed-endpoint-name; }
+.endpoint-function { @extend .wpseed-endpoint-function; }
+.endpoint-view-all { @extend .wpseed-endpoint-view-all; }
+.wpseed-api-settings-container { @extend .wpseed-api-settings-container; }
+.api-test-credentials { @extend .wpseed-api-test-credentials; }
+.test-credentials-buttons { @extend .wpseed-test-credentials-buttons; }
+.tool-section { @extend .wpseed-tool-section; }
+.loading-spinner { @extend .wpseed-loading-spinner; }

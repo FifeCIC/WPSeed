@@ -1,0 +1,171 @@
+/**
+ * wpseed - Alert Component Styles
+ * 
+ * Alert boxes, info panels, and contextual notifications.
+ * 
+ * @package wpseed/CSS/Components
+ * @since 1.0.0
+ */
+
+/* Admin Only Notice */
+.wpseed-admin-only-notice {
+    display: flex;
+    align-items: center;
+    background-color: #f6f7f7;
+    border-left: 4px solid #2271b1;
+    padding: var(--tp-spacing-md) 15px;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.wpseed-admin-icon {
+    font-size: 24px;
+    margin-right: 15px;
+    color: #2271b1;
+}
+
+.wpseed-admin-text h4 {
+    margin: 0 0 5px;
+}
+
+.wpseed-admin-text p {
+    margin: 0;
+}
+
+/* Demo Mode Indicator */
+.wpseed-demo-indicator {
+    display: flex;
+    align-items: center;
+    background-color: #fff8e5;
+    border-left: 4px solid #dba617;
+    padding: var(--tp-spacing-md) 15px;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.wpseed-demo-icon {
+    font-size: 24px;
+    margin-right: 15px;
+    color: #dba617;
+}
+
+.wpseed-demo-text h4 {
+    margin: 0 0 5px;
+}
+
+.wpseed-demo-text p {
+    margin: 0;
+}
+
+/* Debug Info Panel */
+.wpseed-debug-info-panel {
+    background-color: #f8e3dd;
+    border: 1px dashed #d63638;
+    border-radius: var(--tp-border-radius);
+    padding: var(--tp-spacing-md) 15px;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.wpseed-debug-info-panel h4 {
+    color: #d63638;
+    margin-top: 0;
+    margin-bottom: var(--tp-spacing-md);
+    font-size: var(--tp-font-size);
+    display: flex;
+    align-items: center;
+}
+
+.wpseed-debug-info-panel h4:before {
+    content: '\f348';
+    font-family: dashicons;
+    margin-right: 5px;
+    font-size: 18px;
+}
+
+.wpseed-debug-info-content {
+    background-color: var(--tp-color-white);
+    padding: var(--tp-spacing-md);
+    border-radius: 3px;
+}
+
+.wpseed-debug-info-content p {
+    font-family: monospace;
+    margin: 5px 0;
+    font-size: 13px;
+}
+
+.wpseed-debug-info-content p strong {
+    display: inline-block;
+    width: 150px;
+}
+
+.wpseed-debug-advanced-section {
+    margin-top: 15px;
+    border-top: 1px solid #e1e1e1;
+    padding-top: var(--tp-spacing-md);
+}
+
+.wpseed-toggle-advanced-debug {
+    cursor: pointer;
+    color: #2271b1;
+    font-weight: var(--tp-font-weight-medium);
+    margin-bottom: var(--tp-spacing-md);
+    display: flex;
+    align-items: center;
+}
+
+.wpseed-toggle-advanced-debug .dashicons {
+    margin-right: 5px;
+    transition: transform 0.2s ease;
+}
+
+.wpseed-advanced-debug-content {
+    background-color: #f9f9f9;
+    padding: var(--tp-spacing-md);
+    border-radius: 3px;
+    border: 1px solid #e1e1e1;
+}
+
+.wpseed-advanced-debug-content h5 {
+    margin: var(--tp-spacing-md) 0 5px;
+    font-size: var(--tp-font-size);
+    font-weight: var(--tp-font-weight-semibold);
+    color: #1d2327;
+}
+
+.wpseed-advanced-debug-content h5:first-child {
+    margin-top: 0;
+}
+
+.wpseed-advanced-debug-content pre {
+    background: var(--tp-color-white);
+    padding: 8px;
+    border: 1px solid #e1e1e1;
+    border-radius: 3px;
+    font-size: 12px;
+    margin: 5px 0;
+    white-space: pre-wrap;
+}
+
+.wpseed-advanced-debug-content ol {
+    margin-left: 20px;
+    margin-bottom: 0;
+}
+
+.wpseed-advanced-debug-content ol li {
+    margin-bottom: 5px;
+}
+
+/* Legacy classes mapping for backward compatibility */
+.admin-only-notice { @extend .wpseed-admin-only-notice; }
+.admin-icon { @extend .wpseed-admin-icon; }
+.admin-text { @extend .wpseed-admin-text; }
+.demo-indicator { @extend .wpseed-demo-indicator; }
+.demo-icon { @extend .wpseed-demo-icon; }
+.demo-text { @extend .wpseed-demo-text; }
+.debug-info-panel { @extend .wpseed-debug-info-panel; }
+.debug-info-content { @extend .wpseed-debug-info-content; }
+.debug-advanced-section { @extend .wpseed-debug-advanced-section; }
+.toggle-advanced-debug { @extend .wpseed-toggle-advanced-debug; }
+.advanced-debug-content { @extend .wpseed-advanced-debug-content; }

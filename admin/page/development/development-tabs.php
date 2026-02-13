@@ -123,10 +123,10 @@ class WPSeed_Admin_Development_Page {
                 WPSeed_Admin_Development_Performance::output();
                 break;
             case 'theme_info':
-                if (!class_exists('WPSeed_Admin_Development_Theme_Info')) {
+                if (!class_exists('WPSeed_Admin_Development_UI_Library')) {
                     require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/development/view/theme-info.php';
                 }
-                WPSeed_Admin_Development_Theme_Info::output();
+                WPSeed_Admin_Development_UI_Library::output();
                 break;
             case 'debug_log':
                 if (!class_exists('WPSeed_Admin_Development_Debug_Log')) {
@@ -195,10 +195,10 @@ class WPSeed_Admin_Development_Page {
                 require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/development/view/architecture.php';
                 break;
             default:
-                if (!class_exists('WPSeed_Admin_Development_Theme_Info')) {
+                if (!class_exists('WPSeed_Admin_Development_UI_Library')) {
                     require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/development/view/theme-info.php';
                 }
-                WPSeed_Admin_Development_Theme_Info::output();
+                WPSeed_Admin_Development_UI_Library::output();
                 break;
         }
     }

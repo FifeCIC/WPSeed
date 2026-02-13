@@ -28,7 +28,7 @@ class WPSeed_Asset_Queue {
         
         $this->detect_current_context();
         
-        add_action('admin_enqueue_scripts', array($this, 'enqueue_assets'), 5);
+        add_action('admin_enqueue_scripts', array($this, 'enqueue_assets'), 10);
         add_action('admin_notices', array($this, 'missing_assets_notice'));
     }
     
@@ -63,6 +63,13 @@ class WPSeed_Asset_Queue {
     }
     
     private function enqueue_style($name, $asset) {
+        if (isset($asset['external'])) {
+            foreach ($asset['external'] as $ext_handle) {
+                wp_enqueue_style($ext_handle);
+            }
+            return;
+        }
+        
         $url = $this->asset_manager->get_asset_url('css', $name);
         
         if ($url === false) {
@@ -79,6 +86,13 @@ class WPSeed_Asset_Queue {
     }
     
     private function enqueue_script($name, $asset) {
+        if (isset($asset['external'])) {
+            foreach ($asset['external'] as $ext_handle) {
+                wp_enqueue_script($ext_handle);
+            }
+            return;
+        }
+        
         $url = $this->asset_manager->get_asset_url('js', $name);
         
         if ($url === false) {

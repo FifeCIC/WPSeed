@@ -8,8 +8,6 @@
 
 if (!defined('ABSPATH')) exit;
 
-error_log('Credits.php loaded');
-
 class WPSeed_Admin_Development_Credits {
     
     // Set to false to use AJAX, true to use URL-based navigation
@@ -341,5 +339,4 @@ class WPSeed_Admin_Development_Credits {
 
 WPSeed_Admin_Development_Credits::init();
 
-error_log('Registering AJAX action: wpseed_get_contributor_details');
 add_action('wp_ajax_wpseed_get_contributor_details', array('WPSeed_Admin_Development_Credits', 'ajax_get_contributor_details'));

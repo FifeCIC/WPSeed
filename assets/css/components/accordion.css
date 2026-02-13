@@ -1,0 +1,574 @@
+/**
+ * wpseed - Accordion Component Styles
+ * 
+ * Styles for accordion UI elements.
+ * 
+ * HTML Structure:
+ * <div class="accordion">
+ *   <div class="accordion-item">
+ *     <div class="accordion-header">
+ *       <h4 class="accordion-title">Title</h4>
+ *       <span class="accordion-icon dashicons dashicons-arrow-down"></span>
+ *     </div>
+ *     <div class="accordion-content">Content goes here</div>
+ *   </div>
+ * </div>
+ * 
+ * @package wpseed/CSS/Components
+ * @since 1.0.0
+ */
+
+/* Accordion Container */
+.accordion {
+    margin: 20px 0;
+}
+
+.accordion-item {
+    margin-bottom: 10px;
+    border: 1px solid var(--wpseed-color-gray-400);
+    background-color: var(--wpseed-color-white);
+    box-shadow: var(--wpseed-shadow);
+}
+
+.accordion-header {
+    padding: 10px 15px;
+    background-color: var(--wpseed-color-gray-50);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--wpseed-color-gray-400);
+}
+
+.accordion-title {
+    margin: 0;
+    font-size: var(--wpseed-font-size);
+    font-weight: var(--wpseed-font-weight-semibold);
+}
+
+.accordion-icon {
+    color: var(--wpseed-color-wp-blue);
+}
+
+.accordion-content {
+    padding: 15px;
+    display: none; /* Hidden by default */
+}
+
+.accordion-controls {
+    margin-bottom: 15px;
+}
+
+.accordion-controls .button {
+    margin-right: 10px;
+}
+
+/* Legacy class mapping for Alert Decoder Accordion */
+.alert-decoder-accordion {
+    margin-bottom: 20px !important;
+    border: 1px solid var(--wpseed-color-gray-300, #ddd) !important;
+    border-radius: var(--wpseed-border-radius, 4px) !important;
+    overflow: hidden !important;
+    box-shadow: var(--wpseed-shadow, 0 1px 1px rgba(0, 0, 0, 0.04)) !important;
+    display: block !important;
+}
+
+.alert-decoder-accordion-item {
+    border-bottom: 1px solid var(--wpseed-color-gray-300, #ddd) !important;
+    display: block !important;
+}
+
+.alert-decoder-accordion-item:last-child {
+    border-bottom: none !important;
+}
+
+.alert-decoder-accordion-header {
+    padding: 12px 15px !important;
+    background-color: var(--wpseed-color-gray-50, #f5f5f5) !important;
+    cursor: pointer !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    visibility: visible !important;
+    border-bottom: 1px solid var(--wpseed-color-gray-300, #ddd) !important;
+}
+
+.alert-decoder-accordion-header h4 {
+    margin: 0 !important;
+    font-size: var(--wpseed-font-size, 14px) !important;
+    font-weight: var(--wpseed-font-weight-semibold, 600) !important;
+}
+
+.alert-decoder-accordion-content {
+    padding: 15px !important;
+    background-color: var(--wpseed-color-white, #fff) !important;
+    border-top: none !important;
+}
+
+/* Accordion Icon */
+.accordion-icon {
+    font-size: 20px !important;
+    width: 20px !important;
+    height: 20px !important;
+    transition: transform 0.3s ease !important;
+    display: block !important;
+}
+
+.alert-decoder-accordion-header.active .accordion-icon.dashicons-arrow-up-alt2 {
+    transform: rotate(180deg) !important;
+}
+
+/* Feature page section accordion */
+.feature-page-section {
+    margin-bottom: 20px;
+    border: 1px solid var(--wpseed-color-gray-300);
+    border-radius: var(--wpseed-border-radius-sm);
+    background: var(--wpseed-color-white);
+    box-shadow: var(--wpseed-shadow);
+}
+
+.feature-page-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 10px 15px !important;
+    background: var(--wpseed-status-success-bg) !important;
+    border-left: 3px solid var(--wpseed-color-success) !important;
+    border-bottom: 1px solid var(--wpseed-color-gray-300) !important;
+    cursor: pointer !important;
+}
+
+.feature-page-header h3 {
+    margin: 0 !important;
+}
+
+.feature-page-header h3 a {
+    text-decoration: none !important;
+    color: var(--wpseed-status-success-text) !important;
+}
+
+.feature-page-header h3 .dashicons {
+    font-size: 16px !important;
+    vertical-align: text-bottom !important;
+}
+
+.feature-page-header .toggle-section {
+    color: var(--wpseed-color-success) !important;
+}
+
+.feature-page-content {
+    padding: 15px !important;
+    display: none !important; /* Initially hidden */
+}
+
+/* Generic jQuery UI / Custom Accordion Styles */
+.wpseed-accordion,
+.wpseed-custom-accordion {
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    background: #fff;
+    border-radius: 3px;
+}
+
+.wpseed-accordion .accordion-header,
+.wpseed-accordion .ui-accordion-header,
+.wpseed-custom-accordion .accordion-header {
+    padding: 12px 15px;
+    background: #f7f7f7;
+    border-bottom: 1px solid #eee;
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+}
+
+.wpseed-accordion .accordion-header:after,
+.wpseed-accordion .ui-accordion-header:after,
+.wpseed-custom-accordion .accordion-header:after {
+    content: "\f140"; /* down arrow */
+    font-family: dashicons;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+    font-size: 20px;
+    line-height: 1;
+}
+
+.wpseed-accordion .accordion-header.active:after,
+.wpseed-accordion .ui-accordion-header-active:after,
+.wpseed-custom-accordion .accordion-header.active:after {
+    content: "\f142"; /* up arrow */
+}
+
+.wpseed-accordion .accordion-content,
+.wpseed-accordion .ui-accordion-content,
+.wpseed-custom-accordion .accordion-content {
+    padding: 15px;
+    border-top: 1px solid #eee;
+    background: #fff;
+}
+
+.wpseed-custom-accordion .accordion-content {
+    display: none;
+}
+
+.wpseed-custom-accordion .accordion-header.active + .accordion-content {
+    display: block;
+}
+
+/* Theme specific overrides */
+.wp-core-ui .wpseed-accordion .accordion-header,
+.wp-core-ui .wpseed-custom-accordion .accordion-header {
+    color: #23282d;
+}
+
+.wp-core-ui .wpseed-accordion .accordion-header:hover,
+.wp-core-ui .wpseed-custom-accordion .accordion-header:hover {
+    background: #f0f0f0;
+}
+
+/* Original .wpseed-accordion styles from this file, now deprecated by the above */
+.wpseed-accordion-item {
+    margin-bottom: 10px;
+    border: 1px solid var(--wpseed-color-gray-200);
+    border-radius: var(--wpseed-border-radius);
+}
+
+.wpseed-accordion-header {
+    padding: 12px 15px;
+    background: var(--wpseed-color-gray-50);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 3px;
+}
+
+.wpseed-accordion-header h4 {
+    margin: 0;
+    font-size: var(--wpseed-font-size);
+}
+
+.wpseed-accordion-content {
+    padding: 15px;
+    background: var(--wpseed-color-white);
+    border-top: 1px solid var(--wpseed-color-gray-200);
+}
+
+.wpseed-accordion-content p:first-child {
+    margin-top: 0;
+}
+
+.wpseed-accordion-content p:last-child {
+    margin-bottom: 0;
+}
+
+/* Enhanced accordion styling from admin-development.css */
+.wpseed-accordion-container {
+    margin: 20px 0;
+}
+
+.wpseed-accordion-item {
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    background-color: #fff;
+}
+
+.wpseed-accordion-header {
+    padding: 12px 15px;
+    cursor: pointer;
+    background-color: #f7f7f7;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.wpseed-accordion-header:hover {
+    background-color: #f0f0f0;
+}
+
+.wpseed-accordion-title {
+    margin: 0;
+    font-size: 1.1em;
+}
+
+.wpseed-accordion-icon {
+    font-size: 20px;
+}
+
+.wpseed-accordion-content {
+    padding: 15px;
+    display: none;
+    border-top: 1px solid #ddd;
+}
+
+.wpseed-accordion-controls {
+    margin: 20px 0;
+}
+.wpseed-accordion-controls {
+    margin: 20px 0;
+}
+
+/* Tree Component Styles */
+.wpseed-tree-view {
+    border: 1px solid #ddd;
+    background: #fff;
+    border-radius: 4px;
+    margin: 10px 0;
+}
+
+.wpseed-tree-item {
+    border-bottom: 1px solid #f0f0f1;
+    position: relative;
+}
+
+.wpseed-tree-item:last-child {
+    border-bottom: none;
+}
+
+.wpseed-tree-header {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    min-height: 36px;
+}
+
+.wpseed-tree-header:hover {
+    background: #f6f7f7;
+}
+
+.wpseed-tree-header.wpseed-tree-selected {
+    background: #0073aa;
+    color: #fff;
+}
+
+.wpseed-tree-expanded .wpseed-tree-children {
+    display: block;
+}
+
+.wpseed-tree-toggle {
+    margin-right: 8px;
+    width: 16px;
+    height: 16px;
+    text-align: center;
+    color: #646970;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+}
+
+.wpseed-tree-expanded .wpseed-tree-toggle {
+    transform: rotate(90deg);
+}
+
+.wpseed-tree-icon {
+    margin-right: 8px;
+    width: 16px;
+    height: 16px;
+    color: #646970;
+    flex-shrink: 0;
+}
+
+.wpseed-tree-selected .wpseed-tree-icon {
+    color: #fff;
+}
+
+.wpseed-tree-label {
+    flex: 1;
+    font-weight: 500;
+    color: #1d2327;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.wpseed-tree-selected .wpseed-tree-label {
+    color: #fff;
+}
+
+.wpseed-tree-badge {
+    background: #646970;
+    color: #fff;
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 10px;
+    margin-left: 8px;
+    flex-shrink: 0;
+}
+
+.wpseed-tree-selected .wpseed-tree-badge {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.wpseed-tree-children {
+    display: none;
+    border-left: 2px solid #f0f0f1;
+    margin-left: 20px;
+    background: #fafafa;
+}
+
+.wpseed-tree-leaf {
+    padding-left: 24px;
+}
+
+.wpseed-tree-leaf .wpseed-tree-toggle {
+    visibility: hidden;
+}
+
+.wpseed-tree-value {
+    font-weight: 600;
+    color: #1d2327;
+    margin-left: auto;
+    margin-right: 8px;
+}
+
+.wpseed-tree-selected .wpseed-tree-value {
+    color: #fff;
+}
+
+.wpseed-tree-change {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 2px 6px;
+    border-radius: 3px;
+    white-space: nowrap;
+}
+
+.wpseed-tree-change.positive {
+    background: #d1e7dd;
+    color: #0f5132;
+}
+
+.wpseed-tree-change.negative {
+    background: #f8d7da;
+    color: #842029;
+}
+
+.wpseed-tree-selected .wpseed-tree-change.positive {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+.wpseed-tree-selected .wpseed-tree-change.negative {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+/* Nested tree items */
+.wpseed-tree-children .wpseed-tree-item {
+    border-left: none;
+}
+
+.wpseed-tree-children .wpseed-tree-header {
+    padding-left: 20px;
+}
+
+/* Tree focus states for accessibility */
+.wpseed-tree-header:focus {
+    outline: 2px solid #0073aa;
+    outline-offset: -2px;
+}
+
+/* Tree hover states */
+.wpseed-tree-header:hover .wpseed-tree-icon {
+    color: #0073aa;
+}
+
+.wpseed-tree-header:hover .wpseed-tree-toggle {
+    color: #0073aa;
+}
+
+/* Nested Accordion Styles */
+.wpseed-accordion-nested {
+    border: none;
+    background: transparent;
+}
+
+.wpseed-accordion-nested .wpseed-accordion-item {
+    border: 1px solid var(--wpseed-color-border, #e0e0e0);
+    border-radius: 6px;
+    margin-bottom: 8px;
+    background: var(--wpseed-color-surface-secondary, #fafafa);
+}
+
+.wpseed-accordion-nested .wpseed-accordion-header {
+    padding: 12px 16px;
+    background: var(--wpseed-color-surface-secondary, #fafafa);
+    border-radius: 6px;
+}
+
+.wpseed-accordion-nested .wpseed-accordion-header:hover {
+    background: var(--wpseed-color-surface-hover, #f0f0f0);
+}
+
+.wpseed-accordion-nested .wpseed-accordion-content {
+    padding: 16px;
+    background: var(--wpseed-color-surface, #ffffff);
+    border-top: 1px solid var(--wpseed-color-border, #e0e0e0);
+    border-radius: 0 0 6px 6px;
+}
+
+/* Nested Child Accordion Styles */
+.wpseed-accordion-nested-child {
+    margin: 0;
+    border: none;
+    background: transparent;
+}
+
+.wpseed-accordion-nested-child .wpseed-accordion-item {
+    border: 1px solid var(--wpseed-color-border-light, #f0f0f0);
+    border-radius: 4px;
+    margin-bottom: 6px;
+    background: var(--wpseed-color-surface, #ffffff);
+}
+
+.wpseed-accordion-nested-child .wpseed-accordion-header {
+    padding: 10px 14px;
+    background: var(--wpseed-color-surface, #ffffff);
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.wpseed-accordion-nested-child .wpseed-accordion-header h5 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--wpseed-color-text-secondary, #666666);
+}
+
+.wpseed-accordion-nested-child .wpseed-accordion-header:hover {
+    background: var(--wpseed-color-surface-hover, #f8f8f8);
+}
+
+.wpseed-accordion-nested-child .wpseed-accordion-content {
+    padding: 12px 14px;
+    background: var(--wpseed-color-surface, #ffffff);
+    border-top: 1px solid var(--wpseed-color-border-light, #f0f0f0);
+    border-radius: 0 0 4px 4px;
+    font-size: 14px;
+}
+
+.wpseed-accordion-nested-child .wpseed-accordion-icon {
+    font-size: 14px;
+    color: var(--wpseed-color-text-muted, #999999);
+}
+
+/* Nested Accordion Indentation */
+.wpseed-accordion-nested .wpseed-accordion-content .wpseed-accordion-nested-child {
+    margin-left: 0;
+    margin-top: 12px;
+}
+
+/* Interactive States for Nested Accordions */
+.wpseed-accordion-nested .wpseed-accordion-item.wpseed-accordion-expanded > .wpseed-accordion-header {
+    border-radius: 6px 6px 0 0;
+}
+
+.wpseed-accordion-nested-child .wpseed-accordion-item.wpseed-accordion-expanded > .wpseed-accordion-header {
+    border-radius: 4px 4px 0 0;
+}

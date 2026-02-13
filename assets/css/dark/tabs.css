@@ -1,0 +1,59 @@
+/**
+ * wpseed Dark Theme - Tabs Layout Styles
+ * 
+ * Dark theme overrides for tab interfaces.
+ * 
+ * @package wpseed/CSS/Dark
+ * @since 1.0.0
+ */
+
+/* Tabs Navigation */
+.wpseed-dark-theme .wpseed-tabs-nav {
+    border-bottom: 1px solid var(--wpseed-color-gray-400);
+}
+
+.wpseed-dark-theme .wpseed-tab-nav-item a {
+    color: var(--wpseed-color-gray-700);
+    background-color: transparent;
+}
+
+.wpseed-dark-theme .wpseed-tab-nav-item a:hover {
+    background-color: var(--wpseed-color-gray-100);
+    color: var(--wpseed-color-black);
+}
+
+.wpseed-dark-theme .wpseed-tab-nav-item.active a {
+    border-color: var(--wpseed-color-gray-400);
+    background-color: var(--wpseed-color-white);
+    color: var(--wpseed-color-black);
+    border-bottom: 1px solid var(--wpseed-color-white);
+}
+
+/* Tab Content */
+.wpseed-dark-theme .wpseed-tab-content {
+    background-color: var(--wpseed-color-white);
+    color: var(--wpseed-color-black);
+}
+
+/* WordPress Nav Tabs Override */
+.wpseed-dark-theme .nav-tab-wrapper {
+    border-bottom: 1px solid var(--wpseed-color-gray-400);
+}
+
+.wpseed-dark-theme .nav-tab {
+    color: var(--wpseed-color-gray-700);
+    background-color: transparent;
+    border: 1px solid transparent;
+}
+
+.wpseed-dark-theme .nav-tab:hover {
+    background-color: var(--wpseed-color-gray-100);
+    color: var(--wpseed-color-black);
+}
+
+.wpseed-dark-theme .nav-tab-active {
+    border-color: var(--wpseed-color-gray-400);
+    background-color: var(--wpseed-color-white);
+    color: var(--wpseed-color-black);
+    border-bottom-color: var(--wpseed-color-white);
+}

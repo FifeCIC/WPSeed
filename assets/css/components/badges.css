@@ -1,0 +1,163 @@
+/**
+ * wpseed - Badge Components
+ * 
+ * Styles for badges, indicators, and small info displays.
+ * 
+ * HTML Structure:
+ * <span class="tp-badge tp-badge-primary">Badge Text</span>
+ * 
+ * @package wpseed/CSS/Components
+ * @since 1.0.0
+ */
+
+/* Base Badge */
+.wpseed-badge {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: var(--tp-font-weight-semibold);
+}
+
+/* Time Badges */
+.wpseed-time-badge {
+    display: inline-block;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.wpseed-time-badge.bmo {
+    background-color: #e6f7ff;
+    color: #0073aa;
+}
+
+.wpseed-time-badge.amc {
+    background-color: #fef0f0;
+    color: #d63638;
+}
+
+.wpseed-time-full {
+    font-size: 12px;
+    display: none;
+}
+
+.wpseed-time-specific {
+    font-weight: var(--tp-font-weight-medium);
+}
+
+/* Sentiment Badges */
+.wpseed-sentiment-badge {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.wpseed-sentiment-pct {
+    display: block;
+    font-size: 11px;
+    color: #666;
+    margin-top: 3px;
+}
+
+.wpseed-sentiment-bullish {
+    background-color: #e7f5e8;
+    color: #2e7d32;
+}
+
+.wpseed-sentiment-bearish {
+    background-color: #fef0f0;
+    color: #d63638;
+}
+
+.wpseed-sentiment-neutral {
+    background-color: #f0f0f0;
+    color: #616161;
+}
+
+/* Sector Badges */
+.wpseed-sector-badge {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 11px;
+}
+
+.wpseed-sector-technology {
+    background-color: #e6f7ff;
+    color: #0073aa;
+}
+
+.wpseed-sector-healthcare {
+    background-color: #e7f5e8;
+    color: #2e7d32;
+}
+
+.wpseed-sector-financial {
+    background-color: #f5f3ff;
+    color: #673ab7;
+}
+
+.wpseed-sector-consumer {
+    background-color: #fff8e1;
+    color: #f57c00;
+}
+
+.wpseed-sector-industrial {
+    background-color: #f0f0f0;
+    color: #616161;
+}
+
+.wpseed-sector-energy {
+    background-color: #ffeacc;
+    color: #e65100;
+}
+
+/* Report Count Badge */
+.wpseed-report-count {
+    margin-left: auto;
+    background: #f0f0f0;
+    padding: 3px 8px;
+    border-radius: 20px;
+    font-size: 12px;
+    color: #666;
+    font-weight: normal;
+}
+
+/* Demo Badge */
+.wpseed-demo-badge {
+    position: absolute;
+    top: -10px;
+    right: 10px;
+    background: #ffb900;
+    color: #fff;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 3px;
+}
+
+/* Legacy classes mapping for backward compatibility */
+.time-badge { @extend .wpseed-time-badge; }
+.time-bmo { @extend .wpseed-time-badge; @extend .wpseed-time-badge.bmo; }
+.time-amc { @extend .wpseed-time-badge; @extend .wpseed-time-badge.amc; }
+.time-full { @extend .wpseed-time-full; }
+.time-specific { @extend .wpseed-time-specific; }
+.sentiment-badge { @extend .wpseed-sentiment-badge; }
+.sentiment-pct { @extend .wpseed-sentiment-pct; }
+.sentiment-bullish { @extend .wpseed-sentiment-bullish; }
+.sentiment-bearish { @extend .wpseed-sentiment-bearish; }
+.sentiment-neutral { @extend .wpseed-sentiment-neutral; }
+.sector-badge { @extend .wpseed-sector-badge; }
+.sector-technology { @extend .wpseed-sector-technology; }
+.sector-healthcare { @extend .wpseed-sector-healthcare; }
+.sector-financial { @extend .wpseed-sector-financial; }
+.sector-consumer { @extend .wpseed-sector-consumer; }
+.sector-industrial { @extend .wpseed-sector-industrial; }
+.sector-energy { @extend .wpseed-sector-energy; }
+.report-count { @extend .wpseed-report-count; }
+.demo-badge { @extend .wpseed-demo-badge; }

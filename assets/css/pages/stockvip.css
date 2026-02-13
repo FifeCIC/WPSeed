@@ -1,0 +1,87 @@
+/**
+ * wpseed - Stock VIP Page Styles
+ * 
+ * Page-specific styles for the Stock VIP page.
+ * 
+ * NEW STRUCTURE FILE - Part of the component-based CSS architecture
+ * 
+ * @package wpseed/CSS/Pages
+ * @since 1.0.0
+ */
+
+.wpseed-stockvip-dashboard {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: var(--tp-spacing-lg);
+}
+
+@media (min-width: 782px) {
+    .wpseed-stockvip-dashboard {
+        grid-template-columns: 3fr 1fr;
+    }
+}
+
+.wpseed-stockvip-main {
+    background-color: var(--tp-color-white);
+    padding: var(--tp-spacing-lg);
+    border-radius: var(--tp-border-radius);
+    box-shadow: var(--tp-shadow);
+}
+
+.wpseed-stockvip-sidebar {
+    background-color: var(--tp-color-white);
+    padding: var(--tp-spacing-lg);
+    border-radius: var(--tp-border-radius);
+    box-shadow: var(--tp-shadow);
+}
+
+/* Legacy class mappings */
+.stockvip-dashboard { @extend .wpseed-stockvip-dashboard; }
+.stockvip-main { @extend .wpseed-stockvip-main; }
+.stockvip-sidebar { @extend .wpseed-stockvip-sidebar; }
+
+/**
+ * wpseed - StockVIP Page-specific Styles
+ * 
+ * Page-specific styles for the Discord Stock VIP tab.
+ * These should only contain overrides or very specific components
+ * that don't belong in the general component library.
+ * 
+ * @package wpseed/CSS/Pages
+ * @since 1.0.0
+ */
+
+/* Page-specific container */
+.wpseed-stockvip-container {
+    max-width: 1600px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 782px) {
+    .wpseed-alerts-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .wpseed-statistics-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .wpseed-charts-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .wpseed-statistics-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .wpseed-controls {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .wpseed-filter-controls {
+        margin-top: var(--tp-spacing-md);
+    }
+}

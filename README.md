@@ -407,7 +407,7 @@ You are free to:
 
 ### Built With Inspiration From
 - **Automattic** - WooCommerce architecture patterns
-- **TradePress** - Advanced developer tools and AI integration
+- **wpseed** - Advanced developer tools and AI integration
 - **WordPress Plugin Boilerplate** - Community standards
 - **WP-CLI** - Command-line interface patterns
 

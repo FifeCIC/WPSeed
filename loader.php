@@ -159,7 +159,8 @@ final class WordPressPluginSeed {
         include_once( 'includes/logging-helper.php' );
         include_once( 'includes/api-logging.php' );
         include_once( 'includes/functions/database.php' );
-        include_once( 'includes/classes/asset-manager.php' );
+        include_once( 'assets/manage-assets.php' );
+        include_once( 'assets/queue-assets.php' );
         include_once( 'includes/classes/install.php' );
         include_once( 'includes/classes/ajax.php' );
         

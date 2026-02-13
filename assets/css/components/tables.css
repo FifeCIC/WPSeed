@@ -1,0 +1,388 @@
+/**
+ * wpseed - Table Component Styles
+ * 
+ * Styles for tables and data display.
+ * 
+ * HTML Structure:
+ * <table class="tp-table">
+ *   <thead>
+ *     <tr><th>Header 1</th><th>Header 2</th></tr>
+ *   </thead>
+ *   <tbody>
+ *     <tr><td>Data 1</td><td>Data 2</td></tr>
+ *   </tbody>
+ * </table>
+ * 
+ * Variants:
+ * - tp-table-bordered: Adds borders to all cells
+ * - tp-table-striped: Adds zebra striping to rows
+ * - tp-table-hover: Highlights rows on hover
+ * - tp-table-sm: Compact version with less padding
+ * 
+ * @package wpseed/CSS/Components
+ * @since 1.0.0
+ */
+
+/* Base table */
+.wpseed-table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin-bottom: var(--tp-spacing-lg) !important;
+    color: var(--tp-color-text) !important;
+    vertical-align: top !important;
+}
+
+.wpseed-table th,
+.wpseed-table td {
+    padding: var(--tp-spacing-sm) var(--tp-spacing-md) !important;
+    text-align: left !important;
+    border: var(--tp-border-standard) !important;
+}
+
+.wpseed-table th {
+    background-color: var(--tp-color-gray-50) !important;
+    font-weight: var(--tp-font-weight-semibold) !important;
+}
+
+.wpseed-table thead {
+    vertical-align: bottom !important;
+}
+
+.wpseed-table tbody {
+    vertical-align: inherit !important;
+}
+
+.wpseed-table tr:nth-child(even) {
+    background-color: var(--tp-color-gray-100) !important;
+}
+
+/* Responsive wrapper */
+.wpseed-table-responsive {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    margin-bottom: var(--tp-spacing-lg) !important;
+}
+
+/* Table variants */
+.wpseed-table-bordered {
+    border: var(--tp-border-standard) !important;
+}
+
+.wpseed-table-bordered th,
+.wpseed-table-bordered td {
+    border: var(--tp-border-standard) !important;
+}
+
+.wpseed-table-striped tbody tr:nth-of-type(odd) {
+    background-color: var(--tp-color-gray-100) !important;
+}
+
+.wpseed-table-hover tbody tr:hover {
+    background-color: var(--tp-color-table-hover-bg) !important;
+}
+
+.wpseed-table-sm th,
+.wpseed-table-sm td {
+    padding: var(--tp-spacing-xs) var(--tp-spacing-sm) !important;
+}
+
+/* Table contextual variants */
+.wpseed-table-primary {
+    background-color: var(--tp-color-primary-light) !important;
+}
+
+.wpseed-table-secondary {
+    background-color: var(--tp-color-secondary-light) !important;
+}
+
+.wpseed-table-success {
+    background-color: var(--tp-color-success-light) !important;
+}
+
+.wpseed-table-warning {
+    background-color: var(--tp-color-warning-light) !important;
+}
+
+.wpseed-table-danger {
+    background-color: var(--tp-color-error-light) !important;
+}
+
+.wpseed-table-light {
+    background-color: var(--tp-color-gray-50) !important;
+}
+
+.wpseed-table-dark {
+    background-color: var(--tp-color-gray-900) !important;
+    color: var(--tp-color-white) !important;
+}
+
+/* Fixed layout tables */
+.wpseed-table-fixed {
+    table-layout: fixed !important;
+}
+
+.wpseed-table-fixed td, 
+.wpseed-table-fixed th {
+    word-break: break-word !important;
+}
+
+/* Caption */
+.wpseed-table caption {
+    padding: var(--tp-spacing-sm) 0 !important;
+    color: var(--tp-color-gray-600) !important;
+    text-align: left !important;
+    caption-side: top !important;
+}
+
+/* Table alignment classes */
+.wpseed-table-center {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.wpseed-table-right {
+    margin-left: auto !important;
+    margin-right: 0 !important;
+}
+
+/* Pagination row */
+.wpseed-table-pagination {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-top: var(--tp-spacing-md) !important;
+}
+
+.wpseed-pagination-info {
+    color: var(--tp-color-gray-600) !important;
+}
+
+.wpseed-pagination-controls {
+    display: flex !important;
+    gap: var(--tp-spacing-sm) !important;
+}
+
+/* Row/cell states */
+.wpseed-table tr.active {
+    background-color: var(--tp-color-table-active-bg) !important;
+}
+
+.wpseed-table tr.selected td,
+.wpseed-table td.selected {
+    background-color: var(--tp-color-highlight-bg) !important;
+}
+
+/* Support for WordPress Gutenberg block tables */
+.wpseed-block-table {
+    overflow-x: auto !important;
+}
+
+.wpseed-block-table table {
+    border-collapse: collapse !important;
+    width: 100% !important;
+}
+
+.wpseed-block-table thead {
+    border-bottom: 3px solid !important;
+}
+
+.wpseed-block-table tfoot {
+    border-top: 3px solid !important;
+}
+
+.wpseed-block-table.aligncenter,
+.wpseed-block-table.alignleft,
+.wpseed-block-table.alignright {
+    display: table !important;
+    width: auto !important;
+}
+
+/* Specific styles for wpseed tables */
+.wpseed-tasks-table th {
+    background-color: var(--tp-color-gray-50) !important;
+    text-align: left !important;
+    padding: 10px !important;
+    border-bottom: var(--tp-border-standard) !important;
+}
+
+.wpseed-tasks-table td {
+    padding: 12px 10px !important;
+    border-bottom: 1px solid var(--tp-color-gray-200) !important;
+    vertical-align: top !important;
+}
+
+.wpseed-tasks-table tr:hover {
+    background-color: var(--tp-color-gray-100) !important;
+}
+
+.wpseed-sortable {
+    cursor: pointer !important;
+    position: relative !important;
+}
+
+.wpseed-sortable:after {
+    content: "\25BC" !important; /* Down triangle */
+    font-size: 8px !important;
+    color: var(--tp-color-gray-500) !important;
+    margin-left: var(--tp-spacing-xs) !important;
+    visibility: hidden !important;
+}
+
+.wpseed-sortable:hover:after {
+    visibility: visible !important;
+}
+
+.wpseed-sortable.wpseed-sorted-asc:after {
+    content: "\25BC" !important;
+    visibility: visible !important;
+    color: var(--tp-color-text) !important;
+}
+
+.wpseed-sortable.wpseed-sorted-desc:after {
+    content: "\25B2" !important;
+    visibility: visible !important;
+    color: var(--tp-color-text) !important;
+}
+
+/* Task Table Styles */
+.wpseed-table-container {
+    margin-bottom: var(--tp-spacing-xl);
+}
+
+.wpseed-table {
+    border-collapse: collapse !important;
+    width: 100% !important;
+    margin-top: var(--tp-spacing-md) !important;
+}
+
+.wpseed-table th {
+    background-color: #f5f5f5 !important;
+    text-align: left !important;
+    padding: var(--tp-spacing-md) !important;
+    border-bottom: var(--tp-border-standard) !important;
+}
+
+.wpseed-table td {
+    padding: 12px var(--tp-spacing-md) !important;
+    border-bottom: 1px solid #eee !important;
+    vertical-align: top !important;
+}
+
+.wpseed-table tr:hover {
+    background-color: #f9f9f9 !important;
+}
+
+/* Sortable columns */
+.wpseed-sortable {
+    cursor: pointer !important;
+    position: relative !important;
+}
+
+.wpseed-sortable:after {
+    content: "▼" !important;
+    font-size: 8px !important;
+    color: #999 !important;
+    margin-left: var(--tp-spacing-xs) !important;
+    visibility: hidden !important;
+}
+
+.wpseed-sortable:hover:after {
+    visibility: visible !important;
+}
+
+.wpseed-sortable.sorted-asc:after {
+    content: "▼" !important;
+    visibility: visible !important;
+    color: #333 !important;
+}
+
+.wpseed-sortable.sorted-desc:after {
+    content: "▲" !important;
+    visibility: visible !important;
+    color: #333 !important;
+}
+
+/* Directives Table Styles */
+.wpseed-directives-table {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.wpseed-directives-table th {
+    font-weight: 600;
+}
+
+.wpseed-directives-actions {
+    margin-top: 20px;
+}
+
+.wpseed-test-data-table {
+    margin-bottom: 20px;
+}
+
+/* Legacy class mappings */
+.wpseed-tasks-table { @extend .wpseed-table; }
+.wp-block-table { @extend .wpseed-block-table; }
+.table { @extend .wpseed-table; }
+.table-bordered { @extend .wpseed-table-bordered; }
+.table-striped { @extend .wpseed-table-striped; }
+.table-hover { @extend .wpseed-table-hover; }
+.table-sm { @extend .wpseed-table-sm; }
+.table-responsive { @extend .wpseed-table-responsive; }
+.sortable { @extend .wpseed-sortable; }
+.sorted-asc { @extend .wpseed-sorted-asc; }
+.sorted-desc { @extend .wpseed-sorted-desc; }
+.wpseed-scoring-directives-table { @extend .wpseed-directives-table; }
+.wpseed-scoring-directives-actions { @extend .wpseed-directives-actions; }
+.directive-test-data-table { @extend .wpseed-test-data-table; }
+.wpseed-tasks-table-container { @extend .wpseed-table-container; }
+.wpseed-tasks-table { @extend .wpseed-table; }
+.sortable { @extend .wpseed-sortable; }
+
+.wpseed-table-container {
+    overflow-x: auto;
+    margin-bottom: 20px;
+}
+
+/* Data Preview Table Styles (from admin-database.css) */
+#table-data-preview {
+    overflow-x: auto;
+    margin-bottom: 15px;
+}
+
+#table-data-preview table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#table-data-preview th, 
+#table-data-preview td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #e5e5e5;
+}
+
+#table-data-preview th {
+    background: #f8f8f8;
+    font-weight: bold;
+}
+
+#table-data-preview tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+.data-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.pagination-info {
+    font-size: 13px;
+    color: #666;
+}
+
+.current-page, .total-pages {
+    font-weight: bold;
+}

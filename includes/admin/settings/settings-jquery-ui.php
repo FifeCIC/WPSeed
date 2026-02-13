@@ -181,20 +181,3 @@ function wpseed_render_jquery_ui_gallery() {
     </script>
     <?php
 }
-
-// Enqueue jQuery UI
-add_action( 'admin_enqueue_scripts', function( $hook ) {
-    if ( $hook !== 'wpseed_page_wpseed-jquery-ui' ) return;
-    
-    wp_enqueue_script( 'jquery-ui-datepicker' );
-    wp_enqueue_script( 'jquery-ui-slider' );
-    wp_enqueue_script( 'jquery-ui-progressbar' );
-    wp_enqueue_script( 'jquery-ui-autocomplete' );
-    wp_enqueue_script( 'jquery-ui-accordion' );
-    wp_enqueue_script( 'jquery-ui-tabs' );
-    wp_enqueue_script( 'jquery-ui-dialog' );
-    wp_enqueue_script( 'jquery-ui-sortable' );
-    wp_enqueue_script( 'jquery-ui-spinner' );
-    
-    wp_enqueue_style( 'wp-jquery-ui-dialog' );
-});

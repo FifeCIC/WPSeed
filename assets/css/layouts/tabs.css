@@ -1,0 +1,86 @@
+/**
+ * wpseed - Tabs Layout Styles
+ * 
+ * Layout structures for tab interfaces.
+ * 
+ * HTML Structure:
+ * <div class="tp-tabs">
+ *   <ul class="tp-tabs-nav">
+ *     <li class="tp-tab-nav-item active"><a href="#">Tab 1</a></li>
+ *     <li class="tp-tab-nav-item"><a href="#">Tab 2</a></li>
+ *   </ul>
+ *   <div class="tp-tab-content active">
+ *     Tab 1 content
+ *   </div>
+ *   <div class="tp-tab-content">
+ *     Tab 2 content
+ *   </div>
+ * </div>
+ * 
+ * @package wpseed/CSS/Layouts
+ * @since 1.0.0
+ */
+
+/* Tabs Container */
+.wpseed-tabs {
+    margin: var(--tp-spacing-lg) 0;
+}
+
+/* Tabs Navigation */
+.wpseed-tabs-nav {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-bottom: 1px solid #ccc;
+}
+
+.wpseed-tab-nav-item {
+    margin: 0 0 -1px 0;
+    padding: 0;
+}
+
+.wpseed-tab-nav-item a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #555;
+    border: 1px solid transparent;
+    border-bottom: none;
+    margin-right: 2px;
+    font-weight: 500;
+}
+
+.wpseed-tab-nav-item a:hover {
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.wpseed-tab-nav-item.active a {
+    border-color: #ccc;
+    background-color: #fff;
+    color: #000;
+    border-bottom: 1px solid #fff;
+    font-weight: 600;
+}
+
+/* Tab Content */
+.wpseed-tab-content {
+    padding: var(--tp-spacing-lg) 0;
+    display: none;
+}
+
+.wpseed-tab-content.active {
+    display: block;
+}
+
+/* Legacy classes mapping for backward compatibility */
+.wpseed-tabs { @extend .wpseed-tabs; }
+.wpseed-tabs-nav { @extend .wpseed-tabs-nav; }
+.wpseed-tab-nav-item { @extend .wpseed-tab-nav-item; }
+.wpseed-tab-content { @extend .wpseed-tab-content; }
+.nav-tab-wrapper { @extend .wpseed-tabs-nav; }
+.nav-tab { @extend .wpseed-tab-nav-item a; }
+.nav-tab-active { @extend .wpseed-tab-nav-item.active a; }
+.tab-content { @extend .wpseed-tab-content; }
+.tab-content.active { @extend .wpseed-tab-content.active; }

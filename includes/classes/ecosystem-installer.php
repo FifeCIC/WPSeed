@@ -26,10 +26,10 @@ class WPSeed_Ecosystem_Installer {
      */
     private function define_available_plugins() {
         $this->available_plugins = apply_filters('wpseed_ecosystem_available_plugins', array(
-            'tradepress' => array(
-                'name' => 'TradePress',
+            'wpseed' => array(
+                'name' => 'wpseed',
                 'description' => 'Algorithmic stock analysis and trading decision support',
-                'download_url' => 'https://github.com/yourusername/tradepress/archive/main.zip',
+                'download_url' => 'https://github.com/yourusername/wpseed/archive/main.zip',
                 'required_by' => array(),
                 'integrates_with' => array('wpseed'),
             ),

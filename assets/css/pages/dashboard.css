@@ -1,0 +1,76 @@
+/**
+ * wpseed - WordPress Admin Dashboard Styles: wpseed/wp-admin/index.php
+ * 
+ * @package wpseed/CSS/Pages
+ * @since 1.0.0
+ */
+
+/* Recent Symbols Widget Styles */
+.wpseed-recent-symbols-widget {
+    margin: -12px;
+}
+
+.wpseed-recent-symbol-item {
+    display: flex;
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    align-items: center;
+}
+
+.wpseed-recent-symbol-item:last-child {
+    border-bottom: none;
+}
+
+.wpseed-symbol-icon {
+    margin-right: 12px;
+}
+
+.wpseed-symbol-icon img {
+    border-radius: 4px;
+    background: #f0f0f0;
+}
+
+.wpseed-symbol-info {
+    flex: 1;
+}
+
+.wpseed-symbol-name {
+    margin: 0 0 2px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.wpseed-company-name {
+    margin: 0;
+    color: #666;
+    font-size: 12px;
+}
+
+.wpseed-symbol-price {
+    text-align: right;
+}
+
+.wpseed-price-value {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.wpseed-price-change {
+    font-size: 12px;
+}
+
+.wpseed-price-change.positive {
+    color: #0c833f;
+}
+
+.wpseed-price-change.negative {
+    color: #dc3232;
+}
+
+.wpseed-widget-footer {
+    padding: 8px 12px;
+    background: #f8f8f8;
+    border-top: 1px solid #eee;
+    text-align: right;
+}
+

@@ -1,0 +1,373 @@
+/**
+ * wpseed - Form Wizard Component Styles
+ * 
+ * Extended form styles for wizards and setup screens.
+ * 
+ * @package wpseed/CSS/Components
+ * @since 1.0.0
+ */
+
+/* Wizard Form Tables */
+.wpseed-form-table {
+    width: 100%;
+}
+
+.wpseed-form-table th {
+    width: 35%;
+    vertical-align: top;
+    font-weight: normal;
+}
+
+.wpseed-form-table td {
+    vertical-align: top;
+}
+
+.wpseed-form-table td select,
+.wpseed-form-table td input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.wpseed-form-table td input[size] {
+    width: auto;
+}
+
+.wpseed-form-table td .description {
+    line-height: 1.5em;
+    display: block;
+    margin-top: .25em;
+    color: #999;
+    font-style: italic;
+}
+
+.wpseed-form-table td .wpseed-input-checkbox,
+.wpseed-form-table td .wpseed-input-radio {
+    width: auto;
+    box-sizing: inherit;
+    padding: inherit;
+    margin: 0 .5em 0 0;
+    box-shadow: none;
+}
+
+.wpseed-form-table .section-title td {
+    padding: 0;
+}
+
+.wpseed-form-table .section-title h2,
+.wpseed-form-table .section-title p {
+    margin: 12px 0 0;
+}
+
+.wpseed-form-table th,
+.wpseed-form-table td {
+    padding: 12px 0;
+    margin: 0;
+    border: 0;
+}
+
+.wpseed-form-table th:first-child,
+.wpseed-form-table td:first-child {
+    padding-right: 1em;
+}
+
+/* Extension Table in Wizard */
+.wpseed-wizard-extensions {
+    width: 100%;
+    border-top: 1px solid #eee;
+}
+
+.wpseed-wizard-extensions thead th {
+    display: none;
+}
+
+.wpseed-wizard-extensions .page-name {
+    width: 30%;
+    font-weight: bold;
+}
+
+.wpseed-wizard-extensions th,
+.wpseed-wizard-extensions td {
+    padding: 14px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.wpseed-wizard-extensions th:first-child,
+.wpseed-wizard-extensions td:first-child {
+    padding-right: 9px;
+}
+
+.wpseed-wizard-extensions th {
+    padding-top: 0;
+}
+
+.wpseed-wizard-extensions .page-options p {
+    color: #777;
+    margin: 6px 0 0 24px;
+    line-height: 1.75em;
+}
+
+.wpseed-wizard-extensions .page-options p input {
+    vertical-align: middle;
+    margin: 1px 0 0 0;
+    height: 1.75em;
+    width: 1.75em;
+    line-height: 1.75em;
+}
+
+.wpseed-wizard-extensions .page-options p label {
+    line-height: 1;
+}
+
+/* Tax Rates Table */
+.wpseed-tax-rates {
+    width: 100%;
+    font-size: .92em;
+}
+
+.wpseed-tax-rates th {
+    padding: 0;
+    text-align: center;
+    width: auto;
+    vertical-align: middle;
+}
+
+.wpseed-tax-rates td {
+    border: 1px solid #f5f5f5;
+    padding: 6px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.wpseed-tax-rates td input {
+    outline: 0;
+    border: 0;
+    padding: 0;
+    box-shadow: none;
+    text-align: center;
+    width: 100%;
+}
+
+.wpseed-tax-rates td.sort {
+    cursor: move;
+    color: #ccc;
+}
+
+.wpseed-tax-rates td.sort:before {
+    content: "\f333";
+    font-family: 'dashicons';
+}
+
+.wpseed-tax-rates td.readonly {
+    background: #f5f5f5;
+}
+
+.wpseed-tax-rates .add {
+    padding: 1em 0 0 1em;
+    line-height: 1em;
+    font-size: 1em;
+    width: 0;
+    margin: 6px 0 0;
+    height: 0;
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+}
+
+.wpseed-tax-rates .add:before {
+    content: "\f502";
+    font-family: 'dashicons';
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.wpseed-tax-rates .remove {
+    padding: 1em 0 0 1em;
+    line-height: 1em;
+    font-size: 1em;
+    width: 0;
+    margin: 0;
+    height: 0;
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+}
+
+.wpseed-tax-rates .remove:before {
+    content: "\f182";
+    font-family: 'dashicons';
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+/* Wizard Plugin Extensions List */
+.wpseed-wizard-plugin-extensions {
+    border: 1px solid #eee;
+    border-bottom-width: 2px;
+    padding: 0;
+    margin: 0 0 1em;
+    list-style: none outside;
+    border-radius: 4px;
+}
+
+.wpseed-wizard-extension {
+    padding: 1.5em 1em 1em 4em;
+    border-top: 1px solid #eee;
+    list-style: none outside;
+    cursor: pointer;
+    color: #555;
+    box-sizing: border-box;
+    clear: both;
+}
+
+.wpseed-wizard-extension:first-child {
+    border-top: 0;
+}
+
+.wpseed-wizard-extension.featured {
+    width: 50%;
+    float: left;
+    clear: none;
+    border-right: 1px solid #eee;
+    border-top: 0;
+}
+
+.wpseed-wizard-extension.featured-row-last {
+    border-right: 0;
+}
+
+.wpseed-wizard-extension .wpseed-wizard-extension-settings {
+    display: none;
+    margin-bottom: 0;
+    cursor: default;
+}
+
+.wpseed-wizard-extension.checked {
+    background: #C6FFC6;
+}
+
+.wpseed-wizard-extension.checked .wpseed-wizard-extension-settings {
+    display: table;
+}
+
+.wpseed-wizard-extension .wpseed-wizard-extension-description {
+    font-style: italic;
+}
+
+.wpseed-wizard-extension .wpseed-wizard-extension-description p {
+    margin: 0 0 .5em;
+}
+
+.wpseed-wizard-extension .wpseed-wizard-extension-enable {
+    margin: 0 0 .5em;
+}
+
+.wpseed-wizard-extension .wpseed-wizard-extension-enable label {
+    display: block;
+    font-weight: bold;
+    vertical-align: middle;
+}
+
+.wpseed-wizard-extension .wpseed-wizard-extension-enable label img {
+    max-height: 2em;
+    vertical-align: middle;
+}
+
+.wpseed-wizard-extension .wpseed-wizard-extension-enable label:before {
+    content: '';
+    background: #fff;
+    border: 2px solid #eee;
+    display: inline-block;
+    float: left;
+    vertical-align: middle;
+    width: 2em;
+    height: 2em;
+    padding: 0;
+    box-sizing: border-box;
+    line-height: 1.8em;
+    text-align: center;
+    margin: 0 1em 0 -3em;
+    border-radius: 4px;
+}
+
+.wpseed-wizard-extension .wpseed-wizard-extension-enable input {
+    opacity: 0;
+    width: 0;
+    position: absolute;
+}
+
+.wpseed-wizard-extension .wpseed-wizard-extension-enable input:checked + label:before {
+    content: "\f147";
+    font-family: 'dashicons';
+    color: #fff;
+    border-color: #472F75;
+    background: #472F75;
+}
+
+.wpseed-wizard-extension .wpseed-wizard-extension-enable input:focus + label {
+    outline: 1px solid #ddd;
+}
+
+/* Wizard Action Buttons */
+.wpseed-wizard-actions {
+    overflow: hidden;
+}
+
+.wpseed-wizard-actions .button {
+    float: right;
+    font-size: 1.25em;
+    padding: .5em 1em;
+    line-height: 1em;
+    margin-right: .5em;
+    margin-bottom: 2px;
+    height: auto;
+    border-radius: 4px;
+}
+
+.wpseed-wizard-actions .wpseed-button-primary {
+    background-color: #472F75;
+    border-color: #472F75;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 1px 0 #472F75;
+    text-shadow: 0px -1px 1px #472F75, 1px 0px 1px #472F75, 0px 1px 1px #472F75, -1px 0px 1px #472F75;
+    float: right;
+    margin: 0;
+    opacity: 1;
+    color: #fff;
+}
+
+.wpseed-wizard-actions .wpseed-button-primary:hover,
+.wpseed-wizard-actions .wpseed-button-primary:focus,
+.wpseed-wizard-actions .wpseed-button-primary:active {
+    background: #472F75;
+    border-color: #472F75;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 1px 0 #472F75;
+}
+
+/* Legacy classes mapping for backward compatibility */
+.form-table { @extend .wpseed-form-table; }
+.form-table .section_title { @extend .section-title; }
+.form-table td .input-checkbox { @extend .wpseed-input-checkbox; }
+.form-table td .input-radio { @extend .wpseed-input-radio; }
+.wpseed-setup-extensions { @extend .wpseed-wizard-extensions; }
+.table.tax-rates { @extend .wpseed-tax-rates; }
+ul.wpseed-wizard-plugin-extensions { @extend .wpseed-wizard-plugin-extensions; }
+li.wpseed-wizard-extension { @extend .wpseed-wizard-extension; }
+.wpseed-wizard-extension-settings { @extend .wpseed-wizard-extension-settings; }
+.wpseed-wizard-extension-description { @extend .wpseed-wizard-extension-description; }
+.wpseed-wizard-extension-enable { @extend .wpseed-wizard-extension-enable; }
+.wpseed-setup .wpseed-setup-actions { @extend .wpseed-wizard-actions; }
+.wpseed-setup-actions .button-primary { @extend .wpseed-button-primary; }
+
+/* Responsive styles */
+@media screen and (max-width: 782px) {
+    .wpseed-form-table tbody th {
+        width: auto;
+    }
+    
+    .wpseed-wizard-extension.featured {
+        width: 100%;
+        float: none;
+        border-right: 0;
+    }
+}

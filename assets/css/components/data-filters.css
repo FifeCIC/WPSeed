@@ -1,0 +1,132 @@
+/**
+ * wpseed - Data Filter Component Styles
+ * 
+ * For filtering and searching data tables.
+ * 
+ * HTML Structure:
+ * <div class="tp-filter-form">
+ *   <div class="tp-filter-controls">
+ *     <div class="tp-filter-row">
+ *       <div class="tp-filter-item">
+ *         <label>Filter Label</label>
+ *         <select></select>
+ *       </div>
+ *     </div>
+ *   </div>
+ * </div>
+ * 
+ * @package wpseed/CSS/Components
+ * @since 1.0.0
+ */
+
+/* Filter Form */
+.wpseed-filter-form {
+    background: var(--tp-color-white);
+    border: 1px solid #ccd0d4;
+    border-radius: var(--tp-border-radius);
+    padding: var(--tp-spacing-lg);
+    margin-bottom: var(--tp-spacing-xl);
+}
+
+/* Filter Controls */
+.wpseed-filter-controls {
+    display: flex;
+    flex-direction: column;
+    gap: var(--tp-spacing-md);
+}
+
+.wpseed-filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--tp-spacing-lg);
+    align-items: flex-end;
+}
+
+.wpseed-filter-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.wpseed-filter-actions {
+    display: flex;
+    gap: 5px;
+}
+
+/* Data Filter Controls */
+.wpseed-data-filter-controls {
+    margin-bottom: var(--tp-spacing-lg);
+    padding: var(--tp-spacing-md);
+    background: #f8f8f8;
+    border: 1px solid #e5e5e5;
+    border-radius: 3px;
+}
+
+.wpseed-data-search {
+    flex-grow: 1;
+}
+
+/* Data Table Preview */
+.wpseed-table-data-preview {
+    overflow-x: auto;
+    margin-bottom: var(--tp-spacing-lg);
+}
+
+.wpseed-table-data-preview table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.wpseed-table-data-preview th, 
+.wpseed-table-data-preview td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #e5e5e5;
+}
+
+.wpseed-table-data-preview th {
+    background: #f8f8f8;
+    font-weight: bold;
+}
+
+.wpseed-table-data-preview tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+/* Data Pagination */
+.wpseed-data-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--tp-spacing-md);
+}
+
+.wpseed-pagination-info {
+    font-size: 13px;
+    color: #666;
+}
+
+.wpseed-current-page, .wpseed-total-pages {
+    font-weight: bold;
+}
+
+/* Loading State */
+.wpseed-loading {
+    text-align: center;
+    padding: var(--tp-spacing-xl);
+    color: #666;
+}
+
+/* Legacy classes mapping for backward compatibility */
+.wpseed-filter-form { @extend .wpseed-filter-form; }
+.filter-controls { @extend .wpseed-filter-controls; }
+.filter-row { @extend .wpseed-filter-row; }
+.filter-item { @extend .wpseed-filter-item; }
+.filter-actions { @extend .wpseed-filter-actions; }
+.data-filter-controls { @extend .wpseed-data-filter-controls; }
+#data-search { @extend .wpseed-data-search; }
+#table-data-preview { @extend .wpseed-table-data-preview; }
+.data-pagination { @extend .wpseed-data-pagination; }
+.pagination-info { @extend .wpseed-pagination-info; }
+.current-page { @extend .wpseed-current-page; }
+.total-pages { @extend .wpseed-total-pages; }
+.loading { @extend .wpseed-loading; }

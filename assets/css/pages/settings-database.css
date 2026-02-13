@@ -1,0 +1,60 @@
+/**
+ * wpseed Database Settings Styles
+ *
+ * @package wpseed/Admin/CSS
+ * @version 1.0.0
+ */
+
+.wpseed-database-summary {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+}
+
+.wpseed-missing-tables-notice {
+    margin: 15px 0;
+    padding: 15px;
+    background-color: #fef8ee;
+    border-left: 4px solid #f0b849;
+    border-radius: 2px;
+}
+
+.wpseed-install-tables-action {
+    margin-top: 15px;
+}
+
+.wpseed-install-tables-action .spinner {
+    visibility: hidden;
+}
+
+#wpseed-install-result {
+    margin-top: 10px;
+    padding: 10px;
+    display: none;
+}
+
+#wpseed-install-result.success {
+    background-color: #f0fff0;
+    border-left: 4px solid #46b450;
+}
+
+#wpseed-install-result.error {
+    background-color: #fff0f0;
+    border-left: 4px solid #dc3232;
+}
+
+.wpseed-table-exists {
+    color: #46b450;
+    font-weight: bold;
+}
+
+.wpseed-table-missing {
+    color: #dc3232;
+    font-weight: bold;
+}
+
+.wpseed-missing-table {
+    background-color: #fff9f9 !important;
+}
