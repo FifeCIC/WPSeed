@@ -36,8 +36,13 @@ class WPSeed_Admin_Help {
             return;
         }
         
-        $page      = empty( $_GET['page'] ) ? '' : sanitize_title( $_GET['page'] );
-        $tab       = empty( $_GET['tab'] ) ? '' : sanitize_title( $_GET['tab'] );
+        if ( is_admin() && function_exists('current_user_can') && current_user_can( 'manage_options' ) ) {
+            $page      = empty( $_GET['page'] ) ? '' : sanitize_title( wp_unslash( $_GET['page'] ) );
+            $tab       = empty( $_GET['tab'] ) ? '' : sanitize_title( wp_unslash( $_GET['tab'] ) );
+        } else {
+            $page = '';
+            $tab = '';
+        }
 
         $screen->add_help_tab( array(
             'id'        => 'wpseed_support_tab',
@@ -92,7 +97,7 @@ class WPSeed_Admin_Help {
             'id'        => 'wpseed_contribute_tab',
             'title'     => __( 'Contribute', 'wpseed' ),
             'content'   => '<h2>' . __( 'Everyone Can Contribute', 'wpseed' ) . '</h2>' .
-            '<p>' . __( 'You can contribute in many ways and by doing so you will help the project thrive.' ) . '</p>' .
+            '<p>' . __( 'You can contribute in many ways and by doing so you will help the project thrive.', 'wpseed' ) . '</p>' .
             '<p><a href="' . WPSEED_DONATE . '" class="button button-primary">' . __( 'Donate', 'wpseed' ) . '</a> <a href="' . WPSEED_GITHUB . '/wiki" class="button button-primary">' . __( 'Update Wiki', 'wpseed' ) . '</a> <a href="' . WPSEED_GITHUB . '/issues" class="button button-primary">' . __( 'Fix Bugs', 'wpseed' ) . '</a></p>',
         ) );
 
@@ -100,7 +105,7 @@ class WPSeed_Admin_Help {
             'id'        => 'wpseed_newsletter_tab',
             'title'     => __( 'Newsletter', 'wpseed' ),
             'content'   => '<h2>' . __( 'Annual Newsletter', 'wpseed' ) . '</h2>' .
-            '<p>' . __( 'Mailchip is used to manage the projects newsletter subscribers list.' ) . '</p>' .
+            '<p>' . __( 'Mailchip is used to manage the projects newsletter subscribers list.', 'wpseed' ) . '</p>' .
             '<p>' . '<!-- Begin MailChimp Signup Form -->
                 <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
                 <style type="text/css">         
@@ -145,11 +150,11 @@ class WPSeed_Admin_Help {
             'title'     => __( 'Credits', 'wpseed' ),
             'content'   => '<h2>' . __( 'Credits', 'wpseed' ) . '</h2>' .
             '<p>Please do not remove credits from the plugin. You may edit them or give credit somewhere else in your project.</p>' . 
-            '<h4>' . __( 'Automattic - they created the best way to create plugins so we can all get more from WP.' ) . '</h4>' .
-            '<h4>' . __( 'Brian at WPMUDEV - our discussion led to this project and entirely new approach in my development.' ) . '</h4>' . 
-            '<h4>' . __( 'Ignacio Cruz at WPMUDEV - has giving us a good approach to handling shortcodes.' ) . '</h4>' .
-            '<h4>' . __( 'Ashley Rich (A5shleyRich) - author of a crucial piece of the puzzle, related to asynchronous background tasks.' ) . '</h4>' .
-            '<h4>' . __( 'Igor Vaynberg - thank you for an elegant solution to searching within a menu.' ) . '</h4>'
+            '<h4>' . __( 'Automattic - they created the best way to create plugins so we can all get more from WP.', 'wpseed' ) . '</h4>' .
+            '<h4>' . __( 'Brian at WPMUDEV - our discussion led to this project and entirely new approach in my development.', 'wpseed' ) . '</h4>' . 
+            '<h4>' . __( 'Ignacio Cruz at WPMUDEV - has giving us a good approach to handling shortcodes.', 'wpseed' ) . '</h4>' .
+            '<h4>' . __( 'Ashley Rich (A5shleyRich) - author of a crucial piece of the puzzle, related to asynchronous background tasks.', 'wpseed' ) . '</h4>' .
+            '<h4>' . __( 'Igor Vaynberg - thank you for an elegant solution to searching within a menu.', 'wpseed' ) . '</h4>'
         ) );
                     
         $screen->add_help_tab( array(
@@ -182,21 +187,21 @@ class WPSeed_Admin_Help {
         <p>
             <ul id="faq-index">
                 <?php foreach ( $questions as $question_index => $question ): ?>
-                    <li data-answer="<?php echo $question_index; ?>"><a href="#q<?php echo $question_index; ?>"><?php echo $question; ?></a></li>
+                    <li data-answer="<?php echo esc_attr($question_index); ?>"><a href="#q<?php echo esc_attr($question_index); ?>"><?php echo esc_html($question); ?></a></li>
                 <?php endforeach; ?>
             </ul>
         </p>
         
         <ul class="faq-answers">
             <li class="faq-answer" id='q1'>
-                <?php _e('There are multiple developers mentioned in the documentation of this plugin. You must continue to give credit to them all. Removing credits and any reference to repositories will make it difficult for developers to maintain the plugin you create. If you want my support you must also mentioned myself and the WordPress Plugin Seed on your plugins main page.', 'wpseed');?>
+                <?php esc_html_e('There are multiple developers mentioned in the documentation of this plugin. You must continue to give credit to them all. Removing credits and any reference to repositories will make it difficult for developers to maintain the plugin you create. If you want my support you must also mentioned myself and the WordPress Plugin Seed on your plugins main page.', 'wpseed');?>
             </li>
             <li class="faq-answer" id='q2'>
-                <p> <?php _e('Yes, you can hire me (the plugin author) to create a plugin for you and prices vary but start very low. Technically it takes a only a few minutes to create a new plugin using my boilerplate. You can pay me a small fee to start your plugin and then make separate agreements for doing more work to it.', 'wpseed');?> </p>
+                <p> <?php esc_html_e('Yes, you can hire me (the plugin author) to create a plugin for you and prices vary but start very low. Technically it takes a only a few minutes to create a new plugin using my boilerplate. You can pay me a small fee to start your plugin and then make separate agreements for doing more work to it.', 'wpseed');?> </p>
             </li>
 
             <li class="faq-answer" id='q3'>
-                <p> <?php _e('There is always some level of free support but I will expect to see some credit giving to myself and the project. Support is only offered when getting started or your plugin is already available on the WordPress.org repository. If you require support for a premium/commercial plugin project then you will have to pay a small consultation fee.', 'wpseed');?> </p>
+                <p> <?php esc_html_e('There is always some level of free support but I will expect to see some credit giving to myself and the project. Support is only offered when getting started or your plugin is already available on the WordPress.org repository. If you require support for a premium/commercial plugin project then you will have to pay a small consultation fee.', 'wpseed');?> </p>
             </li>
      
         </ul>
@@ -232,7 +237,7 @@ class WPSeed_Admin_Help {
 
                     if ( answer === 39 ) {
                         advancedGroup = $( '<optgroup />' )
-                            .attr( 'label', "<?php _e( 'Advanced: This part of FAQ requires some knowledge about HTML, PHP and/or WordPress coding.', 'wpseed' ); ?>" );
+                            .attr( 'label', "<?php esc_attr_e( 'Advanced: This part of FAQ requires some knowledge about HTML, PHP and/or WordPress coding.', 'wpseed' ); ?>" );
 
                         indexSelector.append( advancedGroup );
                     }
@@ -256,7 +261,7 @@ class WPSeed_Admin_Help {
                 indexSelector.before(
                     $('<label />')
                         .attr( 'for', 'question-selector' )
-                        .text( "<?php _e( 'Select a question', 'wpseed' ); ?>" )
+                        .text( "<?php echo esc_js( __( 'Select a question', 'wpseed' ) ); ?>" )
                         .addClass( 'screen-reader-text' )
                 );
 

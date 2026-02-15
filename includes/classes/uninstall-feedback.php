@@ -44,42 +44,42 @@ class WPSeed_Uninstall_Feedback {
             <div class="wpseed-modal-overlay"></div>
             <div class="wpseed-modal-content">
                 <div class="wpseed-modal-header">
-                    <h2><?php _e('Quick Feedback', 'wpseed'); ?></h2>
+                    <h2><?php esc_html_e('Quick Feedback', 'wpseed'); ?></h2>
                     <button class="wpseed-modal-close">&times;</button>
                 </div>
                 
                 <div class="wpseed-modal-body">
-                    <p><?php _e('If you have a moment, please let us know why you\'re deactivating WPSeed:', 'wpseed'); ?></p>
+                    <p><?php esc_html_e('If you have a moment, please let us know why you\'re deactivating WPSeed:', 'wpseed'); ?></p>
                     
                     <form id="wpseed-feedback-form">
                         <label class="wpseed-reason">
                             <input type="radio" name="reason" value="temporary">
-                            <span><?php _e('Temporary deactivation', 'wpseed'); ?></span>
+                            <span><?php esc_html_e('Temporary deactivation', 'wpseed'); ?></span>
                         </label>
                         
                         <label class="wpseed-reason">
                             <input type="radio" name="reason" value="missing_features">
-                            <span><?php _e('Missing features I need', 'wpseed'); ?></span>
+                            <span><?php esc_html_e('Missing features I need', 'wpseed'); ?></span>
                         </label>
                         
                         <label class="wpseed-reason">
                             <input type="radio" name="reason" value="found_better">
-                            <span><?php _e('Found a better plugin', 'wpseed'); ?></span>
+                            <span><?php esc_html_e('Found a better plugin', 'wpseed'); ?></span>
                         </label>
                         
                         <label class="wpseed-reason">
                             <input type="radio" name="reason" value="not_working">
-                            <span><?php _e('Plugin not working', 'wpseed'); ?></span>
+                            <span><?php esc_html_e('Plugin not working', 'wpseed'); ?></span>
                         </label>
                         
                         <label class="wpseed-reason">
                             <input type="radio" name="reason" value="too_complex">
-                            <span><?php _e('Too complex to use', 'wpseed'); ?></span>
+                            <span><?php esc_html_e('Too complex to use', 'wpseed'); ?></span>
                         </label>
                         
                         <label class="wpseed-reason">
                             <input type="radio" name="reason" value="other">
-                            <span><?php _e('Other', 'wpseed'); ?></span>
+                            <span><?php esc_html_e('Other', 'wpseed'); ?></span>
                         </label>
                         
                         <div class="wpseed-details" style="display:none;">
@@ -88,14 +88,14 @@ class WPSeed_Uninstall_Feedback {
                         
                         <div class="wpseed-email">
                             <input type="email" name="email" placeholder="<?php esc_attr_e('Your email (optional)', 'wpseed'); ?>">
-                            <small><?php _e('We may follow up to help resolve issues', 'wpseed'); ?></small>
+                            <small><?php esc_html_e('We may follow up to help resolve issues', 'wpseed'); ?></small>
                         </div>
                     </form>
                 </div>
                 
                 <div class="wpseed-modal-footer">
-                    <button class="button button-secondary wpseed-skip"><?php _e('Skip & Deactivate', 'wpseed'); ?></button>
-                    <button class="button button-primary wpseed-submit"><?php _e('Submit & Deactivate', 'wpseed'); ?></button>
+                    <button class="button button-secondary wpseed-skip"><?php esc_html_e('Skip & Deactivate', 'wpseed'); ?></button>
+                    <button class="button button-primary wpseed-submit"><?php esc_html_e('Submit & Deactivate', 'wpseed'); ?></button>
                 </div>
             </div>
         </div>
@@ -105,9 +105,9 @@ class WPSeed_Uninstall_Feedback {
     public function handle_feedback() {
         check_ajax_referer('wpseed_uninstall_feedback', 'nonce');
         
-        $reason = sanitize_text_field($_POST['reason'] ?? '');
-        $details = sanitize_textarea_field($_POST['details'] ?? '');
-        $email = sanitize_email($_POST['email'] ?? '');
+        $reason = sanitize_text_field(wp_unslash($_POST['reason'] ?? ''));
+        $details = sanitize_textarea_field(wp_unslash($_POST['details'] ?? ''));
+        $email = sanitize_email(wp_unslash($_POST['email'] ?? ''));
         
         // Log feedback
         $feedback = array(
@@ -128,9 +128,11 @@ class WPSeed_Uninstall_Feedback {
         
         // Send email to admin
         $admin_email = get_option('admin_email');
+        /* translators: %s: Site name */
         $subject = sprintf(__('[%s] Plugin Deactivation Feedback', 'wpseed'), get_bloginfo('name'));
+        /* translators: 1: Reason, 2: Details, 3: Email, 4: Site URL, 5: WP Version, 6: PHP Version */
         $message = sprintf(
-            __("Reason: %s\n\nDetails: %s\n\nEmail: %s\n\nSite: %s\nWP Version: %s\nPHP Version: %s", 'wpseed'),
+            __("Reason: %1\$s\n\nDetails: %2\$s\n\nEmail: %3\$s\n\nSite: %4\$s\nWP Version: %5\$s\nPHP Version: %6\$s", 'wpseed'),
             $reason,
             $details,
             $email,

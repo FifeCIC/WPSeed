@@ -73,8 +73,8 @@ class WPSeed_MemberPress_Integration {
      * Custom account validation
      */
     public function custom_account_validation( $errors ) {
-        if ( isset( $_POST['user_email'] ) ) {
-            $email = sanitize_email( $_POST['user_email'] );
+        if ( isset( $_POST['user_email'] ) && wp_verify_nonce( $_POST['mepr_process_signup_form'], 'mepr_process_signup_form' ) ) {
+            $email = sanitize_email( wp_unslash( $_POST['user_email'] ) );
             
             // Custom validation logic
             if ( strpos( $email, 'example.com' ) !== false ) {
@@ -124,6 +124,7 @@ class WPSeed_MemberPress_Integration {
         $user = get_userdata( $user_id );
         
         $subject = __( 'Welcome to Our Membership!', 'wpseed' );
+        /* translators: %s: User display name */
         $message = sprintf( __( 'Hi %s, welcome to our membership site!', 'wpseed' ), $user->display_name );
         
         wp_mail( $user->user_email, $subject, $message );

@@ -53,8 +53,8 @@ class WPSeed_BuddyPress_Integration {
      */
     public function custom_tab_content() {
         echo '<div class="wpseed-custom-tab">';
-        echo '<h3>' . __( 'Custom Content', 'wpseed' ) . '</h3>';
-        echo '<p>' . __( 'Your custom content here.', 'wpseed' ) . '</p>';
+        echo '<h3>' . esc_html__( 'Custom Content', 'wpseed' ) . '</h3>';
+        echo '<p>' . esc_html__( 'Your custom content here.', 'wpseed' ) . '</p>';
         echo '</div>';
     }
 
@@ -66,7 +66,7 @@ class WPSeed_BuddyPress_Integration {
         $value = get_user_meta( $user_id, 'wpseed_custom_field', true );
         ?>
         <div class="editfield">
-            <label for="wpseed_custom_field"><?php _e( 'Custom Field', 'wpseed' ); ?></label>
+            <label for="wpseed_custom_field"><?php esc_html_e( 'Custom Field', 'wpseed' ); ?></label>
             <input type="text" name="wpseed_custom_field" id="wpseed_custom_field" value="<?php echo esc_attr( $value ); ?>" />
         </div>
         <?php
@@ -76,8 +76,8 @@ class WPSeed_BuddyPress_Integration {
      * Save custom profile field
      */
     public function save_custom_profile_field( $user_id, $posted_field_ids, $errors, $old_values, $new_values ) {
-        if ( isset( $_POST['wpseed_custom_field'] ) ) {
-            update_user_meta( $user_id, 'wpseed_custom_field', sanitize_text_field( $_POST['wpseed_custom_field'] ) );
+        if ( isset( $_POST['wpseed_custom_field'] ) && wp_verify_nonce( $_POST['_wpnonce'], 'bp_xprofile_edit' ) ) {
+            update_user_meta( $user_id, 'wpseed_custom_field', sanitize_text_field( wp_unslash( $_POST['wpseed_custom_field'] ) ) );
         }
     }
 
@@ -86,6 +86,7 @@ class WPSeed_BuddyPress_Integration {
      */
     public function custom_activity_action( $action, $activity ) {
         if ( $activity->type === 'custom_type' ) {
+            /* translators: %s: User display name */
             $action = sprintf( __( '%s did something custom', 'wpseed' ), bp_core_get_userlink( $activity->user_id ) );
         }
         return $action;

@@ -27,7 +27,11 @@ class WPSeed_Listener {
     }
     
     private function process_post_requests() {
-        if ( ! isset( $_POST['wpseed_form_action'] ) || ! is_user_logged_in() ) {
+        if ( ! isset( $_POST['wpseed_form_action'] ) ) {
+            return;
+        }
+        
+        if ( ! function_exists( 'is_user_logged_in' ) || ! is_user_logged_in() ) {
             return;
         }
         
@@ -51,4 +55,7 @@ class WPSeed_Listener {
     }
 }
 
-return new WPSeed_Listener();
+// Initialize only after WordPress is loaded
+add_action('init', function() {
+    new WPSeed_Listener();
+});

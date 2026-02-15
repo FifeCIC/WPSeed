@@ -9,8 +9,8 @@
 if (!defined('ABSPATH')) exit;
 
 // Enqueue assets
-WPSeed_Asset_Manager::enqueue_style('wpseed-notification-center');
-WPSeed_Asset_Manager::enqueue_script('wpseed-notification-center');
+wp_enqueue_style('wpseed-notification-center', WPSeed()->plugin_url() . '/assets/css/notification-center.css', array(), WPSEED_VERSION);
+wp_enqueue_script('wpseed-notification-center', WPSeed()->plugin_url() . '/assets/js/notification-center.js', array('jquery'), WPSEED_VERSION);
 
 // Handle actions
 if (isset($_POST['notification_action'])) {

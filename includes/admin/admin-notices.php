@@ -45,7 +45,7 @@ class WPSeed_Admin_Notices {
         add_action( 'shutdown', array( __CLASS__, 'store_notices' ) );
 
         // Display administrator (staff) only notices.
-        if ( current_user_can( 'manage_wpseed' ) ) {
+        if ( function_exists('current_user_can') && current_user_can( 'manage_wpseed' ) ) {
             add_action( 'admin_print_styles', array( __CLASS__, 'add_notices' ) );
         }
     }
@@ -63,19 +63,19 @@ class WPSeed_Admin_Notices {
         <div class="wpseed_status_box_container">
             <div class="welcome-panel">
             
-                <h3>' . ucfirst( $title ) . '</h3>
+                <h3>' . esc_html(ucfirst( $title )) . '</h3>
                 
                 <div class="welcome-panel-content">
-                    <p class="about-description">' . ucfirst( $intro ) . '...</p>
+                    <p class="about-description">' . esc_html(ucfirst( $intro )) . '...</p>
                     
                     <h4>Section Development Progress</h4>
 
-                    ' . self::info_area( '', '                    
+                    ' . wp_kses_post(self::info_area( '', '                    
                     Free Edition: <progress max="100" value="24"></progress> <br>
                     Premium Edition: <progress max="100" value="36"></progress> <br>
                     Support Content: <progress max="100" value="67"></progress> <br>
-                    Translation: <progress max="100" value="87"></progress>' ) .'
-                    <p>' . __( 'Pledge £9.99 to the Multitool project for 50% discount on the premium edition.' ) . '</p>                                                     
+                    Translation: <progress max="100" value="87"></progress>' )) .'
+                    <p>' . esc_html__( 'Pledge £9.99 to the Multitool project for 50% discount on the premium edition.', 'wpseed' ) . '</p>                                                     
                 </div>
 
             </div> 
@@ -92,7 +92,7 @@ class WPSeed_Admin_Notices {
         global $current_user;
                                                
         // handling user action - hide notice and update user meta
-        if ( isset($_GET[ $dismissable_id ]) && 'dismiss' == $_GET[ $dismissable_id ] ) {
+        if ( isset($_GET[ $dismissable_id ]) && 'dismiss' == $_GET[ $dismissable_id ] && wp_verify_nonce($_GET['_wpnonce'], 'dismiss_notice') ) {
             add_user_meta( $current_user->ID, $dismissable_id, 'true', true );
             return;
         }
@@ -119,9 +119,10 @@ class WPSeed_Admin_Notices {
         $dismissable_button = '';
         if( $dismissable_id !== false ) {
             $dismissable_button = sprintf( 
-                ' <a href="%s&%s=dismiss" class="button button-primary"> ' . __( 'Hide', 'wpseed' ) . ' </a>', 
-                $_SERVER['REQUEST_URI'], 
-                $dismissable_id 
+                ' <a href="%s&%s=dismiss&_wpnonce=%s" class="button button-primary"> ' . esc_html__( 'Hide', 'wpseed' ) . ' </a>', 
+                esc_url(isset($_SERVER['REQUEST_URI']) ? sanitize_text_field(wp_unslash($_SERVER['REQUEST_URI'])) : ''), 
+                esc_attr($dismissable_id),
+                wp_create_nonce('dismiss_notice')
             );
         }
                 
@@ -130,13 +131,13 @@ class WPSeed_Admin_Notices {
             <div class="welcome-panel">
                 <div class="welcome-panel-content">
                     
-                    <h1>' . ucfirst( $title ) . $dismissable_button . '</h1>
+                    <h1>' . esc_html(ucfirst( $title )) . wp_kses_post($dismissable_button) . '</h1>
                     
-                    <p class="about-description">' . ucfirst( $intro ) . '</p>
+                    <p class="about-description">' . esc_html(ucfirst( $intro )) . '</p>
  
-                    ' . $highlighted_info . '
+                    ' . wp_kses_post($highlighted_info) . '
                     
-                    ' . $footer_text . '
+                    ' . wp_kses_post($footer_text) . '
                   
                 </div>
             </div> 
@@ -154,7 +155,7 @@ class WPSeed_Admin_Notices {
     * @package WPSeed 
     */
     public function info_area( $title, $message, $admin_only = true ){   
-        if( $admin_only == true && current_user_can( 'manage_options' ) || $admin_only !== true){
+        if( $admin_only == true && function_exists('current_user_can') && current_user_can( 'manage_options' ) || $admin_only !== true){
             
             $area_title = '';
             if( $title ){
@@ -229,15 +230,15 @@ class WPSeed_Admin_Notices {
      */
     public static function hide_notices() {
         if ( isset( $_GET['wpseed-hide-notice'] ) && isset( $_GET['_wpseed_notice_nonce'] ) ) {
-            if ( ! wp_verify_nonce( $_GET['_wpseed_notice_nonce'], 'wpseed_hide_notices_nonce' ) ) {
-                wp_die( __( 'Action failed. Please refresh the page and retry.', 'wpseed' ) );
+            if ( ! wp_verify_nonce( sanitize_text_field(wp_unslash($_GET['_wpseed_notice_nonce'])), 'wpseed_hide_notices_nonce' ) ) {
+                wp_die( esc_html__( 'Action failed. Please refresh the page and retry.', 'wpseed' ) );
             }
 
-            if ( ! current_user_can( 'manage_wpseed' ) ) {
-                wp_die( __( 'Cheatin&#8217; huh?', 'wpseed' ) );
+            if ( function_exists('current_user_can') && ! current_user_can( 'manage_wpseed' ) ) {
+                wp_die( esc_html__( 'Cheatin&#8217; huh?', 'wpseed' ) );
             }
 
-            $hide_notice = sanitize_text_field( $_GET['wpseed-hide-notice'] );
+            $hide_notice = sanitize_text_field( wp_unslash($_GET['wpseed-hide-notice']) );
             self::remove_notice( $hide_notice );
             do_action( 'wpseed_hide_' . $hide_notice . '_notice' );
         }
@@ -250,7 +251,7 @@ class WPSeed_Admin_Notices {
         $notices = self::get_notices();
 
         if ( ! empty( $notices ) ) {
-            wp_enqueue_style( 'wpseed-activation', plugins_url(  '/assets/css/activation.css', WPSEED_PLUGIN_FILE ) );
+            wp_enqueue_style( 'wpseed-activation', plugins_url(  '/assets/css/activation.css', WPSEED_PLUGIN_FILE ), array(), WPSEED_VERSION );
             foreach ( $notices as $notice ) {
                 if ( ! empty( self::$core_notices[ $notice ] ) && apply_filters( 'wpseed_show_admin_notice', true, $notice ) ) {
                     add_action( 'admin_notices', array( __CLASS__, self::$core_notices[ $notice ] ) );
@@ -319,4 +320,5 @@ class WPSeed_Admin_Notices {
 
 endif;
 
-WPSeed_Admin_Notices::init();
+// Initialize only after WordPress is loaded
+add_action('init', array('WPSeed_Admin_Notices', 'init'));

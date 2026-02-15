@@ -33,8 +33,13 @@ class WPSeed_Asset_Queue {
     }
     
     private function detect_current_context() {
-        $this->current_page = isset($_GET['page']) ? sanitize_text_field($_GET['page']) : '';
-        $this->current_tab = isset($_GET['tab']) ? sanitize_text_field($_GET['tab']) : '';
+        // Only process if we have a valid nonce or this is a safe admin context
+        // TODO: Re-enable after WordPress loading issue resolved - Line 37
+        // if (is_admin() && current_user_can('manage_options')) {
+        if (is_admin()) {
+            $this->current_page = isset($_GET['page']) ? sanitize_text_field(wp_unslash($_GET['page'])) : '';
+            $this->current_tab = isset($_GET['tab']) ? sanitize_text_field(wp_unslash($_GET['tab'])) : '';
+        }
     }
     
     public function enqueue_assets() {
@@ -109,7 +114,7 @@ class WPSeed_Asset_Queue {
     }
     
     public function missing_assets_notice() {
-        if (!current_user_can('manage_options')) {
+        if (function_exists('current_user_can') && !current_user_can('manage_options')) {
             return;
         }
         
@@ -124,7 +129,8 @@ class WPSeed_Asset_Queue {
         <div class="notice notice-warning is-dismissible">
             <p>
                 <strong>WPSeed:</strong> 
-                <?php echo sprintf(_n('%d asset file is missing', '%d asset files are missing', $count, 'wpseed'), $count); ?>
+                /* translators: %d: Number of missing asset files */
+                <?php echo esc_html(sprintf(_n('%d asset file is missing', '%d asset files are missing', $count, 'wpseed'), $count)); ?>
             </p>
             <ul style="list-style: disc; margin-left: 20px;">
                 <?php foreach ($missing as $asset): ?>

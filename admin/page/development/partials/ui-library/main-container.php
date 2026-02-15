@@ -7,7 +7,7 @@
 
 defined('ABSPATH') || exit;
 
-$ui_sections = array(
+$wpseed_ui_sections = array(
     'color-palette' => __('Color Palette', 'wpseed'),
     'button-components' => __('Button Components', 'wpseed'),
     'form-components' => __('Form Components', 'wpseed'),
@@ -50,14 +50,14 @@ $ui_sections = array(
                     <?php esc_html_e('Use these controls to show/hide specific sections while working on styles.', 'wpseed'); ?>
                 </p>
                 <div class="section-toggles">
-                    <?php foreach ($ui_sections as $section_id => $section_name) : ?>
+                    <?php foreach ($wpseed_ui_sections as $wpseed_section_id => $wpseed_section_name) : ?>
                         <label class="section-toggle">
                             <input type="checkbox" 
-                                   id="toggle-<?php echo esc_attr($section_id); ?>" 
+                                   id="toggle-<?php echo esc_attr($wpseed_section_id); ?>" 
                                    class="section-toggle-checkbox" 
-                                   data-section="<?php echo esc_attr($section_id); ?>" 
+                                   data-section="<?php echo esc_attr($wpseed_section_id); ?>" 
                                    checked>
-                            <span class="section-toggle-label"><?php echo esc_html($section_name); ?></span>
+                            <span class="section-toggle-label"><?php echo esc_html($wpseed_section_name); ?></span>
                         </label>
                     <?php endforeach; ?>
                 </div>
@@ -66,7 +66,7 @@ $ui_sections = array(
     </div>
     
     <?php
-    $sections = array(
+    $wpseed_sections = array(
         'color-palette.php',
         'button-components.php',
         'form-components.php',
@@ -85,22 +85,23 @@ $ui_sections = array(
         'pointers.php'
     );
     
-    $partials_dir = WPSEED_PLUGIN_DIR_PATH . 'admin/page/development/partials/ui-library/';
+    $wpseed_partials_dir = WPSEED_PLUGIN_DIR_PATH . 'admin/page/development/partials/ui-library/';
     
-    foreach ($sections as $section) {
-        $section_id = str_replace('.php', '', $section);
-        $section_path = $partials_dir . $section;
+    foreach ($wpseed_sections as $wpseed_section) {
+        $wpseed_section_id = str_replace('.php', '', $wpseed_section);
+        $wpseed_section_path = $wpseed_partials_dir . $wpseed_section;
         
-        echo '<div class="ui-library-section" data-section-id="' . esc_attr($section_id) . '" id="section-' . esc_attr($section_id) . '">';
+        echo '<div class="ui-library-section" data-section-id="' . esc_attr($wpseed_section_id) . '" id="section-' . esc_attr($wpseed_section_id) . '">';
         
-        if (file_exists($section_path)) {
-            require_once $section_path;
+        if (file_exists($wpseed_section_path)) {
+            require_once $wpseed_section_path;
         } else {
-            $section_name = str_replace(array('-', '.php'), array(' ', ''), $section);
-            $section_name = ucwords($section_name);
+            $wpseed_section_name = str_replace(array('-', '.php'), array(' ', ''), $wpseed_section);
+            $wpseed_section_name = ucwords($wpseed_section_name);
             echo '<div class="wpseed-ui-section">';
-            echo '<h3>' . esc_html($section_name) . '</h3>';
-            echo '<p>' . sprintf(esc_html__('Section "%s" is not yet available.', 'wpseed'), esc_html($section_name)) . '</p>';
+            echo '<h3>' . esc_html($wpseed_section_name) . '</h3>';
+            /* translators: %s: Section name */
+            echo '<p>' . sprintf(esc_html__('Section "%s" is not yet available.', 'wpseed'), esc_html($wpseed_section_name)) . '</p>';
             echo '</div>';
         }
         

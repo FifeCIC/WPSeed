@@ -54,7 +54,7 @@ abstract class WPSeed_Background_Process extends WPSeed_Async_Request {
     }
 
     protected function generate_key( $length = 64 ) {
-        $unique = md5( microtime() . rand() );
+        $unique = md5( microtime() . wp_rand() );
         $prepend = $this->identifier . '_batch_';
         return substr( $prepend . $unique, 0, $length );
     }
@@ -163,6 +163,7 @@ abstract class WPSeed_Background_Process extends WPSeed_Async_Request {
         $interval = apply_filters( $this->identifier . '_cron_interval', 5 );
         $schedules[ $this->identifier . '_cron_interval' ] = array(
             'interval' => MINUTE_IN_SECONDS * $interval,
+        /* translators: %d: Number of minutes for cron interval */
             'display'  => sprintf( __( 'Every %d Minutes', 'wpseed' ), $interval ),
         );
         return $schedules;

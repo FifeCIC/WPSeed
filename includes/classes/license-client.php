@@ -24,10 +24,11 @@ class WPSeed_License_Client {
         $this->plugin_slug = 'wpseed';
         $this->plugin_version = WPSEED_VERSION;
         
-        add_action('admin_init', array($this, 'check_license_status'));
-        add_action('admin_notices', array($this, 'license_notices'));
-        add_filter('pre_set_site_transient_update_plugins', array($this, 'check_for_updates'));
-        add_filter('plugins_api', array($this, 'plugin_info'), 10, 3);
+        // License system disabled - pending full development
+        // add_action('admin_init', array($this, 'check_license_status'));
+        // add_action('admin_notices', array($this, 'license_notices'));
+        // add_filter('pre_set_site_transient_update_plugins', array($this, 'check_for_updates'));
+        // add_filter('plugins_api', array($this, 'plugin_info'), 10, 3);
     }
     
     /**
@@ -309,5 +310,5 @@ class WPSeed_License_Client {
     }
 }
 
-// Initialize
-new WPSeed_License_Client();
+// Initialize - disabled pending full development
+// new WPSeed_License_Client();

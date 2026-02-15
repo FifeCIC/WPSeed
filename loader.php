@@ -100,9 +100,9 @@ final class WordPressPluginSeed {
      * @since  1.0
      */
     private function init_hooks() {
-        register_activation_hook( __FILE__, array( 'WPSeed_Install', 'install' ) );
+        register_activation_hook( WPSEED_PLUGIN_FILE, array( 'WPSeed_Install', 'install' ) );
         // Do not confuse deactivation of a plugin with deletion of a plugin - two very different requests.
-        register_deactivation_hook( __FILE__, array( 'WPSeed_Install', 'deactivate' ) );
+        register_deactivation_hook( WPSEED_PLUGIN_FILE, array( 'WPSeed_Install', 'deactivate' ) );
         add_action( 'init', array( $this, 'init' ), 0 );
     }
 
@@ -111,12 +111,9 @@ final class WordPressPluginSeed {
      */
     private function define_constants() {
         
-        $upload_dir = wp_upload_dir();
-
         if ( ! defined( 'WPSEED_MIN_WP_VERSION' ) ) { define( 'WPSEED_MIN_WP_VERSION', $this->min_wp_version ); }
         
         // Main (package) constants.
-        if ( ! defined( 'WPSEED_LOG_DIR' ) ) { define( 'WPSEED_LOG_DIR', $upload_dir['basedir'] . '/wpseed-logs/' ); }
         if ( ! defined( 'WPSEED_SESSION_CACHE_GROUP' ) ) { define( 'WPSEED_SESSION_CACHE_GROUP', 'wpseed_session_id' ); }
         if ( ! defined( 'WPSEED_DEV_MODE' ) ) { define( 'WPSEED_DEV_MODE', false ); }
         if ( ! defined( 'WPSEED_WORDPRESSORG_SLUG' ) ) { define( 'WPSEED_WORDPRESSORG_SLUG', false ); }
@@ -177,10 +174,9 @@ final class WordPressPluginSeed {
             include_once( 'includes/classes/task-scheduler.php' );
         }
         
-        // Carbon Fields Library
+        // Carbon Fields Library (will be initialized in init hook)
         if (file_exists(plugin_dir_path(__FILE__) . 'includes/libraries/carbon-fields/vendor/autoload.php')) {
             require_once plugin_dir_path(__FILE__) . 'includes/libraries/carbon-fields/vendor/autoload.php';
-            \Carbon_Fields\Carbon_Fields::boot();
             include_once( 'includes/classes/carbon-fields-integration.php' );
         }
         
@@ -237,14 +233,7 @@ final class WordPressPluginSeed {
         include_once( 'api/api-factory.php' );
         
         if ( $this->is_request( 'admin' ) ) {
-            include_once( 'includes/admin/admin.php' );
-            include_once( 'includes/admin/admin-main-views.php' );
-            include_once( 'admin/config/admin-menus.php' );
-            include_once( 'admin/notifications/notifications.php' );
-            include_once( 'includes/classes/notification-bell.php' );
-            include_once( 'admin/page/development/view/credits.php' );
-            include_once( 'toolbars/toolbars.php' );
-            include_once( 'includes/classes/uninstall-feedback.php' );
+            add_action( 'init', array( $this, 'load_admin_files' ), 1 );
         }
 
         if ( $this->is_request( 'frontend' ) ) {
@@ -262,9 +251,36 @@ final class WordPressPluginSeed {
     }
 
     /**
+     * Load admin files after WordPress init.
+     */
+    public function load_admin_files() {
+        include_once( 'includes/admin/admin.php' );
+        include_once( 'includes/admin/admin-main-views.php' );
+        include_once( 'admin/config/admin-menus.php' );
+        include_once( 'admin/notifications/notifications.php' );
+        include_once( 'includes/classes/notification-bell.php' );
+        include_once( 'admin/page/development/view/credits.php' );
+        include_once( 'toolbars/toolbars.php' );
+        include_once( 'includes/classes/uninstall-feedback.php' );
+    }
+
+    /**
+     * Define upload-dependent constants after WordPress init.
+     */
+    public function define_upload_constants() {
+        if ( ! defined( 'WPSEED_LOG_DIR' ) ) {
+            $upload_dir = wp_upload_dir();
+            define( 'WPSEED_LOG_DIR', $upload_dir['basedir'] . '/wpseed-logs/' );
+        }
+    }
+
+    /**
      * Initialise WordPress Plugin Seed when WordPress Initialises.
      */
     public function init() {                     
+        // Define upload-dependent constants
+        $this->define_upload_constants();
+        
         // Before init action.
         do_action( 'before_wpseed_init' );
 

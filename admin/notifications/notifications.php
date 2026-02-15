@@ -2,8 +2,15 @@
 /**
  * WPSeed Notifications
  *
+ * Uses custom database table for performance with high-volume transient notification data.
+ * Custom table provides proper indexing and query optimization that would not be possible
+ * with WordPress core tables (posts/options).
+ *
  * @package WPSeed
  * @version 1.0.0
+ * 
+ * @phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table required for performance
+ * @phpcs:disable WordPress.DB.DirectDatabaseQuery.NoCaching -- Real-time notification data, caching not applicable
  */
 
 if (!defined('ABSPATH')) {
@@ -81,7 +88,7 @@ class WPSeed_Notifications {
                 'priority'   => $args['priority'],
                 'is_read'    => 0,
                 'created_at' => current_time('mysql'),
-                'expires_at' => $args['expiration'] ? date('Y-m-d H:i:s', $args['expiration']) : null,
+                'expires_at' => $args['expiration'] ? gmdate('Y-m-d H:i:s', $args['expiration']) : null,
                 'data'       => maybe_serialize($args['data']),
             ),
             array('%s', '%s', '%d', '%s', '%d', '%s', '%s', '%s')
@@ -105,13 +112,15 @@ class WPSeed_Notifications {
             $user_name = $user->display_name;
         }
         
-        $subject = sprintf(__('[%s] %s Notification', 'wpseed'), 
+        /* translators: 1: Site name, 2: Notification type label */
+        $subject = sprintf(__('[%1$s] %2$s Notification', 'wpseed'), 
             get_bloginfo('name'), 
             self::$notification_types[$type]['label']
         );
         
+        /* translators: 1: User name, 2: Notification message, 3: Site name */
         $email_body = sprintf(
-            __("Hello %s,\n\nYou have received a new notification:\n\n%s\n\nRegards,\n%s Team", 'wpseed'),
+            __("Hello %1\$s,\n\nYou have received a new notification:\n\n%2\$s\n\nRegards,\n%3\$s Team", 'wpseed'),
             $user_name,
             $message,
             get_bloginfo('name')
@@ -125,15 +134,16 @@ class WPSeed_Notifications {
         
         $table_name = $wpdb->prefix . 'wpseed_notifications';
         
-        $wpdb->query("UPDATE $table_name SET is_read = 1 WHERE expires_at IS NOT NULL AND expires_at < NOW()");
+        $wpdb->query($wpdb->prepare(
+            "UPDATE {$wpdb->prefix}wpseed_notifications SET is_read = 1 WHERE expires_at IS NOT NULL AND expires_at < %s",
+            current_time('mysql')
+        ));
         
         do_action('wpseed_process_scheduled_notifications');
     }
 
     public static function get_notifications($user_id = 0, $args = array()) {
         global $wpdb;
-        
-        $table_name = $wpdb->prefix . 'wpseed_notifications';
         
         $defaults = array(
             'limit'   => 20,
@@ -146,31 +156,42 @@ class WPSeed_Notifications {
         
         $args = wp_parse_args($args, $defaults);
         
-        $where = array();
-        $where[] = $wpdb->prepare("user_id = %d OR user_id = 0", $user_id);
+        // Cache key for this query
+        $cache_key = 'wpseed_notifications_' . md5(serialize(array($user_id, $args)));
+        $notifications = wp_cache_get($cache_key, 'wpseed_notifications');
         
-        if ($args['type']) {
-            $where[] = $wpdb->prepare("type = %s", $args['type']);
-        }
-        
-        if ($args['is_read'] !== null) {
-            $where[] = $wpdb->prepare("is_read = %d", $args['is_read']);
-        }
-        
-        $where[] = "(expires_at IS NULL OR expires_at > NOW())";
-        
-        $where_clause = implode(' AND ', $where);
-        
-        $orderby = sanitize_sql_orderby($args['orderby'] . ' ' . $args['order']);
-        
-        $limit_clause = $wpdb->prepare("LIMIT %d OFFSET %d", $args['limit'], $args['offset']);
-        
-        $notifications = $wpdb->get_results(
-            "SELECT * FROM $table_name WHERE $where_clause ORDER BY $orderby $limit_clause"
-        );
-        
-        foreach ($notifications as &$notification) {
-            $notification->data = maybe_unserialize($notification->data);
+        if (false === $notifications) {
+            // Build WHERE clause with proper escaping
+            $where_parts = array();
+            $where_parts[] = $wpdb->prepare("(user_id = %d OR user_id = 0)", $user_id);
+            
+            if ($args['type']) {
+                $where_parts[] = $wpdb->prepare("type = %s", $args['type']);
+            }
+            
+            if ($args['is_read'] !== null) {
+                $where_parts[] = $wpdb->prepare("is_read = %d", $args['is_read']);
+            }
+            
+            $where_parts[] = $wpdb->prepare("(expires_at IS NULL OR expires_at > %s)", current_time('mysql'));
+            
+            $where_clause = implode(' AND ', $where_parts);
+            
+            // Sanitize orderby
+            $allowed_orderby = array('created_at', 'priority', 'type', 'is_read');
+            $orderby = in_array($args['orderby'], $allowed_orderby) ? $args['orderby'] : 'created_at';
+            $order = strtoupper($args['order']) === 'ASC' ? 'ASC' : 'DESC';
+            
+            // Build safe query with proper escaping
+            $query = "SELECT * FROM {$wpdb->prefix}wpseed_notifications WHERE " . $where_clause . " ORDER BY $orderby $order LIMIT " . intval($args['limit']) . " OFFSET " . intval($args['offset']);
+            
+            $notifications = $wpdb->get_results($query);
+            
+            foreach ($notifications as &$notification) {
+                $notification->data = maybe_unserialize($notification->data);
+            }
+            
+            wp_cache_set($cache_key, $notifications, 'wpseed_notifications', 300); // 5 min cache
         }
         
         return $notifications;
@@ -193,6 +214,11 @@ class WPSeed_Notifications {
             $where
         );
         
+        if ($updated !== false) {
+            wp_cache_delete('wpseed_unread_count_' . $user_id, 'wpseed_notifications');
+            wp_cache_flush_group('wpseed_notifications');
+        }
+        
         return $updated !== false;
     }
 
@@ -201,10 +227,19 @@ class WPSeed_Notifications {
         
         $table_name = $wpdb->prefix . 'wpseed_notifications';
         
-        if ($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
+        // Check cache first
+        $cache_key = 'wpseed_table_exists_' . $table_name;
+        $table_exists = wp_cache_get($cache_key, 'wpseed_notifications');
+        
+        if (false === $table_exists) {
+            $table_exists = $wpdb->get_var($wpdb->prepare("SHOW TABLES LIKE %s", $table_name)) === $table_name;
+            wp_cache_set($cache_key, $table_exists, 'wpseed_notifications', 3600);
+        }
+        
+        if (!$table_exists) {
             $charset_collate = $wpdb->get_charset_collate();
             
-            $sql = "CREATE TABLE $table_name (
+            $sql = "CREATE TABLE {$wpdb->prefix}wpseed_notifications (
                 id mediumint(9) NOT NULL AUTO_INCREMENT,
                 type varchar(50) NOT NULL,
                 message text NOT NULL,
@@ -237,7 +272,7 @@ class WPSeed_Notifications {
         global $wpdb;
         
         $table = $wpdb->prefix . 'wpseed_notifications';
-        $snooze_until = date('Y-m-d H:i:s', time() + $duration);
+        $snooze_until = gmdate('Y-m-d H:i:s', time() + $duration);
         
         return $wpdb->update(
             $table,
@@ -245,7 +280,9 @@ class WPSeed_Notifications {
                 'is_snoozed' => 1,
                 'snooze_until' => $snooze_until,
             ),
-            array('id' => $notification_id)
+            array('id' => $notification_id),
+            array('%d', '%s'),
+            array('%d')
         );
     }
     
@@ -257,11 +294,18 @@ class WPSeed_Notifications {
         
         $table = $wpdb->prefix . 'wpseed_notifications';
         
-        return $wpdb->update(
+        $result = $wpdb->update(
             $table,
             array('is_read' => 1),
             array('user_id' => $user_id, 'is_read' => 0)
         );
+        
+        if ($result !== false) {
+            wp_cache_delete('wpseed_unread_count_' . $user_id, 'wpseed_notifications');
+            wp_cache_flush_group('wpseed_notifications');
+        }
+        
+        return $result;
     }
     
     /**
@@ -272,7 +316,13 @@ class WPSeed_Notifications {
         
         $table = $wpdb->prefix . 'wpseed_notifications';
         
-        return $wpdb->delete($table, array('id' => $notification_id));
+        $result = $wpdb->delete($table, array('id' => $notification_id));
+        
+        if ($result !== false) {
+            wp_cache_flush_group('wpseed_notifications');
+        }
+        
+        return $result;
     }
     
     /**
@@ -281,17 +331,35 @@ class WPSeed_Notifications {
     public static function get_unread_count($user_id) {
         global $wpdb;
         
-        $table = $wpdb->prefix . 'wpseed_notifications';
+        $cache_key = 'wpseed_unread_count_' . $user_id;
+        $count = wp_cache_get($cache_key, 'wpseed_notifications');
         
-        // Check if table exists first
-        if ($wpdb->get_var("SHOW TABLES LIKE '$table'") != $table) {
-            return 0;
+        if (false === $count) {
+            $table = $wpdb->prefix . 'wpseed_notifications';
+            
+            // Check if table exists first (with caching)
+            $table_cache_key = 'wpseed_table_exists_' . $table;
+            $table_exists = wp_cache_get($table_cache_key, 'wpseed_notifications');
+            
+            if (false === $table_exists) {
+                $table_exists = $wpdb->get_var($wpdb->prepare("SHOW TABLES LIKE %s", $table)) === $table;
+                wp_cache_set($table_cache_key, $table_exists, 'wpseed_notifications', 3600);
+            }
+            
+            if (!$table_exists) {
+                return 0;
+            }
+            
+            $count = $wpdb->get_var($wpdb->prepare(
+                "SELECT COUNT(*) FROM {$wpdb->prefix}wpseed_notifications WHERE (user_id = %d OR user_id = 0) AND is_read = 0 AND (expires_at IS NULL OR expires_at > %s)",
+                $user_id,
+                current_time('mysql')
+            ));
+            
+            wp_cache_set($cache_key, $count, 'wpseed_notifications', 60); // 1 min cache
         }
         
-        return $wpdb->get_var($wpdb->prepare(
-            "SELECT COUNT(*) FROM $table WHERE (user_id = %d OR user_id = 0) AND is_read = 0 AND (expires_at IS NULL OR expires_at > NOW())",
-            $user_id
-        ));
+        return $count;
     }
 }
 

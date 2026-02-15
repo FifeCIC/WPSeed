@@ -12,12 +12,17 @@ class WPSeed_Admin_Development_Tasks_Monitor {
     
     public static function output() {
         if (!function_exists('as_get_scheduled_actions')) {
-            echo '<div class="notice notice-warning"><p>' . __('Action Scheduler library not loaded.', 'wpseed') . '</p></div>';
+            echo '<div class="notice notice-warning"><p>' . esc_html__('Action Scheduler library not loaded.', 'wpseed') . '</p></div>';;
             return;
         }
 
-        $status = isset($_GET['status']) ? sanitize_text_field($_GET['status']) : 'pending';
-        $group = isset($_GET['group']) ? sanitize_text_field($_GET['group']) : '';
+        if (!wp_verify_nonce($_GET['_wpnonce'] ?? '', 'wpseed_tasks_filter')) {
+            $status = 'pending';
+            $group = '';
+        } else {
+            $status = isset($_GET['status']) ? sanitize_text_field($_GET['status']) : 'pending';
+            $group = isset($_GET['group']) ? sanitize_text_field($_GET['group']) : '';
+        }
         
         ?>
         <div class="wpseed-tasks-monitor">
@@ -43,11 +48,11 @@ class WPSeed_Admin_Development_Tasks_Monitor {
         
         ?>
         <div class="wpseed-tasks-filters" style="margin: 20px 0; padding: 15px; background: #fff; border: 1px solid #ccd0d4;">
-            <h3><?php _e('Filter Tasks', 'wpseed'); ?></h3>
+            <h3><?php esc_html_e('Filter Tasks', 'wpseed'); ?></h3>
             
             <div style="display: flex; gap: 20px; align-items: center;">
                 <div>
-                    <label><strong><?php _e('Status:', 'wpseed'); ?></strong></label>
+                    <label><strong><?php esc_html_e('Status:', 'wpseed'); ?></strong></label>
                     <select id="task-status-filter" style="margin-left: 10px;">
                         <?php foreach ($statuses as $value => $label) : ?>
                             <option value="<?php echo esc_attr($value); ?>" <?php selected($current_status, $value); ?>>
@@ -58,17 +63,17 @@ class WPSeed_Admin_Development_Tasks_Monitor {
                 </div>
                 
                 <div>
-                    <label><strong><?php _e('Group:', 'wpseed'); ?></strong></label>
+                    <label><strong><?php esc_html_e('Group:', 'wpseed'); ?></strong></label>
                     <input type="text" id="task-group-filter" value="<?php echo esc_attr($current_group); ?>" 
                            placeholder="<?php esc_attr_e('All groups', 'wpseed'); ?>" style="margin-left: 10px;">
                 </div>
                 
                 <button type="button" class="button button-primary" onclick="wpseedFilterTasks()">
-                    <?php _e('Apply Filters', 'wpseed'); ?>
+                    <?php esc_html_e('Apply Filters', 'wpseed'); ?>
                 </button>
                 
                 <button type="button" class="button" onclick="wpseedResetFilters()">
-                    <?php _e('Reset', 'wpseed'); ?>
+                    <?php esc_html_e('Reset', 'wpseed'); ?>
                 </button>
             </div>
         </div>
@@ -110,22 +115,22 @@ class WPSeed_Admin_Development_Tasks_Monitor {
             
             <div style="background: #fff; padding: 20px; border-left: 4px solid #2271b1; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
                 <div style="font-size: 32px; font-weight: bold; color: #2271b1;"><?php echo number_format($stats['pending']); ?></div>
-                <div style="color: #646970; margin-top: 5px;"><?php _e('Pending', 'wpseed'); ?></div>
+                <div style="color: #646970; margin-top: 5px;"><?php esc_html_e('Pending', 'wpseed'); ?></div>
             </div>
             
             <div style="background: #fff; padding: 20px; border-left: 4px solid #f0b849; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
                 <div style="font-size: 32px; font-weight: bold; color: #f0b849;"><?php echo number_format($stats['in-progress']); ?></div>
-                <div style="color: #646970; margin-top: 5px;"><?php _e('In Progress', 'wpseed'); ?></div>
+                <div style="color: #646970; margin-top: 5px;"><?php esc_html_e('In Progress', 'wpseed'); ?></div>
             </div>
             
             <div style="background: #fff; padding: 20px; border-left: 4px solid #00a32a; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
                 <div style="font-size: 32px; font-weight: bold; color: #00a32a;"><?php echo number_format($stats['complete']); ?></div>
-                <div style="color: #646970; margin-top: 5px;"><?php _e('Complete', 'wpseed'); ?></div>
+                <div style="color: #646970; margin-top: 5px;"><?php esc_html_e('Complete', 'wpseed'); ?></div>
             </div>
             
             <div style="background: #fff; padding: 20px; border-left: 4px solid #d63638; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
                 <div style="font-size: 32px; font-weight: bold; color: #d63638;"><?php echo number_format($stats['failed']); ?></div>
-                <div style="color: #646970; margin-top: 5px;"><?php _e('Failed', 'wpseed'); ?></div>
+                <div style="color: #646970; margin-top: 5px;"><?php esc_html_e('Failed', 'wpseed'); ?></div>
             </div>
             
         </div>
@@ -146,27 +151,28 @@ class WPSeed_Admin_Development_Tasks_Monitor {
         
         ?>
         <div class="wpseed-tasks-table" style="background: #fff; padding: 20px; border: 1px solid #ccd0d4;">
-            <h3><?php printf(__('Tasks (%s)', 'wpseed'), ucfirst($status)); ?></h3>
+            /* translators: %s: Task status */
+            <h3><?php printf(esc_html__('Tasks (%s)', 'wpseed'), esc_html(ucfirst($status))); ?></h3>
             
             <?php if (empty($actions)) : ?>
-                <p><?php _e('No tasks found.', 'wpseed'); ?></p>
+                <p><?php esc_html_e('No tasks found.', 'wpseed'); ?></p>
             <?php else : ?>
                 <table class="wp-list-table widefat fixed striped">
                     <thead>
                         <tr>
-                            <th><?php _e('Hook', 'wpseed'); ?></th>
-                            <th><?php _e('Status', 'wpseed'); ?></th>
-                            <th><?php _e('Group', 'wpseed'); ?></th>
-                            <th><?php _e('Arguments', 'wpseed'); ?></th>
-                            <th><?php _e('Scheduled', 'wpseed'); ?></th>
-                            <th><?php _e('Actions', 'wpseed'); ?></th>
+                            <th><?php esc_html_e('Hook', 'wpseed'); ?></th>
+                            <th><?php esc_html_e('Status', 'wpseed'); ?></th>
+                            <th><?php esc_html_e('Group', 'wpseed'); ?></th>
+                            <th><?php esc_html_e('Arguments', 'wpseed'); ?></th>
+                            <th><?php esc_html_e('Scheduled', 'wpseed'); ?></th>
+                            <th><?php esc_html_e('Actions', 'wpseed'); ?></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($actions as $action) : ?>
                             <tr>
                                 <td><code><?php echo esc_html($action->get_hook()); ?></code></td>
-                                <td><?php echo self::get_status_badge($action->get_status()); ?></td>
+                                <td><?php echo wp_kses_post(self::get_status_badge($action->get_status())); ?></td>
                                 <td><?php echo esc_html($action->get_group()); ?></td>
                                 <td>
                                     <?php 
@@ -192,7 +198,7 @@ class WPSeed_Admin_Development_Tasks_Monitor {
                                 <td>
                                     <a href="<?php echo esc_url(admin_url('tools.php?page=action-scheduler&s=' . urlencode($action->get_hook()))); ?>" 
                                        class="button button-small">
-                                        <?php _e('View Details', 'wpseed'); ?>
+                                        <?php esc_html_e('View Details', 'wpseed'); ?>
                                     </a>
                                 </td>
                             </tr>
@@ -202,7 +208,7 @@ class WPSeed_Admin_Development_Tasks_Monitor {
                 
                 <p style="margin-top: 15px;">
                     <a href="<?php echo esc_url(admin_url('tools.php?page=action-scheduler')); ?>" class="button button-primary">
-                        <?php _e('View All in Action Scheduler', 'wpseed'); ?>
+                        <?php esc_html_e('View All in Action Scheduler', 'wpseed'); ?>
                     </a>
                 </p>
             <?php endif; ?>

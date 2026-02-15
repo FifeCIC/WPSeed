@@ -184,21 +184,24 @@ class WPSeed_Admin_Development_Assets {
                 'class' => 'status-success',
                 'icon' => 'dashicons-yes',
                 'message' => __('All Assets Available', 'wpseed'),
-                'details' => sprintf(__('%d assets managed', 'wpseed'), $total_assets)
+                /* translators: %d: Number of assets managed */
+                'details' => sprintf(__('%1$d assets managed', 'wpseed'), $total_assets)
             );
         } elseif ($total_missing <= 3) {
             return array(
                 'class' => 'status-warning',
                 'icon' => 'dashicons-warning',
-                'message' => __('Minor Issues', 'wpseed'),
-                'details' => sprintf(__('%d of %d missing', 'wpseed'), $total_missing, $total_assets)
+                'message' => __('Some Assets Missing', 'wpseed'),
+                /* translators: %1$d: Number of missing assets, %2$d: Total number of assets */
+                'details' => sprintf(__('%1$d of %2$d missing', 'wpseed'), $total_missing, $total_assets)
             );
         } else {
             return array(
                 'class' => 'status-error',
                 'icon' => 'dashicons-no',
-                'message' => __('Multiple Assets Missing', 'wpseed'),
-                'details' => sprintf(__('%d of %d missing', 'wpseed'), $total_missing, $total_assets)
+                'message' => __('Many Assets Missing', 'wpseed'),
+                /* translators: %1$d: Number of missing assets, %2$d: Total number of assets */
+                'details' => sprintf(__('%1$d of %2$d missing', 'wpseed'), $total_missing, $total_assets)
             );
         }
     }

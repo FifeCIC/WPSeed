@@ -27,10 +27,14 @@ class WPSeed_Admin_Toolbar_Developers {
     private function init() {
         global $wp_admin_bar, $wpseed_settings;  
         
+        // Add custom icon CSS
+        add_action('admin_head', array($this, 'add_toolbar_icon_css'));
+        add_action('wp_head', array($this, 'add_toolbar_icon_css'));
+        
         // Top Level/Level One
         $args = array(
             'id'     => 'wpseed-toolbarmenu-developers',
-            'title'  => __( 'WP Seed Developers', 'text_domain' ),          
+            'title'  => '<span class="ab-icon wpseed-toolbar-icon"></span><span class="ab-label">' . __( 'WP Seed Developers', 'text_domain' ) . '</span>',          
         );
         $wp_admin_bar->add_menu( $args );
         
@@ -60,6 +64,28 @@ class WPSeed_Admin_Toolbar_Developers {
                     'href'   => $href,            
                 );
                 $wp_admin_bar->add_menu( $args );    
+    }
+    
+    /**
+     * Add custom toolbar icon CSS
+     */
+    public function add_toolbar_icon_css() {
+        ?>
+        <style>
+            #wpadminbar .wpseed-toolbar-icon:before {
+                content: '';
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                background-image: url('data:image/svg+xml;base64,<?php echo base64_encode('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12,22C12,22 11,17 11,13C11,9 13,6 17,4C17,4 16,8 16,11C16,14 17,17 17,17M7,18C7,18 6,14 8,11C10,8 13,7 13,7C13,7 12,10 11,12C10,14 10,18 10,18" /></svg>'); ?>');
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center;
+                vertical-align: middle;
+                margin-right: 5px;
+            }
+        </style>
+        <?php
     }
     
 }   

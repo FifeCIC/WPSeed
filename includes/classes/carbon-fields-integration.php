@@ -73,5 +73,7 @@ class WPSeed_Carbon_Fields {
     }
 }
 
-// Initialize
-WPSeed_Carbon_Fields::instance();
+// Initialize only after WordPress is loaded
+add_action('init', function() {
+    WPSeed_Carbon_Fields::instance();
+});

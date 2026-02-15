@@ -21,7 +21,7 @@ function wpseed_register_admin_menus() {
         'manage_options',
         'wpseed',
         'wpseed_main_page',
-        'dashicons-admin-generic',
+        'data:image/svg+xml;base64,' . base64_encode('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12,22C12,22 11,17 11,13C11,9 13,6 17,4C17,4 16,8 16,11C16,14 17,17 17,17M7,18C7,18 6,14 8,11C10,8 13,7 13,7C13,7 12,10 11,12C10,14 10,18 10,18" /></svg>'),
         30
     );
 
@@ -45,7 +45,8 @@ function wpseed_register_admin_menus() {
         'wpseed_jquery_ui_page'
     );
     
-    // Component Library
+    // Component Library - file missing, disabled
+    /*
     add_submenu_page(
         'wpseed',
         __('Component Library', 'wpseed'),
@@ -54,6 +55,7 @@ function wpseed_register_admin_menus() {
         'wpseed-components',
         'wpseed_components_page'
     );
+    */
     
     // Notifications
     add_submenu_page(
@@ -65,7 +67,18 @@ function wpseed_register_admin_menus() {
         'wpseed_notifications_page'
     );
     
-    // License
+    // Security Audit
+    add_submenu_page(
+        'wpseed',
+        __('Security Audit', 'wpseed'),
+        __('Security Audit', 'wpseed'),
+        'manage_options',
+        'wpseed-security-audit',
+        'wpseed_security_audit_page'
+    );
+    
+    // License - disabled pending full development
+    /*
     add_submenu_page(
         'wpseed',
         __('License', 'wpseed'),
@@ -74,6 +87,7 @@ function wpseed_register_admin_menus() {
         'wpseed-license',
         'wpseed_license_page'
     );
+    */
     
     // Scheduled Actions (Action Scheduler)
     if (function_exists('as_enqueue_async_action')) {
@@ -135,17 +149,32 @@ function wpseed_jquery_ui_enqueue_assets($hook) {
     if ($hook !== 'wpseed_page_wpseed-jquery-ui') {
         return;
     }
+    
+    // Enqueue jQuery UI scripts
+    wp_enqueue_script('jquery-ui-datepicker');
+    wp_enqueue_script('jquery-ui-slider');
+    wp_enqueue_script('jquery-ui-progressbar');
+    wp_enqueue_script('jquery-ui-autocomplete');
+    wp_enqueue_script('jquery-ui-accordion');
+    wp_enqueue_script('jquery-ui-tabs');
+    wp_enqueue_script('jquery-ui-dialog');
+    wp_enqueue_script('jquery-ui-sortable');
+    wp_enqueue_script('jquery-ui-spinner');
+    
+    // Enqueue WordPress jQuery UI styles
     wp_enqueue_style('wp-jquery-ui-dialog');
 }
 add_action('admin_enqueue_scripts', 'wpseed_jquery_ui_enqueue_assets');
 
 /**
- * Component Library page callback
+ * Component Library page callback - disabled (file missing)
  */
+/*
 function wpseed_components_page() {
     require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/component-library/component-library.php';
     wpseed_render_component_library();
 }
+*/
 
 /**
  * Notifications page callback
@@ -155,11 +184,20 @@ function wpseed_notifications_page() {
 }
 
 /**
- * License page callback
+ * Security Audit page callback
  */
+function wpseed_security_audit_page() {
+    require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/security-audit.php';
+}
+
+/**
+ * License page callback - disabled pending full development
+ */
+/*
 function wpseed_license_page() {
     require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/license-management.php';
 }
+*/
 
 /**
  * Scheduled Actions page callback

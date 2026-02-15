@@ -83,37 +83,38 @@ class WPSeed_Settings_License extends WPSeed_Settings_Page {
                 <div class="wpseed-license-active">
                     <div class="license-status-badge active">
                         <span class="dashicons dashicons-yes-alt"></span>
-                        <?php _e( 'License Active', 'wpseed' ); ?>
+                        <?php esc_html_e( 'License Active', 'wpseed' ); ?>
                     </div>
 
                     <table class="form-table">
                         <tr>
-                            <th><?php _e( 'License Key', 'wpseed' ); ?></th>
+                            <th><?php esc_html_e( 'License Key', 'wpseed' ); ?></th>
                             <td>
                                 <code><?php echo esc_html( $this->mask_license_key( $license_key ) ); ?></code>
                             </td>
                         </tr>
                         <tr>
-                            <th><?php _e( 'Status', 'wpseed' ); ?></th>
+                            <th><?php esc_html_e( 'Status', 'wpseed' ); ?></th>
                             <td>
-                                <span class="license-status-text active"><?php _e( 'Active', 'wpseed' ); ?></span>
+                                <span class="license-status-text active"><?php esc_html_e( 'Active', 'wpseed' ); ?></span>
                             </td>
                         </tr>
                         <?php if ( ! empty( $license_data['license_type'] ) ) : ?>
                         <tr>
-                            <th><?php _e( 'License Type', 'wpseed' ); ?></th>
+                            <th><?php esc_html_e( 'License Type', 'wpseed' ); ?></th>
                             <td><?php echo esc_html( ucfirst( $license_data['license_type'] ) ); ?></td>
                         </tr>
                         <?php endif; ?>
                         <?php if ( ! empty( $license_data['expires'] ) ) : ?>
                         <tr>
-                            <th><?php _e( 'Expires', 'wpseed' ); ?></th>
+                            <th><?php esc_html_e( 'Expires', 'wpseed' ); ?></th>
                             <td>
                                 <?php echo esc_html( date_i18n( get_option( 'date_format' ), strtotime( $license_data['expires'] ) ) ); ?>
                                 <?php
                                 $days_left = floor( ( strtotime( $license_data['expires'] ) - time() ) / DAY_IN_SECONDS );
+                                /* translators: %d: Number of days until license expires */
                                 if ( $days_left > 0 && $days_left <= 30 ) {
-                                    echo ' <span class="license-expiring">(' . sprintf( __( '%d days left', 'wpseed' ), $days_left ) . ')</span>';
+                                    echo ' <span class="license-expiring">(' . esc_html(sprintf( __( '%d days left', 'wpseed' ), $days_left )) . ')</span>';
                                 }
                                 ?>
                             </td>
@@ -121,16 +122,16 @@ class WPSeed_Settings_License extends WPSeed_Settings_Page {
                         <?php endif; ?>
                         <?php if ( isset( $license_data['sites_allowed'] ) && isset( $license_data['sites_used'] ) ) : ?>
                         <tr>
-                            <th><?php _e( 'Sites', 'wpseed' ); ?></th>
+                            <th><?php esc_html_e( 'Sites', 'wpseed' ); ?></th>
                             <td>
                                 <?php echo esc_html( $license_data['sites_used'] ); ?> / 
-                                <?php echo $license_data['sites_allowed'] == 999 ? __( 'Unlimited', 'wpseed' ) : esc_html( $license_data['sites_allowed'] ); ?>
+                                <?php echo $license_data['sites_allowed'] == 999 ? esc_html__( 'Unlimited', 'wpseed' ) : esc_html( $license_data['sites_allowed'] ); ?>
                             </td>
                         </tr>
                         <?php endif; ?>
                         <?php if ( ! empty( $license_data['customer_name'] ) ) : ?>
                         <tr>
-                            <th><?php _e( 'Licensed To', 'wpseed' ); ?></th>
+                            <th><?php esc_html_e( 'Licensed To', 'wpseed' ); ?></th>
                             <td><?php echo esc_html( $license_data['customer_name'] ); ?></td>
                         </tr>
                         <?php endif; ?>
@@ -141,47 +142,47 @@ class WPSeed_Settings_License extends WPSeed_Settings_Page {
                             <?php wp_nonce_field( 'wpseed_license_action' ); ?>
                             <input type="hidden" name="wpseed_license_action" value="deactivate" />
                             <button type="submit" class="button button-secondary">
-                                <?php _e( 'Deactivate License', 'wpseed' ); ?>
+                                <?php esc_html_e( 'Deactivate License', 'wpseed' ); ?>
                             </button>
                         </form>
                         
                         <button type="button" class="button" onclick="document.getElementById('transfer-form').style.display='block';">
-                            <?php _e( 'Transfer License', 'wpseed' ); ?>
+                            <?php esc_html_e( 'Transfer License', 'wpseed' ); ?>
                         </button>
                         
                         <button type="button" class="button" onclick="document.getElementById('upgrade-form').style.display='block';">
-                            <?php _e( 'Upgrade License', 'wpseed' ); ?>
+                            <?php esc_html_e( 'Upgrade License', 'wpseed' ); ?>
                         </button>
                     </div>
 
                     <!-- Transfer Form (Hidden) -->
                     <div id="transfer-form" style="display:none; margin-top: 20px; padding: 15px; background: #f8f9fa; border: 1px solid #ddd;">
-                        <h4><?php _e( 'Transfer License to New Site', 'wpseed' ); ?></h4>
+                        <h4><?php esc_html_e( 'Transfer License to New Site', 'wpseed' ); ?></h4>
                         <form method="post">
                             <?php wp_nonce_field( 'wpseed_license_action' ); ?>
                             <input type="hidden" name="wpseed_license_action" value="transfer" />
                             <p>
-                                <label><?php _e( 'New Site URL', 'wpseed' ); ?></label><br>
+                                <label><?php esc_html_e( 'New Site URL', 'wpseed' ); ?></label><br>
                                 <input type="url" name="new_site_url" class="regular-text" required />
                             </p>
-                            <button type="submit" class="button button-primary"><?php _e( 'Transfer', 'wpseed' ); ?></button>
-                            <button type="button" class="button" onclick="document.getElementById('transfer-form').style.display='none';"><?php _e( 'Cancel', 'wpseed' ); ?></button>
+                            <button type="submit" class="button button-primary"><?php esc_html_e( 'Transfer', 'wpseed' ); ?></button>
+                            <button type="button" class="button" onclick="document.getElementById('transfer-form').style.display='none';"><?php esc_html_e( 'Cancel', 'wpseed' ); ?></button>
                         </form>
                     </div>
 
                     <!-- Upgrade Form (Hidden) -->
                     <div id="upgrade-form" style="display:none; margin-top: 20px; padding: 15px; background: #f8f9fa; border: 1px solid #ddd;">
-                        <h4><?php _e( 'Upgrade License', 'wpseed' ); ?></h4>
-                        <p><?php _e( 'Enter your new license key to upgrade your license type.', 'wpseed' ); ?></p>
+                        <h4><?php esc_html_e( 'Upgrade License', 'wpseed' ); ?></h4>
+                        <p><?php esc_html_e( 'Enter your new license key to upgrade your license type.', 'wpseed' ); ?></p>
                         <form method="post">
                             <?php wp_nonce_field( 'wpseed_license_action' ); ?>
                             <input type="hidden" name="wpseed_license_action" value="upgrade" />
                             <p>
-                                <label><?php _e( 'New License Key', 'wpseed' ); ?></label><br>
+                                <label><?php esc_html_e( 'New License Key', 'wpseed' ); ?></label><br>
                                 <input type="text" name="new_license_key" class="regular-text" required />
                             </p>
-                            <button type="submit" class="button button-primary"><?php _e( 'Upgrade', 'wpseed' ); ?></button>
-                            <button type="button" class="button" onclick="document.getElementById('upgrade-form').style.display='none';"><?php _e( 'Cancel', 'wpseed' ); ?></button>
+                            <button type="submit" class="button button-primary"><?php esc_html_e( 'Upgrade', 'wpseed' ); ?></button>
+                            <button type="button" class="button" onclick="document.getElementById('upgrade-form').style.display='none';"><?php esc_html_e( 'Cancel', 'wpseed' ); ?></button>
                         </form>
                     </div>
                 </div>
@@ -191,10 +192,10 @@ class WPSeed_Settings_License extends WPSeed_Settings_Page {
                 <div class="wpseed-license-inactive">
                     <div class="license-status-badge inactive">
                         <span class="dashicons dashicons-warning"></span>
-                        <?php _e( 'No Active License', 'wpseed' ); ?>
+                        <?php esc_html_e( 'No Active License', 'wpseed' ); ?>
                     </div>
 
-                    <p><?php _e( 'Enter your license key to activate premium features and receive updates.', 'wpseed' ); ?></p>
+                    <p><?php esc_html_e( 'Enter your license key to activate premium features and receive updates.', 'wpseed' ); ?></p>
 
                     <form method="post">
                         <?php wp_nonce_field( 'wpseed_license_action' ); ?>
@@ -203,7 +204,7 @@ class WPSeed_Settings_License extends WPSeed_Settings_Page {
                         <table class="form-table">
                             <tr>
                                 <th>
-                                    <label for="license_key"><?php _e( 'License Key', 'wpseed' ); ?></label>
+                                    <label for="license_key"><?php esc_html_e( 'License Key', 'wpseed' ); ?></label>
                                 </th>
                                 <td>
                                     <input type="text" 
@@ -214,22 +215,22 @@ class WPSeed_Settings_License extends WPSeed_Settings_Page {
                                            value="<?php echo esc_attr( $license_key ); ?>" 
                                            required />
                                     <p class="description">
-                                        <?php _e( 'Enter your license key received after purchase.', 'wpseed' ); ?>
+                                        <?php esc_html_e( 'Enter your license key received after purchase.', 'wpseed' ); ?>
                                     </p>
                                 </td>
                             </tr>
                         </table>
 
                         <button type="submit" class="button button-primary">
-                            <?php _e( 'Activate License', 'wpseed' ); ?>
+                            <?php esc_html_e( 'Activate License', 'wpseed' ); ?>
                         </button>
                     </form>
 
                     <div class="license-purchase-info">
-                        <h3><?php _e( 'Don\'t have a license?', 'wpseed' ); ?></h3>
-                        <p><?php _e( 'Purchase a license to unlock premium features, priority support, and automatic updates.', 'wpseed' ); ?></p>
+                        <h3><?php esc_html_e( 'Don\'t have a license?', 'wpseed' ); ?></h3>
+                        <p><?php esc_html_e( 'Purchase a license to unlock premium features, priority support, and automatic updates.', 'wpseed' ); ?></p>
                         <a href="https://your-site.com/pricing" class="button button-secondary" target="_blank">
-                            <?php _e( 'View Pricing', 'wpseed' ); ?>
+                            <?php esc_html_e( 'View Pricing', 'wpseed' ); ?>
                         </a>
                     </div>
                 </div>
@@ -237,23 +238,23 @@ class WPSeed_Settings_License extends WPSeed_Settings_Page {
 
             <!-- License Types -->
             <div class="license-types-info">
-                <h3><?php _e( 'License Types', 'wpseed' ); ?></h3>
+                <h3><?php esc_html_e( 'License Types', 'wpseed' ); ?></h3>
                 <div class="license-types-grid">
                     <div class="license-type">
-                        <h4><?php _e( 'Single Site', 'wpseed' ); ?></h4>
-                        <p><?php _e( 'Use on one website', 'wpseed' ); ?></p>
+                        <h4><?php esc_html_e( 'Single Site', 'wpseed' ); ?></h4>
+                        <p><?php esc_html_e( 'Use on one website', 'wpseed' ); ?></p>
                     </div>
                     <div class="license-type">
-                        <h4><?php _e( 'Multi-Site', 'wpseed' ); ?></h4>
-                        <p><?php _e( 'Use on up to 5 websites', 'wpseed' ); ?></p>
+                        <h4><?php esc_html_e( 'Multi-Site', 'wpseed' ); ?></h4>
+                        <p><?php esc_html_e( 'Use on up to 5 websites', 'wpseed' ); ?></p>
                     </div>
                     <div class="license-type">
-                        <h4><?php _e( 'Unlimited', 'wpseed' ); ?></h4>
-                        <p><?php _e( 'Use on unlimited websites', 'wpseed' ); ?></p>
+                        <h4><?php esc_html_e( 'Unlimited', 'wpseed' ); ?></h4>
+                        <p><?php esc_html_e( 'Use on unlimited websites', 'wpseed' ); ?></p>
                     </div>
                     <div class="license-type">
-                        <h4><?php _e( 'Developer', 'wpseed' ); ?></h4>
-                        <p><?php _e( 'For agencies and developers', 'wpseed' ); ?></p>
+                        <h4><?php esc_html_e( 'Developer', 'wpseed' ); ?></h4>
+                        <p><?php esc_html_e( 'For agencies and developers', 'wpseed' ); ?></p>
                     </div>
                 </div>
             </div>

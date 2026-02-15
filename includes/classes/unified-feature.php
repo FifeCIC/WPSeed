@@ -45,7 +45,7 @@ class WPSeed_Unified_Feature {
         ?>
         <div class="wpseed-unified-feature">
             <?php if ( $args['show_icon'] ) : ?>
-                <div class="feature-icon">⚡</div>
+                <div class="feature-icon">🌱</div>
             <?php endif; ?>
             
             <h3><?php echo esc_html( $args['title'] ); ?></h3>

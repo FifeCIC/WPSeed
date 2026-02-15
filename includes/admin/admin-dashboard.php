@@ -25,7 +25,7 @@ class WPSeed_Admin_Dashboard {
      * Init dashboard widgets.
      */
     public function init() {           
-        if ( current_user_can( 'activate_plugins' ) ) {
+        if ( function_exists('current_user_can') && current_user_can( 'activate_plugins' ) ) {
             wp_add_dashboard_widget( 'wpseed_dashboard_widget_example', __( 'Example Widget', 'wpseed' ), array( $this, 'example_widget' ) );
         }
     }
