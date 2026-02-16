@@ -19,7 +19,7 @@ class WPSeed_Admin_Development_Credits {
     
     public static function output() {
         $contributors = self::get_contributors();
-        $selected = isset($_GET['contributor']) ? sanitize_text_field($_GET['contributor']) : 'action_scheduler';
+        $selected = isset($_GET['contributor']) ? sanitize_text_field(wp_unslash($_GET['contributor'])) : 'action_scheduler';
         
         wp_enqueue_style('wpseed-accordion-table', WPSEED_PLUGIN_URL . 'assets/css/accordion-table.css', array(), WPSEED_VERSION);
         wp_enqueue_script('wpseed-accordion-table', WPSEED_PLUGIN_URL . 'assets/js/accordion-table.js', array('jquery'), WPSEED_VERSION, true);
@@ -34,10 +34,10 @@ class WPSeed_Admin_Development_Credits {
                     <div class="tablenav top">
                         <div class="alignleft actions">
                             <select id="category-filter">
-                                <option value=""><?php _e('All Categories', 'wpseed'); ?></option>
-                                <option value="library"><?php _e('Libraries', 'wpseed'); ?></option>
-                                <option value="inspiration"><?php _e('Inspiration', 'wpseed'); ?></option>
-                                <option value="service"><?php _e('Services', 'wpseed'); ?></option>
+                                <option value=""><?php esc_html_e('All Categories', 'wpseed'); ?></option>
+                                <option value="library"><?php esc_html_e('Libraries', 'wpseed'); ?></option>
+                                <option value="inspiration"><?php esc_html_e('Inspiration', 'wpseed'); ?></option>
+                                <option value="service"><?php esc_html_e('Services', 'wpseed'); ?></option>
                             </select>
                             <input type="search" id="contributor-search" placeholder="<?php esc_attr_e('Search...', 'wpseed'); ?>">
                         </div>
@@ -45,10 +45,10 @@ class WPSeed_Admin_Development_Credits {
                     
                     <div class="wp-list-table widefat fixed striped">
                         <div class="table-header" style="display: flex; background: #f1f1f1; padding: 12px 15px; font-weight: 600; border-bottom: 1px solid #c3c4c7;">
-                            <div style="flex: 2;"><?php _e('Name', 'wpseed'); ?></div>
-                            <div style="flex: 1;"><?php _e('Type', 'wpseed'); ?></div>
-                            <div style="flex: 1;"><?php _e('License', 'wpseed'); ?></div>
-                            <div style="flex: 1;"><?php _e('Status', 'wpseed'); ?></div>
+                            <div style="flex: 2;"><?php esc_html_e('Name', 'wpseed'); ?></div>
+                            <div style="flex: 1;"><?php esc_html_e('Type', 'wpseed'); ?></div>
+                            <div style="flex: 1;"><?php esc_html_e('License', 'wpseed'); ?></div>
+                            <div style="flex: 1;"><?php esc_html_e('Status', 'wpseed'); ?></div>
                         </div>
                     </div>
 
@@ -80,11 +80,11 @@ class WPSeed_Admin_Development_Credits {
                                 <div class="accordion-content">
                                     <div class="contributor-meta">
                                         <div>
-                                            <strong><?php _e('Description:', 'wpseed'); ?></strong><br>
+                                            <strong><?php esc_html_e('Description:', 'wpseed'); ?></strong><br>
                                             <?php echo esc_html($contributor['description']); ?>
                                         </div>
                                         <div>
-                                            <strong><?php _e('Used In:', 'wpseed'); ?></strong><br>
+                                            <strong><?php esc_html_e('Used In:', 'wpseed'); ?></strong><br>
                                             <?php echo esc_html($contributor['used_in']); ?>
                                         </div>
                                     </div>
@@ -92,17 +92,17 @@ class WPSeed_Admin_Development_Credits {
                                     <div class="contributor-actions">
                                         <?php if (self::USE_URL_NAVIGATION): ?>
                                             <a href="<?php echo esc_url(add_query_arg('contributor', $id)); ?>" class="button button-primary">
-                                                <?php _e('View Details', 'wpseed'); ?>
+                                                <?php esc_html_e('View Details', 'wpseed'); ?>
                                             </a>
                                         <?php endif; ?>
                                         <?php if ($contributor['website']): ?>
                                             <a href="<?php echo esc_url($contributor['website']); ?>" class="button" target="_blank">
-                                                <?php _e('Visit Website', 'wpseed'); ?>
+                                                <?php esc_html_e('Visit Website', 'wpseed'); ?>
                                             </a>
                                         <?php endif; ?>
                                         <?php if ($contributor['github']): ?>
                                             <a href="<?php echo esc_url($contributor['github']); ?>" class="button" target="_blank">
-                                                <?php _e('GitHub', 'wpseed'); ?>
+                                                <?php esc_html_e('GitHub', 'wpseed'); ?>
                                             </a>
                                         <?php endif; ?>
                                     </div>
@@ -121,7 +121,7 @@ class WPSeed_Admin_Development_Credits {
                             <?php echo self::render_contributor_details($contributor); ?>
                         <?php else: ?>
                             <div class="details-placeholder">
-                                <p><?php _e('Select a contributor to view details', 'wpseed'); ?></p>
+                                <p><?php esc_html_e('Select a contributor to view details', 'wpseed'); ?></p>
                             </div>
                         <?php endif; ?>
                     </div>
@@ -189,30 +189,30 @@ class WPSeed_Admin_Development_Credits {
             <?php endif; ?>
             
             <div class="detail-group">
-                <label><?php _e('Description:', 'wpseed'); ?></label>
+                <label><?php esc_html_e('Description:', 'wpseed'); ?></label>
                 <p><?php echo esc_html($contributor['description']); ?></p>
             </div>
             
             <div class="detail-group">
-                <label><?php _e('Full Details:', 'wpseed'); ?></label>
+                <label><?php esc_html_e('Full Details:', 'wpseed'); ?></label>
                 <p><?php echo esc_html($contributor['details']); ?></p>
             </div>
             
             <div class="detail-group">
-                <label><?php _e('Category:', 'wpseed'); ?></label>
+                <label><?php esc_html_e('Category:', 'wpseed'); ?></label>
                 <span class="type-badge type-<?php echo esc_attr($contributor['category']); ?>">
                     <?php echo esc_html(ucfirst($contributor['category'])); ?>
                 </span>
             </div>
             
             <div class="detail-group">
-                <label><?php _e('License:', 'wpseed'); ?></label>
+                <label><?php esc_html_e('License:', 'wpseed'); ?></label>
                 <span class="license-badge"><?php echo esc_html($contributor['license']); ?></span>
             </div>
             
             <?php if ($contributor['stats']): ?>
                 <div class="detail-group">
-                    <label><?php _e('Statistics:', 'wpseed'); ?></label>
+                    <label><?php esc_html_e('Statistics:', 'wpseed'); ?></label>
                     <p><?php echo esc_html($contributor['stats']); ?></p>
                 </div>
             <?php endif; ?>
@@ -220,12 +220,12 @@ class WPSeed_Admin_Development_Credits {
             <div class="detail-actions">
                 <?php if ($contributor['website']): ?>
                     <a href="<?php echo esc_url($contributor['website']); ?>" class="button button-primary" target="_blank">
-                        <?php _e('Visit Website', 'wpseed'); ?>
+                        <?php esc_html_e('Visit Website', 'wpseed'); ?>
                     </a>
                 <?php endif; ?>
                 <?php if ($contributor['github']): ?>
                     <a href="<?php echo esc_url($contributor['github']); ?>" class="button" target="_blank">
-                        <?php _e('View on GitHub', 'wpseed'); ?>
+                        <?php esc_html_e('View on GitHub', 'wpseed'); ?>
                     </a>
                 <?php endif; ?>
             </div>
@@ -235,29 +235,27 @@ class WPSeed_Admin_Development_Credits {
     }
     
     public static function ajax_get_contributor_details() {
-        error_log('AJAX handler called');
         
         if (!isset($_POST['nonce'])) {
-            error_log('No nonce provided');
             wp_send_json_error('No nonce');
         }
         
-        if (!wp_verify_nonce($_POST['nonce'], 'wpseed_contributor_details')) {
-            error_log('Nonce verification failed');
+        if (!wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['nonce'])), 'wpseed_contributor_details')) {
             wp_send_json_error('Invalid nonce');
         }
         
-        $contributor_id = sanitize_text_field($_POST['contributor_id']);
-        error_log('Contributor ID: ' . $contributor_id);
+        if (!isset($_POST['contributor_id'])) {
+            wp_send_json_error('No contributor ID');
+        }
+        
+        $contributor_id = sanitize_text_field(wp_unslash($_POST['contributor_id']));
         
         $contributors = self::get_contributors();
         
         if (!isset($contributors[$contributor_id])) {
-            error_log('Contributor not found: ' . $contributor_id);
             wp_send_json_error('Contributor not found');
         }
         
-        error_log('Rendering contributor details');
         wp_send_json_success(array('html' => self::render_contributor_details($contributors[$contributor_id])));
     }
     

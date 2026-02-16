@@ -38,7 +38,7 @@ class WPSeed_Listener {
         $action = sanitize_key( $_POST['wpseed_form_action'] );
         
         if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'], $action ) ) {
-            wp_die( __( 'Security check failed', 'wpseed' ) );
+            wp_die( esc_html__( 'Security check failed', 'wpseed' ) );
         }
         
         do_action( 'wpseed_process_form_' . $action );

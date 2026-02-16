@@ -34,7 +34,7 @@ class WPSeed_Admin_Toolbar_Developers {
         // Top Level/Level One
         $args = array(
             'id'     => 'wpseed-toolbarmenu-developers',
-            'title'  => '<span class="ab-icon wpseed-toolbar-icon"></span><span class="ab-label">' . __( 'WP Seed Developers', 'text_domain' ) . '</span>',          
+            'title'  => '<span class="ab-icon wpseed-toolbar-icon"></span><span class="ab-label">' . __( 'WP Seed Developers', 'wpseed' ) . '</span>',          
         );
         $wp_admin_bar->add_menu( $args );
         
@@ -42,7 +42,7 @@ class WPSeed_Admin_Toolbar_Developers {
             $args = array(
                 'id'     => 'wpseed-toolbarmenu-debugtools',
                 'parent' => 'wpseed-toolbarmenu-developers',
-                'title'  => __( 'Debug Tools', 'text_domain' ), 
+                'title'  => __( 'Debug Tools', 'wpseed' ), 
                 'meta'   => array( 'class' => 'first-toolbar-group' )         
             );        
             $wp_admin_bar->add_menu( $args );
@@ -77,7 +77,7 @@ class WPSeed_Admin_Toolbar_Developers {
                 display: inline-block;
                 width: 20px;
                 height: 20px;
-                background-image: url('data:image/svg+xml;base64,<?php echo base64_encode('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12,22C12,22 11,17 11,13C11,9 13,6 17,4C17,4 16,8 16,11C16,14 17,17 17,17M7,18C7,18 6,14 8,11C10,8 13,7 13,7C13,7 12,10 11,12C10,14 10,18 10,18" /></svg>'); ?>');
+                background-image: url('data:image/svg+xml;base64,<?php echo esc_attr( base64_encode('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12,22C12,22 11,17 11,13C11,9 13,6 17,4C17,4 16,8 16,11C16,14 17,17 17,17M7,18C7,18 6,14 8,11C10,8 13,7 13,7C13,7 12,10 11,12C10,14 10,18 10,18" /></svg>') ); ?>');
                 background-size: contain;
                 background-repeat: no-repeat;
                 background-position: center;

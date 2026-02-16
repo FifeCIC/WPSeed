@@ -35,7 +35,7 @@ class WPSeed_Settings_Import_Export {
         check_admin_referer( 'wpseed_export_settings' );
 
         if ( ! current_user_can( 'manage_options' ) ) {
-            wp_die( __( 'You do not have permission to export settings.', 'wpseed' ) );
+            wp_die( esc_html__( 'You do not have permission to export settings.', 'wpseed' ) );
         }
 
         $settings = self::get_all_settings();
@@ -68,7 +68,7 @@ class WPSeed_Settings_Import_Export {
         check_admin_referer( 'wpseed_import_settings' );
 
         if ( ! current_user_can( 'manage_options' ) ) {
-            wp_die( __( 'You do not have permission to import settings.', 'wpseed' ) );
+            wp_die( esc_html__( 'You do not have permission to import settings.', 'wpseed' ) );
         }
 
         if ( empty( $_FILES['import_file']['tmp_name'] ) ) {
@@ -143,19 +143,19 @@ class WPSeed_Settings_Import_Export {
     public static function output_ui() {
         ?>
         <div class="wpseed-import-export">
-            <h2><?php _e( 'Import/Export Settings', 'wpseed' ); ?></h2>
+            <h2><?php esc_html_e( 'Import/Export Settings', 'wpseed' ); ?></h2>
             
             <?php settings_errors( 'wpseed_import' ); ?>
 
             <div class="wpseed-export-section">
-                <h3><?php _e( 'Export Settings', 'wpseed' ); ?></h3>
-                <p><?php _e( 'Export your plugin settings as a JSON file for backup or transfer to another site.', 'wpseed' ); ?></p>
+                <h3><?php esc_html_e( 'Export Settings', 'wpseed' ); ?></h3>
+                <p><?php esc_html_e( 'Export your plugin settings as a JSON file for backup or transfer to another site.', 'wpseed' ); ?></p>
                 
                 <form method="post">
                     <?php wp_nonce_field( 'wpseed_export_settings' ); ?>
                     <button type="submit" name="wpseed_export_settings" class="button button-primary">
                         <span class="dashicons dashicons-download" style="vertical-align: middle;"></span>
-                        <?php _e( 'Export Settings', 'wpseed' ); ?>
+                        <?php esc_html_e( 'Export Settings', 'wpseed' ); ?>
                     </button>
                 </form>
             </div>
@@ -163,13 +163,13 @@ class WPSeed_Settings_Import_Export {
             <hr style="margin: 30px 0;">
 
             <div class="wpseed-import-section">
-                <h3><?php _e( 'Import Settings', 'wpseed' ); ?></h3>
-                <p><?php _e( 'Import settings from a previously exported JSON file.', 'wpseed' ); ?></p>
+                <h3><?php esc_html_e( 'Import Settings', 'wpseed' ); ?></h3>
+                <p><?php esc_html_e( 'Import settings from a previously exported JSON file.', 'wpseed' ); ?></p>
                 
                 <div class="notice notice-warning inline">
                     <p>
-                        <strong><?php _e( 'Warning:', 'wpseed' ); ?></strong>
-                        <?php _e( 'Importing will overwrite your current settings. Make sure to export your current settings first as a backup.', 'wpseed' ); ?>
+                        <strong><?php esc_html_e( 'Warning:', 'wpseed' ); ?></strong>
+                        <?php esc_html_e( 'Importing will overwrite your current settings. Make sure to export your current settings first as a backup.', 'wpseed' ); ?>
                     </p>
                 </div>
 
@@ -182,7 +182,7 @@ class WPSeed_Settings_Import_Export {
                     
                     <button type="submit" name="wpseed_import_settings" class="button button-secondary">
                         <span class="dashicons dashicons-upload" style="vertical-align: middle;"></span>
-                        <?php _e( 'Import Settings', 'wpseed' ); ?>
+                        <?php esc_html_e( 'Import Settings', 'wpseed' ); ?>
                     </button>
                 </form>
             </div>

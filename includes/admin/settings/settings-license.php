@@ -112,8 +112,8 @@ class WPSeed_Settings_License extends WPSeed_Settings_Page {
                                 <?php echo esc_html( date_i18n( get_option( 'date_format' ), strtotime( $license_data['expires'] ) ) ); ?>
                                 <?php
                                 $days_left = floor( ( strtotime( $license_data['expires'] ) - time() ) / DAY_IN_SECONDS );
-                                /* translators: %d: Number of days until license expires */
                                 if ( $days_left > 0 && $days_left <= 30 ) {
+                                    /* translators: %d: Number of days until license expires */
                                     echo ' <span class="license-expiring">(' . esc_html(sprintf( __( '%d days left', 'wpseed' ), $days_left )) . ')</span>';
                                 }
                                 ?>

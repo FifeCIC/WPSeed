@@ -76,8 +76,8 @@ class WPSeed_Ecosystem_Menu_Manager {
     public function render_shared_logging() {
         ?>
         <div class="wrap">
-            <h1><?php _e('Ecosystem Logging', 'wpseed'); ?></h1>
-            <p><?php _e('Unified logging across all Ryan Bayne plugins', 'wpseed'); ?></p>
+            <h1><?php esc_html_e('Ecosystem Logging', 'wpseed'); ?></h1>
+            <p><?php esc_html_e('Unified logging across all Ryan Bayne plugins', 'wpseed'); ?></p>
             
             <?php
             $ecosystem = wpseed_ecosystem();
@@ -119,21 +119,21 @@ class WPSeed_Ecosystem_Menu_Manager {
     public function render_shared_tasks() {
         ?>
         <div class="wrap">
-            <h1><?php _e('Background Tasks Monitor', 'wpseed'); ?></h1>
-            <p><?php _e('View CRON jobs, async processes, and background tasks across all plugins', 'wpseed'); ?></p>
+            <h1><?php esc_html_e('Background Tasks Monitor', 'wpseed'); ?></h1>
+            <p><?php esc_html_e('View CRON jobs, async processes, and background tasks across all plugins', 'wpseed'); ?></p>
             
             <?php
             $ecosystem = wpseed_ecosystem();
             $plugins = $ecosystem->get_plugins();
             ?>
             
-            <h2><?php _e('WordPress CRON Jobs', 'wpseed'); ?></h2>
+            <h2><?php esc_html_e('WordPress CRON Jobs', 'wpseed'); ?></h2>
             <?php $this->render_cron_jobs($plugins); ?>
             
-            <h2><?php _e('Background Processes', 'wpseed'); ?></h2>
+            <h2><?php esc_html_e('Background Processes', 'wpseed'); ?></h2>
             <?php $this->render_background_processes($plugins); ?>
             
-            <h2><?php _e('Async Tasks', 'wpseed'); ?></h2>
+            <h2><?php esc_html_e('Async Tasks', 'wpseed'); ?></h2>
             <?php $this->render_async_tasks($plugins); ?>
         </div>
         <?php
@@ -146,7 +146,7 @@ class WPSeed_Ecosystem_Menu_Manager {
         $crons = _get_cron_array();
         
         if (empty($crons)) {
-            echo '<p>' . __('No scheduled CRON jobs found.', 'wpseed') . '</p>';
+            echo '<p>' . esc_html__('No scheduled CRON jobs found.', 'wpseed') . '</p>';
             return;
         }
         
@@ -154,11 +154,11 @@ class WPSeed_Ecosystem_Menu_Manager {
         <table class="wp-list-table widefat fixed striped">
             <thead>
                 <tr>
-                    <th><?php _e('Hook', 'wpseed'); ?></th>
-                    <th><?php _e('Plugin', 'wpseed'); ?></th>
-                    <th><?php _e('Next Run', 'wpseed'); ?></th>
-                    <th><?php _e('Recurrence', 'wpseed'); ?></th>
-                    <th><?php _e('Actions', 'wpseed'); ?></th>
+                    <th><?php esc_html_e('Hook', 'wpseed'); ?></th>
+                    <th><?php esc_html_e('Plugin', 'wpseed'); ?></th>
+                    <th><?php esc_html_e('Next Run', 'wpseed'); ?></th>
+                    <th><?php esc_html_e('Recurrence', 'wpseed'); ?></th>
+                    <th><?php esc_html_e('Actions', 'wpseed'); ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -182,7 +182,7 @@ class WPSeed_Ecosystem_Menu_Manager {
                                 <td><?php echo esc_html($event['schedule'] ?? 'One-time'); ?></td>
                                 <td>
                                     <button class="button button-small run-now" data-hook="<?php echo esc_attr($hook); ?>">
-                                        <?php _e('Run Now', 'wpseed'); ?>
+                                        <?php esc_html_e('Run Now', 'wpseed'); ?>
                                     </button>
                                 </td>
                             </tr>
@@ -202,11 +202,11 @@ class WPSeed_Ecosystem_Menu_Manager {
         <table class="wp-list-table widefat fixed striped">
             <thead>
                 <tr>
-                    <th><?php _e('Process', 'wpseed'); ?></th>
-                    <th><?php _e('Plugin', 'wpseed'); ?></th>
-                    <th><?php _e('Status', 'wpseed'); ?></th>
-                    <th><?php _e('Progress', 'wpseed'); ?></th>
-                    <th><?php _e('Started', 'wpseed'); ?></th>
+                    <th><?php esc_html_e('Process', 'wpseed'); ?></th>
+                    <th><?php esc_html_e('Plugin', 'wpseed'); ?></th>
+                    <th><?php esc_html_e('Status', 'wpseed'); ?></th>
+                    <th><?php esc_html_e('Progress', 'wpseed'); ?></th>
+                    <th><?php esc_html_e('Started', 'wpseed'); ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -216,7 +216,7 @@ class WPSeed_Ecosystem_Menu_Manager {
                 $resources = $ecosystem->get_shared_resources('background_tasks');
                 
                 if (empty($resources)) {
-                    echo '<tr><td colspan="5">' . __('No background processes running.', 'wpseed') . '</td></tr>';
+                    echo '<tr><td colspan="5">' . esc_html__('No background processes running.', 'wpseed') . '</td></tr>';
                 } else {
                     foreach ($resources as $resource) {
                         if (is_callable($resource['callback'])) {
@@ -238,10 +238,10 @@ class WPSeed_Ecosystem_Menu_Manager {
         <table class="wp-list-table widefat fixed striped">
             <thead>
                 <tr>
-                    <th><?php _e('Task', 'wpseed'); ?></th>
-                    <th><?php _e('Plugin', 'wpseed'); ?></th>
-                    <th><?php _e('Status', 'wpseed'); ?></th>
-                    <th><?php _e('Queued', 'wpseed'); ?></th>
+                    <th><?php esc_html_e('Task', 'wpseed'); ?></th>
+                    <th><?php esc_html_e('Plugin', 'wpseed'); ?></th>
+                    <th><?php esc_html_e('Status', 'wpseed'); ?></th>
+                    <th><?php esc_html_e('Queued', 'wpseed'); ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -251,7 +251,7 @@ class WPSeed_Ecosystem_Menu_Manager {
                 $resources = $ecosystem->get_shared_resources('async_tasks');
                 
                 if (empty($resources)) {
-                    echo '<tr><td colspan="4">' . __('No async tasks queued.', 'wpseed') . '</td></tr>';
+                    echo '<tr><td colspan="4">' . esc_html__('No async tasks queued.', 'wpseed') . '</td></tr>';
                 } else {
                     foreach ($resources as $resource) {
                         if (is_callable($resource['callback'])) {
@@ -271,32 +271,32 @@ class WPSeed_Ecosystem_Menu_Manager {
     public function render_shared_settings() {
         ?>
         <div class="wrap">
-            <h1><?php _e('Ecosystem Settings', 'wpseed'); ?></h1>
+            <h1><?php esc_html_e('Ecosystem Settings', 'wpseed'); ?></h1>
             
             <form method="post" action="options.php">
                 <?php settings_fields('wpseed_ecosystem'); ?>
                 
-                <h2><?php _e('Menu Location', 'wpseed'); ?></h2>
+                <h2><?php esc_html_e('Menu Location', 'wpseed'); ?></h2>
                 <table class="form-table">
                     <tr>
-                        <th><?php _e('Shared Views Location', 'wpseed'); ?></th>
+                        <th><?php esc_html_e('Shared Views Location', 'wpseed'); ?></th>
                         <td>
                             <label>
                                 <input type="radio" name="wpseed_ecosystem_menu_location" value="shared" <?php checked(get_option('wpseed_ecosystem_menu_location', 'shared'), 'shared'); ?>>
-                                <?php _e('Tools & Settings (Recommended for 2+ plugins)', 'wpseed'); ?>
+                                <?php esc_html_e('Tools & Settings (Recommended for 2+ plugins)', 'wpseed'); ?>
                             </label><br>
                             <label>
                                 <input type="radio" name="wpseed_ecosystem_menu_location" value="plugin" <?php checked(get_option('wpseed_ecosystem_menu_location', 'shared'), 'plugin'); ?>>
-                                <?php _e('Each Plugin Menu (Single plugin mode)', 'wpseed'); ?>
+                                <?php esc_html_e('Each Plugin Menu (Single plugin mode)', 'wpseed'); ?>
                             </label>
                             <p class="description">
-                                <?php _e('When multiple Ryan Bayne plugins are installed, shared views (logging, CRON, background tasks) can be moved to WordPress Tools and Settings menus.', 'wpseed'); ?>
+                                <?php esc_html_e('When multiple Ryan Bayne plugins are installed, shared views (logging, CRON, background tasks) can be moved to WordPress Tools and Settings menus.', 'wpseed'); ?>
                             </p>
                         </td>
                     </tr>
                 </table>
                 
-                <h2><?php _e('Installed Plugins', 'wpseed'); ?></h2>
+                <h2><?php esc_html_e('Installed Plugins', 'wpseed'); ?></h2>
                 <?php
                 $ecosystem = wpseed_ecosystem();
                 $plugins = $ecosystem->get_plugins();
@@ -304,9 +304,9 @@ class WPSeed_Ecosystem_Menu_Manager {
                 <table class="wp-list-table widefat fixed striped">
                     <thead>
                         <tr>
-                            <th><?php _e('Plugin', 'wpseed'); ?></th>
-                            <th><?php _e('Version', 'wpseed'); ?></th>
-                            <th><?php _e('Features', 'wpseed'); ?></th>
+                            <th><?php esc_html_e('Plugin', 'wpseed'); ?></th>
+                            <th><?php esc_html_e('Version', 'wpseed'); ?></th>
+                            <th><?php esc_html_e('Features', 'wpseed'); ?></th>
                         </tr>
                     </thead>
                     <tbody>

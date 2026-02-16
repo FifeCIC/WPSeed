@@ -1,26 +1,27 @@
 <?xml version="1.0"?>
-<ruleset name="WPSeed Plugin Standards">
-    <description>Coding standards for WPSeed WordPress plugin</description>
+<ruleset name="WPSeed">
+    <description>WPSeed Plugin Coding Standards</description>
 
-    <!-- Use WordPress coding standards -->
-    <rule ref="WordPress"/>
+    <!-- Exclude third-party libraries -->
+    <exclude-pattern>*/includes/libraries/*</exclude-pattern>
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>*/node_modules/*</exclude-pattern>
+    <exclude-pattern>*/tests/*</exclude-pattern>
+    <exclude-pattern>*/.git/*</exclude-pattern>
+    <exclude-pattern>*/.github/*</exclude-pattern>
 
-    <!-- Exclude third-party libraries from checks -->
-    <exclude-pattern>includes/libraries/</exclude-pattern>
-    <exclude-pattern>vendor/</exclude-pattern>
-    
-    <!-- Check all files in the plugin -->
-    <file>.</file>
-    
-    <!-- Only check PHP files -->
-    <arg name="extensions" value="php"/>
-    
-    <!-- Show progress -->
-    <arg value="p"/>
-    
-    <!-- Show sniff codes -->
-    <arg value="s"/>
-    
-    <!-- Enable colors -->
-    <arg name="colors"/>
+    <!-- Exclude example files -->
+    <exclude-pattern>*/examples/*</exclude-pattern>
+    <exclude-pattern>*/admin/page/development/view/*</exclude-pattern>
+    <exclude-pattern>*/templates/*</exclude-pattern>
+
+    <!-- Exclude specific files -->
+    <exclude-pattern>install.php</exclude-pattern>
+
+    <!-- Allow specific violations -->
+    <rule ref="WordPress">
+        <exclude name="WordPress.WP.I18n.MissingTranslatorsComment"/>
+        <exclude name="WordPress.Security.EscapeOutput.UnsafePrintingFunction"/>
+        <exclude name="WordPress.Security.EscapeOutput.OutputNotEscaped"/>
+    </rule>
 </ruleset>

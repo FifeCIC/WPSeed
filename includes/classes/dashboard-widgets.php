@@ -32,11 +32,11 @@ class WPSeed_Dashboard_Widgets {
         ?>
         <div class="wpseed-dashboard-widget">
             <ul>
-                <li><strong><?php _e( 'Active Features:', 'wpseed' ); ?></strong> <?php echo (int) $stats['features']; ?></li>
-                <li><strong><?php _e( 'API Calls Today:', 'wpseed' ); ?></strong> <?php echo (int) $stats['api_calls']; ?></li>
-                <li><strong><?php _e( 'Cache Hit Rate:', 'wpseed' ); ?></strong> <?php echo (int) $stats['cache_rate']; ?>%</li>
+                <li><strong><?php esc_html_e( 'Active Features:', 'wpseed' ); ?></strong> <?php echo (int) $stats['features']; ?></li>
+                <li><strong><?php esc_html_e( 'API Calls Today:', 'wpseed' ); ?></strong> <?php echo (int) $stats['api_calls']; ?></li>
+                <li><strong><?php esc_html_e( 'Cache Hit Rate:', 'wpseed' ); ?></strong> <?php echo (int) $stats['cache_rate']; ?>%</li>
             </ul>
-            <p><a href="<?php echo admin_url( 'admin.php?page=wpseed-development' ); ?>" class="button button-primary"><?php _e( 'View Details', 'wpseed' ); ?></a></p>
+            <p><a href="<?php echo esc_url( admin_url( 'admin.php?page=wpseed-development' ) ); ?>" class="button button-primary"><?php esc_html_e( 'View Details', 'wpseed' ); ?></a></p>
         </div>
         <?php
     }
@@ -45,9 +45,9 @@ class WPSeed_Dashboard_Widgets {
         ?>
         <div class="wpseed-dashboard-widget">
             <ul>
-                <li><a href="<?php echo admin_url( 'admin.php?page=wpseed-development' ); ?>"><?php _e( 'Development Dashboard', 'wpseed' ); ?></a></li>
-                <li><a href="<?php echo admin_url( 'admin.php?page=wpseed-settings' ); ?>"><?php _e( 'Settings', 'wpseed' ); ?></a></li>
-                <li><a href="<?php echo admin_url( 'admin.php?page=wpseed-learning' ); ?>"><?php _e( 'Learning Centre', 'wpseed' ); ?></a></li>
+                <li><a href="<?php echo esc_url( admin_url( 'admin.php?page=wpseed-development' ) ); ?>"><?php esc_html_e( 'Development Dashboard', 'wpseed' ); ?></a></li>
+                <li><a href="<?php echo esc_url( admin_url( 'admin.php?page=wpseed-settings' ) ); ?>"><?php esc_html_e( 'Settings', 'wpseed' ); ?></a></li>
+                <li><a href="<?php echo esc_url( admin_url( 'admin.php?page=wpseed-learning' ) ); ?>"><?php esc_html_e( 'Learning Centre', 'wpseed' ); ?></a></li>
             </ul>
         </div>
         <?php

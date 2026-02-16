@@ -30,6 +30,11 @@
     <exclude-pattern>*.min.js</exclude-pattern>
     <exclude-pattern>*.min.css</exclude-pattern>
     
+    <!-- Allow development functions in example files -->
+    <rule ref="WordPress.PHP.DevelopmentFunctions">
+        <exclude-pattern>*/examples/*</exclude-pattern>
+    </rule>
+    
     <!-- Set the minimum supported WP version -->
     <config name="minimum_supported_wp_version" value="5.0"/>
     

@@ -27,7 +27,7 @@ if (isset($_POST['wpseed_update_audit']) && check_admin_referer('wpseed_security
     );
     
     update_option('wpseed_security_audit', $audit_data);
-    echo '<div class="notice notice-success"><p>' . __('Security check updated successfully.', 'wpseed') . '</p></div>';
+    echo '<div class="notice notice-success"><p>' . esc_html__('Security check updated successfully.', 'wpseed') . '</p></div>';
 }
 
 // Security checklist
@@ -102,8 +102,8 @@ $security_checks = array(
 ?>
 
 <div class="wrap">
-    <h1><?php _e('Security Audit', 'wpseed'); ?></h1>
-    <p><?php _e('Track security compliance and testing for your WordPress plugin.', 'wpseed'); ?></p>
+    <h1><?php esc_html_e('Security Audit', 'wpseed'); ?></h1>
+    <p><?php esc_html_e('Track security compliance and testing for your WordPress plugin.', 'wpseed'); ?></p>
     
     <div class="security-audit-container">
         <?php foreach ($security_checks as $check_id => $check): ?>
@@ -113,11 +113,11 @@ $security_checks = array(
             $status_class = $status === 'pass' ? 'status-pass' : ($status === 'fail' ? 'status-fail' : 'status-pending');
             ?>
             
-            <div class="security-check-card <?php echo $status_class; ?>">
+            <div class="security-check-card <?php echo esc_attr($status_class); ?>">
                 <div class="check-header">
                     <h2><?php echo esc_html($check['title']); ?></h2>
                     <span class="status-badge status-<?php echo esc_attr($status); ?>">
-                        <?php echo ucfirst($status); ?>
+                        <?php echo esc_html(ucfirst($status)); ?>
                     </span>
                 </div>
                 
@@ -131,14 +131,14 @@ $security_checks = array(
                 
                 <?php if ($check_data): ?>
                     <div class="check-info">
-                        <p><strong><?php _e('Last Checked:', 'wpseed'); ?></strong> 
-                            <?php echo esc_html(date('F j, Y g:i a', strtotime($check_data['last_checked']))); ?>
+                        <p><strong><?php esc_html_e('Last Checked:', 'wpseed'); ?></strong> 
+                            <?php echo esc_html( gmdate( 'F j, Y g:i a', strtotime( $check_data['last_checked'] ) ) ); ?>
                         </p>
-                        <p><strong><?php _e('Tool Used:', 'wpseed'); ?></strong> 
+                        <p><strong><?php esc_html_e('Tool Used:', 'wpseed'); ?></strong> 
                             <?php echo esc_html($check_data['tool']); ?>
                         </p>
                         <?php if (!empty($check_data['notes'])): ?>
-                            <p><strong><?php _e('Notes:', 'wpseed'); ?></strong> 
+                            <p><strong><?php esc_html_e('Notes:', 'wpseed'); ?></strong> 
                                 <?php echo esc_html($check_data['notes']); ?>
                             </p>
                         <?php endif; ?>
@@ -146,7 +146,7 @@ $security_checks = array(
                 <?php endif; ?>
                 
                 <button type="button" class="button update-check-btn" data-check-id="<?php echo esc_attr($check_id); ?>">
-                    <?php _e('Update Check', 'wpseed'); ?>
+                    <?php esc_html_e('Update Check', 'wpseed'); ?>
                 </button>
                 
                 <!-- Update Form (hidden by default) -->
@@ -158,17 +158,17 @@ $security_checks = array(
                         
                         <table class="form-table">
                             <tr>
-                                <th><?php _e('Status', 'wpseed'); ?></th>
+                                <th><?php esc_html_e('Status', 'wpseed'); ?></th>
                                 <td>
                                     <select name="status" required>
-                                        <option value="pending" <?php selected($status, 'pending'); ?>><?php _e('Pending', 'wpseed'); ?></option>
-                                        <option value="pass" <?php selected($status, 'pass'); ?>><?php _e('Pass', 'wpseed'); ?></option>
-                                        <option value="fail" <?php selected($status, 'fail'); ?>><?php _e('Fail', 'wpseed'); ?></option>
+                                        <option value="pending" <?php selected($status, 'pending'); ?>><?php esc_html_e('Pending', 'wpseed'); ?></option>
+                                        <option value="pass" <?php selected($status, 'pass'); ?>><?php esc_html_e('Pass', 'wpseed'); ?></option>
+                                        <option value="fail" <?php selected($status, 'fail'); ?>><?php esc_html_e('Fail', 'wpseed'); ?></option>
                                     </select>
                                 </td>
                             </tr>
                             <tr>
-                                <th><?php _e('Tool Used', 'wpseed'); ?></th>
+                                <th><?php esc_html_e('Tool Used', 'wpseed'); ?></th>
                                 <td>
                                     <input type="text" name="tool" class="regular-text" 
                                            value="<?php echo $check_data ? esc_attr($check_data['tool']) : ''; ?>" 
@@ -176,7 +176,7 @@ $security_checks = array(
                                 </td>
                             </tr>
                             <tr>
-                                <th><?php _e('Notes', 'wpseed'); ?></th>
+                                <th><?php esc_html_e('Notes', 'wpseed'); ?></th>
                                 <td>
                                     <textarea name="notes" rows="3" class="large-text"><?php echo $check_data ? esc_textarea($check_data['notes']) : ''; ?></textarea>
                                 </td>
@@ -184,8 +184,8 @@ $security_checks = array(
                         </table>
                         
                         <p>
-                            <button type="submit" class="button button-primary"><?php _e('Save', 'wpseed'); ?></button>
-                            <button type="button" class="button cancel-update-btn"><?php _e('Cancel', 'wpseed'); ?></button>
+                            <button type="submit" class="button button-primary"><?php esc_html_e('Save', 'wpseed'); ?></button>
+                            <button type="button" class="button cancel-update-btn"><?php esc_html_e('Cancel', 'wpseed'); ?></button>
                         </p>
                     </form>
                 </div>

@@ -9,8 +9,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 ?>
 <div id="message" class="updated wpseed-message wpseed-connect">
-    <p><strong><?php _e( 'WPSeed Data Update', 'wpseed' ); ?></strong> &#8211; <?php _e( 'We need to update your store\'s database to the latest version.', 'wpseed' ); ?></p>
-    <p class="submit"><a href="<?php echo esc_url( add_query_arg( 'do_update_wpseed', 'true', admin_url( 'admin.php?page=wpseed-settings' ) ) ); ?>" class="wpseed-update-now button-primary"><?php _e( 'Run the updater', 'wpseed' ); ?></a></p>
+    <p><strong><?php esc_html_e( 'WPSeed Data Update', 'wpseed' ); ?></strong> &#8211; <?php esc_html_e( 'We need to update your store\'s database to the latest version.', 'wpseed' ); ?></p>
+    <p class="submit"><a href="<?php echo esc_url( add_query_arg( 'do_update_wpseed', 'true', admin_url( 'admin.php?page=wpseed-settings' ) ) ); ?>" class="wpseed-update-now button-primary"><?php esc_html_e( 'Run the updater', 'wpseed' ); ?></a></p>
 </div>
 <script type="text/javascript">
     jQuery( '.wpseed-update-now' ).click( 'click', function() {

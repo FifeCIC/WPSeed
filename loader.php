@@ -161,9 +161,7 @@ final class WordPressPluginSeed {
         include_once( 'includes/classes/install.php' );
         include_once( 'includes/classes/ajax.php' );
         
-        // Background Processing & Advanced Features
-        include_once( 'includes/classes/async-request.php' );
-        include_once( 'includes/classes/background-process.php' );
+        // Advanced Features
         include_once( 'includes/classes/object-registry.php' );
         include_once( 'includes/classes/data-freshness-manager.php' );
         include_once( 'includes/classes/developer-flow-logger.php' );

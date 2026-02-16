@@ -95,7 +95,7 @@ class WPSeed_Developer_Flow_Logger {
         foreach ( self::$flow_steps as $index => $step ) {
             $elapsed = number_format( ( $step['timestamp'] - $start_time ) * 1000, 2 );
             echo '<div class="flow-step">';
-            echo '<strong>' . ( $index + 1 ) . '. ' . $step['type'] . '</strong> (+' . $elapsed . 'ms): ';
+            echo '<strong>' . esc_html( $index + 1 ) . '. ' . esc_html( $step['type'] ) . '</strong> (+' . esc_html( $elapsed ) . 'ms): ';
             echo esc_html( $step['message'] );
             if ( ! empty( $step['data'] ) ) {
                 echo '<pre>' . esc_html( print_r( $step['data'], true ) ) . '</pre>';

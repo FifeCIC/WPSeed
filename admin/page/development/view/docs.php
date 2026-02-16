@@ -20,7 +20,7 @@ class WPSeed_Admin_Development_Docs {
      */
     public static function output() {
         $docs_dir = WPSEED_PLUGIN_DIR_PATH . 'docs/';
-        $current_doc = isset($_GET['doc']) ? sanitize_file_name($_GET['doc']) : 'GETTING-STARTED';
+        $current_doc = isset($_GET['doc']) ? sanitize_file_name(wp_unslash($_GET['doc'])) : 'GETTING-STARTED';
         
         ?>
         <div class="wpseed-docs-viewer">

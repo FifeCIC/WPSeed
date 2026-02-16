@@ -1,19 +1,25 @@
 <?php
 /**
- * Example Background Process
+ * Example Background Process (LEGACY)
  * 
- * Demonstrates how to use the background processing system
+ * DEPRECATED: This example uses the old WPSeed_Background_Process class.
+ * For new projects, use Action Scheduler instead (see action-scheduler-examples.php)
  * 
- * Usage:
- * $process = new WPSeed_Example_Background_Process();
- * $process->push_to_queue( array( 'task' => 'data1' ) );
- * $process->push_to_queue( array( 'task' => 'data2' ) );
- * $process->save()->dispatch();
+ * If you still need this approach, manually include:
+ * require_once WPSEED_PLUGIN_DIR_PATH . 'includes/libraries/library.async-request.php';
+ * require_once WPSEED_PLUGIN_DIR_PATH . 'includes/libraries/library.background-process.php';
  * 
  * @package WPSeed
+ * @deprecated Use Action Scheduler instead
  */
 
 defined( 'ABSPATH' ) || die;
+
+// Load legacy library if needed
+if ( ! class_exists( 'WPSeed_Background_Process' ) ) {
+    require_once WPSEED_PLUGIN_DIR_PATH . 'includes/libraries/library.async-request.php';
+    require_once WPSEED_PLUGIN_DIR_PATH . 'includes/libraries/library.background-process.php';
+}
 
 class WPSeed_Example_Background_Process extends WPSeed_Background_Process {
 
@@ -36,3 +42,11 @@ class WPSeed_Example_Background_Process extends WPSeed_Background_Process {
         error_log( 'Background process complete' );
     }
 }
+
+/**
+ * Usage:
+ * $process = new WPSeed_Example_Background_Process();
+ * $process->push_to_queue( array( 'task' => 'data1' ) );
+ * $process->push_to_queue( array( 'task' => 'data2' ) );
+ * $process->save()->dispatch();
+ */

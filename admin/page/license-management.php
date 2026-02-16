@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) exit;
 
 // Handle form submissions
 if (isset($_POST['wpseed_activate_license']) && check_admin_referer('wpseed_license_action')) {
-    $license_key = sanitize_text_field($_POST['license_key']);
+    $license_key = isset($_POST['license_key']) ? sanitize_text_field(wp_unslash($_POST['license_key'])) : '';
     $client = new WPSeed_License_Client();
     $result = $client->activate_license($license_key);
     
@@ -128,7 +128,7 @@ $is_valid = $client->is_license_valid();
                                 } else {
                                     $expires = strtotime($license_data['expires']);
                                     $days_left = floor(($expires - time()) / DAY_IN_SECONDS);
-                                    echo date('F j, Y', $expires);
+                                    echo esc_html( gmdate( 'F j, Y', $expires ) );
                                     
                                     if ($days_left > 0) {
                                         echo ' <span style="color: #666;">(' . $days_left . ' days remaining)</span>';
@@ -143,7 +143,7 @@ $is_valid = $client->is_license_valid();
                         <?php if (isset($license_data['activated_at'])): ?>
                         <tr>
                             <td><strong>Activated</strong></td>
-                            <td><?php echo date('F j, Y', $license_data['activated_at']); ?></td>
+                            <td><?php echo esc_html( gmdate( 'F j, Y', $license_data['activated_at'] ) ); ?></td>
                         </tr>
                         <?php endif; ?>
                     </tbody>

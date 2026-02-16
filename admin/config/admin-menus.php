@@ -109,15 +109,15 @@ add_action('admin_menu', 'wpseed_register_admin_menus');
 function wpseed_main_page() {
     ?>
     <div class="wrap">
-        <h1><?php _e('WPSeed', 'wpseed'); ?></h1>
-        <p><?php _e('Welcome to WPSeed - Your WordPress Plugin Boilerplate', 'wpseed'); ?></p>
+        <h1><?php esc_html_e('WPSeed', 'wpseed'); ?></h1>
+        <p><?php esc_html_e('Welcome to WPSeed - Your WordPress Plugin Boilerplate', 'wpseed'); ?></p>
         <div class="card">
-            <h2><?php _e('Getting Started', 'wpseed'); ?></h2>
-            <p><?php _e('This is a boilerplate plugin with developer tools and examples.', 'wpseed'); ?></p>
+            <h2><?php esc_html_e('Getting Started', 'wpseed'); ?></h2>
+            <p><?php esc_html_e('This is a boilerplate plugin with developer tools and examples.', 'wpseed'); ?></p>
             <ul>
-                <li><?php _e('Visit the Development page to access debugging tools', 'wpseed'); ?></li>
-                <li><?php _e('Check the code examples in the plugin directory', 'wpseed'); ?></li>
-                <li><?php _e('Customize this plugin to build your own WordPress solution', 'wpseed'); ?></li>
+                <li><?php esc_html_e('Visit the Development page to access debugging tools', 'wpseed'); ?></li>
+                <li><?php esc_html_e('Check the code examples in the plugin directory', 'wpseed'); ?></li>
+                <li><?php esc_html_e('Customize this plugin to build your own WordPress solution', 'wpseed'); ?></li>
             </ul>
         </div>
     </div>
@@ -204,7 +204,7 @@ function wpseed_license_page() {
  */
 function wpseed_scheduled_actions_page() {
     if (!class_exists('ActionScheduler_AdminView')) {
-        wp_die(__('Action Scheduler is not available.', 'wpseed'));
+        wp_die(esc_html__('Action Scheduler is not available.', 'wpseed'));
     }
     
     $admin_view = ActionScheduler_AdminView::instance();

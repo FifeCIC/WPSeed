@@ -47,10 +47,10 @@ class WPSeed_Settings_Repeater {
         <tr valign="top" class="wpseed-repeater-row">
             <th scope="row" class="titledesc">
                 <label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?></label>
-                <?php echo $tooltip_html; ?>
+                <?php echo wp_kses_post( $tooltip_html ); ?>
             </th>
             <td class="forminp forminp-repeater">
-                <?php echo $description; ?>
+                <?php echo wp_kses_post( $description ); ?>
                 
                 <div class="wpseed-repeater-container" data-field-id="<?php echo esc_attr( $value['id'] ); ?>">
                     <div class="wpseed-repeater-items">

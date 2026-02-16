@@ -46,7 +46,10 @@ $items = array(
 );
 
 // Get selected item
-$selected_item = isset($_GET['configure']) ? sanitize_text_field($_GET['configure']) : 'item_1';
+$selected_item = 'item_1';
+if (isset($_GET['configure'])) {
+    $selected_item = sanitize_text_field(wp_unslash($_GET['configure']));
+}
 ?>
 
 <div class="wpseed-accordion-container">
@@ -58,17 +61,17 @@ $selected_item = isset($_GET['configure']) ? sanitize_text_field($_GET['configur
             <div class="tablenav top">
                 <div class="alignleft actions">
                     <input type="search" id="item-search" placeholder="<?php esc_attr_e('Search items...', 'wpseed'); ?>">
-                    <button type="button" class="button"><?php _e('Search', 'wpseed'); ?></button>
+                    <button type="button" class="button"><?php esc_html_e('Search', 'wpseed'); ?></button>
                 </div>
             </div>
             
             <div class="wp-list-table widefat fixed striped">
                 <div class="table-header" style="display: flex; background: #f1f1f1; padding: 12px 15px; font-weight: 600; border-bottom: 1px solid #c3c4c7;">
-                    <div style="flex: 2;"><?php _e('Name', 'wpseed'); ?></div>
-                    <div style="flex: 1;"><?php _e('Status', 'wpseed'); ?></div>
-                    <div style="flex: 1;"><?php _e('Priority', 'wpseed'); ?></div>
-                    <div style="flex: 1;"><?php _e('Weight', 'wpseed'); ?></div>
-                    <div style="flex: 1;"><?php _e('Last Used', 'wpseed'); ?></div>
+                    <div style="flex: 2;"><?php esc_html_e('Name', 'wpseed'); ?></div>
+                    <div style="flex: 1;"><?php esc_html_e('Status', 'wpseed'); ?></div>
+                    <div style="flex: 1;"><?php esc_html_e('Priority', 'wpseed'); ?></div>
+                    <div style="flex: 1;"><?php esc_html_e('Weight', 'wpseed'); ?></div>
+                    <div style="flex: 1;"><?php esc_html_e('Last Used', 'wpseed'); ?></div>
                 </div>
             </div>
 
@@ -98,25 +101,25 @@ $selected_item = isset($_GET['configure']) ? sanitize_text_field($_GET['configur
                         <div class="accordion-content">
                             <div class="item-meta">
                                 <div>
-                                    <strong><?php _e('Description:', 'wpseed'); ?></strong><br>
+                                    <strong><?php esc_html_e('Description:', 'wpseed'); ?></strong><br>
                                     <?php echo esc_html($item['description']); ?>
                                 </div>
                                 <div>
-                                    <strong><?php _e('Status:', 'wpseed'); ?></strong><br>
+                                    <strong><?php esc_html_e('Status:', 'wpseed'); ?></strong><br>
                                     <?php echo esc_html(ucfirst($item['status'])); ?>
                                 </div>
                                 <div>
-                                    <strong><?php _e('Priority:', 'wpseed'); ?></strong><br>
+                                    <strong><?php esc_html_e('Priority:', 'wpseed'); ?></strong><br>
                                     <?php echo esc_html(ucfirst($item['priority'])); ?>
                                 </div>
                             </div>
                             
                             <div class="item-actions">
                                 <a href="<?php echo esc_url(add_query_arg('configure', $item_id)); ?>" class="button button-primary">
-                                    <?php _e('Configure', 'wpseed'); ?>
+                                    <?php esc_html_e('Configure', 'wpseed'); ?>
                                 </a>
-                                <button type="button" class="button"><?php _e('Edit', 'wpseed'); ?></button>
-                                <button type="button" class="button"><?php _e('Delete', 'wpseed'); ?></button>
+                                <button type="button" class="button"><?php esc_html_e('Edit', 'wpseed'); ?></button>
+                                <button type="button" class="button"><?php esc_html_e('Delete', 'wpseed'); ?></button>
                             </div>
                         </div>
                     </div>
@@ -136,42 +139,42 @@ $selected_item = isset($_GET['configure']) ? sanitize_text_field($_GET['configur
                     
                     <div class="section-content">
                         <div class="detail-group">
-                            <label><?php _e('Description:', 'wpseed'); ?></label>
+                            <label><?php esc_html_e('Description:', 'wpseed'); ?></label>
                             <p><?php echo esc_html($item['description']); ?></p>
                         </div>
                         
                         <div class="detail-group">
-                            <label><?php _e('Details:', 'wpseed'); ?></label>
+                            <label><?php esc_html_e('Details:', 'wpseed'); ?></label>
                             <p><?php echo esc_html($item['details']); ?></p>
                         </div>
                         
                         <div class="detail-group">
-                            <label><?php _e('Status:', 'wpseed'); ?></label>
+                            <label><?php esc_html_e('Status:', 'wpseed'); ?></label>
                             <span class="status-badge status-<?php echo esc_attr($item['status']); ?>">
                                 <?php echo esc_html(ucfirst($item['status'])); ?>
                             </span>
                         </div>
                         
                         <div class="detail-group">
-                            <label><?php _e('Priority:', 'wpseed'); ?></label>
+                            <label><?php esc_html_e('Priority:', 'wpseed'); ?></label>
                             <span class="priority-badge priority-<?php echo esc_attr($item['priority']); ?>">
                                 <?php echo esc_html(ucfirst($item['priority'])); ?>
                             </span>
                         </div>
                         
                         <div class="detail-group">
-                            <label><?php _e('Weight:', 'wpseed'); ?></label>
+                            <label><?php esc_html_e('Weight:', 'wpseed'); ?></label>
                             <input type="number" value="<?php echo esc_attr($item['weight']); ?>" min="0" max="100">
                         </div>
                         
                         <div class="detail-actions">
-                            <button type="button" class="button button-primary"><?php _e('Save Changes', 'wpseed'); ?></button>
-                            <button type="button" class="button"><?php _e('Reset', 'wpseed'); ?></button>
+                            <button type="button" class="button button-primary"><?php esc_html_e('Save Changes', 'wpseed'); ?></button>
+                            <button type="button" class="button"><?php esc_html_e('Reset', 'wpseed'); ?></button>
                         </div>
                     </div>
                 <?php else: ?>
                     <div class="details-placeholder">
-                        <p><?php _e('Select an item to view details', 'wpseed'); ?></p>
+                        <p><?php esc_html_e('Select an item to view details', 'wpseed'); ?></p>
                     </div>
                 <?php endif; ?>
             </div>

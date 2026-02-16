@@ -67,7 +67,7 @@ class WPSeed_GitHub_Sync {
             $github_hash = get_transient('wpseed_github_hash_' . $doc['name']);
             $status[$doc['name']] = array(
                 'synced' => ($github_hash === $doc['hash']),
-                'local_modified' => date('Y-m-d H:i:s', $doc['modified']),
+                'local_modified' => gmdate('Y-m-d H:i:s', $doc['modified']),
                 'needs_sync' => ($github_hash !== $doc['hash'])
             );
         }

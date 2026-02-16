@@ -10,13 +10,13 @@ if ( ! defined( 'ABSPATH' ) ) {
         
 <div class="wrap wpseed">
     <h1>
-        <?php _e( 'WPSeed Settings', 'wpseed' ); ?>
+        <?php esc_html_e( 'WPSeed Settings', 'wpseed' ); ?>
     </h1>
     <form method="<?php echo esc_attr( apply_filters( 'wpseed_settings_form_method_tab_' . $current_tab, 'post' ) ); ?>" id="mainform" action="" enctype="multipart/form-data">
         <nav class="nav-tab-wrapper woo-nav-tab-wrapper">
             <?php
                 foreach ( $tabs as $name => $label ) {
-                    echo '<a href="' . admin_url( 'options-general.php?page=wpseed-settings&tab=' . $name ) . '" class="nav-tab ' . ( $current_tab == $name ? 'nav-tab-active' : '' ) . '">' . $label . '</a>';
+                    echo '<a href="' . esc_url( admin_url( 'options-general.php?page=wpseed-settings&tab=' . $name ) ) . '" class="nav-tab ' . ( $current_tab == $name ? 'nav-tab-active' : '' ) . '">' . esc_html( $label ) . '</a>';
                 }
                 do_action( 'wpseed_settings_tabs' );
             ?>

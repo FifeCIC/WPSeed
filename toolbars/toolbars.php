@@ -42,7 +42,7 @@ class WPSeed_Toolbars {
      */
     public function handle_demo_mode_switch() {
         if (!current_user_can('manage_options')) {
-            wp_die(__('Insufficient permissions', 'wpseed'));
+            wp_die(esc_html__('Insufficient permissions', 'wpseed'));
         }
 
         $current_status = get_option('wpseed_demo_mode', false);
@@ -51,6 +51,7 @@ class WPSeed_Toolbars {
         update_option('wpseed_demo_mode', $new_status);
         
         $status_text = $new_status ? __('enabled', 'wpseed') : __('disabled', 'wpseed');
+        /* translators: %s: Status text (enabled or disabled) */
         $message = sprintf(__('Demo mode has been %s.', 'wpseed'), $status_text);
         
         set_transient('wpseed_admin_notice', array(
@@ -67,12 +68,12 @@ class WPSeed_Toolbars {
      */
     public function handle_reset_pointers() {
         if (!current_user_can('manage_options')) {
-            wp_die(__('Insufficient permissions', 'wpseed'));
+            wp_die(esc_html__('Insufficient permissions', 'wpseed'));
         }
 
         $nonce = isset($_GET['_wpnonce']) ? $_GET['_wpnonce'] : '';
         if (!wp_verify_nonce($nonce, 'wpseed_reset_pointers')) {
-            wp_die(__('Security check failed', 'wpseed'));
+            wp_die(esc_html__('Security check failed', 'wpseed'));
         }
         
         delete_user_meta(get_current_user_id(), 'dismissed_wp_pointers');

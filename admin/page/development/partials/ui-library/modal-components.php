@@ -65,7 +65,7 @@ defined('ABSPATH') || exit;
                             </div>
                             <div class="wpseed-task-detail-meta-item">
                                 <span class="wpseed-task-detail-meta-label"><?php esc_html_e('Created:', 'wpseed'); ?></span>
-                                <span><?php echo esc_html(date('Y-m-d H:i')); ?></span>
+                                <span><?php echo esc_html( gmdate( 'Y-m-d H:i' ) ); ?></span>
                             </div>
                         </div>
 

@@ -171,6 +171,11 @@ class WPSeed_Enhanced_Logger {
         
         $table = $wpdb->prefix . 'wpseed_debug_logs';
         
+        // Create table if it doesn't exist
+        if ($wpdb->get_var("SHOW TABLES LIKE '$table'") != $table) {
+            self::create_table();
+        }
+        
         $wpdb->insert($table, array(
             'request_uri' => $_SERVER['REQUEST_URI'],
             'query_count' => count($this->queries),

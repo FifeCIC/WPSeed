@@ -17,7 +17,7 @@ $checklist = file_exists($checklist_file) ? file_get_contents($checklist_file) :
 ?>
 
 <div class="wrap wpseed-developer-checklist">
-    <h1><?php _e('Developer Checklist', 'wpseed'); ?></h1>
+    <h1><?php esc_html_e('Developer Checklist', 'wpseed'); ?></h1>
     
     <div class="wpseed-checklist-content">
         <?php if ($checklist): ?>
@@ -25,7 +25,7 @@ $checklist = file_exists($checklist_file) ? file_get_contents($checklist_file) :
                 <?php echo wp_kses_post(wpautop($checklist)); ?>
             </div>
         <?php else: ?>
-            <p><?php _e('Checklist file not found.', 'wpseed'); ?></p>
+            <p><?php esc_html_e('Checklist file not found.', 'wpseed'); ?></p>
         <?php endif; ?>
     </div>
 </div>

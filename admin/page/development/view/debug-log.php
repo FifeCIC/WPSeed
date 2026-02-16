@@ -15,24 +15,24 @@ class WPSeed_Admin_Development_Debug_Log {
         $log_exists = file_exists($debug_file);
         ?>
         <div class="wpseed-dev-section">
-            <h2><?php _e('WordPress Debug Log', 'wpseed'); ?></h2>
+            <h2><?php esc_html_e('WordPress Debug Log', 'wpseed'); ?></h2>
             
             <?php if (!$log_exists): ?>
                 <div class="notice notice-info">
-                    <p><?php _e('Debug log file does not exist. Enable WP_DEBUG_LOG in wp-config.php to create it.', 'wpseed'); ?></p>
+                    <p><?php esc_html_e('Debug log file does not exist. Enable WP_DEBUG_LOG in wp-config.php to create it.', 'wpseed'); ?></p>
                 </div>
             <?php else: ?>
                 <p>
-                    <strong><?php _e('Log File:', 'wpseed'); ?></strong> 
+                    <strong><?php esc_html_e('Log File:', 'wpseed'); ?></strong> 
                     <code><?php echo esc_html($debug_file); ?></code>
                 </p>
                 <p>
-                    <strong><?php _e('File Size:', 'wpseed'); ?></strong> 
+                    <strong><?php esc_html_e('File Size:', 'wpseed'); ?></strong> 
                     <?php echo size_format(filesize($debug_file)); ?>
                 </p>
                 
                 <div style="margin: 20px 0;">
-                    <a href="<?php echo esc_url(add_query_arg('wpseed_clear_log', '1')); ?>" 
+                    <a href="<?php echo esc_url(wp_nonce_url(add_query_arg('wpseed_clear_log', '1'), 'wpseed_clear_log_action')); ?>" 
                        class="button button-secondary"
                        onclick="return confirm('<?php esc_attr_e('Are you sure you want to clear the debug log?', 'wpseed'); ?>');">
                         <?php _e('Clear Log', 'wpseed'); ?>
@@ -40,7 +40,7 @@ class WPSeed_Admin_Development_Debug_Log {
                 </div>
 
                 <?php
-                if (isset($_GET['wpseed_clear_log'])) {
+                if (isset($_GET['wpseed_clear_log']) && check_admin_referer('wpseed_clear_log_action')) {
                     file_put_contents($debug_file, '');
                     echo '<div class="notice notice-success"><p>' . __('Debug log cleared.', 'wpseed') . '</p></div>';
                 }

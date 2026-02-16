@@ -183,9 +183,13 @@ class WPSeed_Notifications {
             $order = strtoupper($args['order']) === 'ASC' ? 'ASC' : 'DESC';
             
             // Build safe query with proper escaping
-            $query = "SELECT * FROM {$wpdb->prefix}wpseed_notifications WHERE " . $where_clause . " ORDER BY $orderby $order LIMIT " . intval($args['limit']) . " OFFSET " . intval($args['offset']);
-            
-            $notifications = $wpdb->get_results($query);
+            $notifications = $wpdb->get_results(
+                $wpdb->prepare(
+                    "SELECT * FROM {$wpdb->prefix}wpseed_notifications WHERE " . $where_clause . " ORDER BY $orderby $order LIMIT %d OFFSET %d",
+                    $args['limit'],
+                    $args['offset']
+                )
+            );
             
             foreach ($notifications as &$notification) {
                 $notification->data = maybe_unserialize($notification->data);

@@ -460,10 +460,10 @@ class WPSeed_Architecture_Mapper {
     public static function render_tree() {
         $map = self::get_architecture_map();
         echo '<div class="wpseed-architecture-tree">';
-        echo '<style>' . self::get_tree_styles() . '</style>';
-        echo self::render_tree_node($map, 0);
+        echo '<style>' . esc_html( self::get_tree_styles() ) . '</style>';
+        echo wp_kses_post( self::render_tree_node($map, 0) );
         echo '</div>';
-        echo '<script>' . self::get_tree_scripts() . '</script>';
+        echo '<script>' . esc_js( self::get_tree_scripts() ) . '</script>';
     }
     
     private static function render_tree_node($nodes, $level = 0) {

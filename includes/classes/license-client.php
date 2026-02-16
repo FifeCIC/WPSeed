@@ -285,7 +285,7 @@ class WPSeed_License_Client {
         if (empty($license_data)) {
             echo '<div class="notice notice-warning"><p>';
             echo '<strong>WPSeed:</strong> ';
-            echo 'No license key activated. <a href="' . admin_url('admin.php?page=wpseed-license') . '">Activate your license</a> to receive updates and premium features.';
+            echo 'No license key activated. <a href="' . esc_url( admin_url('admin.php?page=wpseed-license') ) . '">Activate your license</a> to receive updates and premium features.';
             echo '</p></div>';
             return;
         }
@@ -298,12 +298,12 @@ class WPSeed_License_Client {
             if ($days_left < 0) {
                 echo '<div class="notice notice-error"><p>';
                 echo '<strong>WPSeed:</strong> ';
-                echo 'Your license has expired. <a href="' . admin_url('admin.php?page=wpseed-license') . '">Renew your license</a> to continue receiving updates.';
+                echo 'Your license has expired. <a href="' . esc_url( admin_url('admin.php?page=wpseed-license') ) . '">Renew your license</a> to continue receiving updates.';
                 echo '</p></div>';
             } elseif ($days_left < 30) {
                 echo '<div class="notice notice-warning"><p>';
                 echo '<strong>WPSeed:</strong> ';
-                echo 'Your license expires in ' . $days_left . ' days. <a href="' . admin_url('admin.php?page=wpseed-license') . '">Renew now</a> to avoid interruption.';
+                echo 'Your license expires in ' . esc_html( $days_left ) . ' days. <a href="' . esc_url( admin_url('admin.php?page=wpseed-license') ) . '">Renew now</a> to avoid interruption.';
                 echo '</p></div>';
             }
         }

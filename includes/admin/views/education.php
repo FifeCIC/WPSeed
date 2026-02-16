@@ -9,7 +9,7 @@ if (!defined('ABSPATH')) exit;
 ?>
 
 <div class="wrap wpseed-learning-center">
-    <h1><?php _e('WPSeed Learning Center', 'wpseed'); ?></h1>
+    <h1><?php esc_html_e('WPSeed Learning Center', 'wpseed'); ?></h1>
     
     <div class="wpseed-learning-grid">
         <?php if (!empty($lessons)): ?>
@@ -29,7 +29,7 @@ if (!defined('ABSPATH')) exit;
                     <?php if ($lesson->video_url): ?>
                         <div class="lesson-video">
                             <a href="<?php echo esc_url($lesson->video_url); ?>" target="_blank" class="button">
-                                <?php _e('Watch Video', 'wpseed'); ?>
+                                <?php esc_html_e('Watch Video', 'wpseed'); ?>
                             </a>
                         </div>
                     <?php endif; ?>
@@ -40,7 +40,7 @@ if (!defined('ABSPATH')) exit;
                 </div>
             <?php endforeach; ?>
         <?php else: ?>
-            <p><?php _e('No lessons available yet.', 'wpseed'); ?></p>
+            <p><?php esc_html_e('No lessons available yet.', 'wpseed'); ?></p>
         <?php endif; ?>
     </div>
 </div>

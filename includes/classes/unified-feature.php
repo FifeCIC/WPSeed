@@ -52,12 +52,12 @@ class WPSeed_Unified_Feature {
             
             <?php if ( $args['show_stats'] ) : ?>
                 <div class="feature-stats">
-                    <p><strong><?php _e( 'Active Users:', 'wpseed' ); ?></strong> <?php echo self::get_active_users(); ?></p>
-                    <p><strong><?php _e( 'Total Posts:', 'wpseed' ); ?></strong> <?php echo self::get_total_posts(); ?></p>
+                    <p><strong><?php esc_html_e( 'Active Users:', 'wpseed' ); ?></strong> <?php echo esc_html( self::get_active_users() ); ?></p>
+                    <p><strong><?php esc_html_e( 'Total Posts:', 'wpseed' ); ?></strong> <?php echo esc_html( self::get_total_posts() ); ?></p>
                 </div>
             <?php endif; ?>
             
-            <p><?php _e( 'This feature demonstrates how the same content can be displayed across multiple WordPress contexts.', 'wpseed' ); ?></p>
+            <p><?php esc_html_e( 'This feature demonstrates how the same content can be displayed across multiple WordPress contexts.', 'wpseed' ); ?></p>
         </div>
         
         <style>
@@ -80,7 +80,7 @@ class WPSeed_Unified_Feature {
     }
     
     public function render_dashboard_widget() {
-        echo self::render_content();
+        echo wp_kses_post( self::render_content() );
     }
     
     // Shortcode
@@ -149,12 +149,14 @@ class WPSeed_Unified_Feature_Widget extends WP_Widget {
     }
     
     public function widget( $args, $instance ) {
+        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- before_widget is safe
         echo $args['before_widget'];
-        echo WPSeed_Unified_Feature::render_content( array(
+        echo wp_kses_post( WPSeed_Unified_Feature::render_content( array(
             'title' => ! empty( $instance['title'] ) ? $instance['title'] : __( 'WPSeed Feature', 'wpseed' ),
             'show_icon' => ! empty( $instance['show_icon'] ),
             'show_stats' => ! empty( $instance['show_stats'] )
-        ) );
+        ) ) );
+        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- after_widget is safe
         echo $args['after_widget'];
     }
     
@@ -164,16 +166,16 @@ class WPSeed_Unified_Feature_Widget extends WP_Widget {
         $show_stats = ! empty( $instance['show_stats'] );
         ?>
         <p>
-            <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'wpseed' ); ?></label>
-            <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
+            <label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title:', 'wpseed' ); ?></label>
+            <input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
         </p>
         <p>
-            <input class="checkbox" type="checkbox" <?php checked( $show_icon ); ?> id="<?php echo $this->get_field_id( 'show_icon' ); ?>" name="<?php echo $this->get_field_name( 'show_icon' ); ?>">
-            <label for="<?php echo $this->get_field_id( 'show_icon' ); ?>"><?php _e( 'Show Icon', 'wpseed' ); ?></label>
+            <input class="checkbox" type="checkbox" <?php checked( $show_icon ); ?> id="<?php echo esc_attr( $this->get_field_id( 'show_icon' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'show_icon' ) ); ?>">
+            <label for="<?php echo esc_attr( $this->get_field_id( 'show_icon' ) ); ?>"><?php esc_html_e( 'Show Icon', 'wpseed' ); ?></label>
         </p>
         <p>
-            <input class="checkbox" type="checkbox" <?php checked( $show_stats ); ?> id="<?php echo $this->get_field_id( 'show_stats' ); ?>" name="<?php echo $this->get_field_name( 'show_stats' ); ?>">
-            <label for="<?php echo $this->get_field_id( 'show_stats' ); ?>"><?php _e( 'Show Stats', 'wpseed' ); ?></label>
+            <input class="checkbox" type="checkbox" <?php checked( $show_stats ); ?> id="<?php echo esc_attr( $this->get_field_id( 'show_stats' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'show_stats' ) ); ?>">
+            <label for="<?php echo esc_attr( $this->get_field_id( 'show_stats' ) ); ?>"><?php esc_html_e( 'Show Stats', 'wpseed' ); ?></label>
         </p>
         <?php
     }

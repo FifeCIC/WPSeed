@@ -16,12 +16,12 @@ class WPSeed_Admin_Development_Tasks_Monitor {
             return;
         }
 
-        if (!wp_verify_nonce($_GET['_wpnonce'] ?? '', 'wpseed_tasks_filter')) {
+        if (!wp_verify_nonce(sanitize_text_field(wp_unslash($_GET['_wpnonce'] ?? '')), 'wpseed_tasks_filter')) {
             $status = 'pending';
             $group = '';
         } else {
-            $status = isset($_GET['status']) ? sanitize_text_field($_GET['status']) : 'pending';
-            $group = isset($_GET['group']) ? sanitize_text_field($_GET['group']) : '';
+            $status = isset($_GET['status']) ? sanitize_text_field(wp_unslash($_GET['status'])) : 'pending';
+            $group = isset($_GET['group']) ? sanitize_text_field(wp_unslash($_GET['group'])) : '';
         }
         
         ?>
@@ -151,8 +151,9 @@ class WPSeed_Admin_Development_Tasks_Monitor {
         
         ?>
         <div class="wpseed-tasks-table" style="background: #fff; padding: 20px; border: 1px solid #ccd0d4;">
+            <h3><?php
             /* translators: %s: Task status */
-            <h3><?php printf(esc_html__('Tasks (%s)', 'wpseed'), esc_html(ucfirst($status))); ?></h3>
+            printf(esc_html__('Tasks (%s)', 'wpseed'), esc_html(ucfirst($status))); ?></h3>
             
             <?php if (empty($actions)) : ?>
                 <p><?php esc_html_e('No tasks found.', 'wpseed'); ?></p>

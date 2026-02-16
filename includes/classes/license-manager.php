@@ -464,9 +464,12 @@ class WPSeed_License_Manager {
                 ?>
                 <div class="notice notice-warning is-dismissible" data-notice="renewal">
                     <p>
-                        <strong><?php _e( 'License Expiring Soon', 'wpseed' ); ?></strong><br>
-                        <?php printf( __( 'Your license will expire in %d days. Renew now to continue receiving updates and support.', 'wpseed' ), $days_left ); ?>
-                        <a href="<?php echo admin_url( 'options-general.php?page=wpseed-settings&tab=license' ); ?>" class="button button-small"><?php _e( 'Manage License', 'wpseed' ); ?></a>
+                        <strong><?php esc_html_e( 'License Expiring Soon', 'wpseed' ); ?></strong><br>
+                        <?php
+                        /* translators: %d: number of days until license expiration */
+                        echo esc_html( sprintf( __( 'Your license will expire in %d days. Renew now to continue receiving updates and support.', 'wpseed' ), $days_left ) );
+                        ?>
+                        <a href="<?php echo esc_url( admin_url( 'options-general.php?page=wpseed-settings&tab=license' ) ); ?>" class="button button-small"><?php esc_html_e( 'Manage License', 'wpseed' ); ?></a>
                     </p>
                 </div>
                 <?php
@@ -478,9 +481,12 @@ class WPSeed_License_Manager {
             ?>
             <div class="notice notice-error">
                 <p>
-                    <strong><?php _e( 'License Expired - Grace Period Active', 'wpseed' ); ?></strong><br>
-                    <?php printf( __( 'Your license has expired but is in a %d-day grace period. Renew now to avoid service interruption.', 'wpseed' ), $this->grace_period ); ?>
-                    <a href="<?php echo admin_url( 'options-general.php?page=wpseed-settings&tab=license' ); ?>" class="button button-primary button-small"><?php _e( 'Renew License', 'wpseed' ); ?></a>
+                    <strong><?php esc_html_e( 'License Expired - Grace Period Active', 'wpseed' ); ?></strong><br>
+                    <?php
+                    /* translators: %d: number of days in grace period */
+                    echo esc_html( sprintf( __( 'Your license has expired but is in a %d-day grace period. Renew now to avoid service interruption.', 'wpseed' ), $this->grace_period ) );
+                    ?>
+                    <a href="<?php echo esc_url( admin_url( 'options-general.php?page=wpseed-settings&tab=license' ) ); ?>" class="button button-primary button-small"><?php esc_html_e( 'Renew License', 'wpseed' ); ?></a>
                 </p>
             </div>
             <?php
@@ -491,9 +497,9 @@ class WPSeed_License_Manager {
             ?>
             <div class="notice notice-error">
                 <p>
-                    <strong><?php _e( 'License Expired', 'wpseed' ); ?></strong><br>
-                    <?php _e( 'Your license has expired. Updates and support are no longer available. Please renew your license.', 'wpseed' ); ?>
-                    <a href="<?php echo admin_url( 'options-general.php?page=wpseed-settings&tab=license' ); ?>" class="button button-primary button-small"><?php _e( 'Renew License', 'wpseed' ); ?></a>
+                    <strong><?php esc_html_e( 'License Expired', 'wpseed' ); ?></strong><br>
+                    <?php esc_html_e( 'Your license has expired. Updates and support are no longer available. Please renew your license.', 'wpseed' ); ?>
+                    <a href="<?php echo esc_url( admin_url( 'options-general.php?page=wpseed-settings&tab=license' ) ); ?>" class="button button-primary button-small"><?php esc_html_e( 'Renew License', 'wpseed' ); ?></a>
                 </p>
             </div>
             <?php

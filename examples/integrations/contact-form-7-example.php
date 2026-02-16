@@ -55,7 +55,7 @@ class WPSeed_CF7_Integration {
      * Custom field validation
      */
     public function custom_validation( $result, $tag ) {
-        $value = isset( $_POST[ $tag->name ] ) ? trim( $_POST[ $tag->name ] ) : '';
+        $value = isset( $_POST[ $tag->name ] ) ? trim( wp_unslash( sanitize_text_field( $_POST[ $tag->name ] ) ) ) : '';
         
         // Example: validate minimum length
         if ( strlen( $value ) < 5 ) {
@@ -76,7 +76,7 @@ class WPSeed_CF7_Integration {
             array(
                 'form_data'   => maybe_serialize( $data ),
                 'submit_time' => current_time( 'mysql' ),
-                'ip_address'  => $_SERVER['REMOTE_ADDR'],
+                'ip_address'  => isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '',
             ),
             array( '%s', '%s', '%s' )
         );

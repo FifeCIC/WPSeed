@@ -20,7 +20,7 @@ class WPSeed_BarChart {
     public function x_axis_ul( $x_axis_array ) {
         echo '<ul class="label">'; 
         foreach( $x_axis_array as $key => $label){
-            echo '<li>'.ucfirst( $label).'</li>';
+            echo '<li>' . esc_html( ucfirst( $label ) ) . '</li>';
         }
         echo '</ul>';        
     }
@@ -48,7 +48,7 @@ class WPSeed_BarChart {
         $yaxis_list .= '<li>0</li>';
         $yaxis_list .= '</ul>';  
 
-        echo $yaxis_list;
+        echo wp_kses_post( $yaxis_list );
     }
     
     /**
@@ -114,6 +114,6 @@ class WPSeed_BarChart {
     }   
     
     public function bar_li( $key, $color, $pixels, $label) {
-        echo '<li class="bar'.$key.' '.$color.'" style="height: '.$pixels.'px;">'.$label.'</li>';    
+        echo '<li class="bar' . esc_attr( $key ) . ' ' . esc_attr( $color ) . '" style="height: ' . esc_attr( $pixels ) . 'px;">' . wp_kses_post( $label ) . '</li>';    
     }                      
 }

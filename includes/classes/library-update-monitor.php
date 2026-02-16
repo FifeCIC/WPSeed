@@ -168,7 +168,7 @@ class WPSeed_Library_Update_Monitor {
             add_action( 'admin_notices', function() use ( $outdated ) {
                 $url = admin_url( 'admin.php?page=wpseed_development&tab=libraries' );
                 echo '<div class="notice notice-warning is-dismissible" data-notice="wpseed-library-outdated">';
-                echo '<p><strong>WPSeed:</strong> ' . count( $outdated ) . ' bundled ' . _n( 'library is', 'libraries are', count( $outdated ), 'wpseed' ) . ' outdated (6+ months): ' . implode( ', ', $outdated ) . '</p>';
+                echo '<p><strong>WPSeed:</strong> ' . esc_html( count( $outdated ) ) . ' bundled ' . esc_html( _n( 'library is', 'libraries are', count( $outdated ), 'wpseed' ) ) . ' outdated (6+ months): ' . esc_html( implode( ', ', $outdated ) ) . '</p>';
                 echo '<p><a href="' . esc_url( $url ) . '" class="button button-primary">Check for Updates</a> <button type="button" class="button wpseed-dismiss-library-notice">Remind Me Later</button></p>';
                 echo '</div>';
             } );

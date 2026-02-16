@@ -8,7 +8,7 @@ $libraries = $monitor->get_libraries();
 $updates = array();
 
 // Check for updates if requested
-if ( isset( $_GET['check_updates'] ) && isset( $_GET['_wpnonce'] ) && wp_verify_nonce( $_GET['_wpnonce'], 'wpseed_check_library_updates' ) ) {
+if ( isset( $_GET['check_updates'] ) && isset( $_GET['_wpnonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'wpseed_check_library_updates' ) ) {
     $monitor->clear_cache();
     $updates = $monitor->check_all_updates();
     echo '<div class="notice notice-success is-dismissible"><p>Library updates checked successfully.</p></div>';
@@ -88,7 +88,7 @@ foreach ( $libraries as $slug => $library ) {
                     <?php endif; ?>
                 </td>
                 <td>
-                    <?php echo esc_html( date( 'M j, Y', strtotime( $library['bundled_date'] ) ) ); ?>
+                    <?php echo esc_html( gmdate( 'M j, Y', strtotime( $library['bundled_date'] ) ) ); ?>
                     <br>
                     <small style="color: #666;"><?php echo esc_html( human_time_diff( strtotime( $library['bundled_date'] ) ) ); ?> ago</small>
                 </td>

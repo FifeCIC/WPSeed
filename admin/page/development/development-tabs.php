@@ -58,7 +58,7 @@ class WPSeed_Admin_Development_Page {
      * Development view wrapper start
      */
     private static function view_wrapper_start() {
-        $current_tab = isset($_GET['tab']) ? sanitize_title($_GET['tab']) : 'assets';
+        $current_tab = isset($_GET['tab']) ? sanitize_title(wp_unslash($_GET['tab'])) : 'assets';
         $tabs = self::get_tabs();
         $tab_title = isset($tabs[$current_tab]) ? $tabs[$current_tab] : '';
         
@@ -87,7 +87,7 @@ class WPSeed_Admin_Development_Page {
      * Display the tabs
      */
     private static function tabs() {
-        $current_tab = isset($_GET['tab']) ? sanitize_title($_GET['tab']) : 'theme_info';
+        $current_tab = isset($_GET['tab']) ? sanitize_title(wp_unslash($_GET['tab'])) : 'theme_info';
         $tabs = self::get_tabs();
         ?>
         <h2 class="nav-tab-wrapper">
@@ -110,7 +110,7 @@ class WPSeed_Admin_Development_Page {
      * Display the active tab content
      */
     private static function active_tab_content() {
-        $current_tab = isset($_GET['tab']) ? sanitize_title($_GET['tab']) : 'assets';
+        $current_tab = isset($_GET['tab']) ? sanitize_title(wp_unslash($_GET['tab'])) : 'assets';
         
         switch ($current_tab) {
             case 'assets':

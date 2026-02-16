@@ -56,11 +56,12 @@ abstract class WPSeed_Shortcode extends WPSeed_Codec_Instance {
         $help = '' .
                 '<div class="postbox">' .
                 '<h3 class="hndle"><span>' .
+                /* translators: %s: Shortcode key */
                 sprintf(__('Shortcode <code>%s</code>', 'wpseed'), $this->_key) .
                 '</span></h3>' .
                 '<div class="inside">' .
                 '<h4>' . __('Shortcode', 'wpseed') . '</h4>' .
-                '<pre><code>[' . $this->_key . ']</code></pre>' .
+                '<pre><code>[' . esc_html($this->_key) . ']</code></pre>' .
                 '<h4>' . __('Description', 'wpseed'). '</h4>' .
                 $usage .
                 $args_help .

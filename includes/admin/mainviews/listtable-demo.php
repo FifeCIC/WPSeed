@@ -74,7 +74,7 @@ class WPSeed_ListTable_Demo extends WP_List_Table {
 	 * No items found text.
 	 */
 	public function no_items() {
-		_e( 'No items found.', 'wpseed' );
+		esc_html_e( 'No items found.', 'wpseed' );
 	}
 
 	/**
@@ -113,19 +113,19 @@ class WPSeed_ListTable_Demo extends WP_List_Table {
 		switch( $column_name ) {
 
 			case 'headerone' :
-				echo $item['headerone'];
+				echo esc_html( $item['headerone'] );
 			break;
 
 			case 'headertwo' :
-				echo $item['headertwo'];
+				echo esc_html( $item['headertwo'] );
 			break;
 
 			case 'headerthree' :
-				echo $item['headerthree'];
+				echo esc_html( $item['headerthree'] );
 			break;
 
 			case 'headerfour' :
-				echo $item['headerfour'];
+				echo esc_html( $item['headerfour'] );
 			break;
 
 		}

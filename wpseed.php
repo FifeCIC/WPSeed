@@ -1,12 +1,12 @@
 <?php
 /**
  * Plugin Name: Plugin Seed
- * Plugin URI: https://pluginseed.wordpress.com/
- * Github URI: https://github.com/RyanBayne/wpseed
- * Description: Grow a new plugin using a WordPress plugin Seed. 
- * Version: 1.0.0
+ * Plugin URI: https://www.fifecic.scot
+ * Github URI: https://github.com/FifeCIC/wpseed
+ * Description: Grow a new plugin using a WordPress plugin Seed (boilerplate). 
+ * Version: 2.0.0
  * Author: Ryan Bayne
- * Author URI: https://www.linkedin.com/in/ryanrbayne/
+ * Author URI: https://www.ryanbayne.uk
  * Requires at least: 4.4
  * Tested up to: 4.7
  * License: GPL3
@@ -17,7 +17,6 @@
  * @category Core
  * @author Ryan Bayne
  * @license GNU General Public License, Version 3
- * @copyright 2016-2017 Ryan R. Bayne (SqueekyCoder@Gmail.com)
  */
 
  // Exit if accessed directly. 

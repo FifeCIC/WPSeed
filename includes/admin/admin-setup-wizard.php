@@ -57,7 +57,7 @@ class WPSeed_Admin_Setup_Wizard {
      * Show the setup wizard.
      */
     public function setup_wizard() {
-        if ( empty( $_GET['page'] ) || 'wpseed-setup' !== $_GET['page'] ) {
+        if ( empty( $_GET['page'] ) || 'wpseed-setup' !== sanitize_text_field( wp_unslash( $_GET['page'] ) ) ) {
             return;
         }
         $this->steps = array(
@@ -102,7 +102,7 @@ class WPSeed_Admin_Setup_Wizard {
                 'handler' => ''
             )
         );
-        $this->step = isset( $_GET['step'] ) ? sanitize_key( $_GET['step'] ) : current( array_keys( $this->steps ) );
+        $this->step = isset( $_GET['step'] ) ? sanitize_key( wp_unslash( $_GET['step'] ) ) : current( array_keys( $this->steps ) );
         $suffix     = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
         // Register scripts for the pretty extension presentation and selection.
@@ -148,13 +148,13 @@ class WPSeed_Admin_Setup_Wizard {
         <head>
             <meta name="viewport" content="width=device-width" />
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-            <title><?php _e( 'WordPress Seed &rsaquo; Setup Wizard', 'wpseed' ); ?></title>
+            <title><?php esc_html_e( 'WordPress Seed &rsaquo; Setup Wizard', 'wpseed' ); ?></title>
             <?php wp_print_scripts( 'wpseed-setup' ); ?>
             <?php wp_print_styles( 'wpseed-setup' ); ?>
             <?php wp_print_styles( 'wpseed_admin_styles' ); ?>
         </head>
         <body class="wpseed-setup wp-core-ui">
-            <h1 id="wpseed-logo"><a href="<?php echo WPSEED_HOME;?>"><img src="<?php echo WPSeed()->plugin_url(); ?>/assets/images/wpseed_logo.png" alt="WPSeed" /></a></h1>
+            <h1 id="wpseed-logo"><a href="<?php echo esc_url( WPSEED_HOME ); ?>"><img src="<?php echo esc_url( WPSeed()->plugin_url() ); ?>/assets/images/wpseed_logo.png" alt="WPSeed" /></a></h1>
         <?php
     }
 
@@ -164,7 +164,7 @@ class WPSeed_Admin_Setup_Wizard {
     public function setup_wizard_footer() {
         ?>
             <?php if ( 'next_steps' === $this->step ) : ?>
-                <a class="wpseed-return-to-dashboard" href="<?php echo esc_url( admin_url() ); ?>"><?php _e( 'Return to the WordPress Dashboard', 'wpseed' ); ?></a>
+                <a class="wpseed-return-to-dashboard" href="<?php echo esc_url( admin_url() ); ?>"><?php esc_html_e( 'Return to the WordPress Dashboard', 'wpseed' ); ?></a>
             <?php endif; ?>
             </body>
         </html>
@@ -199,9 +199,9 @@ class WPSeed_Admin_Setup_Wizard {
         echo '<div class="wpseed-setup-content">'; 
         
         if( !isset( $this->steps[ $this->step ]['view'] ) ) {
-            ?><h1><?php _e( 'Invalid Step!', 'wpseed' ); ?></h1><p><?php _e( 'You have attempted to visit a setup step that does not exist. I would like to know how this happened so that I can improve the plugin. Please tell me what you did before this message appeared. If you were just messing around, then stop it you naughty hacker!', 'wpseed' ); ?></p><?php 
+            ?><h1><?php esc_html_e( 'Invalid Step!', 'wpseed' ); ?></h1><p><?php esc_html_e( 'You have attempted to visit a setup step that does not exist. I would like to know how this happened so that I can improve the plugin. Please tell me what you did before this message appeared. If you were just messing around, then stop it you naughty hacker!', 'wpseed' ); ?></p><?php 
         } elseif( !method_exists( $this, $this->steps[ $this->step ]['view'][1] ) ) {
-            ?><h1><?php _e( 'Something Has Gone Very Wrong!', 'wpseed' ); ?></h1><p><?php _e( 'You have attempted to visit a step in the setup process that may not be ready yet! This should not have happened. Please report it to me.', 'wpseed' ); ?></p><?php             
+            ?><h1><?php esc_html_e( 'Something Has Gone Very Wrong!', 'wpseed' ); ?></h1><p><?php esc_html_e( 'You have attempted to visit a step in the setup process that may not be ready yet! This should not have happened. Please report it to me.', 'wpseed' ); ?></p><?php             
         } else {
             call_user_func( $this->steps[ $this->step ]['view'] );
         }
@@ -615,7 +615,8 @@ class WPSeed_Admin_Setup_Wizard {
 
             if ( ! empty( $gateway['settings'] ) ) {
                 foreach ( $gateway['settings'] as $setting_id => $setting ) {
-                    $settings[ $setting_id ] = wpseed_clean( $_POST[ $gateway_id . '_' . $setting_id ] );
+                    $post_key = $gateway_id . '_' . $setting_id;
+                    $settings[ $setting_id ] = isset( $_POST[ $post_key ] ) ? wpseed_clean( wp_unslash( $_POST[ $post_key ] ) ) : '';
                 }
             }
 

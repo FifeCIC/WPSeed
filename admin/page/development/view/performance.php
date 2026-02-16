@@ -14,7 +14,7 @@ class WPSeed_Admin_Development_Performance {
         // Handle clear logs
         if (isset($_POST['clear_logs']) && wp_verify_nonce($_POST['_wpnonce'], 'wpseed_clear_logs')) {
             WPSeed_Enhanced_Logger::clear_old_logs(0);
-            echo '<div class="notice notice-success"><p>' . __('Logs cleared successfully.', 'wpseed') . '</p></div>';
+            echo '<div class="notice notice-success"><p>' . esc_html__('Logs cleared successfully.', 'wpseed') . '</p></div>';
         }
         
         $logs = WPSeed_Enhanced_Logger::get_recent_logs(50);
@@ -30,28 +30,28 @@ class WPSeed_Admin_Development_Performance {
                     <div style="font-size: 32px; font-weight: bold; color: #2271b1;">
                         <?php echo number_format($current_metrics['execution_time'], 3); ?>s
                     </div>
-                    <div style="color: #646970; margin-top: 5px;"><?php _e('Execution Time', 'wpseed'); ?></div>
+                    <div style="color: #646970; margin-top: 5px;"><?php esc_html_e('Execution Time', 'wpseed'); ?></div>
                 </div>
                 
                 <div class="metric-card" style="background: #fff; padding: 20px; border-left: 4px solid #00a32a; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
                     <div style="font-size: 32px; font-weight: bold; color: #00a32a;">
                         <?php echo number_format($current_metrics['memory_usage'] / 1024 / 1024, 2); ?>MB
                     </div>
-                    <div style="color: #646970; margin-top: 5px;"><?php _e('Memory Used', 'wpseed'); ?></div>
+                    <div style="color: #646970; margin-top: 5px;"><?php esc_html_e('Memory Used', 'wpseed'); ?></div>
                 </div>
                 
                 <div class="metric-card" style="background: #fff; padding: 20px; border-left: 4px solid #f0b849; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
                     <div style="font-size: 32px; font-weight: bold; color: #f0b849;">
                         <?php echo number_format($current_metrics['queries']); ?>
                     </div>
-                    <div style="color: #646970; margin-top: 5px;"><?php _e('DB Queries', 'wpseed'); ?></div>
+                    <div style="color: #646970; margin-top: 5px;"><?php esc_html_e('DB Queries', 'wpseed'); ?></div>
                 </div>
                 
                 <div class="metric-card" style="background: #fff; padding: 20px; border-left: 4px solid #d63638; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
                     <div style="font-size: 32px; font-weight: bold; color: #d63638;">
                         <?php echo number_format($current_metrics['errors']); ?>
                     </div>
-                    <div style="color: #646970; margin-top: 5px;"><?php _e('Errors', 'wpseed'); ?></div>
+                    <div style="color: #646970; margin-top: 5px;"><?php esc_html_e('Errors', 'wpseed'); ?></div>
                 </div>
                 
             </div>
@@ -62,13 +62,13 @@ class WPSeed_Admin_Development_Performance {
             if (!empty($query_stats['slow_queries'])):
             ?>
             <div class="slow-queries-section" style="background: #fff; padding: 20px; border: 1px solid #ccd0d4; border-radius: 4px; margin-bottom: 20px;">
-                <h3><?php _e('Slow Queries (>50ms)', 'wpseed'); ?></h3>
+                <h3><?php esc_html_e('Slow Queries (>50ms)', 'wpseed'); ?></h3>
                 <table class="wp-list-table widefat fixed striped">
                     <thead>
                         <tr>
-                            <th><?php _e('Query', 'wpseed'); ?></th>
-                            <th style="width: 100px;"><?php _e('Time', 'wpseed'); ?></th>
-                            <th style="width: 200px;"><?php _e('Called From', 'wpseed'); ?></th>
+                            <th><?php esc_html_e('Query', 'wpseed'); ?></th>
+                            <th style="width: 100px;"><?php esc_html_e('Time', 'wpseed'); ?></th>
+                            <th style="width: 200px;"><?php esc_html_e('Called From', 'wpseed'); ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -87,12 +87,12 @@ class WPSeed_Admin_Development_Performance {
             <!-- Hook Statistics -->
             <?php $hook_stats = WPSeed_Enhanced_Logger::instance()->get_hook_stats(); ?>
             <div class="hook-stats-section" style="background: #fff; padding: 20px; border: 1px solid #ccd0d4; border-radius: 4px; margin-bottom: 20px;">
-                <h3><?php _e('Most Called Hooks', 'wpseed'); ?></h3>
+                <h3><?php esc_html_e('Most Called Hooks', 'wpseed'); ?></h3>
                 <table class="wp-list-table widefat fixed striped">
                     <thead>
                         <tr>
-                            <th><?php _e('Hook Name', 'wpseed'); ?></th>
-                            <th style="width: 100px;"><?php _e('Calls', 'wpseed'); ?></th>
+                            <th><?php esc_html_e('Hook Name', 'wpseed'); ?></th>
+                            <th style="width: 100px;"><?php esc_html_e('Calls', 'wpseed'); ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -109,11 +109,11 @@ class WPSeed_Admin_Development_Performance {
             <!-- Recent Requests Log -->
             <div class="recent-logs-section" style="background: #fff; padding: 20px; border: 1px solid #ccd0d4; border-radius: 4px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                    <h3 style="margin: 0;"><?php _e('Recent Requests', 'wpseed'); ?></h3>
+                    <h3 style="margin: 0;"><?php esc_html_e('Recent Requests', 'wpseed'); ?></h3>
                     <form method="post">
                         <?php wp_nonce_field('wpseed_clear_logs'); ?>
                         <button type="submit" name="clear_logs" class="button">
-                            <?php _e('Clear Logs', 'wpseed'); ?>
+                            <?php esc_html_e('Clear Logs', 'wpseed'); ?>
                         </button>
                     </form>
                 </div>
@@ -121,20 +121,20 @@ class WPSeed_Admin_Development_Performance {
                 <table class="wp-list-table widefat fixed striped">
                     <thead>
                         <tr>
-                            <th><?php _e('Time', 'wpseed'); ?></th>
-                            <th><?php _e('Request URI', 'wpseed'); ?></th>
-                            <th style="width: 80px;"><?php _e('Queries', 'wpseed'); ?></th>
-                            <th style="width: 100px;"><?php _e('Query Time', 'wpseed'); ?></th>
-                            <th style="width: 100px;"><?php _e('Exec Time', 'wpseed'); ?></th>
-                            <th style="width: 80px;"><?php _e('Memory', 'wpseed'); ?></th>
-                            <th style="width: 60px;"><?php _e('Errors', 'wpseed'); ?></th>
+                            <th><?php esc_html_e('Time', 'wpseed'); ?></th>
+                            <th><?php esc_html_e('Request URI', 'wpseed'); ?></th>
+                            <th style="width: 80px;"><?php esc_html_e('Queries', 'wpseed'); ?></th>
+                            <th style="width: 100px;"><?php esc_html_e('Query Time', 'wpseed'); ?></th>
+                            <th style="width: 100px;"><?php esc_html_e('Exec Time', 'wpseed'); ?></th>
+                            <th style="width: 80px;"><?php esc_html_e('Memory', 'wpseed'); ?></th>
+                            <th style="width: 60px;"><?php esc_html_e('Errors', 'wpseed'); ?></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php if (empty($logs)): ?>
                             <tr>
                                 <td colspan="7" style="text-align: center; color: #666;">
-                                    <?php _e('No logs available. Logs are only collected in developer mode.', 'wpseed'); ?>
+                                    <?php esc_html_e('No logs available. Logs are only collected in developer mode.', 'wpseed'); ?>
                                 </td>
                             </tr>
                         <?php else: ?>
@@ -161,12 +161,12 @@ class WPSeed_Admin_Development_Performance {
             </div>
             
             <div class="performance-info" style="margin-top: 20px; padding: 15px; background: #f9f9f9; border: 1px solid #ddd; border-radius: 4px;">
-                <h4 style="margin-top: 0;"><?php _e('About Performance Monitoring', 'wpseed'); ?></h4>
+                <h4 style="margin-top: 0;"><?php esc_html_e('About Performance Monitoring', 'wpseed'); ?></h4>
                 <ul style="margin: 0;">
-                    <li><?php _e('Performance monitoring only runs in developer mode', 'wpseed'); ?></li>
-                    <li><?php _e('Logs are automatically cleared after 7 days', 'wpseed'); ?></li>
-                    <li><?php _e('Slow queries are those taking more than 50ms', 'wpseed'); ?></li>
-                    <li><?php _e('High query counts may indicate N+1 query problems', 'wpseed'); ?></li>
+                    <li><?php esc_html_e('Performance monitoring only runs in developer mode', 'wpseed'); ?></li>
+                    <li><?php esc_html_e('Logs are automatically cleared after 7 days', 'wpseed'); ?></li>
+                    <li><?php esc_html_e('Slow queries are those taking more than 50ms', 'wpseed'); ?></li>
+                    <li><?php esc_html_e('High query counts may indicate N+1 query problems', 'wpseed'); ?></li>
                 </ul>
             </div>
         </div>

@@ -37,7 +37,9 @@ class WPSeed_Asset_Queue {
         // TODO: Re-enable after WordPress loading issue resolved - Line 37
         // if (is_admin() && current_user_can('manage_options')) {
         if (is_admin()) {
+            // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reading GET params for page detection only, no form processing
             $this->current_page = isset($_GET['page']) ? sanitize_text_field(wp_unslash($_GET['page'])) : '';
+            // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reading GET params for tab detection only, no form processing
             $this->current_tab = isset($_GET['tab']) ? sanitize_text_field(wp_unslash($_GET['tab'])) : '';
         }
     }
@@ -128,9 +130,11 @@ class WPSeed_Asset_Queue {
         ?>
         <div class="notice notice-warning is-dismissible">
             <p>
-                <strong>WPSeed:</strong> 
+                <strong>WPSeed:</strong>
+                <?php
                 /* translators: %d: Number of missing asset files */
-                <?php echo esc_html(sprintf(_n('%d asset file is missing', '%d asset files are missing', $count, 'wpseed'), $count)); ?>
+                echo esc_html(sprintf(_n('%d asset file is missing', '%d asset files are missing', $count, 'wpseed'), $count));
+                ?>
             </p>
             <ul style="list-style: disc; margin-left: 20px;">
                 <?php foreach ($missing as $asset): ?>

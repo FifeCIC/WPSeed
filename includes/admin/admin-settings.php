@@ -77,7 +77,7 @@ class WPSeed_Admin_Settings {
         global $current_tab;
 
         if ( empty( $_REQUEST['_wpnonce'] ) || ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'wpseed-settings' ) ) {
-            die( __( 'Action failed. Please refresh the page and retry.', 'wpseed' ) );
+            die( esc_html__( 'Action failed. Please refresh the page and retry.', 'wpseed' ) );
         }
 
         // Trigger actions
@@ -270,7 +270,7 @@ class WPSeed_Admin_Settings {
                         echo '<h2>' . esc_html( $value['title'] ) . '</h2>';
                     }
                     if ( ! empty( $value['desc'] ) ) {
-                        echo wpautop( wptexturize( wp_kses_post( $value['desc'] ) ) );
+                        echo wp_kses_post( wpautop( wptexturize( $value['desc'] ) ) );
                     }
                     echo '<table class="form-table">'. "\n\n";
                     if ( ! empty( $value['id'] ) ) {
@@ -308,9 +308,9 @@ class WPSeed_Admin_Settings {
                     ?><tr valign="top">
                         <th scope="row" class="titledesc">
                             <label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?></label>
-                            <?php echo $tooltip_html; ?>
+                            <?php echo wp_kses_post( $tooltip_html ); ?>
                         </th>
-                        <td class="forminp forminp-<?php echo sanitize_title( $value['type'] ) ?>">
+                        <td class="forminp forminp-<?php echo esc_attr( sanitize_title( $value['type'] ) ); ?>">
                             <?php
                             if ( 'color' == $value['type'] ) {
                                 echo '<span class="colorpickpreview" style="background: ' . esc_attr( $option_value ) . ';"></span>';
@@ -325,7 +325,7 @@ class WPSeed_Admin_Settings {
                                 class="<?php echo esc_attr( $value['class'] ); ?>"
                                 placeholder="<?php echo esc_attr( $value['placeholder'] ); ?>"
                                 <?php echo implode( ' ', $custom_attributes ); ?>
-                                /> <?php echo $description; ?>
+                                /> <?php echo wp_kses_post( $description ); ?>
                         </td>
                     </tr><?php
                     break;
@@ -338,10 +338,10 @@ class WPSeed_Admin_Settings {
                     ?><tr valign="top">
                         <th scope="row" class="titledesc">
                             <label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?></label>
-                            <?php echo $tooltip_html; ?>
+                            <?php echo wp_kses_post( $tooltip_html ); ?>
                         </th>
-                        <td class="forminp forminp-<?php echo sanitize_title( $value['type'] ) ?>">
-                            <?php echo $description; ?>
+                        <td class="forminp forminp-<?php echo esc_attr( sanitize_title( $value['type'] ) ); ?>">
+                            <?php echo wp_kses_post( $description ); ?>
 
                             <textarea
                                 name="<?php echo esc_attr( $value['id'] ); ?>"
@@ -364,9 +364,9 @@ class WPSeed_Admin_Settings {
                     ?><tr valign="top">
                         <th scope="row" class="titledesc">
                             <label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?></label>
-                            <?php echo $tooltip_html; ?>
+                            <?php echo wp_kses_post( $tooltip_html ); ?>
                         </th>
-                        <td class="forminp forminp-<?php echo sanitize_title( $value['type'] ) ?>">
+                        <td class="forminp forminp-<?php echo esc_attr( sanitize_title( $value['type'] ) ); ?>">
                             <select
                                 name="<?php echo esc_attr( $value['id'] ); ?><?php if ( $value['type'] == 'multiselect' ) echo '[]'; ?>"
                                 id="<?php echo esc_attr( $value['id'] ); ?>"
@@ -386,11 +386,11 @@ class WPSeed_Admin_Settings {
                                                 selected( $option_value, $key );
                                             }
 
-                                        ?>><?php echo $val ?></option>
+                                        ?>><?php echo esc_html( $val ); ?></option>
                                         <?php
                                     }
                                 ?>
-                            </select> <?php echo $description; ?>
+                            </select> <?php echo wp_kses_post( $description ); ?>
                         </td>
                     </tr><?php
                     break;
@@ -403,11 +403,11 @@ class WPSeed_Admin_Settings {
                     ?><tr valign="top">
                         <th scope="row" class="titledesc">
                             <label for="<?php echo esc_attr( $value['id'] ); ?>"><?php echo esc_html( $value['title'] ); ?></label>
-                            <?php echo $tooltip_html; ?>
+                            <?php echo wp_kses_post( $tooltip_html ); ?>
                         </th>
-                        <td class="forminp forminp-<?php echo sanitize_title( $value['type'] ) ?>">
+                        <td class="forminp forminp-<?php echo esc_attr( sanitize_title( $value['type'] ) ); ?>">
                             <fieldset>
-                                <?php echo $description; ?>
+                                <?php echo wp_kses_post( $description ); ?>
                                 <ul>
                                 <?php
                                     foreach ( $value['options'] as $key => $val ) {
@@ -415,13 +415,13 @@ class WPSeed_Admin_Settings {
                                         <li>
                                             <label><input
                                                 name="<?php echo esc_attr( $value['id'] ); ?>"
-                                                value="<?php echo $key; ?>"
+                                                value="<?php echo esc_attr( $key ); ?>"
                                                 type="radio"
                                                 style="<?php echo esc_attr( $value['css'] ); ?>"
                                                 class="<?php echo esc_attr( $value['class'] ); ?>"
                                                 <?php echo implode( ' ', $custom_attributes ); ?>
                                                 <?php checked( $key, $option_value ); ?>
-                                                /> <?php echo $val ?></label>
+                                                /> <?php echo esc_html( $val ); ?></label>
                                         </li>
                                         <?php
                                     }
@@ -474,7 +474,7 @@ class WPSeed_Admin_Settings {
                     }
 
                     ?>
-                        <label for="<?php echo $value['id'] ?>">
+                        <label for="<?php echo esc_attr( $value['id'] ); ?>">
                             <input
                                 name="<?php echo esc_attr( $value['id'] ); ?>"
                                 id="<?php echo esc_attr( $value['id'] ); ?>"
@@ -483,8 +483,8 @@ class WPSeed_Admin_Settings {
                                 value="1"
                                 <?php checked( $option_value, 'yes'); ?>
                                 <?php echo implode( ' ', $custom_attributes ); ?>
-                            /> <?php echo $description ?>
-                        </label> <?php echo $tooltip_html; ?>
+                            /> <?php echo wp_kses_post( $description ); ?>
+                        </label> <?php echo wp_kses_post( $tooltip_html ); ?>
                     <?php
 
                     if ( ! isset( $value['checkboxgroup'] ) || 'end' == $value['checkboxgroup'] ) {
