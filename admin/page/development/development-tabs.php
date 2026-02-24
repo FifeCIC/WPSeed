@@ -38,6 +38,7 @@ class WPSeed_Admin_Development_Page {
             'phpinfo' => __('PHP Info', 'wpseed'),
             'tasks' => __('Tasks', 'wpseed'),
             'libraries' => __('Libraries', 'wpseed'),
+            'gdpr' => __('GDPR', 'wpseed'),
             'credits' => __('Credits', 'wpseed'),
             'docs' => __('Documentation', 'wpseed'),
             'dev_checklist' => __('Dev Checklist', 'wpseed'),
@@ -193,6 +194,12 @@ class WPSeed_Admin_Development_Page {
                 break;
             case 'architecture':
                 require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/development/view/architecture.php';
+                break;
+            case 'gdpr':
+                if (!class_exists('WPSeed_Admin_Development_GDPR')) {
+                    require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/development/view/gdpr.php';
+                }
+                WPSeed_Admin_Development_GDPR::output();
                 break;
             default:
                 if (!class_exists('WPSeed_Admin_Development_UI_Library')) {

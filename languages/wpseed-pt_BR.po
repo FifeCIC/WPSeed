@@ -1,0 +1,157 @@
+# Portuguese (Brazil) translation for WPSeed
+# Copyright (C) 2024 WPSeed
+msgid ""
+msgstr ""
+"Project-Id-Version: WPSeed 1.0.0\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Welcome to WPSeed"
+msgstr "Bem-vindo ao WPSeed"
+
+msgid "Let's get started with a quick setup"
+msgstr "Vamos começar com uma configuração rápida"
+
+msgid "Skip Setup"
+msgstr "Pular configuração"
+
+msgid "Next Step"
+msgstr "Próximo passo"
+
+msgid "Previous Step"
+msgstr "Passo anterior"
+
+msgid "Complete Setup"
+msgstr "Concluir configuração"
+
+msgid "Step 1 of 5"
+msgstr "Passo 1 de 5"
+
+msgid "Basic Configuration"
+msgstr "Configuração básica"
+
+msgid "Configure your plugin settings"
+msgstr "Configure as definições do seu plugin"
+
+msgid "API Settings"
+msgstr "Configurações de API"
+
+msgid "Enter your API key"
+msgstr "Insira sua chave API"
+
+msgid "Test Connection"
+msgstr "Testar conexão"
+
+msgid "Connection successful"
+msgstr "Conexão bem-sucedida"
+
+msgid "Connection failed"
+msgstr "Falha na conexão"
+
+msgid "Developer Mode"
+msgstr "Modo desenvolvedor"
+
+msgid "Enable developer tools and debugging"
+msgstr "Ativar ferramentas de desenvolvedor e depuração"
+
+msgid "Setup Complete!"
+msgstr "Configuração concluída!"
+
+msgid "You're all set. Start using WPSeed now."
+msgstr "Tudo pronto. Comece a usar o WPSeed agora."
+
+msgid "Go to Dashboard"
+msgstr "Ir para o painel"
+
+msgid "WPSeed activated successfully"
+msgstr "WPSeed ativado com sucesso"
+
+msgid "Plugin requires WordPress %s or higher"
+msgstr "O plugin requer WordPress %s ou superior"
+
+msgid "Plugin requires PHP %s or higher"
+msgstr "O plugin requer PHP %s ou superior"
+
+msgid "Security check failed"
+msgstr "Verificação de segurança falhou"
+
+msgid "Unauthorized"
+msgstr "Não autorizado"
+
+msgid "Permission denied"
+msgstr "Permissão negada"
+
+msgid "Invalid request"
+msgstr "Solicitação inválida"
+
+msgid "Error occurred"
+msgstr "Ocorreu um erro"
+
+msgid "Please try again"
+msgstr "Por favor, tente novamente"
+
+msgid "Contact support if problem persists"
+msgstr "Entre em contato com o suporte se o problema persistir"
+
+msgid "Save Changes"
+msgstr "Salvar alterações"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Delete"
+msgstr "Excluir"
+
+msgid "Confirm"
+msgstr "Confirmar"
+
+msgid "Are you sure?"
+msgstr "Tem certeza?"
+
+msgid "This action cannot be undone"
+msgstr "Esta ação não pode ser desfeita"
+
+msgid "Yes, delete"
+msgstr "Sim, excluir"
+
+msgid "No, keep it"
+msgstr "Não, manter"
+
+msgid "Dashboard"
+msgstr "Painel"
+
+msgid "Settings"
+msgstr "Configurações"
+
+msgid "Development"
+msgstr "Desenvolvimento"
+
+msgid "Notifications"
+msgstr "Notificações"
+
+msgid "View"
+msgstr "Ver"
+
+msgid "Edit"
+msgstr "Editar"
+
+msgid "Close"
+msgstr "Fechar"
+
+msgid "Filter"
+msgstr "Filtrar"
+
+msgid "Search"
+msgstr "Pesquisar"
+
+msgid "Processing..."
+msgstr "Processando..."
+
+msgid "Loading..."
+msgstr "Carregando..."
+
+msgid "No items found"
+msgstr "Nenhum item encontrado"

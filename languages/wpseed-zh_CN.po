@@ -1,0 +1,157 @@
+# Chinese (Simplified) translation for WPSeed
+# Copyright (C) 2024 WPSeed
+msgid ""
+msgstr ""
+"Project-Id-Version: WPSeed 1.0.0\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Welcome to WPSeed"
+msgstr "欢迎使用WPSeed"
+
+msgid "Let's get started with a quick setup"
+msgstr "让我们开始快速设置"
+
+msgid "Skip Setup"
+msgstr "跳过设置"
+
+msgid "Next Step"
+msgstr "下一步"
+
+msgid "Previous Step"
+msgstr "上一步"
+
+msgid "Complete Setup"
+msgstr "完成设置"
+
+msgid "Step 1 of 5"
+msgstr "第1步，共5步"
+
+msgid "Basic Configuration"
+msgstr "基本配置"
+
+msgid "Configure your plugin settings"
+msgstr "配置您的插件设置"
+
+msgid "API Settings"
+msgstr "API设置"
+
+msgid "Enter your API key"
+msgstr "输入您的API密钥"
+
+msgid "Test Connection"
+msgstr "测试连接"
+
+msgid "Connection successful"
+msgstr "连接成功"
+
+msgid "Connection failed"
+msgstr "连接失败"
+
+msgid "Developer Mode"
+msgstr "开发者模式"
+
+msgid "Enable developer tools and debugging"
+msgstr "启用开发者工具和调试"
+
+msgid "Setup Complete!"
+msgstr "设置完成！"
+
+msgid "You're all set. Start using WPSeed now."
+msgstr "一切就绪。现在开始使用WPSeed。"
+
+msgid "Go to Dashboard"
+msgstr "前往仪表板"
+
+msgid "WPSeed activated successfully"
+msgstr "WPSeed已成功激活"
+
+msgid "Plugin requires WordPress %s or higher"
+msgstr "插件需要WordPress %s或更高版本"
+
+msgid "Plugin requires PHP %s or higher"
+msgstr "插件需要PHP %s或更高版本"
+
+msgid "Security check failed"
+msgstr "安全检查失败"
+
+msgid "Unauthorized"
+msgstr "未授权"
+
+msgid "Permission denied"
+msgstr "权限被拒绝"
+
+msgid "Invalid request"
+msgstr "无效请求"
+
+msgid "Error occurred"
+msgstr "发生错误"
+
+msgid "Please try again"
+msgstr "请重试"
+
+msgid "Contact support if problem persists"
+msgstr "如果问题仍然存在，请联系支持"
+
+msgid "Save Changes"
+msgstr "保存更改"
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Delete"
+msgstr "删除"
+
+msgid "Confirm"
+msgstr "确认"
+
+msgid "Are you sure?"
+msgstr "您确定吗？"
+
+msgid "This action cannot be undone"
+msgstr "此操作无法撤消"
+
+msgid "Yes, delete"
+msgstr "是的，删除"
+
+msgid "No, keep it"
+msgstr "不，保留"
+
+msgid "Dashboard"
+msgstr "仪表板"
+
+msgid "Settings"
+msgstr "设置"
+
+msgid "Development"
+msgstr "开发"
+
+msgid "Notifications"
+msgstr "通知"
+
+msgid "View"
+msgstr "查看"
+
+msgid "Edit"
+msgstr "编辑"
+
+msgid "Close"
+msgstr "关闭"
+
+msgid "Filter"
+msgstr "筛选"
+
+msgid "Search"
+msgstr "搜索"
+
+msgid "Processing..."
+msgstr "处理中..."
+
+msgid "Loading..."
+msgstr "加载中..."
+
+msgid "No items found"
+msgstr "未找到项目"

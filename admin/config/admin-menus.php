@@ -67,6 +67,16 @@ function wpseed_register_admin_menus() {
         'wpseed_notifications_page'
     );
     
+    // Listener Monitor
+    add_submenu_page(
+        'wpseed',
+        __('Listener Monitor', 'wpseed'),
+        __('Listener Monitor', 'wpseed'),
+        'manage_options',
+        'wpseed-listener-monitor',
+        'wpseed_listener_monitor_page'
+    );
+    
     // Security Audit
     add_submenu_page(
         'wpseed',
@@ -100,6 +110,16 @@ function wpseed_register_admin_menus() {
             'wpseed_scheduled_actions_page'
         );
     }
+    
+    // Settings Backup
+    add_submenu_page(
+        'wpseed',
+        __('Backup & Restore', 'wpseed'),
+        __('Backup & Restore', 'wpseed'),
+        'manage_options',
+        'wpseed-backup',
+        'wpseed_backup_page'
+    );
 }
 add_action('admin_menu', 'wpseed_register_admin_menus');
 
@@ -184,6 +204,14 @@ function wpseed_notifications_page() {
 }
 
 /**
+ * Listener Monitor page callback
+ */
+function wpseed_listener_monitor_page() {
+    require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/listener-monitor.php';
+    wpseed_render_listener_monitor_page();
+}
+
+/**
  * Security Audit page callback
  */
 function wpseed_security_audit_page() {
@@ -209,4 +237,11 @@ function wpseed_scheduled_actions_page() {
     
     $admin_view = ActionScheduler_AdminView::instance();
     $admin_view->render_admin_ui();
+}
+
+/**
+ * Backup & Restore page callback
+ */
+function wpseed_backup_page() {
+    WPSeed_Settings_Backup::render_backup_page();
 }

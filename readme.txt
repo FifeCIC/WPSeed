@@ -18,7 +18,9 @@ WPSeed is a production-ready WordPress plugin boilerplate that includes everythi
 
 = Professional Developer Tools =
 
-* 11-Tab Development Dashboard (Assets, Theme, Debug Log, Database, PHP Info, AI Assistant, Documentation, Dev Checklist, Tasks, Layouts, Diagrams, Architecture)
+* 12-Tab Development Dashboard (Assets, Theme, Debug Log, Database, PHP Info, AI Assistant, Documentation, Dev Checklist, Tasks, Layouts, Diagrams, Architecture)
+* Listener Monitor for tracking and debugging all POST/GET/AJAX requests
+* Settings Backup & Restore with export/import/reset functionality
 * Built-in AI Assistant with Gemini integration (50 free requests/day)
 * Built-in documentation viewer - Access all docs from within WordPress admin
 * Advanced logging system (file-based and database-driven)
@@ -44,9 +46,12 @@ WPSeed is a production-ready WordPress plugin boilerplate that includes everythi
 
 * Custom post types and taxonomies with examples
 * Enhanced settings framework with repeater fields for dynamic configuration
+* Settings backup/restore with export, import, and reset functionality
 * Database-driven notification system with persistent storage
+* Request listener with automatic security checks and decision logging
 * Multisite support with network activation detection
-* i18n ready with automatic translation loading
+* i18n ready with 31 language files and automatic translation loading
+* RTL language support with automatic stylesheet loading
 * Enhanced uninstall with complete cleanup (options, transients, user meta)
 * Security-first approach (nonces, capability checks, sanitization)
 * Uninstall feedback system for user insights

@@ -49,6 +49,16 @@ class WPSeed_Asset_Queue {
             return;
         }
         
+        // Enqueue RTL styles if needed
+        if (is_rtl()) {
+            wp_enqueue_style(
+                'wpseed-rtl',
+                WPSEED_PLUGIN_DIR_URL . 'assets/css/rtl.css',
+                array(),
+                WPSEED_VERSION
+            );
+        }
+        
         $page_id = $this->current_page;
         if (empty($page_id)) {
             return;

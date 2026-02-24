@@ -1,0 +1,18 @@
+# Norwegian Translation for WPSeed
+msgid ""
+msgstr ""
+"Project-Id-Version: WPSeed 1.0.0\n"
+"Language: nb_NO\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "WPSeed"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "View"
+msgstr ""

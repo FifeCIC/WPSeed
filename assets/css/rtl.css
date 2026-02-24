@@ -1,0 +1,67 @@
+/**
+ * RTL (Right-to-Left) Language Support
+ * 
+ * Styles for Arabic, Hebrew, and other RTL languages
+ * 
+ * @package WPSeed
+ */
+
+/* Admin Layout Adjustments */
+.rtl .wpseed-admin-page {
+    direction: rtl;
+    text-align: right;
+}
+
+/* Form Fields */
+.rtl .wpseed-form-field {
+    text-align: right;
+}
+
+.rtl .wpseed-form-field label {
+    float: right;
+    margin-left: 10px;
+    margin-right: 0;
+}
+
+/* Buttons */
+.rtl .wpseed-button-group {
+    text-align: left;
+}
+
+/* Tables */
+.rtl .wpseed-table th,
+.rtl .wpseed-table td {
+    text-align: right;
+}
+
+/* Icons */
+.rtl .dashicons-before:before {
+    margin-left: 5px;
+    margin-right: 0;
+}
+
+/* Notifications */
+.rtl .wpseed-notification {
+    text-align: right;
+}
+
+/* Footer Debug */
+.rtl #wpseed-footer-debug {
+    direction: rtl;
+    text-align: right;
+}
+
+.rtl #wpseed-footer-debug table {
+    direction: rtl;
+}
+
+/* Listener Monitor */
+.rtl .wpseed-stats {
+    direction: rtl;
+}
+
+/* Toolbar */
+.rtl #wp-admin-bar-wpseed-notifications .wpseed-notification-count {
+    margin-right: 5px;
+    margin-left: 0;
+}

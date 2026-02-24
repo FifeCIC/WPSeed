@@ -19,12 +19,14 @@ Transform your plugin development workflow with WPSeed - a production-ready boil
 - **Usage Tracking & Rate Limiting** - Monitor AI usage with built-in analytics
 
 ### 🛠️ Professional Developer Tools
-- **10-Tab Development Dashboard** - Assets, Theme Info, Debug Log, Database, PHP Info, Documentation, Dev Checklist, Tasks, Layouts, Diagrams, Architecture
+- **11-Tab Development Dashboard** - Assets, Theme Info, Debug Log, Database, PHP Info, Documentation, Dev Checklist, Tasks, Layouts, Diagrams, Architecture
 - **Advanced Logging System** - File-based and database-driven logging with filtering
+- **Listener Monitor** - Track and debug all POST/GET/AJAX requests with decision logging
 - **Asset Management** - Automatic asset tracking with missing file detection
 - **GitHub Integration** - Sync documentation directly to your repository
 - **Task Management** - View and manage GitHub issues from WordPress admin
 - **Built-in Documentation Viewer** - Access all docs from within WordPress admin
+- **Settings Backup/Restore** - Export, import, and reset plugin settings
 
 ### 🔌 Modern Architecture
 - **REST API Framework** - Base controller with secure authentication
@@ -124,9 +126,11 @@ mv wpseed my-awesome-plugin
 - **[Getting Started Guide](docs/GETTING-STARTED.md)** - Detailed setup and customization
 - **[Architecture Overview](docs/ARCHITECTURE.md)** - File structure and design patterns
 - **[API Reference](docs/API-REFERENCE.md)** - Functions, classes, and hooks
+- **[Listener Patterns](docs/LISTENER-PATTERNS.md)** - Form processing and request handling
+- **[Translation Guide](docs/TRANSLATION-GUIDE.md)** - Internationalization workflow
+- **[RTL Testing](docs/RTL-TESTING.md)** - Right-to-left language support
 - **[Repeater Fields Guide](docs/REPEATER-FIELDS.md)** - Dynamic repeatable field groups
 - **[Integration Examples](docs/INTEGRATIONS.md)** - WooCommerce, ACF, Elementor, and more
-- **[Video Walkthrough](https://youtube.com/watch?v=...)** - 15-minute video tutorial
 
 ---
 
@@ -458,9 +462,10 @@ If you find WPSeed valuable, consider supporting its development:
 - **Lines of Code**: 15,000+
 - **Classes**: 50+
 - **Functions**: 200+
-- **Admin Pages**: 10+
+- **Admin Pages**: 12+
 - **Integration Examples**: 12
-- **Documentation Pages**: 20+
+- **Documentation Pages**: 25+
+- **Translation Files**: 31 languages
 
 ---
 

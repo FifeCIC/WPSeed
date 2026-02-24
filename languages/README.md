@@ -1,87 +1,65 @@
 # WPSeed Translations
 
-This directory contains translation files for the WPSeed plugin.
+## Translation Status
 
-## File Structure
+| Language | Locale | Status | Translator |
+|----------|--------|--------|------------|
+| Spanish (Spain) | es_ES | 🟡 Partial | Community |
+| French (France) | fr_FR | 🟡 Partial | Community |
+| German | de_DE | 🔴 Template | - |
+| Italian | it_IT | 🔴 Template | - |
+| Portuguese (Brazil) | pt_BR | 🔴 Template | - |
+| Dutch | nl_NL | 🔴 Template | - |
+| Japanese | ja | 🔴 Template | - |
+| Chinese (Simplified) | zh_CN | 🔴 Template | - |
+| Arabic | ar | 🔴 Template | - |
+| Russian | ru_RU | 🔴 Template | - |
+| Korean | ko_KR | 🔴 Template | - |
+| Polish | pl_PL | 🔴 Template | - |
+| Turkish | tr_TR | 🔴 Template | - |
+| Swedish | sv_SE | 🔴 Template | - |
+| Danish | da_DK | 🔴 Template | - |
+| Norwegian | nb_NO | 🔴 Template | - |
+| Finnish | fi | 🔴 Template | - |
+| Greek | el | 🔴 Template | - |
+| Czech | cs_CZ | 🔴 Template | - |
+| Hungarian | hu_HU | 🔴 Template | - |
+| Indonesian | id_ID | 🔴 Template | - |
+| Hindi | hi_IN | 🔴 Template | - |
+| Hebrew | he_IL | 🔴 Template | - |
+| Romanian | ro_RO | 🔴 Template | - |
+| Vietnamese | vi | 🔴 Template | - |
+| Thai | th | 🔴 Template | - |
+| Ukrainian | uk | 🔴 Template | - |
+| Spanish (Mexico) | es_MX | 🔴 Template | - |
+| Portuguese (Portugal) | pt_PT | 🔴 Template | - |
+| Bengali | bn_BD | 🔴 Template | - |
+| Persian | fa_IR | 🔴 Template | - |
 
-- `wpseed.pot` - Template file containing all translatable strings
-- `wpseed-{locale}.po` - Translation files for specific languages (e.g., `wpseed-es_ES.po` for Spanish)
-- `wpseed-{locale}.mo` - Compiled translation files (generated from .po files)
-
-## Generating Translation Template
-
-To generate/update the POT file with all translatable strings:
-
-```bash
-wp i18n make-pot . languages/wpseed.pot --domain=wpseed
-```
-
-Or using the makepot command:
-
-```bash
-php wp-content/plugins/wpseed/bin/makepot.php
-```
-
-## Creating a New Translation
-
-1. Copy `wpseed.pot` to `wpseed-{locale}.po` (e.g., `wpseed-fr_FR.po` for French)
-2. Edit the .po file with a translation tool like:
-   - [Poedit](https://poedit.net/) (Desktop app)
-   - [Loco Translate](https://wordpress.org/plugins/loco-translate/) (WordPress plugin)
-   - Any text editor
-3. Compile to .mo file (Poedit does this automatically)
-
-## Translation Tools
-
-### Using Poedit (Recommended)
-1. Download from https://poedit.net/
-2. Open `wpseed.pot`
-3. Create new translation from template
-4. Save as `wpseed-{locale}.po`
-5. Poedit automatically generates the .mo file
-
-### Using Loco Translate Plugin
-1. Install Loco Translate plugin
-2. Go to Loco Translate → Plugins → WPSeed
-3. Click "New language"
-4. Select language and translate
-
-### Using WP-CLI
-```bash
-# Generate POT file
-wp i18n make-pot . languages/wpseed.pot
-
-# Create PO file for Spanish
-wp i18n make-po languages/wpseed.pot languages/wpseed-es_ES.po
-
-# Compile MO file
-wp i18n make-mo languages/
-```
-
-## Available Locales
-
-Common locale codes:
-- `en_US` - English (US)
-- `es_ES` - Spanish (Spain)
-- `fr_FR` - French (France)
-- `de_DE` - German (Germany)
-- `it_IT` - Italian (Italy)
-- `pt_BR` - Portuguese (Brazil)
-- `ja` - Japanese
-- `zh_CN` - Chinese (Simplified)
-
-Full list: https://make.wordpress.org/polyglots/teams/
+**Legend:**
+- 🟢 Complete (90-100%)
+- 🟡 Partial (30-89%)
+- 🔴 Template (0-29%)
 
 ## Contributing Translations
 
-To contribute a translation:
-1. Create the translation files
-2. Test in WordPress
-3. Submit via GitHub pull request to `/languages/` directory
+See [TRANSLATION-GUIDE.md](../docs/TRANSLATION-GUIDE.md) for instructions.
 
-## Notes
+### Quick Start
+1. Open `.po` file in Poedit
+2. Translate strings
+3. Save (generates `.mo` file automatically)
+4. Test in WordPress
+5. Submit pull request
 
-- The plugin text domain is `wpseed`
-- All translatable strings use `__()`, `_e()`, `_n()`, `_x()`, `esc_html__()`, etc.
-- Translator comments are included for context on placeholders
-- POT file should be regenerated before each release
+## Using Translations
+
+1. Copy `.po` and `.mo` files to this directory
+2. Change WordPress language in Settings → General
+3. Translations load automatically
+
+## Need Help?
+
+- Translation Guide: `docs/TRANSLATION-GUIDE.md`
+- Report Issues: https://github.com/ryanbayne/wpseed/issues
+- Tag: `translation`, `i18n`

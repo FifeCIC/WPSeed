@@ -1,10 +1,10 @@
-# Copyright (C) 2026 WPSeed
+# Copyright (C) 2024 WPSeed
 # This file is distributed under the GPL v3.
 msgid ""
 msgstr ""
 "Project-Id-Version: WPSeed 1.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/ryanbayne/wpseed/issues\n"
-"POT-Creation-Date: 2026-02-15 00:00+0000\n"
+"POT-Creation-Date: 2024-12-20 00:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -12,9 +12,213 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: WP-CLI\n"
+"X-Generator: Manual\n"
 "X-Domain: wpseed\n"
 
-#: Placeholder file - Run wp i18n make-pot to generate translations
+#: wpseed.php:50
 msgid "WPSeed"
+msgstr ""
+
+#: includes/classes/listener.php:40
+msgid "Security check failed"
+msgstr ""
+
+#: includes/classes/listener.php:50
+msgid "Unauthorized"
+msgstr ""
+
+#: includes/classes/footer-debug.php:30
+msgid "WPSeed Debug Area"
+msgstr ""
+
+#: admin/page/listener-monitor.php:20
+msgid "Logs cleared"
+msgstr ""
+
+#: admin/page/listener-monitor.php:50
+msgid "Listener Monitor"
+msgstr ""
+
+#: admin/page/listener-monitor.php:55
+msgid "Total Requests"
+msgstr ""
+
+#: admin/page/listener-monitor.php:60
+msgid "Processed"
+msgstr ""
+
+#: admin/page/listener-monitor.php:65
+msgid "Rejected"
+msgstr ""
+
+#: admin/page/listener-monitor.php:70
+msgid "Skipped"
+msgstr ""
+
+#: admin/page/listener-monitor.php:80
+msgid "Type"
+msgstr ""
+
+#: admin/page/listener-monitor.php:85
+msgid "All"
+msgstr ""
+
+#: admin/page/listener-monitor.php:95
+msgid "Status"
+msgstr ""
+
+#: admin/page/listener-monitor.php:105
+msgid "Filter"
+msgstr ""
+
+#: admin/page/listener-monitor.php:106
+msgid "Reset"
+msgstr ""
+
+#: admin/page/listener-monitor.php:112
+msgid "Clear all logs?"
+msgstr ""
+
+#: admin/page/listener-monitor.php:114
+msgid "Clear All Logs"
+msgstr ""
+
+#: admin/page/listener-monitor.php:120
+msgid "Time"
+msgstr ""
+
+#: admin/page/listener-monitor.php:122
+msgid "URL"
+msgstr ""
+
+#: admin/page/listener-monitor.php:123
+msgid "User"
+msgstr ""
+
+#: admin/page/listener-monitor.php:124
+msgid "IP"
+msgstr ""
+
+#: admin/page/listener-monitor.php:126
+msgid "Reason"
+msgstr ""
+
+#: admin/page/listener-monitor.php:127
+msgid "Actions"
+msgstr ""
+
+#: admin/page/listener-monitor.php:133
+msgid "No requests logged yet"
+msgstr ""
+
+#: admin/page/listener-monitor.php:160
+msgid "View"
+msgstr ""
+
+#: admin/page/listener-monitor.php:168
+#, php-format
+msgid "Showing last 100 requests. Total: %d"
+msgstr ""
+
+#: admin/page/listener-monitor.php:173
+msgid "Request Details"
+msgstr ""
+
+#: admin/page/listener-monitor.php:175
+msgid "Close"
+msgstr ""
+
+#: toolbars/toolbar-developers.php:38
+msgid "WPSeed Dev"
+msgstr ""
+
+#: toolbars/toolbar-developers.php:47
+msgid "Developer Tools"
+msgstr ""
+
+#: toolbars/toolbar-developers.php:58
+msgid "✅ Demo Mode: ON"
+msgstr ""
+
+#: toolbars/toolbar-developers.php:60
+msgid "❌ Demo Mode: OFF"
+msgstr ""
+
+#: toolbars/toolbar-developers.php:72
+msgid "✅ Footer Debug: ON"
+msgstr ""
+
+#: toolbars/toolbar-developers.php:72
+msgid "❌ Footer Debug: OFF"
+msgstr ""
+
+#: toolbars/toolbar-developers.php:80
+msgid "Reset Pointers"
+msgstr ""
+
+#: toolbars/toolbar-developers.php:88
+msgid "Development Page"
+msgstr ""
+
+#: admin/config/admin-menus.php:20
+msgid "Development"
+msgstr ""
+
+#: admin/config/admin-menus.php:30
+msgid "jQuery UI Gallery"
+msgstr ""
+
+#: admin/config/admin-menus.php:40
+msgid "Notifications"
+msgstr ""
+
+#: admin/config/admin-menus.php:50
+msgid "Listener Monitor"
+msgstr ""
+
+#: admin/config/admin-menus.php:60
+msgid "Security Audit"
+msgstr ""
+
+#: admin/config/admin-menus.php:70
+msgid "Scheduled Actions"
+msgstr ""
+
+#: admin/config/admin-menus.php:85
+msgid "Welcome to WPSeed - Your WordPress Plugin Boilerplate"
+msgstr ""
+
+#: admin/config/admin-menus.php:88
+msgid "Getting Started"
+msgstr ""
+
+#: admin/config/admin-menus.php:89
+msgid "This is a boilerplate plugin with developer tools and examples."
+msgstr ""
+
+#: admin/config/admin-menus.php:91
+msgid "Visit the Development page to access debugging tools"
+msgstr ""
+
+#: admin/config/admin-menus.php:92
+msgid "Check the code examples in the plugin directory"
+msgstr ""
+
+#: admin/config/admin-menus.php:93
+msgid "Customize this plugin to build your own WordPress solution"
+msgstr ""
+
+#: admin/notifications/notifications.php:100
+#, php-format
+msgid "[%1$s] %2$s Notification"
+msgstr ""
+
+#: admin/notifications/notifications.php:110
+#, php-format
+msgid "Hello %1$s,\n\nYou have received a new notification:\n\n%2$s\n\nRegards,\n%3$s Team"
+msgstr ""
+
+#: includes/classes/background-process.php:180
+#, php-format
+msgid "Every %d Minutes"
 msgstr ""

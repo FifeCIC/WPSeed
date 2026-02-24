@@ -189,6 +189,7 @@ final class WordPressPluginSeed {
         
         // New Boilerplate Features
         include_once( 'includes/classes/developer-mode.php' );
+        include_once( 'includes/classes/footer-debug.php' );
         include_once( 'includes/classes/rest-controller.php' );
         include_once( 'includes/classes/rest-example.php' );
         include_once( 'includes/classes/rest-education.php' );
@@ -210,6 +211,9 @@ final class WordPressPluginSeed {
         include_once( 'includes/classes/ecosystem-registry.php' );
         include_once( 'includes/classes/ecosystem-menu-manager.php' );
         include_once( 'includes/classes/ecosystem-installer.php' );
+        
+        // Settings Backup/Restore
+        include_once( 'includes/classes/settings-backup.php' );
         
         // WP-CLI Commands
         if ( defined( 'WP_CLI' ) && WP_CLI ) {

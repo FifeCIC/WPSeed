@@ -53,14 +53,8 @@ class WPSeed_Admin_Toolbar_Developers {
         // Demo Mode Switch
         $thisaction = 'wpseed_demo_mode_switch';
         $href = admin_url('admin-post.php?action=' . $thisaction);
-        
         $is_demo = get_option('wpseed_demo_mode', false);
-        
-        if ($is_demo) {
-            $title = __('✅ Demo Mode: ON', 'wpseed');        
-        } else {
-            $title = __('❌ Demo Mode: OFF', 'wpseed');    
-        }
+        $title = $is_demo ? __('✅ Demo Mode: ON', 'wpseed') : __('❌ Demo Mode: OFF', 'wpseed')
            
         $args = array(
             'id'     => 'wpseed-toolbarmenu-toggledemomode',
@@ -80,6 +74,20 @@ class WPSeed_Admin_Toolbar_Developers {
             'parent' => 'wpseed-toolbarmenu-devtools',
             'title'  => __('Reset Pointers', 'wpseed'),
             'href'   => esc_url(wp_nonce_url($href, 'wpseed_reset_pointers')),
+        );
+        
+        $wp_admin_bar->add_menu($args);
+        
+        // Footer Debug Toggle
+        $thisaction = 'wpseed_footer_debug_toggle';
+        $href = admin_url('admin-post.php?action=' . $thisaction);
+        $is_debug = get_option('wpseed_footer_debug', false);
+        
+        $args = array(
+            'id'     => 'wpseed-toolbarmenu-footerdebug',
+            'parent' => 'wpseed-toolbarmenu-devtools',
+            'title'  => $is_debug ? __('✅ Footer Debug: ON', 'wpseed') : __('❌ Footer Debug: OFF', 'wpseed'),
+            'href'   => esc_url($href),
         );
         
         $wp_admin_bar->add_menu($args);

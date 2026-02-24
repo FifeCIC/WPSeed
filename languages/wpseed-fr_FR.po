@@ -1,0 +1,333 @@
+# French (France) Translation for WPSeed
+# Translators: [Your Name]
+msgid ""
+msgstr ""
+"Project-Id-Version: WPSeed 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/ryanbayne/wpseed/issues\n"
+"POT-Creation-Date: 2024-12-20 00:00+0000\n"
+"PO-Revision-Date: 2024-12-20 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: French\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "WPSeed"
+msgstr "WPSeed"
+
+msgid "Security check failed"
+msgstr "Vérification de sécurité échouée"
+
+msgid "Unauthorized"
+msgstr "Non autorisé"
+
+msgid "Settings"
+msgstr "Paramètres"
+
+msgid "Save Changes"
+msgstr "Enregistrer les modifications"
+
+msgid "Delete"
+msgstr "Supprimer"
+
+msgid "View"
+msgstr "Voir"
+
+msgid "Edit"
+msgstr "Modifier"
+
+msgid "Close"
+msgstr "Fermer"
+
+msgid "Filter"
+msgstr "Filtrer"
+
+msgid "All"
+msgstr "Tous"
+
+msgid "Type"
+msgstr "Type"
+
+msgid "Status"
+msgstr "Statut"
+
+msgid "Time"
+msgstr "Temps"
+
+msgid "User"
+msgstr "Utilisateur"
+
+msgid "Actions"
+msgstr "Actions"
+
+# Settings Labels
+msgid "General Settings"
+msgstr "Paramètres généraux"
+
+msgid "API Configuration"
+msgstr "Configuration API"
+
+msgid "Developer Options"
+msgstr "Options développeur"
+
+msgid "Enable/Disable"
+msgstr "Activer/Désactiver"
+
+msgid "API Key"
+msgstr "Clé API"
+
+msgid "Secret Key"
+msgstr "Clé secrète"
+
+msgid "Endpoint URL"
+msgstr "URL du point de terminaison"
+
+msgid "Timeout (seconds)"
+msgstr "Délai d'expiration (secondes)"
+
+msgid "Debug Mode"
+msgstr "Mode débogage"
+
+msgid "Log Level"
+msgstr "Niveau de journalisation"
+
+msgid "Cache Duration"
+msgstr "Durée du cache"
+
+# Listener Monitor
+msgid "Listener Monitor"
+msgstr "Moniteur d'écoute"
+
+msgid "Total Requests"
+msgstr "Requêtes totales"
+
+msgid "Processed"
+msgstr "Traitées"
+
+msgid "Rejected"
+msgstr "Rejetées"
+
+msgid "Skipped"
+msgstr "Ignorées"
+
+msgid "Request Type"
+msgstr "Type de requête"
+
+msgid "IP Address"
+msgstr "Adresse IP"
+
+msgid "View Details"
+msgstr "Voir les détails"
+
+msgid "Clear All Logs"
+msgstr "Effacer tous les journaux"
+
+msgid "Filter by Type"
+msgstr "Filtrer par type"
+
+msgid "Filter by Status"
+msgstr "Filtrer par statut"
+
+msgid "No requests logged yet"
+msgstr "Aucune requête enregistrée pour le moment"
+
+msgid "Showing last 100 requests"
+msgstr "Affichage des 100 dernières requêtes"
+
+# Notifications
+msgid "You have %d new notifications"
+msgstr "Vous avez %d nouvelles notifications"
+
+msgid "Mark as read"
+msgstr "Marquer comme lu"
+
+msgid "Mark all as read"
+msgstr "Tout marquer comme lu"
+
+msgid "Dismiss"
+msgstr "Ignorer"
+
+msgid "Notification Center"
+msgstr "Centre de notifications"
+
+msgid "System Alerts"
+msgstr "Alertes système"
+
+msgid "Update Notices"
+msgstr "Avis de mise à jour"
+
+msgid "No notifications"
+msgstr "Aucune notification"
+
+# Help Text
+msgid "Enter your API credentials here"
+msgstr "Entrez vos identifiants API ici"
+
+msgid "Enable this to see debug information"
+msgstr "Activez ceci pour voir les informations de débogage"
+
+msgid "Click to view full details"
+msgstr "Cliquez pour voir tous les détails"
+
+msgid "This setting controls..."
+msgstr "Ce paramètre contrôle..."
+
+msgid "Learn more"
+msgstr "En savoir plus"
+
+msgid "Documentation"
+msgstr "Documentation"
+
+msgid "Need help?"
+msgstr "Besoin d'aide ?"
+
+# Development Tools
+msgid "Development"
+msgstr "Développement"
+
+msgid "WPSeed Development"
+msgstr "Développement WPSeed"
+
+msgid "Assets"
+msgstr "Ressources"
+
+msgid "Performance"
+msgstr "Performance"
+
+msgid "Theme"
+msgstr "Thème"
+
+msgid "Debug Log"
+msgstr "Journal de débogage"
+
+msgid "Database"
+msgstr "Base de données"
+
+msgid "PHP Info"
+msgstr "Informations PHP"
+
+msgid "Tasks"
+msgstr "Tâches"
+
+msgid "Libraries"
+msgstr "Bibliothèques"
+
+msgid "GDPR"
+msgstr "RGPD"
+
+msgid "Credits"
+msgstr "Crédits"
+
+msgid "Dev Checklist"
+msgstr "Liste de vérification"
+
+msgid "Layouts"
+msgstr "Mises en page"
+
+msgid "Diagrams"
+msgstr "Diagrammes"
+
+msgid "Architecture"
+msgstr "Architecture"
+
+# GDPR
+msgid "GDPR Compliance Tools"
+msgstr "Outils de conformité RGPD"
+
+msgid "Tools to help manage user data, consent, and privacy compliance. These are working examples for your plugin development."
+msgstr "Outils pour aider à gérer les données utilisateur, le consentement et la conformité à la vie privée. Ce sont des exemples fonctionnels pour le développement de votre plugin."
+
+msgid "Data Export"
+msgstr "Exportation de données"
+
+msgid "Export all user data in JSON format for GDPR compliance."
+msgstr "Exporter toutes les données utilisateur au format JSON pour la conformité RGPD."
+
+msgid "User ID or Email:"
+msgstr "ID utilisateur ou e-mail :"
+
+msgid "Export Data"
+msgstr "Exporter les données"
+
+msgid "Example Implementation:"
+msgstr "Exemple d'implémentation :"
+
+msgid "Data Deletion"
+msgstr "Suppression de données"
+
+msgid "Permanently delete all user data from the plugin."
+msgstr "Supprimer définitivement toutes les données utilisateur du plugin."
+
+msgid "Delete Data"
+msgstr "Supprimer les données"
+
+msgid "Are you sure? This cannot be undone!"
+msgstr "Êtes-vous sûr ? Cela ne peut pas être annulé !"
+
+msgid "Consent Management"
+msgstr "Gestion du consentement"
+
+msgid "Track and manage user consent for data processing."
+msgstr "Suivre et gérer le consentement de l'utilisateur pour le traitement des données."
+
+msgid "Users with Consent"
+msgstr "Utilisateurs avec consentement"
+
+msgid "Frontend Consent Form:"
+msgstr "Formulaire de consentement frontend :"
+
+msgid "Privacy Policy"
+msgstr "Politique de confidentialité"
+
+msgid "Add privacy policy content for your plugin."
+msgstr "Ajouter le contenu de la politique de confidentialité pour votre plugin."
+
+msgid "Privacy Policy Content:"
+msgstr "Contenu de la politique de confidentialité :"
+
+msgid "Save Policy"
+msgstr "Enregistrer la politique"
+
+msgid "Register with WordPress:"
+msgstr "Enregistrer avec WordPress :"
+
+msgid "Data Retention"
+msgstr "Conservation des données"
+
+msgid "Configure automatic data deletion after specified period."
+msgstr "Configurer la suppression automatique des données après la période spécifiée."
+
+msgid "Delete data after (days):"
+msgstr "Supprimer les données après (jours) :"
+
+msgid "Update Retention"
+msgstr "Mettre à jour la conservation"
+
+msgid "Scheduled Cleanup:"
+msgstr "Nettoyage planifié :"
+
+msgid "Data Portability"
+msgstr "Portabilité des données"
+
+msgid "Generate machine-readable data export for users."
+msgstr "Générer une exportation de données lisible par machine pour les utilisateurs."
+
+msgid "Supported Formats:"
+msgstr "Formats pris en charge :"
+
+msgid "Export Formats:"
+msgstr "Formats d'exportation :"
+
+msgid "User not found"
+msgstr "Utilisateur introuvable"
+
+msgid "User data deleted successfully"
+msgstr "Données utilisateur supprimées avec succès"
+
+msgid "Privacy policy updated"
+msgstr "Politique de confidentialité mise à jour"
+
+msgid "Data retention period updated"
+msgstr "Période de conservation des données mise à jour"
