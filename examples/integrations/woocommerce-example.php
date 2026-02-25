@@ -61,7 +61,7 @@ class WPSeed_WooCommerce_Integration {
     public function display_custom_order_data( $order ) {
         $custom_data = $order->get_meta( '_wpseed_order_data' );
         if ( $custom_data ) {
-            echo '<p><strong>' . __( 'Custom Order Data', 'wpseed' ) . ':</strong> ' . esc_html( $custom_data ) . '</p>';
+            echo '<p><strong>' . esc_html__( 'Custom Order Data', 'wpseed' ) . ':</strong> ' . esc_html( $custom_data ) . '</p>';
         }
     }
 

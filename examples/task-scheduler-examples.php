@@ -134,8 +134,8 @@ function wpseed_example_get_scheduled() {
     ));
     
     foreach ($actions as $action) {
-        echo 'Hook: ' . $action->get_hook() . '<br>';
-        echo 'Scheduled: ' . $action->get_schedule()->get_date()->format('Y-m-d H:i:s') . '<br>';
+        echo 'Hook: ' . esc_html($action->get_hook()) . '<br>';
+        echo 'Scheduled: ' . esc_html($action->get_schedule()->get_date()->format('Y-m-d H:i:s')) . '<br>';
     }
 }
 

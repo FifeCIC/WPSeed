@@ -69,7 +69,7 @@ class WPSeed_bbPress_Integration {
     public function add_custom_field() {
         ?>
         <p>
-            <label for="wpseed_custom_field"><?php _e( 'Custom Field', 'wpseed' ); ?></label>
+            <label for="wpseed_custom_field"><?php esc_html_e( 'Custom Field', 'wpseed' ); ?></label>
             <input type="text" name="wpseed_custom_field" id="wpseed_custom_field" class="regular-text" />
         </p>
         <?php

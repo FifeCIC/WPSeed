@@ -28,14 +28,14 @@ class WPSeed_Admin_Development_Debug_Log {
                 </p>
                 <p>
                     <strong><?php esc_html_e('File Size:', 'wpseed'); ?></strong> 
-                    <?php echo size_format(filesize($debug_file)); ?>
+                        <?php echo esc_html(size_format(filesize($debug_file))); ?>
                 </p>
                 
                 <div style="margin: 20px 0;">
                     <a href="<?php echo esc_url(wp_nonce_url(add_query_arg('wpseed_clear_log', '1'), 'wpseed_clear_log_action')); ?>" 
                        class="button button-secondary"
                        onclick="return confirm('<?php esc_attr_e('Are you sure you want to clear the debug log?', 'wpseed'); ?>');">
-                        <?php _e('Clear Log', 'wpseed'); ?>
+                        <?php esc_html_e('Clear Log', 'wpseed'); ?>
                     </a>
                 </div>
 
@@ -50,7 +50,7 @@ class WPSeed_Admin_Development_Debug_Log {
                 $last_lines = array_slice($lines, -100);
                 ?>
                 
-                <h3><?php _e('Last 100 Lines', 'wpseed'); ?></h3>
+                <h3><?php esc_html_e('Last 100 Lines', 'wpseed'); ?></h3>
                 <textarea readonly style="width: 100%; height: 400px; font-family: monospace; font-size: 12px;"><?php 
                     echo esc_textarea(implode("\n", $last_lines)); 
                 ?></textarea>

@@ -30,7 +30,7 @@ class WPSeed_Admin_Development_Diagrams {
                         <option value="hook-system"><?php _e('Hook System', 'wpseed'); ?></option>
                     </optgroup>
                     <optgroup label="Data Flow">
-                        <option value="data-flow"><?php _e('Data Flow Architecture', 'wpseed'); ?></option>
+                        <option value="data-flow"><?php esc_html_e('Data Flow Architecture', 'wpseed'); ?></option>
                         <option value="rest-api-flow"><?php _e('REST API Flow', 'wpseed'); ?></option>
                         <option value="admin-flow"><?php _e('Admin Interface Flow', 'wpseed'); ?></option>
                     </optgroup>

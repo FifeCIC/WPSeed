@@ -131,7 +131,7 @@ class WPSeed_Admin_Development_Credits {
         
         <script>
         jQuery(document).ready(function($) {
-            var useAjax = <?php echo self::USE_URL_NAVIGATION ? 'false' : 'true'; ?>;
+            var useAjax = <?php echo esc_js(self::USE_URL_NAVIGATION ? 'false' : 'true'); ?>;
             
             $('#category-filter').on('change', function() {
                 var category = $(this).val();
@@ -155,7 +155,7 @@ class WPSeed_Admin_Development_Credits {
                     $.post(ajaxurl, {
                         action: 'wpseed_get_contributor_details',
                         contributor_id: contributorId,
-                        nonce: '<?php echo wp_create_nonce('wpseed_contributor_details'); ?>'
+                        nonce: '<?php echo esc_attr(wp_create_nonce('wpseed_contributor_details')); ?>'
                     }, function(response) {
                         console.log('Response:', response);
                         if (response.success) {

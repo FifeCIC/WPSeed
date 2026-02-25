@@ -52,7 +52,7 @@ $unread_count = WPSeed_Notifications::get_unread_count($user_id);
 ?>
 
 <div class="wrap wpseed-notification-center">
-    <h1><?php _e('Notification Center', 'wpseed'); ?></h1>
+    <h1><?php esc_html_e('Notification Center', 'wpseed'); ?></h1>
     
     <div class="notification-header" style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
         <div class="notification-filters">
