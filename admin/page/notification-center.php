@@ -16,8 +16,8 @@ wp_enqueue_script('wpseed-notification-center', WPSeed()->plugin_url() . '/asset
 if (isset($_POST['notification_action'])) {
     check_admin_referer('wpseed_notification_action');
     
-    $action = sanitize_text_field($_POST['notification_action']);
-    $notification_id = intval($_POST['notification_id']);
+    $action = sanitize_text_field( wp_unslash( $_POST['notification_action'] ) );
+    $notification_id = isset( $_POST['notification_id'] ) ? intval( $_POST['notification_id'] ) : 0;
     
     switch ($action) {
         case 'mark_read':
@@ -40,7 +40,7 @@ if (isset($_POST['notification_action'])) {
 }
 
 $user_id = get_current_user_id();
-$filter = isset($_GET['filter']) ? sanitize_text_field($_GET['filter']) : 'all';
+$filter = isset($_GET['filter']) ? sanitize_text_field( wp_unslash( $_GET['filter'] ) ) : 'all';
 
 $args = array('limit' => 50);
 if ($filter === 'unread') {
@@ -52,17 +52,17 @@ $unread_count = WPSeed_Notifications::get_unread_count($user_id);
 ?>
 
 <div class="wrap wpseed-notification-center">
-    <h1><?php _e('Notification Center', 'wpseed'); ?></h1>
+    <h1><?php esc_html_e('Notification Center', 'wpseed'); ?></h1>
     
     <div class="notification-header" style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
         <div class="notification-filters">
-            <a href="<?php echo admin_url('admin.php?page=wpseed-notifications'); ?>" 
-               class="button <?php echo $filter === 'all' ? 'button-primary' : ''; ?>">
-                <?php _e('All', 'wpseed'); ?> (<?php echo count($notifications); ?>)
+            <a href="<?php echo esc_url( admin_url('admin.php?page=wpseed-notifications') ); ?>" 
+               class="button <?php echo esc_attr( $filter === 'all' ? 'button-primary' : '' ); ?>">
+                <?php esc_html_e('All', 'wpseed'); ?> (<?php echo esc_html( count($notifications) ); ?>)
             </a>
-            <a href="<?php echo admin_url('admin.php?page=wpseed-notifications&filter=unread'); ?>" 
-               class="button <?php echo $filter === 'unread' ? 'button-primary' : ''; ?>">
-                <?php _e('Unread', 'wpseed'); ?> (<?php echo $unread_count; ?>)
+            <a href="<?php echo esc_url( admin_url('admin.php?page=wpseed-notifications&filter=unread') ); ?>" 
+               class="button <?php echo esc_attr( $filter === 'unread' ? 'button-primary' : '' ); ?>">
+                <?php esc_html_e('Unread', 'wpseed'); ?> (<?php echo esc_html( $unread_count ); ?>)
             </a>
         </div>
         
@@ -71,7 +71,7 @@ $unread_count = WPSeed_Notifications::get_unread_count($user_id);
             <?php wp_nonce_field('wpseed_notification_action'); ?>
             <input type="hidden" name="notification_action" value="mark_all_read">
             <button type="submit" class="button">
-                <?php _e('Mark All Read', 'wpseed'); ?>
+                <?php esc_html_e('Mark All Read', 'wpseed'); ?>
             </button>
         </form>
         <?php endif; ?>
@@ -79,12 +79,12 @@ $unread_count = WPSeed_Notifications::get_unread_count($user_id);
     
     <?php if (empty($notifications)): ?>
         <div class="notice notice-info">
-            <p><?php _e('No notifications found.', 'wpseed'); ?></p>
+            <p><?php esc_html_e('No notifications found.', 'wpseed'); ?></p>
         </div>
     <?php else: ?>
         <div class="notifications-list">
             <?php foreach ($notifications as $notification): ?>
-                <div class="notification-item <?php echo $notification->is_read ? 'read' : 'unread'; ?> <?php echo $notification->priority === 'high' ? 'priority-high' : ''; ?>">
+                <div class="notification-item <?php echo esc_attr( $notification->is_read ? 'read' : 'unread' ); ?> <?php echo esc_attr( $notification->priority === 'high' ? 'priority-high' : '' ); ?>">
                     
                     <div style="display: flex; justify-content: space-between; align-items: start;">
                         <div style="flex: 1;">
@@ -98,11 +98,11 @@ $unread_count = WPSeed_Notifications::get_unread_count($user_id);
                                 </span>
                                 
                                 <?php if ($notification->priority === 'high'): ?>
-                                    <span class="priority-high-label">⚠ <?php _e('High Priority', 'wpseed'); ?></span>
+                                    <span class="priority-high-label">⚠ <?php esc_html_e('High Priority', 'wpseed'); ?></span>
                                 <?php endif; ?>
                                 
                                 <span class="notification-time">
-                                    <?php echo human_time_diff(strtotime($notification->created_at), current_time('timestamp')); ?> <?php _e('ago', 'wpseed'); ?>
+                                    <?php echo esc_html( human_time_diff(strtotime($notification->created_at), current_time('timestamp')) ); ?> <?php esc_html_e('ago', 'wpseed'); ?>
                                 </span>
                             </div>
                             
@@ -115,9 +115,9 @@ $unread_count = WPSeed_Notifications::get_unread_count($user_id);
                                     <form method="post" style="display: inline;">
                                         <?php wp_nonce_field('wpseed_notification_action'); ?>
                                         <input type="hidden" name="notification_action" value="mark_read">
-                                        <input type="hidden" name="notification_id" value="<?php echo $notification->id; ?>">
+                                        <input type="hidden" name="notification_id" value="<?php echo esc_attr( $notification->id ); ?>">
                                         <button type="submit" class="button button-small">
-                                            <?php _e('Mark Read', 'wpseed'); ?>
+                                            <?php esc_html_e('Mark Read', 'wpseed'); ?>
                                         </button>
                                     </form>
                                 <?php endif; ?>
@@ -128,35 +128,35 @@ $unread_count = WPSeed_Notifications::get_unread_count($user_id);
                                     </a>
                                 <?php endif; ?>
                                 
-                                <button type="button" class="button button-small snooze-btn" data-id="<?php echo $notification->id; ?>">
-                                    <?php _e('Snooze', 'wpseed'); ?>
+                                <button type="button" class="button button-small snooze-btn" data-id="<?php echo esc_attr( $notification->id ); ?>">
+                                    <?php esc_html_e('Snooze', 'wpseed'); ?>
                                 </button>
                                 
                                 <form method="post" style="display: inline;">
                                     <?php wp_nonce_field('wpseed_notification_action'); ?>
                                     <input type="hidden" name="notification_action" value="delete">
-                                    <input type="hidden" name="notification_id" value="<?php echo $notification->id; ?>">
+                                    <input type="hidden" name="notification_id" value="<?php echo esc_attr( $notification->id ); ?>">
                                     <button type="submit" class="button button-small button-link-delete">
-                                        <?php _e('Delete', 'wpseed'); ?>
+                                        <?php esc_html_e('Delete', 'wpseed'); ?>
                                     </button>
                                 </form>
                             </div>
                             
                             <!-- Snooze options (hidden by default) -->
-                            <div class="snooze-options" id="snooze-<?php echo $notification->id; ?>">
+                            <div class="snooze-options" id="snooze-<?php echo esc_attr( $notification->id ); ?>">
                                 <form method="post">
                                     <?php wp_nonce_field('wpseed_notification_action'); ?>
                                     <input type="hidden" name="notification_action" value="snooze">
-                                    <input type="hidden" name="notification_id" value="<?php echo $notification->id; ?>">
-                                    <label><?php _e('Snooze for:', 'wpseed'); ?></label>
+                                    <input type="hidden" name="notification_id" value="<?php echo esc_attr( $notification->id ); ?>">
+                                    <label><?php esc_html_e('Snooze for:', 'wpseed'); ?></label>
                                     <select name="snooze_duration">
-                                        <option value="3600"><?php _e('1 hour', 'wpseed'); ?></option>
-                                        <option value="21600"><?php _e('6 hours', 'wpseed'); ?></option>
-                                        <option value="86400"><?php _e('1 day', 'wpseed'); ?></option>
-                                        <option value="604800"><?php _e('1 week', 'wpseed'); ?></option>
+                                        <option value="3600"><?php esc_html_e('1 hour', 'wpseed'); ?></option>
+                                        <option value="21600"><?php esc_html_e('6 hours', 'wpseed'); ?></option>
+                                        <option value="86400"><?php esc_html_e('1 day', 'wpseed'); ?></option>
+                                        <option value="604800"><?php esc_html_e('1 week', 'wpseed'); ?></option>
                                     </select>
-                                    <button type="submit" class="button button-small"><?php _e('Apply', 'wpseed'); ?></button>
-                                    <button type="button" class="button button-small cancel-snooze"><?php _e('Cancel', 'wpseed'); ?></button>
+                                    <button type="submit" class="button button-small"><?php esc_html_e('Apply', 'wpseed'); ?></button>
+                                    <button type="button" class="button button-small cancel-snooze"><?php esc_html_e('Cancel', 'wpseed'); ?></button>
                                 </form>
                             </div>
                         </div>

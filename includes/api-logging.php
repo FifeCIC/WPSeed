@@ -238,11 +238,10 @@ class WPSeed_API_Logging {
         
         $query .= " ORDER BY {$orderby} {$order}";
         $query .= " LIMIT %d OFFSET %d";
-        $params[] = $args['limit'];
-        $params[] = $args['offset'];
+        $params[] = absint($args['limit']);
+        $params[] = absint($args['offset']);
         
-        $prepared_query = $wpdb->prepare($query, $params);
-        $results = $wpdb->get_results($prepared_query, ARRAY_A);
+        $results = $wpdb->get_results($wpdb->prepare($query, $params), ARRAY_A);
         
         return $results;
     }
@@ -283,8 +282,7 @@ class WPSeed_API_Logging {
             $params[] = $args['type'];
         }
         
-        $prepared_query = empty($params) ? $query : $wpdb->prepare($query, $params);
-        $count = $wpdb->get_var($prepared_query);
+        $count = empty($params) ? $wpdb->get_var($query) : $wpdb->get_var($wpdb->prepare($query, $params));
         
         return (int) $count;
     }

@@ -1,16 +1,18 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 /**
- * Adds Foo_Widget widget.
+ * Adds WPSeed_Widget widget.
  */
-class Foo_Widget extends WP_Widget {
+class WPSeed_Widget extends WP_Widget {
 
     /**
      * Register widget with WordPress.
      */                                
     function __construct() {
         parent::__construct(
-            'foo_widget', // Base ID
+            'wpseed_widget', // Base ID
             __( 'Widget Title', 'wpseed' ), // Name
             array( 'description' => __( 'A Foo Widget', 'wpseed' ), ) // Args
         );

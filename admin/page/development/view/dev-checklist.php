@@ -20,7 +20,7 @@ class WPSeed_Admin_Development_Checklist {
                     <?php echo wp_kses_post(wpautop($checklist)); ?>
                 </div>
             <?php else: ?>
-                <p><?php _e('Checklist file not found.', 'wpseed'); ?></p>
+                <p><?php esc_html_e('Checklist file not found.', 'wpseed'); ?></p>
             <?php endif; ?>
         </div>
         

@@ -41,7 +41,9 @@ class WPSeed_Admin_Assets {
         // Register admin styles
         wp_register_style( 'wpseed_admin_styles', WPSeed()->plugin_url() . '/assets/css/admin.css', array(), WPSEED_VERSION );
         wp_register_style( 'wpseed_tooltips', WPSeed()->plugin_url() . '/assets/css/tooltips.css', array(), WPSEED_VERSION );
-        wp_register_style( 'jquery-ui-style', '//code.jquery.com/ui/' . $jquery_version . '/themes/smoothness/jquery-ui.min.css', array(), $jquery_version );
+        wp_register_style( 'wpseed-education', WPSeed()->plugin_url() . '/assets/css/education.css', array(), WPSEED_VERSION );
+        // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion -- External jQuery UI library
+        wp_register_style( 'jquery-ui-style', 'https://code.jquery.com/ui/' . $jquery_version . '/themes/smoothness/jquery-ui.min.css', array(), $jquery_version );
 
         // Admin styles for WordPress Seed pages only
         if ( in_array( $screen_id, wpseed_get_screen_ids() ) ) {
@@ -63,7 +65,7 @@ class WPSeed_Admin_Assets {
         $suffix       = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
         // Register scripts
-        wp_register_script( 'wpseed_tooltips', WPSeed()->plugin_url() . '/assets/js/tooltips.js', array( 'jquery' ), WPSEED_VERSION );
+        wp_register_script( 'wpseed_tooltips', WPSeed()->plugin_url() . '/assets/js/tooltips.js', array( 'jquery' ), WPSEED_VERSION, true );
 
         if ( in_array( $screen_id, wpseed_get_screen_ids() ) ) {
             wp_enqueue_script( 'wpseed_tooltips' );

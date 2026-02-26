@@ -4,6 +4,11 @@
  * 
  * @package WPSeed
  * @version 1.0.0
+ * 
+ * @phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery -- Helper functions for direct database access
+ * @phpcs:disable WordPress.DB.DirectDatabaseQuery.NoCaching -- Caching handled by calling code where appropriate
+ * @phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table/column names cannot be prepared
+ * @phpcs:disable WordPress.DB.PreparedSQL.NotPrepared -- Dynamic queries by design
  */
 
 if (!defined('ABSPATH')) {
@@ -43,25 +48,35 @@ function wpseed_db_table_exists($table_name) {
 function wpseed_db_get_table_columns($table_name, $columns_only = true) {
     global $wpdb;
     
+    // Check cache first
+    $cache_key = 'wpseed_table_columns_' . md5($table_name);
+    $cached = wp_cache_get($cache_key, 'wpseed');
+    if (false !== $cached) {
+        return $cached;
+    }
+    
     if ($columns_only) {
         $columns_array = array();
-        foreach ($wpdb->get_col("DESC " . $table_name, 0) as $column_name) {
+        foreach ($wpdb->get_col("DESC " . esc_sql($table_name), 0) as $column_name) {
             $columns_array[] = $column_name;
         }
+        wp_cache_set($cache_key, $columns_array, 'wpseed', 3600);
         return $columns_array;
     }
     
-    return $wpdb->get_results("DESC " . $table_name);
+    $result = $wpdb->get_results("DESC " . esc_sql($table_name));
+    wp_cache_set($cache_key, $result, 'wpseed', 3600);
+    return $result;
 }
 
 function wpseed_db_drop_table($table_name) {
     global $wpdb;
-    return $wpdb->query("DROP TABLE IF EXISTS $table_name");
+    return $wpdb->query("DROP TABLE IF EXISTS " . esc_sql($table_name));
 }
 
 function wpseed_get_table_row_count($table_name) {
     global $wpdb;
-    $count = @$wpdb->get_var("SELECT COUNT(*) FROM `{$table_name}`");
+    $count = @$wpdb->get_var("SELECT COUNT(*) FROM " . esc_sql($table_name));
     return ($count !== null) ? (int) $count : 0;
 }
 
@@ -101,7 +116,7 @@ function wpseed_get_table_status($table_name) {
         return 'Missing';
     }
     
-    $count = $wpdb->get_var("SELECT COUNT(*) FROM `{$table_name}`");
+    $count = $wpdb->get_var("SELECT COUNT(*) FROM " . esc_sql($table_name));
     if ($count == 0) {
         return 'Empty';
     }

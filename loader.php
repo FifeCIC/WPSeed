@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @class WPSeed
  * @version 1.0.0
  */
-final class WordPressPluginSeed {
+final class WPSeed_Main {
     
     /**
      * WPSeed version.
@@ -62,7 +62,7 @@ final class WordPressPluginSeed {
      * @since 1.0
      */
     public function __clone() {
-        _doing_it_wrong( __FUNCTION__, __( 'Your not allowed to do that!', 'wpseed' ), '1.0' );
+        _doing_it_wrong( __FUNCTION__, esc_html__( 'Your not allowed to do that!', 'wpseed' ), '1.0' );
     }
 
     /**
@@ -70,7 +70,7 @@ final class WordPressPluginSeed {
      * @since 1.0
      */
     public function __wakeup() {
-        _doing_it_wrong( __FUNCTION__, __( 'Your not allowed to do that!', 'wpseed' ), '1.0' );
+        _doing_it_wrong( __FUNCTION__, esc_html__( 'Your not allowed to do that!', 'wpseed' ), '1.0' );
     }
 
     /**
@@ -100,9 +100,12 @@ final class WordPressPluginSeed {
      * @since  1.0
      */
     private function init_hooks() {
-        register_activation_hook( WPSEED_PLUGIN_FILE, array( 'WPSeed_Install', 'install' ) );
-        // Do not confuse deactivation of a plugin with deletion of a plugin - two very different requests.
-        register_deactivation_hook( WPSEED_PLUGIN_FILE, array( 'WPSeed_Install', 'deactivate' ) );
+        // Only register activation/deactivation hooks if not in test environment
+        if ( ! defined( 'WP_TESTS_DIR' ) && ! defined( 'PHPUNIT_COMPOSER_INSTALL' ) ) {
+            register_activation_hook( WPSEED_PLUGIN_FILE, array( 'WPSeed_Install', 'install' ) );
+            // Do not confuse deactivation of a plugin with deletion of a plugin - two very different requests.
+            register_deactivation_hook( WPSEED_PLUGIN_FILE, array( 'WPSeed_Install', 'deactivate' ) );
+        }
         add_action( 'init', array( $this, 'init' ), 0 );
     }
 
@@ -284,7 +287,7 @@ final class WordPressPluginSeed {
         $this->define_upload_constants();
         
         // Before init action.
-        do_action( 'before_wpseed_init' );
+        do_action( 'wpseed_before_init' );
 
         // Init action.
         do_action( 'wpseed_init' );
@@ -347,7 +350,7 @@ if( !function_exists( 'WPSeed' ) ) {
      * @return WPSeed
      */
     function WPSeed() {
-        return WordPressPluginSeed::instance();
+        return WPSeed_Main::instance();
     }
 
     // Global for backwards compatibility.

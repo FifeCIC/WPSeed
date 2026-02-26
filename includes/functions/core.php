@@ -55,7 +55,7 @@ function wpseed_is_dashboard() {
 * running none urgent tasks during existing operations and demanding requests.
 */
 function wpseed_is_background_process() {        
-    if ( ( 'wp-login.php' === basename( $_SERVER['SCRIPT_FILENAME'] ) )
+    if ( ( isset( $_SERVER['SCRIPT_FILENAME'] ) && 'wp-login.php' === basename( wp_unslash( sanitize_text_field( $_SERVER['SCRIPT_FILENAME'] ) ) ) )
             || ( defined( 'XMLRPC_REQUEST' ) && XMLRPC_REQUEST )
             || ( defined( 'DOING_CRON' ) && DOING_CRON )
             || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
@@ -85,6 +85,7 @@ function wpseed_print_js() {
          * @since 2.6.0
          * @param string $js JavaScript code.
          */
+        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         echo apply_filters( 'wpseed_queued_js', $js );
 
         unset( $wpseed_queued_js );

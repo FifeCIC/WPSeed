@@ -185,7 +185,7 @@ trait WPSeed_OptionsTrait {
             {
                 if( $option_information[0] === 1 )
                 {
-                    add_option( $option_name, $option_information[3], $option_information[1] );    
+                    add_option( $option_name, $option_information[3] );    
                 }    
             }
         }
@@ -286,7 +286,7 @@ trait WPSeed_OptionsTrait {
             }
         }
 
-        trigger_error( sprintf( 'Invalid WPSeed option name: %s', $name ), E_USER_WARNING );
+        trigger_error( sprintf( 'Invalid WPSeed option name: %s', esc_html( $name ) ), E_USER_WARNING );
 
         return $default;
     }
@@ -339,7 +339,7 @@ trait WPSeed_OptionsTrait {
             }
         }
 
-        trigger_error( sprintf( 'Invalid WPSeed option name: %s', $name ), E_USER_WARNING );
+        trigger_error( sprintf( 'Invalid WPSeed option name: %s', esc_html( $name ) ), E_USER_WARNING );
 
         return false;
     }
@@ -354,7 +354,7 @@ trait WPSeed_OptionsTrait {
         $names = array_keys( $array );
 
         foreach ( array_diff( $names, self::get_option_names(), self::get_option_names( 'non_compact' ), self::get_option_names( 'private' ) ) as $unknown_name ) {
-            trigger_error( sprintf( 'Invalid WPSeed option name: %s', $unknown_name ), E_USER_WARNING );
+            trigger_error( sprintf( 'Invalid WPSeed option name: %s', esc_html( $unknown_name ) ), E_USER_WARNING );
             unset( $array[ $unknown_name ] );
         }
 
@@ -374,7 +374,7 @@ trait WPSeed_OptionsTrait {
         $names  = (array) $names;
 
         if ( ! self::is_valid( $names ) ) {
-            trigger_error( sprintf( 'Invalid WPSeed option names: %s', print_r( $names, 1 ) ), E_USER_WARNING );
+            trigger_error( sprintf( 'Invalid WPSeed option names: %s', esc_html( print_r( $names, 1 ) ) ), E_USER_WARNING );
 
             return false;
         }

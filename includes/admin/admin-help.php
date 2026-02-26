@@ -36,7 +36,7 @@ class WPSeed_Admin_Help {
             return;
         }
         
-        if ( is_admin() && function_exists('current_user_can') && current_user_can( 'manage_options' ) ) {
+        if ( is_admin() && function_exists('current_user_can') && current_user_can( 'manage_options' ) && isset( $_GET['_wpnonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'wpseed_help_nonce' ) ) {
             $page      = empty( $_GET['page'] ) ? '' : sanitize_title( wp_unslash( $_GET['page'] ) );
             $tab       = empty( $_GET['tab'] ) ? '' : sanitize_title( wp_unslash( $_GET['tab'] ) );
         } else {
@@ -104,14 +104,40 @@ class WPSeed_Admin_Help {
         $screen->add_help_tab( array(
             'id'        => 'wpseed_newsletter_tab',
             'title'     => __( 'Newsletter', 'wpseed' ),
-            'content'   => '<h2>' . __( 'Annual Newsletter', 'wpseed' ) . '</h2>' .
+            'content'   => $this->get_newsletter_content(),
+        ) );
+        
+        $screen->add_help_tab( array(
+            'id'        => 'wpseed_credits_tab',
+            'title'     => __( 'Credits', 'wpseed' ),
+            'content'   => '<h2>' . __( 'Credits', 'wpseed' ) . '</h2>' .
+            '<p>Please do not remove credits from the plugin. You may edit them or give credit somewhere else in your project.</p>' . 
+            '<h4>' . __( 'Automattic - they created the best way to create plugins so we can all get more from WP.', 'wpseed' ) . '</h4>' .
+            '<h4>' . __( 'Brian at WPMUDEV - our discussion led to this project and entirely new approach in my development.', 'wpseed' ) . '</h4>' . 
+            '<h4>' . __( 'Ignacio Cruz at WPMUDEV - has giving us a good approach to handling shortcodes.', 'wpseed' ) . '</h4>' .
+            '<h4>' . __( 'Ashley Rich (A5shleyRich) - author of a crucial piece of the puzzle, related to asynchronous background tasks.', 'wpseed' ) . '</h4>' .
+            '<h4>' . __( 'Igor Vaynberg - thank you for an elegant solution to searching within a menu.', 'wpseed' ) . '</h4>'
+        ) );
+                    
+        $screen->add_help_tab( array(
+            'id'        => 'wpseed_faq_tab',
+            'title'     => __( 'FAQ', 'wpseed' ),
+            'content'   => '',
+            'callback'  => array( $this, 'faq' ),
+        ) );
+                        
+    }
+    
+    private function get_newsletter_content() {
+        wp_enqueue_style( 'wpseed-mailchimp', '//cdn-images.mailchimp.com/embedcode/classic-10_7.css', array(), '10.7' );
+        wp_enqueue_script( 'wpseed-mailchimp-validate', '//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js', array('jquery'), null, true );
+        wp_add_inline_script( 'wpseed-mailchimp-validate', '(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]="EMAIL";ftypes[0]="email";fnames[1]="FNAME";ftypes[1]="text";fnames[2]="LNAME";ftypes[2]="text";}(jQuery));var $mcj = jQuery.noConflict(true);' );
+        
+        return '<h2>' . __( 'Annual Newsletter', 'wpseed' ) . '</h2>' .
             '<p>' . __( 'Mailchip is used to manage the projects newsletter subscribers list.', 'wpseed' ) . '</p>' .
-            '<p>' . '<!-- Begin MailChimp Signup Form -->
-                <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
+            '<p><!-- Begin MailChimp Signup Form -->
                 <style type="text/css">         
                     #mc_embed_signup{background:#f6fbfd; clear:left; font:14px Helvetica,Arial,sans-serif; }
-                    /* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
-                       We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
                 </style>
                 <div id="mc_embed_signup">
                 <form action="//webtechglobal.us9.list-manage.com/subscribe/post?u=99272fe1772de14ff2be02fe6&amp;id=570668cac5" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
@@ -135,35 +161,13 @@ class WPSeed_Admin_Help {
                     <div id="mce-responses" class="clear">
                         <div class="response" id="mce-error-response" style="display:none"></div>
                         <div class="response" id="mce-success-response" style="display:none"></div>
-                    </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                    </div>
                     <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_99272fe1772de14ff2be02fe6_570668cac5" tabindex="-1" value=""></div>
                     <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
                     </div>
                 </form>
                 </div>
-                <script type=\'text/javascript\' src=\'//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js\'></script><script type=\'text/javascript\'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]=\'EMAIL\';ftypes[0]=\'email\';fnames[1]=\'FNAME\';ftypes[1]=\'text\';fnames[2]=\'LNAME\';ftypes[2]=\'text\';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
-                <!--End mc_embed_signup-->' . '</p>',
-        ) );
-        
-        $screen->add_help_tab( array(
-            'id'        => 'wpseed_credits_tab',
-            'title'     => __( 'Credits', 'wpseed' ),
-            'content'   => '<h2>' . __( 'Credits', 'wpseed' ) . '</h2>' .
-            '<p>Please do not remove credits from the plugin. You may edit them or give credit somewhere else in your project.</p>' . 
-            '<h4>' . __( 'Automattic - they created the best way to create plugins so we can all get more from WP.', 'wpseed' ) . '</h4>' .
-            '<h4>' . __( 'Brian at WPMUDEV - our discussion led to this project and entirely new approach in my development.', 'wpseed' ) . '</h4>' . 
-            '<h4>' . __( 'Ignacio Cruz at WPMUDEV - has giving us a good approach to handling shortcodes.', 'wpseed' ) . '</h4>' .
-            '<h4>' . __( 'Ashley Rich (A5shleyRich) - author of a crucial piece of the puzzle, related to asynchronous background tasks.', 'wpseed' ) . '</h4>' .
-            '<h4>' . __( 'Igor Vaynberg - thank you for an elegant solution to searching within a menu.', 'wpseed' ) . '</h4>'
-        ) );
-                    
-        $screen->add_help_tab( array(
-            'id'        => 'wpseed_faq_tab',
-            'title'     => __( 'FAQ', 'wpseed' ),
-            'content'   => '',
-            'callback'  => array( $this, 'faq' ),
-        ) );
-                        
+                <!--End mc_embed_signup--></p>';
     }
     
     public function faq() {

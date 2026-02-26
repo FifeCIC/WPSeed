@@ -31,8 +31,8 @@ class WPSeed_Dependencies {
             if (!is_plugin_active($dependency['file'])) {
                 add_action('admin_notices', function() use ($dependency) {
                     echo '<div class="error"><p>';
-                    /* translators: %s: Required plugin name */
                     echo wp_kses_post(sprintf(
+                        /* translators: %s: Required plugin name */
                         __('WPSeed requires %s to be installed and activated.', 'wpseed'),
                         '<strong>' . esc_html($dependency['name']) . '</strong>'
                     ));

@@ -27,7 +27,7 @@ class WPSeed_Admin_Menus {
     public function __construct() {
         //add_action( 'admin_menu', array( $this, 'toplevel_menu' ), 9 );
         add_action( 'admin_menu', array( $this, 'settings_menu' ), 100 );
-        add_action( 'admin_menu', array( $this, 'mainviews_menu' ), 100 );
+        add_action( 'admin_menu', array( $this, 'main_menu' ), 100 );
     }
 
     /**
@@ -48,9 +48,9 @@ class WPSeed_Admin_Menus {
     }
 
     /**
-    * Add the main tables views to the existing Plugins menu.  
+    * Add the main plugin page to the existing Plugins menu.  
     */
-    public function mainviews_menu() {
+    public function main_menu() {
         add_plugins_page( __( 'WPSeed Plugin', 'wpseed' ), __( 'WPSeed Plugin', 'wpseed' ), 'activate_plugins', 'wpseed', array( $this, 'main_page' ) );        
     } 
         

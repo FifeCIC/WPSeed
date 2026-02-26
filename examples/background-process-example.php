@@ -30,7 +30,10 @@ class WPSeed_Example_Background_Process extends WPSeed_Background_Process {
         // Return false to remove from queue
         // Return modified item to keep in queue for next pass
         
-        error_log( 'Processing: ' . print_r( $item, true ) );
+        // Log processing if WP_DEBUG is enabled
+        if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+            error_log( 'Processing: ' . print_r( $item, true ) );
+        }
         
         // Example: Process and remove
         return false;
@@ -39,7 +42,9 @@ class WPSeed_Example_Background_Process extends WPSeed_Background_Process {
     protected function complete() {
         parent::complete();
         // Actions after queue is complete
-        error_log( 'Background process complete' );
+        if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+            error_log( 'Background process complete' );
+        }
     }
 }
 

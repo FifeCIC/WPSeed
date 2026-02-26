@@ -9,29 +9,29 @@
 if (!defined('ABSPATH')) exit;
 
 // Get audit data
-$audit_data = get_option('wpseed_security_audit', array());
+$wpseed_audit_data = get_option('wpseed_security_audit', array());
 
 // Handle form submission
 if (isset($_POST['wpseed_update_audit']) && check_admin_referer('wpseed_security_audit')) {
-    $check_id = sanitize_text_field($_POST['check_id']);
-    $status = sanitize_text_field($_POST['status']);
-    $tool = sanitize_text_field($_POST['tool']);
-    $notes = sanitize_textarea_field($_POST['notes']);
+    $wpseed_check_id = isset($_POST['check_id']) ? sanitize_text_field(wp_unslash($_POST['check_id'])) : '';
+    $wpseed_status = isset($_POST['status']) ? sanitize_text_field(wp_unslash($_POST['status'])) : '';
+    $wpseed_tool = isset($_POST['tool']) ? sanitize_text_field(wp_unslash($_POST['tool'])) : '';
+    $wpseed_notes = isset($_POST['notes']) ? sanitize_textarea_field(wp_unslash($_POST['notes'])) : '';
     
-    $audit_data[$check_id] = array(
-        'status' => $status,
-        'tool' => $tool,
-        'notes' => $notes,
+    $wpseed_audit_data[$wpseed_check_id] = array(
+        'status' => $wpseed_status,
+        'tool' => $wpseed_tool,
+        'notes' => $wpseed_notes,
         'last_checked' => current_time('mysql'),
         'checked_by' => get_current_user_id()
     );
     
-    update_option('wpseed_security_audit', $audit_data);
+    update_option('wpseed_security_audit', $wpseed_audit_data);
     echo '<div class="notice notice-success"><p>' . esc_html__('Security check updated successfully.', 'wpseed') . '</p></div>';
 }
 
 // Security checklist
-$security_checks = array(
+$wpseed_security_checks = array(
     'input_sanitization' => array(
         'title' => 'Input Validation & Sanitization',
         'items' => array(
@@ -106,64 +106,64 @@ $security_checks = array(
     <p><?php esc_html_e('Track security compliance and testing for your WordPress plugin.', 'wpseed'); ?></p>
     
     <div class="security-audit-container">
-        <?php foreach ($security_checks as $check_id => $check): ?>
+        <?php foreach ($wpseed_security_checks as $wpseed_check_id => $wpseed_check): ?>
             <?php 
-            $check_data = isset($audit_data[$check_id]) ? $audit_data[$check_id] : null;
-            $status = $check_data ? $check_data['status'] : 'pending';
-            $status_class = $status === 'pass' ? 'status-pass' : ($status === 'fail' ? 'status-fail' : 'status-pending');
+            $wpseed_check_data = isset($wpseed_audit_data[$wpseed_check_id]) ? $wpseed_audit_data[$wpseed_check_id] : null;
+            $wpseed_status = $wpseed_check_data ? $wpseed_check_data['status'] : 'pending';
+            $wpseed_status_class = $wpseed_status === 'pass' ? 'status-pass' : ($wpseed_status === 'fail' ? 'status-fail' : 'status-pending');
             ?>
             
-            <div class="security-check-card <?php echo esc_attr($status_class); ?>">
+            <div class="security-check-card <?php echo esc_attr($wpseed_status_class); ?>">
                 <div class="check-header">
-                    <h2><?php echo esc_html($check['title']); ?></h2>
-                    <span class="status-badge status-<?php echo esc_attr($status); ?>">
-                        <?php echo esc_html(ucfirst($status)); ?>
+                    <h2><?php echo esc_html($wpseed_check['title']); ?></h2>
+                    <span class="status-badge status-<?php echo esc_attr($wpseed_status); ?>">
+                        <?php echo esc_html(ucfirst($wpseed_status)); ?>
                     </span>
                 </div>
                 
                 <div class="check-items">
                     <ul>
-                        <?php foreach ($check['items'] as $item): ?>
-                            <li><?php echo esc_html($item); ?></li>
+                        <?php foreach ($wpseed_check['items'] as $wpseed_item): ?>
+                            <li><?php echo esc_html($wpseed_item); ?></li>
                         <?php endforeach; ?>
                     </ul>
                 </div>
                 
-                <?php if ($check_data): ?>
+                <?php if ($wpseed_check_data): ?>
                     <div class="check-info">
                         <p><strong><?php esc_html_e('Last Checked:', 'wpseed'); ?></strong> 
-                            <?php echo esc_html( gmdate( 'F j, Y g:i a', strtotime( $check_data['last_checked'] ) ) ); ?>
+                            <?php echo esc_html( gmdate( 'F j, Y g:i a', strtotime( $wpseed_check_data['last_checked'] ) ) ); ?>
                         </p>
                         <p><strong><?php esc_html_e('Tool Used:', 'wpseed'); ?></strong> 
-                            <?php echo esc_html($check_data['tool']); ?>
+                            <?php echo esc_html($wpseed_check_data['tool']); ?>
                         </p>
-                        <?php if (!empty($check_data['notes'])): ?>
+                        <?php if (!empty($wpseed_check_data['notes'])): ?>
                             <p><strong><?php esc_html_e('Notes:', 'wpseed'); ?></strong> 
-                                <?php echo esc_html($check_data['notes']); ?>
+                                <?php echo esc_html($wpseed_check_data['notes']); ?>
                             </p>
                         <?php endif; ?>
                     </div>
                 <?php endif; ?>
                 
-                <button type="button" class="button update-check-btn" data-check-id="<?php echo esc_attr($check_id); ?>">
+                <button type="button" class="button update-check-btn" data-check-id="<?php echo esc_attr($wpseed_check_id); ?>">
                     <?php esc_html_e('Update Check', 'wpseed'); ?>
                 </button>
                 
                 <!-- Update Form (hidden by default) -->
-                <div class="update-form" id="form-<?php echo esc_attr($check_id); ?>" style="display:none;">
+                <div class="update-form" id="form-<?php echo esc_attr($wpseed_check_id); ?>" style="display:none;">
                     <form method="post">
                         <?php wp_nonce_field('wpseed_security_audit'); ?>
                         <input type="hidden" name="wpseed_update_audit" value="1">
-                        <input type="hidden" name="check_id" value="<?php echo esc_attr($check_id); ?>">
+                        <input type="hidden" name="check_id" value="<?php echo esc_attr($wpseed_check_id); ?>">
                         
                         <table class="form-table">
                             <tr>
                                 <th><?php esc_html_e('Status', 'wpseed'); ?></th>
                                 <td>
                                     <select name="status" required>
-                                        <option value="pending" <?php selected($status, 'pending'); ?>><?php esc_html_e('Pending', 'wpseed'); ?></option>
-                                        <option value="pass" <?php selected($status, 'pass'); ?>><?php esc_html_e('Pass', 'wpseed'); ?></option>
-                                        <option value="fail" <?php selected($status, 'fail'); ?>><?php esc_html_e('Fail', 'wpseed'); ?></option>
+                                        <option value="pending" <?php selected($wpseed_status, 'pending'); ?>><?php esc_html_e('Pending', 'wpseed'); ?></option>
+                                        <option value="pass" <?php selected($wpseed_status, 'pass'); ?>><?php esc_html_e('Pass', 'wpseed'); ?></option>
+                                        <option value="fail" <?php selected($wpseed_status, 'fail'); ?>><?php esc_html_e('Fail', 'wpseed'); ?></option>
                                     </select>
                                 </td>
                             </tr>
@@ -171,14 +171,14 @@ $security_checks = array(
                                 <th><?php esc_html_e('Tool Used', 'wpseed'); ?></th>
                                 <td>
                                     <input type="text" name="tool" class="regular-text" 
-                                           value="<?php echo $check_data ? esc_attr($check_data['tool']) : ''; ?>" 
+                                           value="<?php echo $wpseed_check_data ? esc_attr($wpseed_check_data['tool']) : ''; ?>" 
                                            placeholder="e.g., Plugin Check, Manual Review, Amazon Q">
                                 </td>
                             </tr>
                             <tr>
                                 <th><?php esc_html_e('Notes', 'wpseed'); ?></th>
                                 <td>
-                                    <textarea name="notes" rows="3" class="large-text"><?php echo $check_data ? esc_textarea($check_data['notes']) : ''; ?></textarea>
+                                    <textarea name="notes" rows="3" class="large-text"><?php echo $wpseed_check_data ? esc_textarea($wpseed_check_data['notes']) : ''; ?></textarea>
                                 </td>
                             </tr>
                         </table>

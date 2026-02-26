@@ -34,6 +34,7 @@ class WPSeed_Education {
     }
     
     public function render_page() {
+        wp_enqueue_style('wpseed-education');
         $lessons = $this->get_lessons();
         include dirname(__FILE__) . '/../admin/views/education.php';
     }

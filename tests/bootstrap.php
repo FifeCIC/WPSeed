@@ -5,23 +5,22 @@
  * @package WPSeed/Tests
  */
 
-$_tests_dir = getenv('WP_TESTS_DIR');
+// Define test environment constant before loading anything
+define( 'WP_TESTS_DIR', getenv('WP_TESTS_DIR') ?: rtrim(sys_get_temp_dir(), '/\\') . '/wordpress-tests-lib' );
 
-if (!$_tests_dir) {
-    $_tests_dir = rtrim(sys_get_temp_dir(), '/\\') . '/wordpress-tests-lib';
-}
+$wpseed_tests_dir = WP_TESTS_DIR;
 
-if (!file_exists($_tests_dir . '/includes/functions.php')) {
-    echo "Could not find $_tests_dir/includes/functions.php\n";
+if (!file_exists($wpseed_tests_dir . '/includes/functions.php')) {
+    echo "Could not find {$wpseed_tests_dir}/includes/functions.php\n";
     exit(1);
 }
 
-require_once $_tests_dir . '/includes/functions.php';
+require_once $wpseed_tests_dir . '/includes/functions.php';
 
-function _manually_load_plugin() {
+function wpseed_manually_load_plugin() {
     require dirname(dirname(__FILE__)) . '/wpseed.php';
 }
 
-tests_add_filter('muplugins_loaded', '_manually_load_plugin');
+tests_add_filter('muplugins_loaded', 'wpseed_manually_load_plugin');
 
-require $_tests_dir . '/includes/bootstrap.php';
+require $wpseed_tests_dir . '/includes/bootstrap.php';

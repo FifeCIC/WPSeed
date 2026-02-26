@@ -91,4 +91,6 @@ class WPSeed_Footer_Debug {
     }
 }
 
-new WPSeed_Footer_Debug();
+add_action('init', function() {
+    new WPSeed_Footer_Debug();
+});

@@ -177,19 +177,19 @@ class WPSeed_Notifications {
             
             $where_clause = implode(' AND ', $where_parts);
             
-            // Sanitize orderby
+            // Sanitize orderby and order
             $allowed_orderby = array('created_at', 'priority', 'type', 'is_read');
-            $orderby = in_array($args['orderby'], $allowed_orderby) ? $args['orderby'] : 'created_at';
+            $orderby = in_array($args['orderby'], $allowed_orderby, true) ? $args['orderby'] : 'created_at';
             $order = strtoupper($args['order']) === 'ASC' ? 'ASC' : 'DESC';
             
-            // Build safe query with proper escaping
-            $notifications = $wpdb->get_results(
-                $wpdb->prepare(
-                    "SELECT * FROM {$wpdb->prefix}wpseed_notifications WHERE " . $where_clause . " ORDER BY $orderby $order LIMIT %d OFFSET %d",
-                    $args['limit'],
-                    $args['offset']
-                )
+            // Build safe query - orderby and order are now validated against whitelist
+            $query = $wpdb->prepare(
+                "SELECT * FROM {$wpdb->prefix}wpseed_notifications WHERE " . $where_clause . " ORDER BY {$orderby} {$order} LIMIT %d OFFSET %d",
+                $args['limit'],
+                $args['offset']
             );
+            
+            $notifications = $wpdb->get_results( $query ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
             
             foreach ($notifications as &$notification) {
                 $notification->data = maybe_unserialize($notification->data);

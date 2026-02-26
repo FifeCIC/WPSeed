@@ -46,7 +46,7 @@ class WPSeed_Settings_Import_Export {
             'settings'  => $settings,
         );
 
-        $filename = 'wpseed-settings-' . date( 'Y-m-d-His' ) . '.json';
+        $filename = 'wpseed-settings-' . gmdate( 'Y-m-d-His' ) . '.json';
 
         header( 'Content-Type: application/json' );
         header( 'Content-Disposition: attachment; filename=' . $filename );
@@ -76,7 +76,8 @@ class WPSeed_Settings_Import_Export {
             return;
         }
 
-        $file_content = file_get_contents( $_FILES['import_file']['tmp_name'] );
+        $tmp_name = sanitize_text_field( wp_unslash( $_FILES['import_file']['tmp_name'] ) );
+        $file_content = file_get_contents( $tmp_name );
         $import_data = json_decode( $file_content, true );
 
         if ( json_last_error() !== JSON_ERROR_NONE ) {
@@ -105,6 +106,7 @@ class WPSeed_Settings_Import_Export {
         global $wpdb;
 
         $settings = array();
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         $option_names = $wpdb->get_col(
             $wpdb->prepare(
                 "SELECT option_name FROM {$wpdb->options} WHERE option_name LIKE %s",

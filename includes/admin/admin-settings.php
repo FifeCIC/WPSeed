@@ -76,7 +76,7 @@ class WPSeed_Admin_Settings {
     public static function save() {
         global $current_tab;
 
-        if ( empty( $_REQUEST['_wpnonce'] ) || ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'wpseed-settings' ) ) {
+        if ( empty( $_REQUEST['_wpnonce'] ) || ! wp_verify_nonce( wp_unslash( $_REQUEST['_wpnonce'] ), 'wpseed-settings' ) ) {
             die( esc_html__( 'Action failed. Please refresh the page and retry.', 'wpseed' ) );
         }
 
@@ -148,21 +148,23 @@ class WPSeed_Admin_Settings {
         self::get_settings_pages();
 
         // Get current tab/section
-        $current_tab     = empty( $_GET['tab'] ) ? self::$defaulttab : sanitize_title( $_GET['tab'] );
-        $current_section = empty( $_REQUEST['section'] ) ? '' : sanitize_title( $_REQUEST['section'] );
+        $wpseed_current_tab     = empty( $_GET['tab'] ) ? self::$defaulttab : sanitize_title( wp_unslash( $_GET['tab'] ) );
+        $wpseed_current_section = empty( $_REQUEST['section'] ) ? '' : sanitize_title( wp_unslash( $_REQUEST['section'] ) );
+        $current_tab = $wpseed_current_tab;
+        $current_section = $wpseed_current_section;
 
         // Save settings if data has been posted
-        if ( ! empty( $_POST ) ) {
+        if ( ! empty( $_POST ) && isset( $_REQUEST['_wpnonce'] ) && wp_verify_nonce( wp_unslash( $_REQUEST['_wpnonce'] ), 'wpseed-settings' ) ) {
             self::save();
         }
 
         // Add any posted messages
         if ( ! empty( $_GET['wpseed_error'] ) ) {
-            self::add_error( stripslashes( $_GET['wpseed_error'] ) );
+            self::add_error( sanitize_text_field( wp_unslash( $_GET['wpseed_error'] ) ) );
         }
 
         if ( ! empty( $_GET['wpseed_message'] ) ) {
-            self::add_message( stripslashes( $_GET['wpseed_message'] ) );
+            self::add_message( sanitize_text_field( wp_unslash( $_GET['wpseed_message'] ) ) );
         }
 
         // Get tabs for the settings page
@@ -324,7 +326,7 @@ class WPSeed_Admin_Settings {
                                 value="<?php echo esc_attr( $option_value ); ?>"
                                 class="<?php echo esc_attr( $value['class'] ); ?>"
                                 placeholder="<?php echo esc_attr( $value['placeholder'] ); ?>"
-                                <?php echo implode( ' ', $custom_attributes ); ?>
+                                <?php echo implode( ' ', array_map( 'esc_attr', $custom_attributes ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                                 /> <?php echo wp_kses_post( $description ); ?>
                         </td>
                     </tr><?php
@@ -349,7 +351,7 @@ class WPSeed_Admin_Settings {
                                 style="<?php echo esc_attr( $value['css'] ); ?>"
                                 class="<?php echo esc_attr( $value['class'] ); ?>"
                                 placeholder="<?php echo esc_attr( $value['placeholder'] ); ?>"
-                                <?php echo implode( ' ', $custom_attributes ); ?>
+                                <?php echo implode( ' ', array_map( 'esc_attr', $custom_attributes ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                                 ><?php echo esc_textarea( $option_value );  ?></textarea>
                         </td>
                     </tr><?php
@@ -372,7 +374,7 @@ class WPSeed_Admin_Settings {
                                 id="<?php echo esc_attr( $value['id'] ); ?>"
                                 style="<?php echo esc_attr( $value['css'] ); ?>"
                                 class="<?php echo esc_attr( $value['class'] ); ?>"
-                                <?php echo implode( ' ', $custom_attributes ); ?>
+                                <?php echo implode( ' ', array_map( 'esc_attr', $custom_attributes ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                                 <?php echo ( 'multiselect' == $value['type'] ) ? 'multiple="multiple"' : ''; ?>
                                 >
                                 <?php
@@ -419,7 +421,7 @@ class WPSeed_Admin_Settings {
                                                 type="radio"
                                                 style="<?php echo esc_attr( $value['css'] ); ?>"
                                                 class="<?php echo esc_attr( $value['class'] ); ?>"
-                                                <?php echo implode( ' ', $custom_attributes ); ?>
+                                                <?php echo implode( ' ', array_map( 'esc_attr', $custom_attributes ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                                                 <?php checked( $key, $option_value ); ?>
                                                 /> <?php echo esc_html( $val ); ?></label>
                                         </li>
@@ -482,7 +484,7 @@ class WPSeed_Admin_Settings {
                                 class="<?php echo esc_attr( isset( $value['class'] ) ? $value['class'] : '' ); ?>"
                                 value="1"
                                 <?php checked( $option_value, 'yes'); ?>
-                                <?php echo implode( ' ', $custom_attributes ); ?>
+                                <?php echo implode( ' ', array_map( 'esc_attr', $custom_attributes ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                             /> <?php echo wp_kses_post( $description ); ?>
                         </label> <?php echo wp_kses_post( $tooltip_html ); ?>
                     <?php
@@ -558,7 +560,7 @@ class WPSeed_Admin_Settings {
      * @return bool
      */
     public static function save_fields( $options ) {
-        if ( empty( $_POST ) ) {
+        if ( empty( $_POST ) || ! isset( $_REQUEST['_wpnonce'] ) || ! wp_verify_nonce( wp_unslash( $_REQUEST['_wpnonce'] ), 'wpseed-settings' ) ) {
             return false;
         }
 
@@ -690,16 +692,20 @@ class WPSeed_Admin_Settings {
 
             // Redirect method - don't protect
             if ( file_exists( $downloads_url . '/.htaccess' ) ) {
-                unlink( $downloads_url . '/.htaccess' );
+                wp_delete_file( $downloads_url . '/.htaccess' );
             }
 
         } else {
 
             // Force method - protect, add rules to the htaccess file
             if ( ! file_exists( $downloads_url . '/.htaccess' ) ) {
-                if ( $file_handle = @fopen( $downloads_url . '/.htaccess', 'w' ) ) {
-                    fwrite( $file_handle, 'deny from all' );
-                    fclose( $file_handle );
+                global $wp_filesystem;
+                if ( empty( $wp_filesystem ) ) {
+                    require_once ABSPATH . 'wp-admin/includes/file.php';
+                    WP_Filesystem();
+                }
+                if ( $wp_filesystem ) {
+                    $wp_filesystem->put_contents( $downloads_url . '/.htaccess', 'deny from all', FS_CHMOD_FILE );
                 }
             }
         }

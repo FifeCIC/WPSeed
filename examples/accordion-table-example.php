@@ -15,7 +15,7 @@ wp_enqueue_style('wpseed-accordion-table');
 wp_enqueue_script('wpseed-accordion-table');
 
 // Example data
-$items = array(
+$wpseed_items = array(
     'item_1' => array(
         'name' => 'Example Item 1',
         'status' => 'active',
@@ -46,9 +46,9 @@ $items = array(
 );
 
 // Get selected item
-$selected_item = 'item_1';
-if (isset($_GET['configure'])) {
-    $selected_item = sanitize_text_field(wp_unslash($_GET['configure']));
+$wpseed_selected_item = 'item_1';
+if (isset($_GET['configure']) && isset($_GET['_wpnonce']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_GET['_wpnonce'])), 'wpseed_configure_item')) {
+    $wpseed_selected_item = sanitize_text_field(wp_unslash($_GET['configure']));
 }
 ?>
 
@@ -76,25 +76,25 @@ if (isset($_GET['configure'])) {
             </div>
 
             <div class="wpseed-accordion-table">
-                <?php foreach ($items as $item_id => $item): ?>
+                <?php foreach ($wpseed_items as $wpseed_item_id => $wpseed_item): ?>
                     <div class="accordion-row">
                         <div class="accordion-header">
                             <div style="flex: 2;">
-                                <strong><?php echo esc_html($item['name']); ?></strong>
+                                <strong><?php echo esc_html($wpseed_item['name']); ?></strong>
                             </div>
                             <div style="flex: 1;">
-                                <span class="status-badge status-<?php echo esc_attr($item['status']); ?>">
-                                    <?php echo esc_html(ucfirst($item['status'])); ?>
+                                <span class="status-badge status-<?php echo esc_attr($wpseed_item['status']); ?>">
+                                    <?php echo esc_html(ucfirst($wpseed_item['status'])); ?>
                                 </span>
                             </div>
                             <div style="flex: 1;">
-                                <span class="priority-badge priority-<?php echo esc_attr($item['priority']); ?>">
-                                    <?php echo esc_html(ucfirst($item['priority'])); ?>
+                                <span class="priority-badge priority-<?php echo esc_attr($wpseed_item['priority']); ?>">
+                                    <?php echo esc_html(ucfirst($wpseed_item['priority'])); ?>
                                 </span>
                             </div>
-                            <div style="flex: 1;"><?php echo esc_html($item['weight']); ?></div>
+                            <div style="flex: 1;"><?php echo esc_html($wpseed_item['weight']); ?></div>
                             <div style="flex: 1;">
-                                <?php echo esc_html(human_time_diff(strtotime($item['last_used']), current_time('timestamp')) . ' ago'); ?>
+                                <?php echo esc_html(human_time_diff(strtotime($wpseed_item['last_used']), current_time('timestamp')) . ' ago'); ?>
                             </div>
                         </div>
                         
@@ -102,20 +102,20 @@ if (isset($_GET['configure'])) {
                             <div class="item-meta">
                                 <div>
                                     <strong><?php esc_html_e('Description:', 'wpseed'); ?></strong><br>
-                                    <?php echo esc_html($item['description']); ?>
+                                    <?php echo esc_html($wpseed_item['description']); ?>
                                 </div>
                                 <div>
                                     <strong><?php esc_html_e('Status:', 'wpseed'); ?></strong><br>
-                                    <?php echo esc_html(ucfirst($item['status'])); ?>
+                                    <?php echo esc_html(ucfirst($wpseed_item['status'])); ?>
                                 </div>
                                 <div>
                                     <strong><?php esc_html_e('Priority:', 'wpseed'); ?></strong><br>
-                                    <?php echo esc_html(ucfirst($item['priority'])); ?>
+                                    <?php echo esc_html(ucfirst($wpseed_item['priority'])); ?>
                                 </div>
                             </div>
                             
                             <div class="item-actions">
-                                <a href="<?php echo esc_url(add_query_arg('configure', $item_id)); ?>" class="button button-primary">
+                                <a href="<?php echo esc_url(wp_nonce_url(add_query_arg('configure', $wpseed_item_id), 'wpseed_configure_item')); ?>" class="button button-primary">
                                     <?php esc_html_e('Configure', 'wpseed'); ?>
                                 </a>
                                 <button type="button" class="button"><?php esc_html_e('Edit', 'wpseed'); ?></button>
@@ -130,41 +130,41 @@ if (isset($_GET['configure'])) {
         <!-- Right Column: Details Sidebar -->
         <div class="wpseed-sidebar">
             <div class="wpseed-details-container">
-                <?php if (isset($items[$selected_item])): 
-                    $item = $items[$selected_item];
+                <?php if (isset($wpseed_items[$wpseed_selected_item])): 
+                    $wpseed_item = $wpseed_items[$wpseed_selected_item];
                 ?>
                     <div class="section-header">
-                        <h3><?php echo esc_html($item['name']); ?></h3>
+                        <h3><?php echo esc_html($wpseed_item['name']); ?></h3>
                     </div>
                     
                     <div class="section-content">
                         <div class="detail-group">
                             <label><?php esc_html_e('Description:', 'wpseed'); ?></label>
-                            <p><?php echo esc_html($item['description']); ?></p>
+                            <p><?php echo esc_html($wpseed_item['description']); ?></p>
                         </div>
                         
                         <div class="detail-group">
                             <label><?php esc_html_e('Details:', 'wpseed'); ?></label>
-                            <p><?php echo esc_html($item['details']); ?></p>
+                            <p><?php echo esc_html($wpseed_item['details']); ?></p>
                         </div>
                         
                         <div class="detail-group">
                             <label><?php esc_html_e('Status:', 'wpseed'); ?></label>
-                            <span class="status-badge status-<?php echo esc_attr($item['status']); ?>">
-                                <?php echo esc_html(ucfirst($item['status'])); ?>
+                            <span class="status-badge status-<?php echo esc_attr($wpseed_item['status']); ?>">
+                                <?php echo esc_html(ucfirst($wpseed_item['status'])); ?>
                             </span>
                         </div>
                         
                         <div class="detail-group">
                             <label><?php esc_html_e('Priority:', 'wpseed'); ?></label>
-                            <span class="priority-badge priority-<?php echo esc_attr($item['priority']); ?>">
-                                <?php echo esc_html(ucfirst($item['priority'])); ?>
+                            <span class="priority-badge priority-<?php echo esc_attr($wpseed_item['priority']); ?>">
+                                <?php echo esc_html(ucfirst($wpseed_item['priority'])); ?>
                             </span>
                         </div>
                         
                         <div class="detail-group">
                             <label><?php esc_html_e('Weight:', 'wpseed'); ?></label>
-                            <input type="number" value="<?php echo esc_attr($item['weight']); ?>" min="0" max="100">
+                            <input type="number" value="<?php echo esc_attr($wpseed_item['weight']); ?>" min="0" max="100">
                         </div>
                         
                         <div class="detail-actions">

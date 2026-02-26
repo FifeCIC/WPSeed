@@ -68,6 +68,7 @@ class WPSeed_Install {
     */
     public static function install_action_do_update() {
         if ( ! empty( $_GET['do_update_wpseed'] ) ) {
+            check_admin_referer( 'wpseed-update' );
             self::install();
             WPSeed_Admin_Notices::add_notice( 'update' );
         }        
@@ -78,8 +79,10 @@ class WPSeed_Install {
     */
     public static function install_action_updater_cron() {
         if ( ! empty( $_GET['force_update_wpseed'] ) ) {
-            do_action( 'wp_wpseed_updater_cron' );
+            check_admin_referer( 'wpseed-force-update' );
+            do_action( 'wpseed_updater_cron' );
             wp_safe_redirect( admin_url( 'options-general.php?page=wpseed-settings' ) );
+            exit;
         }        
     }
     
@@ -131,12 +134,16 @@ class WPSeed_Install {
          *
          * Based on code inside core's upgrade_network() function.
          */
-        $sql = "DELETE a, b FROM $wpdb->options a, $wpdb->options b
+        $wpdb->query( $wpdb->prepare(
+            "DELETE a, b FROM $wpdb->options a, $wpdb->options b
             WHERE a.option_name LIKE %s
             AND a.option_name NOT LIKE %s
             AND b.option_name = CONCAT( '_transient_timeout_', SUBSTRING( a.option_name, 12 ) )
-            AND b.option_value < %d";
-        $wpdb->query( $wpdb->prepare( $sql, $wpdb->esc_like( '_transient_' ) . '%', $wpdb->esc_like( '_transient_timeout_' ) . '%', time() ) );
+            AND b.option_value < %d",
+            $wpdb->esc_like( '_transient_' ) . '%',
+            $wpdb->esc_like( '_transient_timeout_' ) . '%',
+            time()
+        ) );
 
         // Trigger action
         do_action( 'wpseed_installed' );
@@ -358,9 +365,14 @@ class WPSeed_Install {
 
         foreach ( $files as $file ) {
             if ( wp_mkdir_p( $file['base'] ) && ! file_exists( trailingslashit( $file['base'] ) . $file['file'] ) ) {
-                if ( $file_handle = @fopen( trailingslashit( $file['base'] ) . $file['file'], 'w' ) ) {
-                    fwrite( $file_handle, $file['content'] );
-                    fclose( $file_handle );
+                $filepath = trailingslashit( $file['base'] ) . $file['file'];
+                global $wp_filesystem;
+                if ( empty( $wp_filesystem ) ) {
+                    require_once ABSPATH . 'wp-admin/includes/file.php';
+                    WP_Filesystem();
+                }
+                if ( $wp_filesystem ) {
+                    $wp_filesystem->put_contents( $filepath, $file['content'], FS_CHMOD_FILE );
                 }
             }
         }
