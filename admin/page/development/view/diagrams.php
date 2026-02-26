@@ -13,8 +13,8 @@ if (!defined('ABSPATH')) {
 class WPSeed_Admin_Development_Diagrams {
     
     public static function output() {
-        // Enqueue Mermaid.js
-        wp_enqueue_script('mermaid', 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js', array(), '10.0.0', true);
+        // Enqueue local Mermaid.js (download from https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js)
+        wp_enqueue_script('mermaid', WPSEED_PLUGIN_URL . 'assets/js/mermaid.min.js', array(), '10.0.0', true);
         ?>
         <div class="wpseed-diagrams-container">
             <div class="diagrams-header">

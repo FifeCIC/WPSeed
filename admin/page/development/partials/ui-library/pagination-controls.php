@@ -134,7 +134,7 @@ defined('ABSPATH') || exit;
     
     <?php
     // Add inline script for pagination functionality
-    $pagination_script = "
+    $wpseed_pagination_script = "
         jQuery(document).ready(function($) {
             // Pagination item click handling
             $('.pagination-item:not(.disabled), .wpseed-pagination-item:not(.disabled)').on('click', function(e) {
@@ -177,6 +177,6 @@ defined('ABSPATH') || exit;
         });
     ";
     
-    wp_add_inline_script('jquery', $pagination_script);
+    wp_add_inline_script('jquery', $wpseed_pagination_script);
     ?>
 </div>

@@ -70,7 +70,7 @@ defined('ABSPATH') || exit;
     wp_enqueue_style('wp-pointer');
     wp_enqueue_script('wp-pointer');
     
-    $pointer_script = "
+    $wpseed_pointer_script = "
         jQuery(document).ready(function($) {
             var testPointer = null;
             
@@ -147,6 +147,6 @@ defined('ABSPATH') || exit;
         });
     ";
     
-    wp_add_inline_script('wp-pointer', $pointer_script);
+    wp_add_inline_script('wp-pointer', $wpseed_pointer_script);
     ?>
 </div>

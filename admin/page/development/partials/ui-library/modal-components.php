@@ -143,7 +143,7 @@ defined('ABSPATH') || exit;
 
     <?php
     // Add inline script for modal functionality using existing patterns
-    $modal_script = "
+    $wpseed_modal_script = "
         jQuery(document).ready(function($) {
             // Basic modal functionality
             $('#open-demo-modal').on('click', function() {
@@ -189,6 +189,6 @@ defined('ABSPATH') || exit;
         });
     ";
 
-    wp_add_inline_script('jquery', $modal_script);
+    wp_add_inline_script('jquery', $wpseed_modal_script);
     ?>
 </div>

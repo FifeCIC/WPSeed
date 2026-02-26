@@ -1,6 +1,6 @@
-=== WPSeed - AI-Powered WordPress Plugin Boilerplate ===
+=== WPSeed Boilerplate ===
 Contributors: Ryan Bayne
-Donate link: https://www.patreon.com/ryanbayne
+Donate link: https://ryanbayne.uk
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Tags: boilerplate, plugin starter, AI assistant, REST API, developer tools, WP-CLI, modern architecture

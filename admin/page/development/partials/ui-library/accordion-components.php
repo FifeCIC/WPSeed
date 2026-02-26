@@ -96,7 +96,7 @@ defined('ABSPATH') || exit;
     
     <?php
     // Add interactive functionality
-    $accordion_script = "
+    $wpseed_accordion_script = "
         jQuery(document).ready(function($) {
             $('.wpseed-accordion-header').on('click', function() {
                 var \$item = $(this).closest('.wpseed-accordion-item');
@@ -121,6 +121,6 @@ defined('ABSPATH') || exit;
         });
     ";
     
-    wp_add_inline_script('jquery', $accordion_script);
+    wp_add_inline_script('jquery', $wpseed_accordion_script);
     ?>
 </div>

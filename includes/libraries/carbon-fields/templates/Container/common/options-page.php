@@ -40,7 +40,7 @@ if ( ! isset( $container_css_class ) ) {
 					<?php do_action( "{$container_id}_before_sidebar" ); ?>
 
 					<div id="submitdiv" class="postbox">
-						<h3><?php _e( 'Actions', 'carbon-fields' ); ?></h3>
+						<h3><?php esc_html_e( 'Actions', 'carbon-fields' ); ?></h3>
 
 						<div id="major-publishing-actions">
 

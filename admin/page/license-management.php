@@ -131,7 +131,7 @@ $is_valid = $client->is_license_valid();
                                     echo esc_html( gmdate( 'F j, Y', $expires ) );
                                     
                                     if ($days_left > 0) {
-                                        echo ' <span style="color: #666;">(' . $days_left . ' days remaining)</span>';
+                                        echo ' <span style="color: #666;">(' . esc_html($days_left) . ' days remaining)</span>';
                                     } else {
                                         echo ' <span style="color: #d63638;">(Expired)</span>';
                                     }

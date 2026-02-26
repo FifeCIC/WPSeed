@@ -34,7 +34,7 @@ class WPSeed_Admin_Dashboard {
      * Recent reviews widget.
      */
     public function example_widget() {              
-        echo '<p>' . __( 'This is an example widget only. A developer must use it or remove it.', 'wpseed' ) . '</p>';
+        echo '<p>' . esc_html__( 'This is an example widget only. A developer must use it or remove it.', 'wpseed' ) . '</p>';
     }
 
 }

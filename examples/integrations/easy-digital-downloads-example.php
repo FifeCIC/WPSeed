@@ -36,7 +36,7 @@ class WPSeed_EDD_Integration {
         $value = get_post_meta( $post_id, '_wpseed_custom_field', true );
         ?>
         <p>
-            <label for="wpseed_custom_field"><?php _e( 'Custom Field', 'wpseed' ); ?></label>
+            <label for="wpseed_custom_field"><?php esc_html_e( 'Custom Field', 'wpseed' ); ?></label>
             <input type="text" name="wpseed_custom_field" id="wpseed_custom_field" value="<?php echo esc_attr( $value ); ?>" class="large-text" />
         </p>
         <?php
