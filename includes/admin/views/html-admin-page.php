@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     <nav class="nav-tab-wrapper woo-nav-tab-wrapper">
         <?php
             foreach ( $tabs as $key => $report_group ) {
-                echo '<a href="' . admin_url( 'admin.php?page=wpseed&tab=' . urlencode( $key ) ) . '" class="nav-tab ';
+                echo '<a href="' . esc_url( admin_url( 'admin.php?page=wpseed&tab=' . urlencode( $key ) ) ) . '" class="nav-tab ';
                 if ( $current_tab == $key ) {
                     echo 'nav-tab-active';
                 }
@@ -60,7 +60,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
                 }
 
-                echo implode( ' | </li><li>', $links );
+                echo wp_kses_post( implode( ' | </li><li>', $links ) );
 
             ?></li>
         </ul>
@@ -79,7 +79,7 @@ if ( ! defined( 'ABSPATH' ) ) {
         }
 
         if ( $tabs['description'] ) {
-            echo '<p>' . $tabs['description'] . '</p>';
+            echo '<p>' . wp_kses_post( $tabs['description'] ) . '</p>';
         }
 
         if ( $tabs['callback'] && ( is_callable( $tabs['callback'] ) ) ) {

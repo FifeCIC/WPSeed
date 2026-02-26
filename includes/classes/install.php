@@ -131,12 +131,11 @@ class WPSeed_Install {
          *
          * Based on code inside core's upgrade_network() function.
          */
-        $sql = "DELETE a, b FROM $wpdb->options a, $wpdb->options b
+        $wpdb->query( $wpdb->prepare( "DELETE a, b FROM $wpdb->options a, $wpdb->options b
             WHERE a.option_name LIKE %s
             AND a.option_name NOT LIKE %s
             AND b.option_name = CONCAT( '_transient_timeout_', SUBSTRING( a.option_name, 12 ) )
-            AND b.option_value < %d";
-        $wpdb->query( $wpdb->prepare( $sql, $wpdb->esc_like( '_transient_' ) . '%', $wpdb->esc_like( '_transient_timeout_' ) . '%', time() ) );
+            AND b.option_value < %d", $wpdb->esc_like( '_transient_' ) . '%', $wpdb->esc_like( '_transient_timeout_' ) . '%', time() ) );
 
         // Trigger action
         do_action( 'wpseed_installed' );
@@ -358,10 +357,9 @@ class WPSeed_Install {
 
         foreach ( $files as $file ) {
             if ( wp_mkdir_p( $file['base'] ) && ! file_exists( trailingslashit( $file['base'] ) . $file['file'] ) ) {
-                if ( $file_handle = @fopen( trailingslashit( $file['base'] ) . $file['file'], 'w' ) ) {
-                    fwrite( $file_handle, $file['content'] );
-                    fclose( $file_handle );
-                }
+                $file_path = trailingslashit( $file['base'] ) . $file['file'];
+                // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
+                file_put_contents( $file_path, $file['content'] );
             }
         }
     }

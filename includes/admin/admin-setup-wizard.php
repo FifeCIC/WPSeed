@@ -102,6 +102,7 @@ class WPSeed_Admin_Setup_Wizard {
                 'handler' => ''
             )
         );
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce verification not required for navigation
         $this->step = isset( $_GET['step'] ) ? sanitize_key( wp_unslash( $_GET['step'] ) ) : current( array_keys( $this->steps ) );
         $suffix     = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
@@ -213,24 +214,24 @@ class WPSeed_Admin_Setup_Wizard {
      * Introduction step.
      */
     public function wpseed_setup_introduction() { ?>
-        <h1><?php _e( 'Setup WordPress Seed', 'wpseed' ); ?></h1>
+        <h1><?php esc_html_e( 'Setup WordPress Seed', 'wpseed' ); ?></h1>
         
         <?php if( $this->optional ) { ?>
         
-        <p><?php _e( 'Thank you for choosing WordPress Seed to improve your website! The setup wizard will help you configure the basic settings. <strong>It’s completely optional and shouldn’t take longer than five minutes.</strong>', 'wpseed' ); ?></p>
-        <p><?php _e( 'No time right now? If you don’t want to go through the wizard, you can skip and return to the WordPress dashboard. You will be able to use the plugin but you might miss some features!', 'wpseed' ); ?></p>
+        <p><?php esc_html_e( 'Thank you for choosing WordPress Seed to improve your website! The setup wizard will help you configure the basic settings. <strong>It’s completely optional and shouldn’t take longer than five minutes.</strong>', 'wpseed' ); ?></p>
+        <p><?php esc_html_e( 'No time right now? If you don’t want to go through the wizard, you can skip and return to the WordPress dashboard. You will be able to use the plugin but you might miss some features!', 'wpseed' ); ?></p>
         <p class="wpseed-setup-actions step">
-            <a href="<?php echo esc_url( $this->get_next_step_link() ); ?>" class="button-primary button button-large button-next"><?php _e( 'Let\'s Go!', 'wpseed' ); ?></a>
-            <a href="<?php echo esc_url( admin_url() ); ?>" class="button button-large"><?php _e( 'Not right now', 'wpseed' ); ?></a>
+            <a href="<?php echo esc_url( $this->get_next_step_link() ); ?>" class="button-primary button button-large button-next"><?php esc_html_e( 'Let\'s Go!', 'wpseed' ); ?></a>
+            <a href="<?php echo esc_url( admin_url() ); ?>" class="button button-large"><?php esc_html_e( 'Not right now', 'wpseed' ); ?></a>
         </p>
         
         <?php } else { ?> 
             
-        <p><?php _e( 'Thank you for choosing WordPress Seed to improve your website! The setup wizard will help you configure the basic settings.', 'wpseed' ); ?></p>
-        <p><?php _e( 'No time right now? If you don’t want to go through the wizard, you can return to the WordPress dashboard but will be unable to use the plugin. Come back when you are ready to continue by clicking the Run the Setup Wizard button!', 'wpseed' ); ?></p>
+        <p><?php esc_html_e( 'Thank you for choosing WordPress Seed to improve your website! The setup wizard will help you configure the basic settings.', 'wpseed' ); ?></p>
+        <p><?php esc_html_e( 'No time right now? If you don’t want to go through the wizard, you can return to the WordPress dashboard but will be unable to use the plugin. Come back when you are ready to continue by clicking the Run the Setup Wizard button!', 'wpseed' ); ?></p>
         <p class="wpseed-setup-actions step">
-            <a href="<?php echo esc_url( $this->get_next_step_link() ); ?>" class="button-primary button button-large button-next"><?php _e( 'Let\'s Go!', 'wpseed' ); ?></a>
-            <a href="<?php echo esc_url( admin_url() ); ?>" class="button button-large"><?php _e( 'Not right now', 'wpseed' ); ?></a>
+            <a href="<?php echo esc_url( $this->get_next_step_link() ); ?>" class="button-primary button button-large button-next"><?php esc_html_e( 'Let\'s Go!', 'wpseed' ); ?></a>
+            <a href="<?php echo esc_url( admin_url() ); ?>" class="button button-large"><?php esc_html_e( 'Not right now', 'wpseed' ); ?></a>
         </p>
                     
         <?php }
@@ -250,23 +251,23 @@ class WPSeed_Admin_Setup_Wizard {
         ); 
         $users = get_users( $args ); ?>
         
-        <h1><?php _e( 'Choose Administrator Access', 'wpseed' ); ?></h1>
+        <h1><?php esc_html_e( 'Choose Administrator Access', 'wpseed' ); ?></h1>
         
         <form method="post">
 
             <?php 
             if( !$users ) { 
-                echo '<p>' . __( 'Your the only administrator, no actions are needed here. If you had other administrator accounts in your WordPress database, they would be listed here.', 'wpseed' ) . '</p>'; 
+                echo '<p>' . esc_html__( 'Your the only administrator, no actions are needed here. If you had other administrator accounts in your WordPress database, they would be listed here.', 'wpseed' ) . '</p>'; 
             }else{
-                echo '<p>' . __( 'You have the opportunity of limiting access to the plugin while it is being configured. Public features and services will be hidden from both visitors and staff until you are ready to fully launch the plugin.', 'wpseed' ) . '</p>'; 
+                echo '<p>' . esc_html__( 'You have the opportunity of limiting access to the plugin while it is being configured. Public features and services will be hidden from both visitors and staff until you are ready to fully launch the plugin.', 'wpseed' ) . '</p>'; 
             ?>
             
             <table class="wpseed-setup-extensions" cellspacing="0">
                 <thead>
                     <tr>
-                        <th class="extension-name"><?php _e( 'User ID', 'wpseed' ); ?></th>
-                        <th class="extension-description"><?php _e( 'Username', 'wpseed' ); ?></th>
-                        <th class="extension-description"><?php _e( 'Display Name', 'wpseed' ); ?></th>
+                        <th class="extension-name"><?php esc_html_e( 'User ID', 'wpseed' ); ?></th>
+                        <th class="extension-description"><?php esc_html_e( 'Username', 'wpseed' ); ?></th>
+                        <th class="extension-description"><?php esc_html_e( 'Display Name', 'wpseed' ); ?></th>
                         <th class="extension-description"></th>
                     </tr>
                 </thead>
@@ -274,14 +275,14 @@ class WPSeed_Admin_Setup_Wizard {
                 
                     <?php foreach( $users as $key => $user_object ) { ?>
                     <tr>
-                        <td class="access-name"><?php echo $user_object->ID ?></td>
-                        <td><?php echo $user_object->user_nicename; ?></td>
-                        <td><?php echo $user_object->display_name; ?></td>
+                        <td class="access-name"><?php echo absint( $user_object->ID ); ?></td>
+                        <td><?php echo esc_html( $user_object->user_nicename ); ?></td>
+                        <td><?php echo esc_html( $user_object->display_name ); ?></td>
                         <td><label for="currency_pos">
                                 <select id="currency_pos" name="currency_pos" class="wpseed-enhanced-select">
-                                    <option value="left" <?php selected( null, 'now' ); ?>><?php echo __( 'Allow Now', 'wpseed' ); ?></option>
-                                    <option value="right" <?php selected( null, 'never' ); ?>><?php echo __( 'Never Allow', 'wpseed' ); ?></option>
-                                    <option value="left_space" <?php selected( null, 'launch' ); ?>><?php echo __( 'On Launch', 'wpseed' ); ?></option>
+                                    <option value="left" <?php selected( null, 'now' ); ?>><?php echo esc_html__( 'Allow Now', 'wpseed' ); ?></option>
+                                    <option value="right" <?php selected( null, 'never' ); ?>><?php echo esc_html__( 'Never Allow', 'wpseed' ); ?></option>
+                                    <option value="left_space" <?php selected( null, 'launch' ); ?>><?php echo esc_html__( 'On Launch', 'wpseed' ); ?></option>
                                 </select>
                             </label>                        
                         </td>
@@ -291,15 +292,15 @@ class WPSeed_Admin_Setup_Wizard {
                 </tbody>
             </table>
 
-            <p><?php _e( 'Once the wizard is complete, you will be offered a button to fully launch the plugin services. Only the administrators with On Launch selected will see the plugins settings pages.', 'wpseed' ); ?></p>
+            <p><?php esc_html_e( 'Once the wizard is complete, you will be offered a button to fully launch the plugin services. Only the administrators with On Launch selected will see the plugins settings pages.', 'wpseed' ); ?></p>
 
             <?php } ?>
             
             <p class="wpseed-setup-actions step">
                 <input type="submit" class="button-primary button button-large button-next" value="<?php esc_attr_e( 'Continue', 'wpseed' ); ?>" name="save_step" />
-                <a href="<?php echo esc_url( $this->get_next_step_link() ); ?>" class="button button-large button-next"><?php _e( 'Skip this step', 'wpseed' ); ?></a>
+                <a href="<?php echo esc_url( $this->get_next_step_link() ); ?>" class="button button-large button-next"><?php esc_html_e( 'Skip this step', 'wpseed' ); ?></a>
                 <?php if ( $this->get_prev_step_link() ) : ?>
-                    <a href="<?php echo esc_url( $this->get_prev_step_link() ); ?>" class="button button-large"><?php _e( 'Back', 'wpseed' ); ?></a>
+                    <a href="<?php echo esc_url( $this->get_prev_step_link() ); ?>" class="button button-large"><?php esc_html_e( 'Back', 'wpseed' ); ?></a>
                 <?php endif; ?>
                 <?php wp_nonce_field( 'wpseed-setup' ); ?>
             </p>
@@ -321,32 +322,32 @@ class WPSeed_Admin_Setup_Wizard {
      * Folders and files step.
      */
     public function wpseed_setup_folders() { ?>
-        <h1><?php _e( 'Create Folders &amp; Files', 'wpseed' ); ?></h1>
+        <h1><?php esc_html_e( 'Create Folders &amp; Files', 'wpseed' ); ?></h1>
         <form method="post">
             <table class="wpseed-setup-extensions" cellspacing="0">
                 <thead>
                     <tr>
-                        <th class="extension-name"><?php _e( 'Name', 'wpseed' ); ?></th>
-                        <th class="extension-description"><?php _e( 'Type', 'wpseed' ); ?></th>
-                        <th class="extension-description"><?php _e( 'Path', 'wpseed' ); ?></th>
+                        <th class="extension-name"><?php esc_html_e( 'Name', 'wpseed' ); ?></th>
+                        <th class="extension-description"><?php esc_html_e( 'Type', 'wpseed' ); ?></th>
+                        <th class="extension-description"><?php esc_html_e( 'Path', 'wpseed' ); ?></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="access-name"><?php _e( 'Extensions', 'wpseed' ); ?></td>
-                        <td><?php _e( 'Folder', 'wpseed' ); ?></td>
+                        <td class="access-name"><?php esc_html_e( 'Extensions', 'wpseed' ); ?></td>
+                        <td><?php esc_html_e( 'Folder', 'wpseed' ); ?></td>
                         <td>wp-content/wpseed-extensions</td>
                     </tr>
                 </tbody>
             </table>
             
-            <p><?php _e( 'This step exists to explain the folders and files that will appear within your installation of WP. Please try to avoid removing the folders and files you see in the list above. They will be installed when you click Continue or you can skip this step if you are an advanced user.', 'wpseed' ); ?></p>
+            <p><?php esc_html_e( 'This step exists to explain the folders and files that will appear within your installation of WP. Please try to avoid removing the folders and files you see in the list above. They will be installed when you click Continue or you can skip this step if you are an advanced user.', 'wpseed' ); ?></p>
             
             <p class="wpseed-setup-actions step">
                 <input type="submit" class="button-primary button button-large button-next" value="<?php esc_attr_e( 'Continue', 'wpseed' ); ?>" name="save_step" />
-                <a href="<?php echo esc_url( $this->get_next_step_link() ); ?>" class="button button-large button-next"><?php _e( 'Skip this step', 'wpseed' ); ?></a>
+                <a href="<?php echo esc_url( $this->get_next_step_link() ); ?>" class="button button-large button-next"><?php esc_html_e( 'Skip this step', 'wpseed' ); ?></a>
                 <?php if ( $this->get_prev_step_link() ) : ?>
-                    <a href="<?php echo esc_url( $this->get_prev_step_link() ); ?>" class="button button-large"><?php _e( 'Back', 'wpseed' ); ?></a>
+                    <a href="<?php echo esc_url( $this->get_prev_step_link() ); ?>" class="button button-large"><?php esc_html_e( 'Back', 'wpseed' ); ?></a>
                 <?php endif; ?>
                 <?php wp_nonce_field( 'wpseed-setup' ); ?>
             </p>
@@ -368,31 +369,31 @@ class WPSeed_Admin_Setup_Wizard {
      */
     public function wpseed_setup_database() {        
         ?>
-        <h1><?php _e( 'Database Changes', 'wpseed' ); ?></h1>
+        <h1><?php esc_html_e( 'Database Changes', 'wpseed' ); ?></h1>
         <form method="post">
             
-            <p><?php _e( 'WordPress Seed needs to insert these options into your database and they are important for the plugin to run.', 'wpseed' ); ?></p>
+            <p><?php esc_html_e( 'WordPress Seed needs to insert these options into your database and they are important for the plugin to run.', 'wpseed' ); ?></p>
             <table class="wpseed-setup-extensions" cellspacing="0">
                 <thead>
                     <tr>
-                        <th class="extension-name"><?php _e( 'Option Name', 'wpseed' ); ?></th>
-                        <th class="extension-description"><?php _e( 'Description', 'wpseed' ); ?></th>
+                        <th class="extension-name"><?php esc_html_e( 'Option Name', 'wpseed' ); ?></th>
+                        <th class="extension-description"><?php esc_html_e( 'Description', 'wpseed' ); ?></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="access-name"><?php _e( 'Extensions', 'wpseed' ); ?></td>
-                        <td><?php _e( 'Folder', 'wpseed' ); ?></td>
+                        <td class="access-name"><?php esc_html_e( 'Extensions', 'wpseed' ); ?></td>
+                        <td><?php esc_html_e( 'Folder', 'wpseed' ); ?></td>
                         <td>wp-content/wpseed-extensions</td>
                     </tr>
                 </tbody>
             </table>            
-            <p><?php _e( 'The plugin will not create or alter any database tables for this installation.', 'wpseed' ); ?></p>
+            <p><?php esc_html_e( 'The plugin will not create or alter any database tables for this installation.', 'wpseed' ); ?></p>
             <table class="wpseed-setup-extensions" cellspacing="0">
                 <thead>
                     <tr>
-                        <th class="extension-name"><?php _e( 'Table Name', 'wpseed' ); ?></th>
-                        <th class="extension-description"><?php _e( 'Description', 'wpseed' ); ?></th>
+                        <th class="extension-name"><?php esc_html_e( 'Table Name', 'wpseed' ); ?></th>
+                        <th class="extension-description"><?php esc_html_e( 'Description', 'wpseed' ); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -401,9 +402,9 @@ class WPSeed_Admin_Setup_Wizard {
             </table>
             <p class="wpseed-setup-actions step">
                 <input type="submit" class="button-primary button button-large button-next" value="<?php esc_attr_e( 'Continue', 'wpseed' ); ?>" name="save_step" />
-                <a href="<?php echo esc_url( $this->get_next_step_link() ); ?>" class="button button-large button-next"><?php _e( 'Skip this step', 'wpseed' ); ?></a>
+                <a href="<?php echo esc_url( $this->get_next_step_link() ); ?>" class="button button-large button-next"><?php esc_html_e( 'Skip this step', 'wpseed' ); ?></a>
                 <?php if ( $this->get_prev_step_link() ) : ?>
-                    <a href="<?php echo esc_url( $this->get_prev_step_link() ); ?>" class="button button-large"><?php _e( 'Back', 'wpseed' ); ?></a>
+                    <a href="<?php echo esc_url( $this->get_prev_step_link() ); ?>" class="button button-large"><?php esc_html_e( 'Back', 'wpseed' ); ?></a>
                 <?php endif; ?>
                 <?php wp_nonce_field( 'wpseed-setup' ); ?>
             </p>
@@ -424,45 +425,45 @@ class WPSeed_Admin_Setup_Wizard {
      * Features configuration step.
      */
     public function wpseed_setup_features() { ?>
-        <h1><?php _e( 'Configure Features', 'wpseed' ); ?></h1>
-        <p><?php _e( 'Enable or disable key features. You can change these settings later.', 'wpseed' ); ?></p>
+        <h1><?php esc_html_e( 'Configure Features', 'wpseed' ); ?></h1>
+        <p><?php esc_html_e( 'Enable or disable key features. You can change these settings later.', 'wpseed' ); ?></p>
         
         <form method="post">
             <table class="form-table">
                 <tr>
-                    <th scope="row"><label for="wpseed_developer_mode"><?php _e( 'Developer Mode', 'wpseed' ); ?></label></th>
+                    <th scope="row"><label for="wpseed_developer_mode"><?php esc_html_e( 'Developer Mode', 'wpseed' ); ?></label></th>
                     <td>
                         <input type="checkbox" id="wpseed_developer_mode" name="wpseed_developer_mode" class="input-checkbox" value="1" />
-                        <label for="wpseed_developer_mode"><?php _e( 'Enable enhanced logging, performance monitoring, and developer tools', 'wpseed' ); ?></label>
+                        <label for="wpseed_developer_mode"><?php esc_html_e( 'Enable enhanced logging, performance monitoring, and developer tools', 'wpseed' ); ?></label>
                     </td>
                 </tr>
                 <tr>
-                    <th scope="row"><label for="wpseed_background_processing"><?php _e( 'Background Processing', 'wpseed' ); ?></label></th>
+                    <th scope="row"><label for="wpseed_background_processing"><?php esc_html_e( 'Background Processing', 'wpseed' ); ?></label></th>
                     <td>
                         <input type="checkbox" id="wpseed_background_processing" name="wpseed_background_processing" class="input-checkbox" value="1" checked />
-                        <label for="wpseed_background_processing"><?php _e( 'Enable Action Scheduler for background tasks', 'wpseed' ); ?></label>
+                        <label for="wpseed_background_processing"><?php esc_html_e( 'Enable Action Scheduler for background tasks', 'wpseed' ); ?></label>
                     </td>
                 </tr>
                 <tr>
-                    <th scope="row"><label for="wpseed_admin_notifications"><?php _e( 'Admin Notifications', 'wpseed' ); ?></label></th>
+                    <th scope="row"><label for="wpseed_admin_notifications"><?php esc_html_e( 'Admin Notifications', 'wpseed' ); ?></label></th>
                     <td>
                         <input type="checkbox" id="wpseed_admin_notifications" name="wpseed_admin_notifications" class="input-checkbox" value="1" checked />
-                        <label for="wpseed_admin_notifications"><?php _e( 'Show notification bell in admin bar', 'wpseed' ); ?></label>
+                        <label for="wpseed_admin_notifications"><?php esc_html_e( 'Show notification bell in admin bar', 'wpseed' ); ?></label>
                     </td>
                 </tr>
                 <tr>
-                    <th scope="row"><label for="wpseed_email_notifications"><?php _e( 'Email Notifications', 'wpseed' ); ?></label></th>
+                    <th scope="row"><label for="wpseed_email_notifications"><?php esc_html_e( 'Email Notifications', 'wpseed' ); ?></label></th>
                     <td>
                         <input type="checkbox" id="wpseed_email_notifications" name="wpseed_email_notifications" class="input-checkbox" value="1" />
-                        <label for="wpseed_email_notifications"><?php _e( 'Send email notifications for important events', 'wpseed' ); ?></label>
+                        <label for="wpseed_email_notifications"><?php esc_html_e( 'Send email notifications for important events', 'wpseed' ); ?></label>
                     </td>
                 </tr>
             </table>
             <p class="wpseed-setup-actions step">
                 <input type="submit" class="button-primary button button-large button-next" value="<?php esc_attr_e( 'Continue', 'wpseed' ); ?>" name="save_step" />
-                <a href="<?php echo esc_url( $this->get_next_step_link() ); ?>" class="button button-large button-next"><?php _e( 'Skip this step', 'wpseed' ); ?></a>
+                <a href="<?php echo esc_url( $this->get_next_step_link() ); ?>" class="button button-large button-next"><?php esc_html_e( 'Skip this step', 'wpseed' ); ?></a>
                 <?php if ( $this->get_prev_step_link() ) : ?>
-                    <a href="<?php echo esc_url( $this->get_prev_step_link() ); ?>" class="button button-large"><?php _e( 'Back', 'wpseed' ); ?></a>
+                    <a href="<?php echo esc_url( $this->get_prev_step_link() ); ?>" class="button button-large"><?php esc_html_e( 'Back', 'wpseed' ); ?></a>
                 <?php endif; ?>
                 <?php wp_nonce_field( 'wpseed-setup' ); ?>
             </p>
@@ -540,8 +541,8 @@ class WPSeed_Admin_Setup_Wizard {
     public function wpseed_setup_extensions() {
         $gateways = $this->get_wizard_extensions();?>
         
-        <h1><?php _e( 'Extensions', 'wpseed' ); ?></h1>   
-        <p><?php _e( 'Normal WordPress plugins safely downloaded from wordpress.org website.', 'wpseed' ); ?></p>
+        <h1><?php esc_html_e( 'Extensions', 'wpseed' ); ?></h1>   
+        <p><?php esc_html_e( 'Normal WordPress plugins safely downloaded from wordpress.org website.', 'wpseed' ); ?></p>
          
         <form method="post" class="wpseed-wizard-plugin-extensions-form">
             
@@ -582,9 +583,9 @@ class WPSeed_Admin_Setup_Wizard {
            
             <p class="wpseed-setup-actions step">
                 <input type="submit" class="button-primary button button-large button-next" value="<?php esc_attr_e( 'Continue', 'wpseed' ); ?>" name="save_step" />
-                <a href="<?php echo esc_url( $this->get_next_step_link() ); ?>" class="button button-large button-next"><?php _e( 'Skip this step', 'wpseed' ); ?></a>
+                <a href="<?php echo esc_url( $this->get_next_step_link() ); ?>" class="button button-large button-next"><?php esc_html_e( 'Skip this step', 'wpseed' ); ?></a>
                 <?php if ( $this->get_prev_step_link() ) : ?>
-                    <a href="<?php echo esc_url( $this->get_prev_step_link() ); ?>" class="button button-large"><?php _e( 'Back', 'wpseed' ); ?></a>
+                    <a href="<?php echo esc_url( $this->get_prev_step_link() ); ?>" class="button button-large"><?php esc_html_e( 'Back', 'wpseed' ); ?></a>
                 <?php endif; ?>
                 <?php wp_nonce_field( 'wpseed-setup' ); ?>
             </p>
@@ -631,31 +632,31 @@ class WPSeed_Admin_Setup_Wizard {
      * Improvement program and feedback.
      */
     public function wpseed_setup_improvement() { ?>
-        <h1><?php _e( 'Improvement Program &amp; Feedback', 'wpseed' ); ?></h1>
-        <p><?php _e( 'Taking the time to provide constructive feedback and allowing the plugin to send none-sensitive data to me can be as valuable as a donation.', 'wpseed' ); ?></p>
+        <h1><?php esc_html_e( 'Improvement Program &amp; Feedback', 'wpseed' ); ?></h1>
+        <p><?php esc_html_e( 'Taking the time to provide constructive feedback and allowing the plugin to send none-sensitive data to me can be as valuable as a donation.', 'wpseed' ); ?></p>
         
         <form method="post">
             <table class="form-table">
                 <tr>
-                    <th scope="row"><label for="wpseed_allow_information_sending"><?php _e( 'Allow none-sensitive information to be sent to <a href="https://evolvewp.dev" target="_blank">EvolveWP</a>?', 'wpseed' ); ?></label></th>
+                    <th scope="row"><label for="wpseed_allow_information_sending"><?php esc_html_e( 'Allow none-sensitive information to be sent to <a href="https://evolvewp.dev" target="_blank">EvolveWP</a>?', 'wpseed' ); ?></label></th>
                     <td>
                         <input type="checkbox" id="wpseed_allow_information_sending" <?php checked( get_option( 'wpseed_ship_to_countries', '' ) !== 'disabled', true ); ?> name="wpseed_allow_information_sending" class="input-checkbox" value="1" />
-                        <label for="wpseed_allow_information_sending"><?php _e( 'Yes, send configuration and logs only.', 'wpseed' ); ?></label>
+                        <label for="wpseed_allow_information_sending"><?php esc_html_e( 'Yes, send configuration and logs only.', 'wpseed' ); ?></label>
                     </td>
                 </tr>
                 <tr>
-                    <th scope="row"><label for="wpseed_allow_future_prompt"><?php _e( 'Allow the plugin to prompt you for feedback in the future?', 'wpseed' ); ?></label></th>
+                    <th scope="row"><label for="wpseed_allow_future_prompt"><?php esc_html_e( 'Allow the plugin to prompt you for feedback in the future?', 'wpseed' ); ?></label></th>
                     <td>
                         <input type="checkbox" <?php checked( get_option( 'wpseed_calc_taxes', 'no' ), 'yes' ); ?> id="wpseed_allow_future_prompt" name="wpseed_allow_future_prompt" class="input-checkbox" value="1" />
-                        <label for="wpseed_allow_future_prompt"><?php _e( 'Yes, prompt me in a couple of months.', 'wpseed' ); ?></label>
+                        <label for="wpseed_allow_future_prompt"><?php esc_html_e( 'Yes, prompt me in a couple of months.', 'wpseed' ); ?></label>
                     </td>
                 </tr>
             </table>
             <p class="wpseed-setup-actions step">
                 <input type="submit" class="button-primary button button-large button-next" value="<?php esc_attr_e( 'Continue', 'wpseed' ); ?>" name="save_step" />
-                <a href="<?php echo esc_url( $this->get_next_step_link() ); ?>" class="button button-large button-next"><?php _e( 'Skip this step', 'wpseed' ); ?></a>
+                <a href="<?php echo esc_url( $this->get_next_step_link() ); ?>" class="button button-large button-next"><?php esc_html_e( 'Skip this step', 'wpseed' ); ?></a>
                 <?php if ( $this->get_prev_step_link() ) : ?>
-                    <a href="<?php echo esc_url( $this->get_prev_step_link() ); ?>" class="button button-large"><?php _e( 'Back', 'wpseed' ); ?></a>
+                    <a href="<?php echo esc_url( $this->get_prev_step_link() ); ?>" class="button button-large"><?php esc_html_e( 'Back', 'wpseed' ); ?></a>
                 <?php endif; ?>
                 <?php wp_nonce_field( 'wpseed-setup' ); ?>
             </p>
@@ -682,24 +683,24 @@ class WPSeed_Admin_Setup_Wizard {
      */
     public function wpseed_setup_ready() {
         $this->wpseed_setup_ready_actions();?>
-        <h1><?php _e( 'WordPress Seed is Ready!', 'wpseed' ); ?></h1>
+        <h1><?php esc_html_e( 'WordPress Seed is Ready!', 'wpseed' ); ?></h1>
 
         <div class="wpseed-setup-next-steps">
             <div class="wpseed-setup-next-steps-first">
-                <h2><?php _e( 'Next Steps', 'wpseed' ); ?></h2>
+                <h2><?php esc_html_e( 'Next Steps', 'wpseed' ); ?></h2>
                 <ul>
-                    <li class="setup-thing"><a class="button button-primary button-large" href="<?php echo esc_url( admin_url( 'options-general.php?page=wpseed-settings' ) ); ?>"><?php _e( 'Go to Settings', 'wpseed' ); ?></a></li>
+                    <li class="setup-thing"><a class="button button-primary button-large" href="<?php echo esc_url( admin_url( 'options-general.php?page=wpseed-settings' ) ); ?>"><?php esc_html_e( 'Go to Settings', 'wpseed' ); ?></a></li>
                 </ul>                                                                                                 
             </div>
             <div class="wpseed-setup-next-steps-last">
             
-                <h2><?php _e( 'Contact Ryan', 'wpseed' ); ?></h2>
+                <h2><?php esc_html_e( 'Contact Ryan', 'wpseed' ); ?></h2>
                 
-                <a href="https://ryanbayne.slack.com/threads/team/squeekycoder/"><?php _e( 'Slack', 'wpseed' ); ?></a>
-                <a href="https://join.skype.com/pJAjfxcbfHPN"><?php _e( 'Skype', 'wpseed' ); ?></a>
-                <a href="https://discord.gg/PcqNqNh"><?php _e( 'Discord', 'wpseed' ); ?></a>
-                <a href="https://twitter.com/Ryan_R_Bayne"><?php _e( 'Twitter', 'wpseed' ); ?></a>
-                <a href="https://plus.google.com/u/0/collection/oA85PE"><?php _e( 'Google+', 'wpseed' ); ?></a>
+                <a href="https://ryanbayne.slack.com/threads/team/squeekycoder/"><?php esc_html_e( 'Slack', 'wpseed' ); ?></a>
+                <a href="https://join.skype.com/pJAjfxcbfHPN"><?php esc_html_e( 'Skype', 'wpseed' ); ?></a>
+                <a href="https://discord.gg/PcqNqNh"><?php esc_html_e( 'Discord', 'wpseed' ); ?></a>
+                <a href="https://twitter.com/Ryan_R_Bayne"><?php esc_html_e( 'Twitter', 'wpseed' ); ?></a>
+                <a href="https://plus.google.com/u/0/collection/oA85PE"><?php esc_html_e( 'Google+', 'wpseed' ); ?></a>
   
             </div>
         </div>

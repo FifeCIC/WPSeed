@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return string
  */
 function wpseed_sanitize_taxonomy_name( $taxonomy ) {
-    return apply_filters( 'sanitize_taxonomy_name', urldecode( sanitize_title( urldecode( $taxonomy ) ) ), $taxonomy );
+    return apply_filters( 'wpseed_sanitize_taxonomy_name', urldecode( sanitize_title( urldecode( $taxonomy ) ) ), $taxonomy );
 }
 
 /**

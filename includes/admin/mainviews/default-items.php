@@ -25,7 +25,7 @@ class WPSeed_MainView_Default_Items extends WPSeed_ListTable_Demo {
      * No items found text.
      */
     public function no_items() {
-        _e( 'No applicable items found.', 'wpseed' );
+        esc_html_e( 'No applicable items found.', 'wpseed' );
     }
 
     /**

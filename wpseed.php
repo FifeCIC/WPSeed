@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Plugin Seed
+ * Plugin Name: WPSeed Boilerplate
  * Plugin URI: https://www.fifecic.scot
  * Github URI: https://github.com/FifeCIC/wpseed
  * Description: Grow a new plugin using a WordPress plugin Seed (boilerplate). 

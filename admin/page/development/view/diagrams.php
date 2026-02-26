@@ -13,35 +13,35 @@ if (!defined('ABSPATH')) {
 class WPSeed_Admin_Development_Diagrams {
     
     public static function output() {
-        // Enqueue Mermaid.js
-        wp_enqueue_script('mermaid', 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js', array(), '10.0.0', true);
+        // Enqueue local Mermaid.js (download from https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js)
+        wp_enqueue_script('mermaid', WPSEED_PLUGIN_URL . 'assets/js/mermaid.min.js', array(), '10.0.0', true);
         ?>
         <div class="wpseed-diagrams-container">
             <div class="diagrams-header">
-                <h2><?php _e('WPSeed System Diagrams', 'wpseed'); ?></h2>
-                <p><?php _e('Visual diagrams showing plugin architecture, data flow, and system processes.', 'wpseed'); ?></p>
+                <h2><?php esc_html_e('WPSeed System Diagrams', 'wpseed'); ?></h2>
+                <p><?php esc_html_e('Visual diagrams showing plugin architecture, data flow, and system processes.', 'wpseed'); ?></p>
             </div>
             
             <div class="diagram-controls">
                 <select id="diagram-selector" class="regular-text">
                     <optgroup label="Architecture">
-                        <option value="plugin-structure"><?php _e('Plugin Structure', 'wpseed'); ?></option>
-                        <option value="class-hierarchy"><?php _e('Class Hierarchy', 'wpseed'); ?></option>
-                        <option value="hook-system"><?php _e('Hook System', 'wpseed'); ?></option>
+                        <option value="plugin-structure"><?php esc_html_e('Plugin Structure', 'wpseed'); ?></option>
+                        <option value="class-hierarchy"><?php esc_html_e('Class Hierarchy', 'wpseed'); ?></option>
+                        <option value="hook-system"><?php esc_html_e('Hook System', 'wpseed'); ?></option>
                     </optgroup>
                     <optgroup label="Data Flow">
                         <option value="data-flow"><?php esc_html_e('Data Flow Architecture', 'wpseed'); ?></option>
-                        <option value="rest-api-flow"><?php _e('REST API Flow', 'wpseed'); ?></option>
-                        <option value="admin-flow"><?php _e('Admin Interface Flow', 'wpseed'); ?></option>
+                        <option value="rest-api-flow"><?php esc_html_e('REST API Flow', 'wpseed'); ?></option>
+                        <option value="admin-flow"><?php esc_html_e('Admin Interface Flow', 'wpseed'); ?></option>
                     </optgroup>
                     <optgroup label="Systems">
-                        <option value="logging-system"><?php _e('Logging System', 'wpseed'); ?></option>
-                        <option value="ai-integration"><?php _e('AI Integration', 'wpseed'); ?></option>
-                        <option value="asset-management"><?php _e('Asset Management', 'wpseed'); ?></option>
+                        <option value="logging-system"><?php esc_html_e('Logging System', 'wpseed'); ?></option>
+                        <option value="ai-integration"><?php esc_html_e('AI Integration', 'wpseed'); ?></option>
+                        <option value="asset-management"><?php esc_html_e('Asset Management', 'wpseed'); ?></option>
                     </optgroup>
                 </select>
-                <button id="fullscreen-btn" class="button"><?php _e('Fullscreen', 'wpseed'); ?></button>
-                <button id="export-btn" class="button"><?php _e('Export SVG', 'wpseed'); ?></button>
+                <button id="fullscreen-btn" class="button"><?php esc_html_e('Fullscreen', 'wpseed'); ?></button>
+                <button id="export-btn" class="button"><?php esc_html_e('Export SVG', 'wpseed'); ?></button>
             </div>
             
             <div id="diagram-container" class="diagram-viewer">

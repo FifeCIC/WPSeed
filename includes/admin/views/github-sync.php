@@ -31,12 +31,12 @@ if (!defined('ABSPATH')) exit;
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($docs as $doc): ?>
-                    <?php $file_status = $status[$doc['name']]; ?>
+                <?php foreach ($docs as $wpseed_doc): ?>
+                    <?php $wpseed_file_status = $status[$wpseed_doc['name']]; ?>
                     <tr>
-                        <td><strong><?php echo esc_html($doc['name']); ?></strong></td>
+                        <td><strong><?php echo esc_html($wpseed_doc['name']); ?></strong></td>
                         <td>
-                            <?php if ($file_status['synced']): ?>
+                            <?php if ($wpseed_file_status['synced']): ?>
                                 <span class="dashicons dashicons-yes-alt" style="color: green;"></span>
                                 <?php esc_html_e('Synced', 'wpseed'); ?>
                             <?php else: ?>
@@ -44,11 +44,11 @@ if (!defined('ABSPATH')) exit;
                                 <?php esc_html_e('Needs Sync', 'wpseed'); ?>
                             <?php endif; ?>
                         </td>
-                        <td><?php echo esc_html($file_status['local_modified']); ?></td>
+                        <td><?php echo esc_html($wpseed_file_status['local_modified']); ?></td>
                         <td>
                             <button class="button button-primary sync-file" 
-                                    data-file="<?php echo esc_attr($doc['name']); ?>"
-                                    data-path="<?php echo esc_attr($doc['path']); ?>">
+                                    data-file="<?php echo esc_attr($wpseed_doc['name']); ?>"
+                                    data-path="<?php echo esc_attr($wpseed_doc['path']); ?>">
                                 <?php esc_html_e('Sync Now', 'wpseed'); ?>
                             </button>
                         </td>
@@ -78,7 +78,7 @@ jQuery(document).ready(function($) {
             action: 'wpseed_sync_github_file',
             file: file,
             path: path,
-            nonce: '<?php echo wp_create_nonce('wpseed_github_sync'); ?>'
+            nonce: '<?php echo esc_attr( wp_create_nonce('wpseed_github_sync') ); ?>'
         }, function(response) {
             if (response.success) {
                 btn.text('Synced!').css('background', 'green');
@@ -96,7 +96,7 @@ jQuery(document).ready(function($) {
         
         $.post(ajaxurl, {
             action: 'wpseed_sync_github_all',
-            nonce: '<?php echo wp_create_nonce('wpseed_github_sync'); ?>'
+            nonce: '<?php echo esc_attr( wp_create_nonce('wpseed_github_sync') ); ?>'
         }, function(response) {
             if (response.success) {
                 alert('All files synced!');

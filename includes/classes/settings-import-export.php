@@ -46,7 +46,7 @@ class WPSeed_Settings_Import_Export {
             'settings'  => $settings,
         );
 
-        $filename = 'wpseed-settings-' . date( 'Y-m-d-His' ) . '.json';
+        $filename = 'wpseed-settings-' . gmdate( 'Y-m-d-His' ) . '.json';
 
         header( 'Content-Type: application/json' );
         header( 'Content-Disposition: attachment; filename=' . $filename );

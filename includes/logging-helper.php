@@ -70,7 +70,7 @@ class WPSeed_Logging_Helper {
         }
         
         if ($data !== null) {
-            $message .= ' | Data: ' . print_r($data, true);
+            $message .= ' | Data: ' . json_encode($data);
         }
         
         self::write_log('debug.log', $message);
@@ -87,10 +87,10 @@ class WPSeed_Logging_Helper {
         }
         
         $file_path = $log_dir . $filename;
-        $timestamp = date('Y-m-d H:i:s');
+        $timestamp = gmdate('Y-m-d H:i:s');
         $log_entry = sprintf('[%s] %s%s', $timestamp, $message, PHP_EOL);
         
-        error_log($log_entry, 3, $file_path);
+        file_put_contents($file_path, $log_entry, FILE_APPEND);
     }
     
     /**

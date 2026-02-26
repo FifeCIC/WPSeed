@@ -72,7 +72,7 @@ abstract class WPSeed_Shortcode extends WPSeed_Codec_Instance {
     }
 
     public function add_shortcode_help () {                
-        echo $this->get_shortcode_help();
+        echo wp_kses_post( $this->get_shortcode_help() );
     }
 
     protected function _defaults_to_args () {              

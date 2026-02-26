@@ -367,7 +367,7 @@ defined('ABSPATH') || exit;
     
     <?php
     // Add interactive demo script
-    $data_analysis_script = "
+    $wpseed_data_analysis_script = "
         jQuery(document).ready(function($) {
             // Simulate real-time price updates
             function updatePrices() {
@@ -463,6 +463,6 @@ defined('ABSPATH') || exit;
         });
     ";
     
-    wp_add_inline_script('jquery', $data_analysis_script);
+    wp_add_inline_script('jquery', $wpseed_data_analysis_script);
     ?>
 </div>

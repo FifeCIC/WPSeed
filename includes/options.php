@@ -185,7 +185,7 @@ trait WPSeed_OptionsTrait {
             {
                 if( $option_information[0] === 1 )
                 {
-                    add_option( $option_name, $option_information[3], $option_information[1] );    
+                    add_option( $option_name, $option_information[3], '', $option_information[1] ? 'yes' : 'no' );    
                 }    
             }
         }
@@ -286,8 +286,6 @@ trait WPSeed_OptionsTrait {
             }
         }
 
-        trigger_error( sprintf( 'Invalid WPSeed option name: %s', $name ), E_USER_WARNING );
-
         return $default;
     }
 
@@ -339,7 +337,7 @@ trait WPSeed_OptionsTrait {
             }
         }
 
-        trigger_error( sprintf( 'Invalid WPSeed option name: %s', $name ), E_USER_WARNING );
+        trigger_error( sprintf( 'Invalid WPSeed option name: %s', esc_html( $name ) ), E_USER_WARNING );
 
         return false;
     }
@@ -374,7 +372,7 @@ trait WPSeed_OptionsTrait {
         $names  = (array) $names;
 
         if ( ! self::is_valid( $names ) ) {
-            trigger_error( sprintf( 'Invalid WPSeed option names: %s', print_r( $names, 1 ) ), E_USER_WARNING );
+            trigger_error( sprintf( 'Invalid WPSeed option names: %s', wp_json_encode( $names ) ), E_USER_WARNING );
 
             return false;
         }

@@ -27,7 +27,7 @@ class WPSeed_MainView_Default_Advanced extends WPSeed_ListTable_Demo {
      * No items found text.
      */
     public function no_items() {
-        _e( 'No applicable items found.', 'wpseed' );
+        esc_html_e( 'No applicable items found.', 'wpseed' );
     }
 
     /**
@@ -110,7 +110,8 @@ class WPSeed_MainView_Default_Advanced extends WPSeed_ListTable_Demo {
             case 'delete':
                 // This demonstrates how deletion might appear once processing is finished.
                 if( isset( $_POST['exampleitem'] ) ) {
-                    foreach( $_POST['exampleitem'] as $key => $item ) {
+                    $items_to_delete = array_map( 'sanitize_text_field', wp_unslash( $_POST['exampleitem'] ) );
+                    foreach( $items_to_delete as $key => $item ) {
                         unset( $this->items[ $key ] );
                     }
                 }

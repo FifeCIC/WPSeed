@@ -42,7 +42,7 @@ class WPSeed_Admin_Development_Debug_Log {
                 <?php
                 if (isset($_GET['wpseed_clear_log']) && check_admin_referer('wpseed_clear_log_action')) {
                     file_put_contents($debug_file, '');
-                    echo '<div class="notice notice-success"><p>' . __('Debug log cleared.', 'wpseed') . '</p></div>';
+                    echo '<div class="notice notice-success"><p>' . esc_html__('Debug log cleared.', 'wpseed') . '</p></div>';
                 }
                 
                 $log_content = file_get_contents($debug_file);

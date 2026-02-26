@@ -148,8 +148,10 @@ class WPSeed_Admin_Settings {
         self::get_settings_pages();
 
         // Get current tab/section
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reading GET parameters for display only, not processing form data
         $current_tab     = empty( $_GET['tab'] ) ? self::$defaulttab : sanitize_title( $_GET['tab'] );
-        $current_section = empty( $_REQUEST['section'] ) ? '' : sanitize_title( $_REQUEST['section'] );
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reading GET parameters for display only, not processing form data
+        $current_section = empty( $_GET['section'] ) ? '' : sanitize_title( $_GET['section'] );
 
         // Save settings if data has been posted
         if ( ! empty( $_POST ) ) {
@@ -157,10 +159,12 @@ class WPSeed_Admin_Settings {
         }
 
         // Add any posted messages
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reading GET parameters for display only, not processing form data
         if ( ! empty( $_GET['wpseed_error'] ) ) {
             self::add_error( stripslashes( $_GET['wpseed_error'] ) );
         }
 
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reading GET parameters for display only, not processing form data
         if ( ! empty( $_GET['wpseed_message'] ) ) {
             self::add_message( stripslashes( $_GET['wpseed_message'] ) );
         }
@@ -324,7 +328,7 @@ class WPSeed_Admin_Settings {
                                 value="<?php echo esc_attr( $option_value ); ?>"
                                 class="<?php echo esc_attr( $value['class'] ); ?>"
                                 placeholder="<?php echo esc_attr( $value['placeholder'] ); ?>"
-                                <?php echo implode( ' ', $custom_attributes ); ?>
+                                <?php echo implode( ' ', $custom_attributes ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Array elements are escaped when built. ?>
                                 /> <?php echo wp_kses_post( $description ); ?>
                         </td>
                     </tr><?php
@@ -349,7 +353,7 @@ class WPSeed_Admin_Settings {
                                 style="<?php echo esc_attr( $value['css'] ); ?>"
                                 class="<?php echo esc_attr( $value['class'] ); ?>"
                                 placeholder="<?php echo esc_attr( $value['placeholder'] ); ?>"
-                                <?php echo implode( ' ', $custom_attributes ); ?>
+                                <?php echo implode( ' ', $custom_attributes ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Array elements are escaped when built. ?>
                                 ><?php echo esc_textarea( $option_value );  ?></textarea>
                         </td>
                     </tr><?php
@@ -372,7 +376,7 @@ class WPSeed_Admin_Settings {
                                 id="<?php echo esc_attr( $value['id'] ); ?>"
                                 style="<?php echo esc_attr( $value['css'] ); ?>"
                                 class="<?php echo esc_attr( $value['class'] ); ?>"
-                                <?php echo implode( ' ', $custom_attributes ); ?>
+                                <?php echo implode( ' ', $custom_attributes ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Array elements are escaped when built. ?>
                                 <?php echo ( 'multiselect' == $value['type'] ) ? 'multiple="multiple"' : ''; ?>
                                 >
                                 <?php
@@ -419,7 +423,7 @@ class WPSeed_Admin_Settings {
                                                 type="radio"
                                                 style="<?php echo esc_attr( $value['css'] ); ?>"
                                                 class="<?php echo esc_attr( $value['class'] ); ?>"
-                                                <?php echo implode( ' ', $custom_attributes ); ?>
+                                                <?php echo implode( ' ', $custom_attributes ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Array elements are escaped when built. ?>
                                                 <?php checked( $key, $option_value ); ?>
                                                 /> <?php echo esc_html( $val ); ?></label>
                                         </li>
@@ -482,7 +486,7 @@ class WPSeed_Admin_Settings {
                                 class="<?php echo esc_attr( isset( $value['class'] ) ? $value['class'] : '' ); ?>"
                                 value="1"
                                 <?php checked( $option_value, 'yes'); ?>
-                                <?php echo implode( ' ', $custom_attributes ); ?>
+                                <?php echo implode( ' ', $custom_attributes ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Array elements are escaped when built. ?>
                             /> <?php echo wp_kses_post( $description ); ?>
                         </label> <?php echo wp_kses_post( $tooltip_html ); ?>
                     <?php
@@ -690,16 +694,20 @@ class WPSeed_Admin_Settings {
 
             // Redirect method - don't protect
             if ( file_exists( $downloads_url . '/.htaccess' ) ) {
-                unlink( $downloads_url . '/.htaccess' );
+                wp_delete_file( $downloads_url . '/.htaccess' );
             }
 
         } else {
 
             // Force method - protect, add rules to the htaccess file
             if ( ! file_exists( $downloads_url . '/.htaccess' ) ) {
-                if ( $file_handle = @fopen( $downloads_url . '/.htaccess', 'w' ) ) {
-                    fwrite( $file_handle, 'deny from all' );
-                    fclose( $file_handle );
+                global $wp_filesystem;
+                if ( empty( $wp_filesystem ) ) {
+                    require_once ABSPATH . 'wp-admin/includes/file.php';
+                    WP_Filesystem();
+                }
+                if ( $wp_filesystem ) {
+                    $wp_filesystem->put_contents( $downloads_url . '/.htaccess', 'deny from all', FS_CHMOD_FILE );
                 }
             }
         }

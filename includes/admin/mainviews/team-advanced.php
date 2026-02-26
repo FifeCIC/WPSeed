@@ -25,7 +25,7 @@ class WPSeed_MainView_Team_Advanced extends WPSeed_ListTable_Demo {
      * No items found text.
      */
     public function no_items() {
-        _e( 'No applicable items found.', 'wpseed' );
+        esc_html_e( 'No applicable items found.', 'wpseed' );
     }
 
     /**
@@ -45,9 +45,10 @@ class WPSeed_MainView_Team_Advanced extends WPSeed_ListTable_Demo {
     function column_headerone( $item ) {   
         // Establish an item ID for request processing.
         $id = $item['headerone'];
+        $page = isset( $_REQUEST['page'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['page'] ) ) : '';
         $actions = array(
-                'edit'      => sprintf('<a href="?page=%s&action=%s&examplevalue=%s">Edit</a>',$_REQUEST['page'],'edit',$id ),
-                'delete'    => sprintf('<a href="?page=%s&action=%s&examplevalue=%s">Delete</a>',$_REQUEST['page'],'delete',$id ),
+                'edit'      => sprintf('<a href="?page=%s&action=%s&examplevalue=%s">Edit</a>', esc_attr( $page ), 'edit', esc_attr( $id ) ),
+                'delete'    => sprintf('<a href="?page=%s&action=%s&examplevalue=%s">Delete</a>', esc_attr( $page ), 'delete', esc_attr( $id ) ),
             );
 
         return sprintf('%1$s %2$s', $item['headerone'], $this->row_actions($actions) );

@@ -61,6 +61,7 @@ class WPSeed_API_Logging {
             'outcome'     => $outcome,
         );
         
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table for API logging, no WP equivalent
         $result = $wpdb->insert(
             $wpdb->prefix . 'wpseed_api_calls',
             $data,
@@ -80,6 +81,7 @@ class WPSeed_API_Logging {
         
         global $wpdb;
         
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table query, no WP equivalent
         $existing = $wpdb->get_row(
             $wpdb->prepare(
                 "SELECT * FROM {$wpdb->prefix}wpseed_api_endpoints WHERE service = %s AND endpoint = %s",
@@ -91,6 +93,7 @@ class WPSeed_API_Logging {
         $params_json = json_encode($parameters);
         
         if ($existing) {
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table update, no WP equivalent
             $result = $wpdb->update(
                 $wpdb->prefix . 'wpseed_api_endpoints',
                 array(
@@ -106,6 +109,7 @@ class WPSeed_API_Logging {
             
             return $result ? $existing->endpointid : false;
         } else {
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table insert, no WP equivalent
             $result = $wpdb->insert(
                 $wpdb->prefix . 'wpseed_api_endpoints',
                 array(
@@ -142,6 +146,7 @@ class WPSeed_API_Logging {
         }
         
         if ($entry_id) {
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table update, no WP equivalent
             $wpdb->update(
                 $wpdb->prefix . 'wpseed_api_calls',
                 array('status' => 'error'),
@@ -151,6 +156,7 @@ class WPSeed_API_Logging {
             );
         }
         
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table insert, no WP equivalent
         $result = $wpdb->insert(
             $wpdb->prefix . 'wpseed_api_errors',
             array(
@@ -178,6 +184,7 @@ class WPSeed_API_Logging {
         
         global $wpdb;
         
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table update, no WP equivalent
         $result = $wpdb->update(
             $wpdb->prefix . 'wpseed_api_calls',
             array(
@@ -241,8 +248,8 @@ class WPSeed_API_Logging {
         $params[] = $args['limit'];
         $params[] = $args['offset'];
         
-        $prepared_query = $wpdb->prepare($query, $params);
-        $results = $wpdb->get_results($prepared_query, ARRAY_A);
+        // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery -- Query is prepared with $wpdb->prepare() below, custom table query with no WP equivalent
+        $results = $wpdb->get_results($wpdb->prepare($query, $params), ARRAY_A);
         
         return $results;
     }
@@ -283,8 +290,9 @@ class WPSeed_API_Logging {
             $params[] = $args['type'];
         }
         
-        $prepared_query = empty($params) ? $query : $wpdb->prepare($query, $params);
-        $count = $wpdb->get_var($prepared_query);
+        // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Query is safely prepared with $wpdb->prepare() when params exist, or uses safe static query
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table query, no WP equivalent
+        $count = empty($params) ? $wpdb->get_var($query) : $wpdb->get_var($wpdb->prepare($query, $params));
         
         return (int) $count;
     }

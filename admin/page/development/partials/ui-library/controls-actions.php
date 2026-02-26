@@ -154,7 +154,7 @@ defined('ABSPATH') || exit;
     
     <?php
     // Add inline script for controls functionality
-    $controls_script = "
+    $wpseed_controls_script = "
         jQuery(document).ready(function($) {
             // Toggle buttons
             $('.wpseed-toggle-button').on('click', function() {
@@ -196,7 +196,7 @@ defined('ABSPATH') || exit;
         });
     ";
     
-    wp_add_inline_script('jquery', $controls_script);
+    wp_add_inline_script('jquery', $wpseed_controls_script);
     ?>
 
 </div>

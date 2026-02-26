@@ -39,7 +39,7 @@ class WPSeed_Admin_Development_PHPInfo {
                     </tr>
                     <tr>
                         <th><?php esc_html_e('Display Errors', 'wpseed'); ?></th>
-                        <td><?php echo ini_get('display_errors') ? __('On', 'wpseed') : __('Off', 'wpseed'); ?></td>
+                        <td><?php echo ini_get('display_errors') ? esc_html__('On', 'wpseed') : esc_html__('Off', 'wpseed'); ?></td>
                     </tr>
                 </tbody>
             </table>

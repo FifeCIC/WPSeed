@@ -57,8 +57,8 @@ class WPSeed_Ecosystem_Installer {
     public function render_installer_page() {
         ?>
         <div class="wrap">
-            <h1><?php _e('Ecosystem Plugin Installer', 'wpseed'); ?></h1>
-            <p><?php _e('Install related Ryan Bayne plugins with one click', 'wpseed'); ?></p>
+            <h1><?php esc_html_e('Ecosystem Plugin Installer', 'wpseed'); ?></h1>
+            <p><?php esc_html_e('Install related Ryan Bayne plugins with one click', 'wpseed'); ?></p>
             
             <div class="ecosystem-plugins-grid">
                 <?php foreach ($this->available_plugins as $slug => $plugin): ?>
@@ -73,7 +73,7 @@ class WPSeed_Ecosystem_Installer {
                             
                             <?php if (!empty($plugin['integrates_with'])): ?>
                                 <p class="plugin-integrations">
-                                    <strong><?php _e('Integrates with:', 'wpseed'); ?></strong>
+                                    <strong><?php esc_html_e('Integrates with:', 'wpseed'); ?></strong>
                                     <?php echo esc_html(implode(', ', $plugin['integrates_with'])); ?>
                                 </p>
                             <?php endif; ?>
@@ -83,17 +83,17 @@ class WPSeed_Ecosystem_Installer {
                             <?php if ($is_active): ?>
                                 <span class="button button-disabled">
                                     <span class="dashicons dashicons-yes-alt"></span>
-                                    <?php _e('Active', 'wpseed'); ?>
+                                    <?php esc_html_e('Active', 'wpseed'); ?>
                                 </span>
                             <?php elseif ($is_installed): ?>
                                 <a href="<?php echo esc_url(wp_nonce_url('plugins.php?action=activate&plugin=' . $slug, 'activate-plugin_' . $slug)); ?>" class="button button-primary">
-                                    <?php _e('Activate', 'wpseed'); ?>
+                                    <?php esc_html_e('Activate', 'wpseed'); ?>
                                 </a>
                             <?php else: ?>
                                 <button class="button button-primary install-plugin" 
                                         data-slug="<?php echo esc_attr($slug); ?>"
                                         data-name="<?php echo esc_attr($plugin['name']); ?>">
-                                    <?php _e('Install Now', 'wpseed'); ?>
+                                    <?php esc_html_e('Install Now', 'wpseed'); ?>
                                 </button>
                             <?php endif; ?>
                         </div>

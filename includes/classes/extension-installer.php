@@ -78,7 +78,7 @@ class WPSeed_Extension_Installer {
         $upgrader = new Plugin_Upgrader( new WP_Ajax_Upgrader_Skin() );
         $result = $upgrader->install( $temp_file );
 
-        @unlink( $temp_file );
+        wp_delete_file( $temp_file );
 
         if ( is_wp_error( $result ) ) {
             return $result;

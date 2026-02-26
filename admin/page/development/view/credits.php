@@ -19,6 +19,7 @@ class WPSeed_Admin_Development_Credits {
     
     public static function output() {
         $contributors = self::get_contributors();
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only display parameter, no data modification
         $selected = isset($_GET['contributor']) ? sanitize_text_field(wp_unslash($_GET['contributor'])) : 'action_scheduler';
         
         wp_enqueue_style('wpseed-accordion-table', WPSEED_PLUGIN_URL . 'assets/css/accordion-table.css', array(), WPSEED_VERSION);
@@ -118,7 +119,7 @@ class WPSeed_Admin_Development_Credits {
                         <?php if (isset($contributors[$selected])): 
                             $contributor = $contributors[$selected];
                         ?>
-                            <?php echo self::render_contributor_details($contributor); ?>
+                            <?php echo wp_kses_post(self::render_contributor_details($contributor)); ?>
                         <?php else: ?>
                             <div class="details-placeholder">
                                 <p><?php esc_html_e('Select a contributor to view details', 'wpseed'); ?></p>

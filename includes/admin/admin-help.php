@@ -37,8 +37,8 @@ class WPSeed_Admin_Help {
         }
         
         if ( is_admin() && function_exists('current_user_can') && current_user_can( 'manage_options' ) ) {
-            $page      = empty( $_GET['page'] ) ? '' : sanitize_title( wp_unslash( $_GET['page'] ) );
-            $tab       = empty( $_GET['tab'] ) ? '' : sanitize_title( wp_unslash( $_GET['tab'] ) );
+            $page      = empty( $_GET['page'] ) ? '' : sanitize_title( wp_unslash( $_GET['page'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            $tab       = empty( $_GET['tab'] ) ? '' : sanitize_title( wp_unslash( $_GET['tab'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
         } else {
             $page = '';
             $tab = '';
@@ -106,43 +106,8 @@ class WPSeed_Admin_Help {
             'title'     => __( 'Newsletter', 'wpseed' ),
             'content'   => '<h2>' . __( 'Annual Newsletter', 'wpseed' ) . '</h2>' .
             '<p>' . __( 'Mailchip is used to manage the projects newsletter subscribers list.', 'wpseed' ) . '</p>' .
-            '<p>' . '<!-- Begin MailChimp Signup Form -->
-                <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
-                <style type="text/css">         
-                    #mc_embed_signup{background:#f6fbfd; clear:left; font:14px Helvetica,Arial,sans-serif; }
-                    /* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
-                       We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
-                </style>
-                <div id="mc_embed_signup">
-                <form action="//webtechglobal.us9.list-manage.com/subscribe/post?u=99272fe1772de14ff2be02fe6&amp;id=570668cac5" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                    <div id="mc_embed_signup_scroll">
-                    <h2>WPSeed Annual Newsletter</h2>
-                <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
-                <div class="mc-field-group">
-                    <label for="mce-EMAIL">Email Address  <span class="asterisk">*</span>
-                </label>
-                    <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
-                </div>
-                <div class="mc-field-group">
-                    <label for="mce-FNAME">First Name </label>
-                    <input type="text" value="" name="FNAME" class="" id="mce-FNAME">
-                </div>
-                <div class="mc-field-group">
-                    <label for="mce-LNAME">Last Name </label>
-                    <input type="text" value="" name="LNAME" class="" id="mce-LNAME">
-                </div>
-                <p>Powered by <a href="http://eepurl.com/2W_2n" title="MailChimp - email marketing made easy and fun">MailChimp</a></p>
-                    <div id="mce-responses" class="clear">
-                        <div class="response" id="mce-error-response" style="display:none"></div>
-                        <div class="response" id="mce-success-response" style="display:none"></div>
-                    </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_99272fe1772de14ff2be02fe6_570668cac5" tabindex="-1" value=""></div>
-                    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
-                    </div>
-                </form>
-                </div>
-                <script type=\'text/javascript\' src=\'//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js\'></script><script type=\'text/javascript\'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]=\'EMAIL\';ftypes[0]=\'email\';fnames[1]=\'FNAME\';ftypes[1]=\'text\';fnames[2]=\'LNAME\';ftypes[2]=\'text\';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
-                <!--End mc_embed_signup-->' . '</p>',
+            '<p>' . __( 'Visit the MailChimp website to subscribe to the WPSeed newsletter.', 'wpseed' ) . '</p>' .
+            '<p><a href="http://eepurl.com/2W_2n" class="button button-primary" target="_blank">' . __( 'Subscribe to Newsletter', 'wpseed' ) . '</a></p>',
         ) );
         
         $screen->add_help_tab( array(
@@ -174,15 +139,9 @@ class WPSeed_Admin_Help {
             3 => __( "Is there support for anyone using this boilerplate to create a plugin?", 'wpseed' ),
         );  
         
+        wp_add_inline_style( 'wp-admin', '.faq-answers li { background:white; padding:10px 20px; border:1px solid #cacaca; }' );
+        
         ?>
-
-        <style>
-            .faq-answers li {
-                background:white;
-                padding:10px 20px;
-                border:1px solid #cacaca;
-            }
-        </style>
 
         <p>
             <ul id="faq-index">
@@ -206,7 +165,8 @@ class WPSeed_Admin_Help {
      
         </ul>
              
-        <script>
+        <?php
+        $faq_script = "
             jQuery( document).ready( function( $ ) {
                 var selectedQuestion = '';
 
@@ -237,7 +197,7 @@ class WPSeed_Admin_Help {
 
                     if ( answer === 39 ) {
                         advancedGroup = $( '<optgroup />' )
-                            .attr( 'label', "<?php esc_attr_e( 'Advanced: This part of FAQ requires some knowledge about HTML, PHP and/or WordPress coding.', 'wpseed' ); ?>" );
+                            .attr( 'label', '" . esc_js( __( 'Advanced: This part of FAQ requires some knowledge about HTML, PHP and/or WordPress coding.', 'wpseed' ) ) . "' );
 
                         indexSelector.append( advancedGroup );
                     }
@@ -261,13 +221,15 @@ class WPSeed_Admin_Help {
                 indexSelector.before(
                     $('<label />')
                         .attr( 'for', 'question-selector' )
-                        .text( "<?php echo esc_js( __( 'Select a question', 'wpseed' ) ); ?>" )
+                        .text( '" . esc_js( __( 'Select a question', 'wpseed' ) ) . "' )
                         .addClass( 'screen-reader-text' )
                 );
 
                 indexSelector.change( selectQuestion );
             });
-        </script>        
+        ";
+        wp_add_inline_script( 'jquery', $faq_script );
+        ?>        
 
         <?php 
     }

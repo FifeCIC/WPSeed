@@ -62,7 +62,7 @@ final class WordPressPluginSeed {
      * @since 1.0
      */
     public function __clone() {
-        _doing_it_wrong( __FUNCTION__, __( 'Your not allowed to do that!', 'wpseed' ), '1.0' );
+        _doing_it_wrong( __FUNCTION__, esc_html__( 'Your not allowed to do that!', 'wpseed' ), '1.0' );
     }
 
     /**
@@ -70,7 +70,7 @@ final class WordPressPluginSeed {
      * @since 1.0
      */
     public function __wakeup() {
-        _doing_it_wrong( __FUNCTION__, __( 'Your not allowed to do that!', 'wpseed' ), '1.0' );
+        _doing_it_wrong( __FUNCTION__, esc_html__( 'Your not allowed to do that!', 'wpseed' ), '1.0' );
     }
 
     /**

@@ -36,18 +36,14 @@ class WPSeed_Admin_Assets {
         $screen         = get_current_screen();
         $screen_id      = $screen ? $screen->id : '';
         
-        $jquery_version = isset( $wp_scripts->registered['jquery-ui-core']->ver ) ? $wp_scripts->registered['jquery-ui-core']->ver : '1.11.4';
-
         // Register admin styles
         wp_register_style( 'wpseed_admin_styles', WPSeed()->plugin_url() . '/assets/css/admin.css', array(), WPSEED_VERSION );
         wp_register_style( 'wpseed_tooltips', WPSeed()->plugin_url() . '/assets/css/tooltips.css', array(), WPSEED_VERSION );
-        wp_register_style( 'jquery-ui-style', '//code.jquery.com/ui/' . $jquery_version . '/themes/smoothness/jquery-ui.min.css', array(), $jquery_version );
 
         // Admin styles for WordPress Seed pages only
         if ( in_array( $screen_id, wpseed_get_screen_ids() ) ) {
             wp_enqueue_style( 'wpseed_admin_styles' );
             wp_enqueue_style( 'wpseed_tooltips' );
-            wp_enqueue_style( 'jquery-ui-style' );
         }
     }
 
