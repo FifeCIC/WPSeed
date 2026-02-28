@@ -12,7 +12,7 @@ class WPSeed_Admin_Development_Performance {
     
     public static function output() {
         // Handle clear logs
-        if (isset($_POST['clear_logs']) && wp_verify_nonce($_POST['_wpnonce'], 'wpseed_clear_logs')) {
+        if (isset($_POST['clear_logs']) && isset($_POST['_wpnonce']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_wpnonce'])), 'wpseed_clear_logs')) {
             WPSeed_Enhanced_Logger::clear_old_logs(0);
             echo '<div class="notice notice-success"><p>' . esc_html__('Logs cleared successfully.', 'wpseed') . '</p></div>';
         }

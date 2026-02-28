@@ -315,7 +315,7 @@ defined('ABSPATH') || exit;
 
     <?php
     // Add inline script for filter functionality
-    $filter_script = "
+    $wpseed_filter_script = "
         jQuery(document).ready(function($) {
             // Search functionality
             $('.search-clear').on('click', function() {
@@ -443,6 +443,6 @@ defined('ABSPATH') || exit;
         });
     ";
     
-    wp_add_inline_script('jquery', $filter_script);
+    wp_add_inline_script('jquery', $wpseed_filter_script);
     ?>
 </div>

@@ -5,7 +5,7 @@ License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Tags: boilerplate, plugin starter, AI assistant, REST API, developer tools, WP-CLI, modern architecture
 Requires at least: 5.0
-Tested up to: 6.4
+Tested up to: 6.9
 Requires PHP: 7.4
 Stable tag: 1.1.0
 License: GPLv3

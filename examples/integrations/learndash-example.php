@@ -97,6 +97,7 @@ class WPSeed_LearnDash_Integration {
     private function log_course_completion( $user_id, $course_id ) {
         global $wpdb;
         
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Simple insert operation for logging
         $wpdb->insert(
             $wpdb->prefix . 'wpseed_ld_completions',
             array(
@@ -121,6 +122,7 @@ class WPSeed_LearnDash_Integration {
     private function log_quiz_result( $user_id, $quiz_id, $score ) {
         global $wpdb;
         
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Simple insert operation for logging
         $wpdb->insert(
             $wpdb->prefix . 'wpseed_ld_quiz_results',
             array(

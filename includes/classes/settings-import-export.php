@@ -105,12 +105,20 @@ class WPSeed_Settings_Import_Export {
         global $wpdb;
 
         $settings = array();
-        $option_names = $wpdb->get_col(
-            $wpdb->prepare(
-                "SELECT option_name FROM {$wpdb->options} WHERE option_name LIKE %s",
-                'wpseed_%'
-            )
-        );
+        
+        // Check cache first
+        $option_names = wp_cache_get( 'wpseed_all_settings_names' );
+        
+        if ( false === $option_names ) {
+            $option_names = $wpdb->get_col(
+                $wpdb->prepare(
+                    "SELECT option_name FROM {$wpdb->options} WHERE option_name LIKE %s",
+                    'wpseed_%'
+                )
+            );
+            // Cache the results
+            wp_cache_set( 'wpseed_all_settings_names', $option_names );
+        }
 
         foreach ( $option_names as $option_name ) {
             $settings[ $option_name ] = get_option( $option_name );

@@ -128,7 +128,7 @@ class WPSeed_Extension_Installer {
             wp_die( esc_html__( 'You do not have permission to install plugins.', 'wpseed' ) );
         }
 
-        $extension_slug = sanitize_text_field( $_GET['wpseed_install_extension'] );
+        $extension_slug = sanitize_text_field( wp_unslash( $_GET['wpseed_install_extension'] ) );
         $license_key = get_option( 'wpseed_license_key', '' );
 
         $result = $this->install_extension( $extension_slug, $license_key );
@@ -137,7 +137,7 @@ class WPSeed_Extension_Installer {
             wp_die( esc_html( $result->get_error_message() ) );
         }
 
-        wp_redirect( admin_url( 'plugins.php?wpseed_extension_installed=1' ) );
+        wp_safe_redirect( admin_url( 'plugins.php?wpseed_extension_installed=1' ) );
         exit;
     }
 

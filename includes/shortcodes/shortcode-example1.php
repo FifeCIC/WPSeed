@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * My appointments list.
  */
-class App_Shortcode_MyAppointments extends App_Shortcode {
+class WPSeed_Shortcode_MyAppointments extends App_Shortcode {
     public function __construct () {
         $this->name = __( 'My Appointments', 'wpseed' );
     }
@@ -25,7 +25,7 @@ class App_Shortcode_MyAppointments extends App_Shortcode {
             'title' => array(
                 'type' => 'text',
                 'name' => __( 'Text Example', 'wpseed' ),
-                'value' => __('<h3>Test Example</h3>', 'wpseed'),
+                'value' => __('Test Example', 'wpseed'),
                 'help' => __('Help example for text.', 'wpseed'),
             ),
             'order' => array(

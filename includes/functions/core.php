@@ -55,7 +55,7 @@ function wpseed_is_dashboard() {
 * running none urgent tasks during existing operations and demanding requests.
 */
 function wpseed_is_background_process() {        
-    if ( ( isset( $_SERVER['SCRIPT_FILENAME'] ) && 'wp-login.php' === basename( wp_unslash( $_SERVER['SCRIPT_FILENAME'] ) ) )
+    if ( ( isset( $_SERVER['SCRIPT_FILENAME'] ) && 'wp-login.php' === basename( sanitize_text_field( wp_unslash( $_SERVER['SCRIPT_FILENAME'] ) ) ) )
             || ( defined( 'XMLRPC_REQUEST' ) && XMLRPC_REQUEST )
             || ( defined( 'DOING_CRON' ) && DOING_CRON )
             || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {

@@ -12,16 +12,16 @@ if (!$_tests_dir) {
 }
 
 if (!file_exists($_tests_dir . '/includes/functions.php')) {
-    fwrite(STDERR, "Could not find $_tests_dir/includes/functions.php\n");
+    error_log("Could not find $_tests_dir/includes/functions.php");
     exit(1);
 }
 
 require_once $_tests_dir . '/includes/functions.php';
 
-function _manually_load_plugin() {
+function wpseed_manually_load_plugin() {
     require dirname(dirname(__FILE__)) . '/wpseed.php';
 }
 
-tests_add_filter('muplugins_loaded', '_manually_load_plugin');
+tests_add_filter('muplugins_loaded', 'wpseed_manually_load_plugin');
 
 require $_tests_dir . '/includes/bootstrap.php';

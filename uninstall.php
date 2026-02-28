@@ -15,14 +15,17 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 global $wpdb, $wp_version;
 
 // Delete options
-$wpdb->query("DELETE FROM {$wpdb->options} WHERE option_name LIKE 'wpseed_%'");
+$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s", $wpdb->esc_like( 'wpseed_' ) . '%' ) );
+wp_cache_delete_multiple( array( 'alloptions', 'wpseed_settings' ) );
 
 // Delete transients
-$wpdb->query("DELETE FROM {$wpdb->options} WHERE option_name LIKE '_transient_wpseed_%'");
-$wpdb->query("DELETE FROM {$wpdb->options} WHERE option_name LIKE '_transient_timeout_wpseed_%'");
+$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s", $wpdb->esc_like( '_transient_wpseed_' ) . '%' ) );
+$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s", $wpdb->esc_like( '_transient_timeout_wpseed_' ) . '%' ) );
+wp_cache_flush();
 
 // Delete user meta
-$wpdb->query("DELETE FROM {$wpdb->usermeta} WHERE meta_key LIKE 'wpseed_%'");
+$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->usermeta} WHERE meta_key LIKE %s", $wpdb->esc_like( 'wpseed_' ) . '%' ) );
+wp_cache_delete_multiple( array( 'user_meta' ) );
 
 // Clear scheduled hooks
 wp_clear_scheduled_hook('wpseed_daily_cleanup');

@@ -57,6 +57,7 @@ class WPSeed_Admin_Setup_Wizard {
      * Show the setup wizard.
      */
     public function setup_wizard() {
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce verification not required for page navigation check
         if ( empty( $_GET['page'] ) || 'wpseed-setup' !== sanitize_text_field( wp_unslash( $_GET['page'] ) ) ) {
             return;
         }
@@ -108,13 +109,13 @@ class WPSeed_Admin_Setup_Wizard {
 
         // Register scripts for the pretty extension presentation and selection.
         wp_register_script( 'jquery-blockui', WPSeed()->plugin_url() . '/assets/js/jquery-blockui/jquery.blockUI' . $suffix . '.js', array( 'jquery' ), '2.70', true );
-        wp_register_script( 'select2', WPSeed()->plugin_url() . '/assets/js/select2/select2' . $suffix . '.js', array( 'jquery' ), '3.5.2' );
-        wp_register_script( 'wpseed-enhanced-select', WPSeed()->plugin_url() . '/assets/js/admin/wpseed-enhanced-select' . $suffix . '.js', array( 'jquery', 'select2' ), WPSEED_VERSION );
+        wp_register_script( 'select2', WPSeed()->plugin_url() . '/assets/js/select2/select2' . $suffix . '.js', array( 'jquery' ), '3.5.2', true );
+        wp_register_script( 'wpseed-enhanced-select', WPSeed()->plugin_url() . '/assets/js/admin/wpseed-enhanced-select' . $suffix . '.js', array( 'jquery', 'select2' ), WPSEED_VERSION, true );
         
         // Queue CSS for the entire setup process.
         wp_enqueue_style( 'wpseed_admin_styles', WPSeed()->plugin_url() . '/assets/css/admin.css', array(), WPSEED_VERSION );
         wp_enqueue_style( 'wpseed-setup', WPSeed()->plugin_url() . '/assets/css/wpseed-setup.css', array( 'dashicons', 'install' ), WPSEED_VERSION );
-        wp_register_script( 'wpseed-setup', WPSeed()->plugin_url() . '/assets/js/admin/wpseed-setup.min.js', array( 'jquery', 'wpseed-enhanced-select', 'jquery-blockui' ), WPSEED_VERSION );
+        wp_register_script( 'wpseed-setup', WPSeed()->plugin_url() . '/assets/js/admin/wpseed-setup.min.js', array( 'jquery', 'wpseed-enhanced-select', 'jquery-blockui' ), WPSEED_VERSION, true );
 
         if ( ! empty( $_POST['save_step'] ) && isset( $this->steps[ $this->step ]['handler'] ) ) {
             call_user_func( $this->steps[ $this->step ]['handler'] );
@@ -313,8 +314,7 @@ class WPSeed_Admin_Setup_Wizard {
      */
     public function wpseed_setup_administrators_save() {          
         check_admin_referer( 'wpseed-setup' );
-
-        wp_redirect( esc_url_raw( $this->get_next_step_link() ) );
+        wp_safe_redirect( esc_url_raw( $this->get_next_step_link() ) );
         exit;
     }
 
@@ -360,7 +360,7 @@ class WPSeed_Admin_Setup_Wizard {
      */
     public function wpseed_setup_folders_save() {       
         check_admin_referer( 'wpseed-setup' );
-        wp_redirect( esc_url_raw( $this->get_next_step_link() ) );
+        wp_safe_redirect( esc_url_raw( $this->get_next_step_link() ) );
         exit;
     }
 
@@ -417,7 +417,7 @@ class WPSeed_Admin_Setup_Wizard {
      */
     public function wpseed_setup_database_save() {           
         check_admin_referer( 'wpseed-setup' );
-        wp_redirect( esc_url_raw( $this->get_next_step_link() ) );
+        wp_safe_redirect( esc_url_raw( $this->get_next_step_link() ) );
         exit;
     }
 
@@ -482,7 +482,7 @@ class WPSeed_Admin_Setup_Wizard {
         update_option( 'wpseed_admin_notifications', ! empty( $_POST['wpseed_admin_notifications'] ) ? 'yes' : 'no' );
         update_option( 'wpseed_email_notifications', ! empty( $_POST['wpseed_email_notifications'] ) ? 'yes' : 'no' );
         
-        wp_redirect( esc_url_raw( $this->get_next_step_link() ) );
+        wp_safe_redirect( esc_url_raw( $this->get_next_step_link() ) );
         exit;
     }
 
@@ -624,7 +624,7 @@ class WPSeed_Admin_Setup_Wizard {
             update_option( $settings_key, $settings );
         }
 
-        wp_redirect( esc_url_raw( $this->get_next_step_link() ) );
+        wp_safe_redirect( esc_url_raw( $this->get_next_step_link() ) );
         exit;
     }
 
@@ -669,7 +669,7 @@ class WPSeed_Admin_Setup_Wizard {
      */
     public function wpseed_setup_improvement_save() { 
         check_admin_referer( 'wpseed-setup' );
-        wp_redirect( esc_url_raw( $this->get_next_step_link() ) );
+        wp_safe_redirect( esc_url_raw( $this->get_next_step_link() ) );
         exit;
     }
     

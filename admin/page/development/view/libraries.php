@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $monitor = WPSeed_Library_Update_Monitor::instance();
-$libraries = $monitor->get_libraries();
+$wpseed_libraries = $monitor->get_libraries();
 $updates = array();
 
 // Check for updates if requested
@@ -15,7 +15,7 @@ if ( isset( $_GET['check_updates'] ) && isset( $_GET['_wpnonce'] ) && wp_verify_
 }
 
 // Get cached updates
-foreach ( $libraries as $slug => $library ) {
+foreach ( $wpseed_libraries as $slug => $library ) {
     $updates[ $slug ] = $monitor->check_updates( $slug );
 }
 ?>
@@ -42,7 +42,7 @@ foreach ( $libraries as $slug => $library ) {
             </tr>
         </thead>
         <tbody>
-            <?php foreach ( $libraries as $slug => $library ) : 
+            <?php foreach ( $wpseed_libraries as $slug => $library ) : 
                 $update = $updates[ $slug ];
                 $is_outdated = $monitor->is_outdated( $slug );
                 $needs_update = ! is_wp_error( $update ) && ! empty( $update['needs_update'] );

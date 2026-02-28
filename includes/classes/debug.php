@@ -43,6 +43,7 @@ class WPSeed_Debug {
 
         echo '<h1>$_POST</h1>';
         echo '<pre>';
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Debug function for display only
         var_dump( $_POST );
         echo '</pre>';
     }   

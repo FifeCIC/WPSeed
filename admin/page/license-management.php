@@ -10,31 +10,31 @@ if (!defined('ABSPATH')) exit;
 
 // Handle form submissions
 if (isset($_POST['wpseed_activate_license']) && check_admin_referer('wpseed_license_action')) {
-    $license_key = isset($_POST['license_key']) ? sanitize_text_field(wp_unslash($_POST['license_key'])) : '';
-    $client = new WPSeed_License_Client();
-    $result = $client->activate_license($license_key);
+    $wpseed_license_key = isset($_POST['license_key']) ? sanitize_text_field(wp_unslash($_POST['license_key'])) : '';
+    $wpseed_client = new WPSeed_License_Client();
+    $wpseed_result = $wpseed_client->activate_license($wpseed_license_key);
     
-    if (is_wp_error($result)) {
-        echo '<div class="notice notice-error"><p>' . esc_html($result->get_error_message()) . '</p></div>';
+    if (is_wp_error($wpseed_result)) {
+        echo '<div class="notice notice-error"><p>' . esc_html($wpseed_result->get_error_message()) . '</p></div>';
     } else {
         echo '<div class="notice notice-success"><p>License activated successfully!</p></div>';
     }
 }
 
 if (isset($_POST['wpseed_deactivate_license']) && check_admin_referer('wpseed_license_action')) {
-    $client = new WPSeed_License_Client();
-    $result = $client->deactivate_license();
+    $wpseed_client = new WPSeed_License_Client();
+    $wpseed_result = $wpseed_client->deactivate_license();
     
-    if (is_wp_error($result)) {
-        echo '<div class="notice notice-error"><p>' . esc_html($result->get_error_message()) . '</p></div>';
+    if (is_wp_error($wpseed_result)) {
+        echo '<div class="notice notice-error"><p>' . esc_html($wpseed_result->get_error_message()) . '</p></div>';
     } else {
         echo '<div class="notice notice-success"><p>License deactivated successfully!</p></div>';
     }
 }
 
-$client = new WPSeed_License_Client();
-$license_data = $client->get_license_data();
-$is_valid = $client->is_license_valid();
+$wpseed_client = new WPSeed_License_Client();
+$wpseed_license_data = $wpseed_client->get_license_data();
+$wpseed_is_valid = $wpseed_client->is_license_valid();
 ?>
 
 <div class="wrap">
@@ -42,7 +42,7 @@ $is_valid = $client->is_license_valid();
     
     <div class="wpseed-license-container" style="max-width: 800px;">
         
-        <?php if (empty($license_data)): ?>
+        <?php if (empty($wpseed_license_data)): ?>
             <!-- No License -->
             <div class="card" style="padding: 20px; margin-top: 20px;">
                 <h2>Activate Your License</h2>
@@ -94,14 +94,14 @@ $is_valid = $client->is_license_valid();
                         <tr>
                             <td style="width: 200px;"><strong>Status</strong></td>
                             <td>
-                                <?php if ($is_valid): ?>
+                                <?php if ($wpseed_is_valid): ?>
                                     <span style="color: #00a32a;">
                                         <span class="dashicons dashicons-yes-alt"></span> Active
                                     </span>
                                 <?php else: ?>
                                     <span style="color: #d63638;">
                                         <span class="dashicons dashicons-warning"></span> 
-                                        <?php echo esc_html(ucfirst($license_data['status'])); ?>
+                                        <?php echo esc_html(ucfirst($wpseed_license_data['status'])); ?>
                                     </span>
                                 <?php endif; ?>
                             </td>
@@ -109,29 +109,29 @@ $is_valid = $client->is_license_valid();
                         <tr>
                             <td><strong>License Key</strong></td>
                             <td>
-                                <code><?php echo esc_html($this->mask_license_key($license_data['license_key'])); ?></code>
+                                <code><?php echo esc_html(wpseed_mask_license_key($wpseed_license_data['license_key'])); ?></code>
                             </td>
                         </tr>
-                        <?php if (isset($license_data['license_type'])): ?>
+                        <?php if (isset($wpseed_license_data['license_type'])): ?>
                         <tr>
                             <td><strong>License Type</strong></td>
-                            <td><?php echo esc_html(ucwords(str_replace('_', ' ', $license_data['license_type']))); ?></td>
+                            <td><?php echo esc_html(ucwords(str_replace('_', ' ', $wpseed_license_data['license_type']))); ?></td>
                         </tr>
                         <?php endif; ?>
-                        <?php if (isset($license_data['expires'])): ?>
+                        <?php if (isset($wpseed_license_data['expires'])): ?>
                         <tr>
                             <td><strong>Expires</strong></td>
                             <td>
                                 <?php 
-                                if ($license_data['expires'] === 'lifetime') {
+                                if ($wpseed_license_data['expires'] === 'lifetime') {
                                     echo 'Lifetime';
                                 } else {
-                                    $expires = strtotime($license_data['expires']);
-                                    $days_left = floor(($expires - time()) / DAY_IN_SECONDS);
-                                    echo esc_html( gmdate( 'F j, Y', $expires ) );
+                                    $wpseed_expires = strtotime($wpseed_license_data['expires']);
+                                    $wpseed_days_left = floor(($wpseed_expires - time()) / DAY_IN_SECONDS);
+                                    echo esc_html( gmdate( 'F j, Y', $wpseed_expires ) );
                                     
-                                    if ($days_left > 0) {
-                                        echo ' <span style="color: #666;">(' . esc_html($days_left) . ' days remaining)</span>';
+                                    if ($wpseed_days_left > 0) {
+                                        echo ' <span style="color: #666;">(' . esc_html($wpseed_days_left) . ' days remaining)</span>';
                                     } else {
                                         echo ' <span style="color: #d63638;">(Expired)</span>';
                                     }
@@ -140,10 +140,10 @@ $is_valid = $client->is_license_valid();
                             </td>
                         </tr>
                         <?php endif; ?>
-                        <?php if (isset($license_data['activated_at'])): ?>
+                        <?php if (isset($wpseed_license_data['activated_at'])): ?>
                         <tr>
                             <td><strong>Activated</strong></td>
-                            <td><?php echo esc_html( gmdate( 'F j, Y', $license_data['activated_at'] ) ); ?></td>
+                            <td><?php echo esc_html( gmdate( 'F j, Y', $wpseed_license_data['activated_at'] ) ); ?></td>
                         </tr>
                         <?php endif; ?>
                     </tbody>
@@ -161,7 +161,7 @@ $is_valid = $client->is_license_valid();
                 </form>
             </div>
             
-            <?php if ($is_valid): ?>
+            <?php if ($wpseed_is_valid): ?>
             <!-- Premium Features -->
             <div class="card" style="padding: 20px; margin-top: 20px;">
                 <h2>Premium Features</h2>
@@ -194,7 +194,7 @@ $is_valid = $client->is_license_valid();
 
 <?php
 // Helper function to mask license key
-function mask_license_key($key) {
+function wpseed_mask_license_key($key) {
     $parts = explode('-', $key);
     if (count($parts) === 4) {
         return $parts[0] . '-****-****-' . $parts[3];

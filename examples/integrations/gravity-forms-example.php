@@ -100,6 +100,7 @@ class WPSeed_GravityForms_Integration {
     private function log_entry( $entry, $form ) {
         global $wpdb;
         
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Simple insert operation for logging form entries
         $wpdb->insert(
             $wpdb->prefix . 'wpseed_gf_entries',
             array(

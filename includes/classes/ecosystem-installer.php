@@ -114,7 +114,7 @@ class WPSeed_Ecosystem_Installer {
             wp_send_json_error('Insufficient permissions');
         }
         
-        $slug = sanitize_text_field($_POST['slug']);
+        $slug = sanitize_text_field(wp_unslash($_POST['slug']));
         
         if (!isset($this->available_plugins[$slug])) {
             wp_send_json_error('Invalid plugin');

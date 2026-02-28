@@ -15,7 +15,7 @@ wp_enqueue_style('wpseed-accordion-table');
 wp_enqueue_script('wpseed-accordion-table');
 
 // Example data
-$items = array(
+$wpseed_items = array(
     'item_1' => array(
         'name' => 'Example Item 1',
         'status' => 'active',
@@ -46,9 +46,9 @@ $items = array(
 );
 
 // Get selected item
-$selected_item = 'item_1';
+$wpseed_selected_item = 'item_1';
 if (isset($_GET['configure'])) {
-    $selected_item = sanitize_text_field(wp_unslash($_GET['configure']));
+    $wpseed_selected_item = sanitize_text_field(wp_unslash($_GET['configure']));
 }
 ?>
 
@@ -76,7 +76,7 @@ if (isset($_GET['configure'])) {
             </div>
 
             <div class="wpseed-accordion-table">
-                <?php foreach ($items as $item_id => $item): ?>
+                <?php foreach ($wpseed_items as $item_id => $item): ?>
                     <div class="accordion-row">
                         <div class="accordion-header">
                             <div style="flex: 2;">
@@ -130,8 +130,8 @@ if (isset($_GET['configure'])) {
         <!-- Right Column: Details Sidebar -->
         <div class="wpseed-sidebar">
             <div class="wpseed-details-container">
-                <?php if (isset($items[$selected_item])): 
-                    $item = $items[$selected_item];
+                <?php if (isset($wpseed_items[$selected_item])): 
+                    $item = $wpseed_items[$selected_item];
                 ?>
                     <div class="section-header">
                         <h3><?php echo esc_html($item['name']); ?></h3>

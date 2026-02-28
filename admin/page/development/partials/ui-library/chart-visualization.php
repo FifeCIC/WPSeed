@@ -343,7 +343,7 @@ defined('ABSPATH') || exit;
     
     <?php
     // Add interactive demo script
-    $chart_script = "
+    $wpseed_chart_script = "
         jQuery(document).ready(function($) {
             // Chart period selector
             $('.chart-period-select').on('change', function() {
@@ -399,6 +399,6 @@ defined('ABSPATH') || exit;
         });
     ";
     
-    wp_add_inline_script('jquery', $chart_script);
+    wp_add_inline_script('jquery', $wpseed_chart_script);
     ?>
 </div>

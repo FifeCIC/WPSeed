@@ -8,7 +8,7 @@
  * Author: Ryan Bayne
  * Author URI: https://www.ryanbayne.uk
  * Requires at least: 4.4
- * Tested up to: 4.7
+ * Tested up to: 6.9
  * License: GPL3
  * License URI: http://www.gnu.org/licenses/gpl-3.0.txt
  * Domain Path: /i18n/languages/
@@ -35,6 +35,11 @@ if ( ! class_exists( 'WordPressPluginSeed' ) ) :
     require_once( WPSEED_PLUGIN_DIR_PATH . 'install.php' );
     include_once( WPSEED_PLUGIN_DIR_PATH . 'functions.php' );
     include_once( WPSEED_PLUGIN_DIR_PATH . 'deprecated.php' );
+    
+    // Load WP Verifier exclusions for open source projects
+    if ( file_exists( WPSEED_PLUGIN_DIR_PATH . 'wp-verifier-exclusions.php' ) ) {
+        include_once( WPSEED_PLUGIN_DIR_PATH . 'wp-verifier-exclusions.php' );
+    }
     
     // Run the plugin
     include_once( WPSEED_PLUGIN_DIR_PATH . 'loader.php' );

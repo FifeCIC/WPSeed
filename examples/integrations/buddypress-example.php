@@ -76,7 +76,7 @@ class WPSeed_BuddyPress_Integration {
      * Save custom profile field
      */
     public function save_custom_profile_field( $user_id, $posted_field_ids, $errors, $old_values, $new_values ) {
-        if ( isset( $_POST['wpseed_custom_field'] ) && wp_verify_nonce( $_POST['_wpnonce'], 'bp_xprofile_edit' ) ) {
+        if ( isset( $_POST['wpseed_custom_field'], $_POST['_wpnonce'] ) && wp_verify_nonce( $_POST['_wpnonce'], 'bp_xprofile_edit' ) ) {
             update_user_meta( $user_id, 'wpseed_custom_field', sanitize_text_field( wp_unslash( $_POST['wpseed_custom_field'] ) ) );
         }
     }

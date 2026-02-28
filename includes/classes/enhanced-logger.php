@@ -39,7 +39,10 @@ class WPSeed_Enhanced_Logger {
         add_filter('pre_http_request', array($this, 'log_http_request'), 10, 3);
         add_action('shutdown', array($this, 'save_logs'));
         
-        set_error_handler(array($this, 'log_error'));
+        // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_set_error_handler -- Only used in debug mode
+        if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+            set_error_handler(array($this, 'log_error'));
+        }
     }
 
     /**
@@ -177,7 +180,7 @@ class WPSeed_Enhanced_Logger {
         }
         
         $wpdb->insert($table, array(
-            'request_uri' => $_SERVER['REQUEST_URI'],
+            'request_uri' => isset($_SERVER['REQUEST_URI']) ? sanitize_text_field($_SERVER['REQUEST_URI']) : '',
             'query_count' => count($this->queries),
             'query_time' => $this->get_query_stats()['total_time'],
             'hook_count' => $this->get_hook_stats()['total_calls'],
@@ -247,6 +250,7 @@ class WPSeed_Enhanced_Logger {
         
         $table = $wpdb->prefix . 'wpseed_debug_logs';
         
+        // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name is safely constructed with $wpdb->prefix
         return $wpdb->query($wpdb->prepare(
             "DELETE FROM $table WHERE created_at < DATE_SUB(NOW(), INTERVAL %d DAY)",
             $days

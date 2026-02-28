@@ -73,7 +73,7 @@ class WPSeed_MemberPress_Integration {
      * Custom account validation
      */
     public function custom_account_validation( $errors ) {
-        if ( isset( $_POST['user_email'] ) && wp_verify_nonce( $_POST['mepr_process_signup_form'], 'mepr_process_signup_form' ) ) {
+        if ( isset( $_POST['user_email'] ) && isset( $_POST['mepr_process_signup_form'] ) && wp_verify_nonce( $_POST['mepr_process_signup_form'], 'mepr_process_signup_form' ) ) {
             $email = sanitize_email( wp_unslash( $_POST['user_email'] ) );
             
             // Custom validation logic

@@ -92,7 +92,7 @@ class WPSeed_Admin_Notices {
         global $current_user;
                                                
         // handling user action - hide notice and update user meta
-        if ( isset($_GET[ $dismissable_id ]) && 'dismiss' == $_GET[ $dismissable_id ] && wp_verify_nonce($_GET['_wpnonce'], 'dismiss_notice') ) {
+        if ( isset($_GET[ $dismissable_id ]) && 'dismiss' == $_GET[ $dismissable_id ] && isset($_GET['_wpnonce']) && wp_verify_nonce(sanitize_text_field($_GET['_wpnonce']), 'dismiss_notice') ) {
             add_user_meta( $current_user->ID, $dismissable_id, 'true', true );
             return;
         }

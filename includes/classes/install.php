@@ -131,6 +131,7 @@ class WPSeed_Install {
          *
          * Based on code inside core's upgrade_network() function.
          */
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- Complex multi-table delete required, similar to WordPress core
         $wpdb->query( $wpdb->prepare( "DELETE a, b FROM $wpdb->options a, $wpdb->options b
             WHERE a.option_name LIKE %s
             AND a.option_name NOT LIKE %s
@@ -358,8 +359,12 @@ class WPSeed_Install {
         foreach ( $files as $file ) {
             if ( wp_mkdir_p( $file['base'] ) && ! file_exists( trailingslashit( $file['base'] ) . $file['file'] ) ) {
                 $file_path = trailingslashit( $file['base'] ) . $file['file'];
-                // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
-                file_put_contents( $file_path, $file['content'] );
+                if ( ! function_exists( 'WP_Filesystem' ) ) {
+                    require_once ABSPATH . 'wp-admin/includes/file.php';
+                }
+                WP_Filesystem();
+                global $wp_filesystem;
+                $wp_filesystem->put_contents( $file_path, $file['content'], FS_CHMOD_FILE );
             }
         }
     }

@@ -41,6 +41,12 @@ class WPSeed_MainView_Food_Advanced extends WPSeed_ListTable_Demo {
         // Filter $this->items to create a dataset suitable for this view.
         unset($this->items[0],$this->items[1]); 
         
+            // Nonce verification for sorting actions
+            if ( isset( $_GET['orderby'] ) || isset( $_GET['order'] ) ) {
+                if ( empty( $_GET['_wpnonce'] ) || ! wp_verify_nonce( $_GET['_wpnonce'], 'wpseed-food-advanced-sorting' ) ) {
+                    die( esc_html__( 'Action failed. Please refresh the page and retry.', 'wpseed' ) );
+                }
+            }
         // Order by sorting columns.
         if( isset( $_GET['orderby'] ) && isset( $_GET['order'] ) ) {
             switch ( $_GET['orderby'] ) {

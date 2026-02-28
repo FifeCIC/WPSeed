@@ -24,7 +24,7 @@ function wpseed_db_selectrow($tablename, $condition, $select = '*') {
     }
     $tablename = esc_sql($tablename);
     $select = esc_sql($select);
-    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Utility function, caching handled by callers, identifiers escaped
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Utility function, caching handled by callers, identifiers escaped
     return $wpdb->get_row("SELECT $select FROM $tablename WHERE $condition", OBJECT);
 }
 
@@ -33,9 +33,9 @@ function wpseed_db_selectwhere($tablename, $condition = null, $orderby = null, $
     $tablename = esc_sql($tablename);
     $select = esc_sql($select);
     $orderby = esc_sql($orderby);
-    $condition = empty($condition) ? '' : ' WHERE ' . $condition;
+    $condition = empty($condition) ? '' : ' WHERE ' . esc_sql($condition);
     $condition .= empty($orderby) ? '' : ' ORDER BY ' . $orderby;
-    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Utility function, caching handled by callers, identifiers escaped
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Utility function, caching handled by callers, identifiers escaped
     return $wpdb->get_results("SELECT $select FROM $tablename $condition", $object);
 }
 
@@ -46,7 +46,7 @@ function wpseed_db_count_rows($tablename, $where = '') {
     if (!empty($where)) {
         $sql .= " WHERE " . $where;
     }
-    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared -- Utility function, caching handled by callers, $where expected to be pre-sanitized by caller
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.NotPrepared -- Utility function, caching handled by callers, $where expected to be pre-sanitized by caller
     return $wpdb->get_var($sql);
 }
 
@@ -54,7 +54,7 @@ function wpseed_db_get_value($column, $tablename, $conditions) {
     global $wpdb;
     $column = esc_sql($column);
     $tablename = esc_sql($tablename);
-    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Utility function, caching handled by callers, identifiers escaped
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Utility function, caching handled by callers, identifiers escaped
     return $wpdb->get_var("SELECT $column FROM $tablename WHERE $conditions");
 }
 
@@ -70,27 +70,28 @@ function wpseed_db_get_table_columns($table_name, $columns_only = true) {
     
     if ($columns_only) {
         $columns_array = array();
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Utility function, caching handled by callers, table name escaped
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Utility function, caching handled by callers, table name escaped
         foreach ($wpdb->get_col("DESC " . $table_name, 0) as $column_name) {
             $columns_array[] = $column_name;
         }
         return $columns_array;
     }
     
-    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Utility function, caching handled by callers, table name escaped
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Utility function, caching handled by callers, table name escaped
     return $wpdb->get_results("DESC " . $table_name);
 }
 
 function wpseed_db_drop_table($table_name) {
     global $wpdb;
     $table_name = esc_sql($table_name);
-    // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name escaped
-    return $wpdb->query("DROP TABLE IF EXISTS $table_name");
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.SchemaChange,WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Utility function for table management, table name escaped
+    return $wpdb->query("DROP TABLE IF EXISTS `$table_name`");
 }
 
 function wpseed_get_table_row_count($table_name) {
     global $wpdb;
-    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- Utility function, caching handled by callers
+    $table_name = esc_sql($table_name);
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Utility function, caching handled by callers, table name escaped
     $count = @$wpdb->get_var("SELECT COUNT(*) FROM `{$table_name}`");
     return ($count !== null) ? (int) $count : 0;
 }
@@ -133,8 +134,9 @@ function wpseed_get_table_status($table_name) {
         return 'Missing';
     }
     
-    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- Utility function, caching handled by callers
-    $count = $wpdb->get_var("SELECT COUNT(*) FROM `{$table_name}`");
+    $table_name = esc_sql($table_name);
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Utility function, caching handled by callers, table name escaped
+    $count = @$wpdb->get_var("SELECT COUNT(*) FROM `{$table_name}`");
     if ($count == 0) {
         return 'Empty';
     }
@@ -146,6 +148,6 @@ function wpseed_db_max_value($column, $tablename) {
     global $wpdb;
     $column = esc_sql($column);
     $tablename = esc_sql($tablename);
-    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Utility function, caching handled by callers, identifiers escaped
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Utility function, caching handled by callers, identifiers escaped
     return $wpdb->get_var("SELECT $column FROM $tablename ORDER BY $column DESC LIMIT 1");
 }

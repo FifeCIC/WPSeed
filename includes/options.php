@@ -352,7 +352,7 @@ trait WPSeed_OptionsTrait {
         $names = array_keys( $array );
 
         foreach ( array_diff( $names, self::get_option_names(), self::get_option_names( 'non_compact' ), self::get_option_names( 'private' ) ) as $unknown_name ) {
-            trigger_error( sprintf( 'Invalid WPSeed option name: %s', $unknown_name ), E_USER_WARNING );
+            trigger_error( sprintf( 'Invalid WPSeed option name: %s', esc_html( $unknown_name ) ), E_USER_WARNING );
             unset( $array[ $unknown_name ] );
         }
 

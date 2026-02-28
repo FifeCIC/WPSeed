@@ -9,16 +9,16 @@
 if (!defined('ABSPATH')) exit;
 
 // Get audit data
-$audit_data = get_option('wpseed_security_audit', array());
+$wpseed_audit_data = get_option('wpseed_security_audit', array());
 
 // Handle form submission
 if (isset($_POST['wpseed_update_audit']) && check_admin_referer('wpseed_security_audit')) {
-    $check_id = sanitize_text_field($_POST['check_id']);
-    $status = sanitize_text_field($_POST['status']);
-    $tool = sanitize_text_field($_POST['tool']);
-    $notes = sanitize_textarea_field($_POST['notes']);
+    $check_id = isset($_POST['check_id']) ? sanitize_text_field($_POST['check_id']) : '';
+    $status = isset($_POST['status']) ? sanitize_text_field($_POST['status']) : '';
+    $tool = isset($_POST['tool']) ? sanitize_text_field($_POST['tool']) : '';
+    $notes = isset($_POST['notes']) ? sanitize_textarea_field($_POST['notes']) : '';
     
-    $audit_data[$check_id] = array(
+    $wpseed_audit_data[$check_id] = array(
         'status' => $status,
         'tool' => $tool,
         'notes' => $notes,
@@ -26,7 +26,7 @@ if (isset($_POST['wpseed_update_audit']) && check_admin_referer('wpseed_security
         'checked_by' => get_current_user_id()
     );
     
-    update_option('wpseed_security_audit', $audit_data);
+    update_option('wpseed_security_audit', $wpseed_audit_data);
     echo '<div class="notice notice-success"><p>' . esc_html__('Security check updated successfully.', 'wpseed') . '</p></div>';
 }
 
@@ -108,7 +108,7 @@ $security_checks = array(
     <div class="security-audit-container">
         <?php foreach ($security_checks as $check_id => $check): ?>
             <?php 
-            $check_data = isset($audit_data[$check_id]) ? $audit_data[$check_id] : null;
+            $check_data = isset($wpseed_audit_data[$check_id]) ? $wpseed_audit_data[$check_id] : null;
             $status = $check_data ? $check_data['status'] : 'pending';
             $status_class = $status === 'pass' ? 'status-pass' : ($status === 'fail' ? 'status-fail' : 'status-pending');
             ?>

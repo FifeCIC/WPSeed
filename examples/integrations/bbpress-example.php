@@ -67,6 +67,7 @@ class WPSeed_bbPress_Integration {
      * Add custom field to topic form
      */
     public function add_custom_field() {
+        wp_nonce_field( 'wpseed_custom_field_action', 'wpseed_custom_field_nonce' );
         ?>
         <p>
             <label for="wpseed_custom_field"><?php esc_html_e( 'Custom Field', 'wpseed' ); ?></label>
@@ -79,7 +80,7 @@ class WPSeed_bbPress_Integration {
      * Save custom field
      */
     public function save_custom_field( $topic_id ) {
-        if ( isset( $_POST['wpseed_custom_field'] ) ) {
+        if ( isset( $_POST['wpseed_custom_field'] ) && isset( $_POST['wpseed_custom_field_nonce'] ) && wp_verify_nonce( wp_unslash( $_POST['wpseed_custom_field_nonce'] ), 'wpseed_custom_field_action' ) ) {
             update_post_meta( $topic_id, '_wpseed_custom_data', sanitize_text_field( $_POST['wpseed_custom_field'] ) );
         }
     }

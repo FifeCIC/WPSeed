@@ -27,6 +27,7 @@ class WPSeed_API_Logging {
         global $wpdb;
         $table = $wpdb->prefix . 'wpseed_api_calls';
         
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- Table existence check, caching not applicable
         return $wpdb->get_var($wpdb->prepare("SHOW TABLES LIKE %s", $table)) === $table;
     }
     
@@ -43,9 +44,17 @@ class WPSeed_API_Logging {
         $user_id = get_current_user_id();
         
         if (empty($file) || empty($line)) {
-            $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1);
-            $file = $backtrace[0]['file'] ?? '';
-            $line = $backtrace[0]['line'] ?? '';
+            // Only use backtrace in debug mode to avoid production warnings
+            if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+                // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_debug_backtrace -- Debug mode only, not used in production
+                $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1);
+                $file = $backtrace[0]['file'] ?? '';
+                $line = $backtrace[0]['line'] ?? '';
+            } else {
+                // Fallback values for production
+                $file = empty($file) ? 'unknown' : $file;
+                $line = empty($line) ? 0 : $line;
+            }
         }
         
         $data = array(
@@ -61,7 +70,7 @@ class WPSeed_API_Logging {
             'outcome'     => $outcome,
         );
         
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table for API logging, no WP equivalent
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table for API logging, no WP equivalent
         $result = $wpdb->insert(
             $wpdb->prefix . 'wpseed_api_calls',
             $data,
@@ -81,7 +90,7 @@ class WPSeed_API_Logging {
         
         global $wpdb;
         
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table query, no WP equivalent
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query, no WP equivalent
         $existing = $wpdb->get_row(
             $wpdb->prepare(
                 "SELECT * FROM {$wpdb->prefix}wpseed_api_endpoints WHERE service = %s AND endpoint = %s",
@@ -93,7 +102,7 @@ class WPSeed_API_Logging {
         $params_json = json_encode($parameters);
         
         if ($existing) {
-            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table update, no WP equivalent
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table update, no WP equivalent
             $result = $wpdb->update(
                 $wpdb->prefix . 'wpseed_api_endpoints',
                 array(
@@ -109,7 +118,7 @@ class WPSeed_API_Logging {
             
             return $result ? $existing->endpointid : false;
         } else {
-            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table insert, no WP equivalent
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table insert, no WP equivalent
             $result = $wpdb->insert(
                 $wpdb->prefix . 'wpseed_api_endpoints',
                 array(
@@ -139,14 +148,23 @@ class WPSeed_API_Logging {
         global $wpdb;
         
         if (empty($file) || empty($function) || empty($line)) {
-            $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1);
-            $file = empty($file) ? ($backtrace[0]['file'] ?? '') : $file;
-            $function = empty($function) ? ($backtrace[0]['function'] ?? '') : $function;
-            $line = empty($line) ? ($backtrace[0]['line'] ?? 0) : $line;
+            // Only use backtrace in debug mode to avoid production warnings
+            if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+                // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_debug_backtrace -- Debug mode only, not used in production
+                $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1);
+                $file = empty($file) ? ($backtrace[0]['file'] ?? '') : $file;
+                $function = empty($function) ? ($backtrace[0]['function'] ?? '') : $function;
+                $line = empty($line) ? ($backtrace[0]['line'] ?? 0) : $line;
+            } else {
+                // Fallback values for production
+                $file = empty($file) ? 'unknown' : $file;
+                $function = empty($function) ? 'unknown' : $function;
+                $line = empty($line) ? 0 : $line;
+            }
         }
         
         if ($entry_id) {
-            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table update, no WP equivalent
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table update, no WP equivalent
             $wpdb->update(
                 $wpdb->prefix . 'wpseed_api_calls',
                 array('status' => 'error'),
@@ -156,7 +174,7 @@ class WPSeed_API_Logging {
             );
         }
         
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table insert, no WP equivalent
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table insert, no WP equivalent, caching not applicable for insert operations
         $result = $wpdb->insert(
             $wpdb->prefix . 'wpseed_api_errors',
             array(
@@ -184,7 +202,7 @@ class WPSeed_API_Logging {
         
         global $wpdb;
         
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table update, no WP equivalent
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table update, no WP equivalent
         $result = $wpdb->update(
             $wpdb->prefix . 'wpseed_api_calls',
             array(
@@ -243,12 +261,12 @@ class WPSeed_API_Logging {
         $orderby = in_array($args['orderby'], $allowed_columns) ? $args['orderby'] : 'timestamp';
         $order = strtoupper($args['order']) === 'ASC' ? 'ASC' : 'DESC';
         
-        $query .= " ORDER BY {$orderby} {$order}";
+        $query .= $wpdb->prepare(" ORDER BY `%1s` %2s", $orderby, $order);
         $query .= " LIMIT %d OFFSET %d";
-        $params[] = $args['limit'];
-        $params[] = $args['offset'];
+        $params[] = absint($args['limit']);
+        $params[] = absint($args['offset']);
         
-        // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery -- Query is prepared with $wpdb->prepare() below, custom table query with no WP equivalent
+        // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.PreparedSQL.InterpolatedNotPrepared,WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- Query is prepared with $wpdb->prepare() below, custom table query with no WP equivalent
         $results = $wpdb->get_results($wpdb->prepare($query, $params), ARRAY_A);
         
         return $results;
@@ -290,9 +308,15 @@ class WPSeed_API_Logging {
             $params[] = $args['type'];
         }
         
-        // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Query is safely prepared with $wpdb->prepare() when params exist, or uses safe static query
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table query, no WP equivalent
-        $count = empty($params) ? $wpdb->get_var($query) : $wpdb->get_var($wpdb->prepare($query, $params));
+        // Prepare query only if we have parameters to bind
+        if (!empty($params)) {
+            $prepared_query = $wpdb->prepare($query, $params);
+        } else {
+            $prepared_query = $query;
+        }
+        
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- Custom table query, no WP equivalent
+        $count = $wpdb->get_var($prepared_query);
         
         return (int) $count;
     }

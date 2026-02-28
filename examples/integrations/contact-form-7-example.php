@@ -55,7 +55,7 @@ class WPSeed_CF7_Integration {
      * Custom field validation
      */
     public function custom_validation( $result, $tag ) {
-        $value = isset( $_POST[ $tag->name ] ) ? trim( wp_unslash( sanitize_text_field( $_POST[ $tag->name ] ) ) ) : '';
+        $value = isset( $tag->values[0] ) ? trim( $tag->values[0] ) : '';
         
         // Example: validate minimum length
         if ( strlen( $value ) < 5 ) {

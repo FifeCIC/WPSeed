@@ -17,8 +17,8 @@ function wpseed_ajax_sync_github_file() {
         wp_send_json_error('Unauthorized');
     }
     
-    $file = sanitize_text_field($_POST['file']);
-    $path = sanitize_text_field($_POST['path']);
+    $file = isset($_POST['file']) ? sanitize_text_field(wp_unslash($_POST['file'])) : '';
+    $path = isset($_POST['path']) ? sanitize_text_field(wp_unslash($_POST['path'])) : '';
     
     $sync = new WPSeed_GitHub_Sync();
     $result = $sync->sync_to_github($path, $file);

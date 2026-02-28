@@ -68,9 +68,13 @@ class WPSeed_AJAX {
     public static function do_wpseed_ajax() {
         global $wp_query;
 
-        if ( ! empty( $_GET['wpseed-ajax'] ) ) {
-            $wp_query->set( 'wpseed-ajax', sanitize_text_field( $_GET['wpseed-ajax'] ) );
-        }
+            if ( ! empty( $_GET['wpseed-ajax'] ) ) {
+                // Nonce verification for AJAX GET requests
+                if ( empty( $_GET['_wpnonce'] ) || ! wp_verify_nonce( $_GET['_wpnonce'], 'wpseed-ajax-action' ) ) {
+                    wp_die( esc_html__( 'Action failed. Please refresh the page and retry.', 'wpseed' ) );
+                }
+                $wp_query->set( 'wpseed-ajax', sanitize_text_field( $_GET['wpseed-ajax'] ) );
+            }
 
         if ( $action = $wp_query->get( 'wpseed-ajax' ) ) {
             self::wpseed_ajax_headers();

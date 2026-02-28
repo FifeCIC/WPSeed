@@ -12,8 +12,8 @@ if (!WPSeed_Developer_Mode::is_dev_environment()) {
     wp_die('Access denied');
 }
 
-$checklist_file = plugin_dir_path(WPSEED_PLUGIN_FILE) . 'docs/DEVELOPER-CHECKLIST.md';
-$checklist = file_exists($checklist_file) ? file_get_contents($checklist_file) : '';
+$wpseed_checklist_file = plugin_dir_path(WPSEED_PLUGIN_FILE) . 'docs/DEVELOPER-CHECKLIST.md';
+$checklist = file_exists($wpseed_checklist_file) ? file_get_contents($wpseed_checklist_file) : '';
 ?>
 
 <div class="wrap wpseed-developer-checklist">

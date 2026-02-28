@@ -51,8 +51,10 @@ class WPSeed_WooCommerce_Integration {
      * Save custom product field
      */
     public function save_custom_product_field( $post_id ) {
-        $value = isset( $_POST['_wpseed_custom_field'] ) ? sanitize_text_field( $_POST['_wpseed_custom_field'] ) : '';
-        update_post_meta( $post_id, '_wpseed_custom_field', $value );
+        if ( isset( $_POST['_wpseed_custom_field'] ) && isset( $_POST['_wpseed_custom_field_nonce'] ) && wp_verify_nonce( wp_unslash( $_POST['_wpseed_custom_field_nonce'] ), '_wpseed_custom_field_action' ) ) {
+            $value = sanitize_text_field( $_POST['_wpseed_custom_field'] );
+            update_post_meta( $post_id, '_wpseed_custom_field', $value );
+        }
     }
 
     /**

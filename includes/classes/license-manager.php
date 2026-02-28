@@ -253,7 +253,7 @@ class WPSeed_License_Manager {
                 add_settings_error( 'wpseed_license', 'deactivated', __( 'License deactivated successfully!', 'wpseed' ), 'success' );
             }
         } elseif ( 'transfer' === $action && ! empty( $_POST['new_site_url'] ) ) {
-            $result = $this->transfer_license( esc_url_raw( $_POST['new_site_url'] ) );
+            $result = $this->transfer_license( esc_url_raw( wp_unslash( $_POST['new_site_url'] ) ) );
             
             if ( is_wp_error( $result ) ) {
                 add_settings_error( 'wpseed_license', 'transfer_failed', $result->get_error_message() );

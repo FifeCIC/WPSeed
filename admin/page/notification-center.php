@@ -16,39 +16,39 @@ wp_enqueue_script('wpseed-notification-center', WPSeed()->plugin_url() . '/asset
 if (isset($_POST['notification_action'])) {
     check_admin_referer('wpseed_notification_action');
     
-    $action = sanitize_text_field($_POST['notification_action']);
-    $notification_id = intval($_POST['notification_id']);
+    $action = sanitize_text_field(wp_unslash($_POST['notification_action']));
+    $wpseed_notification_id = isset($_POST['notification_id']) ? intval($_POST['notification_id']) : 0;
     
     switch ($action) {
         case 'mark_read':
-            WPSeed_Notifications::mark_as_read($notification_id);
+            WPSeed_Notifications::mark_as_read($wpseed_notification_id);
             break;
         case 'snooze':
-            $duration = isset($_POST['snooze_duration']) ? intval($_POST['snooze_duration']) : 3600;
-            WPSeed_Notifications::snooze_notification($notification_id, $duration);
+                $wpseed_duration = isset($_POST['snooze_duration']) ? intval($_POST['snooze_duration']) : 3600;
+                WPSeed_Notifications::snooze_notification($wpseed_notification_id, $wpseed_duration);
             break;
         case 'delete':
-            WPSeed_Notifications::delete_notification($notification_id);
+            WPSeed_Notifications::delete_notification($wpseed_notification_id);
             break;
         case 'mark_all_read':
             WPSeed_Notifications::mark_all_read(get_current_user_id());
             break;
     }
     
-    wp_redirect(admin_url('admin.php?page=wpseed-notifications'));
+    wp_safe_redirect(admin_url('admin.php?page=wpseed-notifications'));
     exit;
 }
 
-$user_id = get_current_user_id();
-$filter = isset($_GET['filter']) ? sanitize_text_field($_GET['filter']) : 'all';
+$wpseed_user_id = get_current_user_id();
+$filter = isset($_GET['filter']) ? sanitize_text_field(wp_unslash($_GET['filter'])) : 'all';
 
-$args = array('limit' => 50);
+$wpseed_args = array('limit' => 50);
 if ($filter === 'unread') {
-    $args['is_read'] = 0;
+    $wpseed_args['is_read'] = 0;
 }
 
-$notifications = WPSeed_Notifications::get_notifications($user_id, $args);
-$unread_count = WPSeed_Notifications::get_unread_count($user_id);
+$notifications = WPSeed_Notifications::get_notifications($wpseed_user_id, $wpseed_args);
+$wpseed_unread_count = WPSeed_Notifications::get_unread_count($wpseed_user_id);
 ?>
 
 <div class="wrap wpseed-notification-center">
@@ -62,11 +62,11 @@ $unread_count = WPSeed_Notifications::get_unread_count($user_id);
             </a>
             <a href="<?php echo esc_url( admin_url('admin.php?page=wpseed-notifications&filter=unread') ); ?>" 
                class="button <?php echo $filter === 'unread' ? 'button-primary' : ''; ?>">
-                <?php esc_html_e('Unread', 'wpseed'); ?> (<?php echo absint( $unread_count ); ?>)
+                <?php esc_html_e('Unread', 'wpseed'); ?> (<?php echo absint( $wpseed_unread_count ); ?>)
             </a>
         </div>
         
-        <?php if ($unread_count > 0): ?>
+        <?php if ($wpseed_unread_count > 0): ?>
         <form method="post" style="display: inline;">
             <?php wp_nonce_field('wpseed_notification_action'); ?>
             <input type="hidden" name="notification_action" value="mark_all_read">

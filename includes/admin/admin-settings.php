@@ -72,6 +72,8 @@ class WPSeed_Admin_Settings {
 
     /**
      * Save the settings.
+     * 
+     * @security Performs nonce verification before processing.
      */
     public static function save() {
         global $current_tab;
@@ -148,8 +150,7 @@ class WPSeed_Admin_Settings {
         self::get_settings_pages();
 
         // Get current tab/section
-        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reading GET parameters for display only, not processing form data
-        $current_tab     = empty( $_GET['tab'] ) ? self::$defaulttab : sanitize_title( $_GET['tab'] );
+        $current_tab     = empty( $_GET['tab'] ) ? self::$defaulttab : sanitize_title( wp_unslash( $_GET['tab'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reading GET parameters for display only, not processing form data
         // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reading GET parameters for display only, not processing form data
         $current_section = empty( $_GET['section'] ) ? '' : sanitize_title( $_GET['section'] );
 
@@ -560,6 +561,7 @@ class WPSeed_Admin_Settings {
      *
      * @param array $options Options array to output
      * @return bool
+     * @security Nonce verification handled by calling save() method. Direct calls must verify nonce.
      */
     public static function save_fields( $options ) {
         if ( empty( $_POST ) ) {
@@ -576,6 +578,7 @@ class WPSeed_Admin_Settings {
             }
 
             // Get posted value.
+            // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verification is performed in the calling save() method.
             if ( strstr( $option['id'], '[' ) ) {
                 parse_str( $option['id'], $option_name_array );
                 $option_name  = current( array_keys( $option_name_array ) );
