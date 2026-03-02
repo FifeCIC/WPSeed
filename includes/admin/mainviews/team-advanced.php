@@ -43,9 +43,7 @@ class WPSeed_MainView_Team_Advanced extends WPSeed_ListTable_Demo {
     }
     
     function column_headerone( $item ) {   
-        // Establish an item ID for request processing.
         $id = $item['headerone'];
-        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Page parameter used only for building display links, not data processing
         $page = isset( $_REQUEST['page'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['page'] ) ) : '';
         $actions = array(
                 'edit'      => sprintf('<a href="?page=%s&action=%s&examplevalue=%s">Edit</a>', esc_attr( $page ), 'edit', esc_attr( $id ) ),

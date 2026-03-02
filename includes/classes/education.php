@@ -40,13 +40,11 @@ class WPSeed_Education {
     
     public function get_lessons() {
         global $wpdb;
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Simple select for lessons data, table name safely constructed with $wpdb->prefix
         return $wpdb->get_results("SELECT * FROM {$this->table_name} ORDER BY lesson_order ASC");
     }
     
     public function get_lesson($id) {
         global $wpdb;
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Simple select for lesson data, table name safely constructed with $wpdb->prefix
         return $wpdb->get_row($wpdb->prepare("SELECT * FROM {$this->table_name} WHERE id = %d", $id));
     }
     
@@ -77,8 +75,6 @@ class WPSeed_Education {
     
     private function seed_default_lessons() {
         global $wpdb;
-        
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Simple count query for seeding check, table name safely constructed with $wpdb->prefix
         $count = $wpdb->get_var("SELECT COUNT(*) FROM {$this->table_name}");
         if ($count > 0) return;
         
@@ -110,7 +106,6 @@ class WPSeed_Education {
         );
         
         foreach ($lessons as $lesson) {
-            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Simple insert for seeding default lessons
             $wpdb->insert($this->table_name, $lesson);
         }
     }

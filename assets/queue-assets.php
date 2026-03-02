@@ -33,13 +33,8 @@ class WPSeed_Asset_Queue {
     }
     
     private function detect_current_context() {
-        // Only process if we have a valid nonce or this is a safe admin context
-        // TODO: Re-enable after WordPress loading issue resolved - Line 37
-        // if (is_admin() && current_user_can('manage_options')) {
         if (is_admin()) {
-            // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reading GET params for page detection only, no form processing
             $this->current_page = isset($_GET['page']) ? sanitize_text_field(wp_unslash($_GET['page'])) : '';
-            // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reading GET params for tab detection only, no form processing
             $this->current_tab = isset($_GET['tab']) ? sanitize_text_field(wp_unslash($_GET['tab'])) : '';
         }
     }

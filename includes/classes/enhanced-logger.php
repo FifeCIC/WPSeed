@@ -38,8 +38,6 @@ class WPSeed_Enhanced_Logger {
         add_action('all', array($this, 'log_hook'));
         add_filter('pre_http_request', array($this, 'log_http_request'), 10, 3);
         add_action('shutdown', array($this, 'save_logs'));
-        
-        // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_set_error_handler -- Only used in debug mode
         if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
             set_error_handler(array($this, 'log_error'));
         }
@@ -249,8 +247,6 @@ class WPSeed_Enhanced_Logger {
         global $wpdb;
         
         $table = $wpdb->prefix . 'wpseed_debug_logs';
-        
-        // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name is safely constructed with $wpdb->prefix
         return $wpdb->query($wpdb->prepare(
             "DELETE FROM $table WHERE created_at < DATE_SUB(NOW(), INTERVAL %d DAY)",
             $days

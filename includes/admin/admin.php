@@ -61,9 +61,7 @@ class WPSeed_Admin {
         }
                 
         // Setup/welcome
-        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Page parameter used only for file inclusion routing, not data processing
         if ( ! empty( $_GET['page'] ) ) {
-            // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Page parameter used only for file inclusion routing, not data processing
             switch ( $_GET['page'] ) {
                 case 'wpseed-setup' :
                     include_once( dirname( __FILE__ ) . '/admin-setup-wizard.php' );

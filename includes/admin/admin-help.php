@@ -37,8 +37,8 @@ class WPSeed_Admin_Help {
         }
         
         if ( is_admin() && function_exists('current_user_can') && current_user_can( 'manage_options' ) ) {
-            $page      = empty( $_GET['page'] ) ? '' : sanitize_title( wp_unslash( $_GET['page'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-            $tab       = empty( $_GET['tab'] ) ? '' : sanitize_title( wp_unslash( $_GET['tab'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            $page      = empty( $_GET['page'] ) ? '' : sanitize_title( wp_unslash( $_GET['page'] ) );
+            $tab       = empty( $_GET['tab'] ) ? '' : sanitize_title( wp_unslash( $_GET['tab'] ) );
         } else {
             $page = '';
             $tab = '';

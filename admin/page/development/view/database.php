@@ -43,7 +43,6 @@ class WPSeed_Admin_Development_Database {
 
             <h3><?php esc_html_e('WordPress Tables', 'wpseed'); ?></h3>
             <?php
-            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- Development diagnostic page requires real-time data
             $tables = $wpdb->get_results("SHOW TABLES LIKE '{$wpdb->prefix}%'", ARRAY_N);
             ?>
             <table class="widefat">
@@ -57,10 +56,7 @@ class WPSeed_Admin_Development_Database {
                 <tbody>
                     <?php foreach ($tables as $table): 
                         $table_name = $table[0];
-                        // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name from SHOW TABLES is safe
-                        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- Development diagnostic page requires real-time data
                         $row_count = $wpdb->get_var("SELECT COUNT(*) FROM `{$table_name}`");
-                        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching -- Development diagnostic page requires real-time data
                         $table_status = $wpdb->get_row($wpdb->prepare("SHOW TABLE STATUS LIKE %s", $table_name));
                         $size = $table_status ? size_format($table_status->Data_length + $table_status->Index_length) : 'N/A';
                     ?>

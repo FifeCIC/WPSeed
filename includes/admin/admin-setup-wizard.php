@@ -57,7 +57,6 @@ class WPSeed_Admin_Setup_Wizard {
      * Show the setup wizard.
      */
     public function setup_wizard() {
-        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce verification not required for page navigation check
         if ( empty( $_GET['page'] ) || 'wpseed-setup' !== sanitize_text_field( wp_unslash( $_GET['page'] ) ) ) {
             return;
         }
@@ -103,7 +102,6 @@ class WPSeed_Admin_Setup_Wizard {
                 'handler' => ''
             )
         );
-        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce verification not required for navigation
         $this->step = isset( $_GET['step'] ) ? sanitize_key( wp_unslash( $_GET['step'] ) ) : current( array_keys( $this->steps ) );
         $suffix     = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 

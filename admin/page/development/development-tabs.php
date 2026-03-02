@@ -30,20 +30,20 @@ class WPSeed_Admin_Development_Page {
      */
     public static function get_tabs() {
         return array(
-            'assets' => __('Assets', 'wpseed'),
-            'performance' => __('Performance', 'wpseed'),
-            'theme_info' => __('Theme', 'wpseed'),
-            'debug_log' => __('Debug Log', 'wpseed'),
-            'database' => __('Database', 'wpseed'),
-            'phpinfo' => __('PHP Info', 'wpseed'),
-            'tasks' => __('Tasks', 'wpseed'),
-            'libraries' => __('Libraries', 'wpseed'),
-            'credits' => __('Credits', 'wpseed'),
-            'docs' => __('Documentation', 'wpseed'),
-            'dev_checklist' => __('Dev Checklist', 'wpseed'),
-            'layouts' => __('Layouts', 'wpseed'),
-            'diagrams' => __('Diagrams', 'wpseed'),
-            'architecture' => __('Architecture', 'wpseed'),
+            'assets' => array('title' => __('Assets', 'wpseed'), 'code' => 'AST01'),
+            'performance' => array('title' => __('Performance', 'wpseed'), 'code' => 'PRF01'),
+            'theme_info' => array('title' => __('Theme', 'wpseed'), 'code' => 'THM01'),
+            'debug_log' => array('title' => __('Debug Log', 'wpseed'), 'code' => 'DBG01'),
+            'database' => array('title' => __('Database', 'wpseed'), 'code' => 'DBS01'),
+            'phpinfo' => array('title' => __('PHP Info', 'wpseed'), 'code' => 'PHP01'),
+            'tasks' => array('title' => __('Tasks', 'wpseed'), 'code' => 'TSK01'),
+            'libraries' => array('title' => __('Libraries', 'wpseed'), 'code' => 'LIB01'),
+            'credits' => array('title' => __('Credits', 'wpseed'), 'code' => 'CRD01'),
+            'docs' => array('title' => __('Documentation', 'wpseed'), 'code' => 'DOC01'),
+            'dev_checklist' => array('title' => __('Dev Checklist', 'wpseed'), 'code' => 'CHK01'),
+            'layouts' => array('title' => __('Layouts', 'wpseed'), 'code' => 'LAY01'),
+            'diagrams' => array('title' => __('Diagrams', 'wpseed'), 'code' => 'DGM01'),
+            'architecture' => array('title' => __('Architecture', 'wpseed'), 'code' => 'ARC01'),
         );
     }
 
@@ -58,10 +58,10 @@ class WPSeed_Admin_Development_Page {
      * Development view wrapper start
      */
     private static function view_wrapper_start() {
-        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Tab navigation parameter, no state change
         $current_tab = isset($_GET['tab']) ? sanitize_title(wp_unslash($_GET['tab'])) : 'assets';
         $tabs = self::get_tabs();
-        $tab_title = isset($tabs[$current_tab]) ? $tabs[$current_tab] : '';
+        $tab_data = isset($tabs[$current_tab]) ? $tabs[$current_tab] : array();
+        $tab_title = isset($tab_data['title']) ? $tab_data['title'] : '';
         
         ?>
         <div class="wrap wpseed-development-wrap">
@@ -88,20 +88,24 @@ class WPSeed_Admin_Development_Page {
      * Display the tabs
      */
     private static function tabs() {
-        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Tab navigation parameter, no state change
+        if (!function_exists('wpverifier_header')) {
+            require_once WP_PLUGIN_DIR . '/WPVerifier/includes/helper-functions.php';
+        }
+        
         $current_tab = isset($_GET['tab']) ? sanitize_title(wp_unslash($_GET['tab'])) : 'theme_info';
         $tabs = self::get_tabs();
         ?>
         <h2 class="nav-tab-wrapper">
             <?php
-            foreach ($tabs as $tab_id => $tab_title) {
+            foreach ($tabs as $tab_id => $tab_data) {
                 $active_class = ($current_tab === $tab_id) ? 'nav-tab-active' : '';
-                printf(
-                    '<a href="%s" class="nav-tab %s">%s</a>',
-                    esc_url(add_query_arg('tab', $tab_id)),
-                    esc_attr($active_class),
-                    esc_html($tab_title)
-                );
+                $title = isset($tab_data['title']) ? $tab_data['title'] : $tab_data;
+                $code = isset($tab_data['code']) ? $tab_data['code'] : '';
+                ?>
+                <a href="<?php echo esc_url(add_query_arg('tab', $tab_id)); ?>" class="nav-tab <?php echo esc_attr($active_class); ?>">
+                    <?php wpverifier_header($title, $code); ?>
+                </a>
+                <?php
             }
             ?>
         </h2>
@@ -112,7 +116,6 @@ class WPSeed_Admin_Development_Page {
      * Display the active tab content
      */
     private static function active_tab_content() {
-        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Tab navigation parameter, no state change
         $current_tab = isset($_GET['tab']) ? sanitize_title(wp_unslash($_GET['tab'])) : 'assets';
         
         switch ($current_tab) {

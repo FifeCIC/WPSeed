@@ -150,8 +150,7 @@ class WPSeed_Admin_Settings {
         self::get_settings_pages();
 
         // Get current tab/section
-        $current_tab     = empty( $_GET['tab'] ) ? self::$defaulttab : sanitize_title( wp_unslash( $_GET['tab'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reading GET parameters for display only, not processing form data
-        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reading GET parameters for display only, not processing form data
+        $current_tab     = empty( $_GET['tab'] ) ? self::$defaulttab : sanitize_title( wp_unslash( $_GET['tab'] ) );
         $current_section = empty( $_GET['section'] ) ? '' : sanitize_title( $_GET['section'] );
 
         // Save settings if data has been posted
@@ -160,12 +159,10 @@ class WPSeed_Admin_Settings {
         }
 
         // Add any posted messages
-        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reading GET parameters for display only, not processing form data
         if ( ! empty( $_GET['wpseed_error'] ) ) {
             self::add_error( stripslashes( $_GET['wpseed_error'] ) );
         }
 
-        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reading GET parameters for display only, not processing form data
         if ( ! empty( $_GET['wpseed_message'] ) ) {
             self::add_message( stripslashes( $_GET['wpseed_message'] ) );
         }
@@ -329,7 +326,7 @@ class WPSeed_Admin_Settings {
                                 value="<?php echo esc_attr( $option_value ); ?>"
                                 class="<?php echo esc_attr( $value['class'] ); ?>"
                                 placeholder="<?php echo esc_attr( $value['placeholder'] ); ?>"
-                                <?php echo implode( ' ', $custom_attributes ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Array elements are escaped when built. ?>
+                                <?php echo implode( ' ', $custom_attributes ); ?>
                                 /> <?php echo wp_kses_post( $description ); ?>
                         </td>
                     </tr><?php
@@ -354,7 +351,7 @@ class WPSeed_Admin_Settings {
                                 style="<?php echo esc_attr( $value['css'] ); ?>"
                                 class="<?php echo esc_attr( $value['class'] ); ?>"
                                 placeholder="<?php echo esc_attr( $value['placeholder'] ); ?>"
-                                <?php echo implode( ' ', $custom_attributes ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Array elements are escaped when built. ?>
+                                <?php echo implode( ' ', $custom_attributes ); ?>
                                 ><?php echo esc_textarea( $option_value );  ?></textarea>
                         </td>
                     </tr><?php
@@ -377,7 +374,7 @@ class WPSeed_Admin_Settings {
                                 id="<?php echo esc_attr( $value['id'] ); ?>"
                                 style="<?php echo esc_attr( $value['css'] ); ?>"
                                 class="<?php echo esc_attr( $value['class'] ); ?>"
-                                <?php echo implode( ' ', $custom_attributes ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Array elements are escaped when built. ?>
+                                <?php echo implode( ' ', $custom_attributes ); ?>
                                 <?php echo ( 'multiselect' == $value['type'] ) ? 'multiple="multiple"' : ''; ?>
                                 >
                                 <?php
@@ -424,7 +421,7 @@ class WPSeed_Admin_Settings {
                                                 type="radio"
                                                 style="<?php echo esc_attr( $value['css'] ); ?>"
                                                 class="<?php echo esc_attr( $value['class'] ); ?>"
-                                                <?php echo implode( ' ', $custom_attributes ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Array elements are escaped when built. ?>
+                                                <?php echo implode( ' ', $custom_attributes ); ?>
                                                 <?php checked( $key, $option_value ); ?>
                                                 /> <?php echo esc_html( $val ); ?></label>
                                         </li>
@@ -487,7 +484,7 @@ class WPSeed_Admin_Settings {
                                 class="<?php echo esc_attr( isset( $value['class'] ) ? $value['class'] : '' ); ?>"
                                 value="1"
                                 <?php checked( $option_value, 'yes'); ?>
-                                <?php echo implode( ' ', $custom_attributes ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Array elements are escaped when built. ?>
+                                <?php echo implode( ' ', $custom_attributes ); ?>
                             /> <?php echo wp_kses_post( $description ); ?>
                         </label> <?php echo wp_kses_post( $tooltip_html ); ?>
                     <?php
@@ -578,7 +575,6 @@ class WPSeed_Admin_Settings {
             }
 
             // Get posted value.
-            // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verification is performed in the calling save() method.
             if ( strstr( $option['id'], '[' ) ) {
                 parse_str( $option['id'], $option_name_array );
                 $option_name  = current( array_keys( $option_name_array ) );

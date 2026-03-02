@@ -131,7 +131,6 @@ class WPSeed_Install {
          *
          * Based on code inside core's upgrade_network() function.
          */
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- Complex multi-table delete required, similar to WordPress core
         $wpdb->query( $wpdb->prepare( "DELETE a, b FROM $wpdb->options a, $wpdb->options b
             WHERE a.option_name LIKE %s
             AND a.option_name NOT LIKE %s

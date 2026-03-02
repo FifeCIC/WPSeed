@@ -25,14 +25,11 @@ class Foo_Widget extends WP_Widget {
      * @param array $instance Saved values from database.
      */
     public function widget( $args, $instance ) {
-        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- WordPress core widget args are safe
         echo $args['before_widget'];
         if ( ! empty( $instance['title'] ) ) {
-            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- WordPress core widget args are safe
             echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ) . $args['after_title'];
         }
         echo esc_html__( 'Hello, World!', 'wpseed' );
-        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- WordPress core widget args are safe
         echo $args['after_widget'];
     }
 }

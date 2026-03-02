@@ -187,7 +187,7 @@ abstract class ActionScheduler_Abstract_ListTable extends WP_List_Table {
 		if ( array_key_exists( $action, $this->bulk_actions ) && is_callable( array( $this, $method ) ) && ! empty( $_GET['ID'] ) && is_array( $_GET['ID'] ) ) {
 			$ids_sql = '(' . implode( ',', array_fill( 0, count( $_GET['ID'] ), '%s' ) ) . ')';
 			$id      = array_map( 'absint', $_GET['ID'] );
-			$this->$method( $id, $wpdb->prepare( $ids_sql, $id ) ); //phpcs:ignore WordPress.DB.PreparedSQL
+			$this->$method( $id, $wpdb->prepare( $ids_sql, $id ) );
 		}
 
 		if ( isset( $_SERVER['REQUEST_URI'] ) ) {
@@ -340,8 +340,8 @@ abstract class ActionScheduler_Abstract_ListTable extends WP_List_Table {
 
 		$valid_sortable_columns = array_values( $this->sort_by );
 
-		if ( ! empty( $_GET['orderby'] ) && in_array( $_GET['orderby'], $valid_sortable_columns, true ) ) { //phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			$orderby = sanitize_text_field( wp_unslash( $_GET['orderby'] ) ); //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( ! empty( $_GET['orderby'] ) && in_array( $_GET['orderby'], $valid_sortable_columns, true ) ) {
+			$orderby = sanitize_text_field( wp_unslash( $_GET['orderby'] ) );
 		} else {
 			$orderby = $valid_sortable_columns[0];
 		}
@@ -356,7 +356,7 @@ abstract class ActionScheduler_Abstract_ListTable extends WP_List_Table {
 	 */
 	protected function get_request_order() {
 
-		if ( ! empty( $_GET['order'] ) && 'desc' === strtolower( sanitize_text_field( wp_unslash( $_GET['order'] ) ) ) ) { //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( ! empty( $_GET['order'] ) && 'desc' === strtolower( sanitize_text_field( wp_unslash( $_GET['order'] ) ) ) ) {
 			$order = 'DESC';
 		} else {
 			$order = 'ASC';
@@ -371,7 +371,7 @@ abstract class ActionScheduler_Abstract_ListTable extends WP_List_Table {
 	 * @return string
 	 */
 	protected function get_request_status() {
-		$status = ( ! empty( $_GET['status'] ) ) ? sanitize_text_field( wp_unslash( $_GET['status'] ) ) : ''; //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$status = ( ! empty( $_GET['status'] ) ) ? sanitize_text_field( wp_unslash( $_GET['status'] ) ) : '';
 		return $status;
 	}
 
@@ -381,7 +381,7 @@ abstract class ActionScheduler_Abstract_ListTable extends WP_List_Table {
 	 * @return string
 	 */
 	protected function get_request_search_query() {
-		$search_query = ( ! empty( $_GET['s'] ) ) ? sanitize_text_field( wp_unslash( $_GET['s'] ) ) : ''; //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$search_query = ( ! empty( $_GET['s'] ) ) ? sanitize_text_field( wp_unslash( $_GET['s'] ) ) : '';
 		return $search_query;
 	}
 
@@ -412,17 +412,17 @@ abstract class ActionScheduler_Abstract_ListTable extends WP_List_Table {
 	protected function get_items_query_search() {
 		global $wpdb;
 
-		if ( empty( $_GET['s'] ) || empty( $this->search_by ) ) { //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( empty( $_GET['s'] ) || empty( $this->search_by ) ) {
 			return '';
 		}
 
-		$search_string = sanitize_text_field( wp_unslash( $_GET['s'] ) ); //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$search_string = sanitize_text_field( wp_unslash( $_GET['s'] ) );
 
 		$filter = array();
 		foreach ( $this->search_by as $column ) {
 			$wild     = '%';
 			$sql_like = $wild . $wpdb->esc_like( $search_string ) . $wild;
-			$filter[] = $wpdb->prepare( '`' . $column . '` LIKE %s', $sql_like ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.DB.PreparedSQL.NotPrepared
+			$filter[] = $wpdb->prepare( '`' . $column . '` LIKE %s', $sql_like );
 		}
 		return implode( ' OR ', $filter );
 	}
@@ -434,18 +434,18 @@ abstract class ActionScheduler_Abstract_ListTable extends WP_List_Table {
 	protected function get_items_query_filters() {
 		global $wpdb;
 
-		if ( ! $this->filter_by || empty( $_GET['filter_by'] ) || ! is_array( $_GET['filter_by'] ) ) { //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( ! $this->filter_by || empty( $_GET['filter_by'] ) || ! is_array( $_GET['filter_by'] ) ) {
 			return '';
 		}
 
 		$filter = array();
 
 		foreach ( $this->filter_by as $column => $options ) {
-			if ( empty( $_GET['filter_by'][ $column ] ) || empty( $options[ $_GET['filter_by'][ $column ] ] ) ) { //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			if ( empty( $_GET['filter_by'][ $column ] ) || empty( $options[ $_GET['filter_by'][ $column ] ] ) ) {
 				continue;
 			}
 
-			$filter[] = $wpdb->prepare( "`$column` = %s", sanitize_text_field( wp_unslash( $_GET['filter_by'][ $column ] ) ) ); //phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+			$filter[] = $wpdb->prepare( "`$column` = %s", sanitize_text_field( wp_unslash( $_GET['filter_by'][ $column ] ) ) );
 		}
 
 		return implode( ' AND ', $filter );
@@ -468,7 +468,7 @@ abstract class ActionScheduler_Abstract_ListTable extends WP_List_Table {
 
 		$this->process_row_actions();
 
-		if ( ! empty( $_REQUEST['_wp_http_referer'] && ! empty( $_SERVER['REQUEST_URI'] ) ) ) { //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( ! empty( $_REQUEST['_wp_http_referer'] && ! empty( $_SERVER['REQUEST_URI'] ) ) ) {
 			// _wp_http_referer is used only on bulk actions, we remove it to keep the $_GET shorter
 			wp_safe_redirect( remove_query_arg( array( '_wp_http_referer', '_wpnonce' ), esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ) ) );
 			exit;
@@ -495,10 +495,10 @@ abstract class ActionScheduler_Abstract_ListTable extends WP_List_Table {
 
 		$sql = "SELECT $columns FROM {$this->table_name} {$where} {$order} {$limit} {$offset}";
 
-		$this->set_items( $wpdb->get_results( $sql, ARRAY_A ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$this->set_items( $wpdb->get_results( $sql, ARRAY_A ) );
 
 		$query_count = "SELECT COUNT({$this->ID}) FROM {$this->table_name} {$where}";
-		$total_items = $wpdb->get_var( $query_count ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$total_items = $wpdb->get_var( $query_count );
 		$per_page    = $this->get_items_per_page( $this->get_per_page_option_name(), $this->items_per_page );
 		$this->set_pagination_args(
 			array(
@@ -522,7 +522,7 @@ abstract class ActionScheduler_Abstract_ListTable extends WP_List_Table {
 		echo '<div class="alignleft actions">';
 
 		foreach ( $this->filter_by as $id => $options ) {
-			$default = ! empty( $_GET['filter_by'][ $id ] ) ? sanitize_text_field( wp_unslash( $_GET['filter_by'][ $id ] ) ) : ''; //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$default = ! empty( $_GET['filter_by'][ $id ] ) ? sanitize_text_field( wp_unslash( $_GET['filter_by'][ $id ] ) ) : '';
 			if ( empty( $options[ $default ] ) ) {
 				$default = '';
 			}
@@ -619,18 +619,18 @@ abstract class ActionScheduler_Abstract_ListTable extends WP_List_Table {
 	protected function process_row_actions() {
 		$parameters = array( 'row_action', 'row_id', 'nonce' );
 		foreach ( $parameters as $parameter ) {
-			if ( empty( $_REQUEST[ $parameter ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			if ( empty( $_REQUEST[ $parameter ] ) ) {
 				return;
 			}
 		}
 
-		$action = sanitize_text_field( wp_unslash( $_REQUEST['row_action'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotValidated
-		$row_id = sanitize_text_field( wp_unslash( $_REQUEST['row_id'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotValidated
-		$nonce  = sanitize_text_field( wp_unslash( $_REQUEST['nonce'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotValidated
-		$method = 'row_action_' . $action; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$action = sanitize_text_field( wp_unslash( $_REQUEST['row_action'] ) );
+		$row_id = sanitize_text_field( wp_unslash( $_REQUEST['row_id'] ) );
+		$nonce  = sanitize_text_field( wp_unslash( $_REQUEST['nonce'] ) );
+		$method = 'row_action_' . $action;
 
 		if ( wp_verify_nonce( $nonce, $action . '::' . $row_id ) && method_exists( $this, $method ) ) {
-			$this->$method( sanitize_text_field( wp_unslash( $row_id ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$this->$method( sanitize_text_field( wp_unslash( $row_id ) ) );
 		}
 
 		if ( isset( $_SERVER['REQUEST_URI'] ) ) {
@@ -723,7 +723,7 @@ abstract class ActionScheduler_Abstract_ListTable extends WP_List_Table {
 
 		if ( $status_list_items ) {
 			echo '<ul class="subsubsub">';
-			echo implode( " | \n", $status_list_items ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo implode( " | \n", $status_list_items ); 
 			echo '</ul>';
 		}
 	}
@@ -736,7 +736,7 @@ abstract class ActionScheduler_Abstract_ListTable extends WP_List_Table {
 	protected function display_table() {
 		echo '<form id="' . esc_attr( $this->_args['plural'] ) . '-filter" method="get">';
 		foreach ( $this->get_request_query_args_to_persist() as $arg ) {
-			$arg_value = isset( $_GET[ $arg ] ) ? sanitize_text_field( wp_unslash( $_GET[ $arg ] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$arg_value = isset( $_GET[ $arg ] ) ? sanitize_text_field( wp_unslash( $_GET[ $arg ] ) ) : '';
 			if ( ! $arg_value ) {
 				continue;
 			}
@@ -745,7 +745,7 @@ abstract class ActionScheduler_Abstract_ListTable extends WP_List_Table {
 		}
 
 		if ( ! empty( $this->search_by ) ) {
-			echo $this->search_box( $this->get_search_box_button_text(), 'plugin' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo $this->search_box( $this->get_search_box_button_text(), 'plugin' ); 
 		}
 		parent::display();
 		echo '</form>';
@@ -758,7 +758,7 @@ abstract class ActionScheduler_Abstract_ListTable extends WP_List_Table {
 		$this->process_bulk_action();
 		$this->process_row_actions();
 
-		if ( ! empty( $_REQUEST['_wp_http_referer'] ) && ! empty( $_SERVER['REQUEST_URI'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( ! empty( $_REQUEST['_wp_http_referer'] ) && ! empty( $_SERVER['REQUEST_URI'] ) ) {
 			// _wp_http_referer is used only on bulk actions, we remove it to keep the $_GET shorter
 			wp_safe_redirect( remove_query_arg( array( '_wp_http_referer', '_wpnonce' ), esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ) ) );
 			exit;

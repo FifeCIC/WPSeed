@@ -47,8 +47,7 @@ class WPSeed_Admin_Toolbar_Developers {
             );        
             $wp_admin_bar->add_menu( $args );
 
-                // error display switch        
-                // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reading GET parameter to construct nonce-protected URL
+                // error display switch
                 $page_param = isset( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
                 $href = wp_nonce_url( admin_url() . 'admin.php?page=' . $page_param . '&wpseedaction=' . 'debugmodeswitch'  . '', 'debugmodeswitch' );
                 if( !isset( $wpseed_settings['displayerrors'] ) || $wpseed_settings['displayerrors'] !== true ) 

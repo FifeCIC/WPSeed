@@ -98,7 +98,6 @@ class WPSeed_EDD_Integration {
     private function log_purchase( $payment ) {
         global $wpdb;
         
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Simple insert operation for logging
         $wpdb->insert(
             $wpdb->prefix . 'wpseed_edd_purchases',
             array(

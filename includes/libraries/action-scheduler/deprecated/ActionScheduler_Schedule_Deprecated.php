@@ -22,7 +22,7 @@ abstract class ActionScheduler_Schedule_Deprecated implements ActionScheduler_Sc
 			$replacement_method = 'get_next( $after )';
 		}
 
-		_deprecated_function( __METHOD__, '3.0.0', __CLASS__ . '::' . $replacement_method ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		_deprecated_function( __METHOD__, '3.0.0', __CLASS__ . '::' . $replacement_method );
 
 		return $return_value;
 	}

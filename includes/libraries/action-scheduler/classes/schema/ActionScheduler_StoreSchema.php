@@ -124,7 +124,7 @@ class ActionScheduler_StoreSchema extends ActionScheduler_Abstract_Schema {
 				MODIFY COLUMN last_attempt_gmt datetime NULL default '{$default_date}',
 				MODIFY COLUMN last_attempt_local datetime NULL default '{$default_date}'
 		";
-			$wpdb->query( $query ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+			$wpdb->query( $query );
 		}
 		// phpcs:enable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 	}

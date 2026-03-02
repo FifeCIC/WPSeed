@@ -149,14 +149,12 @@ class WPSeed_Unified_Feature_Widget extends WP_Widget {
     }
     
     public function widget( $args, $instance ) {
-        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- before_widget is safe
         echo $args['before_widget'];
         echo wp_kses_post( WPSeed_Unified_Feature::render_content( array(
             'title' => ! empty( $instance['title'] ) ? $instance['title'] : __( 'WPSeed Feature', 'wpseed' ),
             'show_icon' => ! empty( $instance['show_icon'] ),
             'show_stats' => ! empty( $instance['show_stats'] )
         ) ) );
-        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- after_widget is safe
         echo $args['after_widget'];
     }
     

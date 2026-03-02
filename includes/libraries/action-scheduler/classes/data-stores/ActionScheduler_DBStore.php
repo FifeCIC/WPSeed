@@ -90,7 +90,7 @@ class ActionScheduler_DBStore extends ActionScheduler_Store {
 				'status'               => ( $action->is_finished() ? self::STATUS_COMPLETE : self::STATUS_PENDING ),
 				'scheduled_date_gmt'   => $this->get_scheduled_date_string( $action, $date ),
 				'scheduled_date_local' => $this->get_scheduled_date_string_local( $action, $date ),
-				'schedule'             => serialize( $action->get_schedule() ), // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.serialize_serialize
+				'schedule'             => serialize( $action->get_schedule() ),
 				'group_id'             => current( $this->get_group_ids( $action->get_group() ) ),
 				'priority'             => $action->get_priority(),
 			);
@@ -104,8 +104,6 @@ class ActionScheduler_DBStore extends ActionScheduler_Store {
 			}
 
 			$insert_sql = $this->build_insert_sql( $data, $unique );
-
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- $insert_sql should be already prepared.
 			$wpdb->query( $insert_sql );
 			$action_id = $wpdb->insert_id;
 
@@ -146,7 +144,7 @@ class ActionScheduler_DBStore extends ActionScheduler_Store {
 		$column_sql      = '`' . implode( '`, `', $columns ) . '`';
 		$placeholder_sql = implode( ', ', $placeholders );
 		$where_clause    = $this->build_where_clause_for_insert( $data, $table_name, $unique );
-		// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQLPlaceholders.UnfinishedPrepare	 -- $column_sql and $where_clause are already prepared. $placeholder_sql is hardcoded.
+
 		$insert_query    = $wpdb->prepare(
 			"
 INSERT INTO $table_name ( $column_sql )
@@ -154,7 +152,6 @@ SELECT $placeholder_sql FROM DUAL
 WHERE ( $where_clause ) IS NULL",
 			$values
 		);
-		// phpcs:enable
 
 		return $insert_query;
 	}
@@ -366,7 +363,7 @@ AND `group_id` = %d
 
 		$hook     = $data->hook;
 		$args     = json_decode( $data->args, true );
-		$schedule = unserialize( $data->schedule ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.serialize_unserialize
+		$schedule = unserialize( $data->schedule );
 
 		$this->validate_args( $args, $data->action_id );
 		$this->validate_schedule( $schedule, $data->action_id );
@@ -577,7 +574,7 @@ AND `group_id` = %d
 		}
 
 		if ( ! empty( $sql_params ) ) {
-			$sql = $wpdb->prepare( $sql, $sql_params ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+			$sql = $wpdb->prepare( $sql, $sql_params );
 		}
 
 		return $sql;
@@ -601,7 +598,7 @@ AND `group_id` = %d
 
 		$sql = $this->get_query_actions_sql( $query, $query_type );
 
-		return ( 'count' === $query_type ) ? $wpdb->get_var( $sql ) : $wpdb->get_col( $sql ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.NoSql, WordPress.DB.DirectDatabaseQuery.NoCaching
+		return ( 'count' === $query_type ) ? $wpdb->get_var( $sql ) : $wpdb->get_col( $sql );
 	}
 
 	/**
@@ -619,7 +616,7 @@ AND `group_id` = %d
 		$actions_count_by_status = array();
 		$action_stati_and_labels = $this->get_status_labels();
 
-		foreach ( $wpdb->get_results( $sql ) as $action_data ) { // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		foreach ( $wpdb->get_results( $sql ) as $action_data ) {
 			// Ignore any actions with invalid status.
 			if ( array_key_exists( $action_data->status, $action_stati_and_labels ) ) {
 				$actions_count_by_status[ $action_data->status ] = $action_data->count;
@@ -722,7 +719,7 @@ AND `group_id` = %d
 
 			$wpdb->query(
 				$wpdb->prepare(
-					"UPDATE {$wpdb->actionscheduler_actions} SET status = %s WHERE action_id IN {$query_in}", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+					"UPDATE {$wpdb->actionscheduler_actions} SET status = %s WHERE action_id IN {$query_in}",
 					$parameters
 				)
 			);
@@ -934,8 +931,8 @@ AND `group_id` = %d
 		$order    = apply_filters( 'action_scheduler_claim_actions_order_by', 'ORDER BY priority ASC, attempts ASC, scheduled_date_gmt ASC, action_id ASC' );
 		$params[] = $limit;
 
-		$sql           = $wpdb->prepare( "{$update} {$where} {$order} LIMIT %d", $params ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQLPlaceholders
-		$rows_affected = $wpdb->query( $sql ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		$sql           = $wpdb->prepare( "{$update} {$where} {$order} LIMIT %d", $params );
+		$rows_affected = $wpdb->query( $sql );
 		if ( false === $rows_affected ) {
 			$error = empty( $wpdb->last_error )
 				? _x( 'unknown', 'database error', 'action-scheduler' )
@@ -962,9 +959,9 @@ AND `group_id` = %d
 		global $wpdb;
 
 		$sql = "SELECT COUNT(DISTINCT claim_id) FROM {$wpdb->actionscheduler_actions} WHERE claim_id != 0 AND status IN ( %s, %s)";
-		$sql = $wpdb->prepare( $sql, array( self::STATUS_PENDING, self::STATUS_RUNNING ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$sql = $wpdb->prepare( $sql, array( self::STATUS_PENDING, self::STATUS_RUNNING ) );
 
-		return (int) $wpdb->get_var( $sql ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		return (int) $wpdb->get_var( $sql );
 	}
 
 	/**
@@ -978,9 +975,9 @@ AND `group_id` = %d
 		global $wpdb;
 
 		$sql = "SELECT claim_id FROM {$wpdb->actionscheduler_actions} WHERE action_id=%d";
-		$sql = $wpdb->prepare( $sql, $action_id ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$sql = $wpdb->prepare( $sql, $action_id );
 
-		return (int) $wpdb->get_var( $sql ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		return (int) $wpdb->get_var( $sql );
 	}
 
 	/**
@@ -1004,7 +1001,7 @@ AND `group_id` = %d
 
 		// Verify that the scheduled date for each action is within the expected bounds (in some unusual
 		// cases, we cannot depend on MySQL to honor all of the WHERE conditions we specify).
-		foreach ( $wpdb->get_results( $sql ) as $claimed_action ) { // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		foreach ( $wpdb->get_results( $sql ) as $claimed_action ) {
 			if ( $claimed_action->scheduled_date_gmt <= $cut_off ) {
 				$action_ids[] = absint( $claimed_action->action_id );
 			}
@@ -1033,7 +1030,7 @@ AND `group_id` = %d
 		$row_updates = 0;
 		if ( count( $action_ids ) > 0 ) {
 			$action_id_string = implode( ',', array_map( 'absint', $action_ids ) );
-			$row_updates      = $wpdb->query( "UPDATE {$wpdb->actionscheduler_actions} SET claim_id = 0 WHERE action_id IN ({$action_id_string})" ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+			$row_updates      = $wpdb->query( "UPDATE {$wpdb->actionscheduler_actions} SET claim_id = 0 WHERE action_id IN ({$action_id_string})" );
 		}
 
 		$wpdb->delete( $wpdb->actionscheduler_claims, array( 'claim_id' => $claim->get_id() ), array( '%d' ) );
@@ -1104,9 +1101,7 @@ AND `group_id` = %d
 		global $wpdb;
 
 		$sql = "UPDATE {$wpdb->actionscheduler_actions} SET attempts = attempts+1, status=%s, last_attempt_gmt = %s, last_attempt_local = %s WHERE action_id = %d";
-		$sql = $wpdb->prepare( $sql, self::STATUS_RUNNING, current_time( 'mysql', true ), current_time( 'mysql' ), $action_id ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
-
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$sql = $wpdb->prepare( $sql, self::STATUS_RUNNING, current_time( 'mysql', true ), current_time( 'mysql' ), $action_id );
 		$status_updated = $wpdb->query( $sql );
 
 		if ( ! $status_updated ) {
@@ -1171,8 +1166,8 @@ AND `group_id` = %d
 		/** @var \wpdb $wpdb */
 		global $wpdb;
 		$sql    = "SELECT status FROM {$wpdb->actionscheduler_actions} WHERE action_id=%d";
-		$sql    = $wpdb->prepare( $sql, $action_id ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
-		$status = $wpdb->get_var( $sql ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$sql    = $wpdb->prepare( $sql, $action_id );
+		$status = $wpdb->get_var( $sql );
 
 		if ( null === $status ) {
 			throw new \InvalidArgumentException( __( 'Invalid action ID. No status found.', 'action-scheduler' ) );
