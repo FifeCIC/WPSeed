@@ -44,23 +44,36 @@ class WPSeed_Enhanced_Logger {
     }
 
     /**
-     * Log database query
+     * Log database query with loop counting
      */
     public function log_query($query) {
         global $wpdb;
         
+        $query_hash = md5($query);
+        $query_type = strtoupper(strtok(trim($query), ' '));
+        
         $this->queries[] = array(
             'query' => $query,
+            'query_hash' => $query_hash,
+            'query_type' => $query_type,
             'time' => $wpdb->timer_stop(),
             'backtrace' => wp_debug_backtrace_summary(null, 3),
             'timestamp' => microtime(true),
         );
         
+        // Use unified logger for query tracking
+        if (class_exists('WPSeed_Unified_Logger')) {
+            WPSeed_Unified_Logger::instance()->trace('DB_QUERY', "{$query_type} query", array(
+                'query_hash' => $query_hash,
+                'execution_time' => $wpdb->timer_stop()
+            ));
+        }
+        
         return $query;
     }
 
     /**
-     * Log hook execution
+     * Log hook execution with smart counting
      */
     public function log_hook($hook) {
         if (!isset($this->hooks[$hook])) {
@@ -71,6 +84,11 @@ class WPSeed_Enhanced_Logger {
         }
         
         $this->hooks[$hook]['count']++;
+        
+        // Use unified logger for hook tracking (only log frequently called hooks)
+        if (class_exists('WPSeed_Unified_Logger') && $this->hooks[$hook]['count'] % 50 === 0) {
+            WPSeed_Unified_Logger::instance()->trace('HOOK_FREQUENT', "Hook {$hook} called {$this->hooks[$hook]['count']} times");
+        }
         
         return $hook;
     }
@@ -107,24 +125,45 @@ class WPSeed_Enhanced_Logger {
     }
 
     /**
-     * Get query statistics
+     * Get enhanced query statistics with loop detection
      */
     public function get_query_stats() {
         $total_time = 0;
         $slow_queries = array();
+        $query_patterns = array();
         
         foreach ($this->queries as $query) {
             $total_time += $query['time'];
+            
+            // Track query patterns for loop detection
+            $hash = $query['query_hash'];
+            if (!isset($query_patterns[$hash])) {
+                $query_patterns[$hash] = array(
+                    'count' => 0,
+                    'type' => $query['query_type'],
+                    'total_time' => 0,
+                    'sample_query' => substr($query['query'], 0, 100)
+                );
+            }
+            $query_patterns[$hash]['count']++;
+            $query_patterns[$hash]['total_time'] += $query['time'];
             
             if ($query['time'] > 0.05) { // 50ms threshold
                 $slow_queries[] = $query;
             }
         }
         
+        // Find repeated queries (potential loops)
+        $repeated_queries = array_filter($query_patterns, function($pattern) {
+            return $pattern['count'] > 5;
+        });
+        
         return array(
             'total' => count($this->queries),
             'total_time' => $total_time,
             'slow_queries' => $slow_queries,
+            'repeated_queries' => $repeated_queries,
+            'unique_patterns' => count($query_patterns),
             'avg_time' => count($this->queries) > 0 ? $total_time / count($this->queries) : 0,
         );
     }

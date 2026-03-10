@@ -1,11 +1,10 @@
 {
-    "generated_at": "2026-03-04 20:48:18",
-    "updated_at": "2026-03-05 18:25:21",
+    "generated_at": "2026-03-05 12:15:46",
     "plugin": "WPSeed Boilerplate",
     "readiness": {
         "overall": 0,
         "errors": 24,
-        "warnings": 298,
+        "warnings": 301,
         "status": "needs-work"
     },
     "configuration": {
@@ -46,7 +45,6 @@
         "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\admin\\page\\development\\view\\credits.php": "0172637e",
         "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\admin\\page\\development\\view\\database.php": "62c954a7",
         "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\admin\\page\\development\\view\\docs.php": "3bc09e07",
-        "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\admin\\page\\notification-center.php": "053f0f6f",
         "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\admin\\page\\security-audit.php": "cde5e5a5",
         "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\assets\\queue-assets.php": "72b8badf",
         "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\examples\\accordion-table-example.php": "66d1d8c0",
@@ -61,10 +59,7 @@
         "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\includes\\admin\\admin.php": "2aa41c0d",
         "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\includes\\admin\\mainviews\\food-advanced.php": "ab0376ab",
         "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\includes\\admin\\mainviews\\team-advanced.php": "87767273",
-        "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\includes\\admin\\views\\developer-checklist.php": "e7a6c91f",
-        "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\includes\\admin\\views\\education.php": "936c4570",
         "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\includes\\admin\\views\\html-admin-page.php": "db6f12b2",
-        "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\includes\\admin\\views\\html-admin-settings.php": "ecd706e8",
         "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\includes\\classes\\ajax.php": "efeb5589",
         "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\includes\\classes\\debug.php": "4235c2c3",
         "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\includes\\classes\\developer-flow-logger.php": "2f337eef",
@@ -77,7 +72,6 @@
         "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\includes\\classes\\license-manager.php": "2bf39ac3",
         "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\includes\\classes\\listener.php": "4f6a55b6",
         "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\includes\\classes\\settings-import-export.php": "7bcb3175",
-        "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\includes\\classes\\wpverifier-json-storage.php": "d59d2aa4",
         "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\includes\\classes\\wpverifier-verification-matcher.php": "4c2a56dd",
         "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\includes\\options.php": "4bf12bc6",
         "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\includes\\toolbars\\toolbar-developers.php": "85d82018",
@@ -92,7 +86,12 @@
         "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\includes\\admin\\admin-assets.php": "6ef0c55b",
         "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\admin\\page\\development\\partials\\ui-library\\progress-indicators.php": "9928df54",
         "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\admin\\page\\development\\partials\\ui-library\\status-indicators.php": "aee80f8a",
-        "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\admin\\page\\development\\view\\libraries.php": "caf43586"
+        "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\admin\\page\\development\\view\\libraries.php": "caf43586",
+        "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\admin\\page\\notification-center.php": "eeec2ff1",
+        "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\includes\\admin\\views\\developer-checklist.php": "13d824e6",
+        "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\includes\\admin\\views\\education.php": "5bc1e0b4",
+        "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\includes\\admin\\views\\html-admin-settings.php": "9c2ecf80",
+        "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\includes\\classes\\wpverifier-json-storage.php": "f6001f0b"
     },
     "results": {
         "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\includes\\admin\\admin-settings.php": [
@@ -2042,12 +2041,12 @@
                 "resolved_by": null
             }
         ],
-        "admin\/page\/notification-center.php": [
+        "includes\/classes\/frontend-scripts.php": [
             {
-                "issue_id": "W-3d84b972",
+                "issue_id": "W-dc303486",
                 "message": "<strong>Plugin Updater detected.<\/strong><br>Detected code which may be altering WordPress update routines. Detected: pre_set_site_transient_update_plugins",
                 "code": "update_modification_detected",
-                "link": "http:\/\/localhost\/EcoSystem\/wp-admin\/plugin-editor.php?plugin=wpseed%2Fwpseed.php&file=wpseed%2Fadmin%2Fpage%2Fnotification-center.php",
+                "link": "http:\/\/localhost\/EcoSystem\/wp-admin\/plugin-editor.php?plugin=wpseed%2Fwpseed.php&file=wpseed%2Fincludes%2Fclasses%2Ffrontend-scripts.php",
                 "docs": "https:\/\/developer.wordpress.org\/plugins\/wordpress-org\/common-issues\/#update-checker",
                 "severity": 9,
                 "type": "WARNING",
@@ -2059,10 +2058,10 @@
                 "resolved_by": null
             },
             {
-                "issue_id": "W-3d84b972",
+                "issue_id": "W-dc303486",
                 "message": "<strong>Plugin Updater detected.<\/strong><br>Detected code which may be altering WordPress update routines. Detected: _site_transient_update_plugins",
                 "code": "update_modification_detected",
-                "link": "http:\/\/localhost\/EcoSystem\/wp-admin\/plugin-editor.php?plugin=wpseed%2Fwpseed.php&file=wpseed%2Fadmin%2Fpage%2Fnotification-center.php",
+                "link": "http:\/\/localhost\/EcoSystem\/wp-admin\/plugin-editor.php?plugin=wpseed%2Fwpseed.php&file=wpseed%2Fincludes%2Fclasses%2Ffrontend-scripts.php",
                 "docs": "https:\/\/developer.wordpress.org\/plugins\/wordpress-org\/common-issues\/#update-checker",
                 "severity": 9,
                 "type": "WARNING",
@@ -2346,23 +2345,6 @@
                 "type": "WARNING",
                 "line": 23,
                 "column": 76,
-                "ignored": false,
-                "ignored_by": null,
-                "resolved": false,
-                "resolved_by": null
-            }
-        ],
-        "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\admin\\page\\notification-center.php": [
-            {
-                "issue_id": "W-c6aaa204",
-                "message": "No PHP code was found in this file and short open tags are not allowed by this install of PHP. This file may be using short open tags but PHP does not allow them.",
-                "code": "Internal.NoCodeFound",
-                "link": null,
-                "docs": "",
-                "severity": 5,
-                "type": "WARNING",
-                "line": 1,
-                "column": 1,
                 "ignored": false,
                 "ignored_by": null,
                 "resolved": false,
@@ -3342,40 +3324,6 @@
                 "resolved_by": null
             }
         ],
-        "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\includes\\admin\\views\\developer-checklist.php": [
-            {
-                "issue_id": "W-0228fb7c",
-                "message": "No PHP code was found in this file and short open tags are not allowed by this install of PHP. This file may be using short open tags but PHP does not allow them.",
-                "code": "Internal.NoCodeFound",
-                "link": null,
-                "docs": "",
-                "severity": 5,
-                "type": "WARNING",
-                "line": 1,
-                "column": 1,
-                "ignored": false,
-                "ignored_by": null,
-                "resolved": false,
-                "resolved_by": null
-            }
-        ],
-        "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\includes\\admin\\views\\education.php": [
-            {
-                "issue_id": "W-070220d3",
-                "message": "No PHP code was found in this file and short open tags are not allowed by this install of PHP. This file may be using short open tags but PHP does not allow them.",
-                "code": "Internal.NoCodeFound",
-                "link": null,
-                "docs": "",
-                "severity": 5,
-                "type": "WARNING",
-                "line": 1,
-                "column": 1,
-                "ignored": false,
-                "ignored_by": null,
-                "resolved": false,
-                "resolved_by": null
-            }
-        ],
         "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\includes\\admin\\views\\html-admin-page.php": [
             {
                 "issue_id": "W-ff30db4d",
@@ -3522,23 +3470,6 @@
                 "type": "WARNING",
                 "line": 59,
                 "column": 21,
-                "ignored": false,
-                "ignored_by": null,
-                "resolved": false,
-                "resolved_by": null
-            }
-        ],
-        "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\includes\\admin\\views\\html-admin-settings.php": [
-            {
-                "issue_id": "W-7910ffc8",
-                "message": "No PHP code was found in this file and short open tags are not allowed by this install of PHP. This file may be using short open tags but PHP does not allow them.",
-                "code": "Internal.NoCodeFound",
-                "link": null,
-                "docs": "",
-                "severity": 5,
-                "type": "WARNING",
-                "line": 1,
-                "column": 1,
                 "ignored": false,
                 "ignored_by": null,
                 "resolved": false,
@@ -4349,23 +4280,6 @@
                 "resolved_by": null
             }
         ],
-        "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\includes\\classes\\wpverifier-json-storage.php": [
-            {
-                "issue_id": "W-49c74bfb",
-                "message": "No PHP code was found in this file and short open tags are not allowed by this install of PHP. This file may be using short open tags but PHP does not allow them.",
-                "code": "Internal.NoCodeFound",
-                "link": null,
-                "docs": "",
-                "severity": 5,
-                "type": "WARNING",
-                "line": 1,
-                "column": 1,
-                "ignored": false,
-                "ignored_by": null,
-                "resolved": false,
-                "resolved_by": null
-            }
-        ],
         "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\includes\\classes\\wpverifier-verification-matcher.php": [
             {
                 "issue_id": "W-63b622ce",
@@ -5039,6 +4953,136 @@
                 "type": "WARNING",
                 "line": 48,
                 "column": 17,
+                "ignored": false,
+                "ignored_by": null,
+                "resolved": false,
+                "resolved_by": null
+            }
+        ],
+        "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\admin\\page\\notification-center.php": [
+            {
+                "issue_id": "W-1a9364eb",
+                "message": "Global variables defined by a theme\/plugin should start with the theme\/plugin prefix. Found: &quot;$filter&quot;.",
+                "code": "WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound",
+                "link": null,
+                "docs": "",
+                "severity": 6,
+                "type": "WARNING",
+                "line": 43,
+                "column": 1,
+                "ignored": false,
+                "ignored_by": null,
+                "resolved": false,
+                "resolved_by": null
+            },
+            {
+                "issue_id": "W-308a665b",
+                "message": "Global variables defined by a theme\/plugin should start with the theme\/plugin prefix. Found: &quot;$notifications&quot;.",
+                "code": "WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound",
+                "link": null,
+                "docs": "",
+                "severity": 6,
+                "type": "WARNING",
+                "line": 50,
+                "column": 1,
+                "ignored": false,
+                "ignored_by": null,
+                "resolved": false,
+                "resolved_by": null
+            },
+            {
+                "issue_id": "W-e6cab806",
+                "message": "Global variables defined by a theme\/plugin should start with the theme\/plugin prefix. Found: &quot;$notification&quot;.",
+                "code": "WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound",
+                "link": null,
+                "docs": "",
+                "severity": 6,
+                "type": "WARNING",
+                "line": 86,
+                "column": 46,
+                "ignored": false,
+                "ignored_by": null,
+                "resolved": false,
+                "resolved_by": null
+            }
+        ],
+        "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\includes\\admin\\views\\developer-checklist.php": [
+            {
+                "issue_id": "W-2e30c228",
+                "message": "Global variables defined by a theme\/plugin should start with the theme\/plugin prefix. Found: &quot;$checklist&quot;.",
+                "code": "WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound",
+                "link": null,
+                "docs": "",
+                "severity": 6,
+                "type": "WARNING",
+                "line": 16,
+                "column": 1,
+                "ignored": false,
+                "ignored_by": null,
+                "resolved": false,
+                "resolved_by": null
+            }
+        ],
+        "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\includes\\admin\\views\\education.php": [
+            {
+                "issue_id": "W-f2864500",
+                "message": "Global variables defined by a theme\/plugin should start with the theme\/plugin prefix. Found: &quot;$lesson&quot;.",
+                "code": "WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound",
+                "link": null,
+                "docs": "",
+                "severity": 6,
+                "type": "WARNING",
+                "line": 16,
+                "column": 40,
+                "ignored": false,
+                "ignored_by": null,
+                "resolved": false,
+                "resolved_by": null
+            }
+        ],
+        "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\includes\\admin\\views\\html-admin-settings.php": [
+            {
+                "issue_id": "W-4529d0ee",
+                "message": "Global variables defined by a theme\/plugin should start with the theme\/plugin prefix. Found: &quot;$name&quot;.",
+                "code": "WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound",
+                "link": null,
+                "docs": "",
+                "severity": 6,
+                "type": "WARNING",
+                "line": 18,
+                "column": 36,
+                "ignored": false,
+                "ignored_by": null,
+                "resolved": false,
+                "resolved_by": null
+            },
+            {
+                "issue_id": "W-4529d0ee",
+                "message": "Global variables defined by a theme\/plugin should start with the theme\/plugin prefix. Found: &quot;$label&quot;.",
+                "code": "WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound",
+                "link": null,
+                "docs": "",
+                "severity": 6,
+                "type": "WARNING",
+                "line": 18,
+                "column": 45,
+                "ignored": false,
+                "ignored_by": null,
+                "resolved": false,
+                "resolved_by": null
+            }
+        ],
+        "C:\\wamp64\\www\\Ecosystem\\wp-content\\plugins\\wpseed\\includes\\classes\\wpverifier-json-storage.php": [
+            {
+                "issue_id": "W-8ebb93aa",
+                "message": "Classes declared by a theme\/plugin should start with the theme\/plugin prefix. Found: &quot;WPVerifier_JSON_Storage&quot;.",
+                "code": "WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedClassFound",
+                "link": null,
+                "docs": "",
+                "severity": 6,
+                "type": "WARNING",
+                "line": 14,
+                "column": 1,
                 "ignored": false,
                 "ignored_by": null,
                 "resolved": false,

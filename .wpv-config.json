@@ -1,0 +1,29 @@
+{
+    "wporg_preparation": false,
+    "skipped_rules": [],
+    "configuration": {
+        "wporg_preparation": false,
+        "skipped_rules": [
+            "hidden_files",
+            "application_detected",
+            "plugin_updater_detected",
+            "outdated_tested_upto_header",
+            "stable_tag_mismatch",
+            "readme_mismatched_header_requires",
+            "mismatched_tested_up_to_header",
+            "missing_direct_file_access_protection"
+        ]
+    },
+    "ignored_paths": [
+        {
+            "path": "includes\/libraries\/action-scheduler",
+            "reason": "vendor",
+            "added_at": "2026-03-10 12:14:03"
+        },
+        {
+            "path": "includes\/libraries\/carbon-fields",
+            "reason": "vendor",
+            "added_at": "2026-03-10 12:14:03"
+        }
+    ]
+}

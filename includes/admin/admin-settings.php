@@ -326,7 +326,7 @@ class WPSeed_Admin_Settings {
                                 value="<?php echo esc_attr( $option_value ); ?>"
                                 class="<?php echo esc_attr( $value['class'] ); ?>"
                                 placeholder="<?php echo esc_attr( $value['placeholder'] ); ?>"
-                                <?php echo implode( ' ', $custom_attributes ); ?>
+                                <?php echo wp_kses_post( implode( ' ', $custom_attributes ) ); ?>
                                 /> <?php echo wp_kses_post( $description ); ?>
                         </td>
                     </tr><?php

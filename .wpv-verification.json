@@ -1,8 +1,233 @@
 {
     "version": "1.0",
-    "plugin": "wpseed",
-    "created_at": "2026-03-02 23:36:06",
-    "readiness": 0,
     "file_level": [],
-    "function_level": []
+    "function_level": [],
+    "file_hashes": {
+        "deprecated.php": "3bfe91ea",
+        "functions.php": "3bfe91ea",
+        "install.php": "3bfe91ea",
+        "loader.php": "3d5d87c9",
+        "uninstall.php": "dce281e2",
+        "wp-verifier-exclusions.php": "ed922cfc",
+        "wpseed.php": "a472b836",
+        "api\/api-directory.php": "f5b63b02",
+        "api\/api-factory.php": "f042f0ed",
+        "api\/base-api.php": "1593d8ee",
+        "assets\/manage-assets.php": "fbddff12",
+        "assets\/queue-assets.php": "72b8badf",
+        "assets\/script-assets.php": "399dc7da",
+        "assets\/style-assets.php": "a1a89277",
+        "examples\/accordion-table-example.php": "66d1d8c0",
+        "examples\/action-scheduler-examples.php": "cd272fcd",
+        "examples\/background-process-example.php": "716c6412",
+        "examples\/carbon-fields-examples.php": "f33a1eb2",
+        "examples\/carbon-fields-premium-templates.php": "4513b5e5",
+        "examples\/task-scheduler-examples.php": "b000f6b3",
+        "includes\/api-logging.php": "35e8d2c7",
+        "includes\/depreciated.php": "bb33ec6c",
+        "includes\/formatting.php": "f666e9ea",
+        "includes\/functions.shortcodes.php": "123814fe",
+        "includes\/get.php": "6f4e3654",
+        "includes\/install.php": "60562008",
+        "includes\/logger.php": "dcb227ab",
+        "includes\/logging-helper.php": "fafde6e9",
+        "includes\/options.php": "4bf12bc6",
+        "includes\/sanitize.php": "f27061bc",
+        "includes\/widgets.php": "408ee1c1",
+        "shortcodes\/shortcodes.php": "0ff539f3",
+        "templates\/example.php": "37167522",
+        "tests\/bootstrap.php": "864db6d5",
+        "tests\/test-example.php": "7d3df753",
+        "toolbars\/toolbar-developers.php": "5fd994c6",
+        "toolbars\/toolbar-quicktools.php": "30f247cb",
+        "toolbars\/toolbars.php": "1e965be2"
+    },
+    "function_hashes": {
+        "wp-verifier-exclusions.php": {
+            "wpseed_exclude_wporg_checks": "e9e65f7a"
+        },
+        "api\/api-directory.php": {
+            "WPSeed_API_Directory::get_all_providers": "d526ce95",
+            "WPSeed_API_Directory::get_provider": "5c509265"
+        },
+        "api\/api-factory.php": {
+            "WPSeed_API_Factory::create": "0c59de8a",
+            "WPSeed_API_Factory::create_from_settings": "0cf87532"
+        },
+        "api\/base-api.php": {
+            "WPSeed_Base_API::__construct": "ae9bf1dc",
+            "WPSeed_Base_API::test_connection": "cc6de9b4",
+            "WPSeed_Base_API::make_request": "cc6de9b4",
+            "WPSeed_Base_API::get_headers": "2a9fa617",
+            "WPSeed_Base_API::get_provider_id": "7952e983"
+        },
+        "assets\/manage-assets.php": {
+            "WPSeed_Asset_Manager::__construct": "9d493dc6",
+            "WPSeed_Asset_Manager::init_assets": "65635f62",
+            "WPSeed_Asset_Manager::get_asset_path": "3311e97a",
+            "WPSeed_Asset_Manager::get_asset_url": "bb130aad",
+            "WPSeed_Asset_Manager::get_all_assets": "fe29ab4a",
+            "WPSeed_Asset_Manager::get_assets_by_page": "68bd8f0e",
+            "WPSeed_Asset_Manager::get_dependencies": "d9a5ba80",
+            "WPSeed_Asset_Manager::get_assets_by_category": "8cd1dac5",
+            "WPSeed_Asset_Manager::asset_exists": "dfe432f7",
+            "WPSeed_Asset_Manager::log_missing_asset": "e0735b99",
+            "WPSeed_Asset_Manager::get_missing_assets": "3187626a",
+            "WPSeed_Asset_Manager::has_missing_assets": "e48694e1",
+            "WPSeed_Asset_Manager::wpseed_get_asset": "86b519a7",
+            "WPSeed_Asset_Manager::wpseed_get_asset_url": "c27c44ab"
+        },
+        "assets\/queue-assets.php": {
+            "WPSeed_Asset_Queue::__construct": "ac830707",
+            "WPSeed_Asset_Queue::detect_current_context": "5cc1d4a5",
+            "WPSeed_Asset_Queue::enqueue_assets": "762257ad",
+            "WPSeed_Asset_Queue::enqueue_style": "08366bf5",
+            "WPSeed_Asset_Queue::enqueue_script": "99284fb2",
+            "WPSeed_Asset_Queue::missing_assets_notice": "b40ac31d",
+            "WPSeed_Asset_Queue_Instance::get_instance": "7be483da"
+        },
+        "examples\/action-scheduler-examples.php": {
+            "wpseed_example_schedule_single_task": "466d2e8f",
+            "wpseed_handle_single_item": "bbee1e53",
+            "wpseed_example_process_batch": "412b728d",
+            "wpseed_handle_batch_item": "bbee1e53",
+            "wpseed_example_schedule_recurring": "8819aee4",
+            "wpseed_handle_hourly_sync": "a0439050",
+            "wpseed_example_cancel_actions": "c98dc94c",
+            "wpseed_example_check_scheduled": "167f8ff7"
+        },
+        "examples\/background-process-example.php": {
+            "WPSeed_Example_Background_Process::task": "38c64f90",
+            "WPSeed_Example_Background_Process::complete": "79fea2fa"
+        },
+        "examples\/carbon-fields-examples.php": {
+            "wpseed_example_theme_options": "cb8e479c",
+            "wpseed_example_post_meta": "8543cc88",
+            "wpseed_example_complex_fields": "1f069132",
+            "wpseed_example_repeater": "93b96934",
+            "wpseed_example_conditional": "444df8ed",
+            "wpseed_get_carbon_value_example": "3402bd64",
+            "wpseed_example_all_fields": "73a47b4b"
+        },
+        "examples\/carbon-fields-premium-templates.php": {
+            "wpseed_carbon_ecommerce_product_fields": "3d926a65",
+            "wpseed_carbon_membership_fields": "08c6aec2",
+            "wpseed_carbon_booking_fields": "a53359ab",
+            "wpseed_carbon_event_fields": "fe1977ab",
+            "wpseed_carbon_property_fields": "8e24f159",
+            "wpseed_carbon_course_fields": "76bb930d",
+            "wpseed_register_premium_templates": "36f9849b"
+        },
+        "examples\/task-scheduler-examples.php": {
+            "wpseed_example_schedule_single_task": "236fa7f6",
+            "wpseed_example_schedule_recurring_task": "75a9fe01",
+            "wpseed_example_schedule_cron_task": "9d139d0e",
+            "wpseed_example_check_scheduled": "9c33233d",
+            "wpseed_example_unschedule_task": "1e920684",
+            "wpseed_handle_process_data": "60107397",
+            "wpseed_example_batch_process": "039d87a9",
+            "wpseed_example_get_scheduled": "b004961b",
+            "wpseed_example_migration": "c0b106a4",
+            "wpseed_handle_my_process": "22c85bbc"
+        },
+        "includes\/api-logging.php": {
+            "WPSeed_API_Logging::ready": "82f0fb41",
+            "WPSeed_API_Logging::log_call": "93da7066",
+            "WPSeed_API_Logging::track_endpoint": "82001378",
+            "WPSeed_API_Logging::log_error": "366849b7",
+            "WPSeed_API_Logging::update_call_outcome": "9623d5eb",
+            "WPSeed_API_Logging::get_api_calls": "b7867b02",
+            "WPSeed_API_Logging::get_api_call_count": "1e81bd40"
+        },
+        "includes\/depreciated.php": {
+            "wpseed_function_called": "b4a40892"
+        },
+        "includes\/formatting.php": {
+            "wpseed_string_half": "fd133195",
+            "wpseed_normalize_postcode": "f21c8fc8",
+            "wpseed_format_phone_number": "07cd5640",
+            "wpseed_strtolower": "12a52f9d",
+            "wpseed_trim_string": "72076e2d",
+            "wpseed_clean": "b1f4d865"
+        },
+        "includes\/get.php": {
+            "wpseed_get_ip_address": "a093e205",
+            "wpseed_get_total_administrators": "fa9ed2b0"
+        },
+        "includes\/install.php": {
+            "WPSeed_Install::__construct": "ad457369",
+            "WPSeed_Install::check_version": "d4505412",
+            "WPSeed_Install::install": "1a0ba95f",
+            "WPSeed_Install::create_options": "f176359d",
+            "WPSeed_Install::create_roles": "537f8337",
+            "WPSeed_Install::setup_environment": "9386ee1a",
+            "WPSeed_Install::register_post_types": "a2119af7",
+            "WPSeed_Install::register_taxonomies": "edcfa218",
+            "WPSeed_Install::create_cron_jobs": "19fde894"
+        },
+        "includes\/logger.php": {
+            "WPSeed_Logger::__construct": "11dbdde0",
+            "WPSeed_Logger::__destruct": "e3b0c442",
+            "WPSeed_Logger::open": "8beaabe2",
+            "WPSeed_Logger::close": "8beaabe2",
+            "WPSeed_Logger::add": "8beaabe2",
+            "WPSeed_Logger::clear": "8beaabe2"
+        },
+        "includes\/logging-helper.php": {
+            "WPSeed_Logging_Helper::log_app": "619c587e",
+            "WPSeed_Logging_Helper::log_api": "51e73a0c",
+            "WPSeed_Logging_Helper::log_error": "aecd0ca7",
+            "WPSeed_Logging_Helper::log_debug": "4266c35a",
+            "WPSeed_Logging_Helper::write_log": "090dd746",
+            "WPSeed_Logging_Helper::clear_log": "bd000f6f",
+            "WPSeed_Logging_Helper::get_log": "dd239081"
+        },
+        "includes\/options.php": {
+            "WPSeed_Options::get_option_names": "e52e633c",
+            "WPSeed_Options::get_option_information": "d29b58c3",
+            "WPSeed_Options::install_options": "a4d9b516",
+            "WPSeed_Options::uninstall_options": "7f6997bd",
+            "WPSeed_Options::is_valid": "babd7e16",
+            "WPSeed_Options::get_option": "32d85887",
+            "WPSeed_Options::update_grouped_option": "f8e505fb",
+            "WPSeed_Options::update_option": "77f447c3",
+            "WPSeed_Options::update_options": "92f7ab1d",
+            "WPSeed_Options::delete_option": "6397e5eb",
+            "WPSeed_Options::get_grouped_option": "611b5aea",
+            "WPSeed_Options::delete_grouped_option": "e07b62f8"
+        },
+        "includes\/sanitize.php": {
+            "wpseed_sanitize_taxonomy_name": "ab088bc3",
+            "wpseed_sanitize_permalink": "fe98d8f0",
+            "wpseed_sanitize_tooltip": "be48089b"
+        },
+        "includes\/widgets.php": {
+            "wpseed_register_widgets": "20e52779"
+        },
+        "shortcodes\/shortcodes.php": {
+            "wpseed_example_shortcode": "a3b86b24",
+            "wpseed_load_template": "7d2065f7",
+            "wpseed_get_example_items": "41e0ce53"
+        },
+        "tests\/bootstrap.php": {
+            "wpseed_manually_load_plugin": "4b46c7e6"
+        },
+        "tests\/test-example.php": {
+            "WPSeed_Test_Example::test_plugin_activated": "fe3516d4",
+            "WPSeed_Test_Example::test_version_constant": "5616d3da"
+        },
+        "toolbars\/toolbar-developers.php": {
+            "WPSeed_Admin_Toolbar_Developers::__construct": "8ef50e60",
+            "WPSeed_Admin_Toolbar_Developers::init": "38df2661",
+            "WPSeed_Admin_Toolbar_Developers::parent_level": "c153dd33",
+            "WPSeed_Admin_Toolbar_Developers::second_level_tools": "ec15bf14"
+        },
+        "toolbars\/toolbars.php": {
+            "WPSeed_Toolbars::__construct": "0589a46b",
+            "WPSeed_Toolbars::admin_only_toolbars": "a389ba23",
+            "WPSeed_Toolbars::handle_demo_mode_switch": "eb08a092",
+            "WPSeed_Toolbars::handle_reset_pointers": "7c606981"
+        }
+    },
+    "updated_at": "2026-03-10 12:14:13"
 }

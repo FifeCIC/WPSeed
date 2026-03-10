@@ -1,0 +1,25 @@
+{
+    "wporg_preparation": false,
+    "skipped_rules": [],
+    "configuration": {
+        "wporg_preparation": false,
+        "skipped_rules": [
+            "WordPress.Security.EscapeOutput.OutputNotEscaped",
+            "WordPress.DB.DirectDatabaseQuery.DirectQuery",
+            "WordPress.DB.DirectDatabaseQuery.NoCaching",
+            "WordPress.WP.GlobalVariablesOverride.Prohibited"
+        ]
+    },
+    "ignored_paths": [
+        {
+            "path": "includes\/libraries\/action-scheduler",
+            "reason": "vendor",
+            "added_at": "2026-03-10 12:09:04"
+        },
+        {
+            "path": "includes\/libraries\/carbon-fields",
+            "reason": "vendor",
+            "added_at": "2026-03-10 12:09:04"
+        }
+    ]
+}
