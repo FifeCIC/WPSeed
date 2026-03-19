@@ -422,23 +422,28 @@ You are free to:
 
 ---
 
-## 📞 Support & Community
+## About This Project
 
-### Get Help
-- **Documentation**: [docs/](docs/)
-- **GitHub Issues**: [Report bugs or request features](https://github.com/ryanbayne/wpseed/issues)
-- **GitHub Discussions**: [Ask questions and share ideas](https://github.com/ryanbayne/wpseed/discussions)
+Ryan Bayne created this boilerplate plugin in his free time to support other developers. He is now establishing **Fife CIC** (Community Interest Company) — a volunteer-driven organisation based in Fife, Scotland. All development work on this project has been carried out by unpaid hours. 
+
+Fife CIC's mission is to build technology and community services that create real opportunities for people — from accessible pathways into employment, to skills training, to supporting single parents and young people in their technology-related aspirations. Every line of code here contributes to that mission.
+
+---
+
+## 📞 Support & Community
 
 ### Stay Connected
 - **Blog**: [ryanbayne.wordpress.com](https://ryanbayne.wordpress.com)
-- **Twitter**: [@ryanrbayne](https://twitter.com/ryanrbayne)
 - **LinkedIn**: [Ryan Bayne](https://www.linkedin.com/in/ryanrbayne/)
+- **FifeCIC**: [Fife Community Interest Company](https://www.fifecic.scot)
 
 ### Support Development
 If you find WPSeed valuable, consider supporting its development:
 
 - ⭐ **Star this repository** on GitHub
-- 💰 **[Sponsor on Patreon](https://www.patreon.com/ryanbayne)**
+- 💰 **[Sponsor Ryan on GitHub](https://github.com/sponsors/ryanbayne)**
+- 💰 **[Back Ryans Patreon](https://www.patreon.com/sponsors/ryanbayne)**
+- 💰 **[Buy Ryan A Coffee](https://www.buymeacoffee.com/ryanbayne)**
 - 🐛 **Report bugs** and suggest features
 - 📝 **Contribute code** or documentation
 - 💬 **Share your experience** and help others
@@ -466,12 +471,12 @@ If you find WPSeed valuable, consider supporting its development:
 
 ## ⚡ Quick Links
 
-- [Download Latest Release](https://github.com/ryanbayne/wpseed/releases/latest)
+- [Download Latest Release](https://github.com/fifecic/wpseed/releases/latest)
 - [View Changelog](CHANGELOG.md)
 - [Read Documentation](docs/)
 - [Watch Video Tutorial](https://youtube.com/watch?v=...)
-- [Report an Issue](https://github.com/ryanbayne/wpseed/issues/new)
-- [Request a Feature](https://github.com/ryanbayne/wpseed/issues/new?labels=enhancement)
+- [Report an Issue](https://github.com/fifecic/wpseed/issues/new)
+- [Request a Feature](https://github.com/fifecic/wpseed/issues/new?labels=enhancement)
 
 ---
 
