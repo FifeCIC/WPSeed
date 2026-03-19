@@ -424,41 +424,27 @@ You are free to:
 
 ## About This Project
 
-This project was created by **Fife CIC** (Community Interest Company) — a volunteer-driven organisation based in Fife, Scotland. All development work on this project has been carried out by unpaid volunteers. Fife CIC has received no external funding for this project.
+Ryan Bayne created this boilerplate plugin in his free time to support other developers. He is now establishing **Fife CIC** (Community Interest Company) — a volunteer-driven organisation based in Fife, Scotland. All development work on this project has been carried out by unpaid hours. 
 
 Fife CIC's mission is to build technology and community services that create real opportunities for people — from accessible pathways into employment, to skills training, to supporting single parents and young people in their technology-related aspirations. Every line of code here contributes to that mission.
-
-### 💛 Support This Project
-
-If you find this project useful, please consider supporting us financially, it will encourage development. Your contributions go directly toward:
-
-- **Rewarding our volunteers** through our Fair Incentive Policy (revenue-sharing credits, service discounts, and recognition)
-- **Sustaining development** so we can continue maintaining and improving this project
-- **Genuine Need** — profits from our work fund our personal workstations, software and services used to achieve our high standards
-
-**Every contribution, no matter how small, makes a difference.**
-
-[💖 Sponsor us on GitHub](https://github.com/sponsors/FifeCIC) · [🌐 Learn more about Fife CIC](https://fifecic.co.uk)
 
 ---
 
 ## 📞 Support & Community
 
-### Get Help
-- **Documentation**: [docs/](docs/)
-- **GitHub Issues**: [Report bugs or request features](https://github.com/ryanbayne/wpseed/issues)
-- **GitHub Discussions**: [Ask questions and share ideas](https://github.com/ryanbayne/wpseed/discussions)
-
 ### Stay Connected
 - **Blog**: [ryanbayne.wordpress.com](https://ryanbayne.wordpress.com)
 - **Twitter**: [@ryanrbayne](https://twitter.com/ryanrbayne)
 - **LinkedIn**: [Ryan Bayne](https://www.linkedin.com/in/ryanrbayne/)
+- **FifeCIC**: [Fife Community Interest Company](https://www.fifecic.scot)
 
 ### Support Development
 If you find WPSeed valuable, consider supporting its development:
 
 - ⭐ **Star this repository** on GitHub
-- 💰 **[Sponsor on Patreon](https://www.patreon.com/ryanbayne)**
+- 💰 **[Sponsor Ryan on GitHub](https://github.com/sponsors/ryanbayne)**
+- 💰 **[Back Ryans Patreon](https://www.patreon.com/sponsors/ryanbayne)**
+- 💰 **[Buy Ryan A Coffee](https://www.buymeacoffee.com/ryanbayne)**
 - 🐛 **Report bugs** and suggest features
 - 📝 **Contribute code** or documentation
 - 💬 **Share your experience** and help others
@@ -486,12 +472,12 @@ If you find WPSeed valuable, consider supporting its development:
 
 ## ⚡ Quick Links
 
-- [Download Latest Release](https://github.com/ryanbayne/wpseed/releases/latest)
+- [Download Latest Release](https://github.com/fifecic/wpseed/releases/latest)
 - [View Changelog](CHANGELOG.md)
 - [Read Documentation](docs/)
 - [Watch Video Tutorial](https://youtube.com/watch?v=...)
-- [Report an Issue](https://github.com/ryanbayne/wpseed/issues/new)
-- [Request a Feature](https://github.com/ryanbayne/wpseed/issues/new?labels=enhancement)
+- [Report an Issue](https://github.com/fifecic/wpseed/issues/new)
+- [Request a Feature](https://github.com/fifecic/wpseed/issues/new?labels=enhancement)
 
 ---
 
