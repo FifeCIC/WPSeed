@@ -434,7 +434,6 @@ Fife CIC's mission is to build technology and community services that create rea
 
 ### Stay Connected
 - **Blog**: [ryanbayne.wordpress.com](https://ryanbayne.wordpress.com)
-- **Twitter**: [@ryanrbayne](https://twitter.com/ryanrbayne)
 - **LinkedIn**: [Ryan Bayne](https://www.linkedin.com/in/ryanrbayne/)
 - **FifeCIC**: [Fife Community Interest Company](https://www.fifecic.scot)
 
