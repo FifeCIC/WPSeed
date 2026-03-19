@@ -422,6 +422,26 @@ You are free to:
 
 ---
 
+## About This Project
+
+This project was created by **Fife CIC** (Community Interest Company) — a volunteer-driven organisation based in Fife, Scotland. All development work on this project has been carried out by unpaid volunteers. Fife CIC has received no external funding for this project.
+
+Fife CIC's mission is to build technology and community services that create real opportunities for people — from accessible pathways into employment, to skills training, to supporting single parents and young people in their technology-related aspirations. Every line of code here contributes to that mission.
+
+### 💛 Support This Project
+
+If you find this project useful, please consider supporting us financially, it will encourage development. Your contributions go directly toward:
+
+- **Rewarding our volunteers** through our Fair Incentive Policy (revenue-sharing credits, service discounts, and recognition)
+- **Sustaining development** so we can continue maintaining and improving this project
+- **Genuine Need** — profits from our work fund our personal workstations, software and services used to achieve our high standards
+
+**Every contribution, no matter how small, makes a difference.**
+
+[💖 Sponsor us on GitHub](https://github.com/sponsors/FifeCIC) · [🌐 Learn more about Fife CIC](https://fifecic.co.uk)
+
+---
+
 ## 📞 Support & Community
 
 ### Get Help
