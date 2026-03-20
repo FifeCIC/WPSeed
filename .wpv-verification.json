@@ -8,7 +8,6 @@
         "install.php": "3bfe91ea",
         "loader.php": "3d5d87c9",
         "uninstall.php": "dce281e2",
-        "wp-verifier-exclusions.php": "ed922cfc",
         "wpseed.php": "a472b836",
         "api\/api-directory.php": "f5b63b02",
         "api\/api-factory.php": "f042f0ed",
@@ -43,9 +42,6 @@
         "toolbars\/toolbars.php": "1e965be2"
     },
     "function_hashes": {
-        "wp-verifier-exclusions.php": {
-            "wpseed_exclude_wporg_checks": "e9e65f7a"
-        },
         "api\/api-directory.php": {
             "WPSeed_API_Directory::get_all_providers": "d526ce95",
             "WPSeed_API_Directory::get_provider": "5c509265"
@@ -229,5 +225,5 @@
             "WPSeed_Toolbars::handle_reset_pointers": "7c606981"
         }
     },
-    "updated_at": "2026-03-10 12:14:13"
+    "updated_at": "2026-03-20 11:50:16"
 }
