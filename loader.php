@@ -110,7 +110,12 @@ final class WordPressPluginSeed {
      * Define WPSeed Constants.
      */
     private function define_constants() {
-        
+
+        if ( ! defined( 'WPSEED_LOG_DIR' ) ) {
+            $upload_dir = wp_upload_dir();
+            define( 'WPSEED_LOG_DIR', $upload_dir['basedir'] . '/wpseed-logs/' );
+        }
+
         if ( ! defined( 'WPSEED_MIN_WP_VERSION' ) ) { define( 'WPSEED_MIN_WP_VERSION', $this->min_wp_version ); }
         
         // Main (package) constants.
@@ -263,22 +268,9 @@ final class WordPressPluginSeed {
     }
 
     /**
-     * Define upload-dependent constants after WordPress init.
-     */
-    public function define_upload_constants() {
-        if ( ! defined( 'WPSEED_LOG_DIR' ) ) {
-            $upload_dir = wp_upload_dir();
-            define( 'WPSEED_LOG_DIR', $upload_dir['basedir'] . '/wpseed-logs/' );
-        }
-    }
-
-    /**
      * Initialise WordPress Plugin Seed when WordPress Initialises.
      */
-    public function init() {                     
-        // Define upload-dependent constants
-        $this->define_upload_constants();
-        
+    public function init() {
         // Before init action.
         do_action( 'before_wpseed_init' );
 

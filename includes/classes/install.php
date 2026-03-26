@@ -422,19 +422,19 @@ class WPSeed_Install {
         $sql = "CREATE TABLE {$wpdb->prefix}wpseed_api_calls (
             entryid bigint(20) NOT NULL AUTO_INCREMENT,
             service varchar(100) NOT NULL,
-            type varchar(20) NOT NULL,
-            status varchar(20) NOT NULL,
-            file varchar(255) DEFAULT NULL,
-            function varchar(100) DEFAULT NULL,
-            line int(11) DEFAULT NULL,
+            `type` varchar(20) NOT NULL,
+            `status` varchar(20) NOT NULL,
+            `file` varchar(255) DEFAULT NULL,
+            `function` varchar(100) DEFAULT NULL,
+            `line` int(11) DEFAULT NULL,
             wpuserid bigint(20) DEFAULT NULL,
-            timestamp datetime NOT NULL,
+            `timestamp` datetime NOT NULL,
             description text,
             outcome text,
             PRIMARY KEY (entryid),
             KEY service (service),
-            KEY status (status),
-            KEY timestamp (timestamp)
+            KEY `status` (`status`),
+            KEY `timestamp` (`timestamp`)
         ) $charset_collate;";
         
         dbDelta($sql);
@@ -462,10 +462,10 @@ class WPSeed_Install {
             entryid bigint(20) NOT NULL,
             code varchar(50) NOT NULL,
             error text NOT NULL,
-            line int(11) DEFAULT NULL,
-            function varchar(100) DEFAULT NULL,
-            file varchar(255) DEFAULT NULL,
-            timestamp datetime NOT NULL,
+            `line` int(11) DEFAULT NULL,
+            `function` varchar(100) DEFAULT NULL,
+            `file` varchar(255) DEFAULT NULL,
+            `timestamp` datetime NOT NULL,
             PRIMARY KEY (errorid),
             KEY entryid (entryid),
             KEY code (code)

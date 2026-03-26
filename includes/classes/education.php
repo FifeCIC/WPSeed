@@ -55,7 +55,7 @@ class WPSeed_Education {
         $sql = "CREATE TABLE IF NOT EXISTS {$this->table_name} (
             id bigint(20) NOT NULL AUTO_INCREMENT,
             title varchar(255) NOT NULL,
-            slug varchar(255) NOT NULL,
+            slug varchar(191) NOT NULL,
             content longtext NOT NULL,
             lesson_type varchar(50) DEFAULT 'tutorial',
             lesson_order int(11) DEFAULT 0,
