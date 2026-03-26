@@ -98,7 +98,7 @@ class WPSeed_Developer_Flow_Logger {
             echo '<strong>' . esc_html( $index + 1 ) . '. ' . esc_html( $step['type'] ) . '</strong> (+' . esc_html( $elapsed ) . 'ms): ';
             echo esc_html( $step['message'] );
             if ( ! empty( $step['data'] ) ) {
-                echo '<pre>' . esc_html( var_export( $step['data'], true ) ) . '</pre>';
+                echo '<pre>' . esc_html( wp_json_encode( $step['data'] ) ) . '</pre>';
             }
             echo '</div>';
         }

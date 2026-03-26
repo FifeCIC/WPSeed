@@ -1,3 +1,4 @@
+<?php if ( ! defined( 'ABSPATH' ) ) exit; ?>
 <div class="wpseed-example">
     <h3><?php echo esc_html($title); ?></h3>
     <ul>

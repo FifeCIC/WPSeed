@@ -7,7 +7,7 @@ Tags: boilerplate, plugin starter, AI assistant, REST API, developer tools, WP-C
 Requires at least: 5.0
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.1.0
+Stable tag: 2.0.0
 License: GPLv3
 
 The most advanced WordPress plugin boilerplate with built-in AI assistance, professional developer tools, and modern architecture.
@@ -135,31 +135,11 @@ Translator needed to localize the plugin.
 No special upgrade instructions this time.
 
 == Changelog ==
-
-= Roadmap Changes - 2025-01-XX =
-
-**Phase 7 Complete ✅ - Moving to Phase 8**
-
-* COMPLETED: Phase 7.1 Action Scheduler Integration
-* COMPLETED: Phase 7.2 Carbon Fields Integration with 6 premium field templates
-* COMPLETED: Phase 7.3 Enhanced Logging System with Query Monitor-style features
-* COMPLETED: Phase 7.4 Enhanced Notifications with database storage and bell icon
-* COMPLETED: Phase 7.5 Library Update Monitor with GitHub API integration and automatic update checks
-* COMPLETED: Phase 7.6 Credits & Contributors Gallery with AJAX details loading and filtering
-* COMPLETED: Phase 8.1 Carbon Fields Settings Examples (theme options, post meta, conditional fields, repeater fields, all field types)
-* COMPLETED: Phase 8.2 Uninstall Feedback Form (modal popup with reason collection)
-* COMPLETED: Phase 8.4 Widget Examples (legacy widgets, dashboard widgets)
-* REMOVED: WP-CLI code generators from Phase 8 (user decision - not implementing)
-* MOVED: Premium Licensing System from Phase 8 to Phase 15 (future - months away)
-* FOCUS: Phase 8 remaining tasks - Settings import/export, requirements checker, conflict detector, debugging integrations
-
-= 1.2.0 - 2025 =
-
-**Feature Release - Action Scheduler & AI Integration**
-
+= 2.0.0 =
+s import/export, requirements checker, conflict detector, debugging integrations
 * NEW: Action Scheduler integration for reliable background processing
 * NEW: AI Assistant tab with Gemini integration (50 free requests/day)
-* NEW: Architecture mapper tab with interactive plugin structure visualization
+* NEW: Architecture mapper tab with interactive plugin structure visualisation
 * NEW: Object registry for global access without globals
 * NEW: Data freshness manager for cache validation
 * NEW: Developer flow logger for decision tracking
@@ -168,14 +148,18 @@ No special upgrade instructions this time.
 * IMPROVED: Development Dashboard now 11 tabs
 * IMPROVED: Enhanced logging with developer mode support
 * IMPROVED: Setup wizard with Features configuration step
-* IMPROVED: Asset management with centralized registry
+* IMPROVED: Asset management with centralised registry
 * FIXED: Missing database tables on activation
 * FIXED: Carbon Fields loading with Pimple dependencies
-
-= 1.1.0 - 2025 =
-
-**Feature Release - Enhanced Settings & Integrations**
-
+* FIXED: Direct database query in Gravity Forms integration now invalidates cache after insert
+* FIXED: Direct database query in WPForms integration now invalidates cache after insert
+* FIXED: Admin script registration now explicitly sets in-footer flag for better page performance
+* FIXED: Sidebar widget before_widget/after_widget output now passed through wp_kses_post()
+* FIXED: Global variable $progress_script renamed to $wpseed_progress_script in progress-indicators.php to satisfy prefix naming standard
+* FIXED: Global variable $status_script renamed to $wpseed_status_script in status-indicators.php to satisfy prefix naming standard
+* FIXED: Restored admin/page/notification-center.php which had been accidentally overwritten with WPVerifier JSON results data
+* FIXED: Global variable $security_checks renamed to $wpseed_security_checks in security-audit.php to satisfy prefix naming standard
+* FIXED: Restored includes/admin/views/developer-checklist.php which had been accidentally overwritten with WPVerifier JSON results data
 * NEW: Repeater fields for settings framework - Dynamic add/remove field groups
 * NEW: Built-in documentation viewer in Development Dashboard
 * NEW: 12 integration examples for popular plugins
@@ -193,11 +177,6 @@ No special upgrade instructions this time.
 * IMPROVED: Documentation tab in Development Dashboard
 * IMPROVED: Settings framework with repeater field support
 * IMPROVED: Comprehensive integration documentation
-
-= 1.0.0 - 2024 =
-
-**Major Release - Complete Rewrite**
-
 * NEW: Built-in AI Assistant with Amazon Q and Gemini integration
 * NEW: 10-Tab Development Dashboard (Assets, Theme, Debug Log, Database, PHP Info, AI Assistant, Dev Checklist, Tasks, Layouts, Diagrams)
 * NEW: REST API framework with secure base controller

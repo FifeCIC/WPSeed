@@ -21,9 +21,11 @@ class WPSeed_Listener {
             return;
         }
         
-        if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
-            $this->process_post_requests();
+        if ( empty( $_SERVER['REQUEST_METHOD'] ) || 'POST' !== $_SERVER['REQUEST_METHOD'] ) {
+            return;
         }
+
+        $this->process_post_requests();
     }
     
     private function process_post_requests() {

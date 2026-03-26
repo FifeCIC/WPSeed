@@ -67,16 +67,6 @@ function wpseed_register_admin_menus() {
         'wpseed_notifications_page'
     );
     
-    // Security Audit
-    add_submenu_page(
-        'wpseed',
-        __('Security Audit', 'wpseed'),
-        __('Security Audit', 'wpseed'),
-        'manage_options',
-        'wpseed-security-audit',
-        'wpseed_security_audit_page'
-    );
-    
     // License - disabled pending full development
     /*
     add_submenu_page(
@@ -181,13 +171,6 @@ function wpseed_components_page() {
  */
 function wpseed_notifications_page() {
     require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/notification-center.php';
-}
-
-/**
- * Security Audit page callback
- */
-function wpseed_security_audit_page() {
-    require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/security-audit.php';
 }
 
 /**

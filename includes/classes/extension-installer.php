@@ -151,7 +151,11 @@ class WPSeed_Extension_Installer {
             wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wpseed' ) ) );
         }
 
-        $extension_slug = sanitize_text_field( $_POST['extension'] ?? '' );
+        if ( empty( $_POST['extension'] ) ) {
+            wp_send_json_error( array( 'message' => __( 'Extension slug is required.', 'wpseed' ) ) );
+        }
+
+        $extension_slug = sanitize_text_field( wp_unslash( $_POST['extension'] ) );
         $license_key = get_option( 'wpseed_license_key', '' );
 
         if ( empty( $extension_slug ) ) {

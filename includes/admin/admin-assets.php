@@ -8,6 +8,7 @@
  * @category Loading
  * @package  WPSeed/Loading
  * @since    1.0.0
+ * @version  1.2.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -49,6 +50,9 @@ class WPSeed_Admin_Assets {
 
     /**
      * Enqueue scripts for the admin side.
+     *
+     * @since  1.0.0
+     * @version 1.2.0
      */
     public function admin_scripts() {                   
         global $wp_query, $post;
@@ -58,8 +62,8 @@ class WPSeed_Admin_Assets {
         $package_screen_id = sanitize_title( __( 'WPSeed', 'wpseed' ) );
         $suffix       = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
-        // Register scripts
-        wp_register_script( 'wpseed_tooltips', WPSeed()->plugin_url() . '/assets/js/tooltips.js', array( 'jquery' ), WPSEED_VERSION );
+        // Register scripts — true loads in footer for better page performance.
+        wp_register_script( 'wpseed_tooltips', WPSeed()->plugin_url() . '/assets/js/tooltips.js', array( 'jquery' ), WPSEED_VERSION, true );
 
         if ( in_array( $screen_id, wpseed_get_screen_ids() ) ) {
             wp_enqueue_script( 'wpseed_tooltips' );

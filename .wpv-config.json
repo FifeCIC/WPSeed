@@ -14,12 +14,12 @@
         {
             "path": "includes/libraries/action-scheduler",
             "reason": "vendor",
-            "added_at": "2026-03-20 11:50:13"
+            "added_at": "2026-03-26 13:13:18"
         },
         {
             "path": "includes/libraries/carbon-fields",
             "reason": "vendor",
-            "added_at": "2026-03-20 11:50:13"
+            "added_at": "2026-03-26 13:13:18"
         }
     ],
     "verification_settings": {

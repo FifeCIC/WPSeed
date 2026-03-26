@@ -94,7 +94,9 @@ class WPSeed_Install {
         }
 
         // Ensure needed classes are loaded
-        include_once( 'admin/class.wpseed-admin-notices.php' );
+        if ( ! class_exists( 'WPSeed_Admin_Notices' ) ) {
+            include_once( dirname( __FILE__ ) . '/../admin/admin-notices.php' );
+        }
 
         WPSeed_Admin_Notices::remove_all_notices();
         
@@ -375,7 +377,9 @@ class WPSeed_Install {
      */
     private static function create_options() {
         // Include settings so that we can run through defaults
-        include_once( 'admin/class.wpseed-admin-settings.php' );
+        if ( ! class_exists( 'WPSeed_Admin_Settings' ) ) {
+            include_once( dirname( __FILE__ ) . '/../admin/admin-settings.php' );
+        }
 
         $settings = WPSeed_Admin_Settings::get_settings_pages();
 

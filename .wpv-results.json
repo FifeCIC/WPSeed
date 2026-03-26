@@ -1,45 +1,272 @@
 {
-    "generated_at": "2026-03-20 11:52:09",
+    "generated_at": "2026-03-26 13:15:33",
     "plugin": "wpseed/wpseed.php",
     "readiness": {
         "overall": 0,
-        "errors": 34,
-        "warnings": 275
+        "errors": 33,
+        "warnings": 286
     },
-    "configuration": {
-        "wporg_preparation": true,
-        "skipped_rules": []
-    },
-    "ignored_paths": [],
     "results": {
         "includes/admin/admin-settings.php": [
             {
-                "issue_id": "W-4bd79b1b",
-                "message": "Global variables defined by a theme/plugin should start with the theme/plugin prefix. Found: &quot;$status_script&quot;.",
-                "code": "WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound",
-                "type": "WARNING",
-                "line": 327,
-                "column": 5,
-                "ignored": false
-            }
-        ],
-        "includes/classes/unified-feature.php": [
-            {
-                "issue_id": "E-eea09e12",
-                "message": "All output should be run through an escaping function (see the Security sections in the WordPress Developer Handbooks), found &#039;$args[&#039;before_widget&#039;]&#039;.",
+                "issue_id": "E-0a19dbdf",
+                "message": "All output should be run through an escaping function (see the Security sections in the WordPress Developer Handbooks), found &#039;$custom_attributes&#039;.",
                 "code": "WordPress.Security.EscapeOutput.OutputNotEscaped",
                 "type": "ERROR",
-                "line": 152,
-                "column": 14,
+                "line": 354,
+                "column": 58,
                 "ignored": false
             },
             {
-                "issue_id": "E-58104377",
-                "message": "All output should be run through an escaping function (see the Security sections in the WordPress Developer Handbooks), found &#039;$args[&#039;after_widget&#039;]&#039;.",
+                "issue_id": "E-b1439c84",
+                "message": "All output should be run through an escaping function (see the Security sections in the WordPress Developer Handbooks), found &#039;$custom_attributes&#039;.",
                 "code": "WordPress.Security.EscapeOutput.OutputNotEscaped",
                 "type": "ERROR",
-                "line": 158,
-                "column": 14,
+                "line": 377,
+                "column": 58,
+                "ignored": false
+            },
+            {
+                "issue_id": "E-ed371c6e",
+                "message": "All output should be run through an escaping function (see the Security sections in the WordPress Developer Handbooks), found &#039;$custom_attributes&#039;.",
+                "code": "WordPress.Security.EscapeOutput.OutputNotEscaped",
+                "type": "ERROR",
+                "line": 424,
+                "column": 74,
+                "ignored": false
+            },
+            {
+                "issue_id": "E-63ca6737",
+                "message": "All output should be run through an escaping function (see the Security sections in the WordPress Developer Handbooks), found &#039;$custom_attributes&#039;.",
+                "code": "WordPress.Security.EscapeOutput.OutputNotEscaped",
+                "type": "ERROR",
+                "line": 487,
+                "column": 58,
+                "ignored": false
+            },
+            {
+                "issue_id": "W-4bc34f65",
+                "message": "$_REQUEST[&#039;_wpnonce&#039;] not unslashed before sanitization. Use wp_unslash() or similar",
+                "code": "WordPress.Security.ValidatedSanitizedInput.MissingUnslash",
+                "type": "WARNING",
+                "line": 81,
+                "column": 67,
+                "ignored": false
+            },
+            {
+                "issue_id": "W-9d8344bf",
+                "message": "Detected usage of a non-sanitized input variable: $_REQUEST[&#039;_wpnonce&#039;]",
+                "code": "WordPress.Security.ValidatedSanitizedInput.InputNotSanitized",
+                "type": "WARNING",
+                "line": 81,
+                "column": 67,
+                "ignored": false
+            },
+            {
+                "issue_id": "W-3a0b9ef9",
+                "message": "Processing form data without nonce verification.",
+                "code": "WordPress.Security.NonceVerification.Recommended",
+                "type": "WARNING",
+                "line": 153,
+                "column": 35,
+                "ignored": false
+            },
+            {
+                "issue_id": "W-48f5c546",
+                "message": "Processing form data without nonce verification.",
+                "code": "WordPress.Security.NonceVerification.Recommended",
+                "type": "WARNING",
+                "line": 153,
+                "column": 100,
+                "ignored": false
+            },
+            {
+                "issue_id": "W-ba410ac7",
+                "message": "Global variables defined by a theme/plugin should start with the theme/plugin prefix. Found: &quot;$current_tab&quot;.",
+                "code": "WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound",
+                "type": "WARNING",
+                "line": 153,
+                "column": 9,
+                "ignored": false
+            },
+            {
+                "issue_id": "W-6eeb2889",
+                "message": "Processing form data without nonce verification.",
+                "code": "WordPress.Security.NonceVerification.Recommended",
+                "type": "WARNING",
+                "line": 154,
+                "column": 35,
+                "ignored": false
+            },
+            {
+                "issue_id": "W-8e0db013",
+                "message": "Processing form data without nonce verification.",
+                "code": "WordPress.Security.NonceVerification.Recommended",
+                "type": "WARNING",
+                "line": 154,
+                "column": 77,
+                "ignored": false
+            },
+            {
+                "issue_id": "W-cb51e9af",
+                "message": "$_GET[&#039;section&#039;] not unslashed before sanitization. Use wp_unslash() or similar",
+                "code": "WordPress.Security.ValidatedSanitizedInput.MissingUnslash",
+                "type": "WARNING",
+                "line": 154,
+                "column": 77,
+                "ignored": false
+            },
+            {
+                "issue_id": "W-60ab0396",
+                "message": "Global variables defined by a theme/plugin should start with the theme/plugin prefix. Found: &quot;$current_section&quot;.",
+                "code": "WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound",
+                "type": "WARNING",
+                "line": 154,
+                "column": 9,
+                "ignored": false
+            },
+            {
+                "issue_id": "W-6f4d7fe4",
+                "message": "Processing form data without nonce verification.",
+                "code": "WordPress.Security.NonceVerification.Missing",
+                "type": "WARNING",
+                "line": 157,
+                "column": 23,
+                "ignored": false
+            },
+            {
+                "issue_id": "W-e4e8a685",
+                "message": "Processing form data without nonce verification.",
+                "code": "WordPress.Security.NonceVerification.Recommended",
+                "type": "WARNING",
+                "line": 162,
+                "column": 23,
+                "ignored": false
+            },
+            {
+                "issue_id": "W-3308ca0f",
+                "message": "Processing form data without nonce verification.",
+                "code": "WordPress.Security.NonceVerification.Recommended",
+                "type": "WARNING",
+                "line": 163,
+                "column": 44,
+                "ignored": false
+            },
+            {
+                "issue_id": "W-ee18f0b1",
+                "message": "$_GET[&#039;wpseed_error&#039;] not unslashed before sanitization. Use wp_unslash() or similar",
+                "code": "WordPress.Security.ValidatedSanitizedInput.MissingUnslash",
+                "type": "WARNING",
+                "line": 163,
+                "column": 44,
+                "ignored": false
+            },
+            {
+                "issue_id": "W-127998dc",
+                "message": "Detected usage of a non-sanitized input variable: $_GET[&#039;wpseed_error&#039;]",
+                "code": "WordPress.Security.ValidatedSanitizedInput.InputNotSanitized",
+                "type": "WARNING",
+                "line": 163,
+                "column": 44,
+                "ignored": false
+            },
+            {
+                "issue_id": "W-0a5798b4",
+                "message": "Processing form data without nonce verification.",
+                "code": "WordPress.Security.NonceVerification.Recommended",
+                "type": "WARNING",
+                "line": 166,
+                "column": 23,
+                "ignored": false
+            },
+            {
+                "issue_id": "W-3b402457",
+                "message": "Processing form data without nonce verification.",
+                "code": "WordPress.Security.NonceVerification.Recommended",
+                "type": "WARNING",
+                "line": 167,
+                "column": 46,
+                "ignored": false
+            },
+            {
+                "issue_id": "W-58afc146",
+                "message": "$_GET[&#039;wpseed_message&#039;] not unslashed before sanitization. Use wp_unslash() or similar",
+                "code": "WordPress.Security.ValidatedSanitizedInput.MissingUnslash",
+                "type": "WARNING",
+                "line": 167,
+                "column": 46,
+                "ignored": false
+            },
+            {
+                "issue_id": "W-6097d79c",
+                "message": "Detected usage of a non-sanitized input variable: $_GET[&#039;wpseed_message&#039;]",
+                "code": "WordPress.Security.ValidatedSanitizedInput.InputNotSanitized",
+                "type": "WARNING",
+                "line": 167,
+                "column": 46,
+                "ignored": false
+            },
+            {
+                "issue_id": "W-153e446c",
+                "message": "Processing form data without nonce verification.",
+                "code": "WordPress.Security.NonceVerification.Missing",
+                "type": "WARNING",
+                "line": 564,
+                "column": 21,
+                "ignored": false
+            },
+            {
+                "issue_id": "W-9ccd8fe6",
+                "message": "Processing form data without nonce verification.",
+                "code": "WordPress.Security.NonceVerification.Missing",
+                "type": "WARNING",
+                "line": 582,
+                "column": 40,
+                "ignored": false
+            },
+            {
+                "issue_id": "W-4ccbe637",
+                "message": "Processing form data without nonce verification.",
+                "code": "WordPress.Security.NonceVerification.Missing",
+                "type": "WARNING",
+                "line": 582,
+                "column": 96,
+                "ignored": false
+            },
+            {
+                "issue_id": "W-b1a8cc3f",
+                "message": "Detected usage of a non-sanitized input variable: $_POST[$option_name][$setting_name]",
+                "code": "WordPress.Security.ValidatedSanitizedInput.InputNotSanitized",
+                "type": "WARNING",
+                "line": 582,
+                "column": 96,
+                "ignored": false
+            },
+            {
+                "issue_id": "W-aa49f656",
+                "message": "Processing form data without nonce verification.",
+                "code": "WordPress.Security.NonceVerification.Missing",
+                "type": "WARNING",
+                "line": 586,
+                "column": 40,
+                "ignored": false
+            },
+            {
+                "issue_id": "W-41c853d9",
+                "message": "Processing form data without nonce verification.",
+                "code": "WordPress.Security.NonceVerification.Missing",
+                "type": "WARNING",
+                "line": 586,
+                "column": 80,
+                "ignored": false
+            },
+            {
+                "issue_id": "W-f66c8f68",
+                "message": "Detected usage of a non-sanitized input variable: $_POST[$option[&#039;id&#039;]]",
+                "code": "WordPress.Security.ValidatedSanitizedInput.InputNotSanitized",
+                "type": "WARNING",
+                "line": 586,
+                "column": 80,
                 "ignored": false
             }
         ],
@@ -90,6 +317,15 @@
                 "ignored": false
             },
             {
+                "issue_id": "E-70c6b802",
+                "message": "PHP file should prevent direct access. Add a check like: if ( ! defined( 'ABSPATH' ) ) exit;",
+                "code": "missing_direct_file_access_protection",
+                "type": "ERROR",
+                "line": 0,
+                "column": 0,
+                "ignored": false
+            },
+            {
                 "issue_id": "W-75715fa9",
                 "message": "Classes declared by a theme/plugin should start with the theme/plugin prefix. Found: &quot;Foo_Widget&quot;.",
                 "code": "WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedClassFound",
@@ -99,9 +335,9 @@
                 "ignored": false
             }
         ],
-        "libraries.php": [
+        "admin/page/development/view/libraries.php": [
             {
-                "issue_id": "E-d6557efd",
+                "issue_id": "E-5318635a",
                 "message": "<strong>Plugin Updater detected.</strong><br>These are not permitted in WordPress.org hosted plugins. Detected: site_transient_update_plugins",
                 "code": "plugin_updater_detected",
                 "type": "ERROR",
@@ -110,7 +346,7 @@
                 "ignored": false
             },
             {
-                "issue_id": "E-597dab9a",
+                "issue_id": "E-e8167420",
                 "message": "PHP file should prevent direct access. Add a check like: if ( ! defined( 'ABSPATH' ) ) exit;",
                 "code": "missing_direct_file_access_protection",
                 "type": "ERROR",
@@ -119,7 +355,7 @@
                 "ignored": false
             },
             {
-                "issue_id": "W-2767a927",
+                "issue_id": "W-17e74aaf",
                 "message": "<strong>Plugin Updater detected.</strong><br>Detected code which may be altering WordPress update routines. Detected: pre_set_site_transient_update_plugins",
                 "code": "update_modification_detected",
                 "type": "WARNING",
@@ -128,12 +364,21 @@
                 "ignored": false
             },
             {
-                "issue_id": "W-09af90f3",
+                "issue_id": "W-df6793a8",
                 "message": "<strong>Plugin Updater detected.</strong><br>Detected code which may be altering WordPress update routines. Detected: _site_transient_update_plugins",
                 "code": "update_modification_detected",
                 "type": "WARNING",
                 "line": 0,
                 "column": 0,
+                "ignored": false
+            },
+            {
+                "issue_id": "W-399024d1",
+                "message": "No PHP code was found in this file and short open tags are not allowed by this install of PHP. This file may be using short open tags but PHP does not allow them.",
+                "code": "Internal.NoCodeFound",
+                "type": "WARNING",
+                "line": 1,
+                "column": 1,
                 "ignored": false
             }
         ],
@@ -303,6 +548,33 @@
         ],
         "includes/api-logging.php": [
             {
+                "issue_id": "E-47d9fddc",
+                "message": "Use placeholders and $wpdb-&gt;prepare(); found $query",
+                "code": "WordPress.DB.PreparedSQL.NotPrepared",
+                "type": "ERROR",
+                "line": 259,
+                "column": 54,
+                "ignored": false
+            },
+            {
+                "issue_id": "E-21923cc7",
+                "message": "Unescaped parameter $query used in $wpdb-&gt;get_results($wpdb-&gt;prepare($query, $params))\\n$query assigned unsafely at line 246:\\n $query .= &quot; AND type = %s&quot;\\n$args[&#039;type&#039;] used without escaping.",
+                "code": "PluginCheck.Security.DirectDB.UnescapedDBParameter",
+                "type": "ERROR",
+                "line": 259,
+                "column": 27,
+                "ignored": false
+            },
+            {
+                "issue_id": "E-75b984c0",
+                "message": "Use placeholders and $wpdb-&gt;prepare(); found $query",
+                "code": "WordPress.DB.PreparedSQL.NotPrepared",
+                "type": "ERROR",
+                "line": 302,
+                "column": 46,
+                "ignored": false
+            },
+            {
                 "issue_id": "E-3f010d75",
                 "message": "Use placeholders and $wpdb-&gt;prepare(); found $prepared_query",
                 "code": "WordPress.DB.PreparedSQL.NotPrepared",
@@ -318,6 +590,15 @@
                 "type": "ERROR",
                 "line": 307,
                 "column": 25,
+                "ignored": false
+            },
+            {
+                "issue_id": "W-c143352b",
+                "message": "debug_backtrace() found. Debug code should not normally be used in production.",
+                "code": "WordPress.PHP.DevelopmentFunctions.error_log_debug_backtrace",
+                "type": "WARNING",
+                "line": 48,
+                "column": 30,
                 "ignored": false
             },
             {
@@ -973,113 +1254,94 @@
                 "ignored": false
             }
         ],
-        "notification-center.php": [
+        "includes/admin/views/developer-checklist.php": [
             {
-                "issue_id": "E-1cd1e363",
+                "issue_id": "W-d6898f07",
+                "message": "No PHP code was found in this file and short open tags are not allowed by this install of PHP. This file may be using short open tags but PHP does not allow them.",
+                "code": "Internal.NoCodeFound",
+                "type": "WARNING",
+                "line": 1,
+                "column": 1,
+                "ignored": false
+            }
+        ],
+        "includes/admin/views/education.php": [
+            {
+                "issue_id": "E-970c66af",
                 "message": "PHP file should prevent direct access. Add a check like: if ( ! defined( 'ABSPATH' ) ) exit;",
                 "code": "missing_direct_file_access_protection",
                 "type": "ERROR",
                 "line": 0,
                 "column": 0,
                 "ignored": false
+            },
+            {
+                "issue_id": "W-e5db67d9",
+                "message": "No PHP code was found in this file and short open tags are not allowed by this install of PHP. This file may be using short open tags but PHP does not allow them.",
+                "code": "Internal.NoCodeFound",
+                "type": "WARNING",
+                "line": 1,
+                "column": 1,
+                "ignored": false
             }
         ],
-        "deprecated.php": [
+        "includes/admin/views/html-admin-settings.php": [
             {
-                "issue_id": "E-d4b48321",
+                "issue_id": "E-a6209fc6",
                 "message": "PHP file should prevent direct access. Add a check like: if ( ! defined( 'ABSPATH' ) ) exit;",
                 "code": "missing_direct_file_access_protection",
                 "type": "ERROR",
                 "line": 0,
                 "column": 0,
                 "ignored": false
+            },
+            {
+                "issue_id": "W-919a0f71",
+                "message": "No PHP code was found in this file and short open tags are not allowed by this install of PHP. This file may be using short open tags but PHP does not allow them.",
+                "code": "Internal.NoCodeFound",
+                "type": "WARNING",
+                "line": 1,
+                "column": 1,
+                "ignored": false
             }
         ],
-        "functions.php": [
+        "includes/classes/frontend-scripts.php": [
             {
-                "issue_id": "E-51d7fdd3",
+                "issue_id": "E-0c6f0277",
                 "message": "PHP file should prevent direct access. Add a check like: if ( ! defined( 'ABSPATH' ) ) exit;",
                 "code": "missing_direct_file_access_protection",
                 "type": "ERROR",
                 "line": 0,
                 "column": 0,
                 "ignored": false
+            },
+            {
+                "issue_id": "W-fce0cda6",
+                "message": "No PHP code was found in this file and short open tags are not allowed by this install of PHP. This file may be using short open tags but PHP does not allow them.",
+                "code": "Internal.NoCodeFound",
+                "type": "WARNING",
+                "line": 1,
+                "column": 1,
+                "ignored": false
             }
         ],
-        "developer-checklist.php": [
+        "includes/classes/wpverifier-json-storage.php": [
             {
-                "issue_id": "E-5f3f99df",
+                "issue_id": "E-7bafa89c",
                 "message": "PHP file should prevent direct access. Add a check like: if ( ! defined( 'ABSPATH' ) ) exit;",
                 "code": "missing_direct_file_access_protection",
                 "type": "ERROR",
                 "line": 0,
                 "column": 0,
                 "ignored": false
-            }
-        ],
-        "education.php": [
+            },
             {
-                "issue_id": "E-a6e0fa2b",
-                "message": "PHP file should prevent direct access. Add a check like: if ( ! defined( 'ABSPATH' ) ) exit;",
-                "code": "missing_direct_file_access_protection",
-                "type": "ERROR",
-                "line": 0,
-                "column": 0,
-                "ignored": false
-            }
-        ],
-        "html-admin-settings.php": [
-            {
-                "issue_id": "E-d9d7130d",
-                "message": "PHP file should prevent direct access. Add a check like: if ( ! defined( 'ABSPATH' ) ) exit;",
-                "code": "missing_direct_file_access_protection",
-                "type": "ERROR",
-                "line": 0,
-                "column": 0,
-                "ignored": false
-            }
-        ],
-        "frontend-scripts.php": [
-            {
-                "issue_id": "E-67032b0d",
-                "message": "PHP file should prevent direct access. Add a check like: if ( ! defined( 'ABSPATH' ) ) exit;",
-                "code": "missing_direct_file_access_protection",
-                "type": "ERROR",
-                "line": 0,
-                "column": 0,
-                "ignored": false
-            }
-        ],
-        "wpverifier-json-storage.php": [
-            {
-                "issue_id": "E-31f74979",
-                "message": "PHP file should prevent direct access. Add a check like: if ( ! defined( 'ABSPATH' ) ) exit;",
-                "code": "missing_direct_file_access_protection",
-                "type": "ERROR",
-                "line": 0,
-                "column": 0,
-                "ignored": false
-            }
-        ],
-        "widget-example.php": [
-            {
-                "issue_id": "E-c66c4673",
-                "message": "PHP file should prevent direct access. Add a check like: if ( ! defined( 'ABSPATH' ) ) exit;",
-                "code": "missing_direct_file_access_protection",
-                "type": "ERROR",
-                "line": 0,
-                "column": 0,
-                "ignored": false
-            }
-        ],
-        "install.php": [
-            {
-                "issue_id": "E-4a02a7aa",
-                "message": "PHP file should prevent direct access. Add a check like: if ( ! defined( 'ABSPATH' ) ) exit;",
-                "code": "missing_direct_file_access_protection",
-                "type": "ERROR",
-                "line": 0,
-                "column": 0,
+                "issue_id": "W-b2c250f7",
+                "message": "No PHP code was found in this file and short open tags are not allowed by this install of PHP. This file may be using short open tags but PHP does not allow them.",
+                "code": "Internal.NoCodeFound",
+                "type": "WARNING",
+                "line": 1,
+                "column": 1,
                 "ignored": false
             }
         ],
@@ -1103,25 +1365,41 @@
                 "ignored": false
             }
         ],
-        "example.php": [
+        "tests/bootstrap.php": [
             {
-                "issue_id": "E-3ce385ac",
+                "issue_id": "E-6fb68ac7",
                 "message": "PHP file should prevent direct access. Add a check like: if ( ! defined( 'ABSPATH' ) ) exit;",
                 "code": "missing_direct_file_access_protection",
                 "type": "ERROR",
                 "line": 0,
                 "column": 0,
                 "ignored": false
-            }
-        ],
-        "bootstrap.php": [
+            },
             {
-                "issue_id": "E-dce1a85f",
-                "message": "PHP file should prevent direct access. Add a check like: if ( ! defined( 'ABSPATH' ) ) exit;",
-                "code": "missing_direct_file_access_protection",
-                "type": "ERROR",
-                "line": 0,
-                "column": 0,
+                "issue_id": "W-7ccd34cb",
+                "message": "error_log() found. Debug code should not normally be used in production.",
+                "code": "WordPress.PHP.DevelopmentFunctions.error_log_error_log",
+                "type": "WARNING",
+                "line": 15,
+                "column": 5,
+                "ignored": false
+            },
+            {
+                "issue_id": "W-d1cbc57e",
+                "message": "Global variables defined by a theme/plugin should start with the theme/plugin prefix. Found: &quot;$_tests_dir&quot;.",
+                "code": "WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound",
+                "type": "WARNING",
+                "line": 8,
+                "column": 1,
+                "ignored": false
+            },
+            {
+                "issue_id": "W-33fb3cdc",
+                "message": "Global variables defined by a theme/plugin should start with the theme/plugin prefix. Found: &quot;$_tests_dir&quot;.",
+                "code": "WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound",
+                "type": "WARNING",
+                "line": 11,
+                "column": 5,
                 "ignored": false
             }
         ],
@@ -1295,28 +1573,6 @@
                 "ignored": false
             }
         ],
-        "admin/page/development/view/libraries.php": [
-            {
-                "issue_id": "W-399024d1",
-                "message": "No PHP code was found in this file and short open tags are not allowed by this install of PHP. This file may be using short open tags but PHP does not allow them.",
-                "code": "Internal.NoCodeFound",
-                "type": "WARNING",
-                "line": 1,
-                "column": 1,
-                "ignored": false
-            }
-        ],
-        "admin/page/notification-center.php": [
-            {
-                "issue_id": "W-dd8af24a",
-                "message": "No PHP code was found in this file and short open tags are not allowed by this install of PHP. This file may be using short open tags but PHP does not allow them.",
-                "code": "Internal.NoCodeFound",
-                "type": "WARNING",
-                "line": 1,
-                "column": 1,
-                "ignored": false
-            }
-        ],
         "admin/page/security-audit.php": [
             {
                 "issue_id": "W-f709e789",
@@ -1379,15 +1635,6 @@
                 "type": "WARNING",
                 "line": 19,
                 "column": 5,
-                "ignored": false
-            },
-            {
-                "issue_id": "W-b66b28c5",
-                "message": "Global variables defined by a theme/plugin should start with the theme/plugin prefix. Found: &quot;$security_checks&quot;.",
-                "code": "WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound",
-                "type": "WARNING",
-                "line": 34,
-                "column": 1,
                 "ignored": false
             },
             {
@@ -1713,17 +1960,6 @@
                 "ignored": false
             }
         ],
-        "includes/admin/admin-pointers.php": [
-            {
-                "issue_id": "W-4c327f1c",
-                "message": "Processing form data without nonce verification.",
-                "code": "WordPress.Security.NonceVerification.Recommended",
-                "type": "WARNING",
-                "line": 50,
-                "column": 23,
-                "ignored": false
-            }
-        ],
         "includes/admin/admin-setup-wizard.php": [
             {
                 "issue_id": "W-051c3cb7",
@@ -1912,28 +2148,6 @@
                 "ignored": false
             }
         ],
-        "includes/admin/views/developer-checklist.php": [
-            {
-                "issue_id": "W-d6898f07",
-                "message": "No PHP code was found in this file and short open tags are not allowed by this install of PHP. This file may be using short open tags but PHP does not allow them.",
-                "code": "Internal.NoCodeFound",
-                "type": "WARNING",
-                "line": 1,
-                "column": 1,
-                "ignored": false
-            }
-        ],
-        "includes/admin/views/education.php": [
-            {
-                "issue_id": "W-e5db67d9",
-                "message": "No PHP code was found in this file and short open tags are not allowed by this install of PHP. This file may be using short open tags but PHP does not allow them.",
-                "code": "Internal.NoCodeFound",
-                "type": "WARNING",
-                "line": 1,
-                "column": 1,
-                "ignored": false
-            }
-        ],
         "includes/admin/views/html-admin-page.php": [
             {
                 "issue_id": "W-faee59b1",
@@ -2023,17 +2237,6 @@
                 "type": "WARNING",
                 "line": 59,
                 "column": 21,
-                "ignored": false
-            }
-        ],
-        "includes/admin/views/html-admin-settings.php": [
-            {
-                "issue_id": "W-919a0f71",
-                "message": "No PHP code was found in this file and short open tags are not allowed by this install of PHP. This file may be using short open tags but PHP does not allow them.",
-                "code": "Internal.NoCodeFound",
-                "type": "WARNING",
-                "line": 1,
-                "column": 1,
                 "ignored": false
             }
         ],
@@ -2137,28 +2340,6 @@
                 "type": "WARNING",
                 "line": 58,
                 "column": 19,
-                "ignored": false
-            }
-        ],
-        "includes/classes/developer-flow-logger.php": [
-            {
-                "issue_id": "W-255ee938",
-                "message": "var_export() found. Debug code should not normally be used in production.",
-                "code": "WordPress.PHP.DevelopmentFunctions.error_log_var_export",
-                "type": "WARNING",
-                "line": 101,
-                "column": 42,
-                "ignored": false
-            }
-        ],
-        "includes/classes/ecosystem-installer.php": [
-            {
-                "issue_id": "W-99cbecaa",
-                "message": "Detected usage of a possibly undefined superglobal array index: $_POST[&#039;slug&#039;]. Check that the array index exists before using it.",
-                "code": "WordPress.Security.ValidatedSanitizedInput.InputNotValidated",
-                "type": "WARNING",
-                "line": 117,
-                "column": 48,
                 "ignored": false
             }
         ],
@@ -2400,28 +2581,6 @@
                 "ignored": false
             }
         ],
-        "includes/classes/extension-installer.php": [
-            {
-                "issue_id": "W-948fb847",
-                "message": "$_POST[&#039;extension&#039;] not unslashed before sanitization. Use wp_unslash() or similar",
-                "code": "WordPress.Security.ValidatedSanitizedInput.MissingUnslash",
-                "type": "WARNING",
-                "line": 154,
-                "column": 48,
-                "ignored": false
-            }
-        ],
-        "includes/classes/frontend-scripts.php": [
-            {
-                "issue_id": "W-fce0cda6",
-                "message": "No PHP code was found in this file and short open tags are not allowed by this install of PHP. This file may be using short open tags but PHP does not allow them.",
-                "code": "Internal.NoCodeFound",
-                "type": "WARNING",
-                "line": 1,
-                "column": 1,
-                "ignored": false
-            }
-        ],
         "includes/classes/install.php": [
             {
                 "issue_id": "W-a099267d",
@@ -2495,17 +2654,6 @@
                 "type": "WARNING",
                 "line": 264,
                 "column": 68,
-                "ignored": false
-            }
-        ],
-        "includes/classes/listener.php": [
-            {
-                "issue_id": "W-2419f673",
-                "message": "Detected usage of a possibly undefined superglobal array index: $_SERVER[&#039;REQUEST_METHOD&#039;]. Check that the array index exists before using it.",
-                "code": "WordPress.Security.ValidatedSanitizedInput.InputNotValidated",
-                "type": "WARNING",
-                "line": 24,
-                "column": 14,
                 "ignored": false
             }
         ],
@@ -2641,17 +2789,6 @@
                 "ignored": false
             }
         ],
-        "includes/classes/wpverifier-json-storage.php": [
-            {
-                "issue_id": "W-b2c250f7",
-                "message": "No PHP code was found in this file and short open tags are not allowed by this install of PHP. This file may be using short open tags but PHP does not allow them.",
-                "code": "Internal.NoCodeFound",
-                "type": "WARNING",
-                "line": 1,
-                "column": 1,
-                "ignored": false
-            }
-        ],
         "includes/classes/wpverifier-verification-matcher.php": [
             {
                 "issue_id": "W-7832e4a1",
@@ -2721,68 +2858,6 @@
                 "ignored": false
             }
         ],
-        "tests/bootstrap.php": [
-            {
-                "issue_id": "W-7ccd34cb",
-                "message": "error_log() found. Debug code should not normally be used in production.",
-                "code": "WordPress.PHP.DevelopmentFunctions.error_log_error_log",
-                "type": "WARNING",
-                "line": 15,
-                "column": 5,
-                "ignored": false
-            },
-            {
-                "issue_id": "W-d1cbc57e",
-                "message": "Global variables defined by a theme/plugin should start with the theme/plugin prefix. Found: &quot;$_tests_dir&quot;.",
-                "code": "WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound",
-                "type": "WARNING",
-                "line": 8,
-                "column": 1,
-                "ignored": false
-            },
-            {
-                "issue_id": "W-33fb3cdc",
-                "message": "Global variables defined by a theme/plugin should start with the theme/plugin prefix. Found: &quot;$_tests_dir&quot;.",
-                "code": "WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound",
-                "type": "WARNING",
-                "line": 11,
-                "column": 5,
-                "ignored": false
-            }
-        ],
-        "examples/integrations/contact-form-7-example.php": [
-            {
-                "issue_id": "W-782e4a5e",
-                "message": "Use of a direct database call is discouraged.",
-                "code": "WordPress.DB.DirectDatabaseQuery.DirectQuery",
-                "type": "WARNING",
-                "line": 74,
-                "column": 9,
-                "ignored": false
-            }
-        ],
-        "examples/integrations/easy-digital-downloads-example.php": [
-            {
-                "issue_id": "W-1a495956",
-                "message": "Use of a direct database call is discouraged.",
-                "code": "WordPress.DB.DirectDatabaseQuery.DirectQuery",
-                "type": "WARNING",
-                "line": 101,
-                "column": 9,
-                "ignored": false
-            }
-        ],
-        "examples/integrations/gravity-forms-example.php": [
-            {
-                "issue_id": "W-2f5b8f16",
-                "message": "Use of a direct database call is discouraged.",
-                "code": "WordPress.DB.DirectDatabaseQuery.DirectQuery",
-                "type": "WARNING",
-                "line": 103,
-                "column": 9,
-                "ignored": false
-            }
-        ],
         "examples/integrations/learndash-example.php": [
             {
                 "issue_id": "W-2942f9b3",
@@ -2799,17 +2874,6 @@
                 "code": "WordPress.DB.DirectDatabaseQuery.DirectQuery",
                 "type": "WARNING",
                 "line": 124,
-                "column": 9,
-                "ignored": false
-            }
-        ],
-        "examples/integrations/wpforms-example.php": [
-            {
-                "issue_id": "W-3ed85a99",
-                "message": "Use of a direct database call is discouraged.",
-                "code": "WordPress.DB.DirectDatabaseQuery.DirectQuery",
-                "type": "WARNING",
-                "line": 95,
                 "column": 9,
                 "ignored": false
             }
@@ -2888,17 +2952,6 @@
                 "ignored": false
             }
         ],
-        "includes/admin/admin-assets.php": [
-            {
-                "issue_id": "W-69f4aa58",
-                "message": "In footer ($in_footer) is not set explicitly wp_register_script; It is recommended to load scripts in the footer. Please set this value to `true` to load it in the footer, or explicitly `false` if it should be loaded in the header.",
-                "code": "WordPress.WP.EnqueuedResourceParameters.NotInFooter",
-                "type": "WARNING",
-                "line": 62,
-                "column": 9,
-                "ignored": false
-            }
-        ],
         "wpseed.php": [
             {
                 "issue_id": "W-0b53af4e",
@@ -2916,28 +2969,6 @@
                 "type": "WARNING",
                 "line": 0,
                 "column": 0,
-                "ignored": false
-            }
-        ],
-        "admin/page/development/partials/ui-library/progress-indicators.php": [
-            {
-                "issue_id": "W-e12e6e1a",
-                "message": "Global variables defined by a theme/plugin should start with the theme/plugin prefix. Found: &quot;$progress_script&quot;.",
-                "code": "WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound",
-                "type": "WARNING",
-                "line": 158,
-                "column": 5,
-                "ignored": false
-            }
-        ],
-        "admin/page/development/partials/ui-library/status-indicators.php": [
-            {
-                "issue_id": "W-4bd79b1b",
-                "message": "Global variables defined by a theme/plugin should start with the theme/plugin prefix. Found: &quot;$status_script&quot;.",
-                "code": "WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound",
-                "type": "WARNING",
-                "line": 327,
-                "column": 5,
                 "ignored": false
             }
         ]

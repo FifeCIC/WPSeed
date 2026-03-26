@@ -3,7 +3,7 @@
  * UI Library Progress Indicators Partial
  *
  * @package wpseed/Admin/Views/Partials
- * @version 1.0.7
+ * @version 1.2.0
  */
 
 defined('ABSPATH') || exit;
@@ -154,8 +154,8 @@ defined('ABSPATH') || exit;
     </div>
 
     <?php
-    // Add interactive demo script
-    $progress_script = "
+    // Add interactive demo script — variable prefixed with wpseed_ to satisfy global variable naming standards.
+    $wpseed_progress_script = "
         jQuery(document).ready(function($) {
             // Simulate progress animation for media-progress-bar
             function animateProgress() {
@@ -201,6 +201,6 @@ defined('ABSPATH') || exit;
         });
     ";
     
-    wp_add_inline_script('jquery', $progress_script);
+    wp_add_inline_script('jquery', $wpseed_progress_script);
     ?>
 </div>

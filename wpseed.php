@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {exit;}
                  
 if ( ! class_exists( 'WordPressPluginSeed' ) ) :
 
-    if ( ! defined( 'WPSEED_VERSION' ) ) { define( 'WPSEED_VERSION', '0.0.1' ); }
+    if ( ! defined( 'WPSEED_VERSION' ) ) { define( 'WPSEED_VERSION', '2.0.0' ); }
     if ( ! defined( 'WPSEED_PLUGIN_FILE' ) ) { define( 'WPSEED_PLUGIN_FILE', __FILE__ ); }
     if ( ! defined( 'WPSEED_PLUGIN_BASENAME' ) ) { define( 'WPSEED_PLUGIN_BASENAME', plugin_basename( __FILE__ ) ); }
     if ( ! defined( 'WPSEED_PLUGIN_DIR_PATH' ) ) { define( 'WPSEED_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) ); }
