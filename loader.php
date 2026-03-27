@@ -196,16 +196,12 @@ final class WordPressPluginSeed {
         include_once( 'includes/classes/developer-mode.php' );
         include_once( 'includes/classes/rest-controller.php' );
         include_once( 'includes/classes/rest-example.php' );
-        include_once( 'includes/classes/rest-education.php' );
         include_once( 'includes/classes/i18n.php' );
         include_once( 'includes/classes/dependencies.php' );
         include_once( 'includes/classes/multisite.php' );
-        include_once( 'includes/classes/education.php' );
         include_once( 'includes/classes/github-sync.php' );
         include_once( 'includes/functions/github-sync-ajax.php' );
         include_once( 'includes/classes/settings-import-export.php' );
-        include_once( 'includes/classes/license-manager.php' );
-        include_once( 'includes/classes/license-client.php' );
         include_once( 'includes/classes/extension-installer.php' );
         include_once( 'includes/classes/library-manager.php' );
         include_once( 'includes/classes/library-update-monitor.php' );
@@ -225,9 +221,6 @@ final class WordPressPluginSeed {
         add_action( 'rest_api_init', function() {
             $controller = new WPSeed_REST_Example_Controller();
             $controller->register_routes();
-            
-            $education_controller = new WPSeed_REST_Education_Controller();
-            $education_controller->register_routes();
         });
         
         // API System

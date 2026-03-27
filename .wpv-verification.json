@@ -298,6 +298,98 @@
         "admin/page/notification-center.php": {
             "hash": "f948c706890a3c9eac3ca60fa2280017",
             "ignored_at": "2026-03-26 21:51:45"
+        },
+        "includes/admin/views/developer-checklist.php": {
+            "hash": "798bc0b4469455a4bcb3fadfd3f65dc9",
+            "ignored_at": "2026-03-27 08:32:42"
+        },
+        "includes/admin/views/education.php": {
+            "hash": "",
+            "ignored_at": "2026-03-27 08:37:54"
+        },
+        "includes/admin/views/html-admin-settings.php": {
+            "hash": "cdb6e46050c114e4136676a5f4498595",
+            "ignored_at": "2026-03-27 08:38:55"
+        },
+        "includes/classes/frontend-scripts.php": {
+            "hash": "2bf9e7e39d94df1595da986bada4213c",
+            "ignored_at": "2026-03-27 08:39:31"
+        },
+        "includes/classes/wpverifier-json-storage.php": {
+            "hash": "",
+            "ignored_at": "2026-03-27 08:39:53"
+        },
+        "loader.php": {
+            "hash": "a59ed7099b1e77d1a0a599799c516016",
+            "ignored_at": "2026-03-27 08:40:10"
+        },
+        "admin/page/development/view/credits.php": {
+            "hash": "6f2d23d7dd3713ac574ac64cc934eb7a",
+            "ignored_at": "2026-03-27 08:40:37"
+        },
+        "admin/page/development/view/docs.php": {
+            "hash": "31cb8aac4694fe442b10a7de78abe663",
+            "ignored_at": "2026-03-27 08:41:32"
+        },
+        "examples/integrations/buddypress-example.php": {
+            "hash": "c28549786c08cdedeff8694909971e94",
+            "ignored_at": "2026-03-27 08:43:09"
+        },
+        "includes/admin/admin-notices.php": {
+            "hash": "f4608139ec37b3ab9c48eb00f0501d1d",
+            "ignored_at": "2026-03-27 08:44:31"
+        },
+        "includes/admin/mainviews/food-advanced.php": {
+            "hash": "",
+            "ignored_at": "2026-03-27 08:45:06"
+        },
+        "includes/admin/mainviews/team-advanced.php": {
+            "hash": "d6467571a58faadcb68c7ff5630239e9",
+            "ignored_at": "2026-03-27 08:46:38"
+        },
+        "includes/classes/settings-import-export.php": {
+            "hash": "722544317280dd20aefe5b4b11d20214",
+            "ignored_at": "2026-03-27 08:48:29"
+        },
+        "includes/functions/database.php": {
+            "hash": "ce3147a2ed7c93491f8075b40142cadc",
+            "ignored_at": "2026-03-27 18:36:23"
+        },
+        "includes/toolbars/toolbar-developers.php": {
+            "hash": "33929dcf79bba580db7b0adeb7194100",
+            "ignored_at": "2026-03-27 18:38:42"
+        },
+        "examples/integrations/learndash-example.php": {
+            "hash": "d8350041937b6e3b4c30723fd92da76d",
+            "ignored_at": "2026-03-27 18:51:14"
+        },
+        "wpseed.php": {
+            "hash": "e01a19e7eefce6a88861f8e584a27c7e",
+            "ignored_at": "2026-03-27 18:51:58"
+        },
+        "examples/integrations/memberpress-example.php": {
+            "hash": "9f3efa01fa9b93fcc3215f9731f7ec43",
+            "ignored_at": "2026-03-27 19:32:39"
+        },
+        "includes/classes/license-manager.php": {
+            "hash": "341af530b3c504e80e03ce78a5882b9d",
+            "ignored_at": "2026-03-27 19:34:57"
+        },
+        "includes/options.php": {
+            "hash": "685fa7cc9d701b9bc417e6078c68bdbe",
+            "ignored_at": "2026-03-27 19:49:47"
+        },
+        "readme.txt": {
+            "hash": "5e58aac6ac48f6c60e14558d2556f95e",
+            "ignored_at": "2026-03-27 19:53:46"
+        },
+        "tests/bootstrap.php": {
+            "hash": "0dedeeb8b7a5a6d72af215eab91bac90",
+            "ignored_at": "2026-03-27 19:56:19"
+        },
+        "assets/queue-assets.php": {
+            "hash": "959e82847af98b04ef6811af5e350af0",
+            "ignored_at": "2026-03-27 20:00:28"
         }
     }
 }

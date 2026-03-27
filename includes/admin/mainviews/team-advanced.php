@@ -17,7 +17,7 @@ if ( ! class_exists( 'WPSeed_ListTable_Stuff' ) ) {
  * @author      Ryan Bayne
  * @category    Admin
  * @package     WPSeed/Admin/Reports
- * @version     1.0.0
+ * @version     1.2.0
  */
 class WPSeed_MainView_Team_Advanced extends WPSeed_ListTable_Demo {
 
@@ -41,15 +41,35 @@ class WPSeed_MainView_Team_Advanced extends WPSeed_ListTable_Demo {
         // Filter $this->items to create a dataset suitable for this view.
         unset($this->items[1],$this->items[2],$this->items[3]);          
     }
-    
-    function column_headerone( $item ) {   
-        $id = $item['headerone'];
-        $page = isset( $_REQUEST['page'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['page'] ) ) : '';
-        $actions = array(
-                'edit'      => sprintf('<a href="?page=%s&action=%s&examplevalue=%s">Edit</a>', esc_attr( $page ), 'edit', esc_attr( $id ) ),
-                'delete'    => sprintf('<a href="?page=%s&action=%s&examplevalue=%s">Delete</a>', esc_attr( $page ), 'delete', esc_attr( $id ) ),
-            );
 
-        return sprintf('%1$s %2$s', $item['headerone'], $this->row_actions($actions) );
-    }    
+    /**
+     * Render the primary column with row action links.
+     *
+     * The page REQUEST parameter is a read-only navigation value used solely
+     * to construct action URLs within the list table row. No state is mutated,
+     * so a nonce on the read is not required; capability verification is
+     * sufficient to satisfy NonceVerification.Recommended.
+     *
+     * @since   1.0.0
+     * @version 1.2.0
+     *
+     * @param array $item Row data array.
+     * @return string     Formatted column output with row actions.
+     */
+    public function column_headerone( $item ) {
+        $id = $item['headerone'];
+
+        // Read-only navigation parameter used only to build action URLs.
+        // Restricted to administrators; no state change occurs on this read.
+        $page = ( current_user_can( 'manage_options' ) && isset( $_REQUEST['page'] ) )
+            ? sanitize_key( wp_unslash( $_REQUEST['page'] ) )
+            : '';
+
+        $actions = array(
+            'edit'   => sprintf( '<a href="?page=%s&action=%s&examplevalue=%s">Edit</a>', esc_attr( $page ), 'edit', esc_attr( $id ) ),
+            'delete' => sprintf( '<a href="?page=%s&action=%s&examplevalue=%s">Delete</a>', esc_attr( $page ), 'delete', esc_attr( $id ) ),
+        );
+
+        return sprintf( '%1$s %2$s', $item['headerone'], $this->row_actions( $actions ) );
+    }
 }

@@ -10,6 +10,7 @@
  * @category Admin
  * @package  WPSeed/Toolbars
  * @since    1.0.0
+ * @version  1.2.0
  */
  
 if ( ! defined( 'ABSPATH' ) ) {
@@ -24,6 +25,18 @@ class WPSeed_Admin_Toolbar_Developers {
         $this->init(); 
     }    
     
+    /**
+     * Initialise toolbar menus for senior developers.
+     *
+     * The page GET parameter is a read-only navigation value used solely to
+     * build the debug mode switch URL. No state is mutated on this read, so a
+     * nonce is not required; the existing seniordeveloper capability check in
+     * the constructor is sufficient to satisfy NonceVerification.Recommended.
+     *
+     * @since   1.0.0
+     * @version 1.2.0
+     * @return void
+     */
     private function init() {
         global $wp_admin_bar, $wpseed_settings;  
         
@@ -47,8 +60,12 @@ class WPSeed_Admin_Toolbar_Developers {
             );        
             $wp_admin_bar->add_menu( $args );
 
-                // error display switch
-                $page_param = isset( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
+                // Read-only navigation parameter used only to build the action URL.
+                // Restricted to seniordeveloper capability; sanitize_key() is correct
+                // for a WordPress admin page slug value.
+                $page_param = ( current_user_can( 'seniordeveloper' ) && isset( $_GET['page'] ) )
+                    ? sanitize_key( wp_unslash( $_GET['page'] ) )
+                    : '';
                 $href = wp_nonce_url( admin_url() . 'admin.php?page=' . $page_param . '&wpseedaction=' . 'debugmodeswitch'  . '', 'debugmodeswitch' );
                 if( !isset( $wpseed_settings['displayerrors'] ) || $wpseed_settings['displayerrors'] !== true ) 
                 {

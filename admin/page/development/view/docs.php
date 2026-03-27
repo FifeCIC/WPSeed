@@ -11,16 +11,32 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * WPSeed_Admin_Development_Docs Class
+ * WPSeed_Admin_Development_Docs Class.
+ *
+ * @since   1.1.0
+ * @version 1.2.0
  */
 class WPSeed_Admin_Development_Docs {
     
     /**
-     * Output the documentation viewer
+     * Output the documentation viewer.
+     *
+     * The doc GET parameter is a read-only display selector used to choose
+     * which Markdown file to render. It carries no privilege and mutates no
+     * state, so a nonce is not required; capability verification is sufficient.
+     *
+     * @since  1.1.0
+     * @version 1.2.0
+     * @return void
      */
     public static function output() {
         $docs_dir = WPSEED_PLUGIN_DIR_PATH . 'docs/';
-        $current_doc = isset($_GET['doc']) ? sanitize_file_name(wp_unslash($_GET['doc'])) : 'GETTING-STARTED';
+
+        // Read-only navigation parameter — selects which doc file to render.
+        // Restricted to administrators; sanitize_file_name() prevents path traversal.
+        $current_doc = ( current_user_can( 'manage_options' ) && isset( $_GET['doc'] ) )
+            ? sanitize_file_name( wp_unslash( $_GET['doc'] ) )
+            : 'GETTING-STARTED';
         
         ?>
         <div class="wpseed-docs-viewer">

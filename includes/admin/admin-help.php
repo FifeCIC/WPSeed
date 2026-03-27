@@ -54,8 +54,8 @@ class WPSeed_Admin_Help {
         $screen->add_help_tab( array(
             'id'        => 'wpseed_support_tab',
             'title'     => __( 'Help &amp; Support', 'wpseed' ),
-            'content'   => '<h2>' . __( 'Help &amp; Support', 'wpseed' ) . '</h2>' . 
-            '<p><a href="https://join.skype.com/bVtDaGHd9Nnl/" class="button button-primary">' . __( 'Skype', 'wpseed' ) . '</a> <a href="https://wpseed.slack.com/" class="button button-primary">' . __( 'Slack', 'wpseed' ) . '</a> <a href="https://trello.com/b/PEkkYDAJ/wpseed" class="button button-primary">' . __( 'Trello', 'wpseed' ) . '</a> <a href="https://github.com/RyanBayne/wpseed/issues" class="button button-primary">' . __( 'Bugs', 'wpseed' ) . '</a> </p>',
+            'content'   => '<h2>' . __( 'Help &amp; Support', 'wpseed' ) . '</h2>' .
+            '<p>' . __( 'Support resources for this boilerplate are being updated. In the meantime, refer to the inline documentation throughout the codebase, the docs directory, and the README for guidance on getting started and extending the plugin.', 'wpseed' ) . '</p>',
         ) );
 
         if( defined( 'WPSEED_GITHUB' ) ) { 

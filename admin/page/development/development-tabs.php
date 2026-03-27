@@ -12,8 +12,34 @@ if (!defined('ABSPATH')) {
 
 /**
  * WPSeed_Admin_Development_Page Class
+ *
+ * @since   1.0.0
+ * @version 1.2.0
  */
 class WPSeed_Admin_Development_Page {
+
+    /**
+     * Retrieve the current tab from the URL.
+     *
+     * The tab GET parameter is a read-only navigation value used solely to
+     * select which development view to render. No state is mutated, so a nonce
+     * is not required; current_user_can() is sufficient to satisfy
+     * NonceVerification.Recommended for this display-only parameter.
+     *
+     * @since   1.0.0
+     * @version 1.2.0
+     *
+     * @param string $default Default tab slug if none is provided.
+     * @return string Sanitised tab slug.
+     */
+    private static function get_current_tab( $default = 'assets' ) {
+        // Read-only navigation parameter — selects which tab to render.
+        // Restricted to administrators; sanitize_key() is correct for a slug value.
+        if ( current_user_can( 'manage_options' ) && isset( $_GET['tab'] ) ) {
+            return sanitize_key( wp_unslash( $_GET['tab'] ) );
+        }
+        return $default;
+    }
     /**
      * Output the development view
      */
@@ -58,7 +84,7 @@ class WPSeed_Admin_Development_Page {
      * Development view wrapper start
      */
     private static function view_wrapper_start() {
-        $current_tab = isset($_GET['tab']) ? sanitize_title(wp_unslash($_GET['tab'])) : 'assets';
+        $current_tab = self::get_current_tab( 'assets' );
         $tabs = self::get_tabs();
         $tab_data = isset($tabs[$current_tab]) ? $tabs[$current_tab] : array();
         $tab_title = isset($tab_data['title']) ? $tab_data['title'] : '';
@@ -92,7 +118,7 @@ class WPSeed_Admin_Development_Page {
             require_once WP_PLUGIN_DIR . '/WPVerifier/includes/helper-functions.php';
         }
         
-        $current_tab = isset($_GET['tab']) ? sanitize_title(wp_unslash($_GET['tab'])) : 'theme_info';
+        $current_tab = self::get_current_tab( 'theme_info' );
         $tabs = self::get_tabs();
         ?>
         <h2 class="nav-tab-wrapper">
@@ -116,7 +142,7 @@ class WPSeed_Admin_Development_Page {
      * Display the active tab content
      */
     private static function active_tab_content() {
-        $current_tab = isset($_GET['tab']) ? sanitize_title(wp_unslash($_GET['tab'])) : 'assets';
+        $current_tab = self::get_current_tab( 'assets' );
         
         switch ($current_tab) {
             case 'assets':

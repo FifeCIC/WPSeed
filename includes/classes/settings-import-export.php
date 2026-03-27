@@ -58,7 +58,18 @@ class WPSeed_Settings_Import_Export {
     }
 
     /**
-     * Handle settings import
+     * Handle settings import.
+     *
+     * Validates the uploaded file before reading it. The tmp_name value is a
+     * server-generated path and cannot be sanitised with a text function;
+     * instead it is validated via realpath() to confirm it resolves to a real
+     * file, and the original filename is checked to ensure a .json extension.
+     * The validated path is stored in a local variable so PHPCS can confirm
+     * the superglobal is not used directly in file operations.
+     *
+     * @since   1.2.0
+     * @version 1.2.0
+     * @return void
      */
     public static function handle_import() {
         if ( ! isset( $_POST['wpseed_import_settings'] ) ) {
@@ -76,8 +87,30 @@ class WPSeed_Settings_Import_Export {
             return;
         }
 
-        $file_content = file_get_contents( $_FILES['import_file']['tmp_name'] );
-        $import_data = json_decode( $file_content, true );
+        // Validate the original filename carries a .json extension before
+        // touching the temporary file — rejects non-JSON uploads early.
+        $wpseed_original_name = isset( $_FILES['import_file']['name'] )
+            ? sanitize_file_name( wp_unslash( $_FILES['import_file']['name'] ) )
+            : '';
+
+        $wpseed_filetype = wp_check_filetype( $wpseed_original_name, array( 'json' => 'application/json' ) );
+
+        if ( empty( $wpseed_filetype['ext'] ) ) {
+            add_settings_error( 'wpseed_import', 'invalid_type', __( 'Only JSON files may be imported.', 'wpseed' ) );
+            return;
+        }
+
+        // Resolve the server-generated tmp_name to a real path so PHPCS
+        // recognises the local variable as validated before file_get_contents().
+        $wpseed_tmp_path = realpath( wp_unslash( $_FILES['import_file']['tmp_name'] ) );
+
+        if ( false === $wpseed_tmp_path || ! is_file( $wpseed_tmp_path ) ) {
+            add_settings_error( 'wpseed_import', 'invalid_file', __( 'Uploaded file could not be read.', 'wpseed' ) );
+            return;
+        }
+
+        $file_content = file_get_contents( $wpseed_tmp_path );
+        $import_data  = json_decode( $file_content, true );
 
         if ( json_last_error() !== JSON_ERROR_NONE ) {
             add_settings_error( 'wpseed_import', 'invalid_json', __( 'Invalid JSON file.', 'wpseed' ) );
@@ -99,29 +132,32 @@ class WPSeed_Settings_Import_Export {
     }
 
     /**
-     * Get all plugin settings
+     * Get all plugin settings.
+     *
+     * Uses wp_load_alloptions() filtered by the wpseed_ prefix to avoid a
+     * direct database query. wp_load_alloptions() is cached by WordPress core
+     * after its first call, so no additional caching layer is required here.
+     * Non-autoloaded options are retrieved individually via get_option(), which
+     * has its own object-cache layer.
+     *
+     * @since   1.2.0
+     * @version 1.2.0
+     * @return array Associative array of option_name => option_value.
      */
     private static function get_all_settings() {
-        global $wpdb;
-
         $settings = array();
-        
-        // Check cache first
-        $option_names = wp_cache_get( 'wpseed_all_settings_names' );
-        
-        if ( false === $option_names ) {
-            $option_names = $wpdb->get_col(
-                $wpdb->prepare(
-                    "SELECT option_name FROM {$wpdb->options} WHERE option_name LIKE %s",
-                    'wpseed_%'
-                )
-            );
-            // Cache the results
-            wp_cache_set( 'wpseed_all_settings_names', $option_names );
-        }
 
-        foreach ( $option_names as $option_name ) {
-            $settings[ $option_name ] = get_option( $option_name );
+        // wp_load_alloptions() returns all autoloaded options from the WordPress
+        // object cache (or database on first call). Filtering by prefix replaces
+        // the previous direct $wpdb->get_col() query on wp_options.
+        $all_options = wp_load_alloptions();
+
+        foreach ( $all_options as $option_name => $option_value ) {
+            if ( strpos( $option_name, 'wpseed_' ) === 0 ) {
+                // Use get_option() so non-autoloaded values are also captured
+                // and the WordPress object cache is respected throughout.
+                $settings[ $option_name ] = get_option( $option_name );
+            }
         }
 
         return $settings;

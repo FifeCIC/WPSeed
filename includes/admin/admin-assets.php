@@ -40,11 +40,13 @@ class WPSeed_Admin_Assets {
         // Register admin styles
         wp_register_style( 'wpseed_admin_styles', WPSeed()->plugin_url() . '/assets/css/admin.css', array(), WPSEED_VERSION );
         wp_register_style( 'wpseed_tooltips', WPSeed()->plugin_url() . '/assets/css/tooltips.css', array(), WPSEED_VERSION );
+        wp_register_style( 'wpseed_developer_checklist', WPSeed()->plugin_url() . '/assets/css/developer-checklist.css', array(), WPSEED_VERSION );
 
         // Admin styles for WordPress Seed pages only
         if ( in_array( $screen_id, wpseed_get_screen_ids() ) ) {
             wp_enqueue_style( 'wpseed_admin_styles' );
             wp_enqueue_style( 'wpseed_tooltips' );
+            wp_enqueue_style( 'wpseed_developer_checklist' );
         }
     }
 

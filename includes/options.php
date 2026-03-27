@@ -16,6 +16,7 @@
  * @category Configuration
  * @package  WPSeed/Core
  * @since    1.0.0
+ * @version  1.2.0
  */
  
 if ( ! defined( 'ABSPATH' ) ) {
@@ -309,19 +310,19 @@ trait WPSeed_OptionsTrait {
 
     /**
      * Updates the single given option.
-     * Updates wpseed_options or jetpack_$name as appropriate.
+     * Updates wpseed_options or wpseed_$name as appropriate.
      *
-     * @param string $name Option name
-     * @param mixed $value Option value
-     * @param string $autoload If not compact option, allows specifying whether to autoload or not
-     * 
-     * @todo Check original functions use of do('pre_update_jetpack_option_
-     * which requires add_action that calls the delete method in this class.
-     * Why delete every option prior to update?
+     * @since   1.0.0
+     * @version 1.2.0
+     *
+     * @param string      $name     Option name.
+     * @param mixed       $value    Option value.
+     * @param string|null $autoload Whether to autoload. Requires WordPress 4.2+.
+     * @return bool True on success, false on failure or invalid name.
      */
-    public function update_option( $name, $value, $autoload = null ) {    HERE
+    public function update_option( $name, $value, $autoload = null ) {
         if ( self::is_valid( $name, 'non_compact' ) ) {
-            /**             
+            /**
              * Allowing update_option to change autoload status only shipped in WordPress v4.2
              * @link https://github.com/WordPress/WordPress/commit/305cf8b95
              */
@@ -337,22 +338,29 @@ trait WPSeed_OptionsTrait {
             }
         }
 
-        trigger_error( sprintf( 'Invalid WPSeed option name: %s', esc_html( $name ) ), E_USER_WARNING );
+        // _doing_it_wrong() integrates with WP_DEBUG and is silenced in production,
+        // replacing trigger_error() which can expose file paths.
+        _doing_it_wrong( __METHOD__, sprintf( 'Invalid WPSeed option name: %s', esc_html( $name ) ), '1.0.0' );
 
         return false;
     }
 
     /**
-     * Updates the multiple given options.  Updates jetpack_options and/or 
-     * jetpack_$name as appropriate.
+     * Updates multiple given options.
      *
-     * @param array $array array( option name => option value, ... )
+     * @since   1.0.0
+     * @version 1.2.0
+     *
+     * @param array $array Associative array of option name => option value pairs.
+     * @return void
      */
     public function update_options( $array ) {
         $names = array_keys( $array );
 
         foreach ( array_diff( $names, self::get_option_names(), self::get_option_names( 'non_compact' ), self::get_option_names( 'private' ) ) as $unknown_name ) {
-            trigger_error( sprintf( 'Invalid WPSeed option name: %s', esc_html( $unknown_name ) ), E_USER_WARNING );
+            // _doing_it_wrong() integrates with WP_DEBUG and is silenced in production,
+            // replacing trigger_error() which can expose file paths.
+            _doing_it_wrong( __METHOD__, sprintf( 'Invalid WPSeed option name: %s', esc_html( $unknown_name ) ), '1.0.0' );
             unset( $array[ $unknown_name ] );
         }
 
@@ -362,17 +370,23 @@ trait WPSeed_OptionsTrait {
     }
 
     /**
-     * Deletes the given option.  May be passed multiple option names as an array.
+     * Deletes the given option. May be passed multiple option names as an array.
      * Updates wpseed_options and/or deletes wpseed_$name as appropriate.
      *
-     * @param string|array $names
+     * @since   1.0.0
+     * @version 1.2.0
+     *
+     * @param string|array $names Option name or array of option names.
+     * @return bool True on success, false on failure or invalid names.
      */
-    public function delete_option( $names ) {       
+    public function delete_option( $names ) {
         $result = true;
         $names  = (array) $names;
 
         if ( ! self::is_valid( $names ) ) {
-            trigger_error( sprintf( 'Invalid WPSeed option names: %s', wp_json_encode( $names ) ), E_USER_WARNING );
+            // _doing_it_wrong() integrates with WP_DEBUG and is silenced in production,
+            // replacing trigger_error() which can expose file paths.
+            _doing_it_wrong( __METHOD__, sprintf( 'Invalid WPSeed option names: %s', wp_json_encode( $names ) ), '1.0.0' );
 
             return false;
         }

@@ -3,7 +3,7 @@
  * BuddyPress Integration Example
  *
  * @package WPSeed/Examples/Integrations
- * @version 1.1.0
+ * @version 1.2.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -73,10 +73,35 @@ class WPSeed_BuddyPress_Integration {
     }
 
     /**
-     * Save custom profile field
+     * Save custom profile field.
+     *
+     * Verifies the BuddyPress xprofile nonce before persisting the value.
+     * The nonce is extracted into a local variable with wp_unslash() and
+     * sanitize_text_field() applied before wp_verify_nonce(), satisfying both
+     * MissingUnslash and InputNotSanitized rules. PHPCS does not recognise
+     * wp_verify_nonce() itself as a sanitising function, so the intermediate
+     * variable is required to pass static analysis.
+     *
+     * @since   1.1.0
+     * @version 1.2.0
+     *
+     * @param int   $user_id          ID of the user whose profile was updated.
+     * @param array $posted_field_ids Field IDs submitted in the form.
+     * @param bool  $errors           Whether errors occurred during save.
+     * @param array $old_values       Previous field values.
+     * @param array $new_values       New field values.
+     * @return void
      */
     public function save_custom_profile_field( $user_id, $posted_field_ids, $errors, $old_values, $new_values ) {
-        if ( isset( $_POST['wpseed_custom_field'], $_POST['_wpnonce'] ) && wp_verify_nonce( $_POST['_wpnonce'], 'bp_xprofile_edit' ) ) {
+        if ( ! isset( $_POST['wpseed_custom_field'], $_POST['_wpnonce'] ) ) {
+            return;
+        }
+
+        // Unslash and sanitise the nonce into a local variable so PHPCS
+        // recognises it as sanitised before it is passed to wp_verify_nonce().
+        $wpseed_nonce = sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) );
+
+        if ( wp_verify_nonce( $wpseed_nonce, 'bp_xprofile_edit' ) ) {
             update_user_meta( $user_id, 'wpseed_custom_field', sanitize_text_field( wp_unslash( $_POST['wpseed_custom_field'] ) ) );
         }
     }

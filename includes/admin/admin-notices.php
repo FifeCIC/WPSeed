@@ -8,6 +8,7 @@
  * @category User Interface
  * @package  WPSeed/Notices
  * @since    1.0.0
+ * @version  1.2.0
  */
  
 if ( ! defined( 'ABSPATH' ) ) {
@@ -83,18 +84,38 @@ class WPSeed_Admin_Notices {
     }
     
     /**
-    * Present information at the head of a page with option to dismiss.   
-    * 
-    * @author Ryan Bayne
-    * @package WPSeed
-    */
+     * Present information at the head of a page with option to dismiss.
+     *
+     * Renders a styled welcome-panel box with an optional highlighted info area,
+     * footer text, and a dismissal link secured by a nonce. The nonce is
+     * extracted into a sanitised local variable before verification so that
+     * PHPCS can confirm the superglobal is both unslashed and sanitised.
+     *
+     * @since   1.0.0
+     * @version 1.2.0
+     *
+     * @param string      $title             Box heading text.
+     * @param string      $intro             Introductory paragraph text.
+     * @param bool        $info_area         Whether to render the highlighted info area.
+     * @param string      $info_area_title   Heading for the highlighted info area.
+     * @param string      $info_area_content Content for the highlighted info area.
+     * @param string|bool $footer            Footer text, or false for none.
+     * @param string|bool $dismissable_id    Meta key used to track dismissal, or false.
+     * @return void
+     */
     public function intro_box( $title, $intro, $info_area = false, $info_area_title = '', $info_area_content = '', $footer = false, $dismissable_id = false ){
         global $current_user;
-                                               
+
         // handling user action - hide notice and update user meta
-        if ( isset($_GET[ $dismissable_id ]) && 'dismiss' == $_GET[ $dismissable_id ] && isset($_GET['_wpnonce']) && wp_verify_nonce(sanitize_text_field($_GET['_wpnonce']), 'dismiss_notice') ) {
-            add_user_meta( $current_user->ID, $dismissable_id, 'true', true );
-            return;
+        if ( isset( $_GET[ $dismissable_id ], $_GET['_wpnonce'] ) ) {
+            // Unslash and sanitise the nonce into a local variable so PHPCS
+            // recognises it as sanitised before it is passed to wp_verify_nonce().
+            $wpseed_dismiss_nonce = sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) );
+
+            if ( 'dismiss' === $_GET[ $dismissable_id ] && wp_verify_nonce( $wpseed_dismiss_nonce, 'dismiss_notice' ) ) {
+                add_user_meta( $current_user->ID, $dismissable_id, 'true', true );
+                return;
+            }
         }
                
         // a dismissed intro
@@ -296,11 +317,30 @@ class WPSeed_Admin_Notices {
 
     /**
      * If we need to update, include a message with the update button.
+     *
+     * Verifies a nonce and manage_options capability before acting on the
+     * do_update_wpseed GET parameter, preventing unauthorised or forged
+     * update requests from triggering the updater.
+     *
+     * @since   1.0.0
+     * @version 1.2.0
+     * @return void
      */
     public static function update_notice() {
         if ( version_compare( get_option( 'wpseed_db_version' ), WPSEED_VERSION, '<' ) ) {
             $updater = new WPSeed_Background_Updater();
-            if ( $updater->is_updating() || ! empty( $_GET['do_update_wpseed'] ) ) {
+
+            // Verify nonce and capability before treating the GET parameter as
+            // an instruction to run the updater — prevents CSRF and privilege abuse.
+            $wpseed_do_update = false;
+            if ( isset( $_GET['do_update_wpseed'], $_GET['_wpseed_update_nonce'] ) ) {
+                $wpseed_update_nonce = sanitize_text_field( wp_unslash( $_GET['_wpseed_update_nonce'] ) );
+                if ( wp_verify_nonce( $wpseed_update_nonce, 'wpseed_do_update' ) && current_user_can( 'manage_options' ) ) {
+                    $wpseed_do_update = true;
+                }
+            }
+
+            if ( $updater->is_updating() || $wpseed_do_update ) {
                 include( 'notices/updating.php' );
             } else {
                 include( 'notices/update.php' );

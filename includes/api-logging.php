@@ -209,103 +209,141 @@ class WPSeed_API_Logging {
 
     /**
      * Get API calls
+     *
+     * @since   1.0.0
+     * @version 1.2.0
+     *
+     * @param array $args Query arguments.
+     * @return array
      */
-    public static function get_api_calls($args = array()) {
-        if (!self::ready()) {
+    public static function get_api_calls( $args = array() ) {
+        if ( ! self::ready() ) {
             return array();
         }
-        
+
         global $wpdb;
-        
+
         $defaults = array(
-            'service'    => '',
-            'status'     => '',
-            'type'       => '',
-            'limit'      => 50,
-            'offset'     => 0,
-            'orderby'    => 'timestamp',
-            'order'      => 'DESC',
+            'service' => '',
+            'status'  => '',
+            'type'    => '',
+            'limit'   => 50,
+            'offset'  => 0,
+            'orderby' => 'timestamp',
+            'order'   => 'DESC',
         );
-        
-        $args = wp_parse_args($args, $defaults);
-        
-        $query = "SELECT * FROM {$wpdb->prefix}wpseed_api_calls WHERE 1=1";
+
+        $args = wp_parse_args( $args, $defaults );
+
+        $cache_key = 'wpseed_api_calls_' . md5( serialize( $args ) );
+        $cached    = wp_cache_get( $cache_key, 'wpseed_api' );
+
+        if ( false !== $cached ) {
+            return $cached;
+        }
+
+        // esc_sql() used for table/column identifiers — %i requires WP 6.2+
+        // and this plugin targets WP 4.4+.
+        $safe_table = esc_sql( $wpdb->prefix . 'wpseed_api_calls' );
+
+        $allowed_columns = array( 'entryid', 'service', 'type', 'status', 'function', 'timestamp' );
+        $orderby         = in_array( $args['orderby'], $allowed_columns, true ) ? $args['orderby'] : 'timestamp';
+        $order           = strtoupper( $args['order'] ) === 'ASC' ? 'ASC' : 'DESC';
+        $safe_orderby    = esc_sql( $orderby );
+
+        $where  = 'WHERE 1=1';
         $params = array();
-        
-        if (!empty($args['service'])) {
-            $query .= " AND service = %s";
+
+        if ( ! empty( $args['service'] ) ) {
+            $where   .= ' AND service = %s';
             $params[] = $args['service'];
         }
-        
-        if (!empty($args['status'])) {
-            $query .= " AND status = %s";
+
+        if ( ! empty( $args['status'] ) ) {
+            $where   .= ' AND `status` = %s';
             $params[] = $args['status'];
         }
-        
-        if (!empty($args['type'])) {
-            $query .= " AND type = %s";
+
+        if ( ! empty( $args['type'] ) ) {
+            $where   .= ' AND `type` = %s';
             $params[] = $args['type'];
         }
-        
-        $allowed_columns = array('entryid', 'service', 'type', 'status', 'function', 'timestamp');
-        $orderby = in_array($args['orderby'], $allowed_columns) ? $args['orderby'] : 'timestamp';
-        $order = strtoupper($args['order']) === 'ASC' ? 'ASC' : 'DESC';
-        
-        $query .= $wpdb->prepare(" ORDER BY `%1s` %2s", $orderby, $order);
-        $query .= " LIMIT %d OFFSET %d";
-        $params[] = absint($args['limit']);
-        $params[] = absint($args['offset']);
-        
-        $results = $wpdb->get_results($wpdb->prepare($query, $params), ARRAY_A);
-        
+
+        $params[] = absint( $args['limit'] );
+        $params[] = absint( $args['offset'] );
+
+        $sql = $wpdb->prepare(
+            'SELECT * FROM `' . $safe_table . '` ' . $where . ' ORDER BY `' . $safe_orderby . '` ' . $order . ' LIMIT %d OFFSET %d',
+            $params
+        );
+
+        $results = $wpdb->get_results( $sql, ARRAY_A );
+
+        wp_cache_set( $cache_key, $results, 'wpseed_api', 60 );
+
         return $results;
     }
 
     /**
      * Get API call count
+     *
+     * @since   1.0.0
+     * @version 1.2.0
+     *
+     * @param array $args Query arguments.
+     * @return int
      */
-    public static function get_api_call_count($args = array()) {
-        if (!self::ready()) {
+    public static function get_api_call_count( $args = array() ) {
+        if ( ! self::ready() ) {
             return 0;
         }
-        
+
         global $wpdb;
-        
+
         $defaults = array(
             'service' => '',
             'status'  => '',
             'type'    => '',
         );
-        
-        $args = wp_parse_args($args, $defaults);
-        
-        $query = "SELECT COUNT(*) FROM {$wpdb->prefix}wpseed_api_calls WHERE 1=1";
+
+        $args = wp_parse_args( $args, $defaults );
+
+        $cache_key = 'wpseed_api_count_' . md5( serialize( $args ) );
+        $cached    = wp_cache_get( $cache_key, 'wpseed_api' );
+
+        if ( false !== $cached ) {
+            return (int) $cached;
+        }
+
+        // esc_sql() used for table identifier — %i requires WP 6.2+.
+        $safe_table = esc_sql( $wpdb->prefix . 'wpseed_api_calls' );
+
+        $where  = 'WHERE 1=1';
         $params = array();
-        
-        if (!empty($args['service'])) {
-            $query .= " AND service = %s";
+
+        if ( ! empty( $args['service'] ) ) {
+            $where   .= ' AND service = %s';
             $params[] = $args['service'];
         }
-        
-        if (!empty($args['status'])) {
-            $query .= " AND status = %s";
+
+        if ( ! empty( $args['status'] ) ) {
+            $where   .= ' AND `status` = %s';
             $params[] = $args['status'];
         }
-        
-        if (!empty($args['type'])) {
-            $query .= " AND type = %s";
+
+        if ( ! empty( $args['type'] ) ) {
+            $where   .= ' AND `type` = %s';
             $params[] = $args['type'];
         }
-        
-        // Prepare query only if we have parameters to bind
-        if (!empty($params)) {
-            $prepared_query = $wpdb->prepare($query, $params);
+
+        if ( ! empty( $params ) ) {
+            $count = $wpdb->get_var( $wpdb->prepare( 'SELECT COUNT(*) FROM `' . $safe_table . '` ' . $where, $params ) );
         } else {
-            $prepared_query = $query;
+            $count = $wpdb->get_var( 'SELECT COUNT(*) FROM `' . $safe_table . '`' );
         }
-        
-        $count = $wpdb->get_var($prepared_query);
-        
+
+        wp_cache_set( $cache_key, $count, 'wpseed_api', 60 );
+
         return (int) $count;
     }
 }

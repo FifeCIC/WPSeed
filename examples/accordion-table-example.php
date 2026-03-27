@@ -47,8 +47,10 @@ $wpseed_items = array(
 
 // Get selected item
 $wpseed_selected_item = 'item_1';
-if (isset($_GET['configure'])) {
-    $wpseed_selected_item = sanitize_text_field(wp_unslash($_GET['configure']));
+// Read-only navigation parameter — selects which item's sidebar to display.
+// Gated behind current_user_can() as this is an admin-only example view.
+if ( current_user_can( 'manage_options' ) && isset( $_GET['configure'] ) ) {
+    $wpseed_selected_item = sanitize_key( wp_unslash( $_GET['configure'] ) );
 }
 ?>
 
@@ -76,7 +78,7 @@ if (isset($_GET['configure'])) {
             </div>
 
             <div class="wpseed-accordion-table">
-                <?php foreach ($wpseed_items as $item_id => $item): ?>
+                <?php foreach ($wpseed_items as $wpseed_item_id => $wpseed_item): ?>
                     <div class="accordion-row">
                         <div class="accordion-header">
                             <div style="flex: 2;">
@@ -115,7 +117,7 @@ if (isset($_GET['configure'])) {
                             </div>
                             
                             <div class="item-actions">
-                                <a href="<?php echo esc_url(add_query_arg('configure', $item_id)); ?>" class="button button-primary">
+                                <a href="<?php echo esc_url(add_query_arg('configure', $wpseed_item_id)); ?>" class="button button-primary">
                                     <?php esc_html_e('Configure', 'wpseed'); ?>
                                 </a>
                                 <button type="button" class="button"><?php esc_html_e('Edit', 'wpseed'); ?></button>

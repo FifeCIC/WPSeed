@@ -128,15 +128,17 @@ class WPSeed_Notifications {
 
     public static function process_pending_notifications() {
         global $wpdb;
-        
-        $table_name = $wpdb->prefix . 'wpseed_notifications';
-        
-        $wpdb->query($wpdb->prepare(
-            "UPDATE {$wpdb->prefix}wpseed_notifications SET is_read = 1 WHERE expires_at IS NOT NULL AND expires_at < %s",
-            current_time('mysql')
-        ));
-        
-        do_action('wpseed_process_scheduled_notifications');
+
+        // Direct query on custom table — no WP API equivalent for bulk expiry updates.
+        // Cache is flushed after write so subsequent reads reflect the change.
+        $wpdb->query( $wpdb->prepare(
+            'UPDATE ' . esc_sql( $wpdb->prefix . 'wpseed_notifications' ) . ' SET is_read = 1 WHERE expires_at IS NOT NULL AND expires_at < %s',
+            current_time( 'mysql' )
+        ) );
+
+        wp_cache_flush_group( 'wpseed_notifications' );
+
+        do_action( 'wpseed_process_scheduled_notifications' );
     }
 
     /**
@@ -194,19 +196,21 @@ class WPSeed_Notifications {
             $orderby = in_array($args['orderby'], $allowed_orderby, true) ? $args['orderby'] : 'created_at';
             $order   = strtoupper($args['order']) === 'ASC' ? 'ASC' : 'DESC';
 
-            // 4. Execute with ONE prepare call
-            // Using %i for the table name and the orderby column
-            $notifications = $wpdb->get_results(
-                $wpdb->prepare(
-                    "SELECT * FROM %i WHERE $where_sql ORDER BY %i $order LIMIT %d OFFSET %d",
-                    array_merge(
-                        array( $wpdb->prefix . 'wpseed_notifications' ), // For %i (table)
-                        $where_params,                                    // For WHERE placeholders
-                        array( $orderby ),                               // For %i (column)
-                        array( absint($args['limit']), absint($args['offset']) ) // For %d (limit/offset)
-                    )
+            // 4. Execute with ONE prepare call.
+            // esc_sql() used for table/column identifiers — %i requires WP 6.2+
+            // and this plugin targets WP 4.4+.
+            $safe_table   = esc_sql( $wpdb->prefix . 'wpseed_notifications' );
+            $safe_orderby = esc_sql( $orderby );
+
+            $sql = $wpdb->prepare(
+                'SELECT * FROM `' . $safe_table . '` WHERE ' . $where_sql . ' ORDER BY `' . $safe_orderby . '` ' . $order . ' LIMIT %d OFFSET %d',
+                array_merge(
+                    $where_params,
+                    array( absint( $args['limit'] ), absint( $args['offset'] ) )
                 )
-            );  
+            );
+
+            $notifications = $wpdb->get_results( $sql );
 
             foreach ( $notifications as &$notification ) {
                 $notification->data = maybe_unserialize( $notification->data );

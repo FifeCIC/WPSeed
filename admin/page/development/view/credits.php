@@ -8,6 +8,12 @@
 
 if (!defined('ABSPATH')) exit;
 
+/**
+ * WPSeed_Admin_Development_Credits Class.
+ *
+ * @since   1.0.0
+ * @version 1.2.0
+ */
 class WPSeed_Admin_Development_Credits {
     
     // Set to false to use AJAX, true to use URL-based navigation
@@ -17,9 +23,24 @@ class WPSeed_Admin_Development_Credits {
         // AJAX handler registered at bottom of file
     }
     
+    /**
+     * Render the Credits & Contributors page output.
+     *
+     * The contributor GET parameter is a read-only display selector used to
+     * pre-select a sidebar entry. It carries no privilege and mutates no state,
+     * so a nonce is not required; capability verification is sufficient.
+     *
+     * @since 1.2.0
+     * @return void
+     */
     public static function output() {
         $contributors = self::get_contributors();
-        $selected = isset($_GET['contributor']) ? sanitize_text_field(wp_unslash($_GET['contributor'])) : 'action_scheduler';
+
+        // Read-only navigation parameter — selects which contributor to highlight
+        // in the sidebar. Restricted to administrators; no state change occurs.
+        $selected = ( current_user_can( 'manage_options' ) && isset( $_GET['contributor'] ) )
+            ? sanitize_key( wp_unslash( $_GET['contributor'] ) )
+            : 'action_scheduler';
         
         wp_enqueue_style('wpseed-accordion-table', WPSEED_PLUGIN_URL . 'assets/css/accordion-table.css', array(), WPSEED_VERSION);
         wp_enqueue_script('wpseed-accordion-table', WPSEED_PLUGIN_URL . 'assets/js/accordion-table.js', array('jquery'), WPSEED_VERSION, true);

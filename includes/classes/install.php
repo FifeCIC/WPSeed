@@ -488,12 +488,6 @@ class WPSeed_Install {
         
         dbDelta($sql);
         
-        // Education/Lessons table
-        if (class_exists('WPSeed_Education')) {
-            $education = new WPSeed_Education();
-            $education->create_table();
-        }
-        
         // Enhanced Logger table
         $sql = "CREATE TABLE {$wpdb->prefix}wpseed_debug_logs (
             id bigint(20) NOT NULL AUTO_INCREMENT,
