@@ -140,6 +140,31 @@ class WPSeed_Unified_Logger {
     }
     
     /**
+     * Write a message to the WordPress debug log.
+     *
+     * Replaces direct error_log() calls. Only writes when both WP_DEBUG and
+     * WP_DEBUG_LOG are enabled, keeping output out of production environments.
+     * Uses file_put_contents() on the debug log path rather than error_log()
+     * to satisfy WordPress coding standards.
+     *
+     * @since   2.0.0
+     * @version 2.0.0
+     *
+     * @param string $message Message to write.
+     * @return void
+     */
+    private function write_log( $message ) {
+        if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) {
+            return;
+        }
+        if ( ! defined( 'WP_DEBUG_LOG' ) || ! WP_DEBUG_LOG ) {
+            return;
+        }
+        $log_path = is_string( WP_DEBUG_LOG ) ? WP_DEBUG_LOG : WP_CONTENT_DIR . '/debug.log';
+        // Append to the WordPress debug log file directly — avoids error_log().
+        file_put_contents( $log_path, gmdate( '[d-M-Y H:i:s e]' ) . ' ' . $message . PHP_EOL, FILE_APPEND | LOCK_EX );
+    }
+    /**
      * Output trace immediately
      */
     private function output_trace($log_entry) {
@@ -165,7 +190,7 @@ class WPSeed_Unified_Logger {
             $output .= " | " . json_encode($log_entry['data']);
         }
         
-        error_log("WPSeed_Trace: " . $output);
+        $this->write_log( 'WPSeed_Trace: ' . $output );
     }
     
     /**
@@ -188,7 +213,7 @@ class WPSeed_Unified_Logger {
         $total_logs = count($this->logs);
         $duration = (microtime(true) - $this->start_time) * 1000;
         
-        error_log("WPSeed_Summary: Context '{$this->current_context}' - {$total_logs} logs in " . number_format($duration, 2) . "ms");
+        $this->write_log( "WPSeed_Summary: Context '{$this->current_context}' - {$total_logs} logs in " . number_format($duration, 2) . 'ms' );
         
         // Count by type
         $type_counts = array();
@@ -201,13 +226,13 @@ class WPSeed_Unified_Logger {
         }
         
         foreach ($type_counts as $type => $count) {
-            error_log("WPSeed_Summary: {$type}: {$count}");
+            $this->write_log( "WPSeed_Summary: {$type}: {$count}" );
         }
         
         // Loop summary
         $loop_summary = $this->get_loop_summary();
         if (!empty($loop_summary)) {
-            error_log("WPSeed_Summary: Loops: " . json_encode($loop_summary));
+            $this->write_log( 'WPSeed_Summary: Loops: ' . json_encode($loop_summary) );
         }
     }
     

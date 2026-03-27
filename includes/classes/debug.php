@@ -24,13 +24,19 @@ class WPSeed_Debug {
     * Old Error display and debugging method from 2015 - will be replaced. 
     */
     public function debugmode() {
-        if( wpseed_is_background_process() ) return; 
-            
+        if( wpseed_is_background_process() ) return;
+
+        // Gate debug functions behind WP_DEBUG — ini_set() and error_reporting()
+        // can expose server paths in production and should never run outside debug mode.
+        if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) {
+            return;
+        }
+
         global $wpdb;
-        
-        ini_set( 'display_errors',1);
-        error_reporting(E_ALL);      
-        
+
+        ini_set( 'display_errors', 1 );
+        error_reporting( E_ALL );
+
         $wpdb->show_errors();
         $wpdb->print_error();
     }
@@ -40,6 +46,8 @@ class WPSeed_Debug {
     */
     private function dump_post() {
         if( !current_user_can( 'activate_plugins') ) return;
+        // var_dump() gated behind WP_DEBUG — must never run in production.
+        if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) return;
 
         echo '<h1>$_POST</h1>';
         echo '<pre>';
@@ -52,6 +60,8 @@ class WPSeed_Debug {
     */
     private function dump_get() {
         if( !current_user_can( 'activate_plugins') ) return;
+        // var_dump() gated behind WP_DEBUG — must never run in production.
+        if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) return;
 
         echo '<h1>$_GET</h1>';
         echo '<pre>';

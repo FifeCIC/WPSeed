@@ -3,7 +3,7 @@
  * WPSeed Development Views
  *
  * @package WPSeed/Admin/Views
- * @version 1.0.0
+ * @version 2.0.0
  */
 
 if (!defined('ABSPATH')) {
@@ -14,30 +14,56 @@ if (!defined('ABSPATH')) {
  * WPSeed_Admin_Development_Page Class
  *
  * @since   1.0.0
- * @version 1.2.0
+ * @version 2.0.0
  */
 class WPSeed_Admin_Development_Page {
 
     /**
+     * Return the nonce action string used to sign development-page tab URLs.
+     *
+     * Centralised so the same action is used when creating and verifying the
+     * nonce, avoiding any mismatch between tabs() and get_current_tab().
+     *
+     * @since  2.0.0
+     * @return string Nonce action slug.
+     */
+    private static function nonce_action() {
+        return 'wpseed_dev_tab_navigation';
+    }
+
+    /**
      * Retrieve the current tab from the URL.
      *
-     * The tab GET parameter is a read-only navigation value used solely to
-     * select which development view to render. No state is mutated, so a nonce
-     * is not required; current_user_can() is sufficient to satisfy
-     * NonceVerification.Recommended for this display-only parameter.
+     * Verifies the tab-navigation nonce before reading $_GET['tab'] so that
+     * the NonceVerification.Recommended standard is satisfied. Falls back to
+     * $default when the nonce is absent or invalid (e.g. direct URL access
+     * without the nonce query arg), which simply renders the default tab.
      *
      * @since   1.0.0
-     * @version 1.2.0
+     * @version 2.0.0
      *
-     * @param string $default Default tab slug if none is provided.
+     * @param string $default Default tab slug if none is provided or nonce fails.
      * @return string Sanitised tab slug.
      */
     private static function get_current_tab( $default = 'assets' ) {
-        // Read-only navigation parameter — selects which tab to render.
-        // Restricted to administrators; sanitize_key() is correct for a slug value.
-        if ( current_user_can( 'manage_options' ) && isset( $_GET['tab'] ) ) {
+        if ( ! current_user_can( 'manage_options' ) ) {
+            return $default;
+        }
+
+        // Verify the tab-navigation nonce before trusting the GET parameter.
+        // wp_verify_nonce() returns false/0 on failure, so the default tab is
+        // shown safely when the nonce is missing or stale.
+        $raw_nonce = isset( $_GET['_wpnonce'] ) ? sanitize_key( wp_unslash( $_GET['_wpnonce'] ) ) : '';
+        if ( ! wp_verify_nonce( $raw_nonce, self::nonce_action() ) ) {
+            return $default;
+        }
+
+        if ( isset( $_GET['tab'] ) ) {
+            // sanitize_key() is correct for a tab slug — strips anything that
+            // is not a lowercase alphanumeric character or hyphen/underscore.
             return sanitize_key( wp_unslash( $_GET['tab'] ) );
         }
+
         return $default;
     }
     /**
@@ -111,25 +137,40 @@ class WPSeed_Admin_Development_Page {
     }
     
     /**
-     * Display the tabs
+     * Display the tab navigation bar.
+     *
+     * Each tab URL includes a nonce so that get_current_tab() can verify it
+     * before reading $_GET['tab'], satisfying NonceVerification.Recommended.
+     * The nonce is added via wp_nonce_url() using the shared nonce action.
+     *
+     * @since   1.0.0
+     * @version 2.0.0
+     * @return void
      */
     private static function tabs() {
-        if (!function_exists('wpverifier_header')) {
+        if ( ! function_exists( 'wpverifier_header' ) ) {
             require_once WP_PLUGIN_DIR . '/WPVerifier/includes/helper-functions.php';
         }
-        
+
         $current_tab = self::get_current_tab( 'theme_info' );
-        $tabs = self::get_tabs();
+        $tabs        = self::get_tabs();
         ?>
         <h2 class="nav-tab-wrapper">
             <?php
-            foreach ($tabs as $tab_id => $tab_data) {
-                $active_class = ($current_tab === $tab_id) ? 'nav-tab-active' : '';
-                $title = isset($tab_data['title']) ? $tab_data['title'] : $tab_data;
-                $code = isset($tab_data['code']) ? $tab_data['code'] : '';
+            foreach ( $tabs as $tab_id => $tab_data ) {
+                $active_class = ( $current_tab === $tab_id ) ? 'nav-tab-active' : '';
+                $title        = isset( $tab_data['title'] ) ? $tab_data['title'] : $tab_data;
+                $code         = isset( $tab_data['code'] ) ? $tab_data['code'] : '';
+
+                // Include a nonce in every tab URL so get_current_tab() can
+                // verify it before reading the tab GET parameter.
+                $tab_url = wp_nonce_url(
+                    add_query_arg( 'tab', $tab_id ),
+                    self::nonce_action()
+                );
                 ?>
-                <a href="<?php echo esc_url(add_query_arg('tab', $tab_id)); ?>" class="nav-tab <?php echo esc_attr($active_class); ?>">
-                    <?php wpverifier_header($title, $code); ?>
+                <a href="<?php echo esc_url( $tab_url ); ?>" class="nav-tab <?php echo esc_attr( $active_class ); ?>">
+                    <?php wpverifier_header( $title, $code ); ?>
                 </a>
                 <?php
             }

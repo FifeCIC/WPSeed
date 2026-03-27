@@ -75,15 +75,16 @@ class WPSeed_Admin_Settings {
      * @security Performs nonce verification before processing.
      */
     public static function save() {
-        global $current_tab;
+        // Prefixed to satisfy WordPress global variable naming standards.
+        global $wpseed_current_tab;
 
         if ( empty( $_REQUEST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_wpnonce'] ) ), 'wpseed-settings' ) ) {
             die( esc_html__( 'Action failed. Please refresh the page and retry.', 'wpseed' ) );
         }
 
         // Trigger actions
-        do_action( 'wpseed_settings_save_' . $current_tab );
-        do_action( 'wpseed_update_options_' . $current_tab );
+        do_action( 'wpseed_settings_save_' . $wpseed_current_tab );
+        do_action( 'wpseed_update_options_' . $wpseed_current_tab );
         do_action( 'wpseed_update_options' );
 
         self::add_message( __( 'Your settings have been saved.', 'wpseed' ) );
@@ -133,7 +134,8 @@ class WPSeed_Admin_Settings {
      * Handles the display of the main wpseed settings page in admin.
      */
     public static function output() {
-        global $current_section, $current_tab;
+        // Both variables prefixed to satisfy WordPress global variable naming standards.
+        global $wpseed_current_section, $wpseed_current_tab;
 
         $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
@@ -148,9 +150,9 @@ class WPSeed_Admin_Settings {
         // Include settings pages
         self::get_settings_pages();
 
-        // Get current tab/section
-        $current_tab     = empty( $_GET['tab'] ) ? self::$defaulttab : sanitize_title( wp_unslash( $_GET['tab'] ) );
-        $current_section = empty( $_GET['section'] ) ? '' : sanitize_title( wp_unslash( $_GET['section'] ) );
+        // Get current tab/section — prefixed variable names used here.
+        $wpseed_current_tab     = empty( $_GET['tab'] ) ? self::$defaulttab : sanitize_title( wp_unslash( $_GET['tab'] ) );
+        $wpseed_current_section = empty( $_GET['section'] ) ? '' : sanitize_title( wp_unslash( $_GET['section'] ) );
 
         // Save settings if data has been posted
         if ( ! empty( $_POST ) ) {
@@ -168,6 +170,11 @@ class WPSeed_Admin_Settings {
 
         // Get tabs for the settings page
         $tabs = apply_filters( 'wpseed_settings_tabs_array', array() );
+
+        // Alias into unprefixed names for the template partial and settings-page.php
+        // which inherit these from the calling scope rather than declaring them global.
+        $current_tab     = $wpseed_current_tab;
+        $current_section = $wpseed_current_section;
 
         include 'views/html-admin-settings.php';
     }

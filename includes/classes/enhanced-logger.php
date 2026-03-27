@@ -211,13 +211,22 @@ class WPSeed_Enhanced_Logger {
         
         $table = $wpdb->prefix . 'wpseed_debug_logs';
         
-        // Create table if it doesn't exist
-        if ($wpdb->get_var("SHOW TABLES LIKE '$table'") != $table) {
+        // SHOW TABLES has no WP API equivalent; use $wpdb->prepare() for the value
+        // and cache the result to avoid repeated database hits.
+        $safe_table   = esc_sql( $table );
+        $table_exists_cache_key = 'wpseed_logger_table_exists';
+        $table_exists = wp_cache_get( $table_exists_cache_key, 'wpseed_logger' );
+        if ( false === $table_exists ) {
+            $table_exists = ( $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table ) ) === $table );
+            wp_cache_set( $table_exists_cache_key, $table_exists, 'wpseed_logger', 3600 );
+        }
+        if ( ! $table_exists ) {
             self::create_table();
         }
-        
-        $wpdb->insert($table, array(
-            'request_uri' => isset($_SERVER['REQUEST_URI']) ? sanitize_text_field($_SERVER['REQUEST_URI']) : '',
+
+        $wpdb->insert( $table, array(
+            // wp_unslash() applied to server variable per MissingUnslash standard.
+            'request_uri'    => isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '',
             'query_count' => count($this->queries),
             'query_time' => $this->get_query_stats()['total_time'],
             'hook_count' => $this->get_hook_stats()['total_calls'],
@@ -268,28 +277,49 @@ class WPSeed_Enhanced_Logger {
     /**
      * Get recent logs
      */
-    public static function get_recent_logs($limit = 50) {
+    public static function get_recent_logs( $limit = 50 ) {
         global $wpdb;
-        
-        $table = $wpdb->prefix . 'wpseed_debug_logs';
-        
-        return $wpdb->get_results($wpdb->prepare(
-            "SELECT * FROM $table ORDER BY created_at DESC LIMIT %d",
-            $limit
-        ));
+
+        $table     = $wpdb->prefix . 'wpseed_debug_logs';
+        $safe_table = esc_sql( $table );
+        $cache_key = 'wpseed_recent_logs_' . absint( $limit );
+        $cached    = wp_cache_get( $cache_key, 'wpseed_logger' );
+
+        if ( false !== $cached ) {
+            return $cached;
+        }
+
+        // esc_sql() used for table identifier — %i requires WP 6.2+, plugin targets WP 4.4+.
+        $results = $wpdb->get_results( $wpdb->prepare(
+            'SELECT * FROM `' . $safe_table . '` ORDER BY created_at DESC LIMIT %d',
+            absint( $limit )
+        ) );
+
+        wp_cache_set( $cache_key, $results, 'wpseed_logger', 60 );
+
+        return $results;
     }
 
     /**
      * Clear old logs
      */
-    public static function clear_old_logs($days = 7) {
+    public static function clear_old_logs( $days = 7 ) {
         global $wpdb;
-        
-        $table = $wpdb->prefix . 'wpseed_debug_logs';
-        return $wpdb->query($wpdb->prepare(
-            "DELETE FROM $table WHERE created_at < DATE_SUB(NOW(), INTERVAL %d DAY)",
-            $days
-        ));
+
+        $table      = $wpdb->prefix . 'wpseed_debug_logs';
+        $safe_table = esc_sql( $table );
+
+        // esc_sql() used for table identifier — %i requires WP 6.2+, plugin targets WP 4.4+.
+        $result = $wpdb->query( $wpdb->prepare(
+            'DELETE FROM `' . $safe_table . '` WHERE created_at < DATE_SUB(NOW(), INTERVAL %d DAY)',
+            absint( $days )
+        ) );
+
+        // Invalidate cached logs after deletion.
+        wp_cache_delete( 'wpseed_recent_logs_50', 'wpseed_logger' );
+        wp_cache_delete( 'wpseed_logger_table_exists', 'wpseed_logger' );
+
+        return $result;
     }
 }
 

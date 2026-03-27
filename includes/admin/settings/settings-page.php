@@ -73,7 +73,9 @@ abstract class WPSeed_Settings_Page {
      * Output sections.
      */
     public function output_sections() {
-        global $current_section;
+        // $wpseed_current_section prefixed to satisfy WordPress global variable naming standards.
+        global $wpseed_current_section;
+        $current_section = $wpseed_current_section;
 
         $sections = $this->get_sections();
 
@@ -105,7 +107,9 @@ abstract class WPSeed_Settings_Page {
      * Save settings.
      */
     public function save() {
-        global $current_section;
+        // $wpseed_current_section prefixed to satisfy WordPress global variable naming standards.
+        global $wpseed_current_section;
+        $current_section = $wpseed_current_section;
 
         $settings = $this->get_settings();
         WPSeed_Admin_Settings::save_fields( $settings );

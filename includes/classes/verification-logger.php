@@ -14,6 +14,30 @@ class WPSeed_Verification_Logger {
     private static $instance = null;
     private $verification_steps = array();
     private $data_counts = array();
+
+    /**
+     * Write a message to the WordPress debug log.
+     *
+     * Only writes when WP_DEBUG and WP_DEBUG_LOG are both enabled.
+     * Uses file_put_contents() rather than error_log() to satisfy
+     * WordPress coding standards.
+     *
+     * @since   1.0.0
+     * @version 1.2.0
+     *
+     * @param string $message Message to write.
+     * @return void
+     */
+    private function write_log( $message ) {
+        if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) {
+            return;
+        }
+        if ( ! defined( 'WP_DEBUG_LOG' ) || ! WP_DEBUG_LOG ) {
+            return;
+        }
+        $log_path = is_string( WP_DEBUG_LOG ) ? WP_DEBUG_LOG : WP_CONTENT_DIR . '/debug.log';
+        file_put_contents( $log_path, gmdate( '[d-M-Y H:i:s e]' ) . ' ' . $message . PHP_EOL, FILE_APPEND | LOCK_EX );
+    }
     
     public static function instance() {
         if (null === self::$instance) {
@@ -47,13 +71,13 @@ class WPSeed_Verification_Logger {
         
         // Immediate output for data loss
         if ($step_data['data_loss']) {
-            error_log("WPSeed_Verification: DATA LOSS in {$step_name}: {$input_count} → {$output_count} (lost {$step_data['loss_amount']})");
+            $this->write_log( "WPSeed_Verification: DATA LOSS in {$step_name}: {$input_count} → {$output_count} (lost {$step_data['loss_amount']})" );
             if (!empty($details)) {
-                error_log("WPSeed_Verification: Details: " . json_encode($details));
+                $this->write_log( 'WPSeed_Verification: Details: ' . json_encode($details) );
             }
         }
         
-        error_log("WPSeed_Verification: {$step_name}: {$input_count} → {$output_count}");
+        $this->write_log( "WPSeed_Verification: {$step_name}: {$input_count} → {$output_count}" );
     }
     
     /**
@@ -67,8 +91,8 @@ class WPSeed_Verification_Logger {
             $details['payload_size'] = $payload_size;
         }
         
-        error_log("WPSeed_Verification: JS_TRACE - {$operation}: {$data_count} items" . 
-                 ($payload_size ? " ({$payload_size} bytes)" : ""));
+        $this->write_log( "WPSeed_Verification: JS_TRACE - {$operation}: {$data_count} items" .
+                 ($payload_size ? " ({$payload_size} bytes)" : '') );
         
         if (class_exists('WPSeed_Unified_Logger')) {
             WPSeed_Unified_Logger::instance()->js_trace($operation, $data_count, $details);
@@ -139,7 +163,7 @@ class WPSeed_Verification_Logger {
             $details['raw_data_size'] = is_array($raw_data) ? count($raw_data) : strlen($raw_data);
         }
         
-        error_log("WPSeed_Verification: EXTRACT_PAYLOAD - {$payload_key}: expected {$expected_count}, got {$actual_count}");
+        $this->write_log( "WPSeed_Verification: EXTRACT_PAYLOAD - {$payload_key}: expected {$expected_count}, got {$actual_count}" );
         
         if (class_exists('WPSeed_Unified_Logger')) {
             WPSeed_Unified_Logger::instance()->trace('EXTRACT_PAYLOAD', 
@@ -188,12 +212,12 @@ class WPSeed_Verification_Logger {
         
         $summary = $this->get_verification_summary();
         
-        error_log("WPSeed_Verification: SUMMARY - {$summary['total_steps']} steps, {$summary['data_loss_steps']} with data loss");
-        error_log("WPSeed_Verification: SUMMARY - Total data loss: {$summary['total_data_loss']}, Final count: {$summary['final_count']}");
+        $this->write_log( "WPSeed_Verification: SUMMARY - {$summary['total_steps']} steps, {$summary['data_loss_steps']} with data loss" );
+        $this->write_log( "WPSeed_Verification: SUMMARY - Total data loss: {$summary['total_data_loss']}, Final count: {$summary['final_count']}" );
         
         foreach ($summary['steps'] as $step) {
             $loss_indicator = $step['loss'] > 0 ? " ❌ LOST {$step['loss']}" : " ✅";
-            error_log("WPSeed_Verification: STEP - {$step['step']}: {$step['input']} → {$step['output']}{$loss_indicator}");
+            $this->write_log( "WPSeed_Verification: STEP - {$step['step']}: {$step['input']} → {$step['output']}{$loss_indicator}" );
         }
     }
     

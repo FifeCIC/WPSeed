@@ -67,20 +67,25 @@ class WPSeed_Install {
     * Manual plugin update action. 
     */
     public static function install_action_do_update() {
-        if ( ! empty( $_GET['do_update_wpseed'] ) ) {
-            self::install();
-            WPSeed_Admin_Notices::add_notice( 'update' );
-        }        
+        if ( ! empty( $_GET['do_update_wpseed'] ) && current_user_can( 'manage_options' ) ) {
+            // Nonce verified via _wpseed_update_nonce added to the update notice link.
+            if ( isset( $_GET['_wpseed_update_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpseed_update_nonce'] ) ), 'wpseed_do_update' ) ) {
+                self::install();
+                WPSeed_Admin_Notices::add_notice( 'update' );
+            }
+        }
     }
     
     /**
     * Forced plugin updating (wpseed do_action) 
     */
     public static function install_action_updater_cron() {
-        if ( ! empty( $_GET['force_update_wpseed'] ) ) {
-            do_action( 'wp_wpseed_updater_cron' );
+        if ( ! empty( $_GET['force_update_wpseed'] ) && current_user_can( 'manage_options' ) ) {
+            // Prefixed hook name — renamed from wp_wpseed_updater_cron to satisfy NonPrefixedHooknameFound.
+            do_action( 'wpseed_updater_cron' );
             wp_safe_redirect( admin_url( 'options-general.php?page=wpseed-settings' ) );
-        }        
+            exit;
+        }
     }
     
     /**

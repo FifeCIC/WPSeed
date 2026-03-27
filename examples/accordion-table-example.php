@@ -1,11 +1,11 @@
 <?php
 /**
  * WPSeed - Accordion Table Example
- * 
- * Demonstrates table with accordion rows and dynamic sidebar
- * 
+ *
+ * Demonstrates table with accordion rows and dynamic sidebar.
+ *
  * @package WPSeed/Examples
- * @version 1.2.0
+ * @version 2.0.0
  */
 
 if (!defined('ABSPATH')) exit;
@@ -13,6 +13,20 @@ if (!defined('ABSPATH')) exit;
 // Enqueue styles and scripts
 wp_enqueue_style('wpseed-accordion-table');
 wp_enqueue_script('wpseed-accordion-table');
+
+/**
+ * Return the nonce action used to sign and verify accordion configure URLs.
+ *
+ * Centralised so the action string is identical at link-generation time
+ * (add_query_arg loop) and at verification time (get selected item block),
+ * preventing any mismatch.
+ *
+ * @since  2.0.0
+ * @return string Nonce action slug.
+ */
+function wpseed_accordion_nonce_action() {
+    return 'wpseed_accordion_configure';
+}
 
 // Example data
 $wpseed_items = array(
@@ -45,12 +59,16 @@ $wpseed_items = array(
     ),
 );
 
-// Get selected item
+// Get selected item — verify the configure nonce before reading $_GET['configure'].
+// wp_verify_nonce() returns false when the nonce is absent or stale, so the
+// default item is shown safely on direct URL access without the nonce arg.
 $wpseed_selected_item = 'item_1';
-// Read-only navigation parameter — selects which item's sidebar to display.
-// Gated behind current_user_can() as this is an admin-only example view.
 if ( current_user_can( 'manage_options' ) && isset( $_GET['configure'] ) ) {
-    $wpseed_selected_item = sanitize_key( wp_unslash( $_GET['configure'] ) );
+    $wpseed_raw_nonce = isset( $_GET['_wpnonce'] ) ? sanitize_key( wp_unslash( $_GET['_wpnonce'] ) ) : '';
+    if ( wp_verify_nonce( $wpseed_raw_nonce, wpseed_accordion_nonce_action() ) ) {
+        // sanitize_key() is correct for an array-key slug value.
+        $wpseed_selected_item = sanitize_key( wp_unslash( $_GET['configure'] ) );
+    }
 }
 ?>
 
@@ -82,21 +100,21 @@ if ( current_user_can( 'manage_options' ) && isset( $_GET['configure'] ) ) {
                     <div class="accordion-row">
                         <div class="accordion-header">
                             <div style="flex: 2;">
-                                <strong><?php echo esc_html($item['name']); ?></strong>
+                                <strong><?php echo esc_html($wpseed_item['name']); ?></strong>
                             </div>
                             <div style="flex: 1;">
-                                <span class="status-badge status-<?php echo esc_attr($item['status']); ?>">
-                                    <?php echo esc_html(ucfirst($item['status'])); ?>
+                                <span class="status-badge status-<?php echo esc_attr($wpseed_item['status']); ?>">
+                                    <?php echo esc_html(ucfirst($wpseed_item['status'])); ?>
                                 </span>
                             </div>
                             <div style="flex: 1;">
-                                <span class="priority-badge priority-<?php echo esc_attr($item['priority']); ?>">
-                                    <?php echo esc_html(ucfirst($item['priority'])); ?>
+                                <span class="priority-badge priority-<?php echo esc_attr($wpseed_item['priority']); ?>">
+                                    <?php echo esc_html(ucfirst($wpseed_item['priority'])); ?>
                                 </span>
                             </div>
-                            <div style="flex: 1;"><?php echo esc_html($item['weight']); ?></div>
+                            <div style="flex: 1;"><?php echo esc_html($wpseed_item['weight']); ?></div>
                             <div style="flex: 1;">
-                                <?php echo esc_html(human_time_diff(strtotime($item['last_used']), current_time('timestamp')) . ' ago'); ?>
+                                <?php echo esc_html(human_time_diff(strtotime($wpseed_item['last_used']), current_time('timestamp')) . ' ago'); ?>
                             </div>
                         </div>
                         
@@ -104,20 +122,28 @@ if ( current_user_can( 'manage_options' ) && isset( $_GET['configure'] ) ) {
                             <div class="item-meta">
                                 <div>
                                     <strong><?php esc_html_e('Description:', 'wpseed'); ?></strong><br>
-                                    <?php echo esc_html($item['description']); ?>
+                                    <?php echo esc_html($wpseed_item['description']); ?>
                                 </div>
                                 <div>
                                     <strong><?php esc_html_e('Status:', 'wpseed'); ?></strong><br>
-                                    <?php echo esc_html(ucfirst($item['status'])); ?>
+                                    <?php echo esc_html(ucfirst($wpseed_item['status'])); ?>
                                 </div>
                                 <div>
                                     <strong><?php esc_html_e('Priority:', 'wpseed'); ?></strong><br>
-                                    <?php echo esc_html(ucfirst($item['priority'])); ?>
+                                    <?php echo esc_html(ucfirst($wpseed_item['priority'])); ?>
                                 </div>
                             </div>
                             
                             <div class="item-actions">
-                                <a href="<?php echo esc_url(add_query_arg('configure', $wpseed_item_id)); ?>" class="button button-primary">
+                                <?php
+                                // Sign the configure URL with a nonce so the
+                                // GET parameter can be verified before use.
+                                $wpseed_configure_url = wp_nonce_url(
+                                    add_query_arg( 'configure', $wpseed_item_id ),
+                                    wpseed_accordion_nonce_action()
+                                );
+                                ?>
+                                <a href="<?php echo esc_url( $wpseed_configure_url ); ?>" class="button button-primary">
                                     <?php esc_html_e('Configure', 'wpseed'); ?>
                                 </a>
                                 <button type="button" class="button"><?php esc_html_e('Edit', 'wpseed'); ?></button>
@@ -132,41 +158,41 @@ if ( current_user_can( 'manage_options' ) && isset( $_GET['configure'] ) ) {
         <!-- Right Column: Details Sidebar -->
         <div class="wpseed-sidebar">
             <div class="wpseed-details-container">
-                <?php if (isset($wpseed_items[$selected_item])): 
-                    $item = $wpseed_items[$selected_item];
+                <?php if (isset($wpseed_items[$wpseed_selected_item])): 
+                    $wpseed_item = $wpseed_items[$wpseed_selected_item];
                 ?>
                     <div class="section-header">
-                        <h3><?php echo esc_html($item['name']); ?></h3>
+                        <h3><?php echo esc_html($wpseed_item['name']); ?></h3>
                     </div>
                     
                     <div class="section-content">
                         <div class="detail-group">
                             <label><?php esc_html_e('Description:', 'wpseed'); ?></label>
-                            <p><?php echo esc_html($item['description']); ?></p>
+                            <p><?php echo esc_html($wpseed_item['description']); ?></p>
                         </div>
                         
                         <div class="detail-group">
                             <label><?php esc_html_e('Details:', 'wpseed'); ?></label>
-                            <p><?php echo esc_html($item['details']); ?></p>
+                            <p><?php echo esc_html($wpseed_item['details']); ?></p>
                         </div>
                         
                         <div class="detail-group">
                             <label><?php esc_html_e('Status:', 'wpseed'); ?></label>
-                            <span class="status-badge status-<?php echo esc_attr($item['status']); ?>">
-                                <?php echo esc_html(ucfirst($item['status'])); ?>
+                            <span class="status-badge status-<?php echo esc_attr($wpseed_item['status']); ?>">
+                                <?php echo esc_html(ucfirst($wpseed_item['status'])); ?>
                             </span>
                         </div>
                         
                         <div class="detail-group">
                             <label><?php esc_html_e('Priority:', 'wpseed'); ?></label>
-                            <span class="priority-badge priority-<?php echo esc_attr($item['priority']); ?>">
-                                <?php echo esc_html(ucfirst($item['priority'])); ?>
+                            <span class="priority-badge priority-<?php echo esc_attr($wpseed_item['priority']); ?>">
+                                <?php echo esc_html(ucfirst($wpseed_item['priority'])); ?>
                             </span>
                         </div>
                         
                         <div class="detail-group">
                             <label><?php esc_html_e('Weight:', 'wpseed'); ?></label>
-                            <input type="number" value="<?php echo esc_attr($item['weight']); ?>" min="0" max="100">
+                            <input type="number" value="<?php echo esc_attr($wpseed_item['weight']); ?>" min="0" max="100">
                         </div>
                         
                         <div class="detail-actions">

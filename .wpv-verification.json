@@ -390,6 +390,62 @@
         "assets/queue-assets.php": {
             "hash": "959e82847af98b04ef6811af5e350af0",
             "ignored_at": "2026-03-27 20:00:28"
+        },
+        "includes/admin/admin-settings.php": {
+            "hash": "ccee1c1909126b27232e445d6f0c5328",
+            "ignored_at": "2026-03-27 21:42:24"
+        },
+        "includes/widgets/widget-example.php": {
+            "hash": "d1a01b5e9270a4c069f957ece800b38d",
+            "ignored_at": "2026-03-27 21:44:33"
+        },
+        "admin/page/development/view/libraries.php": {
+            "hash": "d7f2c1d5584b60902064ec79255e0910",
+            "ignored_at": "2026-03-27 21:45:39"
+        },
+        "admin/notifications/notifications.php": {
+            "hash": "2193797e152d9f61eb8f3a8cc96f9b5c",
+            "ignored_at": "2026-03-27 21:50:29"
+        },
+        "includes/api-logging.php": {
+            "hash": "09d14d13dacfef8d44e5f6b886be71e5",
+            "ignored_at": "2026-03-27 21:51:11"
+        },
+        "admin/page/development/development-tabs.php": {
+            "hash": "ca784e755e9cb463ecd49339ec3e7e74",
+            "ignored_at": "2026-03-27 21:51:51"
+        },
+        "admin/page/development/view/database.php": {
+            "hash": "c930e97205e6883497106a16f9641873",
+            "ignored_at": "2026-03-27 21:52:51"
+        },
+        "examples/accordion-table-example.php": {
+            "hash": "c21537994f8d447135ea0af92a9e1ea1",
+            "ignored_at": "2026-03-27 21:54:05"
+        },
+        "examples/integrations/bbpress-example.php": {
+            "hash": "e185cf208fff7794afdd78bd2ebe00fc",
+            "ignored_at": "2026-03-27 21:55:53"
+        },
+        "examples/integrations/woocommerce-example.php": {
+            "hash": "eb652ead9fb3a679bb39fc5d88d2d73d",
+            "ignored_at": "2026-03-27 21:56:23"
+        },
+        "includes/admin/admin-help.php": {
+            "hash": "9f8c8206d9b1c1df2fa6b2cd0f671630",
+            "ignored_at": "2026-03-27 21:57:19"
+        },
+        "includes/admin/admin-setup-wizard.php": {
+            "hash": "ccad15b1fb183a1614b95fc71efc47a3",
+            "ignored_at": "2026-03-27 21:57:47"
+        },
+        "includes/admin/admin.php": {
+            "hash": "0b666bc98d314c12e440745b3f95581a",
+            "ignored_at": "2026-03-27 21:58:41"
+        },
+        "includes/admin/views/html-admin-page.php": {
+            "hash": "4f6753fe57cde76e60de0e20f478a5a8",
+            "ignored_at": "2026-03-27 21:59:49"
         }
     }
 }

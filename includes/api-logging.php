@@ -2,10 +2,10 @@
 /**
  * WPSeed API Logging
  *
- * Database-driven logging system for API activity, errors, and usage tracking
- * 
+ * Database-driven logging system for API activity, errors, and usage tracking.
+ *
  * @package WPSeed
- * @version 1.0.0
+ * @version 2.0.0
  */
 
 if (!defined('ABSPATH')) {
@@ -15,19 +15,38 @@ if (!defined('ABSPATH')) {
 class WPSeed_API_Logging {
     
     /**
-     * Check if logging is ready
+     * Check whether the API logging table exists and logging is enabled.
+     *
+     * The SHOW TABLES query is cached for one hour so it does not run on every
+     * page load. Direct query is necessary — no WordPress API equivalent exists
+     * for checking whether a custom table is present. $wpdb->prepare() is used
+     * for the dynamic table name value.
+     *
+     * @since  2.0.0
+     * @return bool True when logging is enabled and the table exists.
      */
     public static function ready() {
-        $logging_enabled = get_option('wpseed_api_logging_enabled', 'yes');
-        
-        if ($logging_enabled !== 'yes') {
+        $logging_enabled = get_option( 'wpseed_api_logging_enabled', 'yes' );
+
+        if ( $logging_enabled !== 'yes' ) {
             return false;
         }
-        
+
         global $wpdb;
         $table = $wpdb->prefix . 'wpseed_api_calls';
-    
-        return $wpdb->get_var($wpdb->prepare("SHOW TABLES LIKE %s", $table)) === $table;
+
+        // Cache the table-existence result to avoid a direct query on every request.
+        $cache_key    = 'wpseed_api_table_exists_' . $table;
+        $table_exists = wp_cache_get( $cache_key, 'wpseed_api' );
+
+        if ( false === $table_exists ) {
+            // SHOW TABLES on a custom table — no WP API equivalent.
+            $table_exists = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table ) ) === $table;
+            // Cache for one hour; invalidated on plugin activation when the table is created.
+            wp_cache_set( $cache_key, $table_exists, 'wpseed_api', HOUR_IN_SECONDS );
+        }
+
+        return (bool) $table_exists;
     }
     
     /**

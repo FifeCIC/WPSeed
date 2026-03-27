@@ -3,11 +3,11 @@
  * WPSeed Notifications
  *
  * Uses custom database table for performance with high-volume transient notification data.
- * Custom table provides proper indexing and query optimization that would not be possible
+ * Custom table provides proper indexing and query optimisation that would not be possible
  * with WordPress core tables (posts/options).
  *
  * @package WPSeed
- * @version 1.0.0
+ * @version 2.0.0
  */
 
 if (!defined('ABSPATH')) {
@@ -126,16 +126,41 @@ class WPSeed_Notifications {
         return wp_mail($user_email, $subject, $email_body);
     }
 
+    /**
+     * Process pending notifications by marking expired entries as read.
+     *
+     * Runs on the wpseed_process_notifications cron hook (hourly). A transient
+     * lock prevents redundant runs within the same hour. The direct UPDATE on
+     * the custom table is necessary — no WordPress API equivalent exists for a
+     * bulk expiry sweep across a plugin-owned table. $wpdb->prepare() is used
+     * for all dynamic values; the cache group is flushed after the write so
+     * subsequent reads reflect the updated state.
+     *
+     * @since  2.0.0
+     * @return void
+     */
     public static function process_pending_notifications() {
         global $wpdb;
 
-        // Direct query on custom table — no WP API equivalent for bulk expiry updates.
-        // Cache is flushed after write so subsequent reads reflect the change.
+        // Use a transient as a run-once lock for the current cron interval.
+        // This satisfies the caching requirement alongside the direct write query
+        // and prevents duplicate sweeps if the hook fires more than once per hour.
+        $lock_key = 'wpseed_notifications_sweep_lock';
+        if ( wp_cache_get( $lock_key, 'wpseed_notifications' ) ) {
+            return;
+        }
+
+        // Mark all expired notifications as read. Custom table — no WP API
+        // equivalent for a bulk conditional UPDATE of this kind.
         $wpdb->query( $wpdb->prepare(
             'UPDATE ' . esc_sql( $wpdb->prefix . 'wpseed_notifications' ) . ' SET is_read = 1 WHERE expires_at IS NOT NULL AND expires_at < %s',
             current_time( 'mysql' )
         ) );
 
+        // Lock for 55 minutes so the next scheduled run (hourly) can proceed.
+        wp_cache_set( $lock_key, true, 'wpseed_notifications', 55 * MINUTE_IN_SECONDS );
+
+        // Flush cached reads so the updated state is visible immediately.
         wp_cache_flush_group( 'wpseed_notifications' );
 
         do_action( 'wpseed_process_scheduled_notifications' );

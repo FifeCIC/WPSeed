@@ -60,9 +60,10 @@ class WPSeed_Admin {
             include_once( dirname( __FILE__ ) . '/admin-help.php' );
         }
                 
-        // Setup/welcome
-        if ( ! empty( $_GET['page'] ) ) {
-            switch ( $_GET['page'] ) {
+        // Read-only navigation parameter — gates which wizard file to include.
+        // Restricted to administrators; no state change occurs on this read.
+        if ( current_user_can( 'manage_options' ) && ! empty( $_GET['page'] ) ) {
+            switch ( sanitize_key( wp_unslash( $_GET['page'] ) ) ) {
                 case 'wpseed-setup' :
                     include_once( dirname( __FILE__ ) . '/admin-setup-wizard.php' );
                 break;
@@ -106,10 +107,11 @@ class WPSeed_Admin {
     public function admin_redirects() {
 
         // Nonced plugin install redirects (whitelisted)
-        if ( ! empty( $_GET['wpseed-install-plugin-redirect'] ) ) {
-            $plugin_slug = wpseed_clean( $_GET['wpseed-install-plugin-redirect'] );
+        // Unslash and sanitise before use; current_user_can() checked before acting.
+        if ( current_user_can( 'install_plugins' ) && ! empty( $_GET['wpseed-install-plugin-redirect'] ) ) {
+            $plugin_slug = sanitize_key( wp_unslash( $_GET['wpseed-install-plugin-redirect'] ) );
 
-            if ( current_user_can( 'install_plugins' ) && in_array( $plugin_slug, array( 'wpseed-gateway-stripe' ) ) ) {
+            if ( in_array( $plugin_slug, array( 'wpseed-gateway-stripe' ), true ) ) {
                 $nonce = wp_create_nonce( 'install-plugin_' . $plugin_slug );
                 $url   = self_admin_url( 'update.php?action=install-plugin&plugin=' . $plugin_slug . '&_wpnonce=' . $nonce );
             } else {
@@ -124,7 +126,12 @@ class WPSeed_Admin {
         if ( get_transient( '_wpseed_activation_redirect' ) ) {
             delete_transient( '_wpseed_activation_redirect' );
 
-            if ( ( ! empty( $_GET['page'] ) && in_array( $_GET['page'], array( 'wpseed-setup' ) ) ) || is_network_admin() || isset( $_GET['activate-multi'] ) || ! current_user_can( 'manage_wpseed' ) || apply_filters( 'wpseed_prevent_automatic_wizard_redirect', false ) ) {
+            // Read-only navigation parameters — used only to check current page context.
+            // current_user_can() checked below before any action is taken.
+            $wpseed_current_page    = ( isset( $_GET['page'] ) && current_user_can( 'manage_wpseed' ) ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : '';
+            $wpseed_activate_multi  = isset( $_GET['activate-multi'] );
+
+            if ( ( ! empty( $wpseed_current_page ) && in_array( $wpseed_current_page, array( 'wpseed-setup' ), true ) ) || is_network_admin() || $wpseed_activate_multi || ! current_user_can( 'manage_wpseed' ) || apply_filters( 'wpseed_prevent_automatic_wizard_redirect', false ) ) {
                 return;
             }
 

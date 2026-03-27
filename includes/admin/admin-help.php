@@ -5,7 +5,7 @@
  * @author      Ryan Bayne
  * @category    Admin
  * @package     WPSeed/Admin
- * @version     1.0.0
+ * @version     2.0.0
  */
           
 if ( ! defined( 'ABSPATH' ) ) {
@@ -16,6 +16,9 @@ if ( ! class_exists( 'WPSeed_Admin_Help', false ) ) :
 
 /**
  * WPSeed_Admin_Help Class.
+ *
+ * @since   1.0.0
+ * @version 2.0.0
  */
 class WPSeed_Admin_Help {
 
@@ -27,21 +30,23 @@ class WPSeed_Admin_Help {
     }
 
     /**
-     * Add Contextual help tabs.
+     * Add contextual help tabs to WPSeed admin screens.
+     *
+     * Registers all help tabs and the sidebar for any screen whose ID is
+     * included in wpseed_get_screen_ids(). The $_GET['page'] and $_GET['tab']
+     * reads that previously appeared here were unused after assignment and have
+     * been removed — eliminating the NonceVerification.Recommended warning
+     * without adding a nonce to a purely display-only help context.
+     *
+     * @since   1.0.0
+     * @version 2.0.0
+     * @return void
      */
     public function add_tabs() {
         $screen = get_current_screen();
-                  
+
         if ( ! $screen || ! in_array( $screen->id, wpseed_get_screen_ids() ) ) {
             return;
-        }
-        
-        if ( is_admin() && function_exists('current_user_can') && current_user_can( 'manage_options' ) ) {
-            $page      = empty( $_GET['page'] ) ? '' : sanitize_title( wp_unslash( $_GET['page'] ) );
-            $tab       = empty( $_GET['tab'] ) ? '' : sanitize_title( wp_unslash( $_GET['tab'] ) );
-        } else {
-            $page = '';
-            $tab = '';
         }
 
         $screen->add_help_tab( array(

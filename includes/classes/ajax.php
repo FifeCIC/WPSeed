@@ -69,11 +69,18 @@ class WPSeed_AJAX {
         global $wp_query;
 
             if ( ! empty( $_GET['wpseed-ajax'] ) ) {
-                // Nonce verification for AJAX GET requests
-                if ( empty( $_GET['_wpnonce'] ) || ! wp_verify_nonce( $_GET['_wpnonce'], 'wpseed-ajax-action' ) ) {
+                // Nonce verification for AJAX GET requests.
+                // Unslash and sanitise the nonce into a local variable so PHPCS
+                // recognises it as sanitised before it is passed to wp_verify_nonce().
+                if ( empty( $_GET['_wpnonce'] ) ) {
                     wp_die( esc_html__( 'Action failed. Please refresh the page and retry.', 'wpseed' ) );
                 }
-                $wp_query->set( 'wpseed-ajax', sanitize_text_field( $_GET['wpseed-ajax'] ) );
+                $wpseed_ajax_nonce = sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) );
+                if ( ! wp_verify_nonce( $wpseed_ajax_nonce, 'wpseed-ajax-action' ) ) {
+                    wp_die( esc_html__( 'Action failed. Please refresh the page and retry.', 'wpseed' ) );
+                }
+                // wp_unslash() applied before sanitize_text_field() per MissingUnslash standard.
+                $wp_query->set( 'wpseed-ajax', sanitize_text_field( wp_unslash( $_GET['wpseed-ajax'] ) ) );
             }
 
         if ( $action = $wp_query->get( 'wpseed-ajax' ) ) {

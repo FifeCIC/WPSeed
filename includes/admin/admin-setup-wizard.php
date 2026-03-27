@@ -1,11 +1,12 @@
 <?php
 /**
- * Setup Wizard which completes installation of plugin. 
+ * Setup Wizard which completes installation of plugin.
  *
  * @author      Ryan Bayne
  * @category    Admin
  * @package     WPSeed/Admin
-*/
+ * @version     2.0.0
+ */
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
@@ -14,17 +15,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 if( !class_exists( 'WPSeed_Admin_Setup_Wizard' ) ) :
 
 /**
- * WPSeed_Admin_Setup_Wizard Class 
- * 
- * Class originally created by ** Automattic ** and is the best approach to plugin
+ * WPSeed_Admin_Setup_Wizard Class
+ *
+ * Class originally created by Automattic and is the best approach to plugin
  * installation found if an author wants to treat the user and their site with
  * respect.
  *
  * @author      Ryan Bayne
  * @category    Admin
  * @package     WPSeed/Admin
- * @version     1.0.0
-*/
+ * @since       1.0.0
+ * @version     2.0.0
+ */
 class WPSeed_Admin_Setup_Wizard {
 
     /** @var string Current Step */
@@ -54,10 +56,38 @@ class WPSeed_Admin_Setup_Wizard {
     }
 
     /**
+     * Return the nonce action used to sign and verify wizard step navigation URLs.
+     *
+     * Centralised so the action string is identical at link-generation time
+     * (get_next_step_link / get_prev_step_link) and at verification time
+     * (setup_wizard), preventing any mismatch.
+     *
+     * @since  2.0.0
+     * @return string Nonce action slug.
+     */
+    private function step_nonce_action() {
+        return 'wpseed_wizard_step_navigation';
+    }
+
+    /**
      * Show the setup wizard.
+     *
+     * $_GET['page'] is WordPress's own admin routing parameter — it is set by
+     * WordPress itself and is not user-supplied form data, so it is read via
+     * get_current_screen() rather than directly from $_GET to avoid triggering
+     * NonceVerification.Recommended. $_GET['step'] is user-supplied navigation
+     * and is verified with wp_verify_nonce() before use.
+     *
+     * @since   1.0.0
+     * @version 2.0.0
+     * @return void
      */
     public function setup_wizard() {
-        if ( empty( $_GET['page'] ) || 'wpseed-setup' !== sanitize_text_field( wp_unslash( $_GET['page'] ) ) ) {
+        // Use the screen object to determine whether we are on the wizard page
+        // rather than reading $_GET['page'] directly. This avoids treating
+        // WordPress's own routing parameter as unverified user input.
+        $screen = get_current_screen();
+        if ( ! $screen || 'dashboard_page_wpseed-setup' !== $screen->id ) {
             return;
         }
         $this->steps = array(
@@ -102,7 +132,19 @@ class WPSeed_Admin_Setup_Wizard {
                 'handler' => ''
             )
         );
-        $this->step = isset( $_GET['step'] ) ? sanitize_key( wp_unslash( $_GET['step'] ) ) : current( array_keys( $this->steps ) );
+        // Verify the step-navigation nonce before reading $_GET['step'].
+        // wp_verify_nonce() returns false when the nonce is absent or stale
+        // (e.g. direct URL access), so the wizard falls back to the first step.
+        $wpseed_step_nonce = isset( $_GET['_wpnonce'] )
+            ? sanitize_key( wp_unslash( $_GET['_wpnonce'] ) )
+            : '';
+        $nonce_valid = wp_verify_nonce( $wpseed_step_nonce, $this->step_nonce_action() );
+
+        // Read $_GET['step'] only when the nonce is valid; otherwise start at
+        // the first step so direct URL access without a nonce is handled safely.
+        $this->step = ( $nonce_valid && isset( $_GET['step'] ) )
+            ? sanitize_key( wp_unslash( $_GET['step'] ) )
+            : current( array_keys( $this->steps ) );
         $suffix     = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
         // Register scripts for the pretty extension presentation and selection.
@@ -127,15 +169,40 @@ class WPSeed_Admin_Setup_Wizard {
         exit;
     }
 
+    /**
+     * Return the URL for the next wizard step, signed with a navigation nonce.
+     *
+     * The nonce is verified in setup_wizard() before $_GET['step'] is read,
+     * satisfying WordPress.Security.NonceVerification.Recommended.
+     *
+     * @since   1.0.0
+     * @version 2.0.0
+     * @return string Nonce-signed URL for the next step.
+     */
     public function get_next_step_link() {
         $keys = array_keys( $this->steps );
-        return add_query_arg( 'step', $keys[ array_search( $this->step, array_keys( $this->steps ) ) + 1 ] );
+        $next = $keys[ array_search( $this->step, array_keys( $this->steps ) ) + 1 ];
+        // Sign the step URL so setup_wizard() can verify it before reading $_GET['step'].
+        return wp_nonce_url( add_query_arg( 'step', $next ), $this->step_nonce_action() );
     }
 
+    /**
+     * Return the URL for the previous wizard step, signed with a navigation nonce.
+     *
+     * Returns an empty string when already on the first step.
+     *
+     * @since   1.0.0
+     * @version 2.0.0
+     * @return string Nonce-signed URL for the previous step, or empty string.
+     */
     public function get_prev_step_link() {
-        $keys = array_keys( $this->steps );
+        $keys          = array_keys( $this->steps );
         $current_index = array_search( $this->step, $keys );
-        return $current_index > 0 ? add_query_arg( 'step', $keys[ $current_index - 1 ] ) : '';
+        if ( $current_index <= 0 ) {
+            return '';
+        }
+        // Sign the step URL so setup_wizard() can verify it before reading $_GET['step'].
+        return wp_nonce_url( add_query_arg( 'step', $keys[ $current_index - 1 ] ), $this->step_nonce_action() );
     }
 
     /**
