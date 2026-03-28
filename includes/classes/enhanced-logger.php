@@ -1,10 +1,10 @@
 <?php
 /**
  * WPSeed Enhanced Logger
- * Query Monitor-style logging and debugging
+ * Query Monitor-style logging and debugging.
  *
  * @package WPSeed
- * @version 1.2.0
+ * @version 2.0.0
  */
 
 if (!defined('ABSPATH')) exit;
@@ -27,20 +27,63 @@ class WPSeed_Enhanced_Logger {
     }
 
     private function __construct() {
-        if (!WPSeed_Developer_Mode::is_dev_environment()) {
+        if ( ! WPSeed_Developer_Mode::is_dev_environment() ) {
             return;
         }
 
-        $this->start_time = microtime(true);
+        $this->start_time   = microtime( true );
         $this->start_memory = memory_get_usage();
 
-        add_filter('query', array($this, 'log_query'));
-        add_action('all', array($this, 'log_hook'));
-        add_filter('pre_http_request', array($this, 'log_http_request'), 10, 3);
-        add_action('shutdown', array($this, 'save_logs'));
+        add_filter( 'query',            array( $this, 'log_query' ) );
+        add_action( 'all',              array( $this, 'log_hook' ) );
+        add_filter( 'pre_http_request', array( $this, 'log_http_request' ), 10, 3 );
+
+        // Register the error handler after WordPress is bootstrapped so it does
+        // not interfere with core startup. Gated behind WP_DEBUG so it never
+        // runs in production. restore_error_handler() is called on shutdown
+        // (before save_logs) to limit the scope to a single request and avoid
+        // affecting other plugins or WordPress error handling.
         if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-            set_error_handler(array($this, 'log_error'));
+            add_action( 'init',     array( $this, 'register_error_handler' ), 1 );
+            add_action( 'shutdown', array( $this, 'restore_error_handler' ), 9 );
         }
+
+        add_action( 'shutdown', array( $this, 'save_logs' ) );
+    }
+
+    /**
+     * Register the custom PHP error handler.
+     *
+     * Called on the init hook (priority 1) so WordPress is fully bootstrapped
+     * before the handler is installed. Only registered when WP_DEBUG is true.
+     * The previous handler is stored so restore_error_handler() can reinstate
+     * it cleanly on shutdown.
+     *
+     * @since  2.0.0
+     * @return void
+     */
+    public function register_error_handler() {
+        // set_error_handler() is intentionally used here: this is a dedicated
+        // debug logger, gated behind WP_DEBUG, with a matching restore call on
+        // shutdown (priority 9) to limit its scope to the current request only.
+        set_error_handler( array( $this, 'log_error' ) );
+    }
+
+    /**
+     * Restore the previous PHP error handler.
+     *
+     * Called on shutdown at priority 9, before save_logs() at default priority
+     * 10, so the custom handler is active for the full request but removed
+     * before WordPress and other plugins run their own shutdown routines.
+     *
+     * @since  2.0.0
+     * @return void
+     */
+    public function restore_error_handler() {
+        // Reinstate the handler that was active before register_error_handler()
+        // ran, preventing the custom handler from leaking into shutdown hooks
+        // registered by WordPress core or other plugins.
+        restore_error_handler();
     }
 
     /**

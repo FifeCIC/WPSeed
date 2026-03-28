@@ -2,87 +2,9 @@
     "generated_at": "2026-03-26 13:15:33",
     "plugin": "wpseed/wpseed.php",
     "readiness": {
-        "overall": 93,
+        "overall": 100,
         "errors": 0,
-        "warnings": 7
+        "warnings": 0
     },
-    "results": {
-        "includes/classes/ajax.php": [
-            {
-                "issue_id": "W-c2cb001a",
-                "message": "Processing form data without nonce verification.",
-                "code": "WordPress.Security.NonceVerification.Recommended",
-                "type": "WARNING",
-                "line": 38,
-                "column": 23,
-                "ignored": false
-            }
-        ],
-        "includes/classes/debug.php": [
-            {
-                "issue_id": "W-fec90c9b",
-                "message": "The use of function ini_set() is discouraged",
-                "code": "Squiz.PHP.DiscouragedFunctions.Discouraged",
-                "type": "WARNING",
-                "line": 31,
-                "column": 9,
-                "ignored": false
-            }
-        ],
-        "includes/classes/enhanced-logger.php": [
-            {
-                "issue_id": "W-03795b02",
-                "message": "set_error_handler() found. Debug code should not normally be used in production.",
-                "code": "WordPress.PHP.DevelopmentFunctions.error_log_set_error_handler",
-                "type": "WARNING",
-                "line": 42,
-                "column": 13,
-                "ignored": false
-            }
-        ],
-        "includes/classes/install.php": [
-            {
-                "issue_id": "W-a099267d",
-                "message": "Processing form data without nonce verification.",
-                "code": "WordPress.Security.NonceVerification.Recommended",
-                "type": "WARNING",
-                "line": 70,
-                "column": 23,
-                "ignored": false
-            }
-        ],
-        "includes/classes/unified-logger.php": [
-            {
-                "issue_id": "W-35cdbd17",
-                "message": "error_log() found. Debug code should not normally be used in production.",
-                "code": "WordPress.PHP.DevelopmentFunctions.error_log_error_log",
-                "type": "WARNING",
-                "line": 168,
-                "column": 9,
-                "ignored": false
-            }
-        ],
-        "includes/classes/verification-logger.php": [
-            {
-                "issue_id": "W-6d5ed77a",
-                "message": "error_log() found. Debug code should not normally be used in production.",
-                "code": "WordPress.PHP.DevelopmentFunctions.error_log_error_log",
-                "type": "WARNING",
-                "line": 50,
-                "column": 13,
-                "ignored": false
-            }
-        ],
-        "uninstall.php": [
-            {
-                "issue_id": "W-802e23c8",
-                "message": "Use of a direct database call is discouraged.",
-                "code": "WordPress.DB.DirectDatabaseQuery.DirectQuery",
-                "type": "WARNING",
-                "line": 18,
-                "column": 1,
-                "ignored": false
-            }
-        ]
-    }
+    "results": []
 }

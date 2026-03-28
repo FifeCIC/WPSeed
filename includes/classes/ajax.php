@@ -1,10 +1,11 @@
 <?php
 /**
  * WPSeed Ajax Event Handler.
- *                           
+ *
  * @package  WPSeed/Core
  * @category Ajax
  * @author   Ryan Bayne
+ * @version  2.0.0
  */
  
 if ( ! defined( 'ABSPATH' ) ) {
@@ -15,6 +16,9 @@ class WPSeed_AJAX {
 
     /**
      * Hook in ajax handlers.
+     *
+     * @since  1.0.0
+     * @return void
      */
     public static function init() {
         add_action( 'init', array( __CLASS__, 'define_ajax' ), 0 );
@@ -33,18 +37,36 @@ class WPSeed_AJAX {
 
     /**
      * Set WPSeed AJAX constant and headers.
+     *
+     * Runs at init priority 0 — before nonce infrastructure is reliable — so
+     * this method only detects whether a WPSeed AJAX request is in progress.
+     * The $_GET['wpseed-ajax'] value is extracted into a sanitised local
+     * variable immediately so the sniff can confirm it is not used raw.
+     * Actual nonce verification happens in do_wpseed_ajax() where WordPress
+     * is fully bootstrapped.
+     *
+     * @since   1.0.0
+     * @version 2.0.0
+     * @return  void
      */
     public static function define_ajax() {
-        if ( ! empty( $_GET['wpseed-ajax'] ) ) {
+        // Extract and sanitise immediately — value is only used for emptiness
+        // detection here; do_wpseed_ajax() re-reads and verifies with a nonce.
+        $wpseed_ajax_action = isset( $_GET['wpseed-ajax'] )
+            ? sanitize_text_field( wp_unslash( $_GET['wpseed-ajax'] ) )
+            : '';
+
+        if ( ! empty( $wpseed_ajax_action ) ) {
             if ( ! defined( 'DOING_AJAX' ) ) {
                 define( 'DOING_AJAX', true );
             }
             if ( ! defined( 'WPSEED_DOING_AJAX' ) ) {
                 define( 'WPSEED_DOING_AJAX', true );
             }
-            // Turn off display_errors during AJAX events to prevent malformed JSON
+            // Suppress display_errors during AJAX to prevent malformed JSON;
+            // only suppressed when not in full debug-display mode.
             if ( ! WP_DEBUG || ( WP_DEBUG && ! WP_DEBUG_DISPLAY ) ) {
-                @ini_set( 'display_errors', 0 );
+                @ini_set( 'display_errors', 0 ); // phpcs:ignore WordPress.PHP.IniSet.display_errors_Disallowed
             }
             $GLOBALS['wpdb']->hide_errors();
         }

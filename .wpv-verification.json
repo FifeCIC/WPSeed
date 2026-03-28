@@ -303,10 +303,6 @@
             "hash": "798bc0b4469455a4bcb3fadfd3f65dc9",
             "ignored_at": "2026-03-27 08:32:42"
         },
-        "includes/admin/views/education.php": {
-            "hash": "",
-            "ignored_at": "2026-03-27 08:37:54"
-        },
         "includes/admin/views/html-admin-settings.php": {
             "hash": "cdb6e46050c114e4136676a5f4498595",
             "ignored_at": "2026-03-27 08:38:55"
@@ -314,10 +310,6 @@
         "includes/classes/frontend-scripts.php": {
             "hash": "2bf9e7e39d94df1595da986bada4213c",
             "ignored_at": "2026-03-27 08:39:31"
-        },
-        "includes/classes/wpverifier-json-storage.php": {
-            "hash": "",
-            "ignored_at": "2026-03-27 08:39:53"
         },
         "loader.php": {
             "hash": "a59ed7099b1e77d1a0a599799c516016",
@@ -338,10 +330,6 @@
         "includes/admin/admin-notices.php": {
             "hash": "f4608139ec37b3ab9c48eb00f0501d1d",
             "ignored_at": "2026-03-27 08:44:31"
-        },
-        "includes/admin/mainviews/food-advanced.php": {
-            "hash": "",
-            "ignored_at": "2026-03-27 08:45:06"
         },
         "includes/admin/mainviews/team-advanced.php": {
             "hash": "d6467571a58faadcb68c7ff5630239e9",
@@ -446,6 +434,34 @@
         "includes/admin/views/html-admin-page.php": {
             "hash": "4f6753fe57cde76e60de0e20f478a5a8",
             "ignored_at": "2026-03-27 21:59:49"
+        },
+        "includes/classes/ajax.php": {
+            "hash": "50efcd2c2a4bf7ce90afa8027f01b968",
+            "ignored_at": "2026-03-28 12:15:46"
+        },
+        "includes/classes/debug.php": {
+            "hash": "c427b144c0e63ee177f38e4560fffb66",
+            "ignored_at": "2026-03-28 12:17:32"
+        },
+        "includes/classes/enhanced-logger.php": {
+            "hash": "fb514212d443f3ea16910701a750c593",
+            "ignored_at": "2026-03-28 12:18:37"
+        },
+        "includes/classes/install.php": {
+            "hash": "ecf3715561fc3541c9cc38a24275c8a4",
+            "ignored_at": "2026-03-28 12:19:07"
+        },
+        "includes/classes/unified-logger.php": {
+            "hash": "34d876b168a7efda8137ac8f319280c9",
+            "ignored_at": "2026-03-28 19:06:41"
+        },
+        "includes/classes/verification-logger.php": {
+            "hash": "3b8070a2aa0545e8cb5679ac3b155538",
+            "ignored_at": "2026-03-28 19:10:43"
+        },
+        "uninstall.php": {
+            "hash": "7ebb961aca706fbf1ab7cc2c5b6eb4e7",
+            "ignored_at": "2026-03-28 19:41:27"
         }
     }
 }

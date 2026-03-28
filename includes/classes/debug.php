@@ -1,15 +1,15 @@
 <?php
 /**
- * WPSeed Admin - Debuging Class 
- * 
+ * WPSeed Admin - Debugging Class
+ *
  * Including this class starts debugging. The level
  * and depth of debugging depends on configuration.
- * 
- * @class    WPSeed_Admin
+ *
+ * @class    WPSeed_Debug
  * @author   Ryan Bayne
  * @category Admin
  * @package  WPSeed/Admin
- * @version  1.0.0
+ * @version  2.0.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -19,24 +19,37 @@ if ( ! defined( 'ABSPATH' ) ) {
 if( !class_exists( 'WPSeed_Debug' ) ) :
 
 class WPSeed_Debug {
-    
-    /**
-    * Old Error display and debugging method from 2015 - will be replaced. 
-    */
-    public function debugmode() {
-        if( wpseed_is_background_process() ) return;
 
-        // Gate debug functions behind WP_DEBUG — ini_set() and error_reporting()
-        // can expose server paths in production and should never run outside debug mode.
+    /**
+     * Activate database error display for the current request.
+     *
+     * ini_set() and error_reporting() have been removed: WordPress calls
+     * wp_debug_mode() during bootstrap which already sets display_errors and
+     * error_reporting correctly based on WP_DEBUG and WP_DEBUG_DISPLAY. Calling
+     * them again here is redundant and triggers Squiz.PHP.DiscouragedFunctions.
+     * The $wpdb error-display calls are the only behaviour this method needs to
+     * add on top of what WordPress has already configured.
+     *
+     * @since   1.0.0
+     * @version 2.0.0
+     * @return  void
+     */
+    public function debugmode() {
+        if ( wpseed_is_background_process() ) {
+            return;
+        }
+
+        // Only expose database errors in debug mode — show_errors() and
+        // print_error() can leak table names and query structure in production.
         if ( ! defined( 'WP_DEBUG' ) || ! WP_DEBUG ) {
             return;
         }
 
         global $wpdb;
 
-        ini_set( 'display_errors', 1 );
-        error_reporting( E_ALL );
-
+        // WordPress bootstrap (wp_debug_mode()) has already set display_errors
+        // and error_reporting from WP_DEBUG / WP_DEBUG_DISPLAY, so no ini_set()
+        // or error_reporting() call is needed here.
         $wpdb->show_errors();
         $wpdb->print_error();
     }

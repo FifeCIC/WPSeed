@@ -29,111 +29,169 @@ class WPSeed_Unified_Logger {
     }
     
     /**
-     * Start a new logging context
+     * Start a new logging context.
+     *
+     * Resets loop counters and records a CONTEXT_START trace entry.
+     * Only active when developer mode is enabled.
+     *
+     * @since  1.0.0
+     * @param  string $context Human-readable context label.
+     * @return void
      */
-    public function start_context($context) {
+    public function start_context( $context ) {
         $this->current_context = $context;
-        $this->loop_counters = array();
-        $this->trace("CONTEXT_START", "Starting {$context}");
+        $this->loop_counters   = array();
+        $this->trace( 'CONTEXT_START', "Starting {$context}" );
     }
     
     /**
-     * Enhanced trace with loop counting
+     * Record a trace entry with loop-count detection.
+     *
+     * Entries of type ERROR, CRITICAL, or DATA_LOSS are also written to the
+     * debug log immediately via output_trace(). All other entries are stored
+     * in memory and available via get_logs(). No-ops when developer mode is
+     * not active so there is zero overhead in production.
+     *
+     * @since  1.0.0
+     * @param  string $type    Trace type identifier (e.g. 'ERROR', 'LOOP_START').
+     * @param  string $message Human-readable description.
+     * @param  array  $data    Optional structured data to attach to the entry.
+     * @return void
      */
-    public function trace($type, $message, $data = array()) {
-        if (!wpseed_is_developer_mode()) return;
-        
+    public function trace( $type, $message, $data = array() ) {
+        if ( ! wpseed_is_developer_mode() ) {
+            return;
+        }
+
         $trace_key = $type . ':' . $message;
-        
-        // Count occurrences for loop detection
-        if (!isset($this->loop_counters[$trace_key])) {
-            $this->loop_counters[$trace_key] = 0;
+
+        // Increment the occurrence counter for this type+message pair so
+        // repeated calls can be detected as potential loops.
+        if ( ! isset( $this->loop_counters[ $trace_key ] ) ) {
+            $this->loop_counters[ $trace_key ] = 0;
         }
-        $this->loop_counters[$trace_key]++;
-        
+        $this->loop_counters[ $trace_key ]++;
+
         $log_entry = array(
-            'timestamp' => microtime(true),
-            'context' => $this->current_context,
-            'type' => $type,
-            'message' => $message,
-            'count' => $this->loop_counters[$trace_key],
-            'data' => $data,
-            'memory' => memory_get_usage()
+            'timestamp' => microtime( true ),
+            'context'   => $this->current_context,
+            'type'      => $type,
+            'message'   => $message,
+            'count'     => $this->loop_counters[ $trace_key ],
+            'data'      => $data,
+            'memory'    => memory_get_usage(),
         );
-        
+
         $this->logs[] = $log_entry;
-        
-        // Output immediately for critical traces
-        if (in_array($type, array('ERROR', 'CRITICAL', 'DATA_LOSS'))) {
-            $this->output_trace($log_entry);
+
+        // Write critical entries to the debug log immediately rather than
+        // waiting for end_context(), so they are visible even if execution halts.
+        if ( in_array( $type, array( 'ERROR', 'CRITICAL', 'DATA_LOSS' ), true ) ) {
+            $this->output_trace( $log_entry );
         }
     }
     
     /**
-     * Log JavaScript data transmission
+     * Log a JavaScript data-transmission operation.
+     *
+     * Convenience wrapper around trace() for JS↔PHP data-flow tracking.
+     *
+     * @since  1.0.0
+     * @param  string $operation  Label describing the operation.
+     * @param  int    $data_count Number of items transmitted.
+     * @param  array  $details    Optional extra context.
+     * @return void
      */
-    public function js_trace($operation, $data_count, $details = array()) {
-        $this->trace('JS_TRACE', "{$operation}: {$data_count} items", array_merge($details, array(
+    public function js_trace( $operation, $data_count, $details = array() ) {
+        $this->trace( 'JS_TRACE', "{$operation}: {$data_count} items", array_merge( $details, array(
             'operation' => $operation,
-            'count' => $data_count
-        )));
+            'count'     => $data_count,
+        ) ) );
     }
     
     /**
-     * Log PHP data processing
+     * Log a PHP data-processing operation with data-loss detection.
+     *
+     * Automatically records a DATA_LOSS trace when output_count is less than
+     * input_count, making silent data drops visible in the debug log.
+     *
+     * @since  1.0.0
+     * @param  string $operation    Label describing the operation.
+     * @param  int    $input_count  Number of items entering the operation.
+     * @param  int    $output_count Number of items leaving the operation.
+     * @param  array  $details      Optional extra context.
+     * @return void
      */
-    public function php_trace($operation, $input_count, $output_count, $details = array()) {
-        $this->trace('PHP_TRACE', "{$operation}: {$input_count} → {$output_count}", array_merge($details, array(
-            'operation' => $operation,
-            'input_count' => $input_count,
+    public function php_trace( $operation, $input_count, $output_count, $details = array() ) {
+        $this->trace( 'PHP_TRACE', "{$operation}: {$input_count} → {$output_count}", array_merge( $details, array(
+            'operation'    => $operation,
+            'input_count'  => $input_count,
             'output_count' => $output_count,
-            'data_loss' => $input_count > $output_count
-        )));
-        
-        // Flag potential data loss
-        if ($input_count > $output_count) {
-            $this->trace('DATA_LOSS', "Potential data loss: {$input_count} → {$output_count}", $details);
+            'data_loss'    => $input_count > $output_count,
+        ) ) );
+
+        // A separate DATA_LOSS entry ensures the drop is visible immediately
+        // in the debug log even if end_context() is never called.
+        if ( $input_count > $output_count ) {
+            $this->trace( 'DATA_LOSS', "Potential data loss: {$input_count} → {$output_count}", $details );
         }
     }
     
     /**
-     * Log loop iterations with smart counting
+     * Record a single loop iteration, throttled to every 10th call.
+     *
+     * Logs a LOOP_START entry on the first call for a given loop ID, then
+     * records LOOP_ITERATION entries at every 10th iteration or when
+     * $iteration_data['force_log'] is truthy.
+     *
+     * @since  1.0.0
+     * @param  string $loop_id        Unique identifier for the loop.
+     * @param  array  $iteration_data Optional data for this iteration.
+     * @return void
      */
-    public function loop_trace($loop_id, $iteration_data = array()) {
+    public function loop_trace( $loop_id, $iteration_data = array() ) {
         $loop_key = "LOOP:{$loop_id}";
-        
-        if (!isset($this->loop_counters[$loop_key])) {
-            $this->loop_counters[$loop_key] = 0;
-            $this->trace('LOOP_START', "Starting loop: {$loop_id}");
+
+        if ( ! isset( $this->loop_counters[ $loop_key ] ) ) {
+            $this->loop_counters[ $loop_key ] = 0;
+            $this->trace( 'LOOP_START', "Starting loop: {$loop_id}" );
         }
-        
-        $this->loop_counters[$loop_key]++;
-        
-        // Only log every 10th iteration for large loops, or specific items
-        if ($this->loop_counters[$loop_key] % 10 === 0 || !empty($iteration_data['force_log'])) {
-            $this->trace('LOOP_ITERATION', "Loop {$loop_id} iteration {$this->loop_counters[$loop_key]}", $iteration_data);
+
+        $this->loop_counters[ $loop_key ]++;
+
+        // Throttle to every 10th iteration to avoid flooding the log on large
+        // loops; force_log bypasses the throttle for specific items of interest.
+        if ( $this->loop_counters[ $loop_key ] % 10 === 0 || ! empty( $iteration_data['force_log'] ) ) {
+            $this->trace( 'LOOP_ITERATION', "Loop {$loop_id} iteration {$this->loop_counters[ $loop_key ]}", $iteration_data );
         }
     }
     
     /**
-     * End loop and summarize
+     * Record a LOOP_END trace entry with the total iteration count.
+     *
+     * @since  1.0.0
+     * @param  string $loop_id  Unique identifier for the loop.
+     * @param  array  $summary  Optional summary data to attach.
+     * @return void
      */
-    public function loop_end($loop_id, $summary = array()) {
-        $loop_key = "LOOP:{$loop_id}";
-        $total_iterations = isset($this->loop_counters[$loop_key]) ? $this->loop_counters[$loop_key] : 0;
-        
-        $this->trace('LOOP_END', "Loop {$loop_id} completed: {$total_iterations} iterations", $summary);
+    public function loop_end( $loop_id, $summary = array() ) {
+        $loop_key         = "LOOP:{$loop_id}";
+        $total_iterations = isset( $this->loop_counters[ $loop_key ] ) ? $this->loop_counters[ $loop_key ] : 0;
+        $this->trace( 'LOOP_END', "Loop {$loop_id} completed: {$total_iterations} iterations", $summary );
     }
     
     /**
-     * Get loop summary for debugging
+     * Return a summary of all loop iteration counts keyed by loop ID.
+     *
+     * @since  1.0.0
+     * @return array Map of loop_id => iteration_count.
      */
     public function get_loop_summary() {
         $summary = array();
-        foreach ($this->loop_counters as $key => $count) {
-            if (strpos($key, 'LOOP:') === 0) {
-                $loop_id = substr($key, 5);
-                $summary[$loop_id] = $count;
+        foreach ( $this->loop_counters as $key => $count ) {
+            if ( strpos( $key, 'LOOP:' ) === 0 ) {
+                $loop_id            = substr( $key, 5 );
+                $summary[ $loop_id ] = $count;
             }
         }
         return $summary;
@@ -145,12 +203,12 @@ class WPSeed_Unified_Logger {
      * Replaces direct error_log() calls. Only writes when both WP_DEBUG and
      * WP_DEBUG_LOG are enabled, keeping output out of production environments.
      * Uses file_put_contents() on the debug log path rather than error_log()
-     * to satisfy WordPress coding standards.
+     * to satisfy WordPress.PHP.DevelopmentFunctions.error_log_error_log.
      *
      * @since   2.0.0
      * @version 2.0.0
      *
-     * @param string $message Message to write.
+     * @param  string $message Message to write.
      * @return void
      */
     private function write_log( $message ) {
@@ -160,94 +218,123 @@ class WPSeed_Unified_Logger {
         if ( ! defined( 'WP_DEBUG_LOG' ) || ! WP_DEBUG_LOG ) {
             return;
         }
+        // Resolve the log path: WP_DEBUG_LOG may be a custom file path string
+        // (WP 5.1+) or simply true, in which case the default location is used.
         $log_path = is_string( WP_DEBUG_LOG ) ? WP_DEBUG_LOG : WP_CONTENT_DIR . '/debug.log';
-        // Append to the WordPress debug log file directly — avoids error_log().
+        // Append directly to the debug log — avoids error_log() entirely.
         file_put_contents( $log_path, gmdate( '[d-M-Y H:i:s e]' ) . ' ' . $message . PHP_EOL, FILE_APPEND | LOCK_EX );
     }
     /**
-     * Output trace immediately
+     * Format and write a single trace entry to the debug log immediately.
+     *
+     * Called by trace() for ERROR, CRITICAL, and DATA_LOSS entries. All output
+     * is routed through write_log() which gates on WP_DEBUG and WP_DEBUG_LOG,
+     * so this method is a no-op in production even if developer mode is active.
+     *
+     * @since  1.0.0
+     * @param  array $log_entry Entry array as built by trace().
+     * @return void
      */
-    private function output_trace($log_entry) {
-        if (!wpseed_is_developer_mode()) return;
-        
-        $elapsed = number_format(($log_entry['timestamp'] - $this->start_time) * 1000, 2);
-        $memory = number_format($log_entry['memory'] / 1024 / 1024, 2);
-        
+    private function output_trace( $log_entry ) {
+        if ( ! wpseed_is_developer_mode() ) {
+            return;
+        }
+
+        $elapsed = number_format( ( $log_entry['timestamp'] - $this->start_time ) * 1000, 2 );
+        $memory  = number_format( $log_entry['memory'] / 1024 / 1024, 2 );
+
         $output = sprintf(
-            "[%s] %s (+%sms, %sMB): %s",
+            '[%s] %s (+%sms, %sMB): %s',
             $log_entry['type'],
             $log_entry['context'],
             $elapsed,
             $memory,
             $log_entry['message']
         );
-        
-        if ($log_entry['count'] > 1) {
+
+        if ( $log_entry['count'] > 1 ) {
             $output .= " (×{$log_entry['count']})";
         }
-        
-        if (!empty($log_entry['data'])) {
-            $output .= " | " . json_encode($log_entry['data']);
+
+        if ( ! empty( $log_entry['data'] ) ) {
+            $output .= ' | ' . wp_json_encode( $log_entry['data'] );
         }
-        
+
+        // write_log() handles the WP_DEBUG / WP_DEBUG_LOG gate — no error_log() used.
         $this->write_log( 'WPSeed_Trace: ' . $output );
     }
     
     /**
-     * End context and output summary
+     * Close the current context and write a summary to the debug log.
+     *
+     * @since  1.0.0
+     * @param  array $summary Optional summary data to attach to the CONTEXT_END entry.
+     * @return void
      */
-    public function end_context($summary = array()) {
-        $this->trace('CONTEXT_END', "Ending {$this->current_context}", $summary);
-        
-        if (wpseed_is_developer_mode()) {
+    public function end_context( $summary = array() ) {
+        $this->trace( 'CONTEXT_END', "Ending {$this->current_context}", $summary );
+
+        if ( wpseed_is_developer_mode() ) {
             $this->output_summary();
         }
-        
+
         $this->current_context = '';
     }
     
     /**
-     * Output complete summary
+     * Write a summary of the current context to the debug log.
+     *
+     * Outputs total log count, duration, per-type counts, and loop summaries.
+     * All output routed through write_log() — no-op in production.
+     *
+     * @since  1.0.0
+     * @return void
      */
     private function output_summary() {
-        $total_logs = count($this->logs);
-        $duration = (microtime(true) - $this->start_time) * 1000;
-        
-        $this->write_log( "WPSeed_Summary: Context '{$this->current_context}' - {$total_logs} logs in " . number_format($duration, 2) . 'ms' );
-        
-        // Count by type
+        $total_logs = count( $this->logs );
+        $duration   = ( microtime( true ) - $this->start_time ) * 1000;
+
+        $this->write_log( "WPSeed_Summary: Context '{$this->current_context}' - {$total_logs} logs in " . number_format( $duration, 2 ) . 'ms' );
+
+        // Tally entries by type so the summary shows which trace types fired most.
         $type_counts = array();
-        foreach ($this->logs as $log) {
+        foreach ( $this->logs as $log ) {
             $type = $log['type'];
-            if (!isset($type_counts[$type])) {
-                $type_counts[$type] = 0;
+            if ( ! isset( $type_counts[ $type ] ) ) {
+                $type_counts[ $type ] = 0;
             }
-            $type_counts[$type]++;
+            $type_counts[ $type ]++;
         }
-        
-        foreach ($type_counts as $type => $count) {
+
+        foreach ( $type_counts as $type => $count ) {
             $this->write_log( "WPSeed_Summary: {$type}: {$count}" );
         }
-        
-        // Loop summary
+
+        // Include loop iteration counts so runaway loops are visible in the summary.
         $loop_summary = $this->get_loop_summary();
-        if (!empty($loop_summary)) {
-            $this->write_log( 'WPSeed_Summary: Loops: ' . json_encode($loop_summary) );
+        if ( ! empty( $loop_summary ) ) {
+            $this->write_log( 'WPSeed_Summary: Loops: ' . wp_json_encode( $loop_summary ) );
         }
     }
     
     /**
-     * Get all logs for debugging
+     * Return all recorded log entries.
+     *
+     * @since  1.0.0
+     * @return array Array of log entry arrays.
      */
     public function get_logs() {
         return $this->logs;
     }
-    
+
     /**
-     * Clear logs
+     * Clear all recorded log entries and loop counters.
+     *
+     * @since  1.0.0
+     * @return void
      */
     public function clear_logs() {
-        $this->logs = array();
+        $this->logs          = array();
         $this->loop_counters = array();
     }
 }

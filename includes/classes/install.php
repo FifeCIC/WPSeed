@@ -2,12 +2,13 @@
 /**
  * WPSeed - Installation
  *
- * Installation of post types, taxonomies, database tables, options etc. 
+ * Installation of post types, taxonomies, database tables, options etc.
  *
  * @author   Ryan Bayne
  * @category Installation
  * @package  WPSeed/Core
  * @since    1.0.0
+ * @version  2.0.0
  */
  
 if ( ! defined( 'ABSPATH' ) ) {
@@ -18,6 +19,9 @@ if( !class_exists( 'WPSeed_Install' ) ) :
 
 /**
  * WPSeed_Install Class.
+ *
+ * @since   1.0.0
+ * @version 2.0.0
  */
 class WPSeed_Install { 
     
@@ -77,15 +81,36 @@ class WPSeed_Install {
     }
     
     /**
-    * Forced plugin updating (wpseed do_action) 
-    */
+     * Forced plugin update action triggered by the force_update_wpseed GET parameter.
+     *
+     * Verifies a nonce before acting so that the GET parameter cannot be triggered
+     * by a forged link, satisfying WordPress.Security.NonceVerification.Recommended.
+     * The nonce action 'wpseed_force_update' must be present in the URL; callers
+     * are responsible for generating the URL with wp_nonce_url().
+     *
+     * @since   1.0.0
+     * @version 2.0.0
+     * @return  void
+     */
     public static function install_action_updater_cron() {
-        if ( ! empty( $_GET['force_update_wpseed'] ) && current_user_can( 'manage_options' ) ) {
-            // Prefixed hook name — renamed from wp_wpseed_updater_cron to satisfy NonPrefixedHooknameFound.
-            do_action( 'wpseed_updater_cron' );
-            wp_safe_redirect( admin_url( 'options-general.php?page=wpseed-settings' ) );
-            exit;
+        if ( empty( $_GET['force_update_wpseed'] ) || ! current_user_can( 'manage_options' ) ) {
+            return;
         }
+
+        // Verify the nonce before triggering the cron action — prevents a
+        // forged GET request from forcing an unintended update run.
+        $wpseed_nonce = isset( $_GET['_wpseed_force_nonce'] )
+            ? sanitize_text_field( wp_unslash( $_GET['_wpseed_force_nonce'] ) )
+            : '';
+
+        if ( ! wp_verify_nonce( $wpseed_nonce, 'wpseed_force_update' ) ) {
+            wp_die( esc_html__( 'Action failed. Please refresh the page and retry.', 'wpseed' ) );
+        }
+
+        // Prefixed hook name — renamed from wp_wpseed_updater_cron to satisfy NonPrefixedHooknameFound.
+        do_action( 'wpseed_updater_cron' );
+        wp_safe_redirect( admin_url( 'options-general.php?page=wpseed-settings' ) );
+        exit;
     }
     
     /**
