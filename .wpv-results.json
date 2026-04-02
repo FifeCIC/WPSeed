@@ -1,10 +1,136 @@
 {
-    "generated_at": "2026-03-26 13:15:33",
+    "generated_at": "2026-04-01 09:26:08",
     "plugin": "wpseed/wpseed.php",
     "readiness": {
-        "overall": 100,
-        "errors": 0,
-        "warnings": 0
+        "overall": 85,
+        "errors": 1,
+        "warnings": 13
     },
-    "results": []
+    "results": {
+        "admin/page/development/view/database.php": [
+            {
+                "issue_id": "W-ad4c935b",
+                "message": "Use of a direct database call is discouraged.",
+                "code": "WordPress.DB.DirectDatabaseQuery.DirectQuery",
+                "type": "WARNING",
+                "line": 68,
+                "column": 27,
+                "ignored": false
+            },
+            {
+                "issue_id": "W-dfbde361",
+                "message": "Use of a direct database call is discouraged.",
+                "code": "WordPress.DB.DirectDatabaseQuery.DirectQuery",
+                "type": "WARNING",
+                "line": 95,
+                "column": 42,
+                "ignored": false
+            },
+            {
+                "issue_id": "W-de837ceb",
+                "message": "Use of a direct database call is discouraged.",
+                "code": "WordPress.DB.DirectDatabaseQuery.DirectQuery",
+                "type": "WARNING",
+                "line": 105,
+                "column": 45,
+                "ignored": false
+            }
+        ],
+        "examples/integrations/memberpress-example.php": [
+            {
+                "issue_id": "W-239fdcc3",
+                "message": "Use of a direct database call is discouraged.",
+                "code": "WordPress.DB.DirectDatabaseQuery.DirectQuery",
+                "type": "WARNING",
+                "line": 124,
+                "column": 9,
+                "ignored": false
+            }
+        ],
+        "uninstall.php": [
+            {
+                "issue_id": "W-661c6043",
+                "message": "Use of a direct database call is discouraged.",
+                "code": "WordPress.DB.DirectDatabaseQuery.DirectQuery",
+                "type": "WARNING",
+                "line": 33,
+                "column": 1,
+                "ignored": false
+            },
+            {
+                "issue_id": "W-d8995640",
+                "message": "Direct database call without caching detected. Consider using wp_cache_get() / wp_cache_set() or wp_cache_delete().",
+                "code": "WordPress.DB.DirectDatabaseQuery.NoCaching",
+                "type": "WARNING",
+                "line": 33,
+                "column": 1,
+                "ignored": false
+            },
+            {
+                "issue_id": "W-328b7d3a",
+                "message": "Use of a direct database call is discouraged.",
+                "code": "WordPress.DB.DirectDatabaseQuery.DirectQuery",
+                "type": "WARNING",
+                "line": 51,
+                "column": 1,
+                "ignored": false
+            },
+            {
+                "issue_id": "W-970d61d0",
+                "message": "Direct database call without caching detected. Consider using wp_cache_get() / wp_cache_set() or wp_cache_delete().",
+                "code": "WordPress.DB.DirectDatabaseQuery.NoCaching",
+                "type": "WARNING",
+                "line": 51,
+                "column": 1,
+                "ignored": false
+            },
+            {
+                "issue_id": "W-5161dd6c",
+                "message": "Use of a direct database call is discouraged.",
+                "code": "WordPress.DB.DirectDatabaseQuery.DirectQuery",
+                "type": "WARNING",
+                "line": 57,
+                "column": 1,
+                "ignored": false
+            },
+            {
+                "issue_id": "W-725ce650",
+                "message": "Direct database call without caching detected. Consider using wp_cache_get() / wp_cache_set() or wp_cache_delete().",
+                "code": "WordPress.DB.DirectDatabaseQuery.NoCaching",
+                "type": "WARNING",
+                "line": 57,
+                "column": 1,
+                "ignored": false
+            },
+            {
+                "issue_id": "W-4f3ec311",
+                "message": "Use of a direct database call is discouraged.",
+                "code": "WordPress.DB.DirectDatabaseQuery.DirectQuery",
+                "type": "WARNING",
+                "line": 74,
+                "column": 1,
+                "ignored": false
+            },
+            {
+                "issue_id": "W-9d445362",
+                "message": "Direct database call without caching detected. Consider using wp_cache_get() / wp_cache_set() or wp_cache_delete().",
+                "code": "WordPress.DB.DirectDatabaseQuery.NoCaching",
+                "type": "WARNING",
+                "line": 74,
+                "column": 1,
+                "ignored": false
+            }
+        ],
+        "includes/admin/admin-setup-wizard.php": [
+            {
+                "issue_id": "W-e7a35b68",
+                "message": "Using exclusionary parameters, like exclude, in calls to get_posts() should be done with caution, see https://wpvip.com/documentation/performance-improvements-by-removing-usage-of-post__not_in/ for more information.",
+                "code": "WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude",
+                "type": "WARNING",
+                "line": 314,
+                "column": 13,
+                "ignored": false
+            }
+        ]
+    }
 }
