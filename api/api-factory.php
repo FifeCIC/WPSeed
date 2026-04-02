@@ -34,8 +34,8 @@ class WPSeed_API_Factory {
         try {
             $instance = new $provider['class_name']($provider_id, $args);
             
-            if (!($instance instanceof WPSeed_Base_API)) {
-                return new WP_Error('invalid_base_class', 'API class must extend WPSeed_Base_API');
+            if (!($instance instanceof \WPSeed\API\Base_API)) {
+                return new WP_Error('invalid_base_class', 'API class must extend WPSeed\\API\\Base_API');
             }
             
             return $instance;

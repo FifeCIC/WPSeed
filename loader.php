@@ -4,11 +4,80 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Main WPSeed Class.
+ * WPSeed load order — WordPressPluginSeed main class.
  *
- * @class WPSeed
- * @version 1.0.0
+ * GROUP 1 — Composer PSR-4 autoloader (loaded in wpseed.php before this file)
+ *   vendor/autoload.php — resolves all WPSeed\ namespaced classes automatically.
+ *   No include_once needed for any class under includes/Core/, includes/Ecosystem/,
+ *   includes/Admin/, includes/Utilities/, includes/API/, includes/CLI/.
+ *
+ * GROUP 2 — Core functions (always loaded, no class dependencies)
+ *   includes/functions/core.php      — global helper functions
+ *   includes/functions/validate.php  — input validation helpers
+ *   includes/logging-helper.php      — logging convenience functions
+ *   includes/api-logging.php         — API call logging functions
+ *   includes/functions/database.php  — database helper functions
+ *
+ * GROUP 3 — Core classes (loaded on every request)
+ *   includes/classes/debug.php                  — debug utilities
+ *   includes/classes/autoloader.php             — legacy SPL autoloader (to be removed in Task 0.5)
+ *   includes/classes/install.php                — activation, DB tables, roles
+ *   includes/classes/ajax.php                   — AJAX endpoint registration
+ *   includes/classes/object-registry.php        — generic object registry
+ *   includes/classes/data-freshness-manager.php — cache freshness tracking
+ *   includes/classes/developer-flow-logger.php  — dev-mode flow logging
+ *   includes/classes/developer-mode.php         — developer mode detection
+ *   includes/classes/i18n.php                   — internationalisation
+ *   includes/classes/dependencies.php           — plugin dependency checker
+ *   includes/classes/listener.php               — request listener
+ *   includes/classes/unified-logger.php         — structured trace logger
+ *   includes/classes/enhanced-logger.php        — Query Monitor-style logger
+ *
+ * GROUP 4 — Optional libraries (guarded by file_exists)
+ *   includes/libraries/action-scheduler/ — background job processing
+ *   includes/libraries/carbon-fields/    — settings framework
+ *   includes/classes/task-scheduler.php  — Action Scheduler wrapper (loaded with library)
+ *   includes/classes/carbon-fields-integration.php (loaded with library)
+ *
+ * GROUP 5 — Ecosystem framework (always loaded)
+ *   WPSeed\Ecosystem\Registry     — autoloaded via Composer (Task 0.4)
+ *   includes/classes/ecosystem-menu-manager.php — shared menu placement
+ *   includes/classes/ecosystem-installer.php    — one-click plugin installer
+ *
+ * GROUP 6 — Feature classes (always loaded, safe to remove when cloning if unused)
+ *   includes/classes/multisite.php           — multisite support
+ *   includes/classes/github-sync.php         — GitHub sync
+ *   includes/classes/settings-import-export.php
+ *   includes/classes/extension-installer.php
+ *   includes/classes/library-manager.php
+ *   includes/classes/library-update-monitor.php
+ *   includes/classes/rest-controller.php     — abstract REST base
+ *   includes/classes/rest-example.php        — EXAMPLE: delete when cloning
+ *   includes/classes/unified-feature.php     — EXAMPLE: delete when cloning
+ *
+ * GROUP 7 — WP-CLI (loaded only when WP_CLI is defined)
+ *   includes/classes/cli-commands.php
+ *
+ * GROUP 8 — API system (always loaded)
+ *   api/base-api.php
+ *   api/api-directory.php
+ *   api/api-factory.php
+ *
+ * GROUP 9 — Admin only (guarded by is_request('admin'), loaded on init priority 1)
+ *   includes/admin/admin.php and all admin sub-files
+ *   admin/config/admin-menus.php
+ *   admin/notifications/notifications.php
+ *   includes/classes/notification-bell.php
+ *   toolbars/toolbars.php
+ *   includes/classes/uninstall-feedback.php
+ *
+ * GROUP 10 — Frontend only (guarded by is_request('frontend'))
+ *   includes/classes/frontend-scripts.php
+ *
+ * GROUP 11 — Shortcodes (always loaded)
+ *   shortcodes/shortcodes.php
  */
+
 final class WordPressPluginSeed {
     
     /**
@@ -100,9 +169,10 @@ final class WordPressPluginSeed {
      * @since  1.0
      */
     private function init_hooks() {
-        register_activation_hook( WPSEED_PLUGIN_FILE, array( 'WPSeed_Install', 'install' ) );
-        // Do not confuse deactivation of a plugin with deletion of a plugin - two very different requests.
-        register_deactivation_hook( WPSEED_PLUGIN_FILE, array( 'WPSeed_Install', 'deactivate' ) );
+        register_activation_hook( WPSEED_PLUGIN_FILE, array( '\WPSeed\Core\Install', 'install' ) );
+        register_deactivation_hook( WPSEED_PLUGIN_FILE, array( '\WPSeed\Core\Install', 'deactivate' ) );
+        \WPSeed\Core\Install::init();
+        \WPSeed\Core\AJAX_Handler::init();
         add_action( 'init', array( $this, 'init' ), 0 );
     }
 
@@ -153,51 +223,78 @@ final class WordPressPluginSeed {
      * Include required core files used in admin and on the frontend.
      */
     public function includes() {
-        
+
+        // -------------------------------------------------------------------------
+        // GROUP 2 — Core functions (always loaded, no class dependencies)
+        // -------------------------------------------------------------------------
         include_once( 'includes/functions/core.php' );
-        include_once( 'includes/classes/debug.php' );    
-        include_once( 'includes/classes/autoloader.php' );
         include_once( 'includes/functions/validate.php' );
         include_once( 'includes/logging-helper.php' );
         include_once( 'includes/api-logging.php' );
         include_once( 'includes/functions/database.php' );
-        include_once( 'assets/manage-assets.php' );
-        include_once( 'assets/queue-assets.php' );
-        include_once( 'includes/classes/install.php' );
-        include_once( 'includes/classes/ajax.php' );
-        
-        // Advanced Features
+
+        // -------------------------------------------------------------------------
+        // GROUP 3 — Core classes (loaded on every request)
+        // -------------------------------------------------------------------------
+        include_once( 'includes/classes/debug.php' );
+        // Composer PSR-4 autoloader handles all namespaced classes (loaded in wpseed.php).
+        // WPSeed\Core\Install is autoloaded via Composer — no include needed.
+        // WPSeed\Core\AJAX_Handler is autoloaded via Composer — no include needed.
         include_once( 'includes/classes/object-registry.php' );
         include_once( 'includes/classes/data-freshness-manager.php' );
         include_once( 'includes/classes/developer-flow-logger.php' );
-        
-        // Action Scheduler Library
-        if (file_exists(plugin_dir_path(__FILE__) . 'includes/libraries/action-scheduler/action-scheduler.php')) {
-            require_once plugin_dir_path(__FILE__) . 'includes/libraries/action-scheduler/action-scheduler.php';
-            include_once( 'includes/classes/task-scheduler.php' );
-        }
-        
-        // Carbon Fields Library (will be initialized in init hook)
-        if (file_exists(plugin_dir_path(__FILE__) . 'includes/libraries/carbon-fields/vendor/autoload.php')) {
-            require_once plugin_dir_path(__FILE__) . 'includes/libraries/carbon-fields/vendor/autoload.php';
-            include_once( 'includes/classes/carbon-fields-integration.php' );
-        }
-        
-        // Request Listener
-        include_once( 'includes/classes/listener.php' );
-        
-        // Dashboard Widgets
-        include_once( 'includes/classes/dashboard-widgets.php' );
-        
-        // Unified Feature Example
-        include_once( 'includes/classes/unified-feature.php' );
-        
-        // New Boilerplate Features
         include_once( 'includes/classes/developer-mode.php' );
-        include_once( 'includes/classes/rest-controller.php' );
-        include_once( 'includes/classes/rest-example.php' );
         include_once( 'includes/classes/i18n.php' );
         include_once( 'includes/classes/dependencies.php' );
+        include_once( 'includes/classes/listener.php' );
+        // WPSeed\Core\Logger is autoloaded via Composer — no include needed.
+        // WPSeed\Core\Enhanced_Logger is autoloaded via Composer — no include needed.
+
+        // -------------------------------------------------------------------------
+        // GROUP 3b — Assets (always loaded, procedural — to be replaced by Asset_Manager in Task 3.1)
+        // -------------------------------------------------------------------------
+        include_once( 'assets/manage-assets.php' );
+        include_once( 'assets/queue-assets.php' );
+
+        // -------------------------------------------------------------------------
+        // GROUP 4 — Optional libraries (guarded by file_exists)
+        // -------------------------------------------------------------------------
+        if ( file_exists( plugin_dir_path( __FILE__ ) . 'includes/libraries/action-scheduler/action-scheduler.php' ) ) {
+            require_once plugin_dir_path( __FILE__ ) . 'includes/libraries/action-scheduler/action-scheduler.php';
+            // WPSeed\Core\Task_Scheduler is autoloaded via Composer.
+            \WPSeed\Core\Task_Scheduler::instance();
+        }
+
+        if ( file_exists( plugin_dir_path( __FILE__ ) . 'includes/libraries/carbon-fields/vendor/autoload.php' ) ) {
+            require_once plugin_dir_path( __FILE__ ) . 'includes/libraries/carbon-fields/vendor/autoload.php';
+            include_once( 'includes/classes/carbon-fields-integration.php' );
+        }
+
+        // -------------------------------------------------------------------------
+        // GROUP 5 — Ecosystem framework (always loaded)
+        // All three Ecosystem classes autoloaded via Composer — no includes needed.
+        // -------------------------------------------------------------------------
+        wpseed_ecosystem(); // boot Registry singleton
+        new \WPSeed\Ecosystem\Menu_Manager(); // boot menu manager
+        new \WPSeed\Ecosystem\Installer(); // boot plugin installer
+        add_action( 'wpseed_ecosystem_register', function() {
+            wpseed_ecosystem()->register_plugin( 'wpseed', array(
+                'name'                 => 'WPSeed',
+                'version'              => WPSEED_VERSION,
+                'path'                 => WPSEED_PLUGIN_DIR_PATH,
+                'url'                  => plugins_url( '/', WPSEED_PLUGIN_FILE ),
+                'has_logging'          => true,
+                'has_cron'             => true,
+                'has_background_tasks' => true,
+                'shared_settings'      => array( 'logging', 'cron', 'background_tasks' ),
+            ) );
+        } );
+
+        // -------------------------------------------------------------------------
+        // GROUP 6 — Feature classes (remove unused ones when cloning)
+        // -------------------------------------------------------------------------
+        include_once( 'includes/classes/rest-example.php' );       // EXAMPLE — delete when cloning
+        include_once( 'includes/classes/unified-feature.php' );    // EXAMPLE — delete when cloning
         include_once( 'includes/classes/multisite.php' );
         include_once( 'includes/classes/github-sync.php' );
         include_once( 'includes/functions/github-sync-ajax.php' );
@@ -205,37 +302,45 @@ final class WordPressPluginSeed {
         include_once( 'includes/classes/extension-installer.php' );
         include_once( 'includes/classes/library-manager.php' );
         include_once( 'includes/classes/library-update-monitor.php' );
-        include_once( 'includes/classes/enhanced-logger.php' );
-        
-        // Ecosystem Framework
-        include_once( 'includes/classes/ecosystem-registry.php' );
-        include_once( 'includes/classes/ecosystem-menu-manager.php' );
-        include_once( 'includes/classes/ecosystem-installer.php' );
-        
-        // WP-CLI Commands
+        // WPSeed\Admin\Dashboard_Widgets is autoloaded via Composer — no include needed.
+        new \WPSeed\Admin\Dashboard_Widgets();
+
+        // -------------------------------------------------------------------------
+        // GROUP 7 — WP-CLI (loaded only when WP_CLI is defined)
+        // -------------------------------------------------------------------------
         if ( defined( 'WP_CLI' ) && WP_CLI ) {
             include_once( 'includes/classes/cli-commands.php' );
         }
-        
-        // REST API
+
+        // -------------------------------------------------------------------------
+        // GROUP 8 — API system (always loaded)
+        // WPSeed\API\Base_API and WPSeed\API\REST_Controller autoloaded via Composer.
+        // -------------------------------------------------------------------------
+        include_once( 'api/api-directory.php' );
+        include_once( 'api/api-factory.php' );
+
         add_action( 'rest_api_init', function() {
             $controller = new WPSeed_REST_Example_Controller();
             $controller->register_routes();
-        });
-        
-        // API System
-        include_once( 'api/base-api.php' );
-        include_once( 'api/api-directory.php' );
-        include_once( 'api/api-factory.php' );
-        
+        } );
+
+        // -------------------------------------------------------------------------
+        // GROUP 9 — Admin only (deferred to init priority 1)
+        // -------------------------------------------------------------------------
         if ( $this->is_request( 'admin' ) ) {
             add_action( 'init', array( $this, 'load_admin_files' ), 1 );
         }
 
+        // -------------------------------------------------------------------------
+        // GROUP 10 — Frontend only
+        // -------------------------------------------------------------------------
         if ( $this->is_request( 'frontend' ) ) {
             $this->frontend_includes();
         }
-        
+
+        // -------------------------------------------------------------------------
+        // GROUP 11 — Shortcodes (always loaded)
+        // -------------------------------------------------------------------------
         include_once( 'shortcodes/shortcodes.php' );
     }
 
@@ -254,10 +359,12 @@ final class WordPressPluginSeed {
         include_once( 'includes/admin/admin-main-views.php' );
         include_once( 'admin/config/admin-menus.php' );
         include_once( 'admin/notifications/notifications.php' );
-        include_once( 'includes/classes/notification-bell.php' );
-        include_once( 'admin/page/development/view/credits.php' );
+        // WPSeed\Admin\Notification_Bell autoloaded via Composer.
+        \WPSeed\Admin\Notification_Bell::init();
+        include_once( 'templates/tabs/development/tab-credits.php' );
         include_once( 'toolbars/toolbars.php' );
-        include_once( 'includes/classes/uninstall-feedback.php' );
+        // WPSeed\Admin\Uninstall_Feedback autoloaded via Composer.
+        new \WPSeed\Admin\Uninstall_Feedback();
     }
 
     /**

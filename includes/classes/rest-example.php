@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class WPSeed_REST_Example_Controller extends WPSeed_REST_Controller {
+class WPSeed_REST_Example_Controller extends \WPSeed\API\REST_Controller {
     
     protected $rest_base = 'example';
     

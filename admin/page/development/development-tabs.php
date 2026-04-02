@@ -184,92 +184,87 @@ class WPSeed_Admin_Development_Page {
      */
     private static function active_tab_content() {
         $current_tab = self::get_current_tab( 'assets' );
+        $tab_dir = WPSEED_PLUGIN_DIR_PATH . 'templates/tabs/development/';
         
         switch ($current_tab) {
             case 'assets':
-                require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/development/view/assets-tracker.php';
+                require_once $tab_dir . 'tab-assets.php';
                 break;
             case 'performance':
                 if (!class_exists('WPSeed_Admin_Development_Performance')) {
-                    require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/development/view/performance.php';
+                    require_once $tab_dir . 'tab-performance.php';
                 }
                 WPSeed_Admin_Development_Performance::output();
                 break;
             case 'theme_info':
                 if (!class_exists('WPSeed_Admin_Development_UI_Library')) {
-                    require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/development/view/theme-info.php';
+                    require_once $tab_dir . 'tab-theme.php';
                 }
                 WPSeed_Admin_Development_UI_Library::output();
                 break;
             case 'debug_log':
                 if (!class_exists('WPSeed_Admin_Development_Debug_Log')) {
-                    require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/development/view/debug-log.php';
+                    require_once $tab_dir . 'tab-debug-log.php';
                 }
                 WPSeed_Admin_Development_Debug_Log::output();
                 break;
             case 'database':
                 if (!class_exists('WPSeed_Admin_Development_Database')) {
-                    require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/development/view/database.php';
+                    require_once $tab_dir . 'tab-database.php';
                 }
                 WPSeed_Admin_Development_Database::output();
                 break;
             case 'phpinfo':
                 if (!class_exists('WPSeed_Admin_Development_PHPInfo')) {
-                    require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/development/view/phpinfo.php';
+                    require_once $tab_dir . 'tab-phpinfo.php';
                 }
                 WPSeed_Admin_Development_PHPInfo::output();
                 break;
             case 'tasks':
                 if (!class_exists('WPSeed_Admin_Development_Tasks_Monitor')) {
-                    require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/development/view/tasks-monitor.php';
+                    require_once $tab_dir . 'tab-tasks-monitor.php';
                 }
                 WPSeed_Admin_Development_Tasks_Monitor::output();
                 break;
             case 'libraries':
-                require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/development/view/libraries.php';
+                require_once $tab_dir . 'tab-libraries.php';
                 break;
             case 'credits':
                 if (!class_exists('WPSeed_Admin_Development_Credits')) {
-                    require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/development/view/credits.php';
+                    require_once $tab_dir . 'tab-credits.php';
                 }
                 WPSeed_Admin_Development_Credits::output();
                 break;
             case 'docs':
                 if (!class_exists('WPSeed_Admin_Development_Docs')) {
-                    require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/development/view/docs.php';
+                    require_once $tab_dir . 'tab-docs.php';
                 }
                 WPSeed_Admin_Development_Docs::output();
                 break;
             case 'dev_checklist':
                 if (!class_exists('WPSeed_Admin_Development_Checklist')) {
-                    require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/development/view/dev-checklist.php';
+                    require_once $tab_dir . 'tab-checklist.php';
                 }
                 WPSeed_Admin_Development_Checklist::output();
                 break;
-            case 'tasks':
-                if (!class_exists('WPSeed_Admin_Development_Tasks')) {
-                    require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/development/view/tasks.php';
-                }
-                WPSeed_Admin_Development_Tasks::output();
-                break;
             case 'layouts':
                 if (!class_exists('WPSeed_Admin_Development_Layouts')) {
-                    require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/development/view/layouts.php';
+                    require_once $tab_dir . 'tab-layouts.php';
                 }
                 WPSeed_Admin_Development_Layouts::output();
                 break;
             case 'diagrams':
                 if (!class_exists('WPSeed_Admin_Development_Diagrams')) {
-                    require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/development/view/diagrams.php';
+                    require_once $tab_dir . 'tab-diagrams.php';
                 }
                 WPSeed_Admin_Development_Diagrams::output();
                 break;
             case 'architecture':
-                require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/development/view/architecture.php';
+                require_once $tab_dir . 'tab-architecture.php';
                 break;
             default:
                 if (!class_exists('WPSeed_Admin_Development_UI_Library')) {
-                    require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/development/view/theme-info.php';
+                    require_once $tab_dir . 'tab-theme.php';
                 }
                 WPSeed_Admin_Development_UI_Library::output();
                 break;
