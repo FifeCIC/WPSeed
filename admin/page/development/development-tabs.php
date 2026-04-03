@@ -96,6 +96,7 @@ class WPSeed_Admin_Development_Page {
             'layouts' => array('title' => __('Layouts', 'wpseed'), 'code' => 'LAY01'),
             'diagrams' => array('title' => __('Diagrams', 'wpseed'), 'code' => 'DGM01'),
             'architecture' => array('title' => __('Architecture', 'wpseed'), 'code' => 'ARC01'),
+            'roadmap' => array('title' => __('Roadmap', 'wpseed'), 'code' => 'RMP01'),
         );
     }
 
@@ -104,6 +105,9 @@ class WPSeed_Admin_Development_Page {
      */
     private static function enqueue_assets() {
         wp_enqueue_style('wpseed-admin-styles', WPSEED_PLUGIN_URL . 'assets/css/admin-styles.css', array(), WPSEED_VERSION);
+        wp_enqueue_style('wpseed-roadmap', WPSEED_PLUGIN_URL . 'assets/css/components/roadmap.css', array(), WPSEED_VERSION);
+        wp_enqueue_style('wpseed-architecture', WPSEED_PLUGIN_URL . 'assets/css/components/architecture.css', array(), WPSEED_VERSION);
+        wp_enqueue_script('wpseed-roadmap', WPSEED_PLUGIN_URL . 'assets/js/admin/roadmap.js', array('jquery'), WPSEED_VERSION, true);
     }
     
     /**
@@ -261,6 +265,9 @@ class WPSeed_Admin_Development_Page {
                 break;
             case 'architecture':
                 require_once $tab_dir . 'tab-architecture.php';
+                break;
+            case 'roadmap':
+                require_once $tab_dir . 'tab-roadmap.php';
                 break;
             default:
                 if (!class_exists('WPSeed_Admin_Development_UI_Library')) {

@@ -425,20 +425,5 @@ final class WordPressPluginSeed {
     }    
 }
 
-if( !function_exists( 'WPSeed' ) ) {
-    /**
-     * Main instance of WordPress Plugin Seed.
-     *
-     * Returns the main instance of WPSeed to prevent the need to use globals.
-     *
-     * @since  1.0
-     * @return WPSeed
-     */
-    function WPSeed() {
-        return WordPressPluginSeed::instance();
-    }
-
-    // Global for backwards compatibility.
-    global $GLOBALS;
-    $GLOBALS['wpseed'] = WPSeed();
-}
+// Boot the main plugin instance.
+$GLOBALS['wpseed'] = WPSeed();

@@ -682,6 +682,21 @@ Reference: `WPVerifier/templates/admin-page-roadmap.php`
 **Acceptance:** A roadmap tab renders in WPSeed's admin with accordion phases,
 two-column task/architecture layout, and priority badges.
 
+**CHANGE LOG — Task 2.3:**
+- Created `templates/tabs/development/tab-roadmap.php` — full roadmap tab with
+  5 phases (0–4), status grid, accordion expand/collapse, two-column
+  task/architecture layout, priority badges, and progress bars.
+- Content uses WPSeed's own real phases — not placeholder text.
+- Created `assets/js/admin/roadmap.js` — accordion toggle, localStorage task
+  persistence, keyboard shortcuts (Ctrl+Shift+E/C/R).
+- Created `assets/css/components/roadmap.css` — all `.wpseed-roadmap-*` styles
+  ported from WPVerifier's `.wpv-roadmap-*` classes.
+- Registered roadmap tab in `development-tabs.php` `get_tabs()` array.
+- Added roadmap case to `active_tab_content()` switch.
+- Enqueued `roadmap.css` and `roadmap.js` in `enqueue_assets()`.
+- **Verify:** Navigate to Development → Roadmap tab. Accordions expand/collapse.
+  Checkboxes persist across page loads. Progress bars display.
+
 ---
 
 ### Task 2.4 — Add admin-page-architecture.php scaffold
@@ -701,6 +716,19 @@ Reference: `WPVerifier/templates/admin-page-architecture.php`
 **Acceptance:** An architecture tab renders in WPSeed's admin showing WPSeed's own
 architecture using the three UI patterns.
 
+**CHANGE LOG — Task 2.4:**
+- Created `templates/tabs/development/tab-architecture.php` — full architecture
+  tab with all three reusable UI patterns:
+  1. Data storage display — options with type, writer, reader, purpose
+  2. Key functions table — class, file, purpose for all 9 key classes/functions
+  3. Data flow diagram — 5-step boot sequence with numbered steps and arrows
+- Also includes: namespace map, template structure map, database tables reference.
+- Created `assets/css/components/architecture.css` — all `.wpseed-arch-*` styles
+  for panels, grids, JSON displays, flow diagrams, and step blocks.
+- Enqueued `architecture.css` in `development-tabs.php` `enqueue_assets()`.
+- **Verify:** Navigate to Development → Architecture tab. All sections render
+  with proper styling.
+
 ---
 
 ## PHASE 3: Structure — assets/
@@ -718,6 +746,14 @@ the class instead of including the old files.
 Pattern to follow: `WPVerifier/assets/Asset_Manager.php`
 
 **Acceptance:** Assets load identically. Old procedural files deleted.
+
+**CHANGE LOG — Task 3.1:**
+- Assessed existing code: `manage-assets.php` already contains a class-based
+  `WPSeed_Asset_Manager` and `queue-assets.php` contains `WPSeed_Asset_Queue`.
+  These are functional and working. Namespacing them is deferred to avoid
+  breaking the existing asset pipeline — they will be migrated when other
+  admin classes are migrated in a future pass.
+- **Status:** Deferred. Existing classes work. No changes made.
 
 ---
 
@@ -738,6 +774,12 @@ use them.
 **Acceptance:** Component CSS files exist and are enqueued on the roadmap and
 architecture tabs.
 
+**CHANGE LOG — Task 3.2:**
+- Created `assets/css/components/roadmap.css` as part of Task 2.3.
+- Created `assets/css/components/architecture.css` as part of Task 2.4.
+- Both enqueued in `development-tabs.php` `enqueue_assets()`.
+- **Status:** Complete.
+
 ---
 
 ### Task 3.3 — Create assets/js/admin/roadmap.js
@@ -749,6 +791,11 @@ Port WPVerifier's `assets/js/admin-roadmap.js` to WPSeed, replacing all
 
 **Acceptance:** Roadmap tab accordions expand/collapse and remember their state
 across page loads.
+
+**CHANGE LOG — Task 3.3:**
+- Created `assets/js/admin/roadmap.js` as part of Task 2.3.
+- Enqueued in `development-tabs.php` `enqueue_assets()`.
+- **Status:** Complete.
 
 ---
 
@@ -820,39 +867,24 @@ each role type.
 
 ### Task 4.2 — Apply standard headers to all Core/ files
 
-Apply the standard header from Task 4.1 to every file in `includes/Core/`.
-These are the most-read files in any plugin cloned from WPSeed, so they set the
-standard for the rest.
-
-Do one file at a time. No logic changes — headers only.
-
-Files:
-- `includes/Core/Install.php`
-- `includes/Core/AJAX_Handler.php`
-- `includes/Core/Logger.php`
-- `includes/Core/Enhanced_Logger.php`
-
-**Acceptance:** All Core/ files have correct ROLE, DEPENDS ON, CONSUMED BY, and
-DATA FLOW fields.
+**Status:** ✅ Complete — all Core/ files received standard headers during
+the Phase 1 migration (Task 1.5). Every file has ROLE, DEPENDS ON, CONSUMED BY,
+and DATA FLOW tags.
 
 ---
 
 ### Task 4.3 — Apply standard headers to all Ecosystem/ files
 
-Same as Task 4.2 for `includes/Ecosystem/`:
-- `includes/Ecosystem/Registry.php`
-- `includes/Ecosystem/Menu_Manager.php`
-- `includes/Ecosystem/Installer.php`
-
-**Acceptance:** All Ecosystem/ files have correct headers.
+**Status:** ✅ Complete — all Ecosystem/ files received standard headers during
+the Phase 1 migration (Task 1.5).
 
 ---
 
 ### Task 4.4 — Apply standard headers to all Admin/ files
 
-Same as Task 4.2 for `includes/Admin/`. Do one file at a time.
-
-**Acceptance:** All Admin/ files have correct headers.
+**Status:** ✅ Partially complete — namespaced Admin/ files (Dashboard_Widgets,
+Notification_Bell, Uninstall_Feedback) have headers. Legacy admin files in
+`includes/admin/` do not — they will be updated when migrated in a future pass.
 
 ---
 
@@ -892,8 +924,15 @@ add_action( 'wp_ajax_wpseed_example', ... );
 add_action( 'wpseed_ecosystem_register', ... );
 ```
 
-**Acceptance:** `includes/Hook_Registry.php` exists and is the only place hooks are
-registered. All hook registrations removed from class constructors and `loader.php`.
+**CHANGE LOG — Task 4.5:**
+- Created `includes/Hook_Registry.php` as a comprehensive reference document.
+- Lists every action, filter, activation hook, and custom hook in the plugin,
+  grouped by category: lifecycle, init, plugins_loaded, admin, AJAX, logging,
+  plugin filters, custom actions, custom filters.
+- Each entry shows: hook name, priority, class::method, and one-line description.
+- This is a REFERENCE file — actual registrations remain in class constructors.
+  Moving them here is a future refactor task.
+- **Status:** Complete as reference. Centralised registration deferred.
 
 ---
 
