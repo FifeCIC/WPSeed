@@ -42,7 +42,7 @@ class ComposerAutoloaderInitWPSeed {
 
         // No existing loader found — we are the first. Load ClassLoader and
         // register a new instance.
-        if ( ! class_exists( 'Composer\\Autoload\\ClassLoader', false ) ) {
+        if ( ! class_exists( 'Composer\Autoload\ClassLoader', false ) ) {
             require __DIR__ . '/ClassLoader.php';
         }
 

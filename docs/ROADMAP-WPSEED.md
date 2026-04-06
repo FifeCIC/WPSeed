@@ -1079,3 +1079,22 @@ The command follows the steps documented in Task 6.1 exactly.
 
 **Start with the documentation tasks** (1.1, 1.2, 4.1, 4.6, 6.1) — they cost nothing,
 introduce no risk, and produce the reference material needed for every subsequent task.
+
+---
+
+## Items Deferred to EvolveWP Core
+
+The following items were identified during the WPSeed rebuild as needed but belong
+in EvolveWP Core rather than the boilerplate:
+
+| Item | Why deferred | Where planned |
+|---|---|---|
+| Typed Settings Manager | Every plugin needs it, but it's a runtime feature not a boilerplate concern | EvolveWP Core Phase 1 |
+| Database Abstraction Layer (Table + Query) | Needed by plugins with custom tables, not by the boilerplate itself | EvolveWP Core Phase 1 |
+| Frontend Template System (theme-overridable) | Needed by plugins with public-facing UI | EvolveWP Core Phase 1 |
+| Cloud Services Foundation | Backup, storage, hack detection | EvolveWP Core Phase 2-3 |
+| Webhook System | Event notifications to external services | EvolveWP Core Phase 2 |
+| Asset Manager namespacing | Existing classes work, risk of breaking asset pipeline | Future WPSeed pass |
+| Legacy admin file migration | `includes/admin/*.php` procedural files | Future WPSeed pass |
+| Centralised hook registration | Moving `add_action` calls from constructors to Hook_Registry | Future WPSeed pass |
+| Unmigrated class references | `WPSeed_Developer_Mode`, `WPSeed_Notifications`, `WPSeed_API_Logging` | Future WPSeed pass |
