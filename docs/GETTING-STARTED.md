@@ -411,7 +411,6 @@ my-awesome-plugin/
 - `wpseed_loaded` - Plugin loaded
 - `wpseed_init` - Plugin initialized
 - `wpseed_settings_save_{tab}` - Settings saved
-- `wpseed_admin_mainviews` - Add admin views
 
 ---
 

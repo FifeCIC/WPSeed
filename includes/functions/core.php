@@ -85,7 +85,7 @@ function wpseed_print_js() {
          * @since 2.6.0
          * @param string $js JavaScript code.
          */
-        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        
         echo apply_filters( 'wpseed_queued_js', $js );
 
         unset( $wpseed_queued_js );

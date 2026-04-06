@@ -321,4 +321,4 @@ Translators will be credited in:
 
 **Thank you for helping make WPSeed accessible to more users!**
 
-Last Updated: 2024
+Last Updated: 2025

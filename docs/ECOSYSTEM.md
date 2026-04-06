@@ -2,7 +2,7 @@
 
 ## Overview
 
-WPSeed includes a **Plugin Ecosystem Framework** that enables seamless communication and resource sharing between multiple Ryan Bayne plugins. When 2+ ecosystem plugins are installed, shared views automatically move to WordPress Tools and Settings menus for a unified experience.
+WPSeed includes a **Plugin Ecosystem Framework** that enables seamless communication and resource sharing between multiple ecosystem plugins. When 2+ ecosystem plugins are installed, shared views automatically move to WordPress Tools and Settings menus for a unified experience.
 
 ---
 

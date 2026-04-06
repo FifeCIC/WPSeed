@@ -70,7 +70,6 @@ class WPSeed_Logging_Helper {
         }
         
         if ($data !== null) {
-            // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r -- Debug logging function
             $message .= ' | Data: ' . print_r($data, true);
         }
         
@@ -91,7 +90,6 @@ class WPSeed_Logging_Helper {
         $timestamp = gmdate('Y-m-d H:i:s');
         $log_entry = sprintf('[%s] %s%s', $timestamp, $message, PHP_EOL);
         
-        // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- Logging function
         error_log($log_entry, 3, $file_path);
     }
     

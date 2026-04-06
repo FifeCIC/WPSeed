@@ -90,7 +90,7 @@ class ActionScheduler_DBStore extends ActionScheduler_Store {
 				'status'               => ( $action->is_finished() ? self::STATUS_COMPLETE : self::STATUS_PENDING ),
 				'scheduled_date_gmt'   => $this->get_scheduled_date_string( $action, $date ),
 				'scheduled_date_local' => $this->get_scheduled_date_string_local( $action, $date ),
-				'schedule'             => serialize( $action->get_schedule() ), // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.serialize_serialize
+				'schedule'             => serialize( $action->get_schedule() ),
 				'group_id'             => current( $this->get_group_ids( $action->get_group() ) ),
 				'priority'             => $action->get_priority(),
 			);
@@ -105,7 +105,6 @@ class ActionScheduler_DBStore extends ActionScheduler_Store {
 
 			$insert_sql = $this->build_insert_sql( $data, $unique );
 
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- $insert_sql should be already prepared.
 			$wpdb->query( $insert_sql );
 			$action_id = $wpdb->insert_id;
 
@@ -146,7 +145,6 @@ class ActionScheduler_DBStore extends ActionScheduler_Store {
 		$column_sql      = '`' . implode( '`, `', $columns ) . '`';
 		$placeholder_sql = implode( ', ', $placeholders );
 		$where_clause    = $this->build_where_clause_for_insert( $data, $table_name, $unique );
-		// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQLPlaceholders.UnfinishedPrepare	 -- $column_sql and $where_clause are already prepared. $placeholder_sql is hardcoded.
 		$insert_query    = $wpdb->prepare(
 			"
 INSERT INTO $table_name ( $column_sql )
@@ -154,7 +152,6 @@ SELECT $placeholder_sql FROM DUAL
 WHERE ( $where_clause ) IS NULL",
 			$values
 		);
-		// phpcs:enable
 
 		return $insert_query;
 	}
@@ -181,7 +178,6 @@ WHERE ( $where_clause ) IS NULL",
 		);
 		$pending_status_placeholders = implode( ', ', array_fill( 0, count( $pending_statuses ), '%s' ) );
 
-		// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQLPlaceholders.ReplacementsWrongNumber -- $pending_status_placeholders is hardcoded.
 		$where_clause = $wpdb->prepare(
 			"
 SELECT action_id FROM $table_name
@@ -197,7 +193,6 @@ AND `group_id` = %d
 				)
 			)
 		);
-		// phpcs:enable
 
 		return "$where_clause" . ' LIMIT 1';
 	}
@@ -366,7 +361,7 @@ AND `group_id` = %d
 
 		$hook     = $data->hook;
 		$args     = json_decode( $data->args, true );
-		$schedule = unserialize( $data->schedule ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.serialize_unserialize
+		$schedule = unserialize( $data->schedule );
 
 		$this->validate_args( $args, $data->action_id );
 		$this->validate_schedule( $schedule, $data->action_id );
@@ -577,7 +572,7 @@ AND `group_id` = %d
 		}
 
 		if ( ! empty( $sql_params ) ) {
-			$sql = $wpdb->prepare( $sql, $sql_params ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+			$sql = $wpdb->prepare( $sql, $sql_params );
 		}
 
 		return $sql;

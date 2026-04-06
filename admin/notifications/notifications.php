@@ -8,9 +8,6 @@
  *
  * @package WPSeed
  * @version 1.0.0
- * 
- * @phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery -- Custom table required for performance
- * @phpcs:disable WordPress.DB.DirectDatabaseQuery.NoCaching -- Real-time notification data, caching not applicable
  */
 
 if (!defined('ABSPATH')) {
@@ -189,7 +186,7 @@ class WPSeed_Notifications {
                 $args['offset']
             );
             
-            $notifications = $wpdb->get_results( $query ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+            $notifications = $wpdb->get_results( $query ); 
             
             foreach ($notifications as &$notification) {
                 $notification->data = maybe_unserialize($notification->data);

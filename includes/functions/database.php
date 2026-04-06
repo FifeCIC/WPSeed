@@ -4,11 +4,6 @@
  * 
  * @package WPSeed
  * @version 1.0.0
- * 
- * @phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery -- Helper functions for direct database access
- * @phpcs:disable WordPress.DB.DirectDatabaseQuery.NoCaching -- Caching handled by calling code where appropriate
- * @phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table/column names cannot be prepared
- * @phpcs:disable WordPress.DB.PreparedSQL.NotPrepared -- Dynamic queries by design
  */
 
 if (!defined('ABSPATH')) {

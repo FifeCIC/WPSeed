@@ -393,5 +393,5 @@ A: WPSeed bundles libraries for simplicity. Composer support is optional for adv
 
 ---
 
-**Last Updated**: February 2026  
+**Last Updated**: 2025
 **WPSeed Version**: 1.0.0

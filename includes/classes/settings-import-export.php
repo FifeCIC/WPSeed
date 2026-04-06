@@ -106,7 +106,7 @@ class WPSeed_Settings_Import_Export {
         global $wpdb;
 
         $settings = array();
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+        
         $option_names = $wpdb->get_col(
             $wpdb->prepare(
                 "SELECT option_name FROM {$wpdb->options} WHERE option_name LIKE %s",

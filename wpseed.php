@@ -1,14 +1,14 @@
 <?php
 /**
- * Plugin Name: Seed
+ * Plugin Name: WPSeed Boilerplate
  * Plugin URI: https://www.fifecic.scot
- * Github URI: https://github.com/FifeCIC/wpseed
+ * Github URI: https://github.com/FifeCIC/WPSeed
  * Description: Grow a new plugin using a boilerplate seed framework. 
  * Version: 2.0.0
  * Author: Ryan Bayne
  * Author URI: https://www.ryanbayne.uk
  * Requires at least: 4.4
- * Tested up to: 6.4
+ * Tested up to: 6.7
  * License: GPL3
  * License URI: http://www.gnu.org/licenses/gpl-3.0.txt
  * Domain Path: /languages/

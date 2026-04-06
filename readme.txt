@@ -5,7 +5,7 @@ License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Tags: boilerplate, plugin starter, AI assistant, REST API, developer tools, WP-CLI, modern architecture
 Requires at least: 5.0
-Tested up to: 6.4
+Tested up to: 6.7
 Requires PHP: 7.4
 Stable tag: 1.1.0
 License: GPLv3
@@ -154,8 +154,8 @@ No special upgrade instructions this time.
 * COMPLETED: Phase 8.1 Carbon Fields Settings Examples (theme options, post meta, conditional fields, repeater fields, all field types)
 * COMPLETED: Phase 8.2 Uninstall Feedback Form (modal popup with reason collection)
 * COMPLETED: Phase 8.4 Widget Examples (legacy widgets, dashboard widgets)
+* REMOVED: Premium Licensing System (moved to EvolveWP.Core)
 * REMOVED: WP-CLI code generators from Phase 8 (user decision - not implementing)
-* MOVED: Premium Licensing System from Phase 8 to Phase 15 (future - months away)
 * FOCUS: Phase 8 remaining tasks - Settings import/export, requirements checker, conflict detector, debugging integrations
 
 = 1.2.0 - 2025 =

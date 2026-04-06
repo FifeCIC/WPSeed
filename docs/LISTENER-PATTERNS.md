@@ -359,5 +359,5 @@ See these files for working examples:
 
 ---
 
-**Last Updated**: 2024
+**Last Updated**: 2025
 **WPSeed Version**: 1.0.0

@@ -129,9 +129,8 @@ class WPSeed_Extension_Installer {
         }
 
         $extension_slug = sanitize_text_field( wp_unslash( $_GET['wpseed_install_extension'] ) );
-        $license_key = get_option( 'wpseed_license_key', '' );
 
-        $result = $this->install_extension( $extension_slug, $license_key );
+        $result = $this->install_extension( $extension_slug );
 
         if ( is_wp_error( $result ) ) {
             wp_die( esc_html( $result->get_error_message() ) );
@@ -152,13 +151,12 @@ class WPSeed_Extension_Installer {
         }
 
         $extension_slug = isset( $_POST['extension'] ) ? sanitize_text_field( wp_unslash( $_POST['extension'] ) ) : '';
-        $license_key = get_option( 'wpseed_license_key', '' );
 
         if ( empty( $extension_slug ) ) {
             wp_send_json_error( array( 'message' => __( 'Extension slug is required.', 'wpseed' ) ) );
         }
 
-        $result = $this->install_extension( $extension_slug, $license_key );
+        $result = $this->install_extension( $extension_slug );
 
         if ( is_wp_error( $result ) ) {
             wp_send_json_error( array( 'message' => $result->get_error_message() ) );

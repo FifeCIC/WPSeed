@@ -362,4 +362,4 @@ echo esc_attr($attribute);
 
 ---
 
-Last Updated: 2024
+Last Updated: 2025

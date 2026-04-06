@@ -87,18 +87,7 @@ function wpseed_register_admin_menus() {
         'wpseed_security_audit_page'
     );
     
-    // License - disabled pending full development
-    /*
-    add_submenu_page(
-        'wpseed',
-        __('License', 'wpseed'),
-        __('License', 'wpseed'),
-        'manage_options',
-        'wpseed-license',
-        'wpseed_license_page'
-    );
-    */
-    
+
     // Scheduled Actions (Action Scheduler)
     if (function_exists('as_enqueue_async_action')) {
         add_submenu_page(
@@ -217,15 +206,6 @@ function wpseed_listener_monitor_page() {
 function wpseed_security_audit_page() {
     require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/security-audit.php';
 }
-
-/**
- * License page callback - disabled pending full development
- */
-/*
-function wpseed_license_page() {
-    require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/license-management.php';
-}
-*/
 
 /**
  * Scheduled Actions page callback

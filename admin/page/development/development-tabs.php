@@ -59,7 +59,7 @@ class WPSeed_Admin_Development_Page {
      * Development view wrapper start
      */
     private static function view_wrapper_start() {
-        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only tab navigation
+        
         $current_tab = isset($_GET['tab']) ? sanitize_title(wp_unslash($_GET['tab'])) : 'assets';
         $tabs = self::get_tabs();
         $tab_title = isset($tabs[$current_tab]) ? $tabs[$current_tab] : '';
@@ -89,7 +89,7 @@ class WPSeed_Admin_Development_Page {
      * Display the tabs
      */
     private static function tabs() {
-        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only tab navigation
+        
         $current_tab = isset($_GET['tab']) ? sanitize_title(wp_unslash($_GET['tab'])) : 'theme_info';
         $tabs = self::get_tabs();
         ?>
@@ -113,7 +113,7 @@ class WPSeed_Admin_Development_Page {
      * Display the active tab content
      */
     private static function active_tab_content() {
-        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only tab navigation
+        
         $current_tab = isset($_GET['tab']) ? sanitize_title(wp_unslash($_GET['tab'])) : 'assets';
         
         switch ($current_tab) {

@@ -21,7 +21,7 @@ function wpseed_example_schedule_single_task() {
 // Hook the callback
 add_action( 'wpseed_process_single_item', 'wpseed_handle_single_item' );
 function wpseed_handle_single_item( $item_id ) {
-    // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- Example code for demonstration
+    
     error_log( 'Processing item: ' . $item_id );
     // Your processing logic here
 }
@@ -40,7 +40,7 @@ function wpseed_example_process_batch() {
 
 add_action( 'wpseed_process_batch_item', 'wpseed_handle_batch_item' );
 function wpseed_handle_batch_item( $item_id ) {
-    // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- Example code for demonstration
+    
     error_log( 'Processing batch item: ' . $item_id );
     // Your processing logic here
 }
@@ -57,7 +57,7 @@ function wpseed_example_schedule_recurring() {
 
 add_action( 'wpseed_hourly_sync', 'wpseed_handle_hourly_sync' );
 function wpseed_handle_hourly_sync() {
-    // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- Example code for demonstration
+    
     error_log( 'Running hourly sync' );
     // Your sync logic here
 }
@@ -78,7 +78,7 @@ function wpseed_example_cancel_actions() {
  */
 function wpseed_example_check_scheduled() {
     if ( as_next_scheduled_action( 'wpseed_hourly_sync' ) ) {
-        // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log -- Example code for demonstration
+        
         error_log( 'Hourly sync is scheduled' );
     }
 }

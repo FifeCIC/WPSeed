@@ -171,4 +171,4 @@ Tag: `rtl`, `i18n`
 
 ---
 
-Last Updated: 2024
+Last Updated: 2025

@@ -48,7 +48,7 @@ class WPSeed_Admin_Help {
             'id'        => 'wpseed_support_tab',
             'title'     => __( 'Help &amp; Support', 'wpseed' ),
             'content'   => '<h2>' . __( 'Help &amp; Support', 'wpseed' ) . '</h2>' . 
-            '<p><a href="https://join.skype.com/bVtDaGHd9Nnl/" class="button button-primary">' . __( 'Skype', 'wpseed' ) . '</a> <a href="https://wpseed.slack.com/" class="button button-primary">' . __( 'Slack', 'wpseed' ) . '</a> <a href="https://trello.com/b/PEkkYDAJ/wpseed" class="button button-primary">' . __( 'Trello', 'wpseed' ) . '</a> <a href="https://github.com/RyanBayne/wpseed/issues" class="button button-primary">' . __( 'Bugs', 'wpseed' ) . '</a> </p>',
+            '<p><a href="' . WPSEED_GITHUB . '/issues" class="button button-primary">' . __( 'Report a Bug', 'wpseed' ) . '</a> <a href="' . WPSEED_GITHUB . '/discussions" class="button button-primary">' . __( 'Discussions', 'wpseed' ) . '</a></p>',
         ) );
 
         if( defined( 'WPSEED_GITHUB' ) ) { 
@@ -101,12 +101,7 @@ class WPSeed_Admin_Help {
             '<p><a href="' . WPSEED_DONATE . '" class="button button-primary">' . __( 'Donate', 'wpseed' ) . '</a> <a href="' . WPSEED_GITHUB . '/wiki" class="button button-primary">' . __( 'Update Wiki', 'wpseed' ) . '</a> <a href="' . WPSEED_GITHUB . '/issues" class="button button-primary">' . __( 'Fix Bugs', 'wpseed' ) . '</a></p>',
         ) );
 
-        $screen->add_help_tab( array(
-            'id'        => 'wpseed_newsletter_tab',
-            'title'     => __( 'Newsletter', 'wpseed' ),
-            'content'   => $this->get_newsletter_content(),
-        ) );
-        
+
         $screen->add_help_tab( array(
             'id'        => 'wpseed_credits_tab',
             'title'     => __( 'Credits', 'wpseed' ),
@@ -128,54 +123,11 @@ class WPSeed_Admin_Help {
                         
     }
     
-    private function get_newsletter_content() {
-        wp_enqueue_style( 'wpseed-mailchimp', '//cdn-images.mailchimp.com/embedcode/classic-10_7.css', array(), '10.7' );
-        wp_enqueue_script( 'wpseed-mailchimp-validate', '//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js', array('jquery'), null, true );
-        wp_add_inline_script( 'wpseed-mailchimp-validate', '(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]="EMAIL";ftypes[0]="email";fnames[1]="FNAME";ftypes[1]="text";fnames[2]="LNAME";ftypes[2]="text";}(jQuery));var $mcj = jQuery.noConflict(true);' );
-        
-        return '<h2>' . __( 'Annual Newsletter', 'wpseed' ) . '</h2>' .
-            '<p>' . __( 'Mailchip is used to manage the projects newsletter subscribers list.', 'wpseed' ) . '</p>' .
-            '<p><!-- Begin MailChimp Signup Form -->
-                <style type="text/css">         
-                    #mc_embed_signup{background:#f6fbfd; clear:left; font:14px Helvetica,Arial,sans-serif; }
-                </style>
-                <div id="mc_embed_signup">
-                <form action="//webtechglobal.us9.list-manage.com/subscribe/post?u=99272fe1772de14ff2be02fe6&amp;id=570668cac5" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                    <div id="mc_embed_signup_scroll">
-                    <h2>WPSeed Annual Newsletter</h2>
-                <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
-                <div class="mc-field-group">
-                    <label for="mce-EMAIL">Email Address  <span class="asterisk">*</span>
-                </label>
-                    <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
-                </div>
-                <div class="mc-field-group">
-                    <label for="mce-FNAME">First Name </label>
-                    <input type="text" value="" name="FNAME" class="" id="mce-FNAME">
-                </div>
-                <div class="mc-field-group">
-                    <label for="mce-LNAME">Last Name </label>
-                    <input type="text" value="" name="LNAME" class="" id="mce-LNAME">
-                </div>
-                <p>Powered by <a href="http://eepurl.com/2W_2n" title="MailChimp - email marketing made easy and fun">MailChimp</a></p>
-                    <div id="mce-responses" class="clear">
-                        <div class="response" id="mce-error-response" style="display:none"></div>
-                        <div class="response" id="mce-success-response" style="display:none"></div>
-                    </div>
-                    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_99272fe1772de14ff2be02fe6_570668cac5" tabindex="-1" value=""></div>
-                    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
-                    </div>
-                </form>
-                </div>
-                <!--End mc_embed_signup--></p>';
-    }
-    
     public function faq() {
         $questions = array(
             0 => __( '-- Select a question --', 'wpseed' ),
-            1 => __( "Do I need to give credit to you (Ryan Bayne) if I create a plugin using the seed?", 'wpseed' ),
-            2 => __( "Can I hire you (Ryan Bayne) to create a plugin for me using the seed?", 'wpseed' ),
-            3 => __( "Is there support for anyone using this boilerplate to create a plugin?", 'wpseed' ),
+            1 => __( 'Do I need to give credit if I create a plugin using the seed?', 'wpseed' ),
+            2 => __( 'Is there support for anyone using this boilerplate to create a plugin?', 'wpseed' ),
         );  
         
         ?>
@@ -198,14 +150,10 @@ class WPSeed_Admin_Help {
         
         <ul class="faq-answers">
             <li class="faq-answer" id='q1'>
-                <?php esc_html_e('There are multiple developers mentioned in the documentation of this plugin. You must continue to give credit to them all. Removing credits and any reference to repositories will make it difficult for developers to maintain the plugin you create. If you want my support you must also mentioned myself and the WordPress Plugin Seed on your plugins main page.', 'wpseed');?>
+                <?php esc_html_e('There are multiple developers mentioned in the documentation of this plugin. You must continue to give credit to them all. Removing credits and any reference to repositories will make it difficult for developers to maintain the plugin you create.', 'wpseed');?>
             </li>
             <li class="faq-answer" id='q2'>
-                <p> <?php esc_html_e('Yes, you can hire me (the plugin author) to create a plugin for you and prices vary but start very low. Technically it takes a only a few minutes to create a new plugin using my boilerplate. You can pay me a small fee to start your plugin and then make separate agreements for doing more work to it.', 'wpseed');?> </p>
-            </li>
-
-            <li class="faq-answer" id='q3'>
-                <p> <?php esc_html_e('There is always some level of free support but I will expect to see some credit giving to myself and the project. Support is only offered when getting started or your plugin is already available on the WordPress.org repository. If you require support for a premium/commercial plugin project then you will have to pay a small consultation fee.', 'wpseed');?> </p>
+                <p> <?php esc_html_e('There is always some level of free support. Support is offered when getting started or your plugin is already available on the WordPress.org repository. Use GitHub Issues and Discussions for community support.', 'wpseed');?> </p>
             </li>
      
         </ul>

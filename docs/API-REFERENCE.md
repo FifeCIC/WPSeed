@@ -470,4 +470,4 @@ if (current_user_can('manage_options')) {
 
 ---
 
-Last Updated: 2024
+Last Updated: 2025

@@ -61,7 +61,6 @@ class WPSeed_Admin_Settings {
             $settings[] = include( 'settings/settings-sections.php' );
             $settings[] = include( 'settings/settings-github.php' );
             $settings[] = include( 'settings/settings-repeater-example.php' );
-            $settings[] = include( 'settings/settings-license.php' );
             $settings[] = include( 'settings/settings-tools.php' );
             
             self::$settings = apply_filters( 'wpseed_get_settings_pages', $settings );
@@ -326,7 +325,7 @@ class WPSeed_Admin_Settings {
                                 value="<?php echo esc_attr( $option_value ); ?>"
                                 class="<?php echo esc_attr( $value['class'] ); ?>"
                                 placeholder="<?php echo esc_attr( $value['placeholder'] ); ?>"
-                                <?php echo implode( ' ', array_map( 'esc_attr', $custom_attributes ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                                <?php echo implode( ' ', array_map( 'esc_attr', $custom_attributes ) ); ?>
                                 /> <?php echo wp_kses_post( $description ); ?>
                         </td>
                     </tr><?php
@@ -351,7 +350,7 @@ class WPSeed_Admin_Settings {
                                 style="<?php echo esc_attr( $value['css'] ); ?>"
                                 class="<?php echo esc_attr( $value['class'] ); ?>"
                                 placeholder="<?php echo esc_attr( $value['placeholder'] ); ?>"
-                                <?php echo implode( ' ', array_map( 'esc_attr', $custom_attributes ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                                <?php echo implode( ' ', array_map( 'esc_attr', $custom_attributes ) ); ?>
                                 ><?php echo esc_textarea( $option_value );  ?></textarea>
                         </td>
                     </tr><?php
@@ -374,7 +373,7 @@ class WPSeed_Admin_Settings {
                                 id="<?php echo esc_attr( $value['id'] ); ?>"
                                 style="<?php echo esc_attr( $value['css'] ); ?>"
                                 class="<?php echo esc_attr( $value['class'] ); ?>"
-                                <?php echo implode( ' ', array_map( 'esc_attr', $custom_attributes ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                                <?php echo implode( ' ', array_map( 'esc_attr', $custom_attributes ) ); ?>
                                 <?php echo ( 'multiselect' == $value['type'] ) ? 'multiple="multiple"' : ''; ?>
                                 >
                                 <?php
@@ -421,7 +420,7 @@ class WPSeed_Admin_Settings {
                                                 type="radio"
                                                 style="<?php echo esc_attr( $value['css'] ); ?>"
                                                 class="<?php echo esc_attr( $value['class'] ); ?>"
-                                                <?php echo implode( ' ', array_map( 'esc_attr', $custom_attributes ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                                                <?php echo implode( ' ', array_map( 'esc_attr', $custom_attributes ) ); ?>
                                                 <?php checked( $key, $option_value ); ?>
                                                 /> <?php echo esc_html( $val ); ?></label>
                                         </li>
@@ -484,7 +483,7 @@ class WPSeed_Admin_Settings {
                                 class="<?php echo esc_attr( isset( $value['class'] ) ? $value['class'] : '' ); ?>"
                                 value="1"
                                 <?php checked( $option_value, 'yes'); ?>
-                                <?php echo implode( ' ', array_map( 'esc_attr', $custom_attributes ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                                <?php echo implode( ' ', array_map( 'esc_attr', $custom_attributes ) ); ?>
                             /> <?php echo wp_kses_post( $description ); ?>
                         </label> <?php echo wp_kses_post( $tooltip_html ); ?>
                     <?php
