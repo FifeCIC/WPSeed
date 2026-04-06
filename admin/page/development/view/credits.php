@@ -8,6 +8,12 @@
 
 if (!defined('ABSPATH')) exit;
 
+/**
+ * WPSeed_Admin_Development_Credits Class.
+ *
+ * @since   1.0.0
+ * @version 1.2.0
+ */
 class WPSeed_Admin_Development_Credits {
     
     // Set to false to use AJAX, true to use URL-based navigation
@@ -17,9 +23,24 @@ class WPSeed_Admin_Development_Credits {
         // AJAX handler registered at bottom of file
     }
     
+    /**
+     * Render the Credits & Contributors page output.
+     *
+     * The contributor GET parameter is a read-only display selector used to
+     * pre-select a sidebar entry. It carries no privilege and mutates no state,
+     * so a nonce is not required; capability verification is sufficient.
+     *
+     * @since 1.2.0
+     * @return void
+     */
     public static function output() {
         $contributors = self::get_contributors();
-        $selected = isset($_GET['contributor']) ? sanitize_text_field(wp_unslash($_GET['contributor'])) : 'action_scheduler';
+
+        // Read-only navigation parameter — selects which contributor to highlight
+        // in the sidebar. Restricted to administrators; no state change occurs.
+        $selected = ( current_user_can( 'manage_options' ) && isset( $_GET['contributor'] ) )
+            ? sanitize_key( wp_unslash( $_GET['contributor'] ) )
+            : 'action_scheduler';
         
         wp_enqueue_style('wpseed-accordion-table', WPSEED_PLUGIN_URL . 'assets/css/accordion-table.css', array(), WPSEED_VERSION);
         wp_enqueue_script('wpseed-accordion-table', WPSEED_PLUGIN_URL . 'assets/js/accordion-table.js', array('jquery'), WPSEED_VERSION, true);
@@ -118,7 +139,7 @@ class WPSeed_Admin_Development_Credits {
                         <?php if (isset($contributors[$selected])): 
                             $contributor = $contributors[$selected];
                         ?>
-                            <?php echo self::render_contributor_details($contributor); ?>
+                            <?php echo wp_kses_post(self::render_contributor_details($contributor)); ?>
                         <?php else: ?>
                             <div class="details-placeholder">
                                 <p><?php esc_html_e('Select a contributor to view details', 'wpseed'); ?></p>
@@ -131,7 +152,7 @@ class WPSeed_Admin_Development_Credits {
         
         <script>
         jQuery(document).ready(function($) {
-            var useAjax = <?php echo esc_js( self::USE_URL_NAVIGATION ? 'false' : 'true' ); ?>;
+            var useAjax = <?php echo esc_js(self::USE_URL_NAVIGATION ? 'false' : 'true'); ?>;
             
             $('#category-filter').on('change', function() {
                 var category = $(this).val();
@@ -155,7 +176,7 @@ class WPSeed_Admin_Development_Credits {
                     $.post(ajaxurl, {
                         action: 'wpseed_get_contributor_details',
                         contributor_id: contributorId,
-                        nonce: '<?php echo wp_create_nonce('wpseed_contributor_details'); ?>'
+                        nonce: '<?php echo esc_attr(wp_create_nonce('wpseed_contributor_details')); ?>'
                     }, function(response) {
                         console.log('Response:', response);
                         if (response.success) {

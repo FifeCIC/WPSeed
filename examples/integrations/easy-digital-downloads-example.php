@@ -93,21 +93,29 @@ class WPSeed_EDD_Integration {
     }
 
     /**
-     * Log purchase
+     * Log a completed EDD purchase to the custom purchases table.
+     *
+     * Writes payment data to wpseed_edd_purchases and invalidates the
+     * cached purchases list so subsequent reads reflect the new row.
+     *
+     * @param EDD_Payment $payment The completed payment object.
+     * @return void
      */
     private function log_purchase( $payment ) {
         global $wpdb;
-        
+
         $wpdb->insert(
             $wpdb->prefix . 'wpseed_edd_purchases',
             array(
-                'payment_id'   => $payment->ID,
-                'customer_id'  => $payment->customer_id,
-                'total'        => $payment->total,
+                'payment_id'    => $payment->ID,
+                'customer_id'   => $payment->customer_id,
+                'total'         => $payment->total,
                 'purchase_date' => current_time( 'mysql' ),
             ),
             array( '%d', '%d', '%f', '%s' )
         );
+
+        wp_cache_delete( 'wpseed_edd_purchases', 'wpseed' );
     }
 }
 

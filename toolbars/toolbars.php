@@ -71,7 +71,7 @@ class WPSeed_Toolbars {
             wp_die(esc_html__('Insufficient permissions', 'wpseed'));
         }
 
-        $nonce = isset($_GET['_wpnonce']) ? $_GET['_wpnonce'] : '';
+        $nonce = isset($_GET['_wpnonce']) ? sanitize_text_field(wp_unslash($_GET['_wpnonce'])) : '';
         if (!wp_verify_nonce($nonce, 'wpseed_reset_pointers')) {
             wp_die(esc_html__('Security check failed', 'wpseed'));
         }

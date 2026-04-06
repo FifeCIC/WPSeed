@@ -21,5 +21,5 @@
         "toolbars/toolbars.php",
         "includes/classes/license-manager.php"
     ],
-    "recommendation": "Add third-party library paths to .phpcs.xml.dist exclude patterns to prevent Plugin Check from scanning them."
+    "recommendation": ""
 }

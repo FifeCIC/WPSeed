@@ -3,7 +3,7 @@
  * WPForms Integration Example
  *
  * @package WPSeed/Examples/Integrations
- * @version 1.1.0
+ * @version 1.2.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -87,11 +87,21 @@ class WPSeed_WPForms_Integration {
     }
 
     /**
-     * Log form submission
+     * Log a WPForms submission to the custom submissions table.
+     *
+     * Writes entry data to wpseed_wpforms_submissions and invalidates the
+     * cached submissions list so subsequent reads reflect the new row. A
+     * direct database call is used because there is no WordPress API
+     * equivalent for inserting into a custom table.
+     *
+     * @param int   $entry_id The WPForms entry ID.
+     * @param int   $form_id  The WPForms form ID.
+     * @param array $fields   The submitted field data.
+     * @return void
      */
     private function log_submission( $entry_id, $form_id, $fields ) {
         global $wpdb;
-        
+
         $wpdb->insert(
             $wpdb->prefix . 'wpseed_wpforms_submissions',
             array(
@@ -102,6 +112,9 @@ class WPSeed_WPForms_Integration {
             ),
             array( '%d', '%d', '%s', '%s' )
         );
+
+        // Invalidate cached reads so the new row is visible immediately.
+        wp_cache_delete( 'wpseed_wpforms_submissions', 'wpseed' );
     }
 }
 

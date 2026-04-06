@@ -8,7 +8,7 @@
  * Author: Ryan Bayne
  * Author URI: https://www.ryanbayne.uk
  * Requires at least: 4.4
- * Tested up to: 6.7
+ * Tested up to: 6.9
  * License: GPL3
  * License URI: http://www.gnu.org/licenses/gpl-3.0.txt
  * Domain Path: /languages/
@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {exit;}
                  
 if ( ! class_exists( 'WordPressPluginSeed' ) ) :
 
-    if ( ! defined( 'WPSEED_VERSION' ) ) { define( 'WPSEED_VERSION', '0.0.1' ); }
+    if ( ! defined( 'WPSEED_VERSION' ) ) { define( 'WPSEED_VERSION', '2.0.0' ); }
     if ( ! defined( 'WPSEED_PLUGIN_FILE' ) ) { define( 'WPSEED_PLUGIN_FILE', __FILE__ ); }
     if ( ! defined( 'WPSEED_PLUGIN_BASENAME' ) ) { define( 'WPSEED_PLUGIN_BASENAME', plugin_basename( __FILE__ ) ); }
     if ( ! defined( 'WPSEED_PLUGIN_DIR_PATH' ) ) { define( 'WPSEED_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) ); }
@@ -35,6 +35,11 @@ if ( ! class_exists( 'WordPressPluginSeed' ) ) :
     require_once( WPSEED_PLUGIN_DIR_PATH . 'install.php' );
     include_once( WPSEED_PLUGIN_DIR_PATH . 'functions.php' );
     include_once( WPSEED_PLUGIN_DIR_PATH . 'deprecated.php' );
+    
+    // Load WP Verifier exclusions for open source projects
+    if ( file_exists( WPSEED_PLUGIN_DIR_PATH . 'wp-verifier-exclusions.php' ) ) {
+        include_once( WPSEED_PLUGIN_DIR_PATH . 'wp-verifier-exclusions.php' );
+    }
     
     // Run the plugin
     include_once( WPSEED_PLUGIN_DIR_PATH . 'loader.php' );

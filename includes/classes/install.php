@@ -2,12 +2,13 @@
 /**
  * WPSeed - Installation
  *
- * Installation of post types, taxonomies, database tables, options etc. 
+ * Installation of post types, taxonomies, database tables, options etc.
  *
  * @author   Ryan Bayne
  * @category Installation
  * @package  WPSeed/Core
  * @since    1.0.0
+ * @version  2.0.0
  */
  
 if ( ! defined( 'ABSPATH' ) ) {
@@ -18,6 +19,9 @@ if( !class_exists( 'WPSeed_Install' ) ) :
 
 /**
  * WPSeed_Install Class.
+ *
+ * @since   1.0.0
+ * @version 2.0.0
  */
 class WPSeed_Install { 
     
@@ -67,23 +71,43 @@ class WPSeed_Install {
     * Manual plugin update action. 
     */
     public static function install_action_do_update() {
-        if ( ! empty( $_GET['do_update_wpseed'] ) ) {
-            check_admin_referer( 'wpseed-update' );
-            self::install();
-            WPSeed_Admin_Notices::add_notice( 'update' );
-        }        
+        if ( ! empty( $_GET['do_update_wpseed'] ) && current_user_can( 'manage_options' ) ) {
+            // Nonce verified via _wpseed_update_nonce added to the update notice link.
+            if ( isset( $_GET['_wpseed_update_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpseed_update_nonce'] ) ), 'wpseed_do_update' ) ) {
+                self::install();
+                WPSeed_Admin_Notices::add_notice( 'update' );
+            }
+        }
     }
     
     /**
-    * Forced plugin updating (wpseed do_action) 
-    */
+     * Forced plugin update action triggered by the force_update_wpseed GET parameter.
+     *
+     * Verifies a nonce before acting so that the GET parameter cannot be triggered
+     * by a forged link, satisfying WordPress.Security.NonceVerification.Recommended.
+     * The nonce action 'wpseed_force_update' must be present in the URL; callers
+     * are responsible for generating the URL with wp_nonce_url().
+     *
+     * @since   1.0.0
+     * @version 2.0.0
+     * @return  void
+     */
     public static function install_action_updater_cron() {
-        if ( ! empty( $_GET['force_update_wpseed'] ) ) {
-            check_admin_referer( 'wpseed-force-update' );
-            do_action( 'wpseed_updater_cron' );
-            wp_safe_redirect( admin_url( 'options-general.php?page=wpseed-settings' ) );
-            exit;
-        }        
+        if ( empty( $_GET['force_update_wpseed'] ) || ! current_user_can( 'manage_options' ) ) {
+            return;
+        }
+
+        $wpseed_nonce = isset( $_GET['_wpseed_force_nonce'] )
+            ? sanitize_text_field( wp_unslash( $_GET['_wpseed_force_nonce'] ) )
+            : '';
+
+        if ( ! wp_verify_nonce( $wpseed_nonce, 'wpseed_force_update' ) ) {
+            wp_die( esc_html__( 'Action failed. Please refresh the page and retry.', 'wpseed' ) );
+        }
+
+        do_action( 'wpseed_updater_cron' );
+        wp_safe_redirect( admin_url( 'options-general.php?page=wpseed-settings' ) );
+        exit;
     }
     
     /**
@@ -97,7 +121,9 @@ class WPSeed_Install {
         }
 
         // Ensure needed classes are loaded
-        include_once( 'admin/class.wpseed-admin-notices.php' );
+        if ( ! class_exists( 'WPSeed_Admin_Notices' ) ) {
+            include_once( dirname( __FILE__ ) . '/../admin/admin-notices.php' );
+        }
 
         WPSeed_Admin_Notices::remove_all_notices();
         
@@ -365,15 +391,13 @@ class WPSeed_Install {
 
         foreach ( $files as $file ) {
             if ( wp_mkdir_p( $file['base'] ) && ! file_exists( trailingslashit( $file['base'] ) . $file['file'] ) ) {
-                $filepath = trailingslashit( $file['base'] ) . $file['file'];
-                global $wp_filesystem;
-                if ( empty( $wp_filesystem ) ) {
+                $file_path = trailingslashit( $file['base'] ) . $file['file'];
+                if ( ! function_exists( 'WP_Filesystem' ) ) {
                     require_once ABSPATH . 'wp-admin/includes/file.php';
-                    WP_Filesystem();
                 }
-                if ( $wp_filesystem ) {
-                    $wp_filesystem->put_contents( $filepath, $file['content'], FS_CHMOD_FILE );
-                }
+                WP_Filesystem();
+                global $wp_filesystem;
+                $wp_filesystem->put_contents( $file_path, $file['content'], FS_CHMOD_FILE );
             }
         }
     }
@@ -385,7 +409,9 @@ class WPSeed_Install {
      */
     private static function create_options() {
         // Include settings so that we can run through defaults
-        include_once( 'admin/class.wpseed-admin-settings.php' );
+        if ( ! class_exists( 'WPSeed_Admin_Settings' ) ) {
+            include_once( dirname( __FILE__ ) . '/../admin/admin-settings.php' );
+        }
 
         $settings = WPSeed_Admin_Settings::get_settings_pages();
 
@@ -428,19 +454,19 @@ class WPSeed_Install {
         $sql = "CREATE TABLE {$wpdb->prefix}wpseed_api_calls (
             entryid bigint(20) NOT NULL AUTO_INCREMENT,
             service varchar(100) NOT NULL,
-            type varchar(20) NOT NULL,
-            status varchar(20) NOT NULL,
-            file varchar(255) DEFAULT NULL,
-            function varchar(100) DEFAULT NULL,
-            line int(11) DEFAULT NULL,
+            `type` varchar(20) NOT NULL,
+            `status` varchar(20) NOT NULL,
+            `file` varchar(255) DEFAULT NULL,
+            `function` varchar(100) DEFAULT NULL,
+            `line` int(11) DEFAULT NULL,
             wpuserid bigint(20) DEFAULT NULL,
-            timestamp datetime NOT NULL,
+            `timestamp` datetime NOT NULL,
             description text,
             outcome text,
             PRIMARY KEY (entryid),
             KEY service (service),
-            KEY status (status),
-            KEY timestamp (timestamp)
+            KEY `status` (`status`),
+            KEY `timestamp` (`timestamp`)
         ) $charset_collate;";
         
         dbDelta($sql);
@@ -468,10 +494,10 @@ class WPSeed_Install {
             entryid bigint(20) NOT NULL,
             code varchar(50) NOT NULL,
             error text NOT NULL,
-            line int(11) DEFAULT NULL,
-            function varchar(100) DEFAULT NULL,
-            file varchar(255) DEFAULT NULL,
-            timestamp datetime NOT NULL,
+            `line` int(11) DEFAULT NULL,
+            `function` varchar(100) DEFAULT NULL,
+            `file` varchar(255) DEFAULT NULL,
+            `timestamp` datetime NOT NULL,
             PRIMARY KEY (errorid),
             KEY entryid (entryid),
             KEY code (code)
@@ -493,12 +519,6 @@ class WPSeed_Install {
         ) $charset_collate;";
         
         dbDelta($sql);
-        
-        // Education/Lessons table
-        if (class_exists('WPSeed_Education')) {
-            $education = new WPSeed_Education();
-            $education->create_table();
-        }
         
         // Enhanced Logger table
         $sql = "CREATE TABLE {$wpdb->prefix}wpseed_debug_logs (

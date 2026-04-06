@@ -2,10 +2,10 @@
 /**
  * WPSeed API Logging
  *
- * Database-driven logging system for API activity, errors, and usage tracking
- * 
+ * Database-driven logging system for API activity, errors, and usage tracking.
+ *
  * @package WPSeed
- * @version 1.0.0
+ * @version 2.0.0
  */
 
 if (!defined('ABSPATH')) {
@@ -15,19 +15,38 @@ if (!defined('ABSPATH')) {
 class WPSeed_API_Logging {
     
     /**
-     * Check if logging is ready
+     * Check whether the API logging table exists and logging is enabled.
+     *
+     * The SHOW TABLES query is cached for one hour so it does not run on every
+     * page load. Direct query is necessary — no WordPress API equivalent exists
+     * for checking whether a custom table is present. $wpdb->prepare() is used
+     * for the dynamic table name value.
+     *
+     * @since  2.0.0
+     * @return bool True when logging is enabled and the table exists.
      */
     public static function ready() {
-        $logging_enabled = get_option('wpseed_api_logging_enabled', 'yes');
-        
-        if ($logging_enabled !== 'yes') {
+        $logging_enabled = get_option( 'wpseed_api_logging_enabled', 'yes' );
+
+        if ( $logging_enabled !== 'yes' ) {
             return false;
         }
-        
+
         global $wpdb;
         $table = $wpdb->prefix . 'wpseed_api_calls';
-        
-        return $wpdb->get_var($wpdb->prepare("SHOW TABLES LIKE %s", $table)) === $table;
+
+        // Cache the table-existence result to avoid a direct query on every request.
+        $cache_key    = 'wpseed_api_table_exists_' . $table;
+        $table_exists = wp_cache_get( $cache_key, 'wpseed_api' );
+
+        if ( false === $table_exists ) {
+            // SHOW TABLES on a custom table — no WP API equivalent.
+            $table_exists = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table ) ) === $table;
+            // Cache for one hour; invalidated on plugin activation when the table is created.
+            wp_cache_set( $cache_key, $table_exists, 'wpseed_api', HOUR_IN_SECONDS );
+        }
+
+        return (bool) $table_exists;
     }
     
     /**
@@ -43,9 +62,16 @@ class WPSeed_API_Logging {
         $user_id = get_current_user_id();
         
         if (empty($file) || empty($line)) {
-            $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1);
-            $file = $backtrace[0]['file'] ?? '';
-            $line = $backtrace[0]['line'] ?? '';
+            // Only use backtrace in debug mode to avoid production warnings
+            if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+                $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1);
+                $file = $backtrace[0]['file'] ?? '';
+                $line = $backtrace[0]['line'] ?? '';
+            } else {
+                // Fallback values for production
+                $file = empty($file) ? 'unknown' : $file;
+                $line = empty($line) ? 0 : $line;
+            }
         }
         
         $data = array(
@@ -135,10 +161,18 @@ class WPSeed_API_Logging {
         global $wpdb;
         
         if (empty($file) || empty($function) || empty($line)) {
-            $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1);
-            $file = empty($file) ? ($backtrace[0]['file'] ?? '') : $file;
-            $function = empty($function) ? ($backtrace[0]['function'] ?? '') : $function;
-            $line = empty($line) ? ($backtrace[0]['line'] ?? 0) : $line;
+            // Only use backtrace in debug mode to avoid production warnings
+            if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+                $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1);
+                $file = empty($file) ? ($backtrace[0]['file'] ?? '') : $file;
+                $function = empty($function) ? ($backtrace[0]['function'] ?? '') : $function;
+                $line = empty($line) ? ($backtrace[0]['line'] ?? 0) : $line;
+            } else {
+                // Fallback values for production
+                $file = empty($file) ? 'unknown' : $file;
+                $function = empty($function) ? 'unknown' : $function;
+                $line = empty($line) ? 0 : $line;
+            }
         }
         
         if ($entry_id) {
@@ -194,96 +228,141 @@ class WPSeed_API_Logging {
 
     /**
      * Get API calls
+     *
+     * @since   1.0.0
+     * @version 1.2.0
+     *
+     * @param array $args Query arguments.
+     * @return array
      */
-    public static function get_api_calls($args = array()) {
-        if (!self::ready()) {
+    public static function get_api_calls( $args = array() ) {
+        if ( ! self::ready() ) {
             return array();
         }
-        
+
         global $wpdb;
-        
+
         $defaults = array(
-            'service'    => '',
-            'status'     => '',
-            'type'       => '',
-            'limit'      => 50,
-            'offset'     => 0,
-            'orderby'    => 'timestamp',
-            'order'      => 'DESC',
+            'service' => '',
+            'status'  => '',
+            'type'    => '',
+            'limit'   => 50,
+            'offset'  => 0,
+            'orderby' => 'timestamp',
+            'order'   => 'DESC',
         );
-        
-        $args = wp_parse_args($args, $defaults);
-        
-        $query = "SELECT * FROM {$wpdb->prefix}wpseed_api_calls WHERE 1=1";
+
+        $args = wp_parse_args( $args, $defaults );
+
+        $cache_key = 'wpseed_api_calls_' . md5( serialize( $args ) );
+        $cached    = wp_cache_get( $cache_key, 'wpseed_api' );
+
+        if ( false !== $cached ) {
+            return $cached;
+        }
+
+        // esc_sql() used for table/column identifiers — %i requires WP 6.2+
+        // and this plugin targets WP 4.4+.
+        $safe_table = esc_sql( $wpdb->prefix . 'wpseed_api_calls' );
+
+        $allowed_columns = array( 'entryid', 'service', 'type', 'status', 'function', 'timestamp' );
+        $orderby         = in_array( $args['orderby'], $allowed_columns, true ) ? $args['orderby'] : 'timestamp';
+        $order           = strtoupper( $args['order'] ) === 'ASC' ? 'ASC' : 'DESC';
+        $safe_orderby    = esc_sql( $orderby );
+
+        $where  = 'WHERE 1=1';
         $params = array();
-        
-        if (!empty($args['service'])) {
-            $query .= " AND service = %s";
+
+        if ( ! empty( $args['service'] ) ) {
+            $where   .= ' AND service = %s';
             $params[] = $args['service'];
         }
-        
-        if (!empty($args['status'])) {
-            $query .= " AND status = %s";
+
+        if ( ! empty( $args['status'] ) ) {
+            $where   .= ' AND `status` = %s';
             $params[] = $args['status'];
         }
-        
-        if (!empty($args['type'])) {
-            $query .= " AND type = %s";
+
+        if ( ! empty( $args['type'] ) ) {
+            $where   .= ' AND `type` = %s';
             $params[] = $args['type'];
         }
-        
-        $allowed_columns = array('entryid', 'service', 'type', 'status', 'function', 'timestamp');
-        $orderby = in_array($args['orderby'], $allowed_columns) ? $args['orderby'] : 'timestamp';
-        $order = strtoupper($args['order']) === 'ASC' ? 'ASC' : 'DESC';
-        
-        $query .= " ORDER BY {$orderby} {$order}";
-        $query .= " LIMIT %d OFFSET %d";
-        $params[] = absint($args['limit']);
-        $params[] = absint($args['offset']);
-        
-        $results = $wpdb->get_results($wpdb->prepare($query, $params), ARRAY_A);
-        
+
+        $params[] = absint( $args['limit'] );
+        $params[] = absint( $args['offset'] );
+
+        $sql = $wpdb->prepare(
+            'SELECT * FROM `' . $safe_table . '` ' . $where . ' ORDER BY `' . $safe_orderby . '` ' . $order . ' LIMIT %d OFFSET %d',
+            $params
+        );
+
+        $results = $wpdb->get_results( $sql, ARRAY_A );
+
+        wp_cache_set( $cache_key, $results, 'wpseed_api', 60 );
+
         return $results;
     }
 
     /**
      * Get API call count
+     *
+     * @since   1.0.0
+     * @version 1.2.0
+     *
+     * @param array $args Query arguments.
+     * @return int
      */
-    public static function get_api_call_count($args = array()) {
-        if (!self::ready()) {
+    public static function get_api_call_count( $args = array() ) {
+        if ( ! self::ready() ) {
             return 0;
         }
-        
+
         global $wpdb;
-        
+
         $defaults = array(
             'service' => '',
             'status'  => '',
             'type'    => '',
         );
-        
-        $args = wp_parse_args($args, $defaults);
-        
-        $query = "SELECT COUNT(*) FROM {$wpdb->prefix}wpseed_api_calls WHERE 1=1";
+
+        $args = wp_parse_args( $args, $defaults );
+
+        $cache_key = 'wpseed_api_count_' . md5( serialize( $args ) );
+        $cached    = wp_cache_get( $cache_key, 'wpseed_api' );
+
+        if ( false !== $cached ) {
+            return (int) $cached;
+        }
+
+        // esc_sql() used for table identifier — %i requires WP 6.2+.
+        $safe_table = esc_sql( $wpdb->prefix . 'wpseed_api_calls' );
+
+        $where  = 'WHERE 1=1';
         $params = array();
-        
-        if (!empty($args['service'])) {
-            $query .= " AND service = %s";
+
+        if ( ! empty( $args['service'] ) ) {
+            $where   .= ' AND service = %s';
             $params[] = $args['service'];
         }
-        
-        if (!empty($args['status'])) {
-            $query .= " AND status = %s";
+
+        if ( ! empty( $args['status'] ) ) {
+            $where   .= ' AND `status` = %s';
             $params[] = $args['status'];
         }
-        
-        if (!empty($args['type'])) {
-            $query .= " AND type = %s";
+
+        if ( ! empty( $args['type'] ) ) {
+            $where   .= ' AND `type` = %s';
             $params[] = $args['type'];
         }
-        
-        $count = empty($params) ? $wpdb->get_var($query) : $wpdb->get_var($wpdb->prepare($query, $params));
-        
+
+        if ( ! empty( $params ) ) {
+            $count = $wpdb->get_var( $wpdb->prepare( 'SELECT COUNT(*) FROM `' . $safe_table . '` ' . $where, $params ) );
+        } else {
+            $count = $wpdb->get_var( 'SELECT COUNT(*) FROM `' . $safe_table . '`' );
+        }
+
+        wp_cache_set( $cache_key, $count, 'wpseed_api', 60 );
+
         return (int) $count;
     }
 }

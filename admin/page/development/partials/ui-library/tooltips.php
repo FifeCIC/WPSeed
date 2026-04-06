@@ -379,7 +379,7 @@ defined('ABSPATH') || exit;
     
     <?php
     // Add interactive demo script
-    $tooltip_script = "
+    $wpseed_tooltip_script = "
         jQuery(document).ready(function($) {
             var activeTooltip = null;
             
@@ -569,6 +569,6 @@ defined('ABSPATH') || exit;
         });
     ";
     
-    wp_add_inline_script('jquery', $tooltip_script);
+    wp_add_inline_script('jquery', $wpseed_tooltip_script);
     ?>
 </div>

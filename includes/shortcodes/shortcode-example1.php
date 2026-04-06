@@ -25,7 +25,7 @@ class WPSeed_Shortcode_MyAppointments extends App_Shortcode {
             'title' => array(
                 'type' => 'text',
                 'name' => __( 'Text Example', 'wpseed' ),
-                'value' => '<h3>' . __( 'Test Example', 'wpseed' ) . '</h3>',
+                'value' => __('Test Example', 'wpseed'),
                 'help' => __('Help example for text.', 'wpseed'),
             ),
             'order' => array(

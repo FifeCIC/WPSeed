@@ -3,7 +3,7 @@
  * LearnDash Integration Example
  *
  * @package WPSeed/Examples/Integrations
- * @version 1.1.0
+ * @version 1.2.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -12,6 +12,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * WPSeed_LearnDash_Integration
+ *
+ * @since   1.1.0
+ * @version 1.2.0
  */
 class WPSeed_LearnDash_Integration {
 
@@ -92,11 +95,23 @@ class WPSeed_LearnDash_Integration {
     }
 
     /**
-     * Log course completion
+     * Log course completion to the custom completions table.
+     *
+     * $wpdb->insert() is used because this writes to a custom plugin table
+     * for which no WordPress API equivalent exists. The format array ensures
+     * all values are parameterised. wp_cache_delete() invalidates any cached
+     * reads for this user so subsequent queries reflect the new row.
+     *
+     * @since   1.1.0
+     * @version 1.2.0
+     *
+     * @param int $user_id   ID of the user who completed the course.
+     * @param int $course_id ID of the completed course.
+     * @return void
      */
     private function log_course_completion( $user_id, $course_id ) {
         global $wpdb;
-        
+
         $wpdb->insert(
             $wpdb->prefix . 'wpseed_ld_completions',
             array(
@@ -106,6 +121,9 @@ class WPSeed_LearnDash_Integration {
             ),
             array( '%d', '%d', '%s' )
         );
+
+        // Invalidate cached completion data for this user after the insert.
+        wp_cache_delete( 'wpseed_ld_completions_' . $user_id, 'wpseed_ld' );
     }
 
     /**
@@ -116,11 +134,24 @@ class WPSeed_LearnDash_Integration {
     }
 
     /**
-     * Log quiz result
+     * Log quiz result to the custom quiz results table.
+     *
+     * $wpdb->insert() is used because this writes to a custom plugin table
+     * for which no WordPress API equivalent exists. The format array ensures
+     * all values are parameterised. wp_cache_delete() invalidates any cached
+     * reads for this user so subsequent queries reflect the new row.
+     *
+     * @since   1.1.0
+     * @version 1.2.0
+     *
+     * @param int   $user_id ID of the user who completed the quiz.
+     * @param int   $quiz_id ID of the completed quiz.
+     * @param float $score   Percentage score achieved.
+     * @return void
      */
     private function log_quiz_result( $user_id, $quiz_id, $score ) {
         global $wpdb;
-        
+
         $wpdb->insert(
             $wpdb->prefix . 'wpseed_ld_quiz_results',
             array(
@@ -131,6 +162,9 @@ class WPSeed_LearnDash_Integration {
             ),
             array( '%d', '%d', '%f', '%s' )
         );
+
+        // Invalidate cached quiz result data for this user after the insert.
+        wp_cache_delete( 'wpseed_ld_quiz_results_' . $user_id, 'wpseed_ld' );
     }
 
     /**

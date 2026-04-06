@@ -3,7 +3,7 @@
  * UI Library Status Indicators Partial
  *
  * @package wpseed/Admin/Views/Partials
- * @version 1.0.0
+ * @version 1.2.0
  */
 
 defined('ABSPATH') || exit;
@@ -323,8 +323,8 @@ defined('ABSPATH') || exit;
     </div>
     
     <?php
-    // Add interactive demo script
-    $status_script = "
+    // Add interactive demo script — variable prefixed with wpseed_ to satisfy global variable naming standards.
+    $wpseed_status_script = "
         jQuery(document).ready(function($) {
             // Simulate real-time updates for connection status
             function updateConnectionStatus() {
@@ -431,6 +431,6 @@ defined('ABSPATH') || exit;
         });
     ";
     
-    wp_add_inline_script('jquery', $status_script);
+    wp_add_inline_script('jquery', $wpseed_status_script);
     ?>
 </div>

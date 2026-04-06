@@ -6,6 +6,3 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit;
-
-?>
- 

@@ -55,7 +55,7 @@ class WPSeed_CF7_Integration {
      * Custom field validation
      */
     public function custom_validation( $result, $tag ) {
-        $value = isset( $_POST[ $tag->name ] ) ? trim( wp_unslash( sanitize_text_field( $_POST[ $tag->name ] ) ) ) : '';
+        $value = isset( $tag->values[0] ) ? trim( $tag->values[0] ) : '';
         
         // Example: validate minimum length
         if ( strlen( $value ) < 5 ) {
@@ -66,11 +66,17 @@ class WPSeed_CF7_Integration {
     }
 
     /**
-     * Log form submission
+     * Log form submission to the custom submissions table.
+     *
+     * Writes submission data to wpseed_cf7_submissions and invalidates
+     * the cached submissions list so subsequent reads reflect the new row.
+     *
+     * @param array $data Posted form data from CF7.
+     * @return void
      */
     private function log_submission( $data ) {
         global $wpdb;
-        
+
         $wpdb->insert(
             $wpdb->prefix . 'wpseed_cf7_submissions',
             array(
@@ -80,6 +86,8 @@ class WPSeed_CF7_Integration {
             ),
             array( '%s', '%s', '%s' )
         );
+
+        wp_cache_delete( 'wpseed_cf7_submissions', 'wpseed' );
     }
 }
 

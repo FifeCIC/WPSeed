@@ -1,11 +1,11 @@
 <?php
 /**
  * WPSeed - Accordion Table Example
- * 
- * Demonstrates table with accordion rows and dynamic sidebar
- * 
+ *
+ * Demonstrates table with accordion rows and dynamic sidebar.
+ *
  * @package WPSeed/Examples
- * @version 1.2.0
+ * @version 2.0.0
  */
 
 if (!defined('ABSPATH')) exit;
@@ -13,6 +13,20 @@ if (!defined('ABSPATH')) exit;
 // Enqueue styles and scripts
 wp_enqueue_style('wpseed-accordion-table');
 wp_enqueue_script('wpseed-accordion-table');
+
+/**
+ * Return the nonce action used to sign and verify accordion configure URLs.
+ *
+ * Centralised so the action string is identical at link-generation time
+ * (add_query_arg loop) and at verification time (get selected item block),
+ * preventing any mismatch.
+ *
+ * @since  2.0.0
+ * @return string Nonce action slug.
+ */
+function wpseed_accordion_nonce_action() {
+    return 'wpseed_accordion_configure';
+}
 
 // Example data
 $wpseed_items = array(
@@ -45,10 +59,16 @@ $wpseed_items = array(
     ),
 );
 
-// Get selected item
+// Get selected item — verify the configure nonce before reading $_GET['configure'].
+// wp_verify_nonce() returns false when the nonce is absent or stale, so the
+// default item is shown safely on direct URL access without the nonce arg.
 $wpseed_selected_item = 'item_1';
-if (isset($_GET['configure']) && isset($_GET['_wpnonce']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_GET['_wpnonce'])), 'wpseed_configure_item')) {
-    $wpseed_selected_item = sanitize_text_field(wp_unslash($_GET['configure']));
+if ( current_user_can( 'manage_options' ) && isset( $_GET['configure'] ) ) {
+    $wpseed_raw_nonce = isset( $_GET['_wpnonce'] ) ? sanitize_key( wp_unslash( $_GET['_wpnonce'] ) ) : '';
+    if ( wp_verify_nonce( $wpseed_raw_nonce, wpseed_accordion_nonce_action() ) ) {
+        // sanitize_key() is correct for an array-key slug value.
+        $wpseed_selected_item = sanitize_key( wp_unslash( $_GET['configure'] ) );
+    }
 }
 ?>
 
@@ -115,7 +135,15 @@ if (isset($_GET['configure']) && isset($_GET['_wpnonce']) && wp_verify_nonce(san
                             </div>
                             
                             <div class="item-actions">
-                                <a href="<?php echo esc_url(wp_nonce_url(add_query_arg('configure', $wpseed_item_id), 'wpseed_configure_item')); ?>" class="button button-primary">
+                                <?php
+                                // Sign the configure URL with a nonce so the
+                                // GET parameter can be verified before use.
+                                $wpseed_configure_url = wp_nonce_url(
+                                    add_query_arg( 'configure', $wpseed_item_id ),
+                                    wpseed_accordion_nonce_action()
+                                );
+                                ?>
+                                <a href="<?php echo esc_url( $wpseed_configure_url ); ?>" class="button button-primary">
                                     <?php esc_html_e('Configure', 'wpseed'); ?>
                                 </a>
                                 <button type="button" class="button"><?php esc_html_e('Edit', 'wpseed'); ?></button>

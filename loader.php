@@ -113,7 +113,12 @@ final class WPSeed_Main {
      * Define WPSeed Constants.
      */
     private function define_constants() {
-        
+
+        if ( ! defined( 'WPSEED_LOG_DIR' ) ) {
+            $upload_dir = wp_upload_dir();
+            define( 'WPSEED_LOG_DIR', $upload_dir['basedir'] . '/wpseed-logs/' );
+        }
+
         if ( ! defined( 'WPSEED_MIN_WP_VERSION' ) ) { define( 'WPSEED_MIN_WP_VERSION', $this->min_wp_version ); }
         
         // Main (package) constants.
@@ -191,15 +196,12 @@ final class WPSeed_Main {
         include_once( 'includes/classes/footer-debug.php' );
         include_once( 'includes/classes/rest-controller.php' );
         include_once( 'includes/classes/rest-example.php' );
-        include_once( 'includes/classes/rest-education.php' );
         include_once( 'includes/classes/i18n.php' );
         include_once( 'includes/classes/dependencies.php' );
         include_once( 'includes/classes/multisite.php' );
-        include_once( 'includes/classes/education.php' );
         include_once( 'includes/classes/github-sync.php' );
         include_once( 'includes/functions/github-sync-ajax.php' );
         include_once( 'includes/classes/settings-import-export.php' );
-
         include_once( 'includes/classes/extension-installer.php' );
         include_once( 'includes/classes/library-manager.php' );
         include_once( 'includes/classes/library-update-monitor.php' );
@@ -222,9 +224,6 @@ final class WPSeed_Main {
         add_action( 'rest_api_init', function() {
             $controller = new WPSeed_REST_Example_Controller();
             $controller->register_routes();
-            
-            $education_controller = new WPSeed_REST_Education_Controller();
-            $education_controller->register_routes();
         });
         
         // API System
@@ -265,22 +264,9 @@ final class WPSeed_Main {
     }
 
     /**
-     * Define upload-dependent constants after WordPress init.
-     */
-    public function define_upload_constants() {
-        if ( ! defined( 'WPSEED_LOG_DIR' ) ) {
-            $upload_dir = wp_upload_dir();
-            define( 'WPSEED_LOG_DIR', $upload_dir['basedir'] . '/wpseed-logs/' );
-        }
-    }
-
-    /**
      * Initialise WordPress Plugin Seed when WordPress Initialises.
      */
-    public function init() {                     
-        // Define upload-dependent constants
-        $this->define_upload_constants();
-        
+    public function init() {
         // Before init action.
         do_action( 'wpseed_before_init' );
 

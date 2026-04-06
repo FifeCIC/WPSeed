@@ -31,7 +31,7 @@ class WPSeed_Developer_Mode {
     }
     
     private static function is_localhost() {
-        $server_name = isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : '';
+        $server_name = isset($_SERVER['SERVER_NAME']) ? sanitize_text_field(wp_unslash($_SERVER['SERVER_NAME'])) : '';
         $localhost_patterns = array('localhost', '127.0.0.1', '::1', '.local', '.test', '.dev');
         
         foreach ($localhost_patterns as $pattern) {
@@ -44,7 +44,7 @@ class WPSeed_Developer_Mode {
     }
     
     private static function is_allowed_domain($allowed_domains) {
-        $current_domain = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
+        $current_domain = isset($_SERVER['HTTP_HOST']) ? sanitize_text_field(wp_unslash($_SERVER['HTTP_HOST'])) : '';
         return in_array($current_domain, $allowed_domains);
     }
 }
