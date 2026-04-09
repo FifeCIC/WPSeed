@@ -155,4 +155,43 @@ if ( ! defined( 'ABSPATH' ) ) {
  * wpseed_docs_url                   → Filters the documentation URL.
  * wpseed_support_url                → Filters the support URL.
  * wpseed_donate_url                 → Filters the donation URL.
+ *
+ * ==========================================================================
+ * CONNECTOR SYSTEM FILTERS (since 3.1.0)
+ * ==========================================================================
+ *
+ * wpseed_api_providers       → Filters the list of registered API connector providers.
+ *                               Add, remove, or modify providers at runtime.
+ *                               Fired by WPSeed_API_Directory::get_all_providers().
+ *
+ * wpseed_connector_credentials → Filters credentials before creating a connector.
+ *                                 Allows injecting credentials from environment
+ *                                 variables, secrets managers, or other sources.
+ *                                 Fired by WPSeed_API_Factory::create_from_settings().
+ *                                 Parameters: $args, $provider_id, $account_id.
+ *
+ * wpseed_connector_request_args → Filters wp_remote_request() arguments before
+ *                                  an API call is made. Allows modifying headers,
+ *                                  timeout, or body for specific providers.
+ *                                  Fired by WPSeed\API\Base_API::make_request().
+ *                                  Parameters: $args, $url, $provider_id, $endpoint.
+ *
+ * wpseed_user_can               → Filters the capability check result. Return a
+ *                                  non-null bool to override the default WordPress
+ *                                  capability check. Used by EvolveWP Core to
+ *                                  implement cross-plugin permission logic.
+ *                                  Fired by WPSeed\Core\Capability_Manager::user_can().
+ *                                  Parameters: $result (null), $capability, $user_id.
+ *
+ * ==========================================================================
+ * CAPABILITY SYSTEM ACTIONS (since 3.1.0)
+ * ==========================================================================
+ *
+ * wpseed_capabilities_installed   → Fired after all capabilities have been added
+ *                                    to WordPress roles during plugin activation.
+ *                                    Parameter: $capabilities (all registered caps).
+ *
+ * wpseed_capabilities_uninstalled → Fired after all capabilities have been removed
+ *                                    from WordPress roles during plugin uninstall.
+ *                                    Parameter: $capabilities (all registered caps).
  */

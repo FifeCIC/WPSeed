@@ -113,8 +113,31 @@
 | File | Classification | Description | Delete on clone? |
 |---|---|---|---|
 | `base-api.php` | core | Abstract base class for external API integrations | No |
-| `api-directory.php` | core | API provider directory | No |
-| `api-factory.php` | core | API instance factory | No |
+| `api-directory.php` | core | API provider directory (static + runtime registration) | No |
+| `api-factory.php` | core | API instance factory with Connector_Interface validation | No |
+
+---
+
+## includes/API/ (namespaced, autoloaded via Composer)
+
+| File | Classification | Description | Delete on clone? |
+|---|---|---|---|
+| `Connector_Interface.php` | core | Contract for all API connectors (test, capabilities, execute) | No |
+| `Base_API.php` | core | Abstract base class implementing Connector_Interface | No |
+| `REST_Controller.php` | core | Abstract base class for REST API controllers | No |
+
+---
+
+## includes/Core/ (namespaced, autoloaded via Composer)
+
+| File | Classification | Description | Delete on clone? |
+|---|---|---|---|
+| `AJAX_Handler.php` | core | AJAX endpoint registration and nonce handling | No |
+| `Capability_Manager.php` | core | Custom capability registration, installation, and checking | No |
+| `Enhanced_Logger.php` | core | Query Monitor-style request logger | No |
+| `Install.php` | core | Activation, DB tables, roles, version checking | No |
+| `Logger.php` | core | Structured trace logger with loop detection | No |
+| `Task_Scheduler.php` | optional | Action Scheduler wrapper (loaded with library) | No |
 
 ---
 

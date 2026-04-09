@@ -1076,9 +1076,172 @@ The command follows the steps documented in Task 6.1 exactly.
 | 3.2–3.3 Component CSS/JS | 3 | 1 hour | None | After 2.4 |
 | 5.1–5.3 Class docblocks | 5 | 3 hours | None | Any time |
 | 6.2 CLI clone command | 6 | 3 hours | Low | After 6.1 |
+| **7.1 CSS audit + classify** | **7** | **1–2 hours** | **None** | **Before cloning** |
+| **7.2 Fix --tp- variable refs** | **7** | **1 hour** | **Low** | **After 7.1** |
+| **7.3 Clean up variables.css** | **7** | **30 min** | **Low** | **After 7.2** |
+| **7.4 Delete TradePress CSS** | **7** | **30 min** | **Medium** | **After 7.1** |
+| **7.5 Review core component CSS** | **7** | **2–3 hours** | **Low** | **After 7.2** |
+| **7.6 JavaScript audit** | **7** | **1 hour** | **None** | **After 7.1** |
+| **7.7 Update style-assets.php** | **7** | **1 hour** | **Low** | **After 7.4** |
+| **7.8 ASSET-GUIDE.md** | **7** | **1 hour** | **None** | **After 7.5** |
 
 **Start with the documentation tasks** (1.1, 1.2, 4.1, 4.6, 6.1) — they cost nothing,
 introduce no risk, and produce the reference material needed for every subsequent task.
+
+---
+
+## PHASE 7: CSS & JavaScript Audit
+
+**Priority: HIGH — do before cloning.** Every plugin cloned from WPSeed inherits
+the entire `assets/` directory. Right now that includes ~50 TradePress-specific
+page stylesheets, inconsistent variable naming, duplicate declarations, and no
+clear separation between "core boilerplate styles every plugin needs" and
+"example/demo styles to delete on clone."
+
+If we clone now, every EvolveWP plugin starts with trading platform CSS.
+
+### Task 7.1 — Audit and classify every CSS file
+
+Go through every file in `assets/css/` and classify it:
+
+- **Core** — every plugin needs this (variables, reset, typography, buttons,
+  forms, cards, tables, notices, badges, modals, tooltips, progress, status)
+- **Development** — only needed on the Development admin page (roadmap,
+  architecture, UI library, pointers, diagnostics)
+- **TradePress legacy** — trading-specific, must be deleted on clone
+- **Dead code** — not referenced by any template or enqueue call
+
+Record in a new `docs/ASSET-INVENTORY.md`.
+
+Known TradePress legacy files (at minimum):
+```
+css/pages/trading*.css          (12+ files)
+css/pages/watchlists*.css       (3 files)
+css/pages/scoring*.css          (4 files)
+css/pages/socialplatforms*.css  (5 files)
+css/pages/tradingplatforms*.css (8+ files)
+css/pages/earnings.css
+css/pages/economic-calendar.css
+css/pages/market-correlations.css
+css/pages/news-feed.css
+css/pages/price-forecast.css
+css/pages/sector-rotation.css
+css/pages/stockvip.css
+css/pages/alert-decoder.css
+css/pages/focus-advisor.css
+css/pages/sees-demo.css
+css/components/candlesticks.css
+css/components/heatmaps.css
+css/components/indicators.css
+css/components/mode-indicators.css
+css/layouts/tradingplatforms.css
+css/layouts/automation.css
+css/layouts/research.css
+css/templates/symbol.css
+```
+
+- [ ] Create `docs/ASSET-INVENTORY.md` with classification for every CSS file
+- [ ] Create `docs/ASSET-INVENTORY.md` section for every JS file
+- [ ] Mark TradePress files in FILE-INVENTORY.md as delete-on-clone
+
+### Task 7.2 — Fix variable naming inconsistency
+
+`typography.css` and `reset.css` use `--tp-*` (TradePress) variable names.
+`variables.css` defines `--wpseed-*` variables and has backward-compat aliases
+mapping `--tp-*` to `--wpseed-*`. This works but is messy — every cloned plugin
+carries dead TradePress references.
+
+- [ ] Replace all `--tp-` references in `typography.css` with `--wpseed-`
+- [ ] Replace all `--tp-` references in `reset.css` with `--wpseed-`
+- [ ] Search all component CSS files for remaining `--tp-` references and replace
+- [ ] Remove the backward-compat `--tp-*` aliases from `variables.css`
+- [ ] Remove the duplicate color swatch class block in `variables.css`
+- [ ] Remove `--wpseed-color-bullish` / `--wpseed-color-bearish` trading variables
+      (plugins that need them can add their own)
+- [ ] Verify all development tabs still render correctly after changes
+
+### Task 7.3 — Clean up variables.css
+
+The design token system in `variables.css` is solid but needs tightening:
+
+- [ ] Remove duplicate color swatch class declarations (copy-paste artifact)
+- [ ] Remove trading-specific variables (bullish/bearish)
+- [ ] Remove all `--tp-*` backward compatibility aliases
+- [ ] Add `--wpseed-color-accent` as a secondary brand color token
+- [ ] Add `--wpseed-focus-ring` shorthand for consistent focus styles
+- [ ] Document each variable group with a CSS comment explaining its purpose
+
+### Task 7.4 — Delete TradePress legacy CSS
+
+Remove all files classified as TradePress legacy in Task 7.1. Update
+`style-assets.php` to remove any references to deleted files.
+
+- [ ] Delete all TradePress page CSS files
+- [ ] Delete TradePress component CSS files (candlesticks, heatmaps, etc.)
+- [ ] Delete TradePress layout CSS files (tradingplatforms, automation, research)
+- [ ] Update `style-assets.php` registry
+- [ ] Update CLONING-GUIDE.md to note these are already removed
+- [ ] Verify plugin activates and all admin pages render
+
+### Task 7.5 — Verify core component CSS quality
+
+For each core component CSS file, check:
+
+- [ ] Uses `--wpseed-*` variables consistently (no hardcoded colors/spacing)
+- [ ] All class names use `.wpseed-` prefix (no unprefixed generic classes
+      that could conflict with themes or other plugins)
+- [ ] Responsive — works at WordPress admin's minimum width (782px)
+- [ ] Accessible — focus states, sufficient contrast, no `outline: none`
+- [ ] No `!important` except where overriding WordPress core styles
+- [ ] Dark mode variables in `css/dark/` are complete for each component
+
+Priority files to review first (used on every admin page):
+1. `css/base/variables.css`
+2. `css/base/reset.css`
+3. `css/base/typography.css`
+4. `css/components/buttons.css`
+5. `css/components/forms.css`
+6. `css/components/cards.css`
+7. `css/components/tables.css`
+8. `css/components/notices.css`
+9. `css/components/tooltips.css`
+10. `css/components/modals.css`
+
+### Task 7.6 — JavaScript audit
+
+Same classification exercise for `assets/js/`:
+
+- [ ] Classify each JS file as core / development / legacy / dead
+- [ ] Verify `tooltips.js` works independently (not just inside UI library)
+- [ ] Verify `roadmap.js` localStorage persistence works per-plugin
+- [ ] Check `development-tabs.js` for any hardcoded WPSeed references
+      that should use the plugin prefix variable
+- [ ] Remove any TradePress-specific JS if found
+- [ ] Ensure all JS uses `jQuery` noConflict wrapper or vanilla JS
+
+### Task 7.7 — Update style-assets.php registry
+
+The `style-assets.php` registry only covers a fraction of the CSS files that
+exist. After the audit and cleanup:
+
+- [ ] Add all surviving core component files to the registry
+- [ ] Add correct `pages` arrays so files only load where needed
+- [ ] Add `dependencies` arrays where files depend on variables.css
+- [ ] Remove entries for deleted files
+- [ ] Add a `delete_on_clone` flag to example/demo entries
+
+### Task 7.8 — Create docs/ASSET-GUIDE.md
+
+Developer documentation for the CSS/JS system:
+
+- [ ] Document the variable system (how to use `--wpseed-*` tokens)
+- [ ] Document the component CSS naming convention (`.wpseed-{component}-{element}`)
+- [ ] Document how to add a new component CSS file
+- [ ] Document the `style-assets.php` registry format
+- [ ] Document page-based loading (how assets only load where needed)
+- [ ] Document what to delete vs keep when cloning
+- [ ] Include a visual reference of the core components
+      (buttons, forms, cards, tables, notices, tooltips, modals)
 
 ---
 

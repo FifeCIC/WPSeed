@@ -4,7 +4,7 @@
  * Plugin URI: https://www.fifecic.scot
  * Github URI: https://github.com/FifeCIC/wpseed
  * Description: Grow a new plugin using a WordPress plugin Seed (boilerplate). 
- * Version: 3.0.0
+ * Version: 3.1.0
  * Author: Ryan Bayne
  * Author URI: https://www.ryanbayne.uk
  * Requires at least: 4.4
@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {exit;}
 
 if ( ! class_exists( 'WordPressPluginSeed' ) ) :
 
-    if ( ! defined( 'WPSEED_VERSION' ) ) { define( 'WPSEED_VERSION', '3.0.0' ); }
+    if ( ! defined( 'WPSEED_VERSION' ) ) { define( 'WPSEED_VERSION', '3.1.0' ); }
     if ( ! defined( 'WPSEED_PLUGIN_FILE' ) ) { define( 'WPSEED_PLUGIN_FILE', __FILE__ ); }
     if ( ! defined( 'WPSEED_PLUGIN_BASENAME' ) ) { define( 'WPSEED_PLUGIN_BASENAME', plugin_basename( __FILE__ ) ); }
     if ( ! defined( 'WPSEED_PLUGIN_DIR_PATH' ) ) { define( 'WPSEED_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) ); }

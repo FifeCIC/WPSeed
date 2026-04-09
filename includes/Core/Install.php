@@ -262,7 +262,13 @@ class Install {
 	/**
 	 * Create roles and capabilities.
 	 *
+	 * Creates the Senior Developer role and delegates capability installation
+	 * to the Capability Manager. The Manager handles adding all registered
+	 * caps to their configured default roles.
+	 *
 	 * @since 1.0.0
+	 * @since 3.1.0 Delegates capability installation to Capability_Manager.
+	 *
 	 * @return void
 	 */
 	public static function create_roles() {
@@ -299,54 +305,29 @@ class Install {
 			'import'                 => true, 'list_users'             => true,
 		) );
 
-		$capabilities = self::get_core_capabilities();
-		foreach ( $capabilities as $cap_group ) {
-			foreach ( $cap_group as $cap ) {
-				$wp_roles->add_cap( 'administrator', $cap );
-				$wp_roles->add_cap( 'seniordeveloper', $cap );
+		// Grant all registered capabilities to the seniordeveloper role.
+		$senior_dev = get_role( 'seniordeveloper' );
+		if ( $senior_dev ) {
+			foreach ( Capability_Manager::get_all() as $cap => $args ) {
+				$senior_dev->add_cap( $cap );
 			}
 		}
+
+		// Install capabilities into their configured default roles.
+		Capability_Manager::install();
 	}
 
 	/**
 	 * Remove all custom roles and capabilities.
 	 *
 	 * @since 1.0.0
+	 * @since 3.1.0 Delegates capability removal to Capability_Manager.
+	 *
 	 * @return void
 	 */
 	public static function remove_roles() {
-		global $wp_roles;
-
-		if ( ! class_exists( 'WP_Roles' ) ) {
-			return;
-		}
-		if ( ! isset( $wp_roles ) ) {
-			$wp_roles = new \WP_Roles();
-		}
-
-		$capabilities = self::get_core_capabilities();
-		foreach ( $capabilities as $cap_group ) {
-			foreach ( $cap_group as $cap ) {
-				$wp_roles->remove_cap( 'seniordeveloper', $cap );
-				$wp_roles->remove_cap( 'administrator', $cap );
-			}
-		}
+		Capability_Manager::uninstall();
 		remove_role( 'seniordeveloper' );
-	}
-
-	/**
-	 * Return the custom capabilities for this plugin.
-	 *
-	 * @since 1.0.0
-	 * @return array
-	 */
-	private static function get_core_capabilities() {
-		return array(
-			'core' => array(
-				'manage_wpseed',
-				'code_wpseed',
-			),
-		);
 	}
 
 	/**

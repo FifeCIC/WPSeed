@@ -59,9 +59,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  *   includes/classes/cli-commands.php
  *
  * GROUP 8 — API system (always loaded)
- *   api/base-api.php
- *   api/api-directory.php
- *   api/api-factory.php
+ *   WPSeed\API\Connector_Interface — autoloaded via Composer (contract for connectors)
+ *   WPSeed\API\Base_API             — autoloaded via Composer (abstract base class)
+ *   WPSeed\API\REST_Controller      — autoloaded via Composer (abstract REST base)
+ *   api/api-directory.php            — provider registry (static + runtime)
+ *   api/api-factory.php              — connector instance factory
  *
  * GROUP 9 — Admin only (guarded by is_request('admin'), loaded on init priority 1)
  *   includes/admin/admin.php and all admin sub-files
