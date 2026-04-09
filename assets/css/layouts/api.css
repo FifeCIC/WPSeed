@@ -9,15 +9,15 @@
 
 /* API Configuration Content */
 .wpseed-api-configuration-content {
-    padding: var(--tp-spacing-lg);
+    padding: var(--wpseed-spacing-lg);
 }
 
 /* API Details and Sidebar Layout */
 .wpseed-api-details {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--tp-spacing-xl);
-    margin-bottom: var(--tp-spacing-xl);
+    gap: var(--wpseed-spacing-xl);
+    margin-bottom: var(--wpseed-spacing-xl);
 }
 
 .wpseed-api-main-content {
@@ -31,17 +31,17 @@
 
 /* API Capabilities */
 .wpseed-api-capabilities {
-    padding: var(--tp-spacing-lg);
+    padding: var(--wpseed-spacing-lg);
 }
 
 .wpseed-capability-item {
     display: flex;
     align-items: center;
-    margin-bottom: var(--tp-spacing-md);
+    margin-bottom: var(--wpseed-spacing-md);
 }
 
 .wpseed-capability-item .dashicons {
-    margin-right: var(--tp-spacing-md);
+    margin-right: var(--wpseed-spacing-md);
 }
 
 .wpseed-capability-item.available .dashicons-yes {
@@ -63,18 +63,18 @@
     font-size: 10px;
     padding: 2px 5px;
     border-radius: 3px;
-    margin-left: var(--tp-spacing-xs);
+    margin-left: var(--wpseed-spacing-xs);
 }
 
 /* Endpoints List */
 .wpseed-endpoints-list {
-    padding: var(--tp-spacing-lg);
+    padding: var(--wpseed-spacing-lg);
 }
 
 .wpseed-endpoint-item {
-    margin-bottom: var(--tp-spacing-lg);
-    padding-bottom: var(--tp-spacing-lg);
-    border-bottom: 1px solid var(--tp-color-gray-200);
+    margin-bottom: var(--wpseed-spacing-lg);
+    padding-bottom: var(--wpseed-spacing-lg);
+    border-bottom: 1px solid var(--wpseed-color-gray-200);
 }
 
 .wpseed-endpoint-item:last-child {
@@ -82,12 +82,12 @@
 }
 
 .wpseed-endpoint-name {
-    font-weight: var(--tp-font-weight-semibold);
-    margin-bottom: var(--tp-spacing-xs);
+    font-weight: var(--wpseed-font-weight-semibold);
+    margin-bottom: var(--wpseed-spacing-xs);
 }
 
 .wpseed-endpoint-function {
-    margin-bottom: var(--tp-spacing-xs);
+    margin-bottom: var(--wpseed-spacing-xs);
 }
 
 .wpseed-endpoint-function code {
@@ -97,27 +97,27 @@
 }
 
 .wpseed-endpoint-view-all {
-    margin-top: var(--tp-spacing-lg);
+    margin-top: var(--wpseed-spacing-lg);
     text-align: center;
 }
 
 /* wpseed API Settings */
 .wpseed-api-settings-container {
     margin-top: 30px;
-    padding: var(--tp-spacing-xl);
+    padding: var(--wpseed-spacing-xl);
 }
 
 /* API Credentials Testing */
 .wpseed-api-test-credentials {
-    margin-top: var(--tp-spacing-lg);
-    margin-bottom: var(--tp-spacing-lg);
+    margin-top: var(--wpseed-spacing-lg);
+    margin-bottom: var(--wpseed-spacing-lg);
 }
 
 .wpseed-test-credentials-buttons {
     display: flex;
     flex-direction: row;
-    gap: var(--tp-spacing-md);
-    margin-bottom: var(--tp-spacing-md);
+    gap: var(--wpseed-spacing-md);
+    margin-bottom: var(--wpseed-spacing-md);
 }
 
 /* Animation for tool sections */

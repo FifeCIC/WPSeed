@@ -145,8 +145,8 @@ defined('ABSPATH') || exit;
                     </div>
                 </div>
                 <div class="control-panel-footer">
-                    <button class="tp-button tp-button-small tp-button-secondary"><?php esc_html_e('Reset', 'wpseed'); ?></button>
-                    <button class="tp-button tp-button-small tp-button-primary"><?php esc_html_e('Apply', 'wpseed'); ?></button>
+                    <button class="wpseed-button wpseed-button-small wpseed-button-secondary"><?php esc_html_e('Reset', 'wpseed'); ?></button>
+                    <button class="wpseed-button wpseed-button-small wpseed-button-primary"><?php esc_html_e('Apply', 'wpseed'); ?></button>
                 </div>
             </div>
         </div>

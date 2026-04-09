@@ -22,17 +22,17 @@
 .wpseed-filters {
     display: flex !important;
     flex-wrap: wrap !important;
-    margin-bottom: var(--tp-spacing-xl) !important;
-    padding: var(--tp-spacing-lg) !important;
-    background: var(--tp-color-white) !important;
-    border: var(--tp-border-standard) !important;
-    border-radius: var(--tp-border-radius) !important;
+    margin-bottom: var(--wpseed-spacing-xl) !important;
+    padding: var(--wpseed-spacing-lg) !important;
+    background: var(--wpseed-color-white) !important;
+    border: var(--wpseed-border-standard) !important;
+    border-radius: var(--wpseed-border-radius) !important;
 }
 
 .wpseed-filter-row {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--tp-spacing-lg);
+    gap: var(--wpseed-spacing-lg);
     align-items: flex-end;
 }
 
@@ -41,15 +41,15 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: flex-end;
-    margin-bottom: var(--tp-spacing-lg);
-    gap: var(--tp-spacing-md);
+    margin-bottom: var(--wpseed-spacing-lg);
+    gap: var(--wpseed-spacing-md);
 }
 
 .wpseed-filter-group {
     display: flex;
     flex-wrap: wrap;
     align-items: flex-end;
-    gap: var(--tp-spacing-md);
+    gap: var(--wpseed-spacing-md);
 }
 
 .wpseed-filter-item {
@@ -60,16 +60,16 @@
 
 .wpseed-filter-label {
     font-size: 13px;
-    margin-bottom: var(--tp-spacing-xs);
-    font-weight: var(--tp-font-weight-medium);
+    margin-bottom: var(--wpseed-spacing-xs);
+    font-weight: var(--wpseed-font-weight-medium);
 }
 
 .wpseed-filter-select,
 .wpseed-filter-search-input {
     height: 30px;
-    border: var(--tp-border-standard);
-    border-radius: var(--tp-border-radius);
-    padding: 0 var(--tp-spacing-sm);
+    border: var(--wpseed-border-standard);
+    border-radius: var(--wpseed-border-radius);
+    padding: 0 var(--wpseed-spacing-sm);
 }
 
 .wpseed-filter-search {
@@ -79,33 +79,33 @@
 
 .wpseed-filter-search-input {
     min-width: 200px;
-    margin-right: var(--tp-spacing-xs);
+    margin-right: var(--wpseed-spacing-xs);
 }
 
 .wpseed-filter-search-button {
     height: 30px;
-    padding: 0 var(--tp-spacing-md);
+    padding: 0 var(--wpseed-spacing-md);
 }
 
 .wpseed-filter-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--tp-spacing-xs);
-    margin-top: var(--tp-spacing-md);
+    gap: var(--wpseed-spacing-xs);
+    margin-top: var(--wpseed-spacing-md);
 }
 
 .wpseed-filter-tag {
     display: inline-flex;
     align-items: center;
-    background-color: var(--tp-color-gray-50);
-    border: var(--tp-border-standard);
-    border-radius: var(--tp-border-radius);
+    background-color: var(--wpseed-color-gray-50);
+    border: var(--wpseed-border-standard);
+    border-radius: var(--wpseed-border-radius);
     padding: 3px 8px;
     font-size: 12px;
 }
 
 .wpseed-filter-tag-remove {
-    margin-left: var(--tp-spacing-xs);
+    margin-left: var(--wpseed-spacing-xs);
     cursor: pointer;
     color: #666;
 }
@@ -115,13 +115,13 @@
 }
 
 .wpseed-filter-group {
-    margin-right: var(--tp-spacing-xl) !important;
-    margin-bottom: var(--tp-spacing-md) !important;
+    margin-right: var(--wpseed-spacing-xl) !important;
+    margin-bottom: var(--wpseed-spacing-md) !important;
 }
 
 .wpseed-filter-group label {
-    margin-right: var(--tp-spacing-xs) !important;
-    font-weight: var(--tp-font-weight-semibold) !important;
+    margin-right: var(--wpseed-spacing-xs) !important;
+    font-weight: var(--wpseed-font-weight-semibold) !important;
 }
 
 .wpseed-filter, .wpseed-search {
@@ -134,12 +134,12 @@
 
 .wpseed-date-filter.visible {
     display: flex;
-    gap: var(--tp-spacing-md);
+    gap: var(--wpseed-spacing-md);
     align-items: flex-end;
 }
 
 .wpseed-info-text {
-    margin-top: var(--tp-spacing-md);
+    margin-top: var(--wpseed-spacing-md);
     color: #666;
     font-size: 12px;
 }
@@ -158,7 +158,7 @@
 
 .wpseed-toggle-buttons {
     display: flex;
-    gap: var(--tp-spacing-xs);
+    gap: var(--wpseed-spacing-xs);
 }
 
 .wpseed-toggle-button {
@@ -166,7 +166,7 @@
     align-items: center;
     padding: 5px 10px;
     background: #f5f5f5;
-    border: 1px solid var(--tp-color-gray-300);
+    border: 1px solid var(--wpseed-color-gray-300);
     border-radius: 3px;
     text-decoration: none;
     color: #555;
@@ -181,7 +181,7 @@
 }
 
 .wpseed-toggle-button.active {
-    background: var(--tp-color-white);
+    background: var(--wpseed-color-white);
     border-color: #0073aa;
     color: #0073aa;
 }
@@ -192,14 +192,14 @@
 
 /* Search Input Variations */
 .search-demo {
-    margin-bottom: var(--tp-spacing-lg);
+    margin-bottom: var(--wpseed-spacing-lg);
 }
 
 .search-label {
     display: block;
     font-weight: 600;
-    color: var(--tp-color-text);
-    margin-bottom: var(--tp-spacing-sm);
+    color: var(--wpseed-color-text);
+    margin-bottom: var(--wpseed-spacing-sm);
     font-size: 14px;
 }
 
@@ -214,29 +214,29 @@
 .search-input {
     width: 100%;
     padding: 12px 40px 12px 16px;
-    border: 2px solid var(--tp-color-border);
-    border-radius: var(--tp-border-radius);
+    border: 2px solid var(--wpseed-color-border);
+    border-radius: var(--wpseed-border-radius);
     font-size: 14px;
     line-height: 1.4;
     transition: all 0.2s ease;
-    background: var(--tp-color-white);
-    color: var(--tp-color-text);
+    background: var(--wpseed-color-white);
+    color: var(--wpseed-color-text);
 }
 
 .search-input:focus {
     outline: none;
-    border-color: var(--tp-color-primary);
-    box-shadow: 0 0 0 3px rgba(var(--tp-color-primary-rgb), 0.1);
+    border-color: var(--wpseed-color-primary);
+    box-shadow: 0 0 0 3px rgba(var(--wpseed-color-primary-rgb), 0.1);
 }
 
 .search-input::placeholder {
-    color: var(--tp-color-text-muted);
+    color: var(--wpseed-color-text-muted);
 }
 
 .search-icon {
     position: absolute;
     right: 12px;
-    color: var(--tp-color-text-muted);
+    color: var(--wpseed-color-text-muted);
     pointer-events: none;
     z-index: 2;
 }
@@ -250,7 +250,7 @@
     right: 40px;
     background: none;
     border: none;
-    color: var(--tp-color-text-muted);
+    color: var(--wpseed-color-text-muted);
     cursor: pointer;
     padding: 4px;
     border-radius: 50%;
@@ -259,8 +259,8 @@
 }
 
 .search-clear:hover {
-    color: var(--tp-color-danger);
-    background: rgba(var(--tp-color-danger-rgb), 0.1);
+    color: var(--wpseed-color-danger);
+    background: rgba(var(--wpseed-color-danger-rgb), 0.1);
 }
 
 .search-advanced .search-input {
@@ -272,7 +272,7 @@
     right: 40px;
     background: none;
     border: none;
-    color: var(--tp-color-text-muted);
+    color: var(--wpseed-color-text-muted);
     cursor: pointer;
     padding: 4px;
     border-radius: 50%;
@@ -281,8 +281,8 @@
 }
 
 .search-advanced-toggle:hover {
-    color: var(--tp-color-primary);
-    background: rgba(var(--tp-color-primary-rgb), 0.1);
+    color: var(--wpseed-color-primary);
+    background: rgba(var(--wpseed-color-primary-rgb), 0.1);
 }
 
 .search-advanced-panel {
@@ -290,11 +290,11 @@
     top: 100%;
     left: 0;
     right: 0;
-    background: var(--tp-color-white);
-    border: 2px solid var(--tp-color-border);
+    background: var(--wpseed-color-white);
+    border: 2px solid var(--wpseed-color-border);
     border-top: none;
-    border-radius: 0 0 var(--tp-border-radius) var(--tp-border-radius);
-    padding: var(--tp-spacing-md);
+    border-radius: 0 0 var(--wpseed-border-radius) var(--wpseed-border-radius);
+    padding: var(--wpseed-spacing-md);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     margin-top: -2px;
@@ -302,29 +302,29 @@
 
 .advanced-filter-row {
     display: flex;
-    gap: var(--tp-spacing-md);
+    gap: var(--wpseed-spacing-md);
     align-items: center;
 }
 
 /* Filter Button Groups */
 .filter-demo {
-    margin-bottom: var(--tp-spacing-lg);
+    margin-bottom: var(--wpseed-spacing-lg);
 }
 
 .filter-label {
     display: block;
     font-weight: 600;
-    color: var(--tp-color-text);
-    margin-bottom: var(--tp-spacing-sm);
+    color: var(--wpseed-color-text);
+    margin-bottom: var(--wpseed-spacing-sm);
     font-size: 14px;
 }
 
 .filter-button-group {
     display: inline-flex;
-    border: 2px solid var(--tp-color-border);
-    border-radius: var(--tp-border-radius);
+    border: 2px solid var(--wpseed-color-border);
+    border-radius: var(--wpseed-border-radius);
     overflow: hidden;
-    background: var(--tp-color-white);
+    background: var(--wpseed-color-white);
 }
 
 .filter-button {
@@ -333,14 +333,14 @@
     padding: 12px 16px;
     font-size: 14px;
     font-weight: 500;
-    color: var(--tp-color-text);
+    color: var(--wpseed-color-text);
     cursor: pointer;
     transition: all 0.2s ease;
-    border-right: 1px solid var(--tp-color-border-light);
+    border-right: 1px solid var(--wpseed-color-border-light);
     position: relative;
     display: flex;
     align-items: center;
-    gap: var(--tp-spacing-sm);
+    gap: var(--wpseed-spacing-sm);
 }
 
 .filter-button:last-child {
@@ -348,16 +348,16 @@
 }
 
 .filter-button:hover {
-    background: var(--tp-color-bg-hover);
+    background: var(--wpseed-color-bg-hover);
 }
 
 .filter-button.active {
-    background: var(--tp-color-primary);
-    color: var(--tp-color-white);
+    background: var(--wpseed-color-primary);
+    color: var(--wpseed-color-white);
 }
 
 .filter-count {
-    background: rgba(var(--tp-color-text-rgb), 0.15);
+    background: rgba(var(--wpseed-color-text-rgb), 0.15);
     color: inherit;
     font-size: 12px;
     padding: 2px 6px;
@@ -370,26 +370,26 @@
 }
 
 .filter-performance .filter-gainers.active {
-    background: var(--tp-color-success);
+    background: var(--wpseed-color-success);
 }
 
 .filter-performance .filter-losers.active {
-    background: var(--tp-color-danger);
+    background: var(--wpseed-color-danger);
 }
 
 .filter-performance .filter-volume.active {
-    background: var(--tp-color-info);
+    background: var(--wpseed-color-info);
 }
 
 /* Advanced Filter Panels */
 .filter-panel-demo {
-    margin-bottom: var(--tp-spacing-lg);
+    margin-bottom: var(--wpseed-spacing-lg);
 }
 
 .filter-panel {
-    border: 2px solid var(--tp-color-border);
-    border-radius: var(--tp-border-radius);
-    background: var(--tp-color-white);
+    border: 2px solid var(--wpseed-color-border);
+    border-radius: var(--wpseed-border-radius);
+    background: var(--wpseed-color-white);
     overflow: hidden;
 }
 
@@ -397,9 +397,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--tp-spacing-md);
-    background: var(--tp-color-bg-secondary);
-    border-bottom: 1px solid var(--tp-color-border-light);
+    padding: var(--wpseed-spacing-md);
+    background: var(--wpseed-color-bg-secondary);
+    border-bottom: 1px solid var(--wpseed-color-border-light);
     cursor: pointer;
 }
 
@@ -407,13 +407,13 @@
     margin: 0;
     font-size: 16px;
     font-weight: 600;
-    color: var(--tp-color-text);
+    color: var(--wpseed-color-text);
 }
 
 .filter-panel-toggle {
     background: none;
     border: none;
-    color: var(--tp-color-text-muted);
+    color: var(--wpseed-color-text-muted);
     cursor: pointer;
     padding: 4px;
     border-radius: 50%;
@@ -421,18 +421,18 @@
 }
 
 .filter-panel-toggle:hover {
-    color: var(--tp-color-primary);
-    background: rgba(var(--tp-color-primary-rgb), 0.1);
+    color: var(--wpseed-color-primary);
+    background: rgba(var(--wpseed-color-primary-rgb), 0.1);
 }
 
 .filter-panel-content {
-    padding: var(--tp-spacing-lg);
+    padding: var(--wpseed-spacing-lg);
 }
 
 .filter-row {
     display: flex;
-    gap: var(--tp-spacing-lg);
-    margin-bottom: var(--tp-spacing-md);
+    gap: var(--wpseed-spacing-lg);
+    margin-bottom: var(--wpseed-spacing-md);
 }
 
 .filter-row:last-child {
@@ -447,52 +447,52 @@
 .filter-field-label {
     display: block;
     font-weight: 600;
-    color: var(--tp-color-text);
-    margin-bottom: var(--tp-spacing-sm);
+    color: var(--wpseed-color-text);
+    margin-bottom: var(--wpseed-spacing-sm);
     font-size: 14px;
 }
 
 .filter-input {
     width: 100%;
     padding: 10px 12px;
-    border: 1px solid var(--tp-color-border);
-    border-radius: var(--tp-border-radius);
+    border: 1px solid var(--wpseed-color-border);
+    border-radius: var(--wpseed-border-radius);
     font-size: 14px;
     transition: all 0.2s ease;
 }
 
 .filter-input:focus {
     outline: none;
-    border-color: var(--tp-color-primary);
-    box-shadow: 0 0 0 2px rgba(var(--tp-color-primary-rgb), 0.1);
+    border-color: var(--wpseed-color-primary);
+    box-shadow: 0 0 0 2px rgba(var(--wpseed-color-primary-rgb), 0.1);
 }
 
 .filter-select {
     width: 100%;
     padding: 10px 12px;
-    border: 1px solid var(--tp-color-border);
-    border-radius: var(--tp-border-radius);
+    border: 1px solid var(--wpseed-color-border);
+    border-radius: var(--wpseed-border-radius);
     font-size: 14px;
-    background: var(--tp-color-white);
-    color: var(--tp-color-text);
+    background: var(--wpseed-color-white);
+    color: var(--wpseed-color-text);
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
 .filter-select:focus {
     outline: none;
-    border-color: var(--tp-color-primary);
-    box-shadow: 0 0 0 2px rgba(var(--tp-color-primary-rgb), 0.1);
+    border-color: var(--wpseed-color-primary);
+    box-shadow: 0 0 0 2px rgba(var(--wpseed-color-primary-rgb), 0.1);
 }
 
 .filter-range {
     display: flex;
     align-items: center;
-    gap: var(--tp-spacing-sm);
+    gap: var(--wpseed-spacing-sm);
 }
 
 .filter-range-separator {
-    color: var(--tp-color-text-muted);
+    color: var(--wpseed-color-text-muted);
     font-weight: 500;
 }
 
@@ -500,7 +500,7 @@
     width: 100%;
     height: 6px;
     border-radius: 3px;
-    background: var(--tp-color-border-light);
+    background: var(--wpseed-color-border-light);
     outline: none;
     opacity: 0.7;
     transition: opacity 0.2s;
@@ -516,7 +516,7 @@
     width: 18px;
     height: 18px;
     border-radius: 50%;
-    background: var(--tp-color-primary);
+    background: var(--wpseed-color-primary);
     cursor: pointer;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
@@ -525,7 +525,7 @@
     width: 18px;
     height: 18px;
     border-radius: 50%;
-    background: var(--tp-color-primary);
+    background: var(--wpseed-color-primary);
     cursor: pointer;
     border: none;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -534,59 +534,59 @@
 .filter-slider-labels {
     display: flex;
     justify-content: space-between;
-    margin-top: var(--tp-spacing-xs);
+    margin-top: var(--wpseed-spacing-xs);
     font-size: 12px;
-    color: var(--tp-color-text-muted);
+    color: var(--wpseed-color-text-muted);
 }
 
 .filter-actions {
     display: flex;
-    gap: var(--tp-spacing-md);
+    gap: var(--wpseed-spacing-md);
     justify-content: flex-end;
-    margin-top: var(--tp-spacing-lg);
-    padding-top: var(--tp-spacing-lg);
-    border-top: 1px solid var(--tp-color-border-light);
+    margin-top: var(--wpseed-spacing-lg);
+    padding-top: var(--wpseed-spacing-lg);
+    border-top: 1px solid var(--wpseed-color-border-light);
 }
 
 /* Tag-based Filtering */
 .tag-filter-demo {
-    margin-bottom: var(--tp-spacing-lg);
+    margin-bottom: var(--wpseed-spacing-lg);
 }
 
 .tag-filter-container {
-    background: var(--tp-color-white);
-    border: 2px solid var(--tp-color-border);
-    border-radius: var(--tp-border-radius);
-    padding: var(--tp-spacing-md);
+    background: var(--wpseed-color-white);
+    border: 2px solid var(--wpseed-color-border);
+    border-radius: var(--wpseed-border-radius);
+    padding: var(--wpseed-spacing-md);
 }
 
 .tag-filter-input-wrapper {
     display: flex;
-    gap: var(--tp-spacing-sm);
-    margin-bottom: var(--tp-spacing-md);
+    gap: var(--wpseed-spacing-sm);
+    margin-bottom: var(--wpseed-spacing-md);
 }
 
 .tag-filter-input {
     flex: 1;
     padding: 10px 12px;
-    border: 1px solid var(--tp-color-border);
-    border-radius: var(--tp-border-radius);
+    border: 1px solid var(--wpseed-color-border);
+    border-radius: var(--wpseed-border-radius);
     font-size: 14px;
     transition: all 0.2s ease;
 }
 
 .tag-filter-input:focus {
     outline: none;
-    border-color: var(--tp-color-primary);
-    box-shadow: 0 0 0 2px rgba(var(--tp-color-primary-rgb), 0.1);
+    border-color: var(--wpseed-color-primary);
+    box-shadow: 0 0 0 2px rgba(var(--wpseed-color-primary-rgb), 0.1);
 }
 
 .tag-add-button {
-    background: var(--tp-color-primary);
-    color: var(--tp-color-white);
+    background: var(--wpseed-color-primary);
+    color: var(--wpseed-color-white);
     border: none;
     padding: 10px 12px;
-    border-radius: var(--tp-border-radius);
+    border-radius: var(--wpseed-border-radius);
     cursor: pointer;
     transition: all 0.2s ease;
     display: flex;
@@ -595,24 +595,24 @@
 }
 
 .tag-add-button:hover {
-    background: var(--tp-color-primary-dark);
+    background: var(--wpseed-color-primary-dark);
     transform: translateY(-1px);
 }
 
 .active-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--tp-spacing-sm);
-    margin-bottom: var(--tp-spacing-md);
+    gap: var(--wpseed-spacing-sm);
+    margin-bottom: var(--wpseed-spacing-md);
     min-height: 32px;
 }
 
 .filter-tag {
     display: inline-flex;
     align-items: center;
-    gap: var(--tp-spacing-xs);
-    background: var(--tp-color-primary);
-    color: var(--tp-color-white);
+    gap: var(--wpseed-spacing-xs);
+    background: var(--wpseed-color-primary);
+    color: var(--wpseed-color-white);
     padding: 6px 12px;
     border-radius: 16px;
     font-size: 13px;
@@ -639,21 +639,21 @@
 .suggested-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--tp-spacing-sm);
+    gap: var(--wpseed-spacing-sm);
     align-items: center;
 }
 
 .tag-suggestions-label {
     font-size: 13px;
-    color: var(--tp-color-text-muted);
+    color: var(--wpseed-color-text-muted);
     font-weight: 500;
-    margin-right: var(--tp-spacing-sm);
+    margin-right: var(--wpseed-spacing-sm);
 }
 
 .tag-suggestion {
-    background: var(--tp-color-bg-secondary);
-    color: var(--tp-color-text);
-    border: 1px solid var(--tp-color-border-light);
+    background: var(--wpseed-color-bg-secondary);
+    color: var(--wpseed-color-text);
+    border: 1px solid var(--wpseed-color-border-light);
     padding: 4px 10px;
     border-radius: 12px;
     font-size: 12px;
@@ -662,15 +662,15 @@
 }
 
 .tag-suggestion:hover {
-    background: var(--tp-color-primary);
-    color: var(--tp-color-white);
-    border-color: var(--tp-color-primary);
+    background: var(--wpseed-color-primary);
+    color: var(--wpseed-color-white);
+    border-color: var(--wpseed-color-primary);
     transform: translateY(-1px);
 }
 
 /* Date Range Selectors */
 .date-filter-demo {
-    margin-bottom: var(--tp-spacing-lg);
+    margin-bottom: var(--wpseed-spacing-lg);
 }
 
 .date-input-wrapper {
@@ -681,51 +681,51 @@
 
 .date-input {
     padding: 10px 40px 10px 12px;
-    border: 1px solid var(--tp-color-border);
-    border-radius: var(--tp-border-radius);
+    border: 1px solid var(--wpseed-color-border);
+    border-radius: var(--wpseed-border-radius);
     font-size: 14px;
     transition: all 0.2s ease;
-    background: var(--tp-color-white);
-    color: var(--tp-color-text);
+    background: var(--wpseed-color-white);
+    color: var(--wpseed-color-text);
     min-width: 150px;
 }
 
 .date-input:focus {
     outline: none;
-    border-color: var(--tp-color-primary);
-    box-shadow: 0 0 0 2px rgba(var(--tp-color-primary-rgb), 0.1);
+    border-color: var(--wpseed-color-primary);
+    box-shadow: 0 0 0 2px rgba(var(--wpseed-color-primary-rgb), 0.1);
 }
 
 .date-icon {
     position: absolute;
     right: 12px;
-    color: var(--tp-color-text-muted);
+    color: var(--wpseed-color-text-muted);
     pointer-events: none;
 }
 
 .date-range-wrapper {
     display: flex;
     align-items: center;
-    gap: var(--tp-spacing-md);
+    gap: var(--wpseed-spacing-md);
 }
 
 .date-range-separator {
-    color: var(--tp-color-text-muted);
+    color: var(--wpseed-color-text-muted);
     font-weight: 500;
 }
 
 .date-preset-buttons {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--tp-spacing-sm);
+    gap: var(--wpseed-spacing-sm);
 }
 
 .date-preset-button {
-    background: var(--tp-color-bg-secondary);
-    color: var(--tp-color-text);
-    border: 1px solid var(--tp-color-border);
+    background: var(--wpseed-color-bg-secondary);
+    color: var(--wpseed-color-text);
+    border: 1px solid var(--wpseed-color-border);
     padding: 8px 16px;
-    border-radius: var(--tp-border-radius);
+    border-radius: var(--wpseed-border-radius);
     font-size: 13px;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -733,36 +733,36 @@
 }
 
 .date-preset-button:hover {
-    background: var(--tp-color-bg-hover);
-    border-color: var(--tp-color-primary);
+    background: var(--wpseed-color-bg-hover);
+    border-color: var(--wpseed-color-primary);
 }
 
 .date-preset-button.active {
-    background: var(--tp-color-primary);
-    color: var(--tp-color-white);
-    border-color: var(--tp-color-primary);
+    background: var(--wpseed-color-primary);
+    color: var(--wpseed-color-white);
+    border-color: var(--wpseed-color-primary);
 }
 
 /* Sorting Controls */
 .sort-demo {
-    margin-bottom: var(--tp-spacing-lg);
+    margin-bottom: var(--wpseed-spacing-lg);
 }
 
 .sort-label {
     display: block;
     font-weight: 600;
-    color: var(--tp-color-text);
-    margin-bottom: var(--tp-spacing-sm);
+    color: var(--wpseed-color-text);
+    margin-bottom: var(--wpseed-spacing-sm);
     font-size: 14px;
 }
 
 .sort-select {
     padding: 10px 12px;
-    border: 1px solid var(--tp-color-border);
-    border-radius: var(--tp-border-radius);
+    border: 1px solid var(--wpseed-color-border);
+    border-radius: var(--wpseed-border-radius);
     font-size: 14px;
-    background: var(--tp-color-white);
-    color: var(--tp-color-text);
+    background: var(--wpseed-color-white);
+    color: var(--wpseed-color-text);
     cursor: pointer;
     transition: all 0.2s ease;
     min-width: 200px;
@@ -770,16 +770,16 @@
 
 .sort-select:focus {
     outline: none;
-    border-color: var(--tp-color-primary);
-    box-shadow: 0 0 0 2px rgba(var(--tp-color-primary-rgb), 0.1);
+    border-color: var(--wpseed-color-primary);
+    box-shadow: 0 0 0 2px rgba(var(--wpseed-color-primary-rgb), 0.1);
 }
 
 .sort-button-group {
     display: inline-flex;
-    border: 2px solid var(--tp-color-border);
-    border-radius: var(--tp-border-radius);
+    border: 2px solid var(--wpseed-color-border);
+    border-radius: var(--wpseed-border-radius);
     overflow: hidden;
-    background: var(--tp-color-white);
+    background: var(--wpseed-color-white);
 }
 
 .sort-button {
@@ -788,14 +788,14 @@
     padding: 12px 16px;
     font-size: 14px;
     font-weight: 500;
-    color: var(--tp-color-text);
+    color: var(--wpseed-color-text);
     cursor: pointer;
     transition: all 0.2s ease;
-    border-right: 1px solid var(--tp-color-border-light);
+    border-right: 1px solid var(--wpseed-color-border-light);
     position: relative;
     display: flex;
     align-items: center;
-    gap: var(--tp-spacing-sm);
+    gap: var(--wpseed-spacing-sm);
 }
 
 .sort-button:last-child {
@@ -803,12 +803,12 @@
 }
 
 .sort-button:hover {
-    background: var(--tp-color-bg-hover);
+    background: var(--wpseed-color-bg-hover);
 }
 
 .sort-button.active {
-    background: var(--tp-color-primary);
-    color: var(--tp-color-white);
+    background: var(--wpseed-color-primary);
+    color: var(--wpseed-color-white);
 }
 
 .sort-direction {
@@ -824,7 +824,7 @@
 @media (max-width: 768px) {
     .filter-row {
         flex-direction: column;
-        gap: var(--tp-spacing-md);
+        gap: var(--wpseed-spacing-md);
     }
     
     .filter-button-group {
@@ -841,7 +841,7 @@
     .date-range-wrapper {
         flex-direction: column;
         align-items: stretch;
-        gap: var(--tp-spacing-sm);
+        gap: var(--wpseed-spacing-sm);
     }
     
     .date-preset-buttons {
@@ -860,7 +860,7 @@
     
     .advanced-filter-row {
         flex-direction: column;
-        gap: var(--tp-spacing-sm);
+        gap: var(--wpseed-spacing-sm);
     }
     
     .tag-filter-input-wrapper {

@@ -15,8 +15,8 @@
 
 .wpseed-grid {
     display: grid !important;
-    grid-gap: var(--tp-spacing-lg) !important;
-    margin-bottom: var(--tp-spacing-xl) !important;
+    grid-gap: var(--wpseed-spacing-lg) !important;
+    margin-bottom: var(--wpseed-spacing-xl) !important;
 }
 
 .wpseed-grid-2col {
@@ -86,15 +86,15 @@
 .wpseed-alerts-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: var(--tp-spacing-xl);
-    margin-bottom: var(--tp-spacing-xl);
+    gap: var(--wpseed-spacing-xl);
+    margin-bottom: var(--wpseed-spacing-xl);
 }
 
 /* Statistics Grid Layout */
 .wpseed-statistics-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: var(--tp-spacing-xl);
+    gap: var(--wpseed-spacing-xl);
     margin-bottom: 30px;
 }
 
@@ -102,7 +102,7 @@
 .wpseed-charts-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--tp-spacing-xl);
+    gap: var(--wpseed-spacing-xl);
     margin-bottom: 30px;
 }
 

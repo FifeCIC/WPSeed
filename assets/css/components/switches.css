@@ -8,19 +8,19 @@
  */
 
 /* Base switch styles */
-.tp-switch {
+.wpseed-switch {
   width: 60px;
   height: 30px;
   position: relative;
   display: inline-block;
 }
 
-.tp-switch input[type="checkbox"] {
+.wpseed-switch input[type="checkbox"] {
   visibility: hidden;
   display: none;
 }
 
-.tp-switch .slider {
+.wpseed-switch .slider {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -34,7 +34,7 @@
   transition: 0.2s;
 }
 
-.tp-switch .slider:before {
+.wpseed-switch .slider:before {
   position: absolute;
   content: "";
   width: 100%;
@@ -45,32 +45,32 @@
   transition: 0.2s;
 }
 
-.tp-switch input:checked + .slider:before {
+.wpseed-switch input:checked + .slider:before {
   transform: translateX(4px);
   background-color: #4CAF50;
 }
 
-.tp-switch input:checked + .slider {
+.wpseed-switch input:checked + .slider {
   box-shadow: 0 0 0 2px #4CAF50, 0 0 8px #4CAF50;
 }
 
 /* Enhanced switch with label layout */
-.tp-switch-with-info {
+.wpseed-switch-with-info {
   display: flex;
   align-items: flex-start;
   margin-bottom: 20px;
 }
 
-.tp-switch-content {
+.wpseed-switch-content {
   margin-left: 15px;
 }
 
-.tp-switch-title {
+.wpseed-switch-title {
   font-weight: 600;
   margin-bottom: 5px;
 }
 
-.tp-switch-description {
+.wpseed-switch-description {
   color: #666;
   margin-top: 3px;
   font-size: 13px;

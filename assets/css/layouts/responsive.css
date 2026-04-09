@@ -17,7 +17,7 @@
     }
     
     .wpseed-discord-card + .wpseed-discord-card {
-        margin-top: var(--tp-spacing-xl);
+        margin-top: var(--wpseed-spacing-xl);
     }
 }
 
@@ -38,7 +38,7 @@
     
     .wpseed-button {
         width: 100% !important;
-        margin-bottom: var(--tp-spacing-xs) !important;
+        margin-bottom: var(--wpseed-spacing-xs) !important;
     }
     
     .api-quick-actions {
@@ -95,7 +95,7 @@
     
     .wpseed-form-actions .button {
         width: 100%;
-        margin-bottom: var(--tp-spacing-xs);
+        margin-bottom: var(--wpseed-spacing-xs);
     }
     
     .api-main-section {

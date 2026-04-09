@@ -132,10 +132,10 @@ p.wpseed-actions {
 
 /* Coming Soon Notice */
 .wpseed-coming-soon-notice {
-    padding: var(--tp-spacing-xl);
+    padding: var(--wpseed-spacing-xl);
     background: #f0f0f0;
     border-left: 4px solid #ccc;
-    margin: var(--tp-spacing-xl) 0;
+    margin: var(--wpseed-spacing-xl) 0;
 }
 
 /* Demo Mode and Live Mode Indicators */

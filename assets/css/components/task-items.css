@@ -22,12 +22,12 @@
 
 /* Task Item Container */
 .wpseed-task-item {
-    background: var(--tp-color-white);
-    border: var(--tp-border-standard);
-    border-radius: var(--tp-border-radius);
-    padding: var(--tp-spacing-xl);
-    margin-bottom: var(--tp-spacing-xl);
-    box-shadow: var(--tp-shadow);
+    background: var(--wpseed-color-white);
+    border: var(--wpseed-border-standard);
+    border-radius: var(--wpseed-border-radius);
+    padding: var(--wpseed-spacing-xl);
+    margin-bottom: var(--wpseed-spacing-xl);
+    box-shadow: var(--wpseed-shadow);
 }
 
 /* Task Item Header */
@@ -35,23 +35,23 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--tp-spacing-lg);
-    padding-bottom: var(--tp-spacing-md);
-    border-bottom: var(--tp-border-standard);
+    margin-bottom: var(--wpseed-spacing-lg);
+    padding-bottom: var(--wpseed-spacing-md);
+    border-bottom: var(--wpseed-border-standard);
 }
 
 .wpseed-task-item-title {
     margin: 0;
     font-size: 18px;
-    font-weight: var(--tp-font-weight-semibold);
+    font-weight: var(--wpseed-font-weight-semibold);
 }
 
 .wpseed-task-item-badge {
     display: inline-block;
     padding: 3px 8px;
-    border-radius: var(--tp-border-radius-sm);
+    border-radius: var(--wpseed-border-radius-sm);
     font-size: 12px;
-    font-weight: var(--tp-font-weight-semibold);
+    font-weight: var(--wpseed-font-weight-semibold);
     text-transform: uppercase;
 }
 
@@ -77,14 +77,14 @@
 
 /* Task Item Body */
 .wpseed-task-item-body {
-    margin-bottom: var(--tp-spacing-lg);
+    margin-bottom: var(--wpseed-spacing-lg);
 }
 
 .wpseed-task-item-meta {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--tp-spacing-md);
-    margin-bottom: var(--tp-spacing-md);
+    gap: var(--wpseed-spacing-md);
+    margin-bottom: var(--wpseed-spacing-md);
 }
 
 .wpseed-task-item-meta-item {
@@ -99,11 +99,11 @@
 }
 
 .wpseed-task-item-meta-value {
-    font-weight: var(--tp-font-weight-medium);
+    font-weight: var(--wpseed-font-weight-medium);
 }
 
 .wpseed-task-item-description {
-    margin-top: var(--tp-spacing-md);
+    margin-top: var(--wpseed-spacing-md);
     line-height: 1.5;
 }
 
@@ -111,9 +111,9 @@
 .wpseed-task-item-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--tp-spacing-sm);
-    padding-top: var(--tp-spacing-md);
-    border-top: var(--tp-border-standard);
+    gap: var(--wpseed-spacing-sm);
+    padding-top: var(--wpseed-spacing-md);
+    border-top: var(--wpseed-border-standard);
 }
 
 /* Legacy classes mapping for backward compatibility */

@@ -146,7 +146,7 @@ defined('ABSPATH') || exit;
                     <span class="spinner is-active"></span>
                     <p><?php esc_html_e('Loading more items...', 'wpseed'); ?></p>
                 </div>
-                <button class="tp-button tp-button-secondary infinite-scroll-button">
+                <button class="wpseed-button wpseed-button-secondary infinite-scroll-button">
                     <?php esc_html_e('Load More', 'wpseed'); ?>
                 </button>
             </div>

@@ -634,7 +634,7 @@
 .wpseed-data-table-container {
     overflow-x: auto;
     margin-bottom: 20px;
-    border: 1px solid var(--tp-color-border);
+    border: 1px solid var(--wpseed-color-border);
     border-radius: 4px;
 }
 
@@ -647,17 +647,17 @@
 .wpseed-data-table td {
     padding: 12px 15px;
     text-align: left;
-    border-bottom: 1px solid var(--tp-color-border);
+    border-bottom: 1px solid var(--wpseed-color-border);
 }
 
 .wpseed-data-table th {
-    background-color: var(--tp-color-background-light);
+    background-color: var(--wpseed-color-background-light);
     font-weight: 600;
-    color: var(--tp-color-text);
+    color: var(--wpseed-color-text);
 }
 
 .wpseed-data-table tr:hover {
-    background-color: var(--tp-color-background-hover);
+    background-color: var(--wpseed-color-background-hover);
 }
 
 .wpseed-data-table th.sortable {
@@ -690,21 +690,21 @@
 
 .symbol-cell .symbol {
     font-weight: 600;
-    color: var(--tp-color-text);
+    color: var(--wpseed-color-text);
 }
 
 .symbol-cell .company {
     font-size: 12px;
-    color: var(--tp-color-text-light);
+    color: var(--wpseed-color-text-light);
 }
 
 .wpseed-data-table td.positive {
-    color: var(--tp-color-success);
+    color: var(--wpseed-color-success);
     font-weight: 500;
 }
 
 .wpseed-data-table td.negative {
-    color: var(--tp-color-error);
+    color: var(--wpseed-color-error);
     font-weight: 500;
 }
 
@@ -720,8 +720,8 @@
     flex: 1;
     min-width: 180px;
     padding: 15px;
-    background-color: var(--tp-color-background);
-    border: 1px solid var(--tp-color-border);
+    background-color: var(--wpseed-color-background);
+    border: 1px solid var(--wpseed-color-border);
     border-radius: 4px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
@@ -736,11 +736,11 @@
 .wpseed-metric-header h5 {
     margin: 0;
     font-size: 14px;
-    color: var(--tp-color-text-light);
+    color: var(--wpseed-color-text-light);
 }
 
 .wpseed-metric-info {
-    color: var(--tp-color-text-light);
+    color: var(--wpseed-color-text-light);
     cursor: help;
 }
 
@@ -748,7 +748,7 @@
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 5px;
-    color: var(--tp-color-text);
+    color: var(--wpseed-color-text);
 }
 
 .wpseed-metric-trend {
@@ -759,11 +759,11 @@
 }
 
 .wpseed-metric-trend.positive {
-    color: var(--tp-color-success);
+    color: var(--wpseed-color-success);
 }
 
 .wpseed-metric-trend.negative {
-    color: var(--tp-color-error);
+    color: var(--wpseed-color-error);
 }
 
 /* Trade Statistics Styles */
@@ -772,8 +772,8 @@
 }
 
 .wpseed-stats-card {
-    background-color: var(--tp-color-background);
-    border: 1px solid var(--tp-color-border);
+    background-color: var(--wpseed-color-background);
+    border: 1px solid var(--wpseed-color-border);
     border-radius: 4px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
@@ -783,14 +783,14 @@
     justify-content: space-between;
     align-items: center;
     padding: 15px;
-    border-bottom: 1px solid var(--tp-color-border);
-    background-color: var(--tp-color-background-light);
+    border-bottom: 1px solid var(--wpseed-color-border);
+    background-color: var(--wpseed-color-background-light);
 }
 
 .wpseed-stats-header h5 {
     margin: 0;
     font-size: 16px;
-    color: var(--tp-color-text);
+    color: var(--wpseed-color-text);
 }
 
 .wpseed-stats-body {
@@ -810,27 +810,27 @@
 
 .wpseed-stats-label {
     font-size: 12px;
-    color: var(--tp-color-text-light);
+    color: var(--wpseed-color-text-light);
     margin-bottom: 5px;
 }
 
 .wpseed-stats-value {
     font-size: 18px;
     font-weight: 600;
-    color: var(--tp-color-text);
+    color: var(--wpseed-color-text);
 }
 
 .wpseed-stats-value.positive {
-    color: var(--tp-color-success);
+    color: var(--wpseed-color-success);
 }
 
 .wpseed-stats-value.negative {
-    color: var(--tp-color-error);
+    color: var(--wpseed-color-error);
 }
 
 .wpseed-stats-footer {
     padding: 15px;
-    border-top: 1px solid var(--tp-color-border);
+    border-top: 1px solid var(--wpseed-color-border);
 }
 
 .wpseed-win-rate-bar {
@@ -839,14 +839,14 @@
 
 .wpseed-win-rate-track {
     height: 20px;
-    background-color: var(--tp-color-background-light);
+    background-color: var(--wpseed-color-background-light);
     border-radius: 10px;
     overflow: hidden;
 }
 
 .wpseed-win-rate-fill {
     height: 100%;
-    background-color: var(--tp-color-primary);
+    background-color: var(--wpseed-color-primary);
     border-radius: 10px;
     position: relative;
 }
@@ -856,7 +856,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: var(--tp-color-background);
+    color: var(--wpseed-color-background);
     font-size: 12px;
     font-weight: 600;
     white-space: nowrap;
@@ -864,8 +864,8 @@
 
 /* Market Scanner Styles */
 .wpseed-market-scanner {
-    background-color: var(--tp-color-background);
-    border: 1px solid var(--tp-color-border);
+    background-color: var(--wpseed-color-background);
+    border: 1px solid var(--wpseed-color-border);
     border-radius: 4px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     margin-bottom: 20px;
@@ -876,14 +876,14 @@
     justify-content: space-between;
     align-items: center;
     padding: 15px;
-    border-bottom: 1px solid var(--tp-color-border);
-    background-color: var(--tp-color-background-light);
+    border-bottom: 1px solid var(--wpseed-color-border);
+    background-color: var(--wpseed-color-background-light);
 }
 
 .wpseed-scanner-header h5 {
     margin: 0;
     font-size: 16px;
-    color: var(--tp-color-text);
+    color: var(--wpseed-color-text);
 }
 
 .wpseed-scanner-controls {
@@ -905,13 +905,13 @@
 .wpseed-scanner-table td {
     padding: 12px 15px;
     text-align: left;
-    border-bottom: 1px solid var(--tp-color-border);
+    border-bottom: 1px solid var(--wpseed-color-border);
 }
 
 .wpseed-scanner-table th {
-    background-color: var(--tp-color-background-light);
+    background-color: var(--wpseed-color-background-light);
     font-weight: 600;
-    color: var(--tp-color-text);
+    color: var(--wpseed-color-text);
 }
 
 .wpseed-signal {
@@ -924,23 +924,23 @@
 
 .wpseed-signal.bullish {
     background-color: rgba(0, 163, 42, 0.1);
-    color: var(--tp-color-success);
+    color: var(--wpseed-color-success);
 }
 
 .wpseed-signal.bearish {
     background-color: rgba(214, 54, 56, 0.1);
-    color: var(--tp-color-error);
+    color: var(--wpseed-color-error);
 }
 
 .wpseed-signal.neutral {
     background-color: rgba(220, 220, 222, 0.5);
-    color: var(--tp-color-text-light);
+    color: var(--wpseed-color-text-light);
 }
 
 .wpseed-strength-bar {
     width: 100%;
     height: 8px;
-    background-color: var(--tp-color-background-light);
+    background-color: var(--wpseed-color-background-light);
     border-radius: 4px;
     overflow: hidden;
 }
@@ -951,21 +951,21 @@
 }
 
 .wpseed-strength-fill.bullish {
-    background-color: var(--tp-color-success);
+    background-color: var(--wpseed-color-success);
 }
 
 .wpseed-strength-fill.bearish {
-    background-color: var(--tp-color-error);
+    background-color: var(--wpseed-color-error);
 }
 
 .wpseed-strength-fill.neutral {
-    background-color: var(--tp-color-text-light);
+    background-color: var(--wpseed-color-text-light);
 }
 
 /* Technical Analysis Card Styles */
 .wpseed-technical-card {
-    background-color: var(--tp-color-background);
-    border: 1px solid var(--tp-color-border);
+    background-color: var(--wpseed-color-background);
+    border: 1px solid var(--wpseed-color-border);
     border-radius: 4px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     margin-bottom: 20px;
@@ -976,8 +976,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 15px;
-    border-bottom: 1px solid var(--tp-color-border);
-    background-color: var(--tp-color-background-light);
+    border-bottom: 1px solid var(--wpseed-color-border);
+    background-color: var(--wpseed-color-background-light);
 }
 
 .wpseed-technical-symbol {
@@ -988,12 +988,12 @@
 .wpseed-technical-symbol h5 {
     margin: 0;
     font-size: 18px;
-    color: var(--tp-color-text);
+    color: var(--wpseed-color-text);
 }
 
 .wpseed-technical-symbol span {
     font-size: 12px;
-    color: var(--tp-color-text-light);
+    color: var(--wpseed-color-text-light);
 }
 
 .wpseed-technical-price {
@@ -1003,7 +1003,7 @@
 .wpseed-price {
     font-size: 18px;
     font-weight: 600;
-    color: var(--tp-color-text);
+    color: var(--wpseed-color-text);
 }
 
 .wpseed-change {
@@ -1012,11 +1012,11 @@
 }
 
 .wpseed-change.positive {
-    color: var(--tp-color-success);
+    color: var(--wpseed-color-success);
 }
 
 .wpseed-change.negative {
-    color: var(--tp-color-error);
+    color: var(--wpseed-color-error);
 }
 
 .wpseed-technical-body {
@@ -1030,8 +1030,8 @@
 .wpseed-technical-section h6 {
     margin: 0 0 10px;
     font-size: 14px;
-    color: var(--tp-color-text-light);
-    border-bottom: 1px solid var(--tp-color-border);
+    color: var(--wpseed-color-text-light);
+    border-bottom: 1px solid var(--wpseed-color-border);
     padding-bottom: 5px;
 }
 
@@ -1050,13 +1050,13 @@
 
 .wpseed-technical-label {
     font-size: 13px;
-    color: var(--tp-color-text-light);
+    color: var(--wpseed-color-text-light);
 }
 
 .wpseed-technical-value {
     font-size: 13px;
     font-weight: 500;
-    color: var(--tp-color-text);
+    color: var(--wpseed-color-text);
 }
 
 .wpseed-technical-indicator {
@@ -1066,15 +1066,15 @@
 }
 
 .wpseed-technical-indicator.positive {
-    color: var(--tp-color-success);
+    color: var(--wpseed-color-success);
 }
 
 .wpseed-technical-indicator.negative {
-    color: var(--tp-color-error);
+    color: var(--wpseed-color-error);
 }
 
 .wpseed-technical-indicator.neutral {
-    color: var(--tp-color-text-light);
+    color: var(--wpseed-color-text-light);
 }
 
 .wpseed-technical-footer {
@@ -1082,8 +1082,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 15px;
-    border-top: 1px solid var(--tp-color-border);
-    background-color: var(--tp-color-background-light);
+    border-top: 1px solid var(--wpseed-color-border);
+    background-color: var(--wpseed-color-background-light);
 }
 
 .wpseed-technical-summary {
@@ -1094,7 +1094,7 @@
 
 .wpseed-summary-label {
     font-weight: 600;
-    color: var(--tp-color-text);
+    color: var(--wpseed-color-text);
 }
 
 .wpseed-summary-rating {
@@ -1105,17 +1105,17 @@
 
 .wpseed-summary-rating.bullish {
     background-color: rgba(0, 163, 42, 0.1);
-    color: var(--tp-color-success);
+    color: var(--wpseed-color-success);
 }
 
 .wpseed-summary-rating.bearish {
     background-color: rgba(214, 54, 56, 0.1);
-    color: var(--tp-color-error);
+    color: var(--wpseed-color-error);
 }
 
 .wpseed-summary-rating.neutral {
     background-color: rgba(220, 220, 222, 0.5);
-    color: var(--tp-color-text-light);
+    color: var(--wpseed-color-text-light);
 }
 
 /* Tooltip Styles */
@@ -1123,8 +1123,8 @@
     position: absolute;
     z-index: 1000;
     padding: 8px 12px;
-    background-color: var(--tp-color-text);
-    color: var(--tp-color-background);
+    background-color: var(--wpseed-color-text);
+    color: var(--wpseed-color-background);
     border-radius: 4px;
     font-size: 12px;
     max-width: 200px;

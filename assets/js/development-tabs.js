@@ -444,26 +444,26 @@ jQuery(document).ready(function($) {
     if ($('.feature-status-tab').length > 0) {
         updateFeatureStats();
         
-        // Initialize tp-accordion functionality for feature status
-        $('.tp-accordion-header').on('click', function() {
-            var $content = $(this).next('.tp-accordion-content');
+        // Initialize wpseed-accordion functionality for feature status
+        $('.wpseed-accordion-header').on('click', function() {
+            var $content = $(this).next('.wpseed-accordion-content');
             $content.slideToggle();
-            $(this).find('.tp-accordion-icon')
+            $(this).find('.wpseed-accordion-icon')
                    .toggleClass('dashicons-arrow-down-alt2 dashicons-arrow-up-alt2');
         });
         
         // Expand all accordions
         $('.expand-all').on('click', function() {
-            $('.tp-accordion-content').slideDown();
-            $('.tp-accordion-icon')
+            $('.wpseed-accordion-content').slideDown();
+            $('.wpseed-accordion-icon')
                 .removeClass('dashicons-arrow-down-alt2')
                 .addClass('dashicons-arrow-up-alt2');
         });
         
         // Collapse all accordions
         $('.collapse-all').on('click', function() {
-            $('.tp-accordion-content').slideUp();
-            $('.tp-accordion-icon')
+            $('.wpseed-accordion-content').slideUp();
+            $('.wpseed-accordion-icon')
                 .removeClass('dashicons-arrow-up-alt2')
                 .addClass('dashicons-arrow-down-alt2');
         });

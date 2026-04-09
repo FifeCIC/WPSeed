@@ -150,45 +150,17 @@
     --wpseed-status-info-border: #bee5eb;
     --wpseed-status-info-text: #0c5460;
 
-    /* Trading-specific colors */
-    --wpseed-color-bullish: #00a32a;
-    --wpseed-color-bearish: #d63638;
+    /* Focus Ring — consistent focus style for accessibility */
+    --wpseed-focus-ring: 2px solid var(--wpseed-color-primary);
+    --wpseed-focus-ring-offset: 1px;
 
-    /* Backward compatibility - Keep old variables for other components */
-    --tp-color-primary: var(--wpseed-color-primary);
-    --tp-color-white: var(--wpseed-color-white);
-    --tp-color-gray-50: var(--wpseed-color-gray-50);
-    --tp-color-gray-300: var(--wpseed-color-gray-300);
-    --tp-spacing-md: var(--wpseed-spacing-md);
-    --tp-spacing-lg: var(--wpseed-spacing-lg);
-    --tp-border-radius: var(--wpseed-border-radius);
-    --tp-shadow: var(--wpseed-shadow);
-    --color-primary: var(--wpseed-color-primary);
-    --color-white: var(--wpseed-color-white);
-    --color-gray-50: var(--wpseed-color-gray-50);
-    --color-gray-300: var(--wpseed-color-gray-300);
-    --spacing-md: var(--wpseed-spacing-md);
-    --spacing-lg: var(--wpseed-spacing-lg);
-    --border-radius: var(--wpseed-border-radius);
-    --shadow: var(--wpseed-shadow);
+    /* Accent Color — secondary brand color for highlights */
+    --wpseed-color-accent: #2271b1;
+    --wpseed-color-accent-light: #72aee6;
+    --wpseed-color-accent-dark: #135e96;
 }
 
-/* Color Swatch Classes - Make colors visible in UI Library */
-.wpseed-color-primary { background-color: var(--wpseed-color-primary) !important; }
-.wpseed-color-primary-dark { background-color: var(--wpseed-color-primary-dark) !important; }
-.wpseed-color-primary-light { background-color: var(--wpseed-color-primary-light) !important; }
-
-.wpseed-color-success { background-color: var(--wpseed-color-success) !important; }
-.wpseed-color-warning { background-color: var(--wpseed-color-warning) !important; }
-.wpseed-color-error { background-color: var(--wpseed-color-error) !important; }
-
-.wpseed-color-white { background-color: var(--wpseed-color-white) !important; border: 1px solid var(--wpseed-color-gray-300) !important; }
-.wpseed-color-gray-100 { background-color: var(--wpseed-color-gray-100) !important; }
-.wpseed-color-gray-300 { background-color: var(--wpseed-color-gray-300) !important; }
-.wpseed-color-gray-500 { background-color: var(--wpseed-color-gray-500) !important; }
-.wpseed-color-gray-700 { background-color: var(--wpseed-color-gray-700) !important; }
-.wpseed-color-gray-900 { background-color: var(--wpseed-color-gray-900) !important; }
-
+/* Color Swatch Classes — used by the UI Library color palette showcase */
 .wpseed-color-primary { background-color: var(--wpseed-color-primary) !important; }
 .wpseed-color-primary-dark { background-color: var(--wpseed-color-primary-dark) !important; }
 .wpseed-color-primary-light { background-color: var(--wpseed-color-primary-light) !important; }

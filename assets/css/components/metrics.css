@@ -19,22 +19,22 @@
 .wpseed-metrics-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: var(--tp-spacing-lg);
-    margin-top: var(--tp-spacing-lg);
+    gap: var(--wpseed-spacing-lg);
+    margin-top: var(--wpseed-spacing-lg);
 }
 
 /* Metric Item */
 .wpseed-metric-item {
-    padding: var(--tp-spacing-lg);
-    background: var(--tp-color-gray-100);
-    border: 1px solid var(--tp-color-gray-200);
+    padding: var(--wpseed-spacing-lg);
+    background: var(--wpseed-color-gray-100);
+    border: 1px solid var(--wpseed-color-gray-200);
     text-align: center;
 }
 
 .wpseed-metric-label {
     display: block;
-    font-weight: var(--tp-font-weight-semibold);
-    margin-bottom: var(--tp-spacing-xs);
+    font-weight: var(--wpseed-font-weight-semibold);
+    margin-bottom: var(--wpseed-spacing-xs);
     color: #444;
 }
 
@@ -49,8 +49,8 @@
 .wpseed-component-metrics {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--tp-spacing-md);
-    margin: var(--tp-spacing-lg) 0;
+    gap: var(--wpseed-spacing-md);
+    margin: var(--wpseed-spacing-lg) 0;
 }
 
 /* Legacy classes mapping for backward compatibility */
@@ -91,7 +91,7 @@
 
 .wpseed-stat-value {
     font-size: 24px;
-    font-weight: var(--tp-font-weight-semibold);
+    font-weight: var(--wpseed-font-weight-semibold);
 }
 
 .wpseed-stat-label {
@@ -111,7 +111,7 @@
 
 .wpseed-stat-detail-value {
     font-size: 14px;
-    font-weight: var(--tp-font-weight-semibold);
+    font-weight: var(--wpseed-font-weight-semibold);
 }
 
 /* Success/Error Stats */
@@ -321,12 +321,12 @@
 
 .wpseed-live-count {
     color: #46b450;
-    font-weight: var(--tp-font-weight-semibold);
+    font-weight: var(--wpseed-font-weight-semibold);
 }
 
 .wpseed-demo-count {
     color: #f0c33c;
-    font-weight: var(--tp-font-weight-semibold);
+    font-weight: var(--wpseed-font-weight-semibold);
 }
 
 /* Stats grid */

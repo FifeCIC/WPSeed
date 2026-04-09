@@ -6,31 +6,31 @@
 .tooltip-examples {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--tp-spacing-md);
+    gap: var(--wpseed-spacing-md);
 }
 
 .tooltip-item {
-    margin-bottom: var(--tp-spacing-sm);
+    margin-bottom: var(--wpseed-spacing-sm);
 }
 
 .tooltip-trigger {
     display: inline-flex;
     align-items: center;
     cursor: pointer;
-    color: var(--tp-color-primary);
+    color: var(--wpseed-color-primary);
     text-decoration: underline dotted;
 }
 
 .tooltip-warning {
-    color: var(--tp-color-warning);
+    color: var(--wpseed-color-warning);
 }
 
 .tooltip-success {
-    color: var(--tp-color-success);
+    color: var(--wpseed-color-success);
 }
 
 .tooltip-error {
-    color: var(--tp-color-error);
+    color: var(--wpseed-color-error);
 }
 
 /* Tooltip positions */
@@ -39,13 +39,13 @@
 }
 
 .positioning-demo {
-    padding: var(--tp-spacing-md);
+    padding: var(--wpseed-spacing-md);
 }
 
 .positioning-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--tp-spacing-lg);
+    gap: var(--wpseed-spacing-lg);
     max-width: 400px;
     margin: 0 auto;
 }
@@ -60,21 +60,21 @@
 .trading-metrics-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: var(--tp-spacing-md);
+    gap: var(--wpseed-spacing-md);
 }
 
 .metric-card {
-    background: var(--tp-color-white);
-    border: 1px solid var(--tp-border-color);
-    border-radius: var(--tp-border-radius);
-    padding: var(--tp-spacing-sm);
+    background: var(--wpseed-color-white);
+    border: 1px solid var(--wpseed-border-color);
+    border-radius: var(--wpseed-border-radius);
+    padding: var(--wpseed-spacing-sm);
 }
 
 .metric-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--tp-spacing-sm);
+    margin-bottom: var(--wpseed-spacing-sm);
 }
 
 /* Symbol list for tooltips */
@@ -85,8 +85,8 @@
 .symbol-row {
     display: flex;
     align-items: center;
-    padding: var(--tp-spacing-sm);
-    border-bottom: 1px solid var(--tp-border-color);
+    padding: var(--wpseed-spacing-sm);
+    border-bottom: 1px solid var(--wpseed-border-color);
 }
 
 .symbol-info {
@@ -96,28 +96,28 @@
 }
 
 .symbol-name {
-    font-weight: var(--tp-font-weight-bold);
-    margin-right: var(--tp-spacing-sm);
+    font-weight: var(--wpseed-font-weight-bold);
+    margin-right: var(--wpseed-spacing-sm);
 }
 
 .rich-tooltip-trigger {
     cursor: pointer;
-    color: var(--tp-color-primary);
+    color: var(--wpseed-color-primary);
 }
 
 .symbol-price {
-    margin-right: var(--tp-spacing-md);
-    font-weight: var(--tp-font-weight-bold);
+    margin-right: var(--wpseed-spacing-md);
+    font-weight: var(--wpseed-font-weight-bold);
 }
 
 .symbol-price.positive,
 .symbol-change.positive {
-    color: var(--tp-color-success);
+    color: var(--wpseed-color-success);
 }
 
 .symbol-price.negative,
 .symbol-change.negative {
-    color: var(--tp-color-error);
+    color: var(--wpseed-color-error);
 }
 
 /* Rich tooltip templates */
@@ -130,62 +130,62 @@
 .rich-tooltip-content,
 .interactive-tooltip-content,
 .chart-tooltip-content {
-    padding: var(--tp-spacing-sm);
+    padding: var(--wpseed-spacing-sm);
 }
 
 .tooltip-header {
-    margin-bottom: var(--tp-spacing-sm);
-    border-bottom: 1px solid var(--tp-border-color);
-    padding-bottom: var(--tp-spacing-xs);
+    margin-bottom: var(--wpseed-spacing-sm);
+    border-bottom: 1px solid var(--wpseed-border-color);
+    padding-bottom: var(--wpseed-spacing-xs);
 }
 
 .tooltip-metrics {
-    margin-bottom: var(--tp-spacing-sm);
+    margin-bottom: var(--wpseed-spacing-sm);
 }
 
 .tooltip-metric {
     display: flex;
     justify-content: space-between;
-    margin-bottom: var(--tp-spacing-xs);
+    margin-bottom: var(--wpseed-spacing-xs);
 }
 
 .metric-name {
-    color: var(--tp-color-gray-600);
+    color: var(--wpseed-color-gray-600);
 }
 
 .tooltip-footer {
     font-size: 0.8em;
-    color: var(--tp-color-gray-500);
-    border-top: 1px solid var(--tp-border-color);
-    padding-top: var(--tp-spacing-xs);
-    margin-top: var(--tp-spacing-sm);
+    color: var(--wpseed-color-gray-500);
+    border-top: 1px solid var(--wpseed-border-color);
+    padding-top: var(--wpseed-spacing-xs);
+    margin-top: var(--wpseed-spacing-sm);
 }
 
 /* Interactive tooltips */
 .interactive-tooltip-examples {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--tp-spacing-md);
+    gap: var(--wpseed-spacing-md);
 }
 
 .interactive-tooltip-trigger {
     display: inline-flex;
     align-items: center;
-    background: var(--tp-color-primary);
-    color: var(--tp-color-white);
+    background: var(--wpseed-color-primary);
+    color: var(--wpseed-color-white);
     border: none;
-    padding: var(--tp-spacing-sm) var(--tp-spacing-md);
-    border-radius: var(--tp-border-radius);
+    padding: var(--wpseed-spacing-sm) var(--wpseed-spacing-md);
+    border-radius: var(--wpseed-border-radius);
     cursor: pointer;
     font-size: 14px;
-    font-weight: var(--tp-font-weight-medium);
+    font-weight: var(--wpseed-font-weight-medium);
     transition: all 0.2s ease;
     text-decoration: none;
     position: relative;
 }
 
 .interactive-tooltip-trigger:hover {
-    background: var(--tp-color-primary-dark);
+    background: var(--wpseed-color-primary-dark);
     transform: translateY(-1px);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
@@ -196,48 +196,48 @@
 }
 
 .interactive-tooltip-trigger.warning {
-    background: var(--tp-color-warning);
+    background: var(--wpseed-color-warning);
 }
 
 .interactive-tooltip-trigger.warning:hover {
-    background: var(--tp-color-warning-dark);
+    background: var(--wpseed-color-warning-dark);
 }
 
 .interactive-tooltip-trigger.success {
-    background: var(--tp-color-success);
+    background: var(--wpseed-color-success);
 }
 
 .interactive-tooltip-trigger.success:hover {
-    background: var(--tp-color-success-dark);
+    background: var(--wpseed-color-success-dark);
 }
 
 .interactive-tooltip-trigger.error {
-    background: var(--tp-color-danger);
+    background: var(--wpseed-color-danger);
 }
 
 .interactive-tooltip-trigger.error:hover {
-    background: var(--tp-color-danger-dark);
+    background: var(--wpseed-color-danger-dark);
 }
 
 .tooltip-body {
-    margin-bottom: var(--tp-spacing-sm);
+    margin-bottom: var(--wpseed-spacing-sm);
 }
 
 .tooltip-actions {
     display: flex;
     justify-content: flex-end;
-    gap: var(--tp-spacing-xs);
+    gap: var(--wpseed-spacing-xs);
 }
 
 /* API status list */
 .api-status-list {
-    margin-top: var(--tp-spacing-sm);
+    margin-top: var(--wpseed-spacing-sm);
 }
 
 .api-status-item {
     display: flex;
     align-items: center;
-    margin-bottom: var(--tp-spacing-xs);
+    margin-bottom: var(--wpseed-spacing-xs);
 }
 
 .status-connected {
@@ -245,12 +245,12 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background-color: var(--tp-color-success);
-    margin-right: var(--tp-spacing-xs);
+    background-color: var(--wpseed-color-success);
+    margin-right: var(--wpseed-spacing-xs);
 }
 
 .api-name {
-    margin-right: var(--tp-spacing-sm);
+    margin-right: var(--wpseed-spacing-sm);
 }
 
 /* Chart tooltips */
@@ -259,14 +259,14 @@
 }
 
 .mini-chart {
-    border: 1px solid var(--tp-border-color);
-    border-radius: var(--tp-border-radius);
-    padding: var(--tp-spacing-sm);
-    background: var(--tp-color-white);
+    border: 1px solid var(--wpseed-border-color);
+    border-radius: var(--wpseed-border-radius);
+    padding: var(--wpseed-spacing-sm);
+    background: var(--wpseed-color-white);
 }
 
 .chart-header {
-    margin-bottom: var(--tp-spacing-sm);
+    margin-bottom: var(--wpseed-spacing-sm);
 }
 
 .chart-body {
@@ -293,7 +293,7 @@
 .point-indicator {
     width: 8px;
     height: 8px;
-    background-color: var(--tp-color-primary);
+    background-color: var(--wpseed-color-primary);
     border-radius: 50%;
     position: absolute;
     transform: translate(-50%, -50%);
@@ -303,30 +303,30 @@
 .tooltip-time {
     display: inline-block;
     font-size: 12px;
-    color: var(--tp-color-text-muted);
-    font-weight: var(--tp-font-weight-normal);
-    background: var(--tp-color-bg-secondary);
+    color: var(--wpseed-color-text-muted);
+    font-weight: var(--wpseed-font-weight-normal);
+    background: var(--wpseed-color-bg-secondary);
     padding: 2px 6px;
     border-radius: 3px;
-    margin-right: var(--tp-spacing-xs);
+    margin-right: var(--wpseed-spacing-xs);
     font-family: 'Courier New', monospace;
     letter-spacing: 0.5px;
 }
 
 .tooltip-time.live {
-    color: var(--tp-color-success);
-    background: rgba(var(--tp-color-success-rgb), 0.1);
+    color: var(--wpseed-color-success);
+    background: rgba(var(--wpseed-color-success-rgb), 0.1);
     animation: pulse 2s infinite;
 }
 
 .tooltip-time.delayed {
-    color: var(--tp-color-warning);
-    background: rgba(var(--tp-color-warning-rgb), 0.1);
+    color: var(--wpseed-color-warning);
+    background: rgba(var(--wpseed-color-warning-rgb), 0.1);
 }
 
 .tooltip-time.stale {
-    color: var(--tp-color-text-muted);
-    background: var(--tp-color-bg-secondary);
+    color: var(--wpseed-color-text-muted);
+    background: var(--wpseed-color-bg-secondary);
     opacity: 0.7;
 }
 
@@ -337,5 +337,5 @@
 
 /* Dynamic tooltip content */
 .price-value, .volume-value {
-    font-weight: var(--tp-font-weight-bold);
+    font-weight: var(--wpseed-font-weight-bold);
 }

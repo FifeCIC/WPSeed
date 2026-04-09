@@ -15,15 +15,15 @@
 
 /* Data Explorer Content */
 .wpseed-data-explorer-content {
-    padding: var(--tp-spacing-lg);
+    padding: var(--wpseed-spacing-lg);
 }
 
 /* Data Explorer Controls */
 .wpseed-data-explorer-controls {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--tp-spacing-lg);
-    margin-bottom: var(--tp-spacing-xl);
+    gap: var(--wpseed-spacing-lg);
+    margin-bottom: var(--wpseed-spacing-xl);
     align-items: flex-end;
 }
 
@@ -34,8 +34,8 @@
 
 .wpseed-data-explorer-control label {
     display: block;
-    margin-bottom: var(--tp-spacing-xs);
-    font-weight: var(--tp-font-weight-medium);
+    margin-bottom: var(--wpseed-spacing-xs);
+    font-weight: var(--wpseed-font-weight-medium);
 }
 
 .wpseed-data-explorer-control select,
@@ -46,37 +46,37 @@
 /* Data Explorer Response */
 .wpseed-data-explorer-response {
     background: #f8f8f8;
-    border: var(--tp-border-standard);
-    padding: var(--tp-spacing-lg);
+    border: var(--wpseed-border-standard);
+    padding: var(--wpseed-spacing-lg);
     overflow: auto;
     max-height: 400px;
     white-space: pre-wrap;
     font-family: monospace;
-    margin-top: var(--tp-spacing-md);
+    margin-top: var(--wpseed-spacing-md);
 }
 
 /* Data Explorer Loading */
 .wpseed-data-explorer-loading {
     display: flex;
     align-items: center;
-    margin: var(--tp-spacing-md) 0;
+    margin: var(--wpseed-spacing-md) 0;
 }
 
 .wpseed-data-explorer-loading .spinner {
     float: none;
     margin-top: 0;
-    margin-right: var(--tp-spacing-md);
+    margin-right: var(--wpseed-spacing-md);
 }
 
 /* Test Results */
 .wpseed-api-test-results {
-    margin-top: var(--tp-spacing-md);
+    margin-top: var(--wpseed-spacing-md);
 }
 
 .wpseed-test-result {
-    padding: var(--tp-spacing-md);
-    border-radius: var(--tp-border-radius);
-    margin-top: var(--tp-spacing-md);
+    padding: var(--wpseed-spacing-md);
+    border-radius: var(--wpseed-border-radius);
+    margin-top: var(--wpseed-spacing-md);
     font-size: 13px;
     line-height: 1.5;
 }
@@ -92,7 +92,7 @@
 }
 
 .wpseed-test-result .dashicons {
-    margin-right: var(--tp-spacing-xs);
+    margin-right: var(--wpseed-spacing-xs);
     vertical-align: middle;
 }
 

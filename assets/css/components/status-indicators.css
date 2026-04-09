@@ -4,35 +4,35 @@
  */
 
 .status-example {
-    margin-bottom: var(--tp-spacing-md);
+    margin-bottom: var(--wpseed-spacing-md);
 }
 
 .status-badges-row {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--tp-spacing-sm);
-    margin-top: var(--tp-spacing-xs);
+    gap: var(--wpseed-spacing-sm);
+    margin-top: var(--wpseed-spacing-xs);
 }
 
 /* Connection Status */
 .connection-status-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: var(--tp-spacing-md);
+    gap: var(--wpseed-spacing-md);
 }
 
 .connection-status-item {
-    border: 1px solid var(--tp-border-color);
-    border-radius: var(--tp-border-radius);
+    border: 1px solid var(--wpseed-border-color);
+    border-radius: var(--wpseed-border-radius);
     overflow: hidden;
 }
 
 .connection-status-header {
     display: flex;
     align-items: center;
-    padding: var(--tp-spacing-sm);
-    background-color: var(--tp-color-background-light);
-    border-bottom: 1px solid var(--tp-border-color);
+    padding: var(--wpseed-spacing-sm);
+    background-color: var(--wpseed-color-background-light);
+    border-bottom: 1px solid var(--wpseed-border-color);
 }
 
 .connection-status-dot {
@@ -40,61 +40,61 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    margin-right: var(--tp-spacing-sm);
+    margin-right: var(--wpseed-spacing-sm);
 }
 
 .connection-status-connected {
-    background-color: var(--tp-color-success);
+    background-color: var(--wpseed-color-success);
 }
 
 .connection-status-warning {
-    background-color: var(--tp-color-warning);
+    background-color: var(--wpseed-color-warning);
 }
 
 .connection-status-error {
-    background-color: var(--tp-color-error);
+    background-color: var(--wpseed-color-error);
 }
 
 .connection-status-label {
-    font-weight: var(--tp-font-weight-medium);
+    font-weight: var(--wpseed-font-weight-medium);
 }
 
 .connection-status-details {
-    padding: var(--tp-spacing-sm);
+    padding: var(--wpseed-spacing-sm);
 }
 
 /* Performance Indicators */
 .performance-indicators-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: var(--tp-spacing-md);
+    gap: var(--wpseed-spacing-md);
 }
 
 .performance-card {
-    padding: var(--tp-spacing-md);
-    background-color: var(--tp-color-white);
-    border: 1px solid var(--tp-border-color);
-    border-radius: var(--tp-border-radius);
+    padding: var(--wpseed-spacing-md);
+    background-color: var(--wpseed-color-white);
+    border: 1px solid var(--wpseed-border-color);
+    border-radius: var(--wpseed-border-radius);
     text-align: center;
 }
 
 .performance-value {
     font-size: 1.5em;
-    font-weight: var(--tp-font-weight-bold);
-    margin-bottom: var(--tp-spacing-xs);
+    font-weight: var(--wpseed-font-weight-bold);
+    margin-bottom: var(--wpseed-spacing-xs);
 }
 
 .performance-value.positive {
-    color: var(--tp-color-success);
+    color: var(--wpseed-color-success);
 }
 
 .performance-value.negative {
-    color: var(--tp-color-error);
+    color: var(--wpseed-color-error);
 }
 
 .performance-label {
-    color: var(--tp-color-gray-600);
-    margin-bottom: var(--tp-spacing-sm);
+    color: var(--wpseed-color-gray-600);
+    margin-bottom: var(--wpseed-spacing-sm);
 }
 
 .performance-trend {
@@ -111,15 +111,15 @@
 
 /* Activity Status */
 .activity-status-list {
-    border: 1px solid var(--tp-border-color);
-    border-radius: var(--tp-border-radius);
+    border: 1px solid var(--wpseed-border-color);
+    border-radius: var(--wpseed-border-radius);
     overflow: hidden;
 }
 
 .activity-status-item {
     display: flex;
-    padding: var(--tp-spacing-sm);
-    border-bottom: 1px solid var(--tp-border-color);
+    padding: var(--wpseed-spacing-sm);
+    border-bottom: 1px solid var(--wpseed-border-color);
 }
 
 .activity-status-item:last-child {
@@ -127,7 +127,7 @@
 }
 
 .activity-status-icon {
-    margin-right: var(--tp-spacing-sm);
+    margin-right: var(--wpseed-spacing-sm);
     display: flex;
     align-items: center;
 }
@@ -137,51 +137,51 @@
 }
 
 .activity-status-title {
-    font-weight: var(--tp-font-weight-medium);
-    margin-bottom: var(--tp-spacing-xs);
+    font-weight: var(--wpseed-font-weight-medium);
+    margin-bottom: var(--wpseed-spacing-xs);
 }
 
 .activity-status-description {
     font-size: 0.9em;
-    margin-bottom: var(--tp-spacing-xs);
+    margin-bottom: var(--wpseed-spacing-xs);
 }
 
 .activity-status-time {
     font-size: 0.8em;
-    color: var(--tp-color-gray-500);
+    color: var(--wpseed-color-gray-500);
 }
 
 .activity-success .activity-status-icon {
-    color: var(--tp-color-success);
+    color: var(--wpseed-color-success);
 }
 
 .activity-error .activity-status-icon {
-    color: var(--tp-color-error);
+    color: var(--wpseed-color-error);
 }
 
 /* Data Freshness */
 .data-freshness-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: var(--tp-spacing-md);
+    gap: var(--wpseed-spacing-md);
 }
 
 .data-freshness-item {
-    background-color: var(--tp-color-white);
-    border: 1px solid var(--tp-border-color);
-    border-radius: var(--tp-border-radius);
-    padding: var(--tp-spacing-sm);
+    background-color: var(--wpseed-color-white);
+    border: 1px solid var(--wpseed-border-color);
+    border-radius: var(--wpseed-border-radius);
+    padding: var(--wpseed-spacing-sm);
 }
 
 .data-freshness-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--tp-spacing-sm);
+    margin-bottom: var(--wpseed-spacing-sm);
 }
 
 .data-freshness-title {
-    font-weight: var(--tp-font-weight-medium);
+    font-weight: var(--wpseed-font-weight-medium);
 }
 
 .data-freshness-indicator {
@@ -192,51 +192,51 @@
 }
 
 .data-freshness-indicator.fresh {
-    background-color: var(--tp-color-success);
+    background-color: var(--wpseed-color-success);
 }
 
 .data-freshness-indicator.stale {
-    background-color: var(--tp-color-warning);
+    background-color: var(--wpseed-color-warning);
 }
 
 .data-freshness-timestamp {
     font-size: 0.8em;
-    color: var(--tp-color-gray-600);
+    color: var(--wpseed-color-gray-600);
 }
 
 /* Health Check */
 .health-check-container {
-    background-color: var(--tp-color-white);
-    border: 1px solid var(--tp-border-color);
-    border-radius: var(--tp-border-radius);
-    padding: var(--tp-spacing-md);
+    background-color: var(--wpseed-color-white);
+    border: 1px solid var(--wpseed-border-color);
+    border-radius: var(--wpseed-border-radius);
+    padding: var(--wpseed-spacing-md);
 }
 
 .health-check-overall {
     display: flex;
     align-items: center;
-    margin-bottom: var(--tp-spacing-md);
-    padding-bottom: var(--tp-spacing-md);
-    border-bottom: 1px solid var(--tp-border-color);
+    margin-bottom: var(--wpseed-spacing-md);
+    padding-bottom: var(--wpseed-spacing-md);
+    border-bottom: 1px solid var(--wpseed-border-color);
 }
 
 .health-check-score {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-right: var(--tp-spacing-md);
+    margin-right: var(--wpseed-spacing-md);
 }
 
 .health-score-value {
     font-size: 1.8em;
-    font-weight: var(--tp-font-weight-bold);
-    color: var(--tp-color-success);
+    font-weight: var(--wpseed-font-weight-bold);
+    color: var(--wpseed-color-success);
 }
 
 .health-score-label {
     font-size: 0.9em;
-    color: var(--tp-color-gray-600);
-    margin-top: var(--tp-spacing-xs);
+    color: var(--wpseed-color-gray-600);
+    margin-top: var(--wpseed-spacing-xs);
 }
 
 .health-check-status {
@@ -244,74 +244,74 @@
 }
 
 .health-good {
-    color: var(--tp-color-success);
-    font-weight: var(--tp-font-weight-medium);
+    color: var(--wpseed-color-success);
+    font-weight: var(--wpseed-font-weight-medium);
 }
 
 .health-check-details {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: var(--tp-spacing-sm);
+    gap: var(--wpseed-spacing-sm);
 }
 
 .health-check-item {
     display: flex;
     align-items: center;
-    padding: var(--tp-spacing-sm);
-    background-color: var(--tp-color-background-light);
-    border-radius: var(--tp-border-radius);
+    padding: var(--wpseed-spacing-sm);
+    background-color: var(--wpseed-color-background-light);
+    border-radius: var(--wpseed-border-radius);
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
 .health-check-item:hover {
-    background-color: var(--tp-color-background-hover);
+    background-color: var(--wpseed-color-background-hover);
     transform: translateY(-1px);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .health-check-icon {
-    margin-right: var(--tp-spacing-sm);
+    margin-right: var(--wpseed-spacing-sm);
     font-size: 16px;
     width: 16px;
     height: 16px;
 }
 
 .health-check-icon.health-check-pass {
-    color: var(--tp-color-success);
+    color: var(--wpseed-color-success);
 }
 
 .health-check-icon.health-check-warning {
-    color: var(--tp-color-warning);
+    color: var(--wpseed-color-warning);
 }
 
 .health-check-label {
-    font-weight: var(--tp-font-weight-medium);
-    margin-right: var(--tp-spacing-sm);
+    font-weight: var(--wpseed-font-weight-medium);
+    margin-right: var(--wpseed-spacing-sm);
     flex-grow: 1;
 }
 
 .health-check-value {
-    font-family: var(--tp-font-mono);
-    color: var(--tp-color-gray-700);
-    background-color: var(--tp-color-white);
+    font-family: var(--wpseed-font-mono);
+    color: var(--wpseed-color-gray-700);
+    background-color: var(--wpseed-color-white);
     padding: 2px 6px;
     border-radius: 3px;
-    border: 1px solid var(--tp-color-border-light);
+    border: 1px solid var(--wpseed-color-border-light);
 }
 
 /* Signal Status */
 .signals-status-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: var(--tp-spacing-md);
+    gap: var(--wpseed-spacing-md);
 }
 
 .signal-status-card {
-    background-color: var(--tp-color-white);
-    border: 2px solid var(--tp-border-color);
-    border-radius: var(--tp-border-radius);
-    padding: var(--tp-spacing-md);
+    background-color: var(--wpseed-color-white);
+    border: 2px solid var(--wpseed-border-color);
+    border-radius: var(--wpseed-border-radius);
+    padding: var(--wpseed-spacing-md);
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
@@ -323,7 +323,7 @@
 }
 
 .signal-bullish {
-    border-left: 4px solid var(--tp-color-success);
+    border-left: 4px solid var(--wpseed-color-success);
 }
 
 .signal-bullish:hover {
@@ -331,7 +331,7 @@
 }
 
 .signal-bearish {
-    border-left: 4px solid var(--tp-color-error);
+    border-left: 4px solid var(--wpseed-color-error);
 }
 
 .signal-bearish:hover {
@@ -339,7 +339,7 @@
 }
 
 .signal-neutral {
-    border-left: 4px solid var(--tp-color-gray-400);
+    border-left: 4px solid var(--wpseed-color-gray-400);
 }
 
 .signal-neutral:hover {
@@ -350,7 +350,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: var(--tp-spacing-sm);
+    margin-bottom: var(--wpseed-spacing-sm);
 }
 
 .signal-status-icon {
@@ -360,51 +360,51 @@
 }
 
 .signal-bullish .signal-status-icon {
-    color: var(--tp-color-success);
+    color: var(--wpseed-color-success);
 }
 
 .signal-bearish .signal-status-icon {
-    color: var(--tp-color-error);
+    color: var(--wpseed-color-error);
 }
 
 .signal-neutral .signal-status-icon {
-    color: var(--tp-color-gray-500);
+    color: var(--wpseed-color-gray-500);
 }
 
 .signal-status-label {
-    font-weight: var(--tp-font-weight-semibold);
+    font-weight: var(--wpseed-font-weight-semibold);
     font-size: 16px;
-    margin-bottom: var(--tp-spacing-xs);
+    margin-bottom: var(--wpseed-spacing-xs);
 }
 
 .signal-status-count {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--tp-color-primary);
-    color: var(--tp-color-white);
+    background-color: var(--wpseed-color-primary);
+    color: var(--wpseed-color-white);
     border-radius: 50%;
     width: 24px;
     height: 24px;
     font-size: 12px;
-    font-weight: var(--tp-font-weight-bold);
-    margin-left: var(--tp-spacing-xs);
+    font-weight: var(--wpseed-font-weight-bold);
+    margin-left: var(--wpseed-spacing-xs);
 }
 
 .signal-bullish .signal-status-count {
-    background-color: var(--tp-color-success);
+    background-color: var(--wpseed-color-success);
 }
 
 .signal-bearish .signal-status-count {
-    background-color: var(--tp-color-error);
+    background-color: var(--wpseed-color-error);
 }
 
 .signal-neutral .signal-status-count {
-    background-color: var(--tp-color-gray-500);
+    background-color: var(--wpseed-color-gray-500);
 }
 
 .signal-status-description {
-    color: var(--tp-color-gray-600);
+    color: var(--wpseed-color-gray-600);
     font-size: 14px;
     line-height: 1.4;
 }
@@ -435,7 +435,7 @@
     .signal-status-header {
         flex-direction: column;
         align-items: flex-start;
-        gap: var(--tp-spacing-xs);
+        gap: var(--wpseed-spacing-xs);
     }
     
     .signal-status-count {
@@ -446,28 +446,28 @@
 /* Real-time Animation Effects for Trading Environment */
 @keyframes pulse-success {
     0%, 100% { 
-        box-shadow: 0 0 0 0 rgba(var(--tp-color-success-rgb), 0.7);
+        box-shadow: 0 0 0 0 rgba(var(--wpseed-color-success-rgb), 0.7);
     }
     50% { 
-        box-shadow: 0 0 0 8px rgba(var(--tp-color-success-rgb), 0);
+        box-shadow: 0 0 0 8px rgba(var(--wpseed-color-success-rgb), 0);
     }
 }
 
 @keyframes pulse-error {
     0%, 100% { 
-        box-shadow: 0 0 0 0 rgba(var(--tp-color-error-rgb), 0.7);
+        box-shadow: 0 0 0 0 rgba(var(--wpseed-color-error-rgb), 0.7);
     }
     50% { 
-        box-shadow: 0 0 0 8px rgba(var(--tp-color-error-rgb), 0);
+        box-shadow: 0 0 0 8px rgba(var(--wpseed-color-error-rgb), 0);
     }
 }
 
 @keyframes pulse-warning {
     0%, 100% { 
-        box-shadow: 0 0 0 0 rgba(var(--tp-color-warning-rgb), 0.7);
+        box-shadow: 0 0 0 0 rgba(var(--wpseed-color-warning-rgb), 0.7);
     }
     50% { 
-        box-shadow: 0 0 0 8px rgba(var(--tp-color-warning-rgb), 0);
+        box-shadow: 0 0 0 8px rgba(var(--wpseed-color-warning-rgb), 0);
     }
 }
 
@@ -504,24 +504,24 @@
 .performance-value.positive::before {
     content: "▲";
     margin-right: 4px;
-    color: var(--tp-color-success);
+    color: var(--wpseed-color-success);
 }
 
 .performance-value.negative::before {
     content: "▼";
     margin-right: 4px;
-    color: var(--tp-color-error);
+    color: var(--wpseed-color-error);
 }
 
 /* Enhanced Activity Status for Trading Events */
 .activity-status-item.activity-success {
-    border-left: 3px solid var(--tp-color-success);
-    background: linear-gradient(90deg, rgba(var(--tp-color-success-rgb), 0.05) 0%, transparent 100%);
+    border-left: 3px solid var(--wpseed-color-success);
+    background: linear-gradient(90deg, rgba(var(--wpseed-color-success-rgb), 0.05) 0%, transparent 100%);
 }
 
 .activity-status-item.activity-error {
-    border-left: 3px solid var(--tp-color-error);
-    background: linear-gradient(90deg, rgba(var(--tp-color-error-rgb), 0.05) 0%, transparent 100%);
+    border-left: 3px solid var(--wpseed-color-error);
+    background: linear-gradient(90deg, rgba(var(--wpseed-color-error-rgb), 0.05) 0%, transparent 100%);
 }
 
 /* Enhanced hover effects for interactive elements */
@@ -529,7 +529,7 @@
 .activity-status-item:hover,
 .data-freshness-item:hover {
     cursor: pointer;
-    border-color: var(--tp-color-primary);
+    border-color: var(--wpseed-color-primary);
 }
 
 .status-badges-row .wpseed-badge:hover {
@@ -542,8 +542,8 @@
     .signal-status-card,
     .performance-card,
     .health-check-container {
-        background-color: var(--tp-color-dark-bg, #1a1a1a);
-        border-color: var(--tp-color-dark-border, #333);
-        color: var(--tp-color-dark-text, #e0e0e0);
+        background-color: var(--wpseed-color-dark-bg, #1a1a1a);
+        border-color: var(--wpseed-color-dark-border, #333);
+        color: var(--wpseed-color-dark-text, #e0e0e0);
     }
 }

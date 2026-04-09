@@ -3,11 +3,11 @@
  * Provides consistent spacing and grouping for UI components within a section.
  */
 .wpseed-component-group {
-    margin-bottom: var(--tp-spacing-lg);
-    padding: var(--tp-spacing-md);
-    border: 1px solid var(--tp-border-color);
-    border-radius: var(--tp-border-radius);
-    background-color: var(--tp-color-white);
+    margin-bottom: var(--wpseed-spacing-lg);
+    padding: var(--wpseed-spacing-md);
+    border: 1px solid var(--wpseed-border-color);
+    border-radius: var(--wpseed-border-radius);
+    background-color: var(--wpseed-color-white);
 }
 
 /**
@@ -17,11 +17,11 @@
 .wpseed-component-showcase {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--tp-spacing-md);
-    padding: var(--tp-spacing-sm);
-    margin-top: var(--tp-spacing-sm);
-    background-color: var(--tp-color-background-light);
-    border-radius: var(--tp-border-radius);
+    gap: var(--wpseed-spacing-md);
+    padding: var(--wpseed-spacing-sm);
+    margin-top: var(--wpseed-spacing-sm);
+    background-color: var(--wpseed-color-background-light);
+    border-radius: var(--wpseed-border-radius);
 }
 
 /**
@@ -34,7 +34,7 @@
 }
 
 .wpseed-ui-container {
-    margin-top: var(--tp-spacing-lg);
+    margin-top: var(--wpseed-spacing-lg);
 }
 
 /**
@@ -43,25 +43,25 @@
  */
 .wpseed-grid {
     display: grid;
-    gap: var(--tp-spacing-md);
+    gap: var(--wpseed-spacing-md);
 }
 
 .wpseed-grid-2 {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--tp-spacing-md);
+    gap: var(--wpseed-spacing-md);
 }
 
 .wpseed-grid-2-cols {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--tp-spacing-md);
+    gap: var(--wpseed-spacing-md);
 }
 
 .wpseed-grid-3-cols {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: var(--tp-spacing-md);
+    gap: var(--wpseed-spacing-md);
 }
 
 /* Responsive adjustments */

@@ -14,7 +14,7 @@
  */
 
 /* Base Button Styles */
-.tp-button {
+.wpseed-button {
     display: inline-block;
     padding: var(--wpseed-button-padding-y) var(--wpseed-button-padding-x);
     font-family: var(--wpseed-font-family-base);
@@ -36,103 +36,103 @@
     box-sizing: border-box;
 }
 
-.tp-button:focus {
+.wpseed-button:focus {
     outline: 2px solid var(--wpseed-color-primary-light);
     outline-offset: 2px;
 }
 
-.tp-button:disabled,
-.tp-button.disabled {
+.wpseed-button:disabled,
+.wpseed-button.disabled {
     opacity: 0.6;
     cursor: not-allowed;
     pointer-events: none;
 }
 
 /* Primary Button */
-.tp-button-primary {
+.wpseed-button-primary {
     color: var(--wpseed-color-white);
     background-color: var(--wpseed-color-primary);
     border-color: var(--wpseed-color-primary);
 }
 
-.tp-button-primary:hover:not(:disabled) {
+.wpseed-button-primary:hover:not(:disabled) {
     background-color: var(--wpseed-color-primary-dark);
     border-color: var(--wpseed-color-primary-dark);
     color: var(--wpseed-color-white);
 }
 
-.tp-button-primary:active {
+.wpseed-button-primary:active {
     background-color: var(--wpseed-color-primary-dark);
     border-color: var(--wpseed-color-primary-dark);
     transform: translateY(1px);
 }
 
 /* Secondary Button */
-.tp-button-secondary {
+.wpseed-button-secondary {
     color: var(--wpseed-color-gray-700);
     background-color: var(--wpseed-color-white);
     border-color: var(--wpseed-color-gray-400);
 }
 
-.tp-button-secondary:hover:not(:disabled) {
+.wpseed-button-secondary:hover:not(:disabled) {
     background-color: var(--wpseed-color-gray-50);
     border-color: var(--wpseed-color-gray-500);
     color: var(--wpseed-color-gray-800);
 }
 
-.tp-button-secondary:active {
+.wpseed-button-secondary:active {
     background-color: var(--wpseed-color-gray-100);
     transform: translateY(1px);
 }
 
 /* Success Button */
-.tp-button-success {
+.wpseed-button-success {
     color: var(--wpseed-color-white);
     background-color: var(--wpseed-color-success);
     border-color: var(--wpseed-color-success);
 }
 
-.tp-button-success:hover:not(:disabled) {
+.wpseed-button-success:hover:not(:disabled) {
     background-color: var(--wpseed-color-success-dark);
     border-color: var(--wpseed-color-success-dark);
     color: var(--wpseed-color-white);
 }
 
 /* Danger Button */
-.tp-button-danger {
+.wpseed-button-danger {
     color: var(--wpseed-color-white);
     background-color: var(--wpseed-color-error);
     border-color: var(--wpseed-color-error);
 }
 
-.tp-button-danger:hover:not(:disabled) {
+.wpseed-button-danger:hover:not(:disabled) {
     background-color: var(--wpseed-color-error-dark);
     border-color: var(--wpseed-color-error-dark);
     color: var(--wpseed-color-white);
 }
 
 /* Warning Button */
-.tp-button-warning {
+.wpseed-button-warning {
     color: var(--wpseed-color-black);
     background-color: var(--wpseed-color-warning);
     border-color: var(--wpseed-color-warning);
 }
 
-.tp-button-warning:hover:not(:disabled) {
+.wpseed-button-warning:hover:not(:disabled) {
     background-color: var(--wpseed-color-warning-dark);
     border-color: var(--wpseed-color-warning-dark);
     color: var(--wpseed-color-white);
 }
 
 /* Link Button */
-.tp-button-link {
+.wpseed-button-link {
     color: var(--wpseed-color-primary);
     background-color: transparent;
     border-color: transparent;
     text-decoration: underline;
 }
 
-.tp-button-link:hover:not(:disabled) {
+.wpseed-button-link:hover:not(:disabled) {
     color: var(--wpseed-color-primary-dark);
     background-color: transparent;
     border-color: transparent;
@@ -227,13 +227,13 @@ input.button-link-delete:disabled {
 }
 
 /* Button Sizes */
-.tp-button-small {
+.wpseed-button-small {
     padding: var(--wpseed-spacing-xs) var(--wpseed-spacing-sm);
     font-size: var(--wpseed-font-size-sm);
     min-height: 28px;
 }
 
-.tp-button-large {
+.wpseed-button-large {
     padding: var(--wpseed-spacing-lg) var(--wpseed-spacing-xl);
     font-size: var(--wpseed-font-size-lg);
     min-height: 40px;
@@ -257,51 +257,51 @@ input.button-link-delete:disabled {
 }
 
 /* Button Groups */
-.tp-button-group {
+.wpseed-button-group {
     display: inline-flex;
     vertical-align: middle;
 }
 
-.tp-button-group .tp-button {
+.wpseed-button-group .wpseed-button {
     border-radius: 0;
     margin-left: -1px;
 }
 
-.tp-button-group .tp-button:first-child {
+.wpseed-button-group .wpseed-button:first-child {
     border-top-left-radius: var(--wpseed-border-radius);
     border-bottom-left-radius: var(--wpseed-border-radius);
     margin-left: 0;
 }
 
-.tp-button-group .tp-button:last-child {
+.wpseed-button-group .wpseed-button:last-child {
     border-top-right-radius: var(--wpseed-border-radius);
     border-bottom-right-radius: var(--wpseed-border-radius);
 }
 
-.tp-button-group .tp-button:hover {
+.wpseed-button-group .wpseed-button:hover {
     z-index: 1;
 }
 
 /* Icon Buttons */
-.tp-button-icon {
+.wpseed-button-icon {
     display: inline-flex;
     align-items: center;
     gap: var(--wpseed-spacing-xs);
 }
 
-.tp-button-icon .dashicons {
+.wpseed-button-icon .dashicons {
     font-size: 16px;
     width: 16px;
     height: 16px;
 }
 
 /* Loading State */
-.tp-button-loading {
+.wpseed-button-loading {
     position: relative;
     color: transparent !important;
 }
 
-.tp-button-loading::after {
+.wpseed-button-loading::after {
     content: '';
     position: absolute;
     top: 50%;
@@ -322,20 +322,20 @@ input.button-link-delete:disabled {
 }
 
 /* WordPress Button Compatibility */
-.button.tp-button {
+.button.wpseed-button {
     font-family: var(--wpseed-font-family-base);
     font-weight: var(--wpseed-font-weight-medium);
 }
 
 /* Responsive Design */
 @media screen and (max-width: 782px) {
-    .tp-button {
+    .wpseed-button {
         padding: var(--wpseed-spacing-sm) var(--wpseed-spacing-md);
         font-size: var(--wpseed-font-size-md);
         min-height: 36px;
     }
     
-    .tp-button-small {
+    .wpseed-button-small {
         padding: var(--wpseed-spacing-xs) var(--wpseed-spacing-sm);
         font-size: var(--wpseed-font-size-sm);
         min-height: 32px;

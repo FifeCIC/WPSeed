@@ -72,9 +72,9 @@
     --wpseed-input-border-focus: 1px solid #4a9eff;
     
     /* Update backward compatibility variables */
-    --tp-color-white: var(--wpseed-color-white);
-    --tp-color-gray-50: var(--wpseed-color-gray-50);
-    --tp-color-gray-300: var(--wpseed-color-gray-300);
+    --wpseed-color-white: var(--wpseed-color-white);
+    --wpseed-color-gray-50: var(--wpseed-color-gray-50);
+    --wpseed-color-gray-300: var(--wpseed-color-gray-300);
     --color-white: var(--wpseed-color-white);
     --color-gray-50: var(--wpseed-color-gray-50);
     --color-gray-300: var(--wpseed-color-gray-300);

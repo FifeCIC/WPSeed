@@ -9,27 +9,27 @@
 
 /* Features Management Header */
 .wpseed-features-header {
-    margin-bottom: var(--tp-spacing-xl);
+    margin-bottom: var(--wpseed-spacing-xl);
 }
 
 /* Features Controls */
 .wpseed-features-controls {
     display: flex;
     justify-content: space-between;
-    margin-bottom: var(--tp-spacing-xl);
+    margin-bottom: var(--wpseed-spacing-xl);
     background: #f9f9f9;
-    padding: var(--tp-spacing-md);
-    border: var(--tp-border-standard);
-    border-radius: var(--tp-border-radius);
+    padding: var(--wpseed-spacing-md);
+    border: var(--wpseed-border-standard);
+    border-radius: var(--wpseed-border-radius);
 }
 
 /* Feature Page Sections */
 .wpseed-feature-page-section {
-    margin-bottom: var(--tp-spacing-xl);
-    border: var(--tp-border-standard);
-    border-radius: var(--tp-border-radius);
-    background: var(--tp-color-white);
-    box-shadow: var(--tp-shadow);
+    margin-bottom: var(--wpseed-spacing-xl);
+    border: var(--wpseed-border-standard);
+    border-radius: var(--wpseed-border-radius);
+    background: var(--wpseed-color-white);
+    box-shadow: var(--wpseed-shadow);
     transition: box-shadow 0.3s ease;
 }
 
@@ -41,10 +41,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--tp-spacing-md) var(--tp-spacing-lg);
+    padding: var(--wpseed-spacing-md) var(--wpseed-spacing-lg);
     background: #f7fcf7;
     border-left: 3px solid #46b450;
-    border-bottom: var(--tp-border-standard);
+    border-bottom: var(--wpseed-border-standard);
     cursor: pointer;
 }
 
@@ -67,7 +67,7 @@
 }
 
 .wpseed-feature-page-content {
-    padding: var(--tp-spacing-lg);
+    padding: var(--wpseed-spacing-lg);
     display: none; /* Initially hidden */
 }
 
@@ -79,12 +79,12 @@
 
 .wpseed-feature-table th {
     text-align: left;
-    padding: var(--tp-spacing-md);
+    padding: var(--wpseed-spacing-md);
     border-bottom: 2px solid #ddd;
 }
 
 .wpseed-feature-table td {
-    padding: var(--tp-spacing-md);
+    padding: var(--wpseed-spacing-md);
     border-bottom: 1px solid #eee;
 }
 
@@ -106,7 +106,7 @@
 
 .wpseed-tab-content a {
     text-decoration: none;
-    font-weight: var(--tp-font-weight-semibold);
+    font-weight: var(--wpseed-font-weight-semibold);
     color: #23282d;
 }
 
@@ -116,31 +116,31 @@
 
 /* Feature Summary */
 .wpseed-feature-summary {
-    margin: var(--tp-spacing-xl) 0;
+    margin: var(--wpseed-spacing-xl) 0;
 }
 
 .wpseed-summary-box {
-    background: var(--tp-color-white);
-    border: var(--tp-border-standard);
-    border-radius: var(--tp-border-radius);
-    padding: var(--tp-spacing-lg);
+    background: var(--wpseed-color-white);
+    border: var(--wpseed-border-standard);
+    border-radius: var(--wpseed-border-radius);
+    padding: var(--wpseed-spacing-lg);
 }
 
 .wpseed-summary-box h4 {
     margin-top: 0;
     border-bottom: 1px solid #eee;
-    padding-bottom: var(--tp-spacing-md);
+    padding-bottom: var(--wpseed-spacing-md);
 }
 
 /* Feature Navigation */
 .wpseed-feature-navigation {
     position: sticky;
     top: 32px;
-    background: var(--tp-color-white);
-    border-bottom: var(--tp-border-standard);
-    padding: var(--tp-spacing-md) 0;
+    background: var(--wpseed-color-white);
+    border-bottom: var(--wpseed-border-standard);
+    padding: var(--wpseed-spacing-md) 0;
     z-index: 100;
-    margin-bottom: var(--tp-spacing-lg);
+    margin-bottom: var(--wpseed-spacing-lg);
 }
 
 .wpseed-feature-sections-nav {
@@ -154,7 +154,7 @@
     display: inline-block;
     padding: 5px 12px;
     margin-right: 5px;
-    border-radius: var(--tp-border-radius);
+    border-radius: var(--wpseed-border-radius);
     text-decoration: none;
     color: #646970;
     background: #f0f0f1;
@@ -163,7 +163,7 @@
 .wpseed-feature-nav-item:hover,
 .wpseed-feature-nav-item.active {
     background: #2271b1;
-    color: var(--tp-color-white);
+    color: var(--wpseed-color-white);
 }
 
 /* Feature row states */
@@ -175,9 +175,9 @@
 .wpseed-tab-header {
     display: flex;
     align-items: center;
-    margin-bottom: var(--tp-spacing-xl);
+    margin-bottom: var(--wpseed-spacing-xl);
     border-bottom: 1px solid #eee;
-    padding-bottom: var(--tp-spacing-md);
+    padding-bottom: var(--wpseed-spacing-md);
 }
 
 .wpseed-tab-header h2 {
@@ -200,13 +200,13 @@
     
     .wpseed-tab-content {
         flex-direction: column;
-        gap: var(--tp-spacing-md);
+        gap: var(--wpseed-spacing-md);
     }
 }
 
 /* Features Container */
 .wpseed-features-container {
-    margin-top: var(--tp-spacing-xl);
+    margin-top: var(--wpseed-spacing-xl);
 }
 
 /* Legacy classes mapping for backward compatibility */

@@ -242,7 +242,7 @@ defined('ABSPATH') || exit;
                             </ul>
                         </div>
                         <div class="tooltip-actions">
-                            <button class="tp-button tp-button-small tp-button-primary"><?php esc_html_e('Learn More', 'wpseed'); ?></button>
+                            <button class="wpseed-button wpseed-button-small wpseed-button-primary"><?php esc_html_e('Learn More', 'wpseed'); ?></button>
                         </div>
                     </div>
                     
@@ -265,7 +265,7 @@ defined('ABSPATH') || exit;
                             </div>
                         </div>
                         <div class="tooltip-actions">
-                            <button class="tp-button tp-button-small tp-button-secondary"><?php esc_html_e('Adjust', 'wpseed'); ?></button>
+                            <button class="wpseed-button wpseed-button-small wpseed-button-secondary"><?php esc_html_e('Adjust', 'wpseed'); ?></button>
                         </div>
                     </div>
                     
@@ -288,7 +288,7 @@ defined('ABSPATH') || exit;
                             </div>
                         </div>
                         <div class="tooltip-actions">
-                            <button class="tp-button tp-button-small tp-button-primary"><?php esc_html_e('Check Status', 'wpseed'); ?></button>
+                            <button class="wpseed-button wpseed-button-small wpseed-button-primary"><?php esc_html_e('Check Status', 'wpseed'); ?></button>
                         </div>
                     </div>
                 </div>

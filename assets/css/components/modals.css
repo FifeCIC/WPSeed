@@ -95,15 +95,15 @@
 .wpseed-task-detail-header {
     display: flex !important;
     align-items: center !important;
-    gap: var(--tp-spacing-md) !important;
-    margin-bottom: var(--tp-spacing-lg) !important;
-    padding-bottom: var(--tp-spacing-md) !important;
-    border-bottom: 1px solid var(--tp-color-gray-300) !important;
+    gap: var(--wpseed-spacing-md) !important;
+    margin-bottom: var(--wpseed-spacing-lg) !important;
+    padding-bottom: var(--wpseed-spacing-md) !important;
+    border-bottom: 1px solid var(--wpseed-color-gray-300) !important;
 }
 
 .wpseed-task-detail-header h2 {
     margin-top: 0 !important;
-    padding-right: var(--tp-spacing-xl) !important;
+    padding-right: var(--wpseed-spacing-xl) !important;
 }
 
 .wpseed-task-detail-title {
@@ -113,14 +113,14 @@
 
 .wpseed-task-meta {
     color: #666 !important;
-    margin-bottom: var(--tp-spacing-xl) !important;
+    margin-bottom: var(--wpseed-spacing-xl) !important;
 }
 
 .wpseed-task-detail-meta {
     display: flex !important;
     gap: 15px !important;
     flex-wrap: wrap !important;
-    margin-bottom: var(--tp-spacing-md) !important;
+    margin-bottom: var(--wpseed-spacing-md) !important;
 }
 
 .wpseed-task-detail-meta span {
@@ -139,7 +139,7 @@
 
 .wpseed-task-detail-meta-label {
     font-weight: bold !important;
-    margin-bottom: var(--tp-spacing-xs) !important;
+    margin-bottom: var(--wpseed-spacing-xs) !important;
     color: #666 !important;
 }
 

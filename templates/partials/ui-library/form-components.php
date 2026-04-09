@@ -228,7 +228,7 @@ defined('ABSPATH') || exit;
                     <textarea id="contact-message" name="contact_message" class="wpseed-form-textarea" rows="4" required></textarea>
                 </div>
                 <div class="wpseed-form-actions">
-                    <button type="submit" class="tp-button tp-button-primary"><?php esc_html_e('Send Message', 'wpseed'); ?></button>
+                    <button type="submit" class="wpseed-button wpseed-button-primary"><?php esc_html_e('Send Message', 'wpseed'); ?></button>
                 </div>
             </form>
         </div>
@@ -274,8 +274,8 @@ defined('ABSPATH') || exit;
                     </fieldset>
                 </div>
                 <div class="wpseed-form-actions">
-                    <button type="submit" class="tp-button tp-button-primary"><?php esc_html_e('Save Settings', 'wpseed'); ?></button>
-                    <button type="reset" class="tp-button tp-button-secondary"><?php esc_html_e('Reset', 'wpseed'); ?></button>
+                    <button type="submit" class="wpseed-button wpseed-button-primary"><?php esc_html_e('Save Settings', 'wpseed'); ?></button>
+                    <button type="reset" class="wpseed-button wpseed-button-secondary"><?php esc_html_e('Reset', 'wpseed'); ?></button>
                 </div>
             </form>
         </div>
@@ -299,7 +299,7 @@ defined('ABSPATH') || exit;
                     <div id="symbol-feedback" class="wpseed-form-feedback" style="display:none;"></div>
                 </div>
                 <div class="wpseed-form-actions">
-                    <button type="submit" class="tp-button tp-button-primary" id="ajax-submit-btn"><?php esc_html_e('Validate & Submit', 'wpseed'); ?></button>
+                    <button type="submit" class="wpseed-button wpseed-button-primary" id="ajax-submit-btn"><?php esc_html_e('Validate & Submit', 'wpseed'); ?></button>
                 </div>
             </form>
         </div>

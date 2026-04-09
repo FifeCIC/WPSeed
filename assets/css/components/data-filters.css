@@ -21,24 +21,24 @@
 
 /* Filter Form */
 .wpseed-filter-form {
-    background: var(--tp-color-white);
+    background: var(--wpseed-color-white);
     border: 1px solid #ccd0d4;
-    border-radius: var(--tp-border-radius);
-    padding: var(--tp-spacing-lg);
-    margin-bottom: var(--tp-spacing-xl);
+    border-radius: var(--wpseed-border-radius);
+    padding: var(--wpseed-spacing-lg);
+    margin-bottom: var(--wpseed-spacing-xl);
 }
 
 /* Filter Controls */
 .wpseed-filter-controls {
     display: flex;
     flex-direction: column;
-    gap: var(--tp-spacing-md);
+    gap: var(--wpseed-spacing-md);
 }
 
 .wpseed-filter-row {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--tp-spacing-lg);
+    gap: var(--wpseed-spacing-lg);
     align-items: flex-end;
 }
 
@@ -54,8 +54,8 @@
 
 /* Data Filter Controls */
 .wpseed-data-filter-controls {
-    margin-bottom: var(--tp-spacing-lg);
-    padding: var(--tp-spacing-md);
+    margin-bottom: var(--wpseed-spacing-lg);
+    padding: var(--wpseed-spacing-md);
     background: #f8f8f8;
     border: 1px solid #e5e5e5;
     border-radius: 3px;
@@ -68,7 +68,7 @@
 /* Data Table Preview */
 .wpseed-table-data-preview {
     overflow-x: auto;
-    margin-bottom: var(--tp-spacing-lg);
+    margin-bottom: var(--wpseed-spacing-lg);
 }
 
 .wpseed-table-data-preview table {
@@ -97,7 +97,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: var(--tp-spacing-md);
+    gap: var(--wpseed-spacing-md);
 }
 
 .wpseed-pagination-info {
@@ -112,7 +112,7 @@
 /* Loading State */
 .wpseed-loading {
     text-align: center;
-    padding: var(--tp-spacing-xl);
+    padding: var(--wpseed-spacing-xl);
     color: #666;
 }
 

@@ -10,15 +10,15 @@
 
 /* Headings */
 h1, h2, h3, h4, h5, h6 {
-  color: var(--tp-color-gray-900);
-  font-weight: var(--tp-font-weight-semibold);
+  color: var(--wpseed-color-gray-900);
+  font-weight: var(--wpseed-font-weight-semibold);
   line-height: 1.2;
-  margin-bottom: var(--tp-spacing-md);
+  margin-bottom: var(--wpseed-spacing-md);
 }
 
 h1 {
   font-size: 23px;
-  font-weight: var(--tp-font-weight-bold);
+  font-weight: var(--wpseed-font-weight-bold);
 }
 
 h2 {
@@ -43,21 +43,21 @@ h6 {
 
 /* Paragraphs and text */
 p {
-  margin-bottom: var(--tp-spacing-md);
-  font-size: var(--tp-font-size);
+  margin-bottom: var(--wpseed-spacing-md);
+  font-size: var(--wpseed-font-size);
   line-height: 1.5;
 }
 
 .description {
-  color: var(--tp-color-gray-700);
-  font-size: var(--tp-font-size);
+  color: var(--wpseed-color-gray-700);
+  font-size: var(--wpseed-font-size);
   font-style: italic;
 }
 
 /* Lists */
 ul, ol {
   margin-left: 20px;
-  margin-bottom: var(--tp-spacing-md);
+  margin-bottom: var(--wpseed-spacing-md);
 }
 
 ul {
@@ -69,12 +69,12 @@ ol {
 }
 
 li {
-  margin-bottom: var(--tp-spacing-xs);
+  margin-bottom: var(--wpseed-spacing-xs);
 }
 
 /* Text formatting */
 strong, b {
-  font-weight: var(--tp-font-weight-bold);
+  font-weight: var(--wpseed-font-weight-bold);
 }
 
 em, i {
@@ -83,15 +83,15 @@ em, i {
 
 code, pre, kbd {
   font-family: monospace;
-  font-size: var(--tp-font-size-sm);
-  background-color: var(--tp-color-gray-100);
+  font-size: var(--wpseed-font-size-sm);
+  background-color: var(--wpseed-color-gray-100);
   padding: 2px 4px;
-  border-radius: var(--tp-border-radius-sm);
+  border-radius: var(--wpseed-border-radius-sm);
 }
 
 pre {
-  padding: var(--tp-spacing-md);
-  margin-bottom: var(--tp-spacing-md);
+  padding: var(--wpseed-spacing-md);
+  margin-bottom: var(--wpseed-spacing-md);
   overflow: auto;
   white-space: pre-wrap;
   word-wrap: break-word;
@@ -99,27 +99,27 @@ pre {
 
 /* Links in typography */
 a {
-  color: var(--tp-color-wp-blue);
+  color: var(--wpseed-color-wp-blue);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 a:hover, a:focus {
-  color: var(--tp-color-wp-dark-blue);
+  color: var(--wpseed-color-wp-dark-blue);
   text-decoration: underline;
 }
 
 /* Helper text classes */
 .text-small {
-  font-size: var(--tp-font-size-sm);
+  font-size: var(--wpseed-font-size-sm);
 }
 
 .text-xs {
-  font-size: var(--tp-font-size-xs);
+  font-size: var(--wpseed-font-size-xs);
 }
 
 .text-lg {
-  font-size: var(--tp-font-size-lg);
+  font-size: var(--wpseed-font-size-lg);
 }
 
 .text-center {
@@ -136,60 +136,52 @@ a:hover, a:focus {
 
 /* Text colors */
 .text-success {
-  color: var(--tp-color-success);
+  color: var(--wpseed-color-success);
 }
 
 .text-warning {
-  color: var(--tp-color-warning);
+  color: var(--wpseed-color-warning);
 }
 
 .text-error {
-  color: var(--tp-color-error);
+  color: var(--wpseed-color-error);
 }
 
 .text-info {
-  color: var(--tp-color-info);
+  color: var(--wpseed-color-info);
 }
 
 .text-muted {
-  color: var(--tp-color-gray-600);
-}
-
-.text-bullish {
-  color: var(--tp-color-bullish);
-}
-
-.text-bearish {
-  color: var(--tp-color-bearish);
+  color: var(--wpseed-color-gray-600);
 }
 
 /* Admin-specific typography */
 .wpseed-admin-wrap h1 {
-  margin-top: var(--tp-spacing-md);
-  margin-bottom: var(--tp-spacing-lg);
+  margin-top: var(--wpseed-spacing-md);
+  margin-bottom: var(--wpseed-spacing-lg);
   padding: 0;
 }
 
 .wpseed-admin-wrap h2 {
-  margin-top: var(--tp-spacing-lg);
-  margin-bottom: var(--tp-spacing-md);
+  margin-top: var(--wpseed-spacing-lg);
+  margin-bottom: var(--wpseed-spacing-md);
 }
 
 .wpseed-admin-wrap .section-title {
-  border-bottom: 1px solid var(--tp-color-gray-300);
-  padding-bottom: var(--tp-spacing-xs);
-  margin-bottom: var(--tp-spacing-lg);
+  border-bottom: 1px solid var(--wpseed-color-gray-300);
+  padding-bottom: var(--wpseed-spacing-xs);
+  margin-bottom: var(--wpseed-spacing-lg);
 }
 
 /* Documentation typography */
 .code-comment {
-  color: var(--tp-color-gray-600);
+  color: var(--wpseed-color-gray-600);
 }
 
 .code-string {
-  color: var(--tp-color-success-dark);
+  color: var(--wpseed-color-success-dark);
 }
 
 .code-keyword {
-  color: var(--tp-color-wp-blue);
+  color: var(--wpseed-color-wp-blue);
 }

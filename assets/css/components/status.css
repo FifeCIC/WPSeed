@@ -17,29 +17,29 @@
 .wpseed-status {
     display: inline-block;
     padding: 3px 8px;
-    border-radius: var(--tp-border-radius-sm);
-    font-size: var(--tp-font-size-xs);
-    font-weight: var(--tp-font-weight-medium);
+    border-radius: var(--wpseed-border-radius-sm);
+    font-size: var(--wpseed-font-size-xs);
+    font-weight: var(--wpseed-font-weight-medium);
 }
 
 .wpseed-status-success {
     background-color: #dff0d8;
-    color: var(--tp-color-success);
+    color: var(--wpseed-color-success);
 }
 
 .wpseed-status-warning {
     background-color: #fcf8e3;
-    color: var(--tp-color-warning-dark);
+    color: var(--wpseed-color-warning-dark);
 }
 
 .wpseed-status-error {
     background-color: #f2dede;
-    color: var(--tp-color-error-dark);
+    color: var(--wpseed-color-error-dark);
 }
 
 .wpseed-status-info {
     background-color: #d9edf7;
-    color: var(--tp-color-info-dark);
+    color: var(--wpseed-color-info-dark);
 }
 
 /* Old Styles Mapping */
@@ -53,55 +53,55 @@
 .service-status-badge {
     display: inline-block;
     padding: 2px 8px;
-    border-radius: var(--tp-border-radius-sm);
-    font-weight: var(--tp-font-weight-bold);
+    border-radius: var(--wpseed-border-radius-sm);
+    font-weight: var(--wpseed-font-weight-bold);
 }
 
 .service-status-badge.operational {
     background-color: #edfaef;
-    color: var(--tp-color-success);
+    color: var(--wpseed-color-success);
 }
 
 .service-status-badge.disruption {
-    background-color: var(--tp-color-warning-light);
-    color: var(--tp-color-warning-dark);
+    background-color: var(--wpseed-color-warning-light);
+    color: var(--wpseed-color-warning-dark);
 }
 
 .service-status-badge.outage {
     background-color: #fbeaea;
-    color: var(--tp-color-error);
+    color: var(--wpseed-color-error);
 }
 
 /* Method Badges */
 .method-badge {
     display: inline-block;
     padding: 3px 8px;
-    border-radius: var(--tp-border-radius-sm);
-    font-size: var(--tp-font-size-xs);
-    font-weight: var(--tp-font-weight-bold);
-    color: var(--tp-color-white);
+    border-radius: var(--wpseed-border-radius-sm);
+    font-size: var(--wpseed-font-size-xs);
+    font-weight: var(--wpseed-font-weight-bold);
+    color: var(--wpseed-color-white);
     text-align: center;
     min-width: 50px;
 }
 
 .method-get {
-    background-color: var(--tp-color-method-get);
+    background-color: var(--wpseed-color-method-get);
 }
 
 .method-post {
-    background-color: var(--tp-color-method-post);
+    background-color: var(--wpseed-color-method-post);
 }
 
 .method-put {
-    background-color: var(--tp-color-method-put);
+    background-color: var(--wpseed-color-method-put);
 }
 
 .method-delete {
-    background-color: var(--tp-color-method-delete);
+    background-color: var(--wpseed-color-method-delete);
 }
 
 .method-ws {
-    background-color: var(--tp-color-method-ws);
+    background-color: var(--wpseed-color-method-ws);
 }
 
 /* Directive Type Badges */
@@ -156,11 +156,11 @@ span.directive-status { @extend .wpseed-directive-status; }
 /* Premium Badge */
 .premium-badge {
     display: inline-block;
-    background: var(--tp-color-premium);
-    color: var(--tp-color-white);
+    background: var(--wpseed-color-premium);
+    color: var(--wpseed-color-white);
     font-size: 10px;
     padding: 2px 5px;
-    border-radius: var(--tp-border-radius-sm);
+    border-radius: var(--wpseed-border-radius-sm);
     margin-left: 5px;
 }
 
@@ -168,18 +168,18 @@ span.directive-status { @extend .wpseed-directive-status; }
 .feature-status-badge {
     display: inline-block;
     padding: 3px 8px;
-    border-radius: var(--tp-border-radius-sm);
-    font-size: var(--tp-font-size-xs);
-    font-weight: var(--tp-font-weight-medium);
+    border-radius: var(--wpseed-border-radius-sm);
+    font-size: var(--wpseed-font-size-xs);
+    font-weight: var(--wpseed-font-weight-medium);
 }
 
 .status-live {
     background: #d1ffd6;
-    color: var(--tp-color-success-dark);
+    color: var(--wpseed-color-success-dark);
 }
 
 .status-demo {
-    background: var(--tp-color-warning-light);
+    background: var(--wpseed-color-warning-light);
     color: #96600c;
 }
 
@@ -188,8 +188,8 @@ span.directive-status { @extend .wpseed-directive-status; }
     display: flex;
     flex-wrap: wrap;
     margin-bottom: 20px;
-    background: var(--tp-color-white);
-    border: 1px solid var(--tp-color-gray-200);
+    background: var(--wpseed-color-white);
+    border: 1px solid var(--wpseed-color-gray-200);
     padding: 15px;
 }
 
@@ -199,18 +199,18 @@ span.directive-status { @extend .wpseed-directive-status; }
 }
 
 .stat-label {
-    font-weight: var(--tp-font-weight-bold);
+    font-weight: var(--wpseed-font-weight-bold);
     margin-right: 5px;
 }
 
 .feature-tab-link {
     margin-left: 10px;
     text-decoration: none;
-    color: var(--tp-color-wp-blue);
+    color: var(--wpseed-color-wp-blue);
 }
 
 .feature-tab-link:hover {
-    color: var(--tp-color-wp-blue-hover);
+    color: var(--wpseed-color-wp-blue-hover);
     text-decoration: underline;
 }
 
@@ -218,19 +218,19 @@ span.directive-status { @extend .wpseed-directive-status; }
 .issue-status-badge {
     display: inline-block;
     padding: 3px 8px;
-    border-radius: var(--tp-border-radius-sm);
-    font-size: var(--tp-font-size-xs);
+    border-radius: var(--wpseed-border-radius-sm);
+    font-size: var(--wpseed-font-size-xs);
     text-transform: capitalize;
 }
 
 .issue-status-badge.open {
     background-color: #2cbe4e;
-    color: var(--tp-color-white);
+    color: var(--wpseed-color-white);
 }
 
 .issue-status-badge.closed {
     background-color: #cb2431;
-    color: var(--tp-color-white);
+    color: var(--wpseed-color-white);
 }
 
 /* Status Indicator System */
@@ -248,15 +248,15 @@ span.directive-status { @extend .wpseed-directive-status; }
 }
 
 .status-green {
-    background-color: var(--tp-color-success);
+    background-color: var(--wpseed-color-success);
 }
 
 .status-orange {
-    background-color: var(--tp-color-warning);
+    background-color: var(--wpseed-color-warning);
 }
 
 .status-red {
-    background-color: var(--tp-color-error);
+    background-color: var(--wpseed-color-error);
 }
 
 .status-grey {
@@ -285,84 +285,84 @@ span.directive-status { @extend .wpseed-directive-status; }
     background-color: #f0f0f1;
     height: 16px;
     position: relative;
-    border-radius: var(--tp-border-radius-sm);
+    border-radius: var(--wpseed-border-radius-sm);
     margin-top: 5px;
     margin-bottom: 15px;
 }
 
 .progress-bar {
-    background-color: var(--tp-color-wp-blue);
+    background-color: var(--wpseed-color-wp-blue);
     height: 100%;
-    border-radius: var(--tp-border-radius-sm);
+    border-radius: var(--wpseed-border-radius-sm);
 }
 
 /* Environment indicators */
 .demo-env {
-    color: var(--tp-color-orange);
+    color: var(--wpseed-color-orange);
     font-weight: bold;
 }
 
 .live-env {
-    color: var(--tp-color-success);
+    color: var(--wpseed-color-success);
     font-weight: bold;
 }
 
 .live-trading {
-    color: var(--tp-color-error);
+    color: var(--wpseed-color-error);
     font-weight: bold;
 }
 
 .paper-trading {
-    color: var(--tp-color-info);
+    color: var(--wpseed-color-info);
     font-weight: bold;
 }
 
 /* Consensus indicators */
 .consensus-high { 
-    color: var(--tp-color-success); 
+    color: var(--wpseed-color-success); 
     font-weight: bold; 
 }
 
 .consensus-medium { 
-    color: var(--tp-color-warning); 
+    color: var(--wpseed-color-warning); 
     font-weight: bold; 
 }
 
 .consensus-low { 
-    color: var(--tp-color-error-dark); 
+    color: var(--wpseed-color-error-dark); 
     font-weight: bold; 
 }
 
 /* Percentage difference indicators */
 .positive-pct { 
-    color: var(--tp-color-success); 
+    color: var(--wpseed-color-success); 
     font-weight: bold; 
 }
 
 .negative-pct { 
-    color: var(--tp-color-error-dark); 
+    color: var(--wpseed-color-error-dark); 
     font-weight: bold; 
 }
 
 /* Status Containers */
 .wpseed-status-header {
-    border-bottom: 1px solid var(--tp-color-gray-200);
-    padding: var(--tp-spacing-lg);
+    border-bottom: 1px solid var(--wpseed-color-gray-200);
+    padding: var(--wpseed-spacing-lg);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: var(--tp-color-gray-100);
+    background: var(--wpseed-color-gray-100);
 }
 
 .wpseed-status-header h3 {
     margin: 0;
-    font-size: var(--tp-font-size);
-    font-weight: var(--tp-font-weight-semibold);
+    font-size: var(--wpseed-font-size);
+    font-weight: var(--wpseed-font-weight-semibold);
 }
 
 .wpseed-status-actions {
     display: flex;
-    gap: var(--tp-spacing-md);
+    gap: var(--wpseed-spacing-md);
 }
 
 .wpseed-status-actions a {
@@ -378,8 +378,8 @@ span.directive-status { @extend .wpseed-directive-status; }
 .wpseed-status-data-columns {
     display: flex;
     flex-wrap: wrap;
-    padding: var(--tp-spacing-lg);
-    gap: var(--tp-spacing-xl);
+    padding: var(--wpseed-spacing-lg);
+    gap: var(--wpseed-spacing-xl);
 }
 
 .wpseed-status-data-column {
@@ -388,18 +388,18 @@ span.directive-status { @extend .wpseed-directive-status; }
 }
 
 .wpseed-status-data-item {
-    margin-bottom: var(--tp-spacing-xl);
+    margin-bottom: var(--wpseed-spacing-xl);
 }
 
 .wpseed-status-label {
-    font-weight: var(--tp-font-weight-semibold);
-    margin-bottom: var(--tp-spacing-xs);
+    font-weight: var(--wpseed-font-weight-semibold);
+    margin-bottom: var(--wpseed-spacing-xs);
 }
 
 .wpseed-status-value {
     font-size: 16px;
-    font-weight: var(--tp-font-weight-medium);
-    margin-bottom: var(--tp-spacing-xs);
+    font-weight: var(--wpseed-font-weight-medium);
+    margin-bottom: var(--wpseed-spacing-xs);
 }
 
 .wpseed-status-value.active {
@@ -423,7 +423,7 @@ span.directive-status { @extend .wpseed-directive-status; }
 .wpseed-status-message {
     color: #666;
     font-size: 13px;
-    margin-bottom: var(--tp-spacing-xs);
+    margin-bottom: var(--wpseed-spacing-xs);
 }
 
 .wpseed-status-timestamp {
@@ -433,16 +433,16 @@ span.directive-status { @extend .wpseed-directive-status; }
 
 /* Rate Limits */
 .wpseed-rate-limits {
-    margin-top: var(--tp-spacing-xs);
+    margin-top: var(--wpseed-spacing-xs);
 }
 
 .wpseed-rate-limit-item {
-    margin-bottom: var(--tp-spacing-md);
+    margin-bottom: var(--wpseed-spacing-md);
 }
 
 .wpseed-rate-limit-title {
-    font-weight: var(--tp-font-weight-medium);
-    margin-bottom: var(--tp-spacing-xs);
+    font-weight: var(--wpseed-font-weight-medium);
+    margin-bottom: var(--wpseed-spacing-xs);
 }
 
 .wpseed-rate-limit-bar {
@@ -450,7 +450,7 @@ span.directive-status { @extend .wpseed-directive-status; }
     background-color: #f1f1f1;
     border-radius: 3px;
     overflow: hidden;
-    margin-bottom: var(--tp-spacing-xs);
+    margin-bottom: var(--wpseed-spacing-xs);
 }
 
 .wpseed-rate-limit-progress {
@@ -467,15 +467,15 @@ span.directive-status { @extend .wpseed-directive-status; }
 .wpseed-rate-limit-reset {
     font-size: 12px;
     color: #999;
-    margin-top: var(--tp-spacing-md);
+    margin-top: var(--wpseed-spacing-md);
 }
 
 /* API Status Indicators */
 .wpseed-api-status {
     display: flex;
     align-items: center;
-    gap: var(--tp-spacing-md);
-    padding: var(--tp-spacing-md) var(--tp-spacing-xl);
+    gap: var(--wpseed-spacing-md);
+    padding: var(--wpseed-spacing-md) var(--wpseed-spacing-xl);
     margin-left: auto;
 }
 
@@ -494,7 +494,7 @@ span.directive-status { @extend .wpseed-directive-status; }
 }
 
 .wpseed-status-text {
-    font-weight: var(--tp-font-weight-medium);
+    font-weight: var(--wpseed-font-weight-medium);
 }
 
 .wpseed-api-status.active .wpseed-status-text {
@@ -508,13 +508,13 @@ span.directive-status { @extend .wpseed-directive-status; }
 /* API Badges */
 .wpseed-api-badges {
     display: flex;
-    gap: var(--tp-spacing-md);
+    gap: var(--wpseed-spacing-md);
 }
 
 .wpseed-api-badge {
     display: inline-flex;
     align-items: center;
-    gap: var(--tp-spacing-xs);
+    gap: var(--wpseed-spacing-xs);
     background: #f1f1f1;
     color: #555;
     font-size: 12px;
@@ -524,18 +524,18 @@ span.directive-status { @extend .wpseed-directive-status; }
 
 /* Key Status */
 .wpseed-key-status-container {
-    margin-bottom: var(--tp-spacing-lg);
+    margin-bottom: var(--wpseed-spacing-lg);
 }
 
 .wpseed-key-status-container h5 {
-    margin: var(--tp-spacing-md) 0 var(--tp-spacing-xs);
-    font-size: var(--tp-font-size);
-    font-weight: var(--tp-font-weight-semibold);
+    margin: var(--wpseed-spacing-md) 0 var(--wpseed-spacing-xs);
+    font-size: var(--wpseed-font-size);
+    font-weight: var(--wpseed-font-weight-semibold);
     color: #50575e;
 }
 
 .wpseed-key-status {
-    margin-bottom: var(--tp-spacing-md);
+    margin-bottom: var(--wpseed-spacing-md);
     padding: 8px 10px;
     border-radius: 3px;
     font-size: 13px;
@@ -555,7 +555,7 @@ span.directive-status { @extend .wpseed-directive-status; }
 }
 
 .wpseed-key-status .dashicons {
-    margin-right: var(--tp-spacing-xs);
+    margin-right: var(--wpseed-spacing-xs);
     vertical-align: middle;
 }
 
@@ -573,7 +573,7 @@ span.directive-status { @extend .wpseed-directive-status; }
     padding: 3px 8px;
     border-radius: 3px;
     font-size: 12px;
-    font-weight: var(--tp-font-weight-semibold);
+    font-weight: var(--wpseed-font-weight-semibold);
     text-transform: uppercase;
     margin-left: 8px;
     border: none;
@@ -588,18 +588,18 @@ span.directive-status { @extend .wpseed-directive-status; }
 
 .wpseed-trading-mode-toggle-button.live {
     background-color: #46b450;
-    color: var(--tp-color-white);
+    color: var(--wpseed-color-white);
 }
 
 /* Service Status Button Styles */
 .wpseed-service-status-toggle-button.operational {
     background-color: #46b450;
-    color: var(--tp-color-white);
+    color: var(--wpseed-color-white);
 }
 
 .wpseed-service-status-toggle-button.disabled {
     background-color: #dc3232;
-    color: var(--tp-color-white);
+    color: var(--wpseed-color-white);
 }
 
 /* Demo Mode Button Styles */
@@ -610,7 +610,7 @@ span.directive-status { @extend .wpseed-directive-status; }
 
 .wpseed-demo-mode-toggle-button.demo-off {
     background-color: #47a8d7;
-    color: var(--tp-color-white);
+    color: var(--wpseed-color-white);
 }
 
 /* Button Forms */
@@ -655,7 +655,7 @@ span.directive-status { @extend .wpseed-directive-status; }
 /* Algorithm Status Indicators */
 .wpseed-status-indicator-wrapper {
     text-align: center;
-    margin: var(--tp-spacing-xl) 0;
+    margin: var(--wpseed-spacing-xl) 0;
 }
 
 .wpseed-status-indicator {
@@ -695,14 +695,14 @@ span.directive-status { @extend .wpseed-directive-status; }
 
 .wpseed-runtime-display {
     text-align: center;
-    margin: var(--tp-spacing-xl) 0;
+    margin: var(--wpseed-spacing-xl) 0;
 }
 
 /* Trade Action Status */
 .wpseed-trade-action {
     display: inline-block;
     padding: 3px 8px;
-    border-radius: var(--tp-border-radius);
+    border-radius: var(--wpseed-border-radius);
     font-size: 12px;
     font-weight: bold;
 }
@@ -720,7 +720,7 @@ span.directive-status { @extend .wpseed-directive-status; }
 .wpseed-score {
     display: inline-block;
     padding: 3px 8px;
-    border-radius: var(--tp-border-radius);
+    border-radius: var(--wpseed-border-radius);
     font-weight: bold;
 }
 
@@ -759,10 +759,10 @@ span.directive-status { @extend .wpseed-directive-status; }
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    padding: var(--tp-spacing-lg);
-    background: var(--tp-color-gray-100);
-    border: 1px solid var(--tp-color-gray-200);
-    margin-bottom: var(--tp-spacing-xl);
+    padding: var(--wpseed-spacing-lg);
+    background: var(--wpseed-color-gray-100);
+    border: 1px solid var(--wpseed-color-gray-200);
+    margin-bottom: var(--wpseed-spacing-xl);
 }
 
 .wpseed-status-dot {
@@ -770,7 +770,7 @@ span.directive-status { @extend .wpseed-directive-status; }
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    margin-right: var(--tp-spacing-sm);
+    margin-right: var(--wpseed-spacing-sm);
 }
 
 .wpseed-status-running .wpseed-status-dot {
@@ -784,7 +784,7 @@ span.directive-status { @extend .wpseed-directive-status; }
 }
 
 .wpseed-runtime-display {
-    margin-right: var(--tp-spacing-xl);
+    margin-right: var(--wpseed-spacing-xl);
 }
 
 /* Legacy classes mapping for backward compatibility */
@@ -941,7 +941,7 @@ span.directive-status { @extend .wpseed-directive-status; }
     padding: 3px 8px;
     border-radius: 3px;
     font-size: 12px;
-    font-weight: var(--tp-font-weight-semibold);
+    font-weight: var(--wpseed-font-weight-semibold);
     text-transform: uppercase;
     text-align: center;
     min-width: 60px;
@@ -983,7 +983,7 @@ span.directive-status { @extend .wpseed-directive-status; }
     padding: 3px 8px;
     border-radius: 3px;
     font-size: 12px;
-    font-weight: var(--tp-font-weight-semibold);
+    font-weight: var(--wpseed-font-weight-semibold);
     text-transform: uppercase;
     margin-left: 10px;
 }
@@ -1053,13 +1053,13 @@ span.directive-status { @extend .wpseed-directive-status; }
 /* Status Panel */
 .wpseed-status-panel {
     background: #f9f9f9;
-    border-radius: var(--tp-border-radius);
+    border-radius: var(--wpseed-border-radius);
     padding: 15px;
 }
 
 .wpseed-status-section {
-    margin-bottom: var(--tp-spacing-xl);
-    border-bottom: 1px solid var(--tp-color-gray-200);
+    margin-bottom: var(--wpseed-spacing-xl);
+    border-bottom: 1px solid var(--wpseed-color-gray-200);
     padding-bottom: 15px;
 }
 
@@ -1069,16 +1069,16 @@ span.directive-status { @extend .wpseed-directive-status; }
 }
 
 .wpseed-status-section h4 {
-    margin: 0 0 var(--tp-spacing-md);
-    font-size: var(--tp-font-size);
-    font-weight: var(--tp-font-weight-semibold);
+    margin: 0 0 var(--wpseed-spacing-md);
+    font-size: var(--wpseed-font-size);
+    font-weight: var(--wpseed-font-weight-semibold);
 }
 
 /* Status Indicators */
 .wpseed-status-indicator {
     display: flex;
     align-items: center;
-    margin-bottom: var(--tp-spacing-xs);
+    margin-bottom: var(--wpseed-spacing-xs);
 }
 
 .wpseed-status-success {
@@ -1094,20 +1094,20 @@ span.directive-status { @extend .wpseed-directive-status; }
 }
 
 .wpseed-status-text {
-    margin-left: var(--tp-spacing-xs);
+    margin-left: var(--wpseed-spacing-xs);
 }
 
 /* Status Actions */
 .wpseed-status-actions {
-    margin-top: var(--tp-spacing-lg);
+    margin-top: var(--wpseed-spacing-lg);
     text-align: center;
 }
 
 /* Badge System */
 .wpseed-admin-badge {
     position: absolute;
-    top: var(--tp-spacing-md);
-    right: var(--tp-spacing-md);
+    top: var(--wpseed-spacing-md);
+    right: var(--wpseed-spacing-md);
     background-color: #2271b1;
     color: white;
     padding: 2px 8px;
@@ -1118,8 +1118,8 @@ span.directive-status { @extend .wpseed-directive-status; }
 
 .wpseed-demo-badge {
     position: absolute;
-    top: var(--tp-spacing-md);
-    right: var(--tp-spacing-md);
+    top: var(--wpseed-spacing-md);
+    right: var(--wpseed-spacing-md);
     background-color: #dba617;
     color: white;
     padding: 2px 8px;
@@ -1185,7 +1185,7 @@ span.directive-status { @extend .wpseed-directive-status; }
 
 /* Detail Status */
 .wpseed-detail-status {
-    font-weight: var(--tp-font-weight-semibold) !important;
+    font-weight: var(--wpseed-font-weight-semibold) !important;
 }
 
 .wpseed-detail-status.status-completed {
@@ -1208,15 +1208,15 @@ span.directive-status { @extend .wpseed-directive-status; }
     display: inline-flex !important;
     align-items: center !important;
     gap: 8px !important;
-    margin-top: var(--tp-spacing-md) !important;
+    margin-top: var(--wpseed-spacing-md) !important;
     padding: 8px 12px !important;
     background-color: #f9f9f9 !important;
-    border-radius: var(--tp-border-radius) !important;
+    border-radius: var(--wpseed-border-radius) !important;
     font-size: 12px !important;
 }
 
 .wpseed-status-label {
-    font-weight: var(--tp-font-weight-semibold) !important;
+    font-weight: var(--wpseed-font-weight-semibold) !important;
 }
 
 .wpseed-status-fresh {
@@ -1262,23 +1262,23 @@ span.directive-status { @extend .wpseed-directive-status; }
 }
 
 .wpseed-status-success {
-    background-color: var(--tp-color-success);
+    background-color: var(--wpseed-color-success);
 }
 
 .wpseed-status-warning {
-    background-color: var(--tp-color-warning);
+    background-color: var(--wpseed-color-warning);
 }
 
 .wpseed-status-error {
-    background-color: var(--tp-color-error);
+    background-color: var(--wpseed-color-error);
 }
 
 .wpseed-status-info {
-    background-color: var(--tp-color-info);
+    background-color: var(--wpseed-color-info);
 }
 
 .wpseed-status-processing {
-    background-color: var(--tp-color-primary);
+    background-color: var(--wpseed-color-primary);
 }
 
 .wpseed-badge {
@@ -1289,46 +1289,46 @@ span.directive-status { @extend .wpseed-directive-status; }
 }
 
 .wpseed-badge-success {
-    background-color: var(--tp-color-success-light);
-    color: var(--tp-color-success);
+    background-color: var(--wpseed-color-success-light);
+    color: var(--wpseed-color-success);
 }
 
 .wpseed-badge-warning {
-    background-color: var(--tp-color-warning-light);
-    color: var(--tp-color-warning);
+    background-color: var(--wpseed-color-warning-light);
+    color: var(--wpseed-color-warning);
 }
 
 .wpseed-badge-error {
-    background-color: var(--tp-color-error-light);
-    color: var(--tp-color-error);
+    background-color: var(--wpseed-color-error-light);
+    color: var(--wpseed-color-error);
 }
 
 .wpseed-badge-info {
-    background-color: var(--tp-color-info-light);
-    color: var(--tp-color-info);
+    background-color: var(--wpseed-color-info-light);
+    color: var(--wpseed-color-info);
 }
 
 .wpseed-badge-neutral {
-    background-color: var(--tp-color-border-light);
-    color: var(--tp-color-text-light);
+    background-color: var(--wpseed-color-border-light);
+    color: var(--wpseed-color-text-light);
 }
 
 .wpseed-status-success-icon {
-    color: var(--tp-color-success);
+    color: var(--wpseed-color-success);
 }
 
 .wpseed-status-warning-icon {
-    color: var(--tp-color-warning);
+    color: var(--wpseed-color-warning);
 }
 
 .wpseed-status-error-icon {
-    color: var(--tp-color-error);
+    color: var(--wpseed-color-error);
 }
 
 .wpseed-status-info-icon {
-    color: var(--tp-color-info);
+    color: var(--wpseed-color-info);
 }
 
 .wpseed-status-processing-icon {
-    color: var(--tp-color-primary);
+    color: var(--wpseed-color-primary);
 }

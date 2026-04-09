@@ -13,7 +13,7 @@
     align-items: center;
     background-color: #f6f7f7;
     border-left: 4px solid #2271b1;
-    padding: var(--tp-spacing-md) 15px;
+    padding: var(--wpseed-spacing-md) 15px;
     margin-bottom: 15px;
     position: relative;
 }
@@ -38,7 +38,7 @@
     align-items: center;
     background-color: #fff8e5;
     border-left: 4px solid #dba617;
-    padding: var(--tp-spacing-md) 15px;
+    padding: var(--wpseed-spacing-md) 15px;
     margin-bottom: 15px;
     position: relative;
 }
@@ -61,8 +61,8 @@
 .wpseed-debug-info-panel {
     background-color: #f8e3dd;
     border: 1px dashed #d63638;
-    border-radius: var(--tp-border-radius);
-    padding: var(--tp-spacing-md) 15px;
+    border-radius: var(--wpseed-border-radius);
+    padding: var(--wpseed-spacing-md) 15px;
     margin-bottom: 15px;
     position: relative;
 }
@@ -70,8 +70,8 @@
 .wpseed-debug-info-panel h4 {
     color: #d63638;
     margin-top: 0;
-    margin-bottom: var(--tp-spacing-md);
-    font-size: var(--tp-font-size);
+    margin-bottom: var(--wpseed-spacing-md);
+    font-size: var(--wpseed-font-size);
     display: flex;
     align-items: center;
 }
@@ -84,8 +84,8 @@
 }
 
 .wpseed-debug-info-content {
-    background-color: var(--tp-color-white);
-    padding: var(--tp-spacing-md);
+    background-color: var(--wpseed-color-white);
+    padding: var(--wpseed-spacing-md);
     border-radius: 3px;
 }
 
@@ -103,14 +103,14 @@
 .wpseed-debug-advanced-section {
     margin-top: 15px;
     border-top: 1px solid #e1e1e1;
-    padding-top: var(--tp-spacing-md);
+    padding-top: var(--wpseed-spacing-md);
 }
 
 .wpseed-toggle-advanced-debug {
     cursor: pointer;
     color: #2271b1;
-    font-weight: var(--tp-font-weight-medium);
-    margin-bottom: var(--tp-spacing-md);
+    font-weight: var(--wpseed-font-weight-medium);
+    margin-bottom: var(--wpseed-spacing-md);
     display: flex;
     align-items: center;
 }
@@ -122,15 +122,15 @@
 
 .wpseed-advanced-debug-content {
     background-color: #f9f9f9;
-    padding: var(--tp-spacing-md);
+    padding: var(--wpseed-spacing-md);
     border-radius: 3px;
     border: 1px solid #e1e1e1;
 }
 
 .wpseed-advanced-debug-content h5 {
-    margin: var(--tp-spacing-md) 0 5px;
-    font-size: var(--tp-font-size);
-    font-weight: var(--tp-font-weight-semibold);
+    margin: var(--wpseed-spacing-md) 0 5px;
+    font-size: var(--wpseed-font-size);
+    font-weight: var(--wpseed-font-weight-semibold);
     color: #1d2327;
 }
 
@@ -139,7 +139,7 @@
 }
 
 .wpseed-advanced-debug-content pre {
-    background: var(--tp-color-white);
+    background: var(--wpseed-color-white);
     padding: 8px;
     border: 1px solid #e1e1e1;
     border-radius: 3px;

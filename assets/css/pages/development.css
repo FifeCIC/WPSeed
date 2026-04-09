@@ -125,7 +125,7 @@
     color: #23282d;
 }
 
-.feature-status-tab .tp-accordion-controls {
+.feature-status-tab .wpseed-accordion-controls {
     margin-bottom: 15px;
 }
 
@@ -207,13 +207,13 @@
 }
 
 /* Accordion Styling Improvements */
-.feature-status-tab .tp-accordion-item {
+.feature-status-tab .wpseed-accordion-item {
     margin-bottom: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
 }
 
-.feature-status-tab .tp-accordion-header {
+.feature-status-tab .wpseed-accordion-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -224,24 +224,24 @@
     transition: background-color 0.2s ease;
 }
 
-.feature-status-tab .tp-accordion-header:hover {
+.feature-status-tab .wpseed-accordion-header:hover {
     background: #e9ecef;
 }
 
-.feature-status-tab .tp-accordion-title {
+.feature-status-tab .wpseed-accordion-title {
     margin: 0;
     font-size: 16px;
     font-weight: 600;
     color: #23282d;
 }
 
-.feature-status-tab .tp-accordion-icon {
+.feature-status-tab .wpseed-accordion-icon {
     font-size: 16px;
     color: #666;
     transition: transform 0.2s ease;
 }
 
-.feature-status-tab .tp-accordion-content {
+.feature-status-tab .wpseed-accordion-content {
     padding: 15px;
     background: #fff;
 }

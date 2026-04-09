@@ -23,13 +23,13 @@
 }
 
 .wpseed-meta-item {
-    margin-right: var(--tp-spacing-lg);
+    margin-right: var(--wpseed-spacing-lg);
     display: flex;
     align-items: center;
 }
 
 .wpseed-meta-item .dashicons {
-    margin-right: var(--tp-spacing-xs);
+    margin-right: var(--wpseed-spacing-xs);
     font-size: 16px;
     color: #666;
 }
@@ -37,8 +37,8 @@
 .wpseed-meta-block {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--tp-spacing-md);
-    margin-bottom: var(--tp-spacing-lg);
+    gap: var(--wpseed-spacing-md);
+    margin-bottom: var(--wpseed-spacing-lg);
 }
 
 .wpseed-meta-item {
@@ -50,13 +50,13 @@
 .wpseed-meta-label {
     font-size: 12px;
     color: #666;
-    margin-bottom: var(--tp-spacing-xs);
-    font-weight: var(--tp-font-weight-medium);
+    margin-bottom: var(--wpseed-spacing-xs);
+    font-weight: var(--wpseed-font-weight-medium);
 }
 
 .wpseed-meta-value {
-    font-size: var(--tp-font-size);
-    font-weight: var(--tp-font-weight-semibold);
+    font-size: var(--wpseed-font-size);
+    font-weight: var(--wpseed-font-weight-semibold);
 }
 
 .wpseed-meta-value.highlight {
@@ -66,7 +66,7 @@
 .wpseed-meta-block.inline .wpseed-meta-item {
     flex-direction: row;
     align-items: center;
-    gap: var(--tp-spacing-xs);
+    gap: var(--wpseed-spacing-xs);
 }
 
 /* Legacy classes mapping for backward compatibility */

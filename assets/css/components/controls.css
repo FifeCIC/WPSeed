@@ -19,7 +19,7 @@
 .wpseed-controls {
     display: flex;
     justify-content: space-between;
-    margin-bottom: var(--tp-spacing-xl);
+    margin-bottom: var(--wpseed-spacing-xl);
     align-items: center;
 }
 
@@ -30,7 +30,7 @@
 }
 
 .wpseed-filter-controls label {
-    margin-right: var(--tp-spacing-md);
+    margin-right: var(--wpseed-spacing-md);
 }
 
 /* Pagination */
@@ -38,20 +38,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: var(--tp-spacing-xl);
+    margin-top: var(--wpseed-spacing-xl);
 }
 
 .wpseed-page-info {
-    margin: 0 var(--tp-spacing-lg);
+    margin: 0 var(--wpseed-spacing-lg);
 }
 
 /* Tabs */
 .wpseed-tabs {
-    margin-top: var(--tp-spacing-xl);
+    margin-top: var(--wpseed-spacing-xl);
 }
 
 .wpseed-tab-content {
-    padding: var(--tp-spacing-xl) 0;
+    padding: var(--wpseed-spacing-xl) 0;
 }
 
 /* Container with loading state */

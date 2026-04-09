@@ -16,10 +16,10 @@
 /* Code Block Container */
 .wpseed-code-block {
     background-color: #f5f5f5;
-    border: 1px solid var(--tp-color-gray-200);
-    border-radius: var(--tp-border-radius);
-    padding: var(--tp-spacing-sm);
-    margin-bottom: var(--tp-spacing-md);
+    border: 1px solid var(--wpseed-color-gray-200);
+    border-radius: var(--wpseed-border-radius);
+    padding: var(--wpseed-spacing-sm);
+    margin-bottom: var(--wpseed-spacing-md);
     position: relative;
     font-family: monospace;
     font-size: 13px;
@@ -36,14 +36,14 @@
 /* Copy Code Button */
 .wpseed-copy-code {
     position: absolute;
-    top: var(--tp-spacing-xs);
-    right: var(--tp-spacing-xs);
+    top: var(--wpseed-spacing-xs);
+    right: var(--wpseed-spacing-xs);
     background-color: transparent;
     border: none;
-    color: var(--tp-color-gray-500);
+    color: var(--wpseed-color-gray-500);
     cursor: pointer;
-    padding: var(--tp-spacing-xs);
-    border-radius: var(--tp-border-radius-sm);
+    padding: var(--wpseed-spacing-xs);
+    border-radius: var(--wpseed-border-radius-sm);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -51,11 +51,11 @@
 }
 
 .wpseed-copy-code:hover {
-    color: var(--tp-color-wp-blue);
+    color: var(--wpseed-color-wp-blue);
 }
 
 .wpseed-code-block:focus-within {
-    box-shadow: 0 0 0 1px var(--tp-color-wp-blue);
+    box-shadow: 0 0 0 1px var(--wpseed-color-wp-blue);
 }
 
 /* Copy Animation */
@@ -74,21 +74,21 @@
 .wpseed-shortcode-code {
     display: inline-block;
     background-color: #f5f5f5;
-    border: 1px solid var(--tp-color-gray-200);
-    border-radius: var(--tp-border-radius);
-    padding: var(--tp-spacing-xs) var(--tp-spacing-sm);
+    border: 1px solid var(--wpseed-color-gray-200);
+    border-radius: var(--wpseed-border-radius);
+    padding: var(--wpseed-spacing-xs) var(--wpseed-spacing-sm);
     font-family: monospace;
     position: relative;
-    margin-right: var(--tp-spacing-md);
+    margin-right: var(--wpseed-spacing-md);
 }
 
 /* Table display for data */
 .wpseed-data-table {
-    margin-top: var(--tp-spacing-xl);
+    margin-top: var(--wpseed-spacing-xl);
     background: #f9f9f9;
-    border: 1px solid var(--tp-color-gray-200);
-    padding: var(--tp-spacing-lg);
-    border-radius: var(--tp-border-radius);
+    border: 1px solid var(--wpseed-color-gray-200);
+    padding: var(--wpseed-spacing-lg);
+    border-radius: var(--wpseed-border-radius);
     overflow-x: auto;
 }
 
@@ -111,9 +111,9 @@
 /* Log file display */
 .wpseed-log-files {
     background: #f9f9f9;
-    border: 1px solid var(--tp-color-gray-200);
-    padding: var(--tp-spacing-lg);
-    border-radius: var(--tp-border-radius);
+    border: 1px solid var(--wpseed-color-gray-200);
+    padding: var(--wpseed-spacing-lg);
+    border-radius: var(--wpseed-border-radius);
 }
 
 /* Legacy classes mapping for backward compatibility */

@@ -21,8 +21,8 @@
 }
 
 .wpseed-list-item {
-    padding: var(--tp-spacing-md);
-    border-bottom: var(--tp-border-standard);
+    padding: var(--wpseed-spacing-md);
+    border-bottom: var(--wpseed-border-standard);
     display: flex;
     align-items: center;
 }
@@ -37,23 +37,23 @@
 
 /* Task Lists */
 .wpseed-task-list .wpseed-list-item {
-    padding: var(--tp-spacing-md);
+    padding: var(--wpseed-spacing-md);
     transition: background-color 0.2s ease;
 }
 
 .wpseed-task-list .wpseed-list-item:hover {
-    background-color: var(--tp-color-gray-50);
+    background-color: var(--wpseed-color-gray-50);
 }
 
 .wpseed-task-list .wpseed-list-content {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--tp-spacing-md);
+    gap: var(--wpseed-spacing-md);
 }
 
 .wpseed-task-title {
-    font-weight: var(--tp-font-weight-semibold);
+    font-weight: var(--wpseed-font-weight-semibold);
     flex: 1;
     min-width: 200px;
 }
@@ -61,26 +61,26 @@
 .wpseed-task-meta {
     display: flex;
     align-items: center;
-    gap: var(--tp-spacing-lg);
+    gap: var(--wpseed-spacing-lg);
     color: #666;
     font-size: 13px;
 }
 
 /* Subtask Lists */
 .wpseed-subtask-list {
-    margin-top: var(--tp-spacing-md);
+    margin-top: var(--wpseed-spacing-md);
 }
 
 .wpseed-subtask-list .wpseed-list-item {
-    padding: var(--tp-spacing-sm) var(--tp-spacing-md);
-    background-color: var(--tp-color-gray-50);
-    border-radius: var(--tp-border-radius);
-    margin-bottom: var(--tp-spacing-xs);
-    border: var(--tp-border-standard);
+    padding: var(--wpseed-spacing-sm) var(--wpseed-spacing-md);
+    background-color: var(--wpseed-color-gray-50);
+    border-radius: var(--wpseed-border-radius);
+    margin-bottom: var(--wpseed-spacing-xs);
+    border: var(--wpseed-border-standard);
 }
 
 .wpseed-subtask-checkbox {
-    margin-right: var(--tp-spacing-md);
+    margin-right: var(--wpseed-spacing-md);
 }
 
 .wpseed-subtask-title {

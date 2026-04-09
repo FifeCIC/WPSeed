@@ -11,29 +11,29 @@
 .wpseed-shortcode-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    grid-gap: var(--tp-spacing-lg);
-    margin-bottom: var(--tp-spacing-xl);
+    grid-gap: var(--wpseed-spacing-lg);
+    margin-bottom: var(--wpseed-spacing-xl);
 }
 
 /* Shortcode Documentation Section */
 .wpseed-shortcode-documentation {
-    background-color: var(--tp-color-white);
-    border: var(--tp-border-standard);
-    border-radius: var(--tp-border-radius);
-    padding: var(--tp-spacing-xl);
-    margin-top: var(--tp-spacing-xl);
+    background-color: var(--wpseed-color-white);
+    border: var(--wpseed-border-standard);
+    border-radius: var(--wpseed-border-radius);
+    padding: var(--wpseed-spacing-xl);
+    margin-top: var(--wpseed-spacing-xl);
 }
 
 .wpseed-shortcode-documentation h3 {
     margin-top: 0;
-    margin-bottom: var(--tp-spacing-lg);
-    padding-bottom: var(--tp-spacing-sm);
-    border-bottom: var(--tp-border-standard);
+    margin-bottom: var(--wpseed-spacing-lg);
+    padding-bottom: var(--wpseed-spacing-sm);
+    border-bottom: var(--wpseed-border-standard);
 }
 
 /* Shortcodes Settings Container */
 .wpseed-shortcodes-settings {
-    margin: var(--tp-spacing-xl) 0;
+    margin: var(--wpseed-spacing-xl) 0;
 }
 
 /* Responsive Adjustments */
@@ -43,7 +43,7 @@
     }
     
     .wpseed-shortcode-documentation {
-        padding: var(--tp-spacing-lg);
+        padding: var(--wpseed-spacing-lg);
     }
 }
 

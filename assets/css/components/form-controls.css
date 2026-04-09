@@ -11,16 +11,16 @@
 .wpseed-radio-group {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: var(--tp-spacing-md);
-    margin-top: var(--tp-spacing-md);
+    gap: var(--wpseed-spacing-md);
+    margin-top: var(--wpseed-spacing-md);
 }
 
 /* Weekday Checkboxes */
 .wpseed-weekday-checkboxes {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: var(--tp-spacing-md);
-    margin-top: var(--tp-spacing-md);
+    gap: var(--wpseed-spacing-md);
+    margin-top: var(--wpseed-spacing-md);
 }
 
 /* Form Row */
@@ -37,7 +37,7 @@
 
 /* Schedule Actions */
 .wpseed-schedule-actions {
-    margin-top: var(--tp-spacing-xl);
+    margin-top: var(--wpseed-spacing-xl);
 }
 
 /* Log Controls */
@@ -45,34 +45,34 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--tp-spacing-xl);
-    padding: var(--tp-spacing-lg);
-    background: var(--tp-color-white);
+    margin-bottom: var(--wpseed-spacing-xl);
+    padding: var(--wpseed-spacing-lg);
+    background: var(--wpseed-color-white);
     border: 1px solid #ccd0d4;
-    border-radius: var(--tp-border-radius);
+    border-radius: var(--wpseed-border-radius);
 }
 
 .wpseed-log-filter {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--tp-spacing-md);
+    gap: var(--wpseed-spacing-md);
 }
 
 /* Trade Filters */
 .wpseed-trades-filters {
-    margin-bottom: var(--tp-spacing-xl);
-    padding: var(--tp-spacing-lg);
-    background: var(--tp-color-white);
+    margin-bottom: var(--wpseed-spacing-xl);
+    padding: var(--wpseed-spacing-lg);
+    background: var(--wpseed-color-white);
     border: 1px solid #ccd0d4;
-    border-radius: var(--tp-border-radius);
+    border-radius: var(--wpseed-border-radius);
 }
 
 .wpseed-filter-row {
     display: flex;
     flex-wrap: wrap;
     align-items: flex-end;
-    gap: var(--tp-spacing-lg);
+    gap: var(--wpseed-spacing-lg);
 }
 
 .wpseed-filter-group {

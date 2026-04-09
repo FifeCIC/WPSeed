@@ -29,25 +29,25 @@
 }
 
 .wpseed-admin-section {
-    background: var(--tp-color-white);
-    border: 1px solid var(--tp-color-gray-400);
-    border-radius: var(--tp-border-radius);
+    background: var(--wpseed-color-white);
+    border: 1px solid var(--wpseed-color-gray-400);
+    border-radius: var(--wpseed-border-radius);
     padding: 20px;
     margin-bottom: 20px;
-    box-shadow: var(--tp-shadow);
+    box-shadow: var(--wpseed-shadow);
 }
 
 .wpseed-admin-section h2 {
     margin-top: 0;
     padding-bottom: 10px;
-    border-bottom: 1px solid var(--tp-color-gray-200);
+    border-bottom: 1px solid var(--wpseed-color-gray-200);
 }
 
 /* Section Divider */
 .sidebar-divider {
     margin: 15px 0;
     border: 0;
-    border-top: 1px solid var(--tp-color-gray-200);
+    border-top: 1px solid var(--wpseed-color-gray-200);
 }
 
 /* API Status Layout - 3-column layout */
@@ -114,9 +114,9 @@
     gap: 20px;
     padding: 20px;
     margin-bottom: 20px;
-    background: var(--tp-color-white);
-    border: var(--tp-border-standard);
-    border-radius: var(--tp-border-radius);
+    background: var(--wpseed-color-white);
+    border: var(--wpseed-border-standard);
+    border-radius: var(--wpseed-border-radius);
 }
 
 .service-logo {
@@ -160,9 +160,9 @@
 .wpseed-export-section {
     flex: 1;
     padding: 15px;
-    background-color: var(--tp-color-gray-50);
-    border: 1px solid var(--tp-color-gray-200);
-    border-radius: var(--tp-border-radius);
+    background-color: var(--wpseed-color-gray-50);
+    border: 1px solid var(--wpseed-color-gray-200);
+    border-radius: var(--wpseed-border-radius);
 }
 
 /* Documentation Links */
@@ -182,12 +182,12 @@
 }
 
 .documentation-link {
-    color: var(--tp-color-gray-800);
+    color: var(--wpseed-color-gray-800);
     text-decoration: none;
 }
 
 .documentation-link:hover {
-    color: var(--tp-color-wp-blue);
+    color: var(--wpseed-color-wp-blue);
 }
 
 /* Feature status specific styles */
@@ -200,30 +200,30 @@
 .feature-status-table th {
     text-align: left;
     padding: 8px 12px;
-    background: var(--tp-color-gray-50);
-    border-bottom: 1px solid var(--tp-color-gray-300);
+    background: var(--wpseed-color-gray-50);
+    border-bottom: 1px solid var(--wpseed-color-gray-300);
 }
 
 .feature-status-table td {
     padding: 8px 12px;
-    border-bottom: 1px solid var(--tp-color-gray-50);
+    border-bottom: 1px solid var(--wpseed-color-gray-50);
 }
 
 .feature-status-table tr:hover {
-    background: var(--tp-color-gray-50);
+    background: var(--wpseed-color-gray-50);
 }
 
 .feature-tab-header {
-    font-weight: var(--tp-font-weight-semibold);
-    background: var(--tp-color-gray-100);
+    font-weight: var(--wpseed-font-weight-semibold);
+    background: var(--wpseed-color-gray-100);
 }
 
 .completion-stats {
     display: flex;
     flex-wrap: wrap;
     margin-bottom: 20px;
-    background: var(--tp-color-white);
-    border: 1px solid var(--tp-color-gray-200);
+    background: var(--wpseed-color-white);
+    border: 1px solid var(--wpseed-color-gray-200);
     padding: 15px;
 }
 
@@ -266,8 +266,8 @@
 
 /* Button Styles */
 .test-button {
-    background-color: var(--tp-color-wp-blue);
-    color: var(--tp-color-white);
+    background-color: var(--wpseed-color-wp-blue);
+    color: var(--wpseed-color-white);
     border: none;
     padding: 6px 12px;
     border-radius: 3px;
@@ -280,14 +280,14 @@
 }
 
 .test-button.maintenance {
-    background-color: var(--tp-color-gray-400);
+    background-color: var(--wpseed-color-gray-400);
     cursor: not-allowed;
 }
 
 /* Button refresh animation */
 .button-refresh {
     display: inline-block;
-    color: var(--tp-color-gray-800);
+    color: var(--wpseed-color-gray-800);
     text-decoration: none;
     line-height: 1;
 }
@@ -306,10 +306,10 @@
     display: flex;
     gap: 10px;
     margin-bottom: 20px;
-    background: var(--tp-color-white);
+    background: var(--wpseed-color-white);
     padding: 10px 15px;
-    border: 1px solid var(--tp-color-gray-300);
-    border-radius: var(--tp-border-radius);
+    border: 1px solid var(--wpseed-color-gray-300);
+    border-radius: var(--wpseed-border-radius);
 }
 
 .quick-action-button {
@@ -317,18 +317,18 @@
     align-items: center;
     gap: 5px;
     padding: 5px 10px;
-    background: var(--tp-color-gray-50);
-    border: 1px solid var(--tp-color-gray-300);
-    border-radius: var(--tp-border-radius-sm);
-    color: var(--tp-color-gray-800);
+    background: var(--wpseed-color-gray-50);
+    border: 1px solid var(--wpseed-color-gray-300);
+    border-radius: var(--wpseed-border-radius-sm);
+    color: var(--wpseed-color-gray-800);
     text-decoration: none;
     font-size: 13px;
     cursor: pointer;
 }
 
 .quick-action-button:hover {
-    background: var(--tp-color-gray-100);
-    color: var(--tp-color-wp-blue);
+    background: var(--wpseed-color-gray-100);
+    color: var(--wpseed-color-wp-blue);
 }
 
 /* QuickTools Toolbar Styles */
@@ -419,7 +419,7 @@
 }
 
 .issue-row:hover {
-    background-color: var(--tp-color-gray-100);
+    background-color: var(--wpseed-color-gray-100);
 }
 
 .issue-row.closed {
@@ -433,7 +433,7 @@
 
 .bugnet-log-viewer h3 {
     margin-bottom: 15px;
-    color: var(--tp-color-gray-800);
+    color: var(--wpseed-color-gray-800);
 }
 
 .bugnet-log-viewer textarea {
@@ -451,5 +451,5 @@
 .bugnet-log-viewer p {
     margin-top: 10px;
     font-size: 13px;
-    color: var(--tp-color-gray-600);
+    color: var(--wpseed-color-gray-600);
 }

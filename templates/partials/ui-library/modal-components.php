@@ -16,7 +16,7 @@ defined('ABSPATH') || exit;
         <!-- Basic Modal Demo -->
         <div class="component-demo">
             <h4><?php esc_html_e('Basic Modal', 'wpseed'); ?></h4>
-            <button class="tp-button tp-button-primary" id="open-demo-modal"><?php esc_html_e('Open Modal', 'wpseed'); ?></button>
+            <button class="wpseed-button wpseed-button-primary" id="open-demo-modal"><?php esc_html_e('Open Modal', 'wpseed'); ?></button>
 
             <!-- Modal Structure (hidden by default) -->
             <div id="ui-library-demo-modal" class="wpseed-modal" style="display:none;">
@@ -30,8 +30,8 @@ defined('ABSPATH') || exit;
                         <p><?php esc_html_e('Modal dialogs are useful for displaying additional information, forms, or confirmation messages without navigating away from the current page.', 'wpseed'); ?></p>
                     </div>
                     <div class="wpseed-modal-footer">
-                        <button class="tp-button tp-button-secondary close-demo-modal"><?php esc_html_e('Cancel', 'wpseed'); ?></button>
-                        <button class="tp-button tp-button-primary"><?php esc_html_e('Save Changes', 'wpseed'); ?></button>
+                        <button class="wpseed-button wpseed-button-secondary close-demo-modal"><?php esc_html_e('Cancel', 'wpseed'); ?></button>
+                        <button class="wpseed-button wpseed-button-primary"><?php esc_html_e('Save Changes', 'wpseed'); ?></button>
                     </div>
                 </div>
             </div>
@@ -40,7 +40,7 @@ defined('ABSPATH') || exit;
         <!-- Task Detail Modal Demo -->
         <div class="component-demo">
             <h4><?php esc_html_e('Task Detail Modal', 'wpseed'); ?></h4>
-            <button class="tp-button tp-button-secondary" id="open-task-modal"><?php esc_html_e('View Task Details', 'wpseed'); ?></button>
+            <button class="wpseed-button wpseed-button-secondary" id="open-task-modal"><?php esc_html_e('View Task Details', 'wpseed'); ?></button>
 
             <!-- Task Detail Modal Structure -->
             <div id="ui-library-task-modal" class="wpseed-modal" style="display:none;">
@@ -83,8 +83,8 @@ defined('ABSPATH') || exit;
                         </div>
                     </div>
                     <div class="wpseed-modal-footer">
-                        <button class="tp-button tp-button-secondary close-task-modal"><?php esc_html_e('Close', 'wpseed'); ?></button>
-                        <button class="tp-button tp-button-primary"><?php esc_html_e('Edit Task', 'wpseed'); ?></button>
+                        <button class="wpseed-button wpseed-button-secondary close-task-modal"><?php esc_html_e('Close', 'wpseed'); ?></button>
+                        <button class="wpseed-button wpseed-button-primary"><?php esc_html_e('Edit Task', 'wpseed'); ?></button>
                     </div>
                 </div>
             </div>
@@ -93,7 +93,7 @@ defined('ABSPATH') || exit;
         <!-- Loading Modal Demo -->
         <div class="component-demo">
             <h4><?php esc_html_e('Loading Modal', 'wpseed'); ?></h4>
-            <button class="tp-button tp-button-secondary" id="open-loading-modal"><?php esc_html_e('Show Loading', 'wpseed'); ?></button>
+            <button class="wpseed-button wpseed-button-secondary" id="open-loading-modal"><?php esc_html_e('Show Loading', 'wpseed'); ?></button>
 
             <!-- Loading Modal Structure -->
             <div id="ui-library-loading-modal" class="wpseed-modal" style="display:none;">
@@ -114,7 +114,7 @@ defined('ABSPATH') || exit;
         <!-- Confirmation Modal Demo -->
         <div class="component-demo">
             <h4><?php esc_html_e('Confirmation Modal', 'wpseed'); ?></h4>
-            <button class="tp-button tp-button-danger" id="open-confirm-modal"><?php esc_html_e('Delete Item', 'wpseed'); ?></button>
+            <button class="wpseed-button wpseed-button-danger" id="open-confirm-modal"><?php esc_html_e('Delete Item', 'wpseed'); ?></button>
 
             <!-- Confirmation Modal Structure -->
             <div id="ui-library-confirm-modal" class="wpseed-modal" style="display:none;">
@@ -133,8 +133,8 @@ defined('ABSPATH') || exit;
                         </div>
                     </div>
                     <div class="wpseed-modal-footer">
-                        <button class="tp-button tp-button-secondary close-confirm-modal"><?php esc_html_e('Cancel', 'wpseed'); ?></button>
-                        <button class="tp-button tp-button-danger"><?php esc_html_e('Delete', 'wpseed'); ?></button>
+                        <button class="wpseed-button wpseed-button-secondary close-confirm-modal"><?php esc_html_e('Cancel', 'wpseed'); ?></button>
+                        <button class="wpseed-button wpseed-button-danger"><?php esc_html_e('Delete', 'wpseed'); ?></button>
                     </div>
                 </div>
             </div>

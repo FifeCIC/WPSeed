@@ -8,92 +8,92 @@
 /* CSS Custom Properties for Theme System */
 html, :root {
     /* Light Theme - Trading Colors */
-    --tp-primary: #1a365d;
-    --tp-primary-hover: #2d3748;
-    --tp-secondary: #0d9488;
-    --tp-accent: #f59e0b;
-    --tp-success: #10b981;
-    --tp-warning: #f59e0b;
-    --tp-error: #ef4444;
-    --tp-neutral: #64748b;
-    --tp-neutral-light: #94a3b8;
+    --wpseed-primary: #1a365d;
+    --wpseed-primary-hover: #2d3748;
+    --wpseed-secondary: #0d9488;
+    --wpseed-accent: #f59e0b;
+    --wpseed-success: #10b981;
+    --wpseed-warning: #f59e0b;
+    --wpseed-error: #ef4444;
+    --wpseed-neutral: #64748b;
+    --wpseed-neutral-light: #94a3b8;
     
     /* Background Colors */
-    --tp-bg-primary: #ffffff;
-    --tp-bg-secondary: #f8fafc;
-    --tp-bg-tertiary: #f1f5f9;
-    --tp-bg-card: #ffffff;
+    --wpseed-bg-primary: #ffffff;
+    --wpseed-bg-secondary: #f8fafc;
+    --wpseed-bg-tertiary: #f1f5f9;
+    --wpseed-bg-card: #ffffff;
     
     /* Text Colors */
-    --tp-text-primary: #1e293b;
-    --tp-text-secondary: #475569;
-    --tp-text-muted: #64748b;
+    --wpseed-text-primary: #1e293b;
+    --wpseed-text-secondary: #475569;
+    --wpseed-text-muted: #64748b;
     
     /* Border Colors */
-    --tp-border: #e2e8f0;
-    --tp-border-light: #f1f5f9;
+    --wpseed-border: #e2e8f0;
+    --wpseed-border-light: #f1f5f9;
     
     /* Shadow */
-    --tp-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-    --tp-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --wpseed-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    --wpseed-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 /* Dark Theme */
 html[data-theme="dark"], [data-theme="dark"] {
-    --tp-primary: #3b82f6;
-    --tp-primary-hover: #2563eb;
-    --tp-secondary: #14b8a6;
-    --tp-accent: #fbbf24;
-    --tp-success: #22c55e;
-    --tp-warning: #f59e0b;
-    --tp-error: #f87171;
-    --tp-neutral: #9ca3af;
-    --tp-neutral-light: #6b7280;
+    --wpseed-primary: #3b82f6;
+    --wpseed-primary-hover: #2563eb;
+    --wpseed-secondary: #14b8a6;
+    --wpseed-accent: #fbbf24;
+    --wpseed-success: #22c55e;
+    --wpseed-warning: #f59e0b;
+    --wpseed-error: #f87171;
+    --wpseed-neutral: #9ca3af;
+    --wpseed-neutral-light: #6b7280;
     
     /* Dark Background Colors */
-    --tp-bg-primary: #111827;
-    --tp-bg-secondary: #1f2937;
-    --tp-bg-tertiary: #374151;
-    --tp-bg-card: #1f2937;
+    --wpseed-bg-primary: #111827;
+    --wpseed-bg-secondary: #1f2937;
+    --wpseed-bg-tertiary: #374151;
+    --wpseed-bg-card: #1f2937;
     
     /* Dark Text Colors */
-    --tp-text-primary: #f9fafb;
-    --tp-text-secondary: #d1d5db;
-    --tp-text-muted: #9ca3af;
+    --wpseed-text-primary: #f9fafb;
+    --wpseed-text-secondary: #d1d5db;
+    --wpseed-text-muted: #9ca3af;
     
     /* Dark Border Colors */
-    --tp-border: #374151;
-    --tp-border-light: #4b5563;
+    --wpseed-border: #374151;
+    --wpseed-border-light: #4b5563;
     
     /* Dark Shadow */
-    --tp-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-    --tp-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+    --wpseed-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+    --wpseed-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
 }
 
 /* Theme Toggle Button */
-.tp-theme-toggle {
+.wpseed-theme-toggle {
     position: fixed;
     top: 20px;
     right: 20px;
-    background: var(--tp-bg-card);
-    border: 1px solid var(--tp-border);
+    background: var(--wpseed-bg-card);
+    border: 1px solid var(--wpseed-border);
     border-radius: 8px;
     padding: 8px 12px;
     cursor: pointer;
-    box-shadow: var(--tp-shadow);
-    color: var(--tp-text-primary);
+    box-shadow: var(--wpseed-shadow);
+    color: var(--wpseed-text-primary);
     font-size: 14px;
     transition: all 0.2s ease;
     z-index: 1000;
 }
 
-.tp-theme-toggle:hover {
-    background: var(--tp-bg-tertiary);
+.wpseed-theme-toggle:hover {
+    background: var(--wpseed-bg-tertiary);
     transform: translateY(-1px);
 }
 
 /* Notice Components */
-.tp-notice {
+.wpseed-notice {
     padding: 16px 20px;
     border-radius: 8px;
     margin: 16px 0;
@@ -105,38 +105,38 @@ html[data-theme="dark"], [data-theme="dark"] {
     line-height: 1.5;
 }
 
-.tp-notice-icon {
+.wpseed-notice-icon {
     font-size: 18px;
     margin-top: 1px;
     flex-shrink: 0;
 }
 
-.tp-notice-success {
+.wpseed-notice-success {
     background: rgba(16, 185, 129, 0.1);
-    border-color: var(--tp-success);
-    color: var(--tp-success);
+    border-color: var(--wpseed-success);
+    color: var(--wpseed-success);
 }
 
-.tp-notice-warning {
+.wpseed-notice-warning {
     background: rgba(245, 158, 11, 0.1);
-    border-color: var(--tp-warning);
-    color: var(--tp-warning);
+    border-color: var(--wpseed-warning);
+    color: var(--wpseed-warning);
 }
 
-.tp-notice-error {
+.wpseed-notice-error {
     background: rgba(239, 68, 68, 0.1);
-    border-color: var(--tp-error);
-    color: var(--tp-error);
+    border-color: var(--wpseed-error);
+    color: var(--wpseed-error);
 }
 
-.tp-notice-info {
+.wpseed-notice-info {
     background: rgba(26, 54, 93, 0.1);
-    border-color: var(--tp-primary);
-    color: var(--tp-primary);
+    border-color: var(--wpseed-primary);
+    color: var(--wpseed-primary);
 }
 .wpseed-setup-wrap {
-    background: var(--tp-bg-secondary);
-    color: var(--tp-text-primary);
+    background: var(--wpseed-bg-secondary);
+    color: var(--wpseed-text-primary);
     transition: background-color 0.3s ease, color 0.3s ease;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     margin: -20px -20px 0;
@@ -170,7 +170,7 @@ html[data-theme="dark"], [data-theme="dark"] {
 }
 
 #wpseed-logo a {
-    color: var(--tp-primary);
+    color: var(--wpseed-primary);
     text-decoration: none;
     font-size: 28px;
     font-weight: 700;
@@ -195,7 +195,7 @@ html[data-theme="dark"], [data-theme="dark"] {
     margin: 0 0 32px;
     font-size: 32px;
     font-weight: 700;
-    color: var(--tp-text-primary);
+    color: var(--wpseed-text-primary);
     letter-spacing: -0.5px;
     line-height: 1.2;
 }
@@ -204,7 +204,7 @@ html[data-theme="dark"], [data-theme="dark"] {
     margin: 32px 0 16px;
     font-size: 24px;
     font-weight: 600;
-    color: var(--tp-text-primary);
+    color: var(--wpseed-text-primary);
     letter-spacing: -0.25px;
     line-height: 1.3;
 }
@@ -213,7 +213,7 @@ html[data-theme="dark"], [data-theme="dark"] {
     margin: 24px 0 12px;
     font-size: 18px;
     font-weight: 600;
-    color: var(--tp-text-primary);
+    color: var(--wpseed-text-primary);
     line-height: 1.4;
 }
 
@@ -221,17 +221,17 @@ html[data-theme="dark"], [data-theme="dark"] {
     margin: 0 0 16px;
     font-size: 15px;
     line-height: 1.6;
-    color: var(--tp-text-secondary);
+    color: var(--wpseed-text-secondary);
 }
 
 .wpseed-setup-content a {
-    color: var(--tp-primary);
+    color: var(--wpseed-primary);
     text-decoration: none;
     transition: color 0.2s ease;
 }
 
 .wpseed-setup-content a:hover, .wpseed-setup-content a:focus {
-    color: var(--tp-primary-hover);
+    color: var(--wpseed-primary-hover);
     text-decoration: underline;
 }
 .wpseed-setup-content .form-table th {
@@ -246,17 +246,17 @@ html[data-theme="dark"], [data-theme="dark"] {
     width: 100%;
     box-sizing: border-box;
     padding: 12px 16px;
-    border: 2px solid var(--tp-border);
+    border: 2px solid var(--wpseed-border);
     border-radius: 8px;
-    background: var(--tp-bg-primary);
-    color: var(--tp-text-primary);
+    background: var(--wpseed-bg-primary);
+    color: var(--wpseed-text-primary);
     font-size: 14px;
     transition: all 0.2s ease;
 }
 
 .wpseed-setup-content .form-table td select:focus, .wpseed-setup-content .form-table td input:focus, .wpseed-setup-content .form-table td textarea:focus {
     outline: none;
-    border-color: var(--tp-primary);
+    border-color: var(--wpseed-primary);
     box-shadow: 0 0 0 3px rgba(26, 54, 93, 0.1);
 }
 
@@ -268,7 +268,7 @@ html[data-theme="dark"], [data-theme="dark"] {
     line-height: 1.5;
     display: block;
     margin-top: 8px;
-    color: var(--tp-text-muted);
+    color: var(--wpseed-text-muted);
     font-size: 13px;
 }
 
@@ -276,7 +276,7 @@ html[data-theme="dark"], [data-theme="dark"] {
     width: 18px;
     height: 18px;
     margin: 0 8px 0 0;
-    accent-color: var(--tp-primary);
+    accent-color: var(--wpseed-primary);
 }
 .wpseed-setup-content .form-table .section_title td {
     padding: 0;
@@ -522,43 +522,43 @@ html[data-theme="dark"], [data-theme="dark"] {
     background: #fff;
 }
 .wpseed-setup-steps {
-    background: var(--tp-bg-card);
+    background: var(--wpseed-bg-card);
     border-radius: 12px;
     padding: 24px 0;
     margin: 0 0 32px;
-    border: 1px solid var(--tp-border);
+    border: 1px solid var(--wpseed-border);
 }
 
 .wpseed-setup-steps li {
-    color: var(--tp-text-muted);
-    border-bottom-color: var(--tp-border);
+    color: var(--wpseed-text-muted);
+    border-bottom-color: var(--wpseed-border);
     font-weight: 500;
 }
 
 .wpseed-setup-steps li:before {
-    border-color: var(--tp-border);
-    background: var(--tp-bg-primary);
+    border-color: var(--wpseed-border);
+    background: var(--wpseed-bg-primary);
 }
 
 .wpseed-setup-steps li.active {
-    border-color: var(--tp-primary);
-    color: var(--tp-primary);
+    border-color: var(--wpseed-primary);
+    color: var(--wpseed-primary);
     font-weight: 600;
 }
 
 .wpseed-setup-steps li.active:before {
-    border-color: var(--tp-primary);
-    background: var(--tp-primary);
+    border-color: var(--wpseed-primary);
+    background: var(--wpseed-primary);
 }
 
 .wpseed-setup-steps li.done {
-    border-color: var(--tp-success);
-    color: var(--tp-success);
+    border-color: var(--wpseed-success);
+    color: var(--wpseed-success);
 }
 
 .wpseed-setup-steps li.done:before {
-    border-color: var(--tp-success);
-    background: var(--tp-success);
+    border-color: var(--wpseed-success);
+    background: var(--wpseed-success);
 }
 .wpseed-setup .wpseed-setup-actions {
     overflow: hidden;
@@ -588,30 +588,30 @@ html[data-theme="dark"], [data-theme="dark"] {
 }
 
 .wpseed-setup .wpseed-setup-actions .button-primary {
-    background: var(--tp-primary);
-    border-color: var(--tp-primary);
+    background: var(--wpseed-primary);
+    border-color: var(--wpseed-primary);
     color: white;
-    box-shadow: var(--tp-shadow);
+    box-shadow: var(--wpseed-shadow);
     text-shadow: none;
 }
 
 .wpseed-setup .wpseed-setup-actions .button-primary:hover, .wpseed-setup .wpseed-setup-actions .button-primary:focus {
-    background: var(--tp-primary-hover);
-    border-color: var(--tp-primary-hover);
+    background: var(--wpseed-primary-hover);
+    border-color: var(--wpseed-primary-hover);
     transform: translateY(-1px);
-    box-shadow: var(--tp-shadow-lg);
+    box-shadow: var(--wpseed-shadow-lg);
 }
 
 .wpseed-setup .wpseed-setup-actions .button:not(.button-primary) {
-    background: var(--tp-bg-card);
-    border-color: var(--tp-border);
-    color: var(--tp-text-secondary);
+    background: var(--wpseed-bg-card);
+    border-color: var(--wpseed-border);
+    color: var(--wpseed-text-secondary);
 }
 
 .wpseed-setup .wpseed-setup-actions .button:not(.button-primary):hover {
-    background: var(--tp-bg-tertiary);
-    border-color: var(--tp-neutral);
-    color: var(--tp-text-primary);
+    background: var(--wpseed-bg-tertiary);
+    border-color: var(--wpseed-neutral);
+    color: var(--wpseed-text-primary);
 }
 .wpseed-return-to-dashboard {
     font-size: 0.85em;
@@ -713,29 +713,29 @@ ul.wpseed-wizard-plugin-extensions li.wpseed-wizard-extension .wpseed-wizard-ext
 
 /* Modern Section Styling */
 .wpseed-setup-section {
-    background: var(--tp-bg-card);
-    border: 1px solid var(--tp-border);
+    background: var(--wpseed-bg-card);
+    border: 1px solid var(--wpseed-border);
     border-radius: 12px;
     padding: 24px;
     margin-bottom: 24px;
-    box-shadow: var(--tp-shadow);
+    box-shadow: var(--wpseed-shadow);
 }
 
 .wpseed-disclaimer-section {
-    background: var(--tp-bg-card);
-    border: 2px solid var(--tp-warning);
+    background: var(--wpseed-bg-card);
+    border: 2px solid var(--wpseed-warning);
     border-radius: 12px;
     padding: 24px;
     margin-bottom: 24px;
 }
 
 .wpseed-dev-section {
-    background: var(--tp-bg-tertiary);
-    border: 1px solid var(--tp-border);
+    background: var(--wpseed-bg-tertiary);
+    border: 1px solid var(--wpseed-border);
     border-radius: 8px;
     padding: 20px;
     margin-top: 16px;
-    border-left: 4px solid var(--tp-primary);
+    border-left: 4px solid var(--wpseed-primary);
 }
 
 /* Vertical Tab-Style Setup Wizard */
@@ -755,8 +755,8 @@ ul.wpseed-wizard-plugin-extensions li.wpseed-wizard-extension .wpseed-wizard-ext
     align-items: center;
     padding: 15px 20px;
     margin-bottom: 8px;
-    background: var(--tp-bg-card);
-    border: 2px solid var(--tp-border);
+    background: var(--wpseed-bg-card);
+    border: 2px solid var(--wpseed-border);
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -764,21 +764,21 @@ ul.wpseed-wizard-plugin-extensions li.wpseed-wizard-extension .wpseed-wizard-ext
 }
 
 .wizard-step-tab:hover {
-    border-color: var(--tp-primary);
+    border-color: var(--wpseed-primary);
     transform: translateX(2px);
 }
 
 .wizard-step-tab.active {
-    background: var(--tp-primary);
-    border-color: var(--tp-primary);
+    background: var(--wpseed-primary);
+    border-color: var(--wpseed-primary);
     color: white;
     transform: translateX(4px);
-    box-shadow: var(--tp-shadow-lg);
+    box-shadow: var(--wpseed-shadow-lg);
 }
 
 .wizard-step-tab.completed {
-    background: var(--tp-success);
-    border-color: var(--tp-success);
+    background: var(--wpseed-success);
+    border-color: var(--wpseed-success);
     color: white;
 }
 
@@ -816,15 +816,15 @@ ul.wpseed-wizard-plugin-extensions li.wpseed-wizard-extension .wpseed-wizard-ext
 }
 
 .wizard-step-tab.disabled {
-    background: var(--tp-bg-secondary);
-    border-color: var(--tp-border-light);
-    color: var(--tp-text-muted);
+    background: var(--wpseed-bg-secondary);
+    border-color: var(--wpseed-border-light);
+    color: var(--wpseed-text-muted);
     cursor: not-allowed;
     opacity: 0.6;
 }
 
 .wizard-step-tab.disabled:hover {
-    border-color: var(--tp-border-light);
+    border-color: var(--wpseed-border-light);
     transform: none;
 }
 
@@ -839,11 +839,11 @@ ul.wpseed-wizard-plugin-extensions li.wpseed-wizard-extension .wpseed-wizard-ext
 
 .wpseed-wizard-content {
     flex: 1;
-    background: var(--tp-bg-card);
-    border: 1px solid var(--tp-border);
+    background: var(--wpseed-bg-card);
+    border: 1px solid var(--wpseed-border);
     border-radius: 8px;
     padding: 30px;
-    box-shadow: var(--tp-shadow);
+    box-shadow: var(--wpseed-shadow);
 }
 
 /* Setup Wizard Symbol Selection Styles */
@@ -852,8 +852,8 @@ ul.wpseed-wizard-plugin-extensions li.wpseed-wizard-extension .wpseed-wizard-ext
     overflow-y: auto;
     margin-bottom: 20px;
     padding: 16px;
-    background: var(--tp-bg-card);
-    border: 1px solid var(--tp-border);
+    background: var(--wpseed-bg-card);
+    border: 1px solid var(--wpseed-border);
     border-radius: 8px;
     overflow: visible;
 }
@@ -868,15 +868,15 @@ ul.wpseed-wizard-plugin-extensions li.wpseed-wizard-extension .wpseed-wizard-ext
     position: relative;
     cursor: pointer;
     padding: 8px 12px;
-    background: var(--tp-bg-tertiary);
-    border: 1px solid var(--tp-border);
+    background: var(--wpseed-bg-tertiary);
+    border: 1px solid var(--wpseed-border);
     border-radius: 6px;
     transition: all 0.2s ease;
 }
 
 .wpseed-symbol-item:hover {
-    background: var(--tp-bg-secondary);
-    border-color: var(--tp-primary);
+    background: var(--wpseed-bg-secondary);
+    border-color: var(--wpseed-primary);
     transform: translateY(-1px);
 }
 
@@ -886,21 +886,21 @@ ul.wpseed-wizard-plugin-extensions li.wpseed-wizard-extension .wpseed-wizard-ext
     z-index: 100;
     left: 0;
     top: 100%;
-    background: var(--tp-text-primary);
-    color: var(--tp-bg-primary);
+    background: var(--wpseed-text-primary);
+    color: var(--wpseed-bg-primary);
     border-radius: 6px;
     padding: 8px 12px;
     white-space: pre-line;
     font-size: 12px;
     min-width: 200px;
     max-width: 300px;
-    box-shadow: var(--tp-shadow-lg);
+    box-shadow: var(--wpseed-shadow-lg);
     margin-top: 4px;
 }
 
 .wpseed-symbol-controls {
     margin-bottom: 20px;
     padding: 16px;
-    background: var(--tp-bg-tertiary);
+    background: var(--wpseed-bg-tertiary);
     border-radius: 8px;
 }

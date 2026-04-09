@@ -334,13 +334,13 @@
     color: var(--wpseed-color-gray-800);
 }
 
-.button-group .tp-button {
+.button-group .wpseed-button {
     margin-right: var(--wpseed-spacing-md);
     margin-bottom: var(--wpseed-spacing-sm);
 }
 
 /* Button Base Styles */
-.tp-button {
+.wpseed-button {
     display: inline-block;
     padding: var(--wpseed-button-padding-y) var(--wpseed-button-padding-x);
     font-size: var(--wpseed-font-size);
@@ -356,31 +356,31 @@
     user-select: none;
 }
 
-.tp-button:focus {
+.wpseed-button:focus {
     outline: 2px solid var(--wpseed-color-primary);
     outline-offset: 2px;
 }
 
 /* Primary Button */
-.tp-button-primary {
+.wpseed-button-primary {
     color: var(--wpseed-color-white);
     background-color: var(--wpseed-color-primary);
     border-color: var(--wpseed-color-primary);
 }
 
-.tp-button-primary:hover:not(:disabled) {
+.wpseed-button-primary:hover:not(:disabled) {
     background-color: var(--wpseed-color-primary-dark);
     border-color: var(--wpseed-color-primary-dark);
     transform: translateY(-1px);
     box-shadow: var(--wpseed-shadow-md);
 }
 
-.tp-button-primary:active {
+.wpseed-button-primary:active {
     transform: translateY(0);
     box-shadow: var(--wpseed-shadow);
 }
 
-.tp-button-primary:disabled {
+.wpseed-button-primary:disabled {
     background-color: var(--wpseed-color-gray-400);
     border-color: var(--wpseed-color-gray-400);
     cursor: not-allowed;
@@ -388,25 +388,25 @@
 }
 
 /* Secondary Button */
-.tp-button-secondary {
+.wpseed-button-secondary {
     color: var(--wpseed-color-primary);
     background-color: var(--wpseed-color-white);
     border-color: var(--wpseed-color-primary);
 }
 
-.tp-button-secondary:hover:not(:disabled) {
+.wpseed-button-secondary:hover:not(:disabled) {
     color: var(--wpseed-color-white);
     background-color: var(--wpseed-color-primary);
     transform: translateY(-1px);
     box-shadow: var(--wpseed-shadow-md);
 }
 
-.tp-button-secondary:active {
+.wpseed-button-secondary:active {
     transform: translateY(0);
     box-shadow: var(--wpseed-shadow);
 }
 
-.tp-button-secondary:disabled {
+.wpseed-button-secondary:disabled {
     color: var(--wpseed-color-gray-400);
     border-color: var(--wpseed-color-gray-400);
     cursor: not-allowed;
@@ -457,7 +457,7 @@
 }
 
 /* Modal Styles */
-.tp-modal {
+.wpseed-modal {
     display: none;
     position: fixed;
     z-index: var(--wpseed-z-index-modal);
@@ -469,7 +469,7 @@
     backdrop-filter: blur(2px);
 }
 
-.tp-modal-content {
+.wpseed-modal-content {
     background-color: var(--wpseed-color-white);
     margin: 5% auto;
     border-radius: var(--wpseed-border-radius-lg);
@@ -484,7 +484,7 @@
     to { opacity: 1; transform: translateY(0); }
 }
 
-.tp-modal-header {
+.wpseed-modal-header {
     padding: var(--wpseed-spacing-xl);
     border-bottom: 1px solid var(--wpseed-color-gray-300);
     display: flex;
@@ -492,14 +492,14 @@
     align-items: center;
 }
 
-.tp-modal-header h4 {
+.wpseed-modal-header h4 {
     margin: 0;
     font-size: var(--wpseed-font-size-lg);
     font-weight: var(--wpseed-font-weight-semibold);
     color: var(--wpseed-color-gray-900);
 }
 
-.tp-modal-close {
+.wpseed-modal-close {
     background: none;
     border: none;
     font-size: var(--wpseed-font-size-xl);
@@ -514,18 +514,18 @@
     transition: all var(--wpseed-transition-fast);
 }
 
-.tp-modal-close:hover {
+.wpseed-modal-close:hover {
     background-color: var(--wpseed-color-gray-100);
     color: var(--wpseed-color-gray-900);
 }
 
-.tp-modal-body {
+.wpseed-modal-body {
     padding: var(--wpseed-spacing-xl);
     color: var(--wpseed-color-gray-700);
     line-height: var(--wpseed-line-height-relaxed);
 }
 
-.tp-modal-footer {
+.wpseed-modal-footer {
     padding: var(--wpseed-spacing-xl);
     border-top: 1px solid var(--wpseed-color-gray-300);
     display: flex;
@@ -548,12 +548,12 @@
         grid-template-columns: 1fr;
     }
     
-    .button-group .tp-button {
+    .button-group .wpseed-button {
         margin-bottom: var(--wpseed-spacing-md);
         width: 100%;
     }
     
-    .tp-modal-content {
+    .wpseed-modal-content {
         margin: 10% auto;
         width: 95%;
     }
@@ -584,41 +584,41 @@
 .chart-visualization-showcase {
     display: flex;
     flex-direction: column;
-    gap: var(--tp-spacing-xl);
-    margin-top: var(--tp-spacing-lg);
+    gap: var(--wpseed-spacing-xl);
+    margin-top: var(--wpseed-spacing-lg);
 }
 
 /* Modal Showcase */
 .modal-showcase {
     display: flex;
     flex-direction: column;
-    gap: var(--tp-spacing-xl);
-    margin-top: var(--tp-spacing-lg);
+    gap: var(--wpseed-spacing-xl);
+    margin-top: var(--wpseed-spacing-lg);
 }
 
 /* Status Indicators Showcase */
 .status-indicators-showcase {
     display: flex;
     flex-direction: column;
-    gap: var(--tp-spacing-xl);
-    margin-top: var(--tp-spacing-lg);
+    gap: var(--wpseed-spacing-xl);
+    margin-top: var(--wpseed-spacing-lg);
 }
 
 .status-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: var(--tp-spacing-lg);
-    margin-top: var(--tp-spacing-lg);
+    gap: var(--wpseed-spacing-lg);
+    margin-top: var(--wpseed-spacing-lg);
 }
 
 .status-item {
     display: flex;
     align-items: center;
-    gap: var(--tp-spacing-sm);
-    padding: var(--tp-spacing-md);
-    background: var(--tp-color-white);
+    gap: var(--wpseed-spacing-sm);
+    padding: var(--wpseed-spacing-md);
+    background: var(--wpseed-color-white);
     border: 1px solid #f0f0f1;
-    border-radius: var(--tp-border-radius);
+    border-radius: var(--wpseed-border-radius);
 }
 
 /* Color Info Panel */
@@ -627,10 +627,10 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: var(--tp-color-white);
+    background: var(--wpseed-color-white);
     border: 1px solid #dcdcde;
-    border-radius: var(--tp-border-radius);
-    padding: var(--tp-spacing-xl);
+    border-radius: var(--wpseed-border-radius);
+    padding: var(--wpseed-spacing-xl);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     z-index: 10000;
     min-width: 300px;
@@ -638,7 +638,7 @@
 
 .color-info-panel h4 {
     margin-top: 0;
-    margin-bottom: var(--tp-spacing-lg);
+    margin-bottom: var(--wpseed-spacing-lg);
 }
 
 /* Demo Modal */
@@ -656,8 +656,8 @@
 }
 
 .wpseed-modal-content {
-    background: var(--tp-color-white);
-    border-radius: var(--tp-border-radius);
+    background: var(--wpseed-color-white);
+    border-radius: var(--wpseed-border-radius);
     max-width: 500px;
     width: 90%;
     max-height: 90%;
@@ -668,7 +668,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--tp-spacing-lg);
+    padding: var(--wpseed-spacing-lg);
     border-bottom: 1px solid #dcdcde;
 }
 
@@ -685,21 +685,21 @@
 }
 
 .wpseed-modal-body {
-    padding: var(--tp-spacing-lg);
+    padding: var(--wpseed-spacing-lg);
 }
 
 .wpseed-modal-footer {
     display: flex;
     justify-content: flex-end;
-    gap: var(--tp-spacing-md);
-    padding: var(--tp-spacing-lg);
+    gap: var(--wpseed-spacing-md);
+    padding: var(--wpseed-spacing-lg);
     border-top: 1px solid #dcdcde;
 }
 
 /* Responsive Design */
 @media screen and (max-width: 782px) {
     .wpseed-ui-library-container {
-        padding: var(--tp-spacing-md);
+        padding: var(--wpseed-spacing-md);
     }
     
     .wpseed-color-grid {
@@ -724,7 +724,7 @@
     }
     
     .wpseed-modal-content {
-        margin: var(--tp-spacing-md);
+        margin: var(--wpseed-spacing-md);
         width: auto;
     }
 }
@@ -733,19 +733,19 @@
 .spinner-examples {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--tp-spacing-xl);
-    margin-top: var(--tp-spacing-lg);
+    gap: var(--wpseed-spacing-xl);
+    margin-top: var(--wpseed-spacing-lg);
 }
 
 .spinner-example {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--tp-spacing-sm);
+    gap: var(--wpseed-spacing-sm);
 }
 
 .spinner-label {
-    font-size: var(--tp-font-size-sm);
+    font-size: var(--wpseed-font-size-sm);
     color: #646970;
     font-weight: 500;
 }

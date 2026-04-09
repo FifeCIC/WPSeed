@@ -14,16 +14,16 @@
     display: flex;
     flex-direction: column;
     max-width: 1200px;
-    margin: var(--tp-spacing-lg) 0 !important;
+    margin: var(--wpseed-spacing-lg) 0 !important;
 }
 
 .wpseed-tasks-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--tp-spacing-xl);
-    padding-bottom: var(--tp-spacing-md);
-    border-bottom: var(--tp-border-standard);
+    margin-bottom: var(--wpseed-spacing-xl);
+    padding-bottom: var(--wpseed-spacing-md);
+    border-bottom: var(--wpseed-border-standard);
 }
 
 .wpseed-tasks-title {
@@ -34,7 +34,7 @@
 
 .wpseed-tasks-actions {
     display: flex;
-    gap: var(--tp-spacing-md);
+    gap: var(--wpseed-spacing-md);
 }
 
 /* Task Table Column Widths */
@@ -67,37 +67,37 @@
 .wpseed-task-detail {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap: var(--tp-spacing-xl);
+    gap: var(--wpseed-spacing-xl);
 }
 
 .wpseed-task-main {
-    background: var(--tp-color-white);
-    border: var(--tp-border-standard);
-    border-radius: var(--tp-border-radius);
-    padding: var(--tp-spacing-xl);
+    background: var(--wpseed-color-white);
+    border: var(--wpseed-border-standard);
+    border-radius: var(--wpseed-border-radius);
+    padding: var(--wpseed-spacing-xl);
 }
 
 .wpseed-task-sidebar {
-    background: var(--tp-color-white);
-    border: var(--tp-border-standard);
-    border-radius: var(--tp-border-radius);
-    padding: var(--tp-spacing-xl);
+    background: var(--wpseed-color-white);
+    border: var(--wpseed-border-standard);
+    border-radius: var(--wpseed-border-radius);
+    padding: var(--wpseed-spacing-xl);
 }
 
 .wpseed-task-header {
-    margin-bottom: var(--tp-spacing-xl);
-    padding-bottom: var(--tp-spacing-md);
-    border-bottom: var(--tp-border-standard);
+    margin-bottom: var(--wpseed-spacing-xl);
+    padding-bottom: var(--wpseed-spacing-md);
+    border-bottom: var(--wpseed-border-standard);
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
 }
 
 .wpseed-task-title {
-    margin: 0 0 var(--tp-spacing-md) 0;
+    margin: 0 0 var(--wpseed-spacing-md) 0;
     font-size: 18px;
-    font-weight: var(--tp-font-weight-semibold);
-    font-weight: var(--tp-font-weight-medium) !important;
+    font-weight: var(--wpseed-font-weight-semibold);
+    font-weight: var(--wpseed-font-weight-medium) !important;
     display: block !important;
     text-decoration: none !important;
 }
@@ -109,9 +109,9 @@
 
 .wpseed-task-actions {
     display: flex;
-    gap: var(--tp-spacing-sm);
+    gap: var(--wpseed-spacing-sm);
     flex-wrap: wrap !important;
-    gap: var(--tp-spacing-xs) !important;
+    gap: var(--wpseed-spacing-xs) !important;
 }
 
 .wpseed-task-actions .button {
@@ -123,26 +123,26 @@
 
 /* Current Task Specific */
 .wpseed-current-task {
-    background: var(--tp-color-white);
-    border: var(--tp-border-standard);
-    border-radius: var(--tp-border-radius);
-    padding: var(--tp-spacing-xl);
-    margin-bottom: var(--tp-spacing-xl);
+    background: var(--wpseed-color-white);
+    border: var(--wpseed-border-standard);
+    border-radius: var(--wpseed-border-radius);
+    padding: var(--wpseed-spacing-xl);
+    margin-bottom: var(--wpseed-spacing-xl);
 }
 
 .wpseed-current-task-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--tp-spacing-lg);
-    padding-bottom: var(--tp-spacing-md);
-    border-bottom: var(--tp-border-standard);
+    margin-bottom: var(--wpseed-spacing-lg);
+    padding-bottom: var(--wpseed-spacing-md);
+    border-bottom: var(--wpseed-border-standard);
 }
 
 .wpseed-current-task-title {
     margin: 0;
     font-size: 18px;
-    font-weight: var(--tp-font-weight-semibold);
+    font-weight: var(--wpseed-font-weight-semibold);
 }
 
 .wpseed-current-task-status {
@@ -151,29 +151,29 @@
 
 .wpseed-no-current-task {
     text-align: center;
-    padding: var(--tp-spacing-xl) 0;
+    padding: var(--wpseed-spacing-xl) 0;
     color: #666;
 }
 
 /* Recent Tasks */
 .wpseed-recent-tasks {
-    background: var(--tp-color-white);
-    border: var(--tp-border-standard);
-    border-radius: var(--tp-border-radius);
-    padding: var(--tp-spacing-xl);
-    margin-top: var(--tp-spacing-xl);
+    background: var(--wpseed-color-white);
+    border: var(--wpseed-border-standard);
+    border-radius: var(--wpseed-border-radius);
+    padding: var(--wpseed-spacing-xl);
+    margin-top: var(--wpseed-spacing-xl);
 }
 
 .wpseed-recent-tasks-header {
-    margin-bottom: var(--tp-spacing-md);
-    padding-bottom: var(--tp-spacing-sm);
-    border-bottom: var(--tp-border-standard);
+    margin-bottom: var(--wpseed-spacing-md);
+    padding-bottom: var(--wpseed-spacing-sm);
+    border-bottom: var(--wpseed-border-standard);
 }
 
 .wpseed-recent-tasks-title {
     margin: 0;
     font-size: 16px;
-    font-weight: var(--tp-font-weight-semibold);
+    font-weight: var(--wpseed-font-weight-semibold);
 }
 
 /* Responsive adjustments */
@@ -190,7 +190,7 @@
     
     .wpseed-tasks-actions,
     .wpseed-current-task-status {
-        margin-top: var(--tp-spacing-md);
+        margin-top: var(--wpseed-spacing-md);
         margin-left: 0;
     }
     
@@ -215,7 +215,7 @@
 
 /* Task Detail Content */
 #task-detail-content {
-    margin-top: var(--tp-spacing-md) !important;
+    margin-top: var(--wpseed-spacing-md) !important;
 }
 
 /* Legacy classes mapping for backward compatibility */

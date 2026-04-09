@@ -179,8 +179,8 @@ defined('ABSPATH') || exit;
                             </div>
                         </div>
                         <div class="filter-actions">
-                            <button type="button" class="tp-button tp-button-secondary"><?php esc_html_e('Reset', 'wpseed'); ?></button>
-                            <button type="button" class="tp-button tp-button-primary"><?php esc_html_e('Apply Filters', 'wpseed'); ?></button>
+                            <button type="button" class="wpseed-button wpseed-button-secondary"><?php esc_html_e('Reset', 'wpseed'); ?></button>
+                            <button type="button" class="wpseed-button wpseed-button-primary"><?php esc_html_e('Apply Filters', 'wpseed'); ?></button>
                         </div>
                     </div>
                 </div>

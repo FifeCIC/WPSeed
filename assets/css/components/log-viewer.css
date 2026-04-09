@@ -14,10 +14,10 @@
 
 /* Log Viewer */
 .wpseed-log-viewer {
-    background: var(--tp-color-white);
+    background: var(--wpseed-color-white);
     border: 1px solid #ccd0d4;
-    border-radius: var(--tp-border-radius);
-    padding: var(--tp-spacing-lg);
+    border-radius: var(--wpseed-border-radius);
+    padding: var(--wpseed-spacing-lg);
 }
 
 .wpseed-log-content {
@@ -26,7 +26,7 @@
     overflow-y: auto;
     background: #f9f9f9;
     border: 1px solid #eee;
-    padding: var(--tp-spacing-md);
+    padding: var(--wpseed-spacing-md);
     font-family: monospace;
     white-space: pre-wrap;
     margin: 0;
