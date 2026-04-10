@@ -4,13 +4,13 @@
  * Styles for pagination navigation controls.
  * 
  * HTML Structure:
- * <div class="tp-pagination">
- *   <a href="#" class="tp-pagination-prev">Previous</a>
- *   <ul class="tp-pagination-list">
- *     <li><a href="#" class="tp-pagination-item active">1</a></li>
- *     <li><a href="#" class="tp-pagination-item">2</a></li>
+ * <div class="wpseed-pagination">
+ *   <a href="#" class="wpseed-pagination-prev">Previous</a>
+ *   <ul class="wpseed-pagination-list">
+ *     <li><a href="#" class="wpseed-pagination-item active">1</a></li>
+ *     <li><a href="#" class="wpseed-pagination-item">2</a></li>
  *   </ul>
- *   <a href="#" class="tp-pagination-next">Next</a>
+ *   <a href="#" class="wpseed-pagination-next">Next</a>
  * </div>
  * 
  * @package wpseed/CSS/Components

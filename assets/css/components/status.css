@@ -4,9 +4,9 @@
  * Status indicators, badges, and operational status elements.
  * 
  * HTML Structure:
- * <div class="tp-status tp-status-active">
- *   <span class="tp-status-indicator"></span>
- *   <span class="tp-status-text">Status Text</span>
+ * <div class="wpseed-status wpseed-status-active">
+ *   <span class="wpseed-status-indicator"></span>
+ *   <span class="wpseed-status-text">Status Text</span>
  * </div>
  * 
  * @package wpseed/CSS/Components
@@ -43,12 +43,6 @@
 }
 
 /* Old Styles Mapping */
-.wpseed-status { @extend .wpseed-status; }
-.wpseed-status-success { @extend .wpseed-status-success; }
-.wpseed-status-warning { @extend .wpseed-status-warning; }
-.wpseed-status-error { @extend .wpseed-status-error; }
-.wpseed-status-info { @extend .wpseed-status-info; }
-
 /* Service Status Badges */
 .service-status-badge {
     display: inline-block;
@@ -148,11 +142,6 @@
 }
 
 /* Legacy classes mapping for backward compatibility */
-.directive-type { @extend .wpseed-directive-type; }
-span.directive-type { @extend .wpseed-directive-type; }
-.directive-status { @extend .wpseed-directive-status; }
-span.directive-status { @extend .wpseed-directive-status; }
-
 /* Premium Badge */
 .premium-badge {
     display: inline-block;
@@ -622,36 +611,6 @@ span.directive-status { @extend .wpseed-directive-status; }
 }
 
 /* Legacy classes mapping for backward compatibility */
-.status-header { @extend .wpseed-status-header; }
-.status-actions { @extend .wpseed-status-actions; }
-.status-data-columns { @extend .wpseed-status-data-columns; }
-.status-data-column { @extend .wpseed-status-data-column; }
-.status-data-item { @extend .wpseed-status-data-item; }
-.status-label { @extend .wpseed-status-label; }
-.status-value { @extend .wpseed-status-value; }
-.status-message { @extend .wpseed-status-message; }
-.status-timestamp { @extend .wpseed-status-timestamp; }
-.rate-limits { @extend .wpseed-rate-limits; }
-.rate-limit-item { @extend .wpseed-rate-limit-item; }
-.rate-limit-title { @extend .wpseed-rate-limit-title; }
-.rate-limit-bar { @extend .wpseed-rate-limit-bar; }
-.rate-limit-progress { @extend .wpseed-rate-limit-progress; }
-.rate-limit-text { @extend .wpseed-rate-limit-text; }
-.rate-limit-reset { @extend .wpseed-rate-limit-reset; }
-.api-status { @extend .wpseed-api-status; }
-.status-indicator { @extend .wpseed-status-indicator; }
-.status-text { @extend .wpseed-status-text; }
-.api-badges { @extend .wpseed-api-badges; }
-.api-badge { @extend .wpseed-api-badge; }
-.key-status-container { @extend .wpseed-key-status-container; }
-.key-status { @extend .wpseed-key-status; }
-.trading-mode-toggle-button { @extend .wpseed-mode-toggle-button; @extend .wpseed-trading-mode-toggle-button; }
-.service-status-toggle-button { @extend .wpseed-mode-toggle-button; @extend .wpseed-service-status-toggle-button; }
-.demo-mode-toggle-button { @extend .wpseed-mode-toggle-button; @extend .wpseed-demo-mode-toggle-button; }
-.service-status-form { @extend .wpseed-service-status-form; }
-.trading-mode-button-form { @extend .wpseed-trading-mode-button-form; }
-.demo-mode-button-form { @extend .wpseed-demo-mode-button-form; }
-
 /* Algorithm Status Indicators */
 .wpseed-status-indicator-wrapper {
     text-align: center;
@@ -740,20 +699,6 @@ span.directive-status { @extend .wpseed-directive-status; }
 }
 
 /* Legacy classes mapping for backward compatibility */
-.status-indicator-wrapper { @extend .wpseed-status-indicator-wrapper; }
-.status-indicator { @extend .wpseed-status-indicator; }
-.status-running { @extend .wpseed-status-running; }
-.status-stopped { @extend .wpseed-status-stopped; }
-.status-dot { @extend .wpseed-status-dot; }
-.runtime-display { @extend .wpseed-runtime-display; }
-.trade-action { @extend .wpseed-trade-action; }
-.trade-buy { @extend .wpseed-trade-buy; }
-.trade-sell { @extend .wpseed-trade-sell; }
-.score { @extend .wpseed-score; }
-.score-high { @extend .wpseed-score-high; }
-.score-medium { @extend .wpseed-score-medium; }
-.score-low { @extend .wpseed-score-low; }
-
 /* Automation Status Indicators */
 .wpseed-status-card {
     display: flex;
@@ -788,12 +733,6 @@ span.directive-status { @extend .wpseed-directive-status; }
 }
 
 /* Legacy classes mapping for backward compatibility */
-.status-card { @extend .wpseed-status-card; }
-.status-dot { @extend .wpseed-status-dot; }
-.status-running .status-dot { @extend .wpseed-status-running .wpseed-status-dot; }
-.status-stopped .status-dot { @extend .wpseed-status-stopped .wpseed-status-dot; }
-.runtime-display { @extend .wpseed-runtime-display; }
-
 /* Database Table Status */
 .wpseed-table-status {
     padding: 4px 8px;
@@ -1015,41 +954,6 @@ span.directive-status { @extend .wpseed-directive-status; }
 }
 
 /* Legacy classes mapping for backward compatibility */
-.table-status { @extend .wpseed-table-status; }
-.status-good { @extend .wpseed-status-good; }
-.status-warning { @extend .wpseed-status-warning; }
-.status-error { @extend .wpseed-status-error; }
-.process-status-badge { @extend .wpseed-process-status-badge; }
-.status-badge-active { @extend .wpseed-status-badge-active; }
-.status-badge-warning { @extend .wpseed-status-badge-warning; }
-.status-badge-error { @extend .wpseed-status-badge-error; }
-.status-badge-inactive { @extend .wpseed-status-badge-inactive; }
-.status-badge-not-implemented { @extend .wpseed-status-badge-not-implemented; }
-.wpseed-table-exists { @extend .wpseed-table-exists; }
-.wpseed-table-missing { @extend .wpseed-table-missing; }
-.wpseed-missing-table { @extend .wpseed-missing-table; }
-.wpseed-warning-table { @extend .wpseed-warning-table; }
-.wpseed-table-warning { @extend .wpseed-table-warning; }
-.process-status-good { @extend .wpseed-process-status-good; }
-.process-status-warning { @extend .wpseed-process-status-warning; }
-.process-status-error { @extend .wpseed-process-status-error; }
-.process-status-not-implemented { @extend .wpseed-process-status-not-implemented; }
-.not-implemented-count { @extend .wpseed-not-implemented-count; }
-.process-issues { @extend .wpseed-process-issues; }
-.warning-count { @extend .wpseed-warning-count; }
-.error-count { @extend .wpseed-error-count; }
-.status-badge { @extend .wpseed-status-badge; }
-.ready-status .status-badge { @extend .wpseed-status-badge.ready; }
-.wip-status .status-badge { @extend .wpseed-status-badge.wip; }
-.status-badge.live { @extend .wpseed-status-badge.live; }
-.status-badge.demo { @extend .wpseed-status-badge.demo; }
-.live-status td.feature-mode { @extend .wpseed-feature-mode.live; }
-.demo-status td.feature-mode { @extend .wpseed-feature-mode.demo; }
-.tab-mode-indicator { @extend .wpseed-feature-mode-indicator; }
-.tab-mode-indicator.live { @extend .wpseed-feature-mode-indicator.live; }
-.tab-mode-indicator.demo { @extend .wpseed-feature-mode-indicator.demo; }
-.tab-mode-indicator.disabled { @extend .wpseed-feature-mode-indicator.disabled; }
-
 /* Status Panel */
 .wpseed-status-panel {
     background: #f9f9f9;
@@ -1129,17 +1033,6 @@ span.directive-status { @extend .wpseed-directive-status; }
 }
 
 /* Legacy classes mapping for backward compatibility */
-.status-panel { @extend .wpseed-status-panel; }
-.status-section { @extend .wpseed-status-section; }
-.status-indicator { @extend .wpseed-status-indicator; }
-.status-success { @extend .wpseed-status-success; }
-.status-error { @extend .wpseed-status-error; }
-.status-neutral { @extend .wpseed-status-neutral; }
-.status-text { @extend .wpseed-status-text; }
-.status-actions { @extend .wpseed-status-actions; }
-.admin-badge { @extend .wpseed-admin-badge; }
-.demo-badge { @extend .wpseed-demo-badge; }
-
 /* Task Status Indicators */
 .wpseed-status-indicator {
     width: 12px !important;
@@ -1228,14 +1121,6 @@ span.directive-status { @extend .wpseed-directive-status; }
 }
 
 /* Legacy classes mapping for backward compatibility */
-.task-status-indicator { @extend .wpseed-status-indicator; }
-.priority-indicator { @extend .wpseed-priority-indicator; }
-.detail-status { @extend .wpseed-detail-status; }
-.github-cache-status { @extend .wpseed-cache-status; }
-.status-label { @extend .wpseed-status-label; }
-.status-fresh { @extend .wpseed-status-fresh; }
-.status-stale { @extend .wpseed-status-stale; }
-
 /* Status Indicators Showcase Styles */
 .status-indicators-showcase .component-demo { 
     margin-bottom: 20px; 

@@ -4,9 +4,9 @@
  * Styles for various list types, including task lists, subtasks, etc.
  * 
  * HTML Structure:
- * <ul class="tp-list">
- *   <li class="tp-list-item">
- *     <div class="tp-list-content">Content here</div>
+ * <ul class="wpseed-list">
+ *   <li class="wpseed-list-item">
+ *     <div class="wpseed-list-content">Content here</div>
  *   </li>
  * </ul>
  * 
@@ -97,13 +97,3 @@
 }
 
 /* Legacy classes mapping for backward compatibility */
-.task-list { @extend .wpseed-list; @extend .wpseed-task-list; }
-.task-item { @extend .wpseed-list-item; }
-.task-content { @extend .wpseed-list-content; }
-.task-title { @extend .wpseed-task-title; }
-.task-meta { @extend .wpseed-task-meta; }
-.subtask-list { @extend .wpseed-list; @extend .wpseed-subtask-list; }
-.subtask-item { @extend .wpseed-list-item; }
-.subtask-checkbox { @extend .wpseed-subtask-checkbox; }
-.subtask-title { @extend .wpseed-subtask-title; }
-.subtask-item.completed { @extend .wpseed-list-item.completed; }

@@ -210,19 +210,3 @@
 }
 
 /* Legacy classes mapping for backward compatibility */
-.wpseed-features-header { @extend .wpseed-features-header; }
-.features-controls { @extend .wpseed-features-controls; }
-.feature-page-section { @extend .wpseed-feature-page-section; }
-.feature-page-header { @extend .wpseed-feature-page-header; }
-.feature-page-content { @extend .wpseed-feature-page-content; }
-.feature-table { @extend .wpseed-feature-table; }
-.tab-cell { @extend .wpseed-tab-cell; }
-.tab-content { @extend .wpseed-tab-content; }
-.feature-summary { @extend .wpseed-feature-summary; }
-.summary-box { @extend .wpseed-summary-box; }
-.feature-navigation { @extend .wpseed-feature-navigation; }
-.feature-sections-nav { @extend .wpseed-feature-sections-nav; }
-.feature-nav-item { @extend .wpseed-feature-nav-item; }
-.feature-row.disabled { @extend .wpseed-feature-row.disabled; }
-.wpseed-tab-header { @extend .wpseed-tab-header; }
-.wpseed-features-container { @extend .wpseed-features-container; }

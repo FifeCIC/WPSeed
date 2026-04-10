@@ -91,6 +91,3 @@
 }
 
 /* Legacy classes mapping for backward compatibility */
-.shortcode-grid { @extend .wpseed-shortcode-grid; }
-.shortcode-documentation { @extend .wpseed-shortcode-documentation; }
-.wpseed-shortcodes-settings { @extend .wpseed-shortcodes-settings; }

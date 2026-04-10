@@ -4,11 +4,11 @@
  * Styles for modal dialogs and popups.
  * 
  * HTML Structure:
- * <div class="tp-modal">
- *   <div class="tp-modal-content">
- *     <span class="tp-modal-close">×</span>
+ * <div class="wpseed-modal">
+ *   <div class="wpseed-modal-content">
+ *     <span class="wpseed-modal-close">×</span>
  *     <h2>Modal Title</h2>
- *     <div class="tp-modal-body">Content</div>
+ *     <div class="wpseed-modal-body">Content</div>
  *   </div>
  * </div>
  * 

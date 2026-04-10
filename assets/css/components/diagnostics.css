@@ -4,10 +4,10 @@
  * UI components for diagnostic tools, testing, and debugging.
  * 
  * HTML Structure:
- * <div class="tp-diagnostics-container">
- *   <div class="tp-diagnostics-card">
+ * <div class="wpseed-diagnostics-container">
+ *   <div class="wpseed-diagnostics-card">
  *     <h3>Diagnostics Title</h3>
- *     <div class="tp-diagnostics-result">
+ *     <div class="wpseed-diagnostics-result">
  *       <!-- Results go here -->
  *     </div>
  *   </div>

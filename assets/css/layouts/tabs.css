@@ -75,12 +75,3 @@
 }
 
 /* Legacy classes mapping for backward compatibility */
-.wpseed-tabs { @extend .wpseed-tabs; }
-.wpseed-tabs-nav { @extend .wpseed-tabs-nav; }
-.wpseed-tab-nav-item { @extend .wpseed-tab-nav-item; }
-.wpseed-tab-content { @extend .wpseed-tab-content; }
-.nav-tab-wrapper { @extend .wpseed-tabs-nav; }
-.nav-tab { @extend .wpseed-tab-nav-item a; }
-.nav-tab-active { @extend .wpseed-tab-nav-item.active a; }
-.tab-content { @extend .wpseed-tab-content; }
-.tab-content.active { @extend .wpseed-tab-content.active; }

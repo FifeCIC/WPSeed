@@ -4,7 +4,7 @@
  * Styles for badges, indicators, and small info displays.
  * 
  * HTML Structure:
- * <span class="tp-badge tp-badge-primary">Badge Text</span>
+ * <span class="wpseed-badge wpseed-badge-primary">Badge Text</span>
  * 
  * @package wpseed/CSS/Components
  * @since 1.0.0
@@ -142,22 +142,3 @@
 }
 
 /* Legacy classes mapping for backward compatibility */
-.time-badge { @extend .wpseed-time-badge; }
-.time-bmo { @extend .wpseed-time-badge; @extend .wpseed-time-badge.bmo; }
-.time-amc { @extend .wpseed-time-badge; @extend .wpseed-time-badge.amc; }
-.time-full { @extend .wpseed-time-full; }
-.time-specific { @extend .wpseed-time-specific; }
-.sentiment-badge { @extend .wpseed-sentiment-badge; }
-.sentiment-pct { @extend .wpseed-sentiment-pct; }
-.sentiment-bullish { @extend .wpseed-sentiment-bullish; }
-.sentiment-bearish { @extend .wpseed-sentiment-bearish; }
-.sentiment-neutral { @extend .wpseed-sentiment-neutral; }
-.sector-badge { @extend .wpseed-sector-badge; }
-.sector-technology { @extend .wpseed-sector-technology; }
-.sector-healthcare { @extend .wpseed-sector-healthcare; }
-.sector-financial { @extend .wpseed-sector-financial; }
-.sector-consumer { @extend .wpseed-sector-consumer; }
-.sector-industrial { @extend .wpseed-sector-industrial; }
-.sector-energy { @extend .wpseed-sector-energy; }
-.report-count { @extend .wpseed-report-count; }
-.demo-badge { @extend .wpseed-demo-badge; }

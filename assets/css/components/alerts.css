@@ -158,14 +158,3 @@
 }
 
 /* Legacy classes mapping for backward compatibility */
-.admin-only-notice { @extend .wpseed-admin-only-notice; }
-.admin-icon { @extend .wpseed-admin-icon; }
-.admin-text { @extend .wpseed-admin-text; }
-.demo-indicator { @extend .wpseed-demo-indicator; }
-.demo-icon { @extend .wpseed-demo-icon; }
-.demo-text { @extend .wpseed-demo-text; }
-.debug-info-panel { @extend .wpseed-debug-info-panel; }
-.debug-info-content { @extend .wpseed-debug-info-content; }
-.debug-advanced-section { @extend .wpseed-debug-advanced-section; }
-.toggle-advanced-debug { @extend .wpseed-toggle-advanced-debug; }
-.advanced-debug-content { @extend .wpseed-advanced-debug-content; }

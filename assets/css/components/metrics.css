@@ -4,10 +4,10 @@
  * Styles for displaying metrics, stats, and data visualizations.
  * 
  * HTML Structure:
- * <div class="tp-metrics-grid">
- *   <div class="tp-metric-item">
- *     <span class="tp-metric-label">Label</span>
- *     <span class="tp-metric-value">Value</span>
+ * <div class="wpseed-metrics-grid">
+ *   <div class="wpseed-metric-item">
+ *     <span class="wpseed-metric-label">Label</span>
+ *     <span class="wpseed-metric-value">Value</span>
  *   </div>
  * </div>
  * 
@@ -54,22 +54,16 @@
 }
 
 /* Legacy classes mapping for backward compatibility */
-.metrics-grid { @extend .wpseed-metrics-grid; }
-.metric-item { @extend .wpseed-metric-item; }
-.metric-label { @extend .wpseed-metric-label; }
-.metric-value { @extend .wpseed-metric-value; }
-.component-metrics { @extend .wpseed-component-metrics; }
-
 /**
  * wpseed - Metrics Component Styles
  * 
  * For displaying data metrics, stats, and numerical information.
  * 
  * HTML Structure:
- * <div class="tp-stats-grid">
- *   <div class="tp-stat-item">
- *     <div class="tp-stat-label">Label</div>
- *     <div class="tp-stat-value">Value</div>
+ * <div class="wpseed-stats-grid">
+ *   <div class="wpseed-stat-item">
+ *     <div class="wpseed-stat-label">Label</div>
+ *     <div class="wpseed-stat-value">Value</div>
  *   </div>
  * </div>
  * 
@@ -138,25 +132,15 @@
 }
 
 /* Legacy classes mapping for backward compatibility */
-.stat-numbers { @extend .wpseed-stat-numbers; }
-.stat-item { @extend .wpseed-stat-item; }
-.stat-value { @extend .wpseed-stat-value; }
-.stat-label { @extend .wpseed-stat-label; }
-.stat-detail-item { @extend .wpseed-stat-detail-item; }
-.stat-detail-label { @extend .wpseed-stat-detail-label; }
-.stat-detail-value { @extend .wpseed-stat-detail-value; }
-.table-stats { @extend .wpseed-table-stats; }
-.process-count { @extend .wpseed-process-count; }
-
 /**
  * wpseed - Metrics Component Styles
  * 
  * Styles for metrics, scores, charts and data visualization elements.
  * 
  * HTML Structure:
- * <div class="tp-metric-card">
- *   <div class="tp-metric-label">Label</div>
- *   <div class="tp-metric-value">Value</div>
+ * <div class="wpseed-metric-card">
+ *   <div class="wpseed-metric-label">Label</div>
+ *   <div class="wpseed-metric-value">Value</div>
  * </div>
  * 
  * @package wpseed/CSS/Components
@@ -280,27 +264,6 @@
 }
 
 /* Legacy classes mapping for backward compatibility */
-.directive-test-score-container { @extend .wpseed-score-container; }
-.directive-test-score { @extend .wpseed-score-circle; }
-.directive-test-score-label { @extend .wpseed-score-label; }
-#directive-test-score-value { @extend .wpseed-score-value; }
-.directive-test-loader { @extend .wpseed-loader-spinner; }
-.earnings-positive { @extend .wpseed-value-positive; }
-.earnings-negative { @extend .wpseed-value-negative; }
-.earnings-neutral { @extend .wpseed-value-neutral; }
-.whisper-diff { @extend .wpseed-whisper-diff; }
-.whisper-positive { @extend .wpseed-whisper-positive; }
-.whisper-negative { @extend .wpseed-whisper-negative; }
-.opp-score-container { @extend .wpseed-score-container; }
-.opp-score-value { @extend .wpseed-score-value; }
-.opp-score-bar { @extend .wpseed-score-bar; }
-.high-opportunity { @extend .wpseed-score-high; }
-.medium-opportunity { @extend .wpseed-score-medium; }
-.low-opportunity { @extend .wpseed-score-low; }
-.opportunity-star { @extend .wpseed-score-star; }
-.importance-high { @extend .wpseed-importance-high; }
-.importance-indicator { @extend .wpseed-importance-indicator; }
-
 /**
  * wpseed - Metrics Component Styles
  * 
@@ -337,7 +300,3 @@
 }
 
 /* Legacy classes mapping for backward compatibility */
-.stat-item { @extend .wpseed-stat-item; }
-.live-count { @extend .wpseed-live-count; }
-.demo-count { @extend .wpseed-demo-count; }
-#feature-stats { @extend .wpseed-stats-grid; }

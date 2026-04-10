@@ -4,10 +4,10 @@
  * Button styles used throughout the plugin interface
  * 
  * HTML Structure:
- * <button class="tp-button tp-button-primary">Primary Button</button>
- * <button class="tp-button tp-button-secondary">Secondary Button</button>
- * <button class="tp-button tp-button-danger">Danger Button</button>
- * <button class="tp-button tp-button-link">Link Button</button>
+ * <button class="wpseed-button wpseed-button-primary">Primary Button</button>
+ * <button class="wpseed-button wpseed-button-secondary">Secondary Button</button>
+ * <button class="wpseed-button wpseed-button-danger">Danger Button</button>
+ * <button class="wpseed-button wpseed-button-link">Link Button</button>
  * 
  * @package wpseed/CSS/Components
  * @since 1.0.0
@@ -312,10 +312,10 @@ input.button-link-delete:disabled {
     border: 2px solid currentColor;
     border-top-color: transparent;
     border-radius: 50%;
-    animation: tp-button-spin 0.8s linear infinite;
+    animation: wpseed-button-spin 0.8s linear infinite;
 }
 
-@keyframes tp-button-spin {
+@keyframes wpseed-button-spin {
     to {
         transform: translate(-50%, -50%) rotate(360deg);
     }

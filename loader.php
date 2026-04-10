@@ -61,6 +61,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * GROUP 8 — API system (always loaded)
  *   WPSeed\API\Connector_Interface — autoloaded via Composer (contract for connectors)
  *   WPSeed\API\Base_API             — autoloaded via Composer (abstract base class)
+ *   WPSeed\API\REST_Bridge           — autoloaded via Composer (endpoint registry + connector routing)
  *   WPSeed\API\REST_Controller      — autoloaded via Composer (abstract REST base)
  *   api/api-directory.php            — provider registry (static + runtime)
  *   api/api-factory.php              — connector instance factory

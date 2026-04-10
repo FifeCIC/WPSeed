@@ -4,9 +4,9 @@
  * Reusable content section styles for task details, descriptions, notes.
  * 
  * HTML Structure:
- * <div class="tp-content-section">
- *   <h3 class="tp-section-title">Title</h3>
- *   <div class="tp-section-content">Content here</div>
+ * <div class="wpseed-content-section">
+ *   <h3 class="wpseed-section-title">Title</h3>
+ *   <div class="wpseed-section-content">Content here</div>
  * </div>
  * 
  * @package wpseed/CSS/Components
@@ -71,8 +71,3 @@
 }
 
 /* Legacy classes mapping for backward compatibility */
-.task-description-section { @extend .wpseed-content-section; }
-.task-section-title { @extend .wpseed-section-title; }
-.task-section-content { @extend .wpseed-section-content; }
-.task-section-content.empty { @extend .wpseed-section-content.empty; }
-.task-section-loading { @extend .wpseed-section-loading; }

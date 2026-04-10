@@ -4,9 +4,9 @@
  * Styles for status messages, task state indicators, etc.
  * 
  * HTML Structure:
- * <div class="tp-status-message tp-status-message-success">
+ * <div class="wpseed-status-message wpseed-status-message-success">
  *   <span class="dashicons dashicons-yes-alt"></span>
- *   <span class="tp-status-message-text">Status message text</span>
+ *   <span class="wpseed-status-message-text">Status message text</span>
  * </div>
  * 
  * @package wpseed/CSS/Components
@@ -113,15 +113,3 @@
 }
 
 /* Legacy classes mapping for backward compatibility */
-.task-status-message { @extend .wpseed-status-message; }
-.task-status-message-text { @extend .wpseed-status-message-text; }
-.task-status-message-success { @extend .wpseed-status-message-success; }
-.task-status-message-error { @extend .wpseed-status-message-error; }
-.task-status-message-warning { @extend .wpseed-status-message-warning; }
-.task-status-message-info { @extend .wpseed-status-message-info; }
-.task-status { @extend .wpseed-task-status; }
-.task-status-pending { @extend .wpseed-task-status-pending; }
-.task-status-progress { @extend .wpseed-task-status-progress; }
-.task-status-completed { @extend .wpseed-task-status-completed; }
-.task-status-onhold { @extend .wpseed-task-status-onhold; }
-.task-status-cancelled { @extend .wpseed-task-status-cancelled; }

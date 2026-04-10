@@ -345,20 +345,6 @@
 }
 
 /* Legacy classes mapping for backward compatibility */
-.form-table { @extend .wpseed-form-table; }
-.form-table .section_title { @extend .section-title; }
-.form-table td .input-checkbox { @extend .wpseed-input-checkbox; }
-.form-table td .input-radio { @extend .wpseed-input-radio; }
-.wpseed-setup-extensions { @extend .wpseed-wizard-extensions; }
-.table.tax-rates { @extend .wpseed-tax-rates; }
-ul.wpseed-wizard-plugin-extensions { @extend .wpseed-wizard-plugin-extensions; }
-li.wpseed-wizard-extension { @extend .wpseed-wizard-extension; }
-.wpseed-wizard-extension-settings { @extend .wpseed-wizard-extension-settings; }
-.wpseed-wizard-extension-description { @extend .wpseed-wizard-extension-description; }
-.wpseed-wizard-extension-enable { @extend .wpseed-wizard-extension-enable; }
-.wpseed-setup .wpseed-setup-actions { @extend .wpseed-wizard-actions; }
-.wpseed-setup-actions .button-primary { @extend .wpseed-button-primary; }
-
 /* Responsive styles */
 @media screen and (max-width: 782px) {
     .wpseed-form-table tbody th {

@@ -4,10 +4,10 @@
  * Styles for form elements and controls.
  * 
  * HTML Structure:
- * <div class="tp-form-row">
+ * <div class="wpseed-form-row">
  *   <label for="example">Label</label>
- *   <input type="text" id="example" class="tp-input">
- *   <p class="tp-description">Description text</p>
+ *   <input type="text" id="example" class="wpseed-input">
+ *   <p class="wpseed-description">Description text</p>
  * </div>
  * 
  * @package wpseed/CSS/Components
@@ -43,21 +43,6 @@
     display: flex !important;
     gap: var(--wpseed-spacing-md) !important;
     margin-top: var(--wpseed-spacing-md) !important;
-}
-
-/* Buttons */
-.wpseed-button {
-    cursor: pointer !important;
-    padding: var(--wpseed-spacing-sm) var(--wpseed-spacing-lg) !important;
-    border: var(--wpseed-border-standard) !important;
-    border-radius: var(--wpseed-border-radius) !important;
-    background-color: var(--wpseed-color-gray-50) !important;
-}
-
-.wpseed-button-primary {
-    background-color: #2271b1 !important;
-    color: var(--wpseed-color-white) !important;
-    border-color: #2271b1 !important;
 }
 
 /* Form Layouts */
@@ -154,18 +139,7 @@
     cursor: not-allowed;
 }
 
-/* Trading-specific select variations */
-.wpseed-select.trading-timeframe {
-    background-color: var(--wpseed-color-bg-primary);
-    border-color: var(--wpseed-color-primary);
-    font-weight: var(--wpseed-font-weight-medium);
-}
 
-.wpseed-select-small.trading-instrument {
-    background-color: var(--wpseed-color-bg-secondary);
-    font-family: 'Courier New', monospace;
-    letter-spacing: 0.5px;
-}
 
 .wpseed-form-row .wpseed-description {
     color: var(--wpseed-color-gray-600);
@@ -290,115 +264,7 @@ input:checked + .slider:before {
     border-radius: 50%;
 }
 
-/* Trading Mode Toggle */
-.trading-mode-toggle {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 10px;
-}
 
-.trading-mode-toggle label {
-    position: relative;
-    display: inline-block;
-    padding: 10px 15px;
-    background-color: #f0f0f1;
-    border: 1px solid #c3c4c7;
-    border-radius: var(--wpseed-border-radius);
-    cursor: pointer;
-    transition: var(--wpseed-transition-standard);
-}
-
-.trading-mode-toggle label input[type="radio"] {
-    position: absolute;
-    opacity: 0;
-}
-
-.trading-mode-toggle label:hover {
-    background-color: #e0e0e1;
-}
-
-.trading-mode-toggle label input[type="radio"]:checked + .trading-mode-label.live {
-    background-color: var(--wpseed-color-error);
-    color: var(--wpseed-color-white);
-    border-color: var(--wpseed-color-error);
-}
-
-.trading-mode-toggle label input[type="radio"]:checked + .trading-mode-label.paper {
-    background-color: var(--wpseed-color-wp-blue);
-    color: var(--wpseed-color-white);
-    border-color: var(--wpseed-color-wp-blue);
-}
-
-.trading-mode-toggle .trading-mode-label {
-    display: inline-block;
-    padding: 2px 5px;
-    border-radius: var(--wpseed-border-radius-sm);
-}
-
-/* Mini Toggle */
-.trading-mode-toggle-mini {
-    display: flex;
-    align-items: center;
-    margin: 10px 0;
-}
-
-.trading-mode-toggle-mini .switch {
-    margin-right: 10px;
-}
-
-.trading-mode-toggle-mini .trading-mode-status {
-    font-weight: var(--wpseed-font-weight-medium);
-    min-width: 100px;
-}
-
-/* Alert Decoder Form */
-.alert-decoder-form {
-    margin: 0 !important;
-}
-
-.alert-decoder-form .form-group {
-    margin-bottom: var(--wpseed-spacing-lg) !important;
-}
-
-.alert-decoder-form label {
-    display: block !important;
-    margin-bottom: 5px !important;
-    font-weight: var(--wpseed-font-weight-medium) !important;
-}
-
-.alert-decoder-form textarea {
-    width: 100% !important;
-    min-height: 120px !important;
-    padding: 8px !important;
-    box-sizing: border-box !important;
-    border: var(--wpseed-border-standard) !important;
-    border-radius: var(--wpseed-border-radius) !important;
-}
-
-.alert-decoder-form .form-actions {
-    display: flex !important;
-    gap: 10px !important;
-    margin-top: 10px !important;
-}
-
-/* Data Explorer Form */
-.data-explorer-form {
-    margin-top: 15px;
-}
-
-.data-explorer-inputs {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.data-explorer-result {
-    margin-top: 15px;
-    border: 1px solid var(--wpseed-color-gray-300);
-    background: var(--wpseed-color-gray-100);
-    padding: 10px;
-}
 
 /* API Response */
 .api-response {
@@ -515,99 +381,7 @@ input:checked + .slider:before {
     margin-right: 8px;
 }
 
-/* ==========================================================================
-   Volatility Calculator
-   ========================================================================== */
 
-.wpseed-volatility-analysis-container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.wpseed-research-section {
-    margin-bottom: 25px;
-    background: var(--wpseed-color-white);
-    padding: 20px;
-    border-radius: var(--wpseed-border-radius);
-    box-shadow: var(--wpseed-shadow);
-}
-
-.wpseed-research-inputs {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    gap: 15px;
-    margin-top: 15px;
-}
-
-.wpseed-input-group {
-    flex: 1;
-    min-width: 150px;
-}
-
-.wpseed-input-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: var(--wpseed-font-weight-medium);
-}
-
-.wpseed-research-panels {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-    margin-bottom: 25px;
-}
-
-.wpseed-panel {
-    background: var(--wpseed-color-white);
-    padding: 20px;
-    border-radius: var(--wpseed-border-radius);
-    box-shadow: var(--wpseed-shadow);
-}
-
-.wpseed-metrics-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-    margin-top: 15px;
-}
-
-.wpseed-metrics-grid.columns-3 {
-    grid-template-columns: repeat(3, 1fr);
-}
-
-.wpseed-interpretation {
-    margin-top: 15px;
-}
-
-.wpseed-interpretation h4 {
-    margin-top: 20px;
-    margin-bottom: 10px;
-    font-size: 16px;
-    color: var(--wpseed-color-gray-900);
-}
-
-.wpseed-interpretation p {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.wpseed-interpretation ul {
-    margin-left: 20px;
-}
-
-.wpseed-stop-loss-calc {
-    margin-top: 25px;
-    padding-top: 15px;
-    border-top: 1px solid var(--wpseed-color-gray-200);
-}
-
-.wpseed-research-educational {
-    background: var(--wpseed-color-white);
-    padding: 20px;
-    border-radius: var(--wpseed-border-radius);
-    box-shadow: var(--wpseed-shadow);
-}
 
 /* Search and Filter Components */
 .search-wrapper {
@@ -1117,32 +891,7 @@ input:checked + .slider:before {
     border-color: var(--wpseed-color-primary);
 }
 
-/* Trading-focused enhancements */
-.wpseed-form-layout-horizontal.trading-form .wpseed-form-input[type="number"] {
-    font-family: 'Courier New', monospace;
-    text-align: right;
-    color: var(--wpseed-color-primary);
-    font-weight: 600;
-}
 
-.wpseed-form-layout-inline.trading-quick-form {
-    background: linear-gradient(135deg, var(--wpseed-color-bg-secondary) 0%, rgba(var(--wpseed-color-primary-rgb), 0.05) 100%);
-    border: 2px solid var(--wpseed-color-primary);
-    border-radius: 8px;
-}
-
-.wpseed-form-layout-inline.trading-quick-form .wpseed-form-input[type="number"] {
-    font-family: 'Courier New', monospace;
-    font-weight: 600;
-    color: var(--wpseed-color-success);
-    background: rgba(var(--wpseed-color-success-rgb), 0.05);
-}
-
-.wpseed-form-layout-inline.trading-quick-form .wpseed-form-input[type="number"]:focus {
-    background: var(--wpseed-color-white);
-    border-color: var(--wpseed-color-success);
-    box-shadow: 0 0 0 2px rgba(var(--wpseed-color-success-rgb), 0.2);
-}
 
 /* Responsive Design */
 @media (max-width: 768px) {

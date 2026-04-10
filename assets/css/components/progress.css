@@ -4,8 +4,8 @@
  * Progress bars and loading indicators.
  * 
  * HTML Structure:
- * <div class="tp-progress-container">
- *   <div class="tp-progress-bar" style="width: 75%;"></div>
+ * <div class="wpseed-progress-container">
+ *   <div class="wpseed-progress-bar" style="width: 75%;"></div>
  * </div>
  * 
  * @package wpseed/CSS/Components
@@ -29,9 +29,6 @@
 }
 
 /* Legacy classes mapping for backward compatibility */
-.progress-container { @extend .wpseed-progress-container; }
-.progress-bar { @extend .wpseed-progress-bar; }
-
 /* UI Library Progress Indicator Styles */
 
 /* Base media progress bar */

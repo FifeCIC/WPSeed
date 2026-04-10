@@ -4,9 +4,9 @@
  * Interface elements for exploring and displaying data.
  * 
  * HTML Structure:
- * <div class="tp-data-explorer">
- *   <div class="tp-data-explorer-controls">...</div>
- *   <div class="tp-data-explorer-response">...</div>
+ * <div class="wpseed-data-explorer">
+ *   <div class="wpseed-data-explorer-controls">...</div>
+ *   <div class="wpseed-data-explorer-response">...</div>
  * </div>
  * 
  * @package wpseed/CSS/Components
@@ -97,10 +97,3 @@
 }
 
 /* Legacy classes mapping for backward compatibility */
-.data-explorer-content { @extend .wpseed-data-explorer-content; }
-.data-explorer-controls { @extend .wpseed-data-explorer-controls; }
-.data-explorer-control { @extend .wpseed-data-explorer-control; }
-.data-explorer-response { @extend .wpseed-data-explorer-response; }
-.data-explorer-loading { @extend .wpseed-data-explorer-loading; }
-.api-test-results { @extend .wpseed-api-test-results; }
-.test-result { @extend .wpseed-test-result; }

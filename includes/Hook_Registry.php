@@ -194,4 +194,19 @@ if ( ! defined( 'ABSPATH' ) ) {
  * wpseed_capabilities_uninstalled → Fired after all capabilities have been removed
  *                                    from WordPress roles during plugin uninstall.
  *                                    Parameter: $capabilities (all registered caps).
+ *
+ * ==========================================================================
+ * REST BRIDGE ACTIONS (since 3.1.0)
+ * ==========================================================================
+ *
+ * wpseed_rest_bridge_before_register → Fired before REST Bridge registers its
+ *                                       routes on rest_api_init. Last chance for
+ *                                       plugins to call REST_Bridge::register().
+ *
+ * wpseed_rest_bridge_registered      → Fired after REST Bridge has registered all
+ *                                       routes. Parameter: $endpoints (all metadata).
+ *
+ * wpseed_ecosystem_version_mismatch  → Fired when a plugin requires a newer Core
+ *                                       version than is installed. Parameters:
+ *                                       $slug, $plugin, $required, $actual.
  */

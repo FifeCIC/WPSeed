@@ -140,21 +140,3 @@
 }
 
 /* Legacy classes mapping for backward compatibility */
-.api-configuration-content { @extend .wpseed-api-configuration-content; }
-.api-details { @extend .wpseed-api-details; }
-.api-main-content { @extend .wpseed-api-main-content; }
-.api-sidebar { @extend .wpseed-api-sidebar; }
-.api-capabilities { @extend .wpseed-api-capabilities; }
-.capability-item { @extend .wpseed-capability-item; }
-.capability-text { @extend .wpseed-capability-text; }
-.premium-badge { @extend .wpseed-premium-badge; }
-.endpoints-list { @extend .wpseed-endpoints-list; }
-.endpoint-item { @extend .wpseed-endpoint-item; }
-.endpoint-name { @extend .wpseed-endpoint-name; }
-.endpoint-function { @extend .wpseed-endpoint-function; }
-.endpoint-view-all { @extend .wpseed-endpoint-view-all; }
-.wpseed-api-settings-container { @extend .wpseed-api-settings-container; }
-.api-test-credentials { @extend .wpseed-api-test-credentials; }
-.test-credentials-buttons { @extend .wpseed-test-credentials-buttons; }
-.tool-section { @extend .wpseed-tool-section; }
-.loading-spinner { @extend .wpseed-loading-spinner; }

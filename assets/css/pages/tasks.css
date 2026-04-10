@@ -219,25 +219,3 @@
 }
 
 /* Legacy classes mapping for backward compatibility */
-.tasks-container { @extend .wpseed-tasks-container; }
-.tasks-header { @extend .wpseed-tasks-header; }
-.tasks-title { @extend .wpseed-tasks-title; }
-.tasks-actions { @extend .wpseed-tasks-actions; }
-.task-detail { @extend .wpseed-task-detail; }
-.task-main { @extend .wpseed-task-main; }
-.task-sidebar { @extend .wpseed-task-sidebar; }
-.task-header { @extend .wpseed-task-header; }
-.task-title { @extend .wpseed-task-title; }
-.task-actions { @extend .wpseed-task-actions; }
-.current-task { @extend .wpseed-current-task; }
-.current-task-header { @extend .wpseed-current-task-header; }
-.current-task-title { @extend .wpseed-current-task-title; }
-.current-task-status { @extend .wpseed-current-task-status; }
-.no-current-task { @extend .wpseed-no-current-task; }
-.recent-tasks { @extend .wpseed-recent-tasks; }
-.recent-tasks-header { @extend .wpseed-recent-tasks-header; }
-.recent-tasks-title { @extend .wpseed-recent-tasks-title; }
-.wpseed-tasks-container { @extend .wpseed-tasks-container; }
-.wpseed-tasks-header { @extend .wpseed-tasks-header; }
-.wpseed-tasks-table { @extend .wpseed-tasks-table; }
-.hidden { @extend .wpseed-hidden; }

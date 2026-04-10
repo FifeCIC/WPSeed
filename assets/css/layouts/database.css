@@ -213,24 +213,3 @@
 }
 
 /* Legacy classes mapping for backward compatibility */
-.wpseed-database-settings { @extend .wpseed-database-settings; }
-.wpseed-install-tables-action { @extend .wpseed-install-tables-action; }
-.wpseed-data-tables-container { @extend .wpseed-data-tables-container; }
-.section-header { @extend .wpseed-section-header; }
-.section-actions { @extend .wpseed-section-actions; }
-.section-description { @extend .wpseed-section-description; }
-.wpseed-table-group { @extend .wpseed-table-group; }
-.tables-grid { @extend .wpseed-tables-grid; }
-.wpseed-stats-cards { @extend .wpseed-stats-cards; }
-.wpseed-stats-row { @extend .wpseed-stats-row; }
-.wpseed-stats-column { @extend .wpseed-stats-column; }
-.wpseed-stats-table { @extend .wpseed-stats-table; }
-.api-details-section { @extend .wpseed-api-details-section; }
-.wpseed-database-summary { @extend .wpseed-database-summary; }
-.wpseed-table-exists { @extend .wpseed-table-exists; }
-.wpseed-table-missing { @extend .wpseed-table-missing; }
-.wpseed-missing-table { @extend .wpseed-missing-table; }
-.wpseed-warning-table { @extend .wpseed-warning-table; }
-.wpseed-table-warning { @extend .wpseed-table-warning; }
-.wpseed-filter-form { @extend .wpseed-filter-form; }
-.feature-not-implemented { @extend .feature-not-implemented; }

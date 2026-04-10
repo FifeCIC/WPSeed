@@ -4,14 +4,14 @@
  * Styles for filter controls, groups, and filter bars.
  * 
  * HTML Structure:
- * <div class="tp-filter-bar">
- *   <div class="tp-filter-group">
- *     <label class="tp-filter-label">Filter by:</label>
- *     <select class="tp-filter-select">...</select>
+ * <div class="wpseed-filter-bar">
+ *   <div class="wpseed-filter-group">
+ *     <label class="wpseed-filter-label">Filter by:</label>
+ *     <select class="wpseed-filter-select">...</select>
  *   </div>
- *   <div class="tp-filter-search">
- *     <input type="text" class="tp-filter-search-input" />
- *     <button class="tp-filter-search-button">Search</button>
+ *   <div class="wpseed-filter-search">
+ *     <input type="text" class="wpseed-filter-search-input" />
+ *     <button class="wpseed-filter-search-button">Search</button>
  *   </div>
  * </div>
  * 

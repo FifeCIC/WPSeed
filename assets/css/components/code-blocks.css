@@ -4,9 +4,9 @@
  * Styles for code blocks, syntax highlighting, and code displays.
  * 
  * HTML Structure:
- * <div class="tp-code-block">
+ * <div class="wpseed-code-block">
  *   <code>Code content goes here</code>
- *   <button class="tp-copy-code">Copy</button>
+ *   <button class="wpseed-copy-code">Copy</button>
  * </div>
  * 
  * @package wpseed/CSS/Components
@@ -117,8 +117,3 @@
 }
 
 /* Legacy classes mapping for backward compatibility */
-.experiment-output { @extend .wpseed-code-block; }
-.log-files { @extend .wpseed-log-files; }
-.table-info { @extend .wpseed-data-table; }
-.shortcode-code { @extend .wpseed-shortcode-code; }
-.copy-shortcode { @extend .wpseed-copy-code; }

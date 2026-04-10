@@ -4,9 +4,9 @@
  * Styles for card UI elements.
  * 
  * HTML Structure:
- * <div class="tp-card">
- *   <h4 class="tp-card-header">Title</h4>
- *   <div class="tp-card-body">
+ * <div class="wpseed-card">
+ *   <h4 class="wpseed-card-header">Title</h4>
+ *   <div class="wpseed-card-body">
  *     Content goes here
  *   </div>
  * </div>
@@ -190,23 +190,10 @@
 }
 
 /* Legacy classes mapping for backward compatibility */
-.wpseed-api-settings-card { @extend .wpseed-api-card; }
-.api-overview { @extend .wpseed-api-overview; }
-.api-header { @extend .wpseed-api-header; }
-.api-logo { @extend .wpseed-api-logo; }
-.api-info { @extend .wpseed-api-info; }
-.api-credentials-container { @extend .wpseed-api-credentials-container; }
-.api-credentials-column { @extend .wpseed-api-credentials-column; }
 .algorithm-status-card, 
 .algorithm-metrics-card, 
-.algorithm-config-card { @extend .wpseed-algorithm-card; }
 .cron-schedule-card, 
-.next-run-card { @extend .wpseed-schedule-card; }
-.schedule-group { @extend .wpseed-schedule-group; }
 .summary-card, 
-.positions-card { @extend .wpseed-algorithm-card; }
-.shortcode-card { @extend .wpseed-card; @extend .wpseed-card-interactive; }
-
 /* Legacy result card styles from alert-decoder */
 .result-card {
     background-color: var(--wpseed-color-gray-100);
@@ -961,75 +948,6 @@
 }
 
 /* Legacy class mappings for backward compatibility */
-.automation-section { @extend .wpseed-automation-section; }
-.component-card { @extend .wpseed-component-card; }
-.component-controls { @extend .wpseed-component-controls; }
-.components-grid { @extend .wpseed-components-grid; }
-.wpseed-database-summary { @extend .wpseed-database-summary; }
-.table-card { @extend .wpseed-table-card; }
-.table-card-header { @extend .wpseed-table-card-header; }
-.table-name { @extend .wpseed-table-name; }
-.table-card-body { @extend .wpseed-table-card-body; }
-.table-description { @extend .wpseed-table-description; }
-.table-card-footer { @extend .wpseed-table-card-footer; }
-.table-action { @extend .wpseed-table-action; }
-.stat-card { @extend .wpseed-stat-card; }
-.process-list-item { @extend .wpseed-process-list-item; }
-.process-header { @extend .wpseed-process-header; }
-.process-name { @extend .wpseed-process-name; }
-.process-details { @extend .wpseed-process-details; }
-.process-description { @extend .wpseed-process-description; }
-.process-actions { @extend .wpseed-process-actions; }
-.discord-setup-guide { @extend .wpseed-discord-card; }
-.discord-settings-form { @extend .wpseed-discord-card; }
-.discord-third-container { @extend .wpseed-discord-card; }
-.discord-fourth-container { @extend .wpseed-discord-card; }
-.bot-info { @extend .wpseed-bot-info; }
-.bot-avatar-container { @extend .wpseed-bot-avatar-container; }
-.bot-avatar { @extend .wpseed-bot-avatar; }
-.bot-avatar-placeholder { @extend .wpseed-bot-avatar-placeholder; }
-.bot-name { @extend .wpseed-bot-name; }
-.bot-id { @extend .wpseed-bot-id; }
-.demo-indicator { @extend .wpseed-demo-indicator; }
-.demo-icon { @extend .wpseed-demo-icon; }
-.demo-text { @extend .wpseed-demo-text; }
-.earnings-cards-view { @extend .wpseed-card-grid; }
-.earnings-card { @extend .wpseed-featured-card; }
-.no-earnings-message { @extend .wpseed-message-card; }
-.company-overview { @extend .wpseed-research-card; }
-.metrics-card { @extend .wpseed-metrics-card; }
-.price-forecast-controls, .technical-analysis-controls, .fundamental-analysis-controls { @extend .wpseed-research-controls; }
-.chart-container { @extend .wpseed-chart-container; }
-.indicator-card { @extend .wpseed-indicator-card; }
-.chart-wrapper { @extend .wpseed-chart-wrapper; }
-.company-description { @extend .wpseed-card-description; }
-.stock-alert-card { @extend .wpseed-alert-card; }
-.card-header { @extend .wpseed-alert-card-header; }
-.ticker { @extend .wpseed-alert-ticker; }
-.alert-type { @extend .wpseed-alert-type; }
-.company-name { @extend .wpseed-company-name; }
-.alert-details { @extend .wpseed-alert-details; }
-.detail-row { @extend .wpseed-detail-row; }
-.detail-label { @extend .wpseed-detail-label; }
-.detail-value { @extend .wpseed-detail-value; }
-.card-footer { @extend .wpseed-alert-card-footer; }
-.timestamp { @extend .wpseed-timestamp; }
-.view-details-link { @extend .wpseed-view-details-link; }
-.stat-value { @extend .wpseed-stat-value; }
-.stat-label { @extend .wpseed-stat-label; }
-.chart-box { @extend .wpseed-chart-box; }
-.chart-placeholder { @extend .wpseed-chart-placeholder; }
-.placeholder-text { @extend .wpseed-placeholder-text; }
-.calculator-results { @extend .wpseed-calculator-results; }
-.result-item { @extend .wpseed-result-item; }
-.result-value { @extend .wpseed-result-value; }
-.task-details-card { @extend .wpseed-task-card; }
-.task-details-header { @extend .wpseed-task-card-header; }
-.task-title { @extend .wpseed-task-title; }
-.task-details-body { @extend .wpseed-task-card-body; }
-.task-details-footer { @extend .wpseed-task-card-footer; }
-.task-notes-section, .recent-tasks-section { @extend .wpseed-section-card; }
-.no-current-task { @extend .wpseed-empty-state-card; }
 /* API Status Column Styles */
 .api-status-column {
     flex: 1;

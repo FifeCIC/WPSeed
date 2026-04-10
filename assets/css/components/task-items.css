@@ -4,16 +4,16 @@
  * Styles for task cards, current task display, and task actions.
  * 
  * HTML Structure:
- * <div class="tp-task-item">
- *   <div class="tp-task-item-header">
- *     <h3 class="tp-task-item-title">Task Title</h3>
- *     <span class="tp-task-item-badge">Status</span>
+ * <div class="wpseed-task-item">
+ *   <div class="wpseed-task-item-header">
+ *     <h3 class="wpseed-task-item-title">Task Title</h3>
+ *     <span class="wpseed-task-item-badge">Status</span>
  *   </div>
- *   <div class="tp-task-item-body">
- *     <div class="tp-task-item-meta">...</div>
- *     <div class="tp-task-item-description">...</div>
+ *   <div class="wpseed-task-item-body">
+ *     <div class="wpseed-task-item-meta">...</div>
+ *     <div class="wpseed-task-item-description">...</div>
  *   </div>
- *   <div class="tp-task-item-actions">...</div>
+ *   <div class="wpseed-task-item-actions">...</div>
  * </div>
  * 
  * @package wpseed/CSS/Components
@@ -117,14 +117,3 @@
 }
 
 /* Legacy classes mapping for backward compatibility */
-.current-task { @extend .wpseed-task-item; }
-.current-task-header { @extend .wpseed-task-item-header; }
-.current-task-title { @extend .wpseed-task-item-title; }
-.current-task-status { @extend .wpseed-task-item-badge; }
-.task-item-meta { @extend .wpseed-task-item-meta; }
-.task-item-meta-item { @extend .wpseed-task-item-meta-item; }
-.task-item-meta-label { @extend .wpseed-task-item-meta-label; }
-.task-item-meta-value { @extend .wpseed-task-item-meta-value; }
-.task-item-description { @extend .wpseed-task-item-description; }
-.task-item-actions { @extend .wpseed-task-item-actions; }
-.task-item { @extend .wpseed-task-item; }

@@ -1,128 +1,87 @@
 /**
- * wpseed - CSS Reset
- * 
- * Normalizes browser rendering and provides a consistent baseline
- * for styling across different browsers.
- * 
+ * WPSeed — Scoped CSS Reset
+ *
+ * Normalises rendering ONLY within .wpseed-admin-wrap containers.
+ * A plugin must never apply a global reset — that breaks the WordPress
+ * admin menu, toolbar, and every other plugin's UI.
+ *
+ * The only global rule is box-sizing: border-box, which is safe and
+ * already expected by WordPress core since 4.4.
+ *
  * @package wpseed/CSS/Base
- * @since 1.0.0
+ * @since   1.0.0
+ * @since   3.1.0 Scoped to .wpseed-admin-wrap. No longer global.
  */
 
-/* Box sizing for all elements */
+/* Box sizing — safe to apply globally */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-/* Remove default margin and padding */
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+/* ─────────────────────────────────────────────────────────────────────
+   Everything below is scoped to WPSeed's own admin content wrapper.
+   WordPress admin chrome (menus, toolbar, notices) is untouched.
+   ───────────────────────────────────────────────────────────────────── */
+
+.wpseed-admin-wrap {
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--wpseed-color-gray-900);
+}
+
+.wpseed-admin-wrap h1,
+.wpseed-admin-wrap h2,
+.wpseed-admin-wrap h3,
+.wpseed-admin-wrap h4,
+.wpseed-admin-wrap h5,
+.wpseed-admin-wrap h6,
+.wpseed-admin-wrap p,
+.wpseed-admin-wrap blockquote,
+.wpseed-admin-wrap pre,
+.wpseed-admin-wrap dl,
+.wpseed-admin-wrap dd,
+.wpseed-admin-wrap ol,
+.wpseed-admin-wrap ul,
+.wpseed-admin-wrap fieldset,
+.wpseed-admin-wrap figure {
   margin: 0;
   padding: 0;
-  border: 0;
-  font-size: 100%;
-  vertical-align: baseline;
 }
 
-/* HTML5 display definitions */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-  display: block;
-}
-
-/* Set base body styles */
-body {
-  line-height: 1.5;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-  color: var(--wpseed-color-gray-900);
-  background-color: var(--wpseed-color-white);
-}
-
-/* List styles */
-ol, ul {
+.wpseed-admin-wrap ol,
+.wpseed-admin-wrap ul {
   list-style: none;
 }
 
-/* Quote styles */
-blockquote, q {
-  quotes: none;
-}
-
-blockquote:before, blockquote:after,
-q:before, q:after {
-  content: '';
-  content: none;
-}
-
-/* Table styles */
-table {
+.wpseed-admin-wrap table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* Links */
-a {
+.wpseed-admin-wrap img {
+  max-width: 100%;
+  height: auto;
+}
+
+.wpseed-admin-wrap a {
   color: var(--wpseed-color-wp-blue);
   text-decoration: none;
 }
 
-a:hover, a:focus {
-  color: var(--wpseed-color-wp-dark-blue);
+.wpseed-admin-wrap a:hover,
+.wpseed-admin-wrap a:focus {
+  color: var(--wpseed-color-primary-dark);
   text-decoration: underline;
 }
 
-/* Forms */
-button,
-input,
-optgroup,
-select,
-textarea {
-  font-family: inherit;
-  font-size: 100%;
-  line-height: 1.15;
-  margin: 0;
-}
-
-button,
-input {
-  overflow: visible;
-}
-
-button,
-select {
-  text-transform: none;
-}
-
-/* Focus styles for accessibility */
-a:focus,
-button:focus,
-input:focus,
-textarea:focus,
-select:focus {
-  outline: 2px solid var(--wpseed-color-wp-blue);
-  outline-offset: 1px;
-}
-
-/* Apply WordPress admin-specific resets */
-.wpseed-admin-wrap {
-  font-size: 13px;
-  line-height: 1.4;
-}
-
-/* Images */
-img {
-  max-width: 100%;
-  height: auto;
+/* Focus ring for interactive elements within WPSeed content */
+.wpseed-admin-wrap a:focus,
+.wpseed-admin-wrap button:focus,
+.wpseed-admin-wrap input:focus,
+.wpseed-admin-wrap textarea:focus,
+.wpseed-admin-wrap select:focus {
+  outline: var(--wpseed-focus-ring);
+  outline-offset: var(--wpseed-focus-ring-offset);
 }

@@ -107,10 +107,6 @@
 }
 
 /* Legacy classes mapping for backward compatibility */
-.stock-alerts-grid { @extend .wpseed-alerts-grid; }
-.statistics-cards { @extend .wpseed-statistics-grid; }
-.charts-container { @extend .wpseed-charts-grid; }
-
 @media screen and (max-width: 782px) {
     .results-grid {
         grid-template-columns: 1fr;

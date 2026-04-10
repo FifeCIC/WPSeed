@@ -102,11 +102,20 @@ class WPSeed_Asset_Queue {
         if ($url === false) {
             return;
         }
+
+        // Prefix dependency handles to match registered handle format.
+        $deps = array_map( function( $dep ) {
+            // Already prefixed or a WordPress core handle — leave as-is.
+            if ( 0 === strpos( $dep, 'wpseed-' ) || 0 === strpos( $dep, 'wp-' ) ) {
+                return $dep;
+            }
+            return 'wpseed-' . $dep;
+        }, $asset['dependencies'] );
         
         wp_enqueue_style(
             'wpseed-' . $name,
             $url,
-            $asset['dependencies'],
+            $deps,
             WPSEED_VERSION,
             'all'
         );
@@ -125,11 +134,19 @@ class WPSeed_Asset_Queue {
         if ($url === false) {
             return;
         }
+
+        // Prefix dependency handles to match registered handle format.
+        $deps = array_map( function( $dep ) {
+            if ( 0 === strpos( $dep, 'wpseed-' ) || 0 === strpos( $dep, 'wp-' ) || 'jquery' === $dep ) {
+                return $dep;
+            }
+            return 'wpseed-' . $dep;
+        }, $asset['dependencies'] );
         
         wp_enqueue_script(
             'wpseed-' . $name,
             $url,
-            $asset['dependencies'],
+            $deps,
             WPSEED_VERSION,
             true
         );

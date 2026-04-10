@@ -4,7 +4,7 @@
  * Styles for tables and data display.
  * 
  * HTML Structure:
- * <table class="tp-table">
+ * <table class="wpseed-table">
  *   <thead>
  *     <tr><th>Header 1</th><th>Header 2</th></tr>
  *   </thead>
@@ -14,10 +14,10 @@
  * </table>
  * 
  * Variants:
- * - tp-table-bordered: Adds borders to all cells
- * - tp-table-striped: Adds zebra striping to rows
- * - tp-table-hover: Highlights rows on hover
- * - tp-table-sm: Compact version with less padding
+ * - wpseed-table-bordered: Adds borders to all cells
+ * - wpseed-table-striped: Adds zebra striping to rows
+ * - wpseed-table-hover: Highlights rows on hover
+ * - wpseed-table-sm: Compact version with less padding
  * 
  * @package wpseed/CSS/Components
  * @since 1.0.0
@@ -321,24 +321,6 @@
 }
 
 /* Legacy class mappings */
-.wpseed-tasks-table { @extend .wpseed-table; }
-.wp-block-table { @extend .wpseed-block-table; }
-.table { @extend .wpseed-table; }
-.table-bordered { @extend .wpseed-table-bordered; }
-.table-striped { @extend .wpseed-table-striped; }
-.table-hover { @extend .wpseed-table-hover; }
-.table-sm { @extend .wpseed-table-sm; }
-.table-responsive { @extend .wpseed-table-responsive; }
-.sortable { @extend .wpseed-sortable; }
-.sorted-asc { @extend .wpseed-sorted-asc; }
-.sorted-desc { @extend .wpseed-sorted-desc; }
-.wpseed-scoring-directives-table { @extend .wpseed-directives-table; }
-.wpseed-scoring-directives-actions { @extend .wpseed-directives-actions; }
-.directive-test-data-table { @extend .wpseed-test-data-table; }
-.wpseed-tasks-table-container { @extend .wpseed-table-container; }
-.wpseed-tasks-table { @extend .wpseed-table; }
-.sortable { @extend .wpseed-sortable; }
-
 .wpseed-table-container {
     overflow-x: auto;
     margin-bottom: 20px;

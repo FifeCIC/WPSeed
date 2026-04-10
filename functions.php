@@ -126,3 +126,18 @@ function wpseed_connector( $provider_id, $account_id = '' ) {
 function wpseed_user_can( $capability, $user_id = null ) {
 	return \WPSeed\Core\Capability_Manager::user_can( $capability, $user_id );
 }
+
+/**
+ * Return all registered REST Bridge endpoints.
+ *
+ * Global accessor for \WPSeed\API\REST_Bridge::get_registered_endpoints().
+ * Used by admin UI and AI tools to discover available REST actions.
+ *
+ * @since  3.1.0
+ *
+ * @param  string $source Optional. Filter by source: 'manual', 'connector', or empty for all.
+ * @return array Registered endpoint metadata.
+ */
+function wpseed_rest_endpoints( $source = '' ) {
+	return \WPSeed\API\REST_Bridge::get_registered_endpoints( $source );
+}

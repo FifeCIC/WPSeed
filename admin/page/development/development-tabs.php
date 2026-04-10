@@ -97,6 +97,8 @@ class WPSeed_Admin_Development_Page {
             'diagrams' => array('title' => __('Diagrams', 'wpseed'), 'code' => 'DGM01'),
             'architecture' => array('title' => __('Architecture', 'wpseed'), 'code' => 'ARC01'),
             'roadmap' => array('title' => __('Roadmap', 'wpseed'), 'code' => 'RMP01'),
+            'connectors' => array('title' => __('Connectors', 'wpseed'), 'code' => 'CON01'),
+            'capabilities' => array('title' => __('Capabilities', 'wpseed'), 'code' => 'CAP01'),
         );
     }
 
@@ -104,10 +106,12 @@ class WPSeed_Admin_Development_Page {
      * Enqueue required assets
      */
     private static function enqueue_assets() {
-        wp_enqueue_style('wpseed-admin-styles', WPSEED_PLUGIN_URL . 'assets/css/admin-styles.css', array(), WPSEED_VERSION);
+        wp_enqueue_style('wpseed-variables', WPSEED_PLUGIN_URL . 'assets/css/base/variables.css', array(), WPSEED_VERSION);
         wp_enqueue_style('wpseed-roadmap', WPSEED_PLUGIN_URL . 'assets/css/components/roadmap.css', array(), WPSEED_VERSION);
         wp_enqueue_style('wpseed-architecture', WPSEED_PLUGIN_URL . 'assets/css/components/architecture.css', array(), WPSEED_VERSION);
+        wp_enqueue_style('wpseed-help-tooltips', WPSEED_PLUGIN_URL . 'assets/css/components/help-tooltips.css', array('wpseed-variables'), WPSEED_VERSION);
         wp_enqueue_script('wpseed-roadmap', WPSEED_PLUGIN_URL . 'assets/js/admin/roadmap.js', array('jquery'), WPSEED_VERSION, true);
+        wp_enqueue_script('wpseed-help-tooltips', WPSEED_PLUGIN_URL . 'assets/js/admin/help-tooltips.js', array('jquery'), WPSEED_VERSION, true);
     }
     
     /**
@@ -268,6 +272,12 @@ class WPSeed_Admin_Development_Page {
                 break;
             case 'roadmap':
                 require_once $tab_dir . 'tab-roadmap.php';
+                break;
+            case 'connectors':
+                require_once $tab_dir . 'tab-connectors.php';
+                break;
+            case 'capabilities':
+                require_once $tab_dir . 'tab-capabilities.php';
                 break;
             default:
                 if (!class_exists('WPSeed_Admin_Development_UI_Library')) {

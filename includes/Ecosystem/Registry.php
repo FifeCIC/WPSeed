@@ -83,10 +83,14 @@ class Registry {
 	 * becomes available via is_registered().
 	 *
 	 * @since  3.0.0
+	 * @since  3.1.0 Added requires_core_version for dependency checking.
+	 *
 	 * @param  string $slug Unique plugin slug — use the plugin folder name.
 	 * @param  array  $args {
 	 *     @type string   $name                 Human-readable plugin name.
 	 *     @type string   $version              Semver string.
+	 *     @type string   $requires_core_version Minimum Core plugin version required.
+	 *                                           Empty string means no requirement.
 	 *     @type string   $path                 Absolute path to plugin root (trailing slash).
 	 *     @type string   $url                  Plugin root URL (trailing slash).
 	 *     @type bool     $has_logging          Whether plugin registers log entries.
@@ -98,14 +102,15 @@ class Registry {
 	 */
 	public function register_plugin( $slug, $args = array() ) {
 		$defaults = array(
-			'name'                 => '',
-			'version'              => '1.0.0',
-			'path'                 => '',
-			'url'                  => '',
-			'has_logging'          => false,
-			'has_cron'             => false,
-			'has_background_tasks' => false,
-			'shared_settings'      => array(),
+			'name'                  => '',
+			'version'               => '1.0.0',
+			'requires_core_version' => '',
+			'path'                  => '',
+			'url'                   => '',
+			'has_logging'           => false,
+			'has_cron'              => false,
+			'has_background_tasks'  => false,
+			'shared_settings'       => array(),
 		);
 
 		$this->registered_plugins[ $slug ] = wp_parse_args( $args, $defaults );
@@ -114,17 +119,20 @@ class Registry {
 	}
 
 	/**
-	 * Fire the registration action and persist ecosystem state.
+	 * Fire the registration action, check versions, and persist ecosystem state.
 	 *
 	 * Called on plugins_loaded priority 5. Fires wpseed_ecosystem_register so
-	 * all plugins can call register_plugin(), then stores the resulting state
-	 * in options for use by admin UI without re-firing the action.
+	 * all plugins can call register_plugin(), checks version compatibility,
+	 * then stores the resulting state in options for use by admin UI.
 	 *
 	 * @since  3.0.0
+	 * @since  3.1.0 Added version mismatch detection.
+	 *
 	 * @return void
 	 */
 	public function detect_ecosystem() {
 		do_action( 'wpseed_ecosystem_register' );
+		$this->check_version_requirements();
 		update_option( 'wpseed_ecosystem_mode', $this->is_ecosystem_mode() );
 		update_option( 'wpseed_ecosystem_plugins', $this->registered_plugins );
 	}
@@ -232,9 +240,116 @@ class Registry {
 	 * Check whether the shared menu location should be used.
 	 *
 	 * @since  3.0.0
+	 *
 	 * @return bool
 	 */
 	public function use_shared_menu() {
 		return 'shared' === $this->get_menu_location();
+	}
+
+	/**
+	 * Check version requirements for all registered plugins.
+	 *
+	 * Compares each plugin's requires_core_version against the core plugin's
+	 * registered version. Fires an action and queues an admin notice for
+	 * any mismatches.
+	 *
+	 * @since  3.1.0
+	 *
+	 * @return void
+	 */
+	private function check_version_requirements() {
+		$core_slug    = $this->find_core_plugin();
+		$core_version = '';
+
+		if ( $core_slug && isset( $this->registered_plugins[ $core_slug ] ) ) {
+			$core_version = $this->registered_plugins[ $core_slug ]['version'];
+		}
+
+		foreach ( $this->registered_plugins as $slug => $plugin ) {
+			if ( $slug === $core_slug ) {
+				continue;
+			}
+
+			$required = $plugin['requires_core_version'] ?? '';
+
+			if ( empty( $required ) ) {
+				continue;
+			}
+
+			// No core plugin registered at all.
+			if ( empty( $core_version ) ) {
+				$this->fire_version_mismatch( $slug, $plugin, $required, '0.0.0' );
+				continue;
+			}
+
+			if ( version_compare( $core_version, $required, '<' ) ) {
+				$this->fire_version_mismatch( $slug, $plugin, $required, $core_version );
+			}
+		}
+	}
+
+	/**
+	 * Find the core plugin slug in the registry.
+	 *
+	 * Looks for a plugin whose slug contains 'core'. In the EvolveWP ecosystem
+	 * this will be 'evolvewp-core'. In WPSeed standalone it may not exist.
+	 *
+	 * @since  3.1.0
+	 *
+	 * @return string|null Core plugin slug, or null if not found.
+	 */
+	private function find_core_plugin() {
+		foreach ( $this->registered_plugins as $slug => $plugin ) {
+			if ( false !== strpos( $slug, 'core' ) ) {
+				return $slug;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Handle a version mismatch between a plugin and Core.
+	 *
+	 * Fires the wpseed_ecosystem_version_mismatch action and queues an
+	 * admin notice warning the user.
+	 *
+	 * @since  3.1.0
+	 *
+	 * @param  string $slug           Plugin slug with the requirement.
+	 * @param  array  $plugin         Plugin registration data.
+	 * @param  string $required       Required Core version.
+	 * @param  string $actual         Actual Core version installed.
+	 * @return void
+	 */
+	private function fire_version_mismatch( $slug, $plugin, $required, $actual ) {
+		/**
+		 * Fires when a plugin requires a newer Core version than installed.
+		 *
+		 * @since 3.1.0
+		 *
+		 * @param string $slug     Plugin slug.
+		 * @param array  $plugin   Plugin registration data.
+		 * @param string $required Required Core version.
+		 * @param string $actual   Installed Core version.
+		 */
+		do_action( 'wpseed_ecosystem_version_mismatch', $slug, $plugin, $required, $actual );
+
+		$plugin_name = $plugin['name'] ?: $slug;
+
+		add_action( 'admin_notices', static function () use ( $plugin_name, $required, $actual ) {
+			printf(
+				'<div class="notice notice-warning"><p><strong>%s</strong> %s</p></div>',
+				esc_html( $plugin_name ),
+				esc_html(
+					sprintf(
+						/* translators: 1: required version, 2: installed version */
+						__( 'requires EvolveWP Core %1$s or later. Installed version: %2$s. Some features may not work correctly.', 'wpseed' ),
+						$required,
+						$actual ?: __( 'not installed', 'wpseed' )
+					)
+				)
+			);
+		} );
 	}
 }

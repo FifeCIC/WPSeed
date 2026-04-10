@@ -4,10 +4,10 @@
  * Styles for step indicators used in wizards.
  * 
  * HTML Structure:
- * <ol class="tp-steps">
- *   <li class="tp-step active">Step 1</li>
- *   <li class="tp-step">Step 2</li>
- *   <li class="tp-step">Step 3</li>
+ * <ol class="wpseed-steps">
+ *   <li class="wpseed-step active">Step 1</li>
+ *   <li class="wpseed-step">Step 2</li>
+ *   <li class="wpseed-step">Step 3</li>
  * </ol>
  * 
  * @package wpseed/CSS/Components
@@ -72,5 +72,3 @@
 }
 
 /* Legacy classes mapping for backward compatibility */
-.wpseed-setup-steps { @extend .wpseed-steps; }
-.wpseed-setup-steps li { @extend .wpseed-step; }

@@ -124,6 +124,7 @@
 |---|---|---|---|
 | `Connector_Interface.php` | core | Contract for all API connectors (test, capabilities, execute) | No |
 | `Base_API.php` | core | Abstract base class implementing Connector_Interface | No |
+| `REST_Bridge.php` | core | Endpoint registry, connector routing, response helpers | No |
 | `REST_Controller.php` | core | Abstract base class for REST API controllers | No |
 
 ---

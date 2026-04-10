@@ -407,5 +407,4 @@ p.wpseed-actions {
 }
 
 /* Legacy classes mapping for backward compatibility */
-/* Note: @extend is not valid CSS - these would need to be handled via SCSS/SASS preprocessing */
 /* For now, maintaining original class names for backward compatibility */

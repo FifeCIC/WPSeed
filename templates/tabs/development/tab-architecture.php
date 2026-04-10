@@ -30,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<!-- Left: Namespace Map -->
 	<div class="wpseed-arch-panel">
-		<h3><?php esc_html_e( 'Namespace Map', 'wpseed' ); ?></h3>
+		<h3><?php esc_html_e( 'Namespace Map', 'wpseed' ); ?> <span class="wpseed-help-tip" data-tooltip="<?php esc_attr_e( 'PSR-4 autoloading maps each namespace to a directory under includes/. Composer resolves class names to file paths automatically.', 'wpseed' ); ?>"><span class="dashicons dashicons-editor-help"></span></span></h3>
 		<div class="wpseed-arch-flow">
 			<div class="wpseed-arch-step">
 				<strong>WPSeed\Ecosystem\</strong><br>
@@ -50,14 +50,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<div class="wpseed-arch-step">
 				<strong>WPSeed\API\</strong><br>
 				→ <code>includes/API/</code><br>
-				<?php esc_html_e( 'REST_Controller, Base_API', 'wpseed' ); ?>
+				<?php esc_html_e( 'Connector_Interface, Base_API, REST_Bridge, REST_Controller', 'wpseed' ); ?>
 			</div>
 		</div>
 	</div>
 
 	<!-- Right: Template Map -->
 	<div class="wpseed-arch-panel">
-		<h3><?php esc_html_e( 'Template Structure', 'wpseed' ); ?></h3>
+		<h3><?php esc_html_e( 'Template Structure', 'wpseed' ); ?> <span class="wpseed-help-tip" data-tooltip="<?php esc_attr_e( 'Templates are in three levels: pages/ for full admin pages, tabs/ for tab content, partials/ for reusable fragments.', 'wpseed' ); ?>"><span class="dashicons dashicons-editor-help"></span></span></h3>
 		<div class="wpseed-arch-flow">
 			<div class="wpseed-arch-step">
 				<strong>templates/pages/</strong><br>
@@ -78,7 +78,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <!-- Pattern 1: Data Storage Display -->
 <div class="wpseed-arch-json-panel">
-	<h3><?php esc_html_e( 'Data Storage & Options', 'wpseed' ); ?></h3>
+	<h3><?php esc_html_e( 'Data Storage & Options', 'wpseed' ); ?> <span class="wpseed-help-tip" data-tooltip="<?php esc_attr_e( 'Plugin state is stored in wp_options. Each option is prefixed with wpseed_ to avoid conflicts. The ecosystem registry persists cross-plugin state here.', 'wpseed' ); ?>"><span class="dashicons dashicons-editor-help"></span></span></h3>
 	<div class="wpseed-arch-json-files">
 
 		<div class="wpseed-arch-json-file">
@@ -124,7 +124,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <!-- Pattern 2: Key Functions Table -->
 <div class="wpseed-arch-json-panel">
-	<h3><?php esc_html_e( 'Key Functions & Classes', 'wpseed' ); ?></h3>
+	<h3><?php esc_html_e( 'Key Functions & Classes', 'wpseed' ); ?> <span class="wpseed-help-tip" data-tooltip="<?php esc_attr_e( 'These are the core classes that every plugin inherits from WPSeed. Each has a single responsibility documented in its file header.', 'wpseed' ); ?>"><span class="dashicons dashicons-editor-help"></span></span></h3>
 	<table class="wp-list-table widefat fixed striped">
 		<thead>
 			<tr>
@@ -185,7 +185,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <!-- Pattern 3: Data Flow Diagram -->
 <div class="wpseed-arch-json-panel">
-	<h3><?php esc_html_e( 'Plugin Boot Sequence', 'wpseed' ); ?></h3>
+	<h3><?php esc_html_e( 'Plugin Boot Sequence', 'wpseed' ); ?> <span class="wpseed-help-tip" data-tooltip="<?php esc_attr_e( 'The numbered steps show the exact order files load when WordPress activates the plugin. Understanding this helps debug load-order issues.', 'wpseed' ); ?>"><span class="dashicons dashicons-editor-help"></span></span></h3>
 
 	<div class="wpseed-arch-data-flow">
 		<div class="wpseed-arch-flow-step">
@@ -242,7 +242,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <!-- Database Tables -->
 <div class="wpseed-arch-json-panel">
-	<h3><?php esc_html_e( 'Database Tables', 'wpseed' ); ?></h3>
+	<h3><?php esc_html_e( 'Database Tables', 'wpseed' ); ?> <span class="wpseed-help-tip" data-tooltip="<?php esc_attr_e( 'Custom tables created on activation via dbDelta(). All prefixed with the WordPress table prefix plus wpseed_. Dropped on uninstall.', 'wpseed' ); ?>"><span class="dashicons dashicons-editor-help"></span></span></h3>
 	<table class="wp-list-table widefat fixed striped">
 		<thead>
 			<tr>

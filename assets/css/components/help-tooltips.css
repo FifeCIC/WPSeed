@@ -1,0 +1,135 @@
+/**
+ * WPSeed — Help Tooltips for Development Pages
+ *
+ * Lightweight tooltip styles for contextual help on admin pages.
+ * Based on the full tooltip system in components/tooltips.css but
+ * stripped to just what's needed for data-tooltip help tips.
+ *
+ * Usage:
+ *   <span class="wpseed-help-tip" data-tooltip="Explanation text here">
+ *       <span class="dashicons dashicons-editor-help"></span>
+ *   </span>
+ *
+ * @package wpseed/CSS/Components
+ * @since   3.1.0
+ */
+
+/* Help tip trigger — the clickable/hoverable icon */
+.wpseed-help-tip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: help;
+  color: var(--wpseed-color-gray-500);
+  transition: color var(--wpseed-transition-fast);
+  position: relative;
+  vertical-align: middle;
+  margin-inline-start: var(--wpseed-spacing-xs);
+}
+
+.wpseed-help-tip:hover,
+.wpseed-help-tip:focus {
+  color: var(--wpseed-color-primary);
+}
+
+.wpseed-help-tip .dashicons {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+
+/* The tooltip bubble — positioned by JS */
+.wpseed-help-tooltip {
+  position: absolute;
+  z-index: var(--wpseed-z-index-tooltip);
+  max-width: 300px;
+  padding: var(--wpseed-spacing-sm) var(--wpseed-spacing-md);
+  background: var(--wpseed-color-gray-900);
+  color: var(--wpseed-color-white);
+  font-size: var(--wpseed-font-size-sm);
+  line-height: var(--wpseed-line-height-normal);
+  border-radius: var(--wpseed-border-radius);
+  box-shadow: var(--wpseed-shadow-md);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--wpseed-transition-fast);
+}
+
+.wpseed-help-tooltip.wpseed-visible {
+  opacity: 1;
+}
+
+/* Arrow */
+.wpseed-help-tooltip::after {
+  content: '';
+  position: absolute;
+  border: 6px solid transparent;
+}
+
+/* Default: tooltip above, arrow pointing down */
+.wpseed-help-tooltip--top::after {
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-top-color: var(--wpseed-color-gray-900);
+}
+
+/* Tooltip below, arrow pointing up */
+.wpseed-help-tooltip--bottom::after {
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-bottom-color: var(--wpseed-color-gray-900);
+}
+
+/* Section help — larger tooltip for section descriptions */
+.wpseed-section-help {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wpseed-spacing-xs);
+  padding: var(--wpseed-spacing-xs) var(--wpseed-spacing-sm);
+  background: var(--wpseed-color-gray-50);
+  border: 1px solid var(--wpseed-color-gray-200);
+  border-radius: var(--wpseed-border-radius);
+  font-size: var(--wpseed-font-size-sm);
+  color: var(--wpseed-color-gray-600);
+  cursor: help;
+  transition: all var(--wpseed-transition-fast);
+}
+
+.wpseed-section-help:hover {
+  background: var(--wpseed-color-info-light);
+  border-color: var(--wpseed-color-info);
+  color: var(--wpseed-color-info-dark);
+}
+
+.wpseed-section-help .dashicons {
+  font-size: 14px;
+  width: 14px;
+  height: 14px;
+}
+
+/* Tour button */
+.wpseed-tour-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wpseed-spacing-xs);
+  padding: var(--wpseed-spacing-xs) var(--wpseed-spacing-md);
+  background: var(--wpseed-color-primary-light);
+  color: var(--wpseed-color-white);
+  border: none;
+  border-radius: var(--wpseed-border-radius);
+  font-size: var(--wpseed-font-size-sm);
+  cursor: pointer;
+  transition: background var(--wpseed-transition-fast);
+}
+
+.wpseed-tour-button:hover {
+  background: var(--wpseed-color-primary);
+}
+
+.wpseed-tour-button .dashicons {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}

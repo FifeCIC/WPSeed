@@ -81,13 +81,3 @@
 }
 
 /* Legacy classes mapping for backward compatibility */
-.radio-group { @extend .wpseed-radio-group; }
-.weekday-checkboxes { @extend .wpseed-weekday-checkboxes; }
-.form-row { @extend .wpseed-form-row; }
-.form-group.half { @extend .wpseed-form-group.half; }
-.schedule-actions { @extend .wpseed-schedule-actions; }
-.log-controls { @extend .wpseed-log-controls; }
-.log-filter { @extend .wpseed-log-filter; }
-.trades-filters { @extend .wpseed-trades-filters; }
-.filter-row { @extend .wpseed-filter-row; }
-.filter-group { @extend .wpseed-filter-group; }

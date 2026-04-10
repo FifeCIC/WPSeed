@@ -4,10 +4,10 @@
  * Styles for displaying meta information like task details, assignments, timestamps.
  * 
  * HTML Structure:
- * <div class="tp-meta-block">
- *   <div class="tp-meta-item">
- *     <span class="tp-meta-label">Label</span>
- *     <span class="tp-meta-value">Value</span>
+ * <div class="wpseed-meta-block">
+ *   <div class="wpseed-meta-item">
+ *     <span class="wpseed-meta-label">Label</span>
+ *     <span class="wpseed-meta-value">Value</span>
  *   </div>
  * </div>
  * 
@@ -70,10 +70,3 @@
 }
 
 /* Legacy classes mapping for backward compatibility */
-.task-meta { @extend .wpseed-meta; }
-.task-meta > span { @extend .wpseed-meta-item; }
-.task-meta-block { @extend .wpseed-meta-block; }
-.task-meta-item { @extend .wpseed-meta-item; }
-.task-meta-label { @extend .wpseed-meta-label; }
-.task-meta-value { @extend .wpseed-meta-value; }
-.task-meta-value.highlight { @extend .wpseed-meta-value.highlight; }

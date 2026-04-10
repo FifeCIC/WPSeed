@@ -4,8 +4,8 @@
  * Styles for log viewing and code display.
  * 
  * HTML Structure:
- * <div class="tp-log-viewer">
- *   <pre class="tp-log-content">Log content goes here</pre>
+ * <div class="wpseed-log-viewer">
+ *   <pre class="wpseed-log-content">Log content goes here</pre>
  * </div>
  * 
  * @package wpseed/CSS/Components
@@ -33,5 +33,3 @@
 }
 
 /* Legacy classes mapping for backward compatibility */
-.log-viewer { @extend .wpseed-log-viewer; }
-.log-content { @extend .wpseed-log-content; }

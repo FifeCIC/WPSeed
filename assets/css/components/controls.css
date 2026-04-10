@@ -4,8 +4,8 @@
  * UI controls like filters, pagination, action buttons groups.
  * 
  * HTML Structure:
- * <div class="tp-controls">
- *   <div class="tp-filter-controls">
+ * <div class="wpseed-controls">
+ *   <div class="wpseed-filter-controls">
  *     <label>Filter By:</label>
  *     <select>...</select>
  *   </div>

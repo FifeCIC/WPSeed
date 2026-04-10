@@ -4,10 +4,10 @@
  * For filtering and searching data tables.
  * 
  * HTML Structure:
- * <div class="tp-filter-form">
- *   <div class="tp-filter-controls">
- *     <div class="tp-filter-row">
- *       <div class="tp-filter-item">
+ * <div class="wpseed-filter-form">
+ *   <div class="wpseed-filter-controls">
+ *     <div class="wpseed-filter-row">
+ *       <div class="wpseed-filter-item">
  *         <label>Filter Label</label>
  *         <select></select>
  *       </div>
@@ -117,16 +117,3 @@
 }
 
 /* Legacy classes mapping for backward compatibility */
-.wpseed-filter-form { @extend .wpseed-filter-form; }
-.filter-controls { @extend .wpseed-filter-controls; }
-.filter-row { @extend .wpseed-filter-row; }
-.filter-item { @extend .wpseed-filter-item; }
-.filter-actions { @extend .wpseed-filter-actions; }
-.data-filter-controls { @extend .wpseed-data-filter-controls; }
-#data-search { @extend .wpseed-data-search; }
-#table-data-preview { @extend .wpseed-table-data-preview; }
-.data-pagination { @extend .wpseed-data-pagination; }
-.pagination-info { @extend .wpseed-pagination-info; }
-.current-page { @extend .wpseed-current-page; }
-.total-pages { @extend .wpseed-total-pages; }
-.loading { @extend .wpseed-loading; }
