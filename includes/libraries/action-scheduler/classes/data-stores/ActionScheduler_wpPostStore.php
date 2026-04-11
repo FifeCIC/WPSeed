@@ -30,12 +30,12 @@ class ActionScheduler_wpPostStore extends ActionScheduler_Store {
 	 * Save action.
 	 *
 	 * @param ActionScheduler_Action $action Scheduled Action.
-	 * @param DateTime               $scheduled_date Scheduled Date.
+	 * @param DateTime|null          $scheduled_date Scheduled Date.
 	 *
 	 * @throws RuntimeException Throws an exception if the action could not be saved.
 	 * @return int
 	 */
-	public function save_action( ActionScheduler_Action $action, DateTime $scheduled_date = null ) {
+	public function save_action( ActionScheduler_Action $action, ?DateTime $scheduled_date = null ) {
 		try {
 			$this->validate_action( $action );
 			$post_array = $this->create_post_array( $action, $scheduled_date );
@@ -54,11 +54,11 @@ class ActionScheduler_wpPostStore extends ActionScheduler_Store {
 	 * Create post array.
 	 *
 	 * @param ActionScheduler_Action $action Scheduled Action.
-	 * @param DateTime               $scheduled_date Scheduled Date.
+	 * @param DateTime|null          $scheduled_date Scheduled Date.
 	 *
 	 * @return array Returns an array of post data.
 	 */
-	protected function create_post_array( ActionScheduler_Action $action, DateTime $scheduled_date = null ) {
+	protected function create_post_array( ActionScheduler_Action $action, ?DateTime $scheduled_date = null ) {
 		$post = array(
 			'post_type'     => self::POST_TYPE,
 			'post_title'    => $action->get_hook(),
@@ -446,7 +446,7 @@ class ActionScheduler_wpPostStore extends ActionScheduler_Store {
 			}
 		}
 
-		return $wpdb->prepare( $sql, $sql_params );
+		return $wpdb->prepare( $sql, $sql_params ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 	}
 
 	/**
@@ -471,7 +471,7 @@ class ActionScheduler_wpPostStore extends ActionScheduler_Store {
 
 		$sql = $this->get_query_actions_sql( $query, $query_type );
 
-		return ( 'count' === $query_type ) ? $wpdb->get_var( $sql ) : $wpdb->get_col( $sql );
+		return ( 'count' === $query_type ) ? $wpdb->get_var( $sql ) : $wpdb->get_col( $sql ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.NotPrepared
 	}
 
 	/**
@@ -573,16 +573,16 @@ class ActionScheduler_wpPostStore extends ActionScheduler_Store {
 	/**
 	 * Stake claim.
 	 *
-	 * @param int      $max_actions Maximum number of actions.
-	 * @param DateTime $before_date Jobs must be schedule before this date. Defaults to now.
-	 * @param array    $hooks       Claim only actions with a hook or hooks.
-	 * @param string   $group       Claim only actions in the given group.
+	 * @param int           $max_actions Maximum number of actions.
+	 * @param DateTime|null $before_date Jobs must be schedule before this date. Defaults to now.
+	 * @param array         $hooks       Claim only actions with a hook or hooks.
+	 * @param string        $group       Claim only actions in the given group.
 	 *
 	 * @return ActionScheduler_ActionClaim
 	 * @throws RuntimeException When there is an error staking a claim.
 	 * @throws InvalidArgumentException When the given group is not valid.
 	 */
-	public function stake_claim( $max_actions = 10, DateTime $before_date = null, $hooks = array(), $group = '' ) {
+	public function stake_claim( $max_actions = 10, ?DateTime $before_date = null, $hooks = array(), $group = '' ) {
 		$this->claim_before_date = $before_date;
 		$claim_id                = $this->generate_claim_id();
 		$this->claim_actions( $claim_id, $max_actions, $before_date, $hooks, $group );
@@ -599,6 +599,8 @@ class ActionScheduler_wpPostStore extends ActionScheduler_Store {
 	 */
 	public function get_claim_count() {
 		global $wpdb;
+
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching
 		return $wpdb->get_var(
 			$wpdb->prepare(
 				"SELECT COUNT(DISTINCT post_password) FROM {$wpdb->posts} WHERE post_password != '' AND post_type = %s AND post_status IN ('in-progress','pending')",
@@ -620,16 +622,16 @@ class ActionScheduler_wpPostStore extends ActionScheduler_Store {
 	/**
 	 * Claim actions.
 	 *
-	 * @param string   $claim_id    Claim ID.
-	 * @param int      $limit       Limit.
-	 * @param DateTime $before_date Should use UTC timezone.
-	 * @param array    $hooks       Claim only actions with a hook or hooks.
-	 * @param string   $group       Claim only actions in the given group.
+	 * @param string        $claim_id    Claim ID.
+	 * @param int           $limit       Limit.
+	 * @param DateTime|null $before_date Should use UTC timezone.
+	 * @param array         $hooks       Claim only actions with a hook or hooks.
+	 * @param string        $group       Claim only actions in the given group.
 	 *
 	 * @return int The number of actions that were claimed.
 	 * @throws RuntimeException  When there is a database error.
 	 */
-	protected function claim_actions( $claim_id, $limit, DateTime $before_date = null, $hooks = array(), $group = '' ) {
+	protected function claim_actions( $claim_id, $limit, ?DateTime $before_date = null, $hooks = array(), $group = '' ) {
 		// Set up initial variables.
 		$date      = null === $before_date ? as_get_datetime_object() : clone $before_date;
 		$limit_ids = ! empty( $group );
@@ -688,7 +690,7 @@ class ActionScheduler_wpPostStore extends ActionScheduler_Store {
 		$params[] = $limit;
 
 		// Run the query and gather results.
-		$rows_affected = $wpdb->query( $wpdb->prepare( "{$update} {$where} {$order}", $params ) );
+		$rows_affected = $wpdb->query( $wpdb->prepare( "{$update} {$where} {$order}", $params ) ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQLPlaceholders.UnfinishedPrepare
 
 		if ( false === $rows_affected ) {
 			throw new RuntimeException( __( 'Unable to claim actions. Database error.', 'action-scheduler' ) );
@@ -723,7 +725,7 @@ class ActionScheduler_wpPostStore extends ActionScheduler_Store {
 			'post_status'      => ActionScheduler_Store::STATUS_PENDING,
 			'has_password'     => false,
 			'posts_per_page'   => $limit * 3,
-			'suppress_filters' => true,
+			'suppress_filters' => true, // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.SuppressFilters_suppress_filters
 			'no_found_rows'    => true,
 			'orderby'          => array(
 				'menu_order' => 'ASC',
@@ -735,7 +737,7 @@ class ActionScheduler_wpPostStore extends ActionScheduler_Store {
 				'before'    => $date->format( 'Y-m-d H:i' ),
 				'inclusive' => true,
 			),
-			'tax_query'        => array(
+			'tax_query'        => array( // phpcs:ignore WordPress.DB.SlowDBQuery
 				array(
 					'taxonomy'         => self::GROUP_TAXONOMY,
 					'field'            => 'slug',
@@ -765,6 +767,8 @@ class ActionScheduler_wpPostStore extends ActionScheduler_Store {
 		$action_ids  = array();
 		$before_date = isset( $this->claim_before_date ) ? $this->claim_before_date : as_get_datetime_object();
 		$cut_off     = $before_date->format( 'Y-m-d H:i:s' );
+
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		$results = $wpdb->get_results(
 			$wpdb->prepare(
 				"SELECT ID, post_date_gmt FROM {$wpdb->posts} WHERE post_type = %s AND post_password = %s",
@@ -787,27 +791,46 @@ class ActionScheduler_wpPostStore extends ActionScheduler_Store {
 	}
 
 	/**
-	 * Release claim.
+	 * Release pending actions from a claim.
 	 *
 	 * @param ActionScheduler_ActionClaim $claim Claim object to release.
 	 * @return void
 	 * @throws RuntimeException When the claim is not unlocked.
 	 */
 	public function release_claim( ActionScheduler_ActionClaim $claim ) {
-		$action_ids = $this->find_actions_by_claim_id( $claim->get_id() );
-		if ( empty( $action_ids ) ) {
-			return; // nothing to do.
-		}
-		$action_id_string = implode( ',', array_map( 'intval', $action_ids ) );
 		/**
 		 * Global wpdb object.
 		 *
 		 * @var wpdb $wpdb
 		 */
 		global $wpdb;
+
+		$claim_id = $claim->get_id();
+		if ( trim( $claim_id ) === '' ) {
+			// Verify that the claim_id is valid before attempting to release it.
+			return;
+		}
+
+		// Only attempt to release pending actions to be claimed again. Running and complete actions are no longer relevant outside of admin/analytics.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		$action_ids = $wpdb->get_col(
+			$wpdb->prepare(
+				"SELECT ID, post_date_gmt FROM {$wpdb->posts} WHERE post_type = %s AND post_password = %s AND post_status = %s",
+				self::POST_TYPE,
+				$claim_id,
+				self::STATUS_PENDING
+			)
+		);
+
+		if ( empty( $action_ids ) ) {
+			return; // nothing to do.
+		}
+		$action_id_string = implode( ',', array_map( 'intval', $action_ids ) );
+
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		$result = $wpdb->query(
 			$wpdb->prepare(
-				"UPDATE {$wpdb->posts} SET post_password = '' WHERE ID IN ($action_id_string) AND post_password = %s",
+				"UPDATE {$wpdb->posts} SET post_password = '' WHERE ID IN ($action_id_string) AND post_password = %s", //phpcs:ignore
 				array(
 					$claim->get_id(),
 				)
@@ -832,6 +855,8 @@ class ActionScheduler_wpPostStore extends ActionScheduler_Store {
 		 * @var wpdb $wpdb
 		 */
 		global $wpdb;
+
+		//phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		$result = $wpdb->query(
 			$wpdb->prepare(
 				"UPDATE {$wpdb->posts} SET post_password = '' WHERE ID = %d AND post_type = %s",
@@ -860,6 +885,8 @@ class ActionScheduler_wpPostStore extends ActionScheduler_Store {
 		 * @var wpdb $wpdb
 		 */
 		global $wpdb;
+
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		$result = $wpdb->query(
 			$wpdb->prepare( "UPDATE {$wpdb->posts} SET post_status = %s WHERE ID = %d AND post_type = %s", self::STATUS_FAILED, $action_id, self::POST_TYPE )
 		);
@@ -912,9 +939,11 @@ class ActionScheduler_wpPostStore extends ActionScheduler_Store {
 		 * @var wpdb $wpdb
 		 */
 		global $wpdb;
+
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		return $wpdb->get_var(
 			$wpdb->prepare(
-				"SELECT {$column_name} FROM {$wpdb->posts} WHERE ID=%d AND post_type=%s",
+				"SELECT {$column_name} FROM {$wpdb->posts} WHERE ID=%d AND post_type=%s", // phpcs:ignore
 				$action_id,
 				self::POST_TYPE
 			)
@@ -935,6 +964,8 @@ class ActionScheduler_wpPostStore extends ActionScheduler_Store {
 		 * @var wpdb $wpdb
 		 */
 		global $wpdb;
+
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		$status_updated = $wpdb->query(
 			$wpdb->prepare(
 				"UPDATE {$wpdb->posts} SET menu_order = menu_order+1, post_status=%s, post_modified_gmt = %s, post_modified = %s WHERE ID = %d AND post_type = %s",
@@ -1023,7 +1054,7 @@ class ActionScheduler_wpPostStore extends ActionScheduler_Store {
 		$dependencies_met = get_transient( self::DEPENDENCIES_MET );
 		if ( empty( $dependencies_met ) ) {
 			$maximum_args_length = apply_filters( 'action_scheduler_maximum_args_length', 191 );
-			$found_action        = $wpdb->get_var(
+			$found_action        = $wpdb->get_var( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 				$wpdb->prepare(
 					"SELECT ID FROM {$wpdb->posts} WHERE post_type = %s AND CHAR_LENGTH(post_content) > %d LIMIT 1",
 					$maximum_args_length,

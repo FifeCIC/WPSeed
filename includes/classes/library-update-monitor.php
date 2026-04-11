@@ -33,20 +33,20 @@ class WPSeed_Library_Update_Monitor {
         $this->libraries = array(
             'action-scheduler' => array(
                 'name' => 'Action Scheduler',
-                'version' => '3.8.1',
+                'version' => '3.9.3',
                 'license' => 'GPL-3.0',
                 'github_repo' => 'woocommerce/action-scheduler',
                 'local_path' => 'includes/libraries/action-scheduler/',
-                'bundled_date' => '2024-06-18', // v3.8.1 release date
+                'bundled_date' => '2025-07-15',
                 'description' => 'Background task processing library by WooCommerce',
             ),
             'carbon-fields' => array(
                 'name' => 'Carbon Fields',
-                'version' => '3.6.3',
+                'version' => '3.6.9',
                 'license' => 'GPL-2.0',
                 'github_repo' => 'htmlburger/carbon-fields',
                 'local_path' => 'includes/libraries/carbon-fields/',
-                'bundled_date' => '2024-01-24', // v3.6.3 release date
+                'bundled_date' => '2025-06-11',
                 'description' => 'Modern WordPress custom fields library',
             ),
         );
@@ -130,7 +130,16 @@ class WPSeed_Library_Update_Monitor {
     }
     
     /**
-     * Check if library is outdated (6+ months)
+     * Check if library is outdated (12+ months).
+     *
+     * Uses a 12-month threshold because bundled libraries in a boilerplate
+     * are updated less frequently than application dependencies.
+     *
+     * @since  1.0.0
+     * @since  3.1.0 Changed threshold from 6 months to 12 months.
+     *
+     * @param  string $slug Library slug.
+     * @return bool
      */
     public function is_outdated( $slug ) {
         $library = $this->get_library( $slug );
@@ -139,9 +148,9 @@ class WPSeed_Library_Update_Monitor {
         }
         
         $bundled_time = strtotime( $library['bundled_date'] );
-        $six_months_ago = strtotime( '-6 months' );
+        $threshold = strtotime( '-12 months' );
         
-        return $bundled_time < $six_months_ago;
+        return $bundled_time < $threshold;
     }
     
     /**
@@ -168,7 +177,7 @@ class WPSeed_Library_Update_Monitor {
             add_action( 'admin_notices', function() use ( $outdated ) {
                 $url = admin_url( 'admin.php?page=wpseed_development&tab=libraries' );
                 echo '<div class="notice notice-warning is-dismissible" data-notice="wpseed-library-outdated">';
-                echo '<p><strong>WPSeed:</strong> ' . esc_html( count( $outdated ) ) . ' bundled ' . esc_html( _n( 'library is', 'libraries are', count( $outdated ), 'wpseed' ) ) . ' outdated (6+ months): ' . esc_html( implode( ', ', $outdated ) ) . '</p>';
+                echo '<p><strong>WPSeed:</strong> ' . esc_html( count( $outdated ) ) . ' bundled ' . esc_html( _n( 'library is', 'libraries are', count( $outdated ), 'wpseed' ) ) . ' outdated (12+ months): ' . esc_html( implode( ', ', $outdated ) ) . '</p>';
                 echo '<p><a href="' . esc_url( $url ) . '" class="button button-primary">Check for Updates</a> <button type="button" class="button wpseed-dismiss-library-notice">Remind Me Later</button></p>';
                 echo '</div>';
             } );

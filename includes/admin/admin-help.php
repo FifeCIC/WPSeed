@@ -1,369 +1,251 @@
 <?php
 /**
- * Add the default content to the help tab.
+ * Admin help tabs — contextual help for WPSeed admin screens.
  *
- * @author      Ryan Bayne
- * @category    Admin
- * @package     WPSeed/Admin
- * @version     2.0.0
+ * ROLE: admin-ui
+ *
+ * Adds help tabs to the WordPress Help panel (top-right "Help" button)
+ * on all WPSeed admin screens. Includes FAQ with accordion, instructions,
+ * support links, and about information.
+ *
+ * @package  WPSeed
+ * @category Admin
+ * @since    1.0.0
+ * @version  3.1.0
  */
-          
+
 if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
+	exit;
 }
 
 if ( ! class_exists( 'WPSeed_Admin_Help', false ) ) :
 
 /**
- * WPSeed_Admin_Help Class.
+ * Registers help tabs on WPSeed admin screens.
  *
  * @since   1.0.0
- * @version 2.0.0
+ * @version 3.1.0
  */
 class WPSeed_Admin_Help {
 
-    /**
-     * Hook in tabs.
-     */
-    public function __construct() {
-        add_action( 'current_screen', array( $this, 'add_tabs' ), 50 );
-    }
+	/**
+	 * Hook in tabs.
+	 *
+	 * @since 1.0.0
+	 */
+	public function __construct() {
+		add_action( 'current_screen', array( $this, 'add_tabs' ), 50 );
+	}
 
-    /**
-     * Add contextual help tabs to WPSeed admin screens.
-     *
-     * Registers all help tabs and the sidebar for any screen whose ID is
-     * included in wpseed_get_screen_ids(). The $_GET['page'] and $_GET['tab']
-     * reads that previously appeared here were unused after assignment and have
-     * been removed — eliminating the NonceVerification.Recommended warning
-     * without adding a nonce to a purely display-only help context.
-     *
-     * @since   1.0.0
-     * @version 2.0.0
-     * @return void
-     */
-    public function add_tabs() {
-        $screen = get_current_screen();
+	/**
+	 * Add contextual help tabs to WPSeed admin screens.
+	 *
+	 * @since   1.0.0
+	 * @version 3.1.0
+	 *
+	 * @return void
+	 */
+	public function add_tabs() {
+		$screen = get_current_screen();
 
-        if ( ! $screen || ! in_array( $screen->id, wpseed_get_screen_ids() ) ) {
-            return;
-        }
+		if ( ! $screen || ! in_array( $screen->id, wpseed_get_screen_ids(), true ) ) {
+			return;
+		}
 
-        $screen->add_help_tab( array(
-            'id'        => 'wpseed_instructions_tab',
-            'title'     => __( 'Instructions', 'wpseed' ),
-            'content'   => '',
-            'callback'  => array( $this, 'instructions' ),
-        ) );
+		$screen->add_help_tab( array(
+			'id'       => 'wpseed_instructions_tab',
+			'title'    => __( 'Getting Started', 'wpseed' ),
+			'content'  => '',
+			'callback' => array( $this, 'instructions' ),
+		) );
 
-        $screen->add_help_tab( array(
-            'id'        => 'wpseed_support_tab',
-            'title'     => __( 'Help &amp; Support', 'wpseed' ),
-            'content'   => '<h2>' . __( 'Help &amp; Support', 'wpseed' ) . '</h2>' .
-            '<p>' . __( 'Support resources for this boilerplate are being updated. In the meantime, refer to the inline documentation throughout the codebase, the docs directory, and the README for guidance on getting started and extending the plugin.', 'wpseed' ) . '</p>',
-        ) );
+		$screen->add_help_tab( array(
+			'id'       => 'wpseed_faq_tab',
+			'title'    => __( 'FAQ', 'wpseed' ),
+			'content'  => '',
+			'callback' => array( $this, 'faq' ),
+		) );
 
-        if( defined( 'WPSEED_GITHUB' ) ) { 
-            $screen->add_help_tab( array(
-                'id'        => 'wpseed_bugs_tab',
-                'title'     => __( 'Found a bug?', 'wpseed' ),
-                'content'   =>
-                    '<h2>' . __( 'Please Report Bugs!', 'wpseed' ) . '</h2>' .
-                    '<p>You could save a lot of people a lot of time by reporting issues. Tell the developers and community what has gone wrong by creating a ticket. Please explain what you were doing, what you expected from your actions and what actually happened. Screenshots and short videos are often a big help as the evidence saves us time, we will give you cookies in return.</p>' .  
-                    '<p><a href="' . WPSEED_GITHUB . '/issues?state=open' . '" class="button button-primary">' . __( 'Report a bug', 'wpseed' ) . '</a></p>',
-            ) );
-        }
-        
-        /**
-        * This is the right side sidebar, usually displaying a list of links. 
-        * 
-        * @var {WP_Screen|WP_Screen}
-        */
-        $screen->set_help_sidebar(
-            '<p><strong>' . __( 'For more information:', 'wpseed' ) . '</strong></p>' .
-            '<p><a href="' . WPSEED_GITHUB . '/wiki" target="_blank">' . __( 'About WPSeed', 'wpseed' ) . '</a></p>' .
-            '<p><a href="' . WPSEED_GITHUB . '" target="_blank">' . __( 'GitHub project', 'wpseed' ) . '</a></p>' .
-            '<p><a href="' . WPSEED_GITHUB . '/blob/master/CHANGELOG.txt" target="_blank">' . __( 'Change Log', 'wpseed' ) . '</a></p>' .
-            '<p><a href="https://pluginseed.wordpress.com" target="_blank">' . __( 'Blog', 'wpseed' ) . '</a></p>'
-        );
-        
-        $screen->add_help_tab( array(
-            'id'        => 'wpseed_wizard_tab',
-            'title'     => __( 'Setup wizard', 'wpseed' ),
-            'content'   =>
-                '<h2>' . __( 'Setup wizard', 'wpseed' ) . '</h2>' .
-                '<p>' . __( 'If you need to access the setup wizard again, please click on the button below.', 'wpseed' ) . '</p>' .
-                '<p><a href="' . admin_url( 'index.php?page=wpseed-setup' ) . '" class="button button-primary">' . __( 'Setup wizard', 'wpseed' ) . '</a></p>',
-        ) );   
-             
-        $screen->add_help_tab( array(
-            'id'        => 'wpseed_tutorial_tab',
-            'title'     => __( 'Tutorial', 'wpseed' ),
-            'content'   =>
-                '<h2>' . __( 'Pointers Tutorial', 'wpseed' ) . '</h2>' .
-                '<p>' . __( 'The plugin will explain some features using WordPress pointers.', 'wpseed' ) . '</p>' .
-                '<p><a href="' . admin_url( 'admin.php?page=wpseed&amp;wpseedtutorial=normal' ) . '" class="button button-primary">' . __( 'Star Tutorial', 'wpseed' ) . '</a></p>',
-        ) );
-  
-        $screen->add_help_tab( array(
-            'id'        => 'wpseed_contribute_tab',
-            'title'     => __( 'Contribute', 'wpseed' ),
-            'content'   => '<h2>' . __( 'Everyone Can Contribute', 'wpseed' ) . '</h2>' .
-            '<p>' . __( 'You can contribute in many ways and by doing so you will help the project thrive.', 'wpseed' ) . '</p>' .
-            '<p><a href="' . WPSEED_DONATE . '" class="button button-primary">' . __( 'Donate', 'wpseed' ) . '</a> <a href="' . WPSEED_GITHUB . '/wiki" class="button button-primary">' . __( 'Update Wiki', 'wpseed' ) . '</a> <a href="' . WPSEED_GITHUB . '/issues" class="button button-primary">' . __( 'Fix Bugs', 'wpseed' ) . '</a></p>',
-        ) );
+		$screen->add_help_tab( array(
+			'id'      => 'wpseed_support_tab',
+			'title'   => __( 'Help & Support', 'wpseed' ),
+			'content' =>
+				'<h2>' . esc_html__( 'Help & Support', 'wpseed' ) . '</h2>' .
+				'<p>' . esc_html__( 'WPSeed is a boilerplate for building WordPress plugins. For guidance on extending it, refer to the docs/ directory in the plugin folder.', 'wpseed' ) . '</p>' .
+				'<p><strong>' . esc_html__( 'Key documentation files:', 'wpseed' ) . '</strong></p>' .
+				'<ul>' .
+				'<li><code>docs/CLONING-GUIDE.md</code> — ' . esc_html__( 'How to create a new plugin from WPSeed', 'wpseed' ) . '</li>' .
+				'<li><code>docs/CONNECTORS.md</code> — ' . esc_html__( 'Building API connectors', 'wpseed' ) . '</li>' .
+				'<li><code>docs/CAPABILITIES.md</code> — ' . esc_html__( 'Custom capability management', 'wpseed' ) . '</li>' .
+				'<li><code>docs/REST-BRIDGE.md</code> — ' . esc_html__( 'REST API endpoint registration', 'wpseed' ) . '</li>' .
+				'<li><code>docs/ASSET-GUIDE.md</code> — ' . esc_html__( 'CSS/JS system and design tokens', 'wpseed' ) . '</li>' .
+				'<li><code>docs/NAMING-CONVENTIONS.md</code> — ' . esc_html__( 'Prefix and naming patterns', 'wpseed' ) . '</li>' .
+				'</ul>' .
+				( defined( 'WPSEED_GITHUB' ) && WPSEED_GITHUB
+					? '<p><a href="' . esc_url( WPSEED_GITHUB . '/issues' ) . '" class="button" target="_blank">' . esc_html__( 'Report an Issue', 'wpseed' ) . '</a></p>'
+					: ''
+				),
+		) );
 
-        $screen->add_help_tab( array(
-            'id'        => 'wpseed_newsletter_tab',
-            'title'     => __( 'Newsletter', 'wpseed' ),
-            'content'   => '<h2>' . __( 'Annual Newsletter', 'wpseed' ) . '</h2>' .
-            '<p>' . __( 'Mailchip is used to manage the projects newsletter subscribers list.', 'wpseed' ) . '</p>' .
-            '<p>' . __( 'Visit the MailChimp website to subscribe to the WPSeed newsletter.', 'wpseed' ) . '</p>' .
-            '<p><a href="http://eepurl.com/2W_2n" class="button button-primary" target="_blank">' . __( 'Subscribe to Newsletter', 'wpseed' ) . '</a></p>',
-        ) );
-        
-        $screen->add_help_tab( array(
-            'id'        => 'wpseed_credits_tab',
-            'title'     => __( 'Credits', 'wpseed' ),
-            'content'   => '<h2>' . __( 'Credits', 'wpseed' ) . '</h2>' .
-            '<p>Please do not remove credits from the plugin. You may edit them or give credit somewhere else in your project.</p>' . 
-            '<h4>' . __( 'Automattic - they created the best way to create plugins so we can all get more from WP.', 'wpseed' ) . '</h4>' .
-            '<h4>' . __( 'Brian at WPMUDEV - our discussion led to this project and entirely new approach in my development.', 'wpseed' ) . '</h4>' . 
-            '<h4>' . __( 'Ignacio Cruz at WPMUDEV - has provided a great approach to handling shortcodes.', 'wpseed' ) . '</h4>' .
-            '<h4>' . __( 'Ashley Rich (A5shleyRich) - author of a crucial piece of the puzzle, related to asynchronous background tasks.', 'wpseed' ) . '</h4>' .
-            '<h4>' . __( 'Igor Vaynberg - thank you for an elegant solution to searching within a menu.', 'wpseed' ) . '</h4>'
-        ) );
+		$screen->add_help_tab( array(
+			'id'      => 'wpseed_about_tab',
+			'title'   => __( 'About', 'wpseed' ),
+			'content' =>
+				'<h2>' . esc_html__( 'About WPSeed', 'wpseed' ) . '</h2>' .
+				'<p>' . esc_html__( 'WPSeed is a WordPress plugin boilerplate maintained by FifeCIC. It provides the foundation for the EvolveWP ecosystem — a suite of plugins for project management, client onboarding, and business operations.', 'wpseed' ) . '</p>' .
+				'<p>' . sprintf(
+					/* translators: %s: version number */
+					esc_html__( 'Version: %s', 'wpseed' ),
+					esc_html( WPSEED_VERSION )
+				) . '</p>' .
+				'<p><a href="https://evolvewp.dev" class="button" target="_blank">' . esc_html__( 'EvolveWP Website', 'wpseed' ) . '</a> ' .
+				( defined( 'WPSEED_GITHUB' ) && WPSEED_GITHUB
+					? '<a href="' . esc_url( WPSEED_GITHUB ) . '" class="button" target="_blank">' . esc_html__( 'GitHub', 'wpseed' ) . '</a>'
+					: ''
+				) . '</p>',
+		) );
 
-        $screen->add_help_tab( array(
-            'id'        => 'wpseed_about_tab',
-            'title'     => __( 'FifeCIC', 'wpseed' ),
-            'content'   => '<!-- FifeCIC About Tab v1.0 --><h2>' . __( 'About FifeCIC', 'wpseed' ) . '</h2>' .
-            '<p>' . __( 'This plugins developer is supported by FifeCIC (Fife Community Interest Company), a non-profit organization dedicated to serving our local community through technology and innovation.', 'wpseed' ) . '</p>' .
-            '<h3>' . __( 'Our Mission', 'wpseed' ) . '</h3>' .
-            '<p>' . __( 'FifeCIC exists to empower communities through accessible digital solutions. We believe that quality software should be available to everyone, regardless of budget, and that technology can be a force for positive social change.', 'wpseed' ) . '</p>' .
-            '<h3>' . __( 'Volunteer Development', 'wpseed' ) . '</h3>' .
-            '<p>' . __( 'This plugin was lovingly crafted by Ryan Bayne, a volunteer developer committed to FifeCIC\'s vision. Every feature, every line of code, represents hours of unpaid dedication to making WordPress better for everyone.', 'wpseed' ) . '</p>' .
-            '<p>' . __( 'As a Community Interest Company, we reinvest everything back into our projects and community initiatives. We don\'t have corporate backing or venture capital—just passionate people who believe in what we\'re doing.', 'wpseed' ) . '</p>' .
-            '<h3>' . __( 'How You Can Help', 'wpseed' ) . '</h3>' .
-            '<p>💝 <strong>' . __( 'Donate:', 'wpseed' ) . '</strong> ' . __( 'Your financial support helps us dedicate more time to development, hosting, and community outreach. Every contribution, no matter how small, makes a real difference.', 'wpseed' ) . '</p>' .
-            '<p>🤝 <strong>' . __( 'Get Involved:', 'wpseed' ) . '</strong> ' . __( 'Whether you\'re a developer, designer, tester, or just enthusiastic about our mission, we\'d love to have you join us. Check out our GitHub repository or contact us directly.', 'wpseed' ) . '</p>' .
-            '<p>⭐ <strong>' . __( 'Spread the Word:', 'wpseed' ) . '</strong> ' . __( 'Leave a review, share with colleagues, or simply tell others about FifeCIC. Community support is our lifeblood.', 'wpseed' ) . '</p>' .
-            '<p>🐛 <strong>' . __( 'Report Issues:', 'wpseed' ) . '</strong> ' . __( 'Help us improve by reporting bugs and suggesting features. Your feedback shapes our roadmap.', 'wpseed' ) . '</p>' .
-            '<h3>' . __( 'Connect With Us', 'wpseed' ) . '</h3>' .
-            '<p><a href="#" class="button">' . __( 'Website', 'wpseed' ) . '</a> ' .
-            '<a href="#" class="button">' . __( 'GitHub', 'wpseed' ) . '</a> ' .
-            '<a href="#" class="button">' . __( 'Email', 'wpseed' ) . '</a> ' .
-            '<a href="#" class="button button-primary">' . __( 'Donate', 'wpseed' ) . '</a></p>'
-        ) );
-                    
-        $screen->add_help_tab( array(
-            'id'        => 'wpseed_faq_tab',
-            'title'     => __( 'FAQ', 'wpseed' ),
-            'content'   => '',
-            'callback'  => array( $this, 'faq' ),
-        ) );
-                        
-    }
-    
-    /**
-     * Instructions tab content - step-by-step guide for using verification tabs
-     */
-    public function instructions() {
-        ?>
-        <div class="wpseed-instructions">
-            <h2><?php esc_html_e( 'Step-by-Step Verification Process', 'wpseed' ); ?></h2>
-            <p><?php esc_html_e( 'Follow these tabs in order to achieve optimal verification results:', 'wpseed' ); ?></p>
-            
-            <div class="instruction-steps">
-                <div class="step-card">
-                    <h3><span class="step-number">1</span> <?php esc_html_e( 'Configure', 'wpseed' ); ?></h3>
-                    <p><?php esc_html_e( 'Set up your verification preferences, exclusion rules, and scanning options. This determines what files will be checked and which rules to apply.', 'wpseed' ); ?></p>
-                    <p><strong><?php esc_html_e( 'Key Actions:', 'wpseed' ); ?></strong> <?php esc_html_e( 'Select verification rules, configure exclusions, set scanning depth.', 'wpseed' ); ?></p>
-                </div>
-                
-                <div class="step-card">
-                    <h3><span class="step-number">2</span> <?php esc_html_e( 'Hash Generation', 'wpseed' ); ?></h3>
-                    <p><?php esc_html_e( 'Generate file hashes for incremental scanning. This creates a baseline to detect which files have changed since the last scan.', 'wpseed' ); ?></p>
-                    <p><strong><?php esc_html_e( 'Key Actions:', 'wpseed' ); ?></strong> <?php esc_html_e( 'Generate initial hashes, validate hash creation, review file coverage.', 'wpseed' ); ?></p>
-                </div>
-                
-                <div class="step-card">
-                    <h3><span class="step-number">3</span> <?php esc_html_e( 'Exclusions', 'wpseed' ); ?></h3>
-                    <p><?php esc_html_e( 'Manage files and directories to exclude from verification. This step processes your exclusion rules and creates the final scan list.', 'wpseed' ); ?></p>
-                    <p><strong><?php esc_html_e( 'Key Actions:', 'wpseed' ); ?></strong> <?php esc_html_e( 'Review excluded files, add new exclusions, validate exclusion patterns.', 'wpseed' ); ?></p>
-                </div>
-                
-                <div class="step-card">
-                    <h3><span class="step-number">4</span> <?php esc_html_e( 'Readiness Check', 'wpseed' ); ?></h3>
-                    <p><?php esc_html_e( 'Verify your configuration is ready for verification. This generates a readiness score based on your current settings and file status.', 'wpseed' ); ?></p>
-                    <p><strong><?php esc_html_e( 'Key Actions:', 'wpseed' ); ?></strong> <?php esc_html_e( 'Review readiness score, address any issues, confirm scan parameters.', 'wpseed' ); ?></p>
-                </div>
-                
-                <div class="step-card">
-                    <h3><span class="step-number">5</span> <?php esc_html_e( 'Advanced Verification', 'wpseed' ); ?></h3>
-                    <p><?php esc_html_e( 'Run the comprehensive verification scan. This performs the actual code analysis and generates your final results.', 'wpseed' ); ?></p>
-                    <p><strong><?php esc_html_e( 'Key Actions:', 'wpseed' ); ?></strong> <?php esc_html_e( 'Start verification, monitor progress, review results and recommendations.', 'wpseed' ); ?></p>
-                </div>
-            </div>
-            
-            <div class="instruction-tips">
-                <h3><?php esc_html_e( 'Important Tips', 'wpseed' ); ?></h3>
-                <ul>
-                    <li><?php esc_html_e( 'Complete each step before moving to the next for best results', 'wpseed' ); ?></li>
-                    <li><?php esc_html_e( 'Use the validation features in each step to ensure proper configuration', 'wpseed' ); ?></li>
-                    <li><?php esc_html_e( 'The readiness score helps identify potential issues before running the full scan', 'wpseed' ); ?></li>
-                    <li><?php esc_html_e( 'Review exclusions carefully to avoid scanning unnecessary files', 'wpseed' ); ?></li>
-                </ul>
-            </div>
-        </div>
-        
-        <style>
-        .wpseed-instructions {
-            max-width: 800px;
-        }
-        .instruction-steps {
-            margin: 20px 0;
-        }
-        .step-card {
-            background: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-radius: 5px;
-            padding: 15px;
-            margin: 10px 0;
-            border-left: 4px solid #0073aa;
-        }
-        .step-card h3 {
-            margin-top: 0;
-            color: #0073aa;
-        }
-        .step-number {
-            background: #0073aa;
-            color: white;
-            border-radius: 50%;
-            padding: 5px 10px;
-            margin-right: 10px;
-            font-weight: bold;
-        }
-        .instruction-tips {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
-            border-radius: 5px;
-            padding: 15px;
-            margin-top: 20px;
-        }
-        .instruction-tips h3 {
-            margin-top: 0;
-            color: #856404;
-        }
-        .instruction-tips ul {
-            margin-bottom: 0;
-        }
-        </style>
-        <?php
-    }
-    
-    public function faq() {
-        $questions = array(
-            0 => __( '-- Select a question --', 'wpseed' ),
-            1 => __( "Do I need to give credit to you (Ryan Bayne) if I create a plugin using the seed?", 'wpseed' ),
-            2 => __( "Can I hire you (Ryan Bayne) to create a plugin for me using the seed?", 'wpseed' ),
-            3 => __( "Is there support for anyone using this boilerplate to create a plugin?", 'wpseed' ),
-        );  
-        
-        wp_add_inline_style( 'wp-admin', '.faq-answers li { background:white; padding:10px 20px; border:1px solid #cacaca; }' );
-        
-        ?>
+		$screen->set_help_sidebar(
+			'<p><strong>' . esc_html__( 'Quick Links:', 'wpseed' ) . '</strong></p>' .
+			'<p><a href="https://evolvewp.dev" target="_blank">' . esc_html__( 'EvolveWP', 'wpseed' ) . '</a></p>' .
+			( defined( 'WPSEED_GITHUB' ) && WPSEED_GITHUB
+				? '<p><a href="' . esc_url( WPSEED_GITHUB ) . '" target="_blank">' . esc_html__( 'GitHub', 'wpseed' ) . '</a></p>'
+				: ''
+			) .
+			'<p><a href="https://fifecic.scot" target="_blank">' . esc_html__( 'FifeCIC', 'wpseed' ) . '</a></p>'
+		);
+	}
 
-        <p>
-            <ul id="faq-index">
-                <?php foreach ( $questions as $question_index => $question ): ?>
-                    <li data-answer="<?php echo esc_attr($question_index); ?>"><a href="#q<?php echo esc_attr($question_index); ?>"><?php echo esc_html($question); ?></a></li>
-                <?php endforeach; ?>
-            </ul>
-        </p>
-        
-        <ul class="faq-answers">
-            <li class="faq-answer" id='q1'>
-                <?php esc_html_e('There are multiple developers mentioned in the documentation of this plugin. You must continue to give credit to them all. Removing credits and any reference to repositories will make it difficult for developers to maintain the plugin you create. If you want my support you must also mentioned myself and the WordPress Plugin Seed on your plugins main page.', 'wpseed');?>
-            </li>
-            <li class="faq-answer" id='q2'>
-                <p> <?php esc_html_e('Yes, you can hire me (the plugin author) to create a plugin for you and prices vary but start very low. Technically it takes a only a few minutes to create a new plugin using my boilerplate. You can pay me a small fee to start your plugin and then make separate agreements for doing more work to it.', 'wpseed');?> </p>
-            </li>
+	/**
+	 * Getting Started tab content.
+	 *
+	 * @since  3.1.0
+	 *
+	 * @return void
+	 */
+	public function instructions() {
+		?>
+		<h2><?php esc_html_e( 'Getting Started with WPSeed', 'wpseed' ); ?></h2>
+		<p><?php esc_html_e( 'WPSeed is a boilerplate — a starting point for building WordPress plugins. It is not a finished product. Here is how to use it:', 'wpseed' ); ?></p>
 
-            <li class="faq-answer" id='q3'>
-                <p> <?php esc_html_e('There is always some level of free support but I will expect to see some credit giving to myself and the project. Support is only offered when getting started or your plugin is already available on the WordPress.org repository. If you require support for a premium/commercial plugin project then you will have to pay a small consultation fee.', 'wpseed');?> </p>
-            </li>
-     
-        </ul>
-             
-        <?php
-        $faq_script = "
-            jQuery( document).ready( function( $ ) {
-                var selectedQuestion = '';
+		<div style="margin: 15px 0;">
+			<div style="background: #f8f9fa; border-left: 4px solid #2271b1; padding: 12px 15px; margin: 8px 0; border-radius: 0 4px 4px 0;">
+				<strong style="color: #2271b1;">1. <?php esc_html_e( 'Explore the Development Page', 'wpseed' ); ?></strong>
+				<p style="margin: 5px 0 0;"><?php esc_html_e( 'Navigate to the Development menu item. The tabs show the plugin architecture, roadmap, available connectors, capabilities, and UI components. This is your reference while building.', 'wpseed' ); ?></p>
+			</div>
 
-                function selectQuestion() {
-                    var q = $( '#' + $(this).val() );
-                    if ( selectedQuestion.length ) {
-                        selectedQuestion.hide();
-                    }
-                    q.show();
-                    selectedQuestion = q;
-                }
+			<div style="background: #f8f9fa; border-left: 4px solid #2271b1; padding: 12px 15px; margin: 8px 0; border-radius: 0 4px 4px 0;">
+				<strong style="color: #2271b1;">2. <?php esc_html_e( 'Clone to Create Your Plugin', 'wpseed' ); ?></strong>
+				<p style="margin: 5px 0 0;"><?php esc_html_e( 'Follow docs/CLONING-GUIDE.md to copy WPSeed into a new plugin directory and replace all prefixes with your own. This gives you a fully structured plugin in minutes.', 'wpseed' ); ?></p>
+			</div>
 
-                var faqAnswers = $('.faq-answer');
-                var faqIndex = $('#faq-index');
-                faqAnswers.hide();
-                faqIndex.hide();
+			<div style="background: #f8f9fa; border-left: 4px solid #2271b1; padding: 12px 15px; margin: 8px 0; border-radius: 0 4px 4px 0;">
+				<strong style="color: #2271b1;">3. <?php esc_html_e( 'Build Your Features', 'wpseed' ); ?></strong>
+				<p style="margin: 5px 0 0;"><?php esc_html_e( 'Your cloned plugin inherits the connector system, capability manager, REST bridge, ecosystem registry, admin tabs, and the full CSS component library. Build on top of these foundations.', 'wpseed' ); ?></p>
+			</div>
 
-                var indexSelector = $('<select/>')
-                    .attr( 'id', 'question-selector' )
-                    .addClass( 'widefat' );
-                var questions = faqIndex.find( 'li' );
-                var advancedGroup = false;
-                questions.each( function () {
-                    var self = $(this);
-                    var answer = self.data('answer');
-                    var text = self.text();
-                    var option;
+			<div style="background: #f8f9fa; border-left: 4px solid #2271b1; padding: 12px 15px; margin: 8px 0; border-radius: 0 4px 4px 0;">
+				<strong style="color: #2271b1;">4. <?php esc_html_e( 'Read the Documentation', 'wpseed' ); ?></strong>
+				<p style="margin: 5px 0 0;"><?php esc_html_e( 'The docs/ directory contains guides for every major system. Each PHP file has a ROLE header explaining what it does, what it depends on, and what consumes it.', 'wpseed' ); ?></p>
+			</div>
+		</div>
+		<?php
+	}
 
-                    if ( answer === 39 ) {
-                        advancedGroup = $( '<optgroup />' )
-                            .attr( 'label', '" . esc_js( __( 'Advanced: This part of FAQ requires some knowledge about HTML, PHP and/or WordPress coding.', 'wpseed' ) ) . "' );
+	/**
+	 * FAQ tab content with accordion.
+	 *
+	 * @since  1.0.0
+	 * @version 3.1.0
+	 *
+	 * @return void
+	 */
+	public function faq() {
+		$faqs = array(
+			array(
+				'q' => __( 'What is WPSeed?', 'wpseed' ),
+				'a' => __( 'WPSeed is a WordPress plugin boilerplate — a fully structured starting point for building new plugins. It provides PSR-4 autoloading, an ecosystem registry for multi-plugin communication, an API connector system, capability management, REST endpoint registration, admin development tabs, and a complete CSS component library. You clone it, rename the prefixes, and start building your features on top.', 'wpseed' ),
+			),
+			array(
+				'q' => __( 'Is WPSeed a finished plugin I can use on a live site?', 'wpseed' ),
+				'a' => __( 'No. WPSeed is a development tool, not a production plugin. It is designed to be cloned and transformed into your own plugin. Running WPSeed itself on a live site is harmless but pointless — it does not provide end-user features. The Development page and admin tabs are there to help developers understand the architecture while building.', 'wpseed' ),
+			),
+			array(
+				'q' => __( 'How do I create a new plugin from WPSeed?', 'wpseed' ),
+				'a' => __( 'Follow the step-by-step process in docs/CLONING-GUIDE.md. In short: copy the WPSeed directory, rename the main plugin file, run 7 find-and-replace passes to change all prefixes (WPSeed_ to YourPlugin_, wpseed_ to yourplugin_, etc.), update the plugin header and composer.json, delete the example files, and activate. The whole process takes about 10 minutes.', 'wpseed' ),
+			),
+			array(
+				'q' => __( 'What is the Ecosystem Registry?', 'wpseed' ),
+				'a' => __( 'The Ecosystem Registry allows multiple plugins built from WPSeed to detect each other and share resources. When two or more ecosystem plugins are active, shared menus appear under Tools and Settings, logging is unified, and background tasks are coordinated. Each plugin registers itself on the wpseed_ecosystem_register action.', 'wpseed' ),
+			),
+			array(
+				'q' => __( 'What is the Connector System?', 'wpseed' ),
+				'a' => __( 'The Connector System provides a standard way to integrate with external APIs. Every connector implements three methods: test_connection() to verify credentials, get_capabilities() to declare supported actions, and execute() to run those actions. The REST Bridge can auto-generate REST endpoints for any connector, so external tools (like AI assistants) can interact with APIs through your plugin.', 'wpseed' ),
+			),
+			array(
+				'q' => __( 'What are the Development tabs for?', 'wpseed' ),
+				'a' => __( 'The Development page (accessible from the admin menu) provides tabs for inspecting the plugin internals: Architecture shows the namespace map and boot sequence, Roadmap tracks development progress, Connectors shows registered API integrations, Capabilities shows permission management, and the Theme tab showcases all available UI components. These tabs are inherited by every plugin cloned from WPSeed.', 'wpseed' ),
+			),
+			array(
+				'q' => __( 'How does the CSS system work?', 'wpseed' ),
+				'a' => __( 'WPSeed uses CSS custom properties (design tokens) defined in assets/css/base/variables.css. All components use --wpseed-* variables for colours, spacing, typography, and shadows. Component CSS files are in assets/css/components/ and are loaded per-page via the style-assets.php registry — they only load where needed, not globally. See docs/ASSET-GUIDE.md for the full reference.', 'wpseed' ),
+			),
+			array(
+				'q' => __( 'How do I add a custom capability to my plugin?', 'wpseed' ),
+				'a' => __( 'Use the Capability Manager: call Capability_Manager::register() with a capability name, label, description, and default roles. The capability is installed into WordPress roles on plugin activation and removed on uninstall. Check permissions with wpseed_user_can(). See docs/CAPABILITIES.md for examples.', 'wpseed' ),
+			),
+			array(
+				'q' => __( 'How do I register a REST API endpoint?', 'wpseed' ),
+				'a' => __( 'Use the REST Bridge. In a controller that extends REST_Controller, call $this->register_endpoint() with the route, method, callback, capability, and a label/description for documentation. The endpoint is automatically registered with WordPress on rest_api_init and appears in the endpoint catalogue. See docs/REST-BRIDGE.md.', 'wpseed' ),
+			),
+			array(
+				'q' => __( 'Do I need to give credit to WPSeed?', 'wpseed' ),
+				'a' => __( 'WPSeed is licensed under GPL-3.0. You are free to use it for any purpose, including commercial plugins. Credit is appreciated but not required. If you find it useful, consider contributing back — report bugs, suggest improvements, or share it with other developers.', 'wpseed' ),
+			),
+			array(
+				'q' => __( 'What is EvolveWP?', 'wpseed' ),
+				'a' => __( 'EvolveWP is an ecosystem of WordPress plugins built on WPSeed. It includes EvolveWP Core (shared infrastructure), EvolveWP.Verifier (code quality scanning), EvolveWP.OpsStudio (project management), EvolveWP.ClientJourney (client onboarding), EvolveWP.PredictiveERP (business intelligence), and EvolveWP.Outreach (email campaigns). All are built from WPSeed and communicate via the Ecosystem Registry.', 'wpseed' ),
+			),
+		);
+		?>
+		<h2><?php esc_html_e( 'Frequently Asked Questions', 'wpseed' ); ?></h2>
 
-                        indexSelector.append( advancedGroup );
-                    }
+		<div class="wpseed-faq-list" style="max-width: 800px;">
+			<?php foreach ( $faqs as $index => $faq ) : ?>
+				<div class="wpseed-faq-item" style="border: 1px solid #dcdcde; border-radius: 4px; margin-bottom: 8px; background: #fff;">
+					<button type="button"
+						class="wpseed-faq-toggle"
+						aria-expanded="false"
+						aria-controls="wpseed-faq-answer-<?php echo esc_attr( $index ); ?>"
+						style="display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 12px 15px; background: none; border: none; cursor: pointer; font-size: 13px; font-weight: 600; color: #1d2327; text-align: left;">
+						<span><?php echo esc_html( $faq['q'] ); ?></span>
+						<span class="dashicons dashicons-arrow-down-alt2" style="flex-shrink: 0; transition: transform 0.2s;"></span>
+					</button>
+					<div id="wpseed-faq-answer-<?php echo esc_attr( $index ); ?>"
+						class="wpseed-faq-answer"
+						style="display: none; padding: 0 15px 15px; color: #50575e; line-height: 1.6;">
+						<?php echo esc_html( $faq['a'] ); ?>
+					</div>
+				</div>
+			<?php endforeach; ?>
+		</div>
 
-                    if ( answer !== '' && text !== '' ) {
-                        option = $( '<option/>' )
-                            .val( 'q' + answer )
-                            .text( text );
-                        if ( advancedGroup ) {
-                            advancedGroup.append( option );
-                        }
-                        else {
-                            indexSelector.append( option );
-                        }
+		<script>
+		jQuery( function( $ ) {
+			$( '.wpseed-faq-toggle' ).on( 'click', function() {
+				var $button = $( this );
+				var $answer = $button.next( '.wpseed-faq-answer' );
+				var $icon   = $button.find( '.dashicons' );
+				var isOpen  = $button.attr( 'aria-expanded' ) === 'true';
 
-                    }
-
-                });
-
-                faqIndex.after( indexSelector );
-                indexSelector.before(
-                    $('<label />')
-                        .attr( 'for', 'question-selector' )
-                        .text( '" . esc_js( __( 'Select a question', 'wpseed' ) ) . "' )
-                        .addClass( 'screen-reader-text' )
-                );
-
-                indexSelector.change( selectQuestion );
-            });
-        ";
-        wp_add_inline_script( 'jquery', $faq_script );
-        ?>        
-
-        <?php 
-    }
+				$button.attr( 'aria-expanded', ! isOpen );
+				$answer.slideToggle( 200 );
+				$icon.css( 'transform', isOpen ? 'rotate(0deg)' : 'rotate(180deg)' );
+			} );
+		} );
+		</script>
+		<?php
+	}
 }
 
 endif;

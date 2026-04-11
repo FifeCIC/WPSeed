@@ -58,11 +58,11 @@ Created `docs/FILE-HEADER-TEMPLATE.md` with 10 role types. Applied standard
 headers to all `Core/`, `Ecosystem/`, and namespaced `Admin/` files. Created
 `includes/Hook_Registry.php` as reference. Created `docs/NAMING-CONVENTIONS.md`.
 
-### Phase 5: Class Docblock Standard (partial)
+### Phase 5: Class Docblock Standard ✅
 
-All newly created classes (v3.1.0) have full docblocks with `@since`,
-`@version`, `@param`, `@return`, `@throws`, `@see` tags. Legacy classes
-in `includes/classes/` will be updated when migrated.
+All namespaced classes have full docblocks with `@since`, `@version`,
+`@param`, `@return`, `@throws`, `@see` tags. Legacy classes in
+`includes/classes/` are documented in the deferred items table below.
 
 ### Phase 6: Clone Tooling ✅
 

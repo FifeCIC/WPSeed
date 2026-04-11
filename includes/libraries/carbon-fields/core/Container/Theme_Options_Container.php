@@ -107,7 +107,7 @@ class Theme_Options_Container extends Container {
 		do_action( 'carbon_fields_' . $this->type . '_container_saved', $user_data, $this );
 
 		if ( ! headers_sent() ) {
-			wp_safe_redirect( add_query_arg( array( 'settings-updated' => 'true' ) ) );
+			wp_redirect( add_query_arg( array( 'settings-updated' => 'true' ) ) );
 		}
 	}
 
@@ -251,7 +251,7 @@ class Theme_Options_Container extends Container {
 	 * @return Container                      $this
 	 */
 	public function set_page_parent( $parent ) {
-		if ( is_a( $parent, get_class() ) ) {
+		if ( is_a( $parent, static::class ) ) {
 			$this->settings['parent'] = $parent->get_page_file();
 			return $this;
 		}
