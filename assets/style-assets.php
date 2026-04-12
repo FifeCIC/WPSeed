@@ -511,12 +511,6 @@ return array(
 			'pages'        => array( 'wpseed_ecosystem_installer' ),
 			'dependencies' => array( 'variables' ),
 		),
-		'license-manager' => array(
-			'path'         => 'css/license-manager.css',
-			'purpose'      => 'Licence management page',
-			'pages'        => array( 'wpseed_license' ),
-			'dependencies' => array( 'variables' ),
-		),
 		'notification-center' => array(
 			'path'         => 'css/notification-center.css',
 			'purpose'      => 'Notification centre',
