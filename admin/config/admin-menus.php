@@ -45,18 +45,6 @@ function wpseed_register_admin_menus() {
         'wpseed_jquery_ui_page'
     );
     
-    // Component Library - file missing, disabled
-    /*
-    add_submenu_page(
-        'wpseed',
-        __('Component Library', 'wpseed'),
-        __('Component Library', 'wpseed'),
-        'manage_options',
-        'wpseed-components',
-        'wpseed_components_page'
-    );
-    */
-    
     // Notifications
     add_submenu_page(
         'wpseed',
@@ -66,18 +54,6 @@ function wpseed_register_admin_menus() {
         'wpseed-notifications',
         'wpseed_notifications_page'
     );
-    
-    // License - disabled pending full development
-    /*
-    add_submenu_page(
-        'wpseed',
-        __('License', 'wpseed'),
-        __('License', 'wpseed'),
-        'manage_options',
-        'wpseed-license',
-        'wpseed_license_page'
-    );
-    */
     
     // Scheduled Actions (Action Scheduler)
     if (function_exists('as_enqueue_async_action')) {
@@ -157,30 +133,11 @@ function wpseed_jquery_ui_enqueue_assets($hook) {
 add_action('admin_enqueue_scripts', 'wpseed_jquery_ui_enqueue_assets');
 
 /**
- * Component Library page callback - disabled (file missing)
- */
-/*
-function wpseed_components_page() {
-    require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/component-library/component-library.php';
-    wpseed_render_component_library();
-}
-*/
-
-/**
  * Notifications page callback
  */
 function wpseed_notifications_page() {
     require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/notification-center.php';
 }
-
-/**
- * License page callback - disabled pending full development
- */
-/*
-function wpseed_license_page() {
-    require_once WPSEED_PLUGIN_DIR_PATH . 'admin/page/license-management.php';
-}
-*/
 
 /**
  * Scheduled Actions page callback

@@ -1,26 +1,30 @@
 /**
- * wpseed - Card Component Styles
- * 
- * Styles for card UI elements.
- * 
+ * WPSeed — Card Component Styles
+ *
+ * Reusable card patterns for admin UI. Every card type uses --wpseed-*
+ * design tokens and the .wpseed- prefix.
+ *
  * HTML Structure:
- * <div class="wpseed-card">
- *   <h4 class="wpseed-card-header">Title</h4>
- *   <div class="wpseed-card-body">
- *     Content goes here
+ *   <div class="wpseed-card">
+ *       <div class="wpseed-card-header">Title</div>
+ *       <div class="wpseed-card-body">Content</div>
+ *       <div class="wpseed-card-footer">Actions</div>
  *   </div>
- * </div>
- * 
+ *
  * @package wpseed/CSS/Components
- * @since 1.0.0
+ * @since   1.0.0
+ * @since   3.1.0 Removed TradePress-specific card types. Kept core patterns only.
  */
 
-/* Card Container */
+/* ─────────────────────────────────────────────────────────────────────
+   Base Card
+   ───────────────────────────────────────────────────────────────────── */
+
 .wpseed-card {
     background-color: var(--wpseed-color-gray-100);
     border: var(--wpseed-border-standard);
     border-radius: var(--wpseed-border-radius);
-    padding: 12px;
+    padding: var(--wpseed-spacing-md);
     box-shadow: var(--wpseed-shadow-sm);
     margin-bottom: var(--wpseed-spacing-md);
 }
@@ -35,11 +39,11 @@
 }
 
 .wpseed-card-body {
-    padding: 15px;
+    padding: var(--wpseed-spacing-lg);
 }
 
 .wpseed-card-footer {
-    padding: 10px 15px;
+    padding: var(--wpseed-spacing-sm) var(--wpseed-spacing-lg);
     border-top: 1px solid var(--wpseed-color-gray-200);
     background-color: var(--wpseed-color-gray-100);
 }
@@ -54,22 +58,28 @@
     grid-column: span 2;
 }
 
-/* Interactive Card - Used for Shortcode Cards */
+/* ─────────────────────────────────────────────────────────────────────
+   Interactive Card — hover lift effect
+   ───────────────────────────────────────────────────────────────────── */
+
 .wpseed-card-interactive {
-    transition: box-shadow 0.3s ease, transform 0.2s ease;
+    transition: box-shadow var(--wpseed-transition-normal), transform var(--wpseed-transition-fast);
 }
 
 .wpseed-card-interactive:hover {
-    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    box-shadow: var(--wpseed-shadow-md);
     transform: translateY(-2px);
 }
 
-/* API Settings Card */
+/* ─────────────────────────────────────────────────────────────────────
+   API Card — for connector/API settings panels
+   ───────────────────────────────────────────────────────────────────── */
+
 .wpseed-api-card {
     background: var(--wpseed-color-white);
-    border: 1px solid #ccd0d4;
+    border: 1px solid var(--wpseed-color-gray-400);
     box-shadow: var(--wpseed-shadow);
-    padding: 15px 25px;
+    padding: var(--wpseed-spacing-lg) var(--wpseed-spacing-xl);
     margin-bottom: var(--wpseed-spacing-xl);
     border-radius: var(--wpseed-border-radius);
 }
@@ -77,20 +87,20 @@
 .wpseed-api-card h2 {
     font-size: 1.3em;
     margin-top: 0;
-    padding-bottom: 12px;
+    padding-bottom: var(--wpseed-spacing-md);
     border-bottom: 1px solid var(--wpseed-color-gray-200);
 }
 
 .wpseed-api-card .description {
-    color: #666;
+    color: var(--wpseed-color-gray-700);
     font-style: italic;
     margin-bottom: var(--wpseed-spacing-xl);
 }
 
-/* API Overview Card */
+/* API Overview — header with logo and info */
 .wpseed-api-overview {
     background: var(--wpseed-color-white);
-    border: 1px solid #ccd0d4;
+    border: 1px solid var(--wpseed-color-gray-400);
     box-shadow: var(--wpseed-shadow);
     margin-bottom: var(--wpseed-spacing-xl);
     border-radius: var(--wpseed-border-radius);
@@ -127,18 +137,12 @@
     font-size: 18px;
 }
 
-.wpseed-api-version {
-    font-size: 12px;
-    color: #666;
-    font-weight: normal;
-}
-
 .wpseed-api-description {
-    margin: 0 0 10px 0;
-    color: #555;
+    margin: 0 0 var(--wpseed-spacing-sm) 0;
+    color: var(--wpseed-color-gray-700);
 }
 
-/* API Credentials Cards */
+/* API Credentials — two-column layout */
 .wpseed-api-credentials-container {
     display: flex;
     flex-direction: row;
@@ -160,77 +164,40 @@
     padding-bottom: var(--wpseed-spacing-xs);
     border-bottom: var(--wpseed-border-standard);
     font-size: 16px;
-    font-weight: bold;
-    color: #23282d;
+    font-weight: var(--wpseed-font-weight-bold);
 }
 
-/* Algorithm Control Cards */
-.wpseed-algorithm-card {
-    border: 1px solid #ccd0d4;
-    padding: var(--wpseed-spacing-xl);
-    border-radius: var(--wpseed-border-radius);
+/* API Status Column */
+.wpseed-api-status-column {
+    flex: 1;
+    min-width: 300px;
+}
+
+.wpseed-api-status-box {
     background: var(--wpseed-color-white);
-    margin-bottom: var(--wpseed-spacing-md);
-}
-
-/* Scheduling Cards */
-.wpseed-schedule-card {
-    border: 1px solid #ccd0d4;
-    padding: var(--wpseed-spacing-xl);
+    border: 1px solid var(--wpseed-color-gray-400);
     border-radius: var(--wpseed-border-radius);
-    background: var(--wpseed-color-white);
-    margin-bottom: var(--wpseed-spacing-md);
-}
-
-.wpseed-schedule-group {
-    margin: var(--wpseed-spacing-xl) 0;
-    border: 1px solid #eee;
     padding: var(--wpseed-spacing-lg);
-    border-radius: var(--wpseed-border-radius);
-}
-
-/* Legacy classes mapping for backward compatibility */
-.algorithm-status-card, 
-.algorithm-metrics-card, 
-.cron-schedule-card, 
-.summary-card, 
-/* Legacy result card styles from alert-decoder */
-.result-card {
-    background-color: var(--wpseed-color-gray-100);
-    border: 1px solid var(--wpseed-color-gray-200);
-    border-radius: var(--wpseed-border-radius);
-    padding: 12px;
+    margin-bottom: var(--wpseed-spacing-lg);
     box-shadow: var(--wpseed-shadow-sm);
 }
 
-.result-card h4 {
+.wpseed-api-status-box h3 {
     margin-top: 0;
-    margin-bottom: 10px;
-    padding-bottom: 8px;
+    margin-bottom: var(--wpseed-spacing-lg);
+    padding-bottom: var(--wpseed-spacing-md);
     border-bottom: 1px solid var(--wpseed-color-gray-200);
-    font-size: var(--wpseed-font-size);
+    font-size: 16px;
     font-weight: var(--wpseed-font-weight-semibold);
 }
 
-.result-row {
-    margin-bottom: 8px;
-    display: flex;
-    flex-wrap: wrap;
-}
+/* ─────────────────────────────────────────────────────────────────────
+   Metric Card — single value display
+   ───────────────────────────────────────────────────────────────────── */
 
-.result-label {
-    font-weight: var(--wpseed-font-weight-semibold);
-    margin-right: 5px;
-}
-
-.result-card.summary {
-    grid-column: span 2;
-}
-
-/* Metric Cards */
 .wpseed-metric-card {
     background: var(--wpseed-color-gray-100);
-    padding: 15px;
+    padding: var(--wpseed-spacing-lg);
     border-radius: var(--wpseed-border-radius);
     box-shadow: var(--wpseed-shadow-sm);
     text-align: center;
@@ -238,7 +205,7 @@
 
 .wpseed-metric-card h4 {
     margin-top: 0;
-    margin-bottom: 10px;
+    margin-bottom: var(--wpseed-spacing-sm);
     font-size: var(--wpseed-font-size);
     color: var(--wpseed-color-gray-700);
 }
@@ -246,7 +213,7 @@
 .wpseed-metric-value {
     font-size: 24px;
     font-weight: var(--wpseed-font-weight-semibold);
-    margin-bottom: 10px;
+    margin-bottom: var(--wpseed-spacing-sm);
     color: var(--wpseed-color-gray-900);
 }
 
@@ -255,104 +222,48 @@
     color: var(--wpseed-color-gray-600);
 }
 
-/* Forecast Cards */
-.forecast-cards-wrapper { 
-    display: flex; 
-    flex-wrap: wrap; 
-    gap: 15px; 
-    margin-top: 15px;
-}
+/* ─────────────────────────────────────────────────────────────────────
+   Stat Card — key/value statistics
+   ───────────────────────────────────────────────────────────────────── */
 
-.forecast-card {
+.wpseed-stat-card {
     background: var(--wpseed-color-white);
     border: 1px solid var(--wpseed-color-gray-400);
-    box-shadow: var(--wpseed-shadow);
-    width: calc(33.333% - 15px);
-    min-width: 250px;
-    padding: 15px;
-    box-sizing: border-box;
     border-radius: var(--wpseed-border-radius);
+    padding: var(--wpseed-spacing-lg);
+    min-width: 200px;
+    flex: 1;
 }
 
-.forecast-card h4 {
+.wpseed-stat-card h3 {
     margin-top: 0;
-    border-bottom: 1px solid var(--wpseed-color-gray-200);
-    padding-bottom: 10px;
+    margin-bottom: var(--wpseed-spacing-md);
+    font-size: 16px;
 }
 
-.forecast-card-data {
+.wpseed-stat-value {
+    font-size: 32px;
+    font-weight: var(--wpseed-font-weight-bold);
+    margin-bottom: 5px;
+    color: var(--wpseed-color-primary);
+}
+
+.wpseed-stat-label {
+    color: var(--wpseed-color-gray-700);
+    font-size: var(--wpseed-font-size-md);
+}
+
+.wpseed-stats-cards {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-}
-
-.forecast-card-label {
-    font-weight: bold;
-}
-
-.forecast-card-value {
-    text-align: right;
-}
-
-/* Watchlist Cards */
-.watchlist-card {
-    background-color: var(--wpseed-color-white);
-    border: 1px solid var(--wpseed-color-gray-300);
-    border-radius: var(--wpseed-border-radius);
-    padding: 15px;
-    margin-bottom: 15px;
-    box-shadow: var(--wpseed-shadow-sm);
-}
-
-.watchlist-card h4 {
-    margin-top: 0;
-    margin-bottom: 10px;
-    border-bottom: 1px solid var(--wpseed-color-gray-200);
-    padding-bottom: 8px;
-}
-
-.watchlist-symbols {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.watchlist-symbols li {
-    padding: 5px 0;
-    border-bottom: 1px solid var(--wpseed-color-gray-50);
-    display: flex;
-    justify-content: space-between;
-}
-
-.watchlist-symbols li:last-child {
-    border-bottom: none;
-}
-
-.watchlist-symbols .symbol {
-    font-weight: bold;
-    font-family: monospace;
-}
-
-.watchlist-symbols .name {
-    color: var(--wpseed-color-gray-600);
-    font-size: 0.9em;
-}
-
-.empty-watchlist {
-    font-style: italic;
-    color: var(--wpseed-color-gray-600);
-}
-
-/* Automation Section Card */
-.wpseed-automation-section {
+    flex-wrap: wrap;
+    gap: var(--wpseed-spacing-lg);
     margin-bottom: var(--wpseed-spacing-xl);
-    padding: var(--wpseed-spacing-xl);
-    background: var(--wpseed-color-white);
-    border: 1px solid #ccd0d4;
-    box-shadow: 0 1px 1px rgba(0,0,0,.04);
 }
 
-/* Component Card */
+/* ─────────────────────────────────────────────────────────────────────
+   Component Card — for UI library showcase
+   ───────────────────────────────────────────────────────────────────── */
+
 .wpseed-component-card {
     padding: var(--wpseed-spacing-lg);
     background: var(--wpseed-color-gray-100);
@@ -371,34 +282,27 @@
     text-align: center;
 }
 
-/* Components Grid */
 .wpseed-components-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: var(--wpseed-spacing-xl);
 }
 
-/* Database Summary Card */
-.wpseed-database-summary {
-    margin: var(--wpseed-spacing-xl) 0;
-    padding: var(--wpseed-spacing-lg);
-    background-color: var(--wpseed-color-white);
-    border: var(--wpseed-border-standard);
-    border-radius: var(--wpseed-border-radius);
-}
+/* ─────────────────────────────────────────────────────────────────────
+   Table Card — for database/data display
+   ───────────────────────────────────────────────────────────────────── */
 
-/* Database Table Card */
 .wpseed-table-card {
     background: var(--wpseed-color-white);
-    border: 1px solid #ccd0d4;
+    border: 1px solid var(--wpseed-color-gray-400);
     box-shadow: var(--wpseed-shadow);
     border-radius: var(--wpseed-border-radius);
     overflow: hidden;
-    transition: box-shadow 0.3s ease;
+    transition: box-shadow var(--wpseed-transition-normal);
 }
 
 .wpseed-table-card:hover {
-    box-shadow: 0 3px 8px rgba(0,0,0,.08);
+    box-shadow: var(--wpseed-shadow-md);
 }
 
 .wpseed-table-card-header {
@@ -407,7 +311,7 @@
     align-items: center;
     padding: var(--wpseed-spacing-lg);
     border-bottom: 1px solid var(--wpseed-color-gray-200);
-    background: #f8f8f8;
+    background: var(--wpseed-color-gray-50);
 }
 
 .wpseed-table-name {
@@ -422,16 +326,16 @@
 .wpseed-table-description {
     margin-top: 0;
     margin-bottom: var(--wpseed-spacing-lg);
-    color: #666;
+    color: var(--wpseed-color-gray-700);
 }
 
 .wpseed-table-card-footer {
     display: flex;
     justify-content: flex-end;
-    gap: 8px;
-    padding: 10px 15px;
+    gap: var(--wpseed-spacing-sm);
+    padding: var(--wpseed-spacing-sm) var(--wpseed-spacing-lg);
     border-top: 1px solid var(--wpseed-color-gray-200);
-    background: #f8f8f8;
+    background: var(--wpseed-color-gray-50);
 }
 
 .wpseed-table-action {
@@ -446,26 +350,140 @@
     margin-right: 5px;
 }
 
-/* Stats Card */
-.wpseed-stat-card {
-    background-color: var(--wpseed-color-white);
-    border: 1px solid #ccd0d4;
+/* ─────────────────────────────────────────────────────────────────────
+   Task Card — for task/project display
+   ───────────────────────────────────────────────────────────────────── */
+
+.wpseed-task-card {
+    background: var(--wpseed-color-white);
+    border: var(--wpseed-border-standard);
+    border-radius: var(--wpseed-border-radius);
+    box-shadow: var(--wpseed-shadow);
+    margin-bottom: var(--wpseed-spacing-xl);
+}
+
+.wpseed-task-card-header {
+    background: var(--wpseed-color-gray-50);
+    padding: var(--wpseed-spacing-lg);
+    border-bottom: var(--wpseed-border-standard);
+}
+
+.wpseed-task-title {
+    margin: 0 0 var(--wpseed-spacing-md) 0;
+    font-size: 18px;
+    color: var(--wpseed-color-gray-900);
+}
+
+.wpseed-task-card-body {
+    padding: var(--wpseed-spacing-lg);
+}
+
+.wpseed-task-card-footer {
+    background: var(--wpseed-color-gray-50);
+    padding: var(--wpseed-spacing-lg);
+    border-top: var(--wpseed-border-standard);
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   Section Card & Empty State
+   ───────────────────────────────────────────────────────────────────── */
+
+.wpseed-section-card {
+    background: var(--wpseed-color-white);
+    border: var(--wpseed-border-standard);
     border-radius: var(--wpseed-border-radius);
     padding: var(--wpseed-spacing-lg);
-    min-width: 200px;
-    flex: 1;
+    margin-bottom: var(--wpseed-spacing-xl);
 }
 
-.wpseed-stat-card h3 {
+.wpseed-empty-state-card {
+    background: var(--wpseed-color-gray-50);
+    border: var(--wpseed-border-standard);
+    border-radius: var(--wpseed-border-radius);
+    padding: var(--wpseed-spacing-lg);
+    text-align: center;
+    color: var(--wpseed-color-gray-700);
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   Featured Card — with score/status border
+   ───────────────────────────────────────────────────────────────────── */
+
+.wpseed-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--wpseed-spacing-xl);
+    margin-bottom: var(--wpseed-spacing-xl);
+}
+
+.wpseed-featured-card {
+    background: var(--wpseed-color-white);
+    border-radius: var(--wpseed-border-radius-lg);
+    box-shadow: var(--wpseed-shadow);
+    padding: var(--wpseed-spacing-lg);
+    border: 1px solid var(--wpseed-color-gray-200);
+    transition: transform var(--wpseed-transition-fast), box-shadow var(--wpseed-transition-fast);
+}
+
+.wpseed-featured-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--wpseed-shadow-lg);
+}
+
+.wpseed-featured-card h4 {
     margin-top: 0;
     margin-bottom: var(--wpseed-spacing-md);
-    font-size: 16px;
+    font-size: 18px;
 }
 
-/* Process List Item */
+.wpseed-featured-card p {
+    margin-bottom: var(--wpseed-spacing-sm);
+    color: var(--wpseed-color-gray-700);
+}
+
+.wpseed-featured-card.wpseed-score-high {
+    border-left: 4px solid var(--wpseed-color-success);
+}
+
+.wpseed-featured-card.wpseed-score-medium {
+    border-left: 4px solid var(--wpseed-color-warning);
+}
+
+.wpseed-featured-card.wpseed-score-low {
+    border-left: 4px solid var(--wpseed-color-error);
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   Message Card — centred text for empty/info states
+   ───────────────────────────────────────────────────────────────────── */
+
+.wpseed-message-card {
+    padding: var(--wpseed-spacing-xl);
+    background: var(--wpseed-color-gray-100);
+    border: 1px solid var(--wpseed-color-gray-200);
+    border-radius: var(--wpseed-border-radius);
+    text-align: center;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   Database Summary Card
+   ───────────────────────────────────────────────────────────────────── */
+
+.wpseed-database-summary {
+    margin: var(--wpseed-spacing-xl) 0;
+    padding: var(--wpseed-spacing-lg);
+    background-color: var(--wpseed-color-white);
+    border: var(--wpseed-border-standard);
+    border-radius: var(--wpseed-border-radius);
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   Process List Item — for background tasks/cron display
+   ───────────────────────────────────────────────────────────────────── */
+
 .wpseed-process-list-item {
     background: var(--wpseed-color-white);
-    border: 1px solid #e5e5e5;
+    border: 1px solid var(--wpseed-color-gray-200);
     border-radius: var(--wpseed-border-radius);
     margin-bottom: var(--wpseed-spacing-lg);
     padding: var(--wpseed-spacing-lg);
@@ -479,7 +497,7 @@
 }
 
 .wpseed-process-name {
-    font-weight: bold;
+    font-weight: var(--wpseed-font-weight-bold);
     font-size: 15px;
 }
 
@@ -494,81 +512,26 @@
     margin: var(--wpseed-spacing-md) 0 0 0;
     padding-top: var(--wpseed-spacing-md);
     border-top: 1px solid var(--wpseed-color-gray-200);
-    color: #666;
+    color: var(--wpseed-color-gray-700);
 }
 
 .wpseed-process-actions {
     display: flex;
     justify-content: flex-end;
-    gap: 8px;
+    gap: var(--wpseed-spacing-sm);
     margin-top: var(--wpseed-spacing-md);
 }
 
-/* Discord Setup Cards */
-.wpseed-discord-card {
-    background: var(--wpseed-color-white);
-    border: var(--wpseed-border-standard);
-    border-radius: var(--wpseed-border-radius);
-    padding: var(--wpseed-spacing-xl);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
+/* ─────────────────────────────────────────────────────────────────────
+   Demo Indicator — info banner for demo/preview modes
+   ───────────────────────────────────────────────────────────────────── */
 
-.wpseed-discord-card h3 {
-    margin-top: 0;
-    padding-bottom: var(--wpseed-spacing-md);
-    border-bottom: 1px solid var(--wpseed-color-gray-200);
-}
-
-/* Bot Info Card */
-.wpseed-bot-info {
-    display: flex;
-    align-items: center;
-    background: var(--wpseed-color-white);
-    padding: var(--wpseed-spacing-md);
-    border-radius: var(--wpseed-border-radius);
-    margin-top: var(--wpseed-spacing-md);
-}
-
-.wpseed-bot-avatar-container {
-    width: 50px;
-    height: 50px;
-    margin-right: var(--wpseed-spacing-lg);
-}
-
-.wpseed-bot-avatar {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-}
-
-.wpseed-bot-avatar-placeholder {
-    width: 100%;
-    height: 100%;
-    background: #646970;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--wpseed-color-white);
-}
-
-.wpseed-bot-name {
-    font-weight: var(--wpseed-font-weight-semibold);
-    margin-bottom: var(--wpseed-spacing-xs);
-}
-
-.wpseed-bot-id {
-    font-size: 12px;
-    color: #646970;
-}
-
-/* Demo Indicator Card */
 .wpseed-demo-indicator {
     display: flex;
     align-items: center;
-    background-color: #f0f7ff;
-    border-left: 4px solid #0073aa;
-    padding: 12px 15px;
+    background-color: var(--wpseed-status-info-bg);
+    border-left: 4px solid var(--wpseed-color-primary);
+    padding: var(--wpseed-spacing-md) var(--wpseed-spacing-lg);
     margin-bottom: var(--wpseed-spacing-xl);
     position: relative;
 }
@@ -576,619 +539,38 @@
 .wpseed-demo-icon {
     font-size: 24px;
     margin-right: var(--wpseed-spacing-lg);
-    color: #0073aa;
+    color: var(--wpseed-color-primary);
 }
 
 .wpseed-demo-text h4 {
     margin: 0 0 5px 0;
-    color: #23282d;
+    color: var(--wpseed-color-gray-900);
 }
 
 .wpseed-demo-text p {
     margin: 0;
-    color: #666;
-    font-size: 13px;
+    color: var(--wpseed-color-gray-700);
+    font-size: var(--wpseed-font-size);
 }
 
-/* Card-style View */
-.wpseed-card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: var(--wpseed-spacing-xl);
-    margin-bottom: var(--wpseed-spacing-xl);
-}
-
-.wpseed-featured-card {
-    background: var(--wpseed-color-white);
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-    padding: var(--wpseed-spacing-lg);
-    border: 1px solid #e0e0e0;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.wpseed-featured-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.wpseed-featured-card h4 {
-    margin-top: 0;
-    margin-bottom: var(--wpseed-spacing-md);
-    font-size: 18px;
-}
-
-.wpseed-featured-card p {
-    margin-bottom: var(--wpseed-spacing-sm);
-    color: #666;
-}
-
-.wpseed-featured-card.wpseed-score-high {
-    border-left: 4px solid #46b450;
-}
-
-.wpseed-featured-card.wpseed-score-medium {
-    border-left: 4px solid #ffb900;
-}
-
-.wpseed-featured-card.wpseed-score-low {
-    border-left: 4px solid #dc3232;
-}
-
-/* Message Card */
-.wpseed-message-card {
-    padding: var(--wpseed-spacing-xl);
-    background: var(--wpseed-color-gray-100);
-    border: 1px solid var(--wpseed-color-gray-200);
-    border-radius: var(--wpseed-border-radius);
-    text-align: center;
-}
-
-/* Research Cards */
-.wpseed-research-card {
-    background: #fff;
-    padding: 20px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-.wpseed-research-card h3 {
-    margin-top: 0;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #eee;
-}
-
-.wpseed-research-card .wpseed-card-description {
-    padding: 10px;
-    background: #f9f9f9;
-    border-left: 4px solid #2271b1;
-    margin-top: 10px;
-}
-
-.wpseed-metrics-card {
-    background: #fff;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-/* Research Controls Card */
-.wpseed-research-controls {
-    margin-bottom: 20px;
-    padding: 15px;
-    background: #f9f9f9;
-    border: 1px solid #e5e5e5;
-}
-
-.wpseed-chart-container {
-    background: #f9f9f9;
-    border: 1px solid #e5e5e5;
-    padding: 15px;
-    border-radius: 4px;
-    margin-bottom: 20px;
-}
-
-.wpseed-indicator-card {
-    background: #f9f9f9;
-    border: 1px solid #e5e5e5;
-    padding: 15px;
-    border-radius: 4px;
-}
-
-.wpseed-indicator-card h3 {
-    margin-top: 0;
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #e5e5e5;
-    font-size: 16px;
-}
-
-.wpseed-chart-wrapper {
-    padding: 15px;
-    background: #f9f9f9;
-    border: 1px solid #eee;
-    border-radius: 4px;
-    margin-bottom: 20px;
-}
-
-.wpseed-chart-wrapper h4 {
-    margin-top: 0;
-    margin-bottom: 15px;
-}
-
-/* Stock Alert Cards */
-.wpseed-alert-card {
-    background: var(--wpseed-color-white);
-    border-radius: 6px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.wpseed-alert-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-
-/* Alert card types */
-.wpseed-alert-card.trade-alert {
-    border-top: 4px solid #e74c3c;
-}
-
-.wpseed-alert-card.watchlist {
-    border-top: 4px solid #3498db;
-}
-
-.wpseed-alert-card.update {
-    border-top: 4px solid #f39c12;
-}
-
-.wpseed-alert-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-    background: #f9f9f9;
-}
-
-.wpseed-alert-ticker {
-    margin: 0;
-    font-size: 22px;
-    font-weight: 700;
-}
-
-.wpseed-alert-type {
-    font-size: 12px;
-    font-weight: bold;
-    padding: 4px 8px;
-    border-radius: 4px;
-    color: #fff;
-}
-
-.wpseed-alert-type.trade-alert {
-    background-color: #e74c3c;
-}
-
-.wpseed-alert-type.watchlist {
-    background-color: #3498db;
-}
-
-.wpseed-alert-type.update {
-    background-color: #f39c12;
-}
-
-.wpseed-company-name {
-    padding: 0 15px;
-    margin-top: 5px;
-    font-size: 14px;
-    color: #555;
-    font-weight: 500;
-}
-
-.wpseed-alert-details {
-    padding: 15px;
-}
-
-.wpseed-detail-row {
-    display: flex;
-    margin-bottom: 8px;
-}
-
-.wpseed-detail-label {
-    flex: 0 0 100px;
-    font-weight: 500;
-    color: #555;
-}
-
-.wpseed-detail-value {
-    flex: 1;
-}
-
-.wpseed-detail-value.price {
-    font-weight: 700;
-    color: #2ecc71;
-}
-
-.wpseed-alert-card-footer {
-    padding: 10px 15px;
-    background: #f9f9f9;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid #eee;
-}
-
-.wpseed-timestamp {
-    font-size: 12px;
-    color: #777;
-}
-
-.wpseed-view-details-link {
-    font-size: 13px;
-    text-decoration: none;
-}
-
-/* Statistics Cards */
-.wpseed-stat-card {
-    background: var(--wpseed-color-white);
-    border-radius: 6px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    text-align: center;
-}
-
-.wpseed-stat-value {
-    font-size: 32px;
-    font-weight: 700;
-    margin-bottom: 5px;
-    color: #0073aa;
-}
-
-.wpseed-stat-label {
-    color: #555;
-    font-size: 14px;
-}
-
-/* Chart Box */
-.wpseed-chart-box {
-    background: var(--wpseed-color-white);
-    border-radius: 6px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-}
-
-.wpseed-chart-box h3 {
-    margin-top: 0;
-    margin-bottom: 15px;
-}
-
-.wpseed-chart-placeholder {
-    background: #f5f5f5;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 4px;
-}
-
-.wpseed-placeholder-text {
-    color: #777;
-    font-style: italic;
-}
-
-/* Calculator Results Card */
-.wpseed-calculator-results {
-    margin-top: var(--wpseed-spacing-xxl);
-    padding: var(--wpseed-spacing-xl);
-    background: #f9f9f9;
-    border: 1px solid var(--wpseed-color-gray-300);
-    border-radius: var(--wpseed-border-radius);
-}
-
-.wpseed-result-item {
-    display: flex;
-    justify-content: space-between;
-    padding: var(--wpseed-spacing-md);
-    background: var(--wpseed-color-white);
-    border-radius: var(--wpseed-border-radius);
-    border-left: 4px solid #2271b1;
-}
-
-.wpseed-result-value {
-    font-weight: var(--wpseed-font-weight-semibold);
-}
-
-/* Task Card Styles */
-.wpseed-task-card {
-    background: var(--wpseed-color-white);
-    border: var(--wpseed-border-standard);
-    border-radius: var(--wpseed-border-radius);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    margin-bottom: var(--wpseed-spacing-xl);
-}
-
-.wpseed-task-card-header {
-    background: var(--wpseed-color-gray-50);
-    padding: var(--wpseed-spacing-lg);
-    border-bottom: var(--wpseed-border-standard);
-}
-
-.wpseed-task-title {
-    margin: 0 0 var(--wpseed-spacing-md) 0;
-    font-size: 18px;
-    color: #23282d;
-}
-
-.wpseed-task-card-body {
-    padding: var(--wpseed-spacing-lg);
-}
-
-.wpseed-task-card-footer {
-    background: #f9f9f9;
-    padding: var(--wpseed-spacing-lg);
-    border-top: var(--wpseed-border-standard);
-}
-
-.wpseed-section-card {
-    background: var(--wpseed-color-white);
-    border: var(--wpseed-border-standard);
-    border-radius: var(--wpseed-border-radius);
-    padding: var(--wpseed-spacing-lg);
-    margin-bottom: var(--wpseed-spacing-xl);
-}
-
-.wpseed-empty-state-card {
-    background: #f9f9f9;
-    border: var(--wpseed-border-standard);
-    border-radius: var(--wpseed-border-radius);
-    padding: var(--wpseed-spacing-lg);
-    text-align: center;
-    color: #555;
-}
-
-/* Legacy class mappings for backward compatibility */
-/* API Status Column Styles */
-.api-status-column {
-    flex: 1;
-    min-width: 300px;
-}
-
-.status-box {
-    background: var(--wpseed-color-white);
-    border: 1px solid #ccd0d4;
-    border-radius: var(--wpseed-border-radius);
-    padding: var(--wpseed-spacing-lg);
-    margin-bottom: var(--wpseed-spacing-lg);
-    box-shadow: 0 1px 1px rgba(0,0,0,.04);
-}
-
-.status-box h3 {
-    margin-top: 0;
-    margin-bottom: var(--wpseed-spacing-lg);
-    padding-bottom: var(--wpseed-spacing-md);
-    border-bottom: 1px solid var(--wpseed-color-gray-200);
-    font-size: 16px;
-    font-weight: var(--wpseed-font-weight-semibold);
-}
-
-.status-box h4 {
-    margin-top: var(--wpseed-spacing-lg);
-    margin-bottom: var(--wpseed-spacing-md);
-    font-size: 14px;
-    font-weight: var(--wpseed-font-weight-semibold);
-    color: #23282d;
-}
-
-.status-box h5 {
-    margin-top: var(--wpseed-spacing-md);
-    margin-bottom: var(--wpseed-spacing-xs);
-    font-size: 13px;
-    font-weight: var(--wpseed-font-weight-medium);
-    color: #50575e;
-}
-
-.api-type-indicator {
-    display: flex;
-    align-items: flex-start;
-    padding: var(--wpseed-spacing-md);
-    background: #f0f7ff;
-    border-left: 4px solid #0073aa;
-    border-radius: var(--wpseed-border-radius);
-    margin-bottom: var(--wpseed-spacing-lg);
-}
-
-.api-type-indicator .dashicons {
-    margin-right: var(--wpseed-spacing-md);
-    color: #0073aa;
-    font-size: 20px;
-    width: 20px;
-    height: 20px;
-    margin-top: 2px;
-}
-
-.api-type-text strong {
-    display: block;
-    margin-bottom: var(--wpseed-spacing-xs);
-    color: #23282d;
-}
-
-.api-type-text p {
-    margin: 0;
-    color: #666;
-    font-size: 13px;
-    line-height: 1.4;
-}
-
-.api-features ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.api-features li {
-    display: flex;
-    align-items: center;
-    padding: var(--wpseed-spacing-xs) 0;
-    border-bottom: 1px solid var(--wpseed-color-gray-100);
-}
-
-.api-features li:last-child {
-    border-bottom: none;
-}
-
-.api-features .dashicons {
-    margin-right: var(--wpseed-spacing-sm);
-    color: #46b450;
-    font-size: 16px;
-    width: 16px;
-    height: 16px;
-}
-
-.test-credentials-buttons {
-    margin-top: var(--wpseed-spacing-lg);
-    text-align: center;
-}
-
-.test-credentials-buttons .button {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--wpseed-spacing-xs);
-}
-
-.test-credentials-buttons .dashicons {
-    font-size: 16px;
-    width: 16px;
-    height: 16px;
-}
-
-/* Additional styles for tables and stats */
-.wpseed-decoded-data-card .decoded-data-details dd:after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
-/* Table Card Styles (from admin-database.css) */
-.tables-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.table-card {
-    background: #fff;
-    border: 1px solid #ccd0d4;
-    box-shadow: 0 1px 1px rgba(0,0,0,.04);
-    border-radius: 4px;
-    overflow: hidden;
-    transition: box-shadow 0.3s ease;
-}
-
-.table-card:hover {
-    box-shadow: 0 3px 8px rgba(0,0,0,.08);
-}
-
-.table-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-    border-bottom: 1px solid #eee;
-    background: #f8f8f8;
-}
-
-.table-name {
-    margin: 0;
-    font-size: 16px;
-}
-
-.table-card-body {
-    padding: 15px;
-}
-
-.table-description {
-    margin-top: 0;
-    margin-bottom: 15px;
-    color: #666;
-}
-
-.table-stats {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px 10px;
-}
-
-.table-card-footer {
-    display: flex;
-    justify-content: flex-end;
-    gap: 8px;
-    padding: 10px 15px;
-    border-top: 1px solid #eee;
-    background: #f8f8f8;
-}
-
-.table-action {
-    display: flex;
-    align-items: center;
-}
-
-.table-action .dashicons {
-    font-size: 16px;
-    width: 16px;
-    height: 16px;
-    margin-right: 5px;
-}
-
-/* Stats Card Styles (from admin-database.css) */
-.wpseed-stats-cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.stat-card {
-    background-color: #fff;
-    border: 1px solid #ccd0d4;
-    border-radius: 4px;
-    padding: 15px;
-    min-width: 200px;
-    flex: 1;
-}
-
-.stat-card h3 {
-    margin-top: 0;
-    margin-bottom: 10px;
-    font-size: 16px;
-}
-
-.stat-numbers {
-    display: flex;
-    justify-content: space-between;
-}
-
-.stat-item .stat-value {
-    font-size: 24px;
-    font-weight: 600;
-}
-
-.stat-item .stat-label {
-    font-size: 12px;
-    color: #666;
-}
-
-.stat-item.success .stat-value {
-    color: #46b450;
-}
-
-.stat-item.error .stat-value {
-    color: #dc3232;
-}
+/* ─────────────────────────────────────────────────────────────────────
+   Responsive
+   ───────────────────────────────────────────────────────────────────── */
 
 @media screen and (max-width: 782px) {
-    .stat-card {
+    .wpseed-api-credentials-container {
+        flex-direction: column;
+    }
+
+    .wpseed-process-details {
+        grid-template-columns: 1fr;
+    }
+
+    .wpseed-stats-cards .wpseed-stat-card {
         min-width: 100%;
+    }
+
+    .wpseed-card-grid {
+        grid-template-columns: 1fr;
     }
 }
